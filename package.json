@@ -1,0 +1,28 @@
+{
+  "name": "bookshop",
+  "description": "Bookshop service",
+  "repository": "https://github.wdf.sap.corp/caps/bookshop.git",
+  "license": "ISC",
+  "version": "1.0.0",
+  "dependencies": {
+    "@sap/cds": "^3.0.0",
+    "express": "^4.16.4"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "devDependencies": {
+    "sqlite3": "^4.0.4"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "model": "srv",
+        "credentials": {
+          "database": "db/my-bookshop.db"
+        }
+      }
+    }
+  }
+}

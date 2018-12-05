@@ -1,0 +1,22 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "cds run",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/.vscode/cds", "args": [ "run" ],
+            "skipFiles": [
+                "<node_internals>/**/*.js",
+                "**/cds-reflect/lib/index.js",
+                "**/cds/lib/index.js",
+                "**/.vscode/cds.js",
+            ],
+            "autoAttachChildProcesses": true,
+            "console": "integratedTerminal"
+        }
+    ]
+}
