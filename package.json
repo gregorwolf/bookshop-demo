@@ -20,7 +20,7 @@
         "kind": "sqlite",
         "model": "srv",
         "credentials": {
-          "database": "db/my-bookshop.db"
+          "database": "bookshop.db"
         }
       }
     }
