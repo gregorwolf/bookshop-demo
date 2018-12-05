@@ -4,6 +4,9 @@
   "repository": "https://github.wdf.sap.corp/caps/bookshop.git",
   "license": "ISC",
   "version": "1.0.0",
+  "files": [
+    "db/", "srv/"
+  ],
   "dependencies": {
     "@sap/cds": "^3.0.0",
     "express": "^4.16.4"
