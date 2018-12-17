@@ -38,25 +38,19 @@ annotate my.Books with @(
 		],
 		Facets: [
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Details}', Target: '@UI.FieldGroup#Details'},
-			// {$Type: 'UI.ReferenceFacet', Label: '{i18n>Admin}', Target: '@UI.FieldGroup#Admin'},
 		],
 		FieldGroup#Details: {
 			Data: [
 				{$Type: 'UI.DataField', Value: title, Label: '{i18n>Title}'},
 				{$Type: 'UI.DataField', Value: author.name},
 				{$Type: 'UI.DataField', Value: stock},
+				{$Type: 'UI.DataField', Value: price},
+				{$Type: 'UI.DataField', Value: currency.symbol, Label: '{i18n>Currency}'},
 			]
 		},
-		// FieldGroup#Admin: {
-		// 	Data: [
-		// 		{$Type: 'UI.DataField', Value: createdBy, "@UI.Importance": #Medium},
-		// 		{$Type: 'UI.DataField', Value: createdAt, "@UI.Importance": #Medium},
-		// 		{$Type: 'UI.DataField', Value: modifiedBy, "@UI.Importance": #Medium},
-		// 		{$Type: 'UI.DataField', Value: modifiedAt, "@UI.Importance": #Medium}
-		// 	]
-		// }
 	}
 );
+
 
 
 ////////////////////////////////////////////////////////////////////////////
@@ -80,3 +74,28 @@ annotate my.Authors with {
 	ID @title:'{i18n>ID}' @UI.HiddenFilter;
 	name @title:'{i18n>Author Name}';
 }
+
+
+
+////////////////////////////////////////////////////////////////////////////
+//
+//	Books for Admins
+//
+
+using AdminService from './admin-service';
+annotate AdminService.Books with @(
+	UI: {
+		Facets: [
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Details}', Target: '@UI.FieldGroup#Details'},
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Admin}', Target: '@UI.FieldGroup#Admin'},
+		],
+		FieldGroup#Admin: {
+			Data: [
+				{$Type: 'UI.DataField', Value: createdBy, "@UI.Importance": #Medium},
+				{$Type: 'UI.DataField', Value: createdAt, "@UI.Importance": #Medium},
+				{$Type: 'UI.DataField', Value: modifiedBy, "@UI.Importance": #Medium},
+				{$Type: 'UI.DataField', Value: modifiedAt, "@UI.Importance": #Medium}
+			]
+		}
+	}
+);

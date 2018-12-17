@@ -5,7 +5,8 @@
   "license": "ISC",
   "version": "1.0.0",
   "files": [
-    "db/", "srv/"
+    "db/",
+    "srv/"
   ],
   "dependencies": {
     "@sap/cds": "^3.0.0",
@@ -21,7 +22,10 @@
     "requires": {
       "db": {
         "kind": "sqlite",
-        "model": [ "db", "srv"],
+        "model": [
+          "db",
+          "srv"
+        ],
         "credentials": {
           "database": "bookshop.db"
         }
