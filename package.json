@@ -9,7 +9,7 @@
     "srv/"
   ],
   "dependencies": {
-    "@sap/cds": "^3.0.0",
+    "@sap/cds": "latest",
     "express": "^4.16.4"
   },
   "engines": {
