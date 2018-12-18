@@ -28,7 +28,7 @@ npm run setup
 
 ## Run
 ```sh
-cds run
+npm start
 ```
 
 ## Test
@@ -47,6 +47,6 @@ Set breakpoints in one of the javascript files, e.g. [srv/cat-service.js](srv/ca
 
 ## Develop
 
-Edit the provided `.cds` or `.js` sources and restart the server (i.e. Ctrl-C, `cds run`) to see the effects.
+Edit the provided `.cds` or `.js` sources and restart the server (i.e. Ctrl-C, `npm start`) to see the effects.
 
-Note: re-deploy the database thru `cds deploy` in case you did changes which affect the data models or the signatures of entities exposed in the services.
+Note: re-deploy the database thru `npm run deploy` in case you did changes which affect the data models or the signatures of entities exposed in the services.

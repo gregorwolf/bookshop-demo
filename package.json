@@ -20,6 +20,7 @@
   },
   "scripts": {
     "setup": "npm i && cds deploy -2 sqlite:my.db",
-    "start": "cds run"
+    "start": "cds run",
+    "deploy": "cds deploy"
   }
 }
