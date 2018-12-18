@@ -2,7 +2,7 @@
 
 Sample application showcasing Fiori apps consuming two [services](srv/cat-service.cds) served with Node.js runtime and a sqlite database.
 
-## Prerequisites:
+## Preliminaries
 
 * [_Node.js v8_](https://nodejs.org/en/)
 * [_sqlite_](https://www.sqlite.org/download.html) (pre-installed on Mac and Linux)
