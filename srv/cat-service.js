@@ -1,6 +1,6 @@
 module.exports = (srv) => {
 
-  const {Books} = cds.entities ('my.bookshop')
+  const {Books} = cds.entities
 
   // Reduce stock of ordered books
   srv.before ('CREATE', 'Orders', async (req) => {

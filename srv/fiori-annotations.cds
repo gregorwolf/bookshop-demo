@@ -33,21 +33,6 @@ annotate my.Books with @(
   		Title: {Value: title},
   		Description: {Value: author.name}
   	},
-		HeaderFacets: [
-			// {$Type: 'UI.ReferenceFacet', Label: '{i18n>Details}', Target: '@UI.FieldGroup#Details'},
-		],
-		Facets: [
-			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Details}', Target: '@UI.FieldGroup#Details'},
-		],
-		FieldGroup#Details: {
-			Data: [
-				{$Type: 'UI.DataField', Value: title, Label: '{i18n>Title}'},
-				{$Type: 'UI.DataField', Value: author.name},
-				{$Type: 'UI.DataField', Value: stock},
-				{$Type: 'UI.DataField', Value: price},
-				{$Type: 'UI.DataField', Value: currency.symbol, Label: '{i18n>Currency}'},
-			]
-		},
 	}
 );
 
@@ -63,6 +48,7 @@ annotate my.Books with {
 	author @title:'{i18n>Author ID}';
 	price @title:'{i18n>Price}';
 	stock @title:'{i18n>Stock}';
+	descr @UI.MultiLineText;
 }
 
 
@@ -79,16 +65,62 @@ annotate my.Authors with {
 
 ////////////////////////////////////////////////////////////////////////////
 //
+//	Books Object Page
+//
+
+using CatalogService from './cat-service';
+annotate CatalogService.Books with @(
+	UI: {
+		HeaderFacets: [
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Description}', Target: '@UI.FieldGroup#Descr'},
+		],
+		Facets: [
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Details}', Target: '@UI.FieldGroup#Price'},
+		],
+		FieldGroup#Descr: {
+			Data: [
+				{$Type: 'UI.DataField', Value: descr},
+			]
+		},
+		FieldGroup#Price: {
+			Data: [
+				{$Type: 'UI.DataField', Value: price},
+				{$Type: 'UI.DataField', Value: currency.symbol, Label: '{i18n>Currency}'},
+			]
+		},
+	}
+);
+
+
+
+////////////////////////////////////////////////////////////////////////////
+//
 //	Books for Admins
 //
 
 using AdminService from './admin-service';
 annotate AdminService.Books with @(
+	// odata.draft.enabled,
 	UI: {
 		Facets: [
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>General}', Target: '@UI.FieldGroup#General'},
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Details}', Target: '@UI.FieldGroup#Details'},
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Admin}', Target: '@UI.FieldGroup#Admin'},
 		],
+		FieldGroup#General: {
+			Data: [
+				{$Type: 'UI.DataField', Value: title},
+				{$Type: 'UI.DataField', Value: author_ID},
+				{$Type: 'UI.DataField', Value: descr},
+			]
+		},
+		FieldGroup#Details: {
+			Data: [
+				{$Type: 'UI.DataField', Value: stock},
+				{$Type: 'UI.DataField', Value: price},
+				{$Type: 'UI.DataField', Value: currency.symbol, Label: '{i18n>Currency}'},
+			]
+		},
 		FieldGroup#Admin: {
 			Data: [
 				{$Type: 'UI.DataField', Value: createdBy, "@UI.Importance": #Medium},
