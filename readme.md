@@ -1,6 +1,8 @@
 # Bookshop Sample App
 
-Sample application showcasing Fiori apps consuming two [services](srv/cat-service.cds) served with Node.js runtime and a sqlite database.
+Sample application showcasing different services serving the same set of data entities from a sqlite database.
+The services match different use cases visualized in corresponding Fiori apps.
+
 
 ## Preliminaries
 
