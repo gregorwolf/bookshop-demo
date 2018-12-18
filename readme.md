@@ -4,13 +4,13 @@ Sample application showcasing Fiori apps consuming two [services](srv/cat-servic
 
 ## Prerequisites:
 
-* [Node.js v8](https://nodejs.org/en/)
-* [sqlite3](https://www.sqlite.org/download.html) (pre-installed on Mac and Linux)
+* [_Node.js v8_](https://nodejs.org/en/)
+* [_sqlite3_](https://www.sqlite.org/download.html) (pre-installed on Mac and Linux)
 
 
 ## Setup
 
-Simply download or clone this project and _npm-run `setup`_ in the project folder.
+Simply download this project and _npm-run `setup`_ in the project folder &mdash; i.e., if you have [_git_](https://git-scm.com) installed, just copy & paste this to your command line:
 
 ```sh
 git clone https://github.wdf.sap.corp/caps/bookshop.git
