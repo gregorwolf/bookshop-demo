@@ -10,7 +10,7 @@ Sample application showcasing Fiori apps consuming two [services](srv/cat-servic
 ```sh
 npm set @sap:registry=http://npm.sap.com
 ```
-* Akternatively use latest _nexus snapshots_:
+> Alternatively use latest _nexus snapshots_:
 ```sh
 npm set @sap:registry=http://nexus.wdf.sap.corp:8081/nexus/content/groups/build.snapshots.npm
 ```
