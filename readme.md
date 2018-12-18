@@ -40,4 +40,4 @@ In [VS Code](https://code.visualstudio.com) switch to _Debug_ view and launch th
 
 Edit the provided `.cds` or `.js` sources and restart the server (i.e. Ctrl-C, `cds run`) to see the effects.
 
-> Note: re-deploy the database thru `cds deploy` in case you did changes which affect the data models or the signatures of entities exposed in the services.
+Note: re-deploy the database thru `cds deploy` in case you did changes which affect the data models or the signatures of entities exposed in the services.
