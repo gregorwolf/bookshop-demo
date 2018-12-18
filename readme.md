@@ -6,7 +6,14 @@ Sample application showcasing Fiori apps consuming two [services](srv/cat-servic
 
 * [_Node.js v8_](https://nodejs.org/en/)
 * [_sqlite3_](https://www.sqlite.org/download.html) (pre-installed on Mac and Linux)
-
+* _npm set @sap:registry_ to _npm.sap.com_:
+```sh
+npm set @sap:registry=http://npm.sap.com
+```
+* Akternatively use latest _nexus snapshots_:
+```sh
+npm set @sap:registry=http://nexus.wdf.sap.corp:8081/nexus/content/groups/build.snapshots.npm
+```
 
 ## Setup
 
