@@ -22,5 +22,19 @@
     "setup": "npm i && cds deploy -2 sqlite:my.db",
     "start": "cds run",
     "deploy": "cds deploy"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "model": [
+          "db",
+          "srv"
+        ],
+        "credentials": {
+          "database": "my.db"
+        }
+      }
+    }
   }
 }
