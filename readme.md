@@ -4,7 +4,7 @@ Sample application showcasing Fiori apps consuming two [services](srv/cat-servic
 
 ## Preliminaries
 
-* get [_Node.js v8_](https://nodejs.org/en/)
+* get [_Node.js_](https://nodejs.org/en/) v8 or higher
 * get [_sqlite_](https://www.sqlite.org/download.html) (Windows only; pre-installed on Mac/Linux)
 * _npm set @sap:registry_ to _npm.sap.com_:
 ```sh
