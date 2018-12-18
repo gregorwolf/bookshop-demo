@@ -17,7 +17,7 @@ npm set @sap:registry=http://nexus.wdf.sap.corp:8081/nexus/content/groups/build.
 
 ## Setup
 
-Simply download this project and _npm-run `setup`_ in the project folder, e.g. <br>
+Simply download this project and _`npm run setup`_ in the project folder, e.g. <br>
 copy & paste this to your command line:
 
 ```sh
@@ -41,7 +41,7 @@ Open these links in your browser:
 
 ## Debug
 
-In [VS Code](https://code.visualstudio.com) switch to _Debug_ view and launch the pre-configured _cds run_ debug configuration. Set breakpoints in one of the javascript files, e.g. [srv/cat-service.js](srv/cat-service.js).
+In [VS Code](https://code.visualstudio.com) switch to _Debug_ view and launch the prepared _cds run_ configuration. Set breakpoints in one of the javascript files, e.g. [srv/cat-service.js](srv/cat-service.js).
 
 
 ## Develop
