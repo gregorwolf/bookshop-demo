@@ -41,7 +41,8 @@ Open these links in your browser:
 
 ## Debug
 
-In [VS Code](https://code.visualstudio.com) switch to _Debug_ view and launch the prepared _cds run_ configuration. Set breakpoints in one of the javascript files, e.g. [srv/cat-service.js](srv/cat-service.js).
+In [VS Code](https://code.visualstudio.com) switch to _Debug_ view and launch the prepared _cds run_ configuration. <br>
+Set breakpoints in one of the javascript files, e.g. [srv/cat-service.js](srv/cat-service.js).
 
 
 ## Develop
