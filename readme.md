@@ -10,7 +10,8 @@ Sample application showcasing Fiori apps consuming two [services](srv/cat-servic
 
 ## Setup
 
-Simply download this project and _npm-run `setup`_ in the project folder &mdash; i.e., if you have [_git_](https://git-scm.com) installed, just copy & paste this to your command line:
+Simply download this project and _npm-run `setup`_ in the project folder, e.g. <br>
+copy & paste this to your command line:
 
 ```sh
 git clone https://github.wdf.sap.corp/caps/bookshop.git
