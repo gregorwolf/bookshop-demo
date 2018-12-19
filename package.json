@@ -1,5 +1,5 @@
 {
-  "name": "bookshop",
+  "name": "@sap/capm-samples-bookshop",
   "description": "Bookshop sample app",
   "repository": "https://github.wdf.sap.corp/caps/bookshop.git",
   "version": "1.0.0",
@@ -32,7 +32,7 @@
           "srv"
         ],
         "credentials": {
-          "database": "my.db"
+          "database": "db/bookshop.db"
         }
       }
     }
