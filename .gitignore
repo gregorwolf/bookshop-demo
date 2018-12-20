@@ -1,5 +1,6 @@
 gen/
 .gen/
 node_modules/
+target/
 *.db
 .DS_Store
