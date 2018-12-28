@@ -45,7 +45,7 @@ annotate my.Books with @(
 annotate my.Books with {
 	ID @title:'{i18n>ID}' @UI.HiddenFilter;
 	title @title:'{i18n>Title}';
-	author @title:'{i18n>Author ID}';
+	author @title:'{i18n>AuthorID}';
 	price @title:'{i18n>Price}';
 	stock @title:'{i18n>Stock}';
 	descr @UI.MultiLineText;
@@ -58,7 +58,7 @@ annotate my.Books with {
 //
 annotate my.Authors with {
 	ID @title:'{i18n>ID}' @UI.HiddenFilter;
-	name @title:'{i18n>Author Name}';
+	name @title:'{i18n>AuthorName}';
 }
 
 
