@@ -5,17 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "cds run",
-            "type": "node",
-            "request": "launch",
-            "program": "${workspaceFolder}/.vscode/cds", "args": [ "run" ],
-            "skipFiles": [
+            "type": "node", "request": "launch",
+            "name": "cds run", "args": [ "run" ],
+            "program": "${workspaceFolder}/.vscode/cds", "skipFiles": [
                 "<node_internals>/**/*.js",
                 "**/cds-reflect/lib/index.js",
                 "**/cds/lib/index.js",
                 "**/.vscode/cds.js",
             ],
-            "autoAttachChildProcesses": true,
             "console": "integratedTerminal"
         }
     ]
