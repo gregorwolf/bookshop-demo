@@ -19,7 +19,7 @@
     "sqlite3": "^4.0.4"
   },
   "scripts": {
-    "setup": "npm i && cds deploy -2 sqlite:my.db",
+    "setup": "npm i && cds deploy -2 sqlite:db/bookshop.db",
     "start": "cds run",
     "deploy": "cds deploy"
   },
