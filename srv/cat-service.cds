@@ -12,5 +12,6 @@ service CatalogService {
 
   @requires: 'authenticated-user'
   @insertonly entity Orders as projection on my.Orders;
+  @insertonly entity OrderItems as projection on my.OrderItems;
 
 }

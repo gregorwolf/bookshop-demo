@@ -1,8 +1,6 @@
 # Bookshop Sample App
 
-Sample application showcasing different services serving the same set of data entities from a sqlite database.
-The services match different use cases visualized in corresponding Fiori apps.
-
+Sample application showcasing different services serving the same set of data entities from a sqlite database. The services match different use cases visualized in corresponding Fiori apps.
 
 ## Preliminaries
 
@@ -19,8 +17,7 @@ npm set @sap:registry=http://nexus.wdf.sap.corp:8081/nexus/content/groups/build.
 
 ## Setup
 
-Simply download this project and _`npm run setup`_ in the project folder, e.g. <br>
-copy & paste this to your command line:
+Download this project and _`npm run setup`_ in the project folder — e.g. copy & paste this to your command line:
 
 ```sh
 git clone https://github.wdf.sap.corp/caps/bookshop.git
@@ -43,7 +40,8 @@ Open these links in your browser:
 
 ## Debug
 
-In [VS Code](https://code.visualstudio.com) switch to _Debug_ view and launch the prepared _cds run_ configuration. <br>
+In [VS Code](https://code.visualstudio.com) switch to _Debug_ view and launch the prepared _cds run_ configuration. 
+
 Set breakpoints in one of the javascript files, e.g. [srv/cat-service.js](srv/cat-service.js).
 
 

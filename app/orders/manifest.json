@@ -1,14 +1,14 @@
 {
 	"_version": "1.8.0",
 	"sap.app": {
-		"id": "bookshop",
+		"id": "orders",
 		"type": "application",
-		"title": "Browse Books",
+		"title": "Manage Orders",
 		"description": "Sample Application",
 		"i18n": "i18n/i18n.properties",
 		"dataSources": {
-			"CatalogService": {
-				"uri": "/catalog/",
+			"AdminService": {
+				"uri": "/admin/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "4.0"
@@ -28,7 +28,7 @@
 				"uri": "i18n/i18n.properties"
 			},
 			"": {
-				"dataSource": "CatalogService",
+				"dataSource": "AdminService",
 				"settings": {
                     "synchronizationMode": "None",
                     "operationMode": "Server",
@@ -45,52 +45,75 @@
             "routes": [
                 {
                     "pattern": "",
-                    "name": "BooksList",
-                    "target": "BooksList"
+                    "name": "OrdersList",
+                    "target": "OrdersList"
+                },
+                {
+                    "pattern": "Orders({key})",
+                    "name": "OrdersDetails",
+                    "target": "OrdersDetails"
+                },
+                {
+                    "pattern": "OrderItems({key})",
+                    "name": "OrderItemsDetails",
+                    "target": "OrderItemsDetails"
                 },
                 {
                     "pattern": "Books({key})",
                     "name": "BooksDetails",
                     "target": "BooksDetails"
-                },
-                {
-                    "pattern": "Authors({key})",
-                    "name": "AuthorsDetails",
-                    "target": "AuthorsDetails"
                 }
             ],
             "targets": {
-                "BooksList": {
-                    "entitySet": "Books",
-                    "viewId": "bookshop::ListReport::Books",
+                "OrdersList": {
+                    "entitySet": "Orders",
+                    "viewId": "admin::ListReport::Orders",
                     "viewName": "sap.fe.templates.ListReport",
                     "viewData": {
                         "noPageVariantManagement": true,
                         "navigation": {
-                            "Books": {
+                            "Orders": {
                                 "detail": {
-                                    "route": "BooksDetails"
-                                },
-                                "author": {
-                                    "route": "AuthorsDetails"
-                                }
-                            },
-                            "Authors": {
-                                "detail": {
-                                    "route": "AuthorsDetails"
-                                }
-                            },
-                            "author": {
-                                "detail": {
-                                    "route": "AuthorsDetails"
+                                    "route": "OrdersDetails"
                                 }
                             }
                         }
                     }
                 },
+                "OrdersDetails": {
+                    "entitySet": "Orders",
+                    "viewId": "admin::ObjectPage::Orders",
+                    "viewName": "sap.fe.templates.ObjectPage",
+                    "viewData": {
+                        "navigation": {
+                            "Items": {
+                                "detail": {
+                                    "route": "OrderItemsDetails"
+                                }
+                            },
+                            "book": {
+                                "detail": {
+                                    "route": "BooksDetails"
+                                }
+                            },
+                            "dummy": {
+                                "detail": {
+                                    "route": "BooksDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "OrderItemsDetails": {
+                    "entitySet": "OrderItems",
+                    "viewId": "admin::ObjectPage::OrderItemss",
+                    "viewName": "sap.fe.templates.ObjectPage",
+                    "viewData": {
+                    }
+                },
                 "BooksDetails": {
                     "entitySet": "Books",
-                    "viewId": "bookshop::ObjectPage::Books",
+                    "viewId": "admin::ObjectPage::Books",
                     "viewName": "sap.fe.templates.ObjectPage",
                     "viewData": {
                         "navigation": {
@@ -104,7 +127,7 @@
                 },
                 "AuthorsDetails": {
                     "entitySet": "Authors",
-                    "viewId": "bookshop::ObjectPage::Authors",
+                    "viewId": "admin::ObjectPage::Authors",
                     "viewName": "sap.fe.templates.ObjectPage",
                     "viewData": {
                         "navigation": {}

@@ -7,17 +7,32 @@ using my.bookshop as my from '../db/data-model';
 //
 annotate my.Books with @(
 	UI: {
+		Identification: [ title ],
 	  SelectionFields: [ ID, title, author.name, price, currency_code ],
 		LineItem: [
 			{Value: ID},
 			{Value: title},
-			{Value: author.name, Label:'{i18n>Author}'},
-			{Value: author_ID},
+			{$Type:'UI.DataFieldWithNavigationPath', Value: author.name, Label:'{i18n>Author}', Target:'author'},
+			{$Type:'UI.DataFieldWithNavigationPath', Value: author_ID, Label:'{i18n>AuthorID}', Target:'author'},
 			{Value: stock},
 			{Value: price},
 			{Value: currency.symbol, Label:''},
 		]
 	},
+) {
+	author @(
+		// Common.Text: { $value:author.name, "@UI.TextArrangement": #TextOnly },
+		ValueList.entity:'Authors',
+		Common.ValueList.Parameters:[
+			{ $Type:'Common.ValueListParameterInOut', LocalDataProperty:author_name, ValueListProperty:'name' },
+		],
+	);
+}
+
+annotate my.Authors with @(
+	UI: {
+		Identification: [ name ],
+	}
 );
 
 
@@ -79,13 +94,13 @@ annotate CatalogService.Books with @(
 		],
 		FieldGroup#Descr: {
 			Data: [
-				{$Type: 'UI.DataField', Value: descr},
+				{Value: descr},
 			]
 		},
 		FieldGroup#Price: {
 			Data: [
-				{$Type: 'UI.DataField', Value: price},
-				{$Type: 'UI.DataField', Value: currency.symbol, Label: '{i18n>Currency}'},
+				{Value: price},
+				{Value: currency.symbol, Label: '{i18n>Currency}'},
 			]
 		},
 	}
@@ -100,7 +115,6 @@ annotate CatalogService.Books with @(
 
 using AdminService from './admin-service';
 annotate AdminService.Books with @(
-	// odata.draft.enabled,
 	UI: {
 		Facets: [
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>General}', Target: '@UI.FieldGroup#General'},
@@ -109,24 +123,114 @@ annotate AdminService.Books with @(
 		],
 		FieldGroup#General: {
 			Data: [
-				{$Type: 'UI.DataField', Value: title},
-				{$Type: 'UI.DataField', Value: author_ID},
-				{$Type: 'UI.DataField', Value: descr},
+				{Value: title},
+				{Value: author_ID},
+				{Value: descr},
 			]
 		},
 		FieldGroup#Details: {
 			Data: [
-				{$Type: 'UI.DataField', Value: stock},
-				{$Type: 'UI.DataField', Value: price},
-				{$Type: 'UI.DataField', Value: currency.symbol, Label: '{i18n>Currency}'},
+				{Value: stock},
+				{Value: price},
+				{Value: currency.symbol, Label: '{i18n>Currency}'},
 			]
 		},
 		FieldGroup#Admin: {
 			Data: [
-				{$Type: 'UI.DataField', Value: createdBy, "@UI.Importance": #Medium},
-				{$Type: 'UI.DataField', Value: createdAt, "@UI.Importance": #Medium},
-				{$Type: 'UI.DataField', Value: modifiedBy, "@UI.Importance": #Medium},
-				{$Type: 'UI.DataField', Value: modifiedAt, "@UI.Importance": #Medium}
+				{Value: createdBy},
+				{Value: createdAt},
+				{Value: modifiedBy},
+				{Value: modifiedAt}
+			]
+		}
+	}
+);
+
+
+
+
+////////////////////////////////////////////////////////////////////////////
+//
+//	Order Mgmt
+//
+
+
+annotate my.OrderItems with {
+	book @(
+		// Common.Text: { $value:book.title, "@UI.TextArrangement": #TextOnly },
+		Common.Text: book.title,
+		Common.FieldControl: #Mandatory,
+		ValueList.entity:'Books',
+	);
+	amount @(
+		Common.FieldControl: #Mandatory
+	);
+}
+
+annotate my.Orders with {
+	dummy @(
+		// Common.Text: { $value:book.title, "@UI.TextArrangement": #TextOnly },
+		Common.Text: dummy.title,
+		Common.FieldControl: #Mandatory,
+		ValueList.entity:'Books',
+	);
+}
+
+annotate AdminService.OrderItems with @(
+	UI: {
+	  SelectionFields: [ book_ID ],
+		LineItem: [
+			{Value: book_ID, Label:'Book'},
+			{Value: amount, Label:'Amount'},
+		],
+		Facets: [
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>OrderItems}', Target: '@UI.LineItem'},
+		],
+	}
+);
+
+annotate AdminService.Orders with @(
+	odata.draft.enabled,
+	UI: {
+	  SelectionFields: [ createdAt, createdBy ],
+		LineItem: [
+			{Value: ID, Label:'ID'},
+			{Value: createdBy, Label:'Customer'},
+			{Value: createdAt, Label:'Date'},
+		],
+  	HeaderInfo: {
+  		TypeName: 'Order', TypeNamePlural: 'Orders',
+  		Title: {Value: createdAt},
+  		Description: {Value: createdBy}
+  	},
+		HeaderFacets: [
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Created}', Target: '@UI.FieldGroup#Created'},
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Modified}', Target: '@UI.FieldGroup#Modified'},
+		],
+		Facets: [
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Test}', Target: '@UI.FieldGroup#Test'},
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>OrderItems}', Target: 'Items/@UI.LineItem'},
+		],
+		FieldGroup#Test: {
+			Data: [
+				// {$Type:'UI.DataFieldWithNavigationPath', Value: dummy_ID, Label:'Dummy Book', Target:'dummy'},
+				{$Type:'UI.DataField', Value: dummy_ID, Label:'Dummy Book', Target:'dummy'},
+				{Value: anInteger, Label:'An Integer'},
+				{Value: aString, Label:'A String'},
+				{Value: total, Label:'Total (a Decimal)'},
+				{Value: currency_code},
+			]
+		},
+		FieldGroup#Created: {
+			Data: [
+				{Value: createdBy},
+				{Value: createdAt},
+			]
+		},
+		FieldGroup#Modified: {
+			Data: [
+				{Value: modifiedBy},
+				{Value: modifiedAt},
 			]
 		}
 	}

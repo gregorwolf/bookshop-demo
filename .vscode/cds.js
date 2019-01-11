@@ -1,2 +1,3 @@
 // used in launch.json to refer to an installed cds via an absolute path
-require ('@sap/cds/bin/cds')
+const cds = require ('@sap/cds')
+cds.exec()
