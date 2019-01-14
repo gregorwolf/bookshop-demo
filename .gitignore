@@ -4,3 +4,4 @@ node_modules/
 target/
 *.db
 .DS_Store
+_out
