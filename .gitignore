@@ -3,4 +3,5 @@ gen/
 node_modules/
 target/
 *.db
+_out
 .DS_Store

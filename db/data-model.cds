@@ -22,13 +22,10 @@ entity Authors : managed {
 }
 
 entity Orders : cuid, managed {
+  OrderNo  : String @title:'Order Number'; //> readable key
   Items    : Composition of many OrderItems on Items.order = $self;
   total    : Decimal(9,2);
   currency : Currency;
-  // for debugging Fiori...
-  anInteger : Integer;
-  aString   : String;
-  dummy     : Association to Books;
 }
 entity OrderItems : cuid {
   order  : Association to Orders;

@@ -7,6 +7,7 @@
         {
             "type": "node", "request": "launch",
             "name": "cds run", "args": [ "run" ],
+            "env": {"DEBUG":"yes"},
             "program": "${workspaceFolder}/.vscode/cds", "skipFiles": [
                 "<node_internals>/**/*.js",
                 "**/cds-reflect/lib/index.js",
