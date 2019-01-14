@@ -18,7 +18,7 @@ using my.bookshop as my from '../db/data-model';
 //
 annotate my.Books with @(
 	UI: {
-		Identification: [ title ],
+		Identification: [{Value:title}],
 	  SelectionFields: [ ID, title, author.name, price, currency_code ],
 		LineItem: [
 			{Value: ID},
@@ -34,15 +34,15 @@ annotate my.Books with @(
 	author @(
 		// Common.Text: { $value:author.name, "@UI.TextArrangement": #TextOnly },
 		ValueList.entity:'Authors',
-		Common.ValueList.Parameters:[
-			{ $Type:'Common.ValueListParameterInOut', LocalDataProperty:author_name, ValueListProperty:'name' },
-		],
+		// Common.ValueList.Parameters:[
+		// 	{ $Type:'Common.ValueListParameterInOut', LocalDataProperty:author_name, ValueListProperty:'name' },
+		// ],
 	);
 }
 
 annotate my.Authors with @(
 	UI: {
-		Identification: [ name ],
+		Identification: [{Value:name}],
 	}
 );
 
