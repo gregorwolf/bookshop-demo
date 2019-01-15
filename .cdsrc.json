@@ -11,7 +11,7 @@
         ],
         "tasks": [
             { "use":"@sap/cds/bin/build/hdb", "src":"db", "options":{ "model":["db","srv"] } },
-            { "use":"@sap/cds/bin/build/nodejs-srv-2.x", "src":"srv", "options":{ "model":["srv","app"] } }
+            { "use":"@sap/cds/bin/build/node-srv", "src":"srv", "options":{ "model":["srv","app"] } }
         ]
     }
 }
