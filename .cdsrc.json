@@ -3,6 +3,7 @@
         "localized": true
     },
     "cdsc": {
+        "newCsn": true,
         "betaMode": true
     },
     "build": {
