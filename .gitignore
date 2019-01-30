@@ -5,3 +5,4 @@ target/
 *.db
 .DS_Store
 _out
+default-*.json
