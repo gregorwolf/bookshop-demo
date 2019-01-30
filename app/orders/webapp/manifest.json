@@ -1,0 +1,151 @@
+{
+	"_version": "1.8.0",
+	"sap.app": {
+		"id": "orders",
+		"type": "application",
+		"title": "Manage Orders",
+		"description": "Sample Application",
+		"i18n": "i18n/i18n.properties",
+		"dataSources": {
+			"AdminService": {
+				"uri": "/admin/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0"
+				}
+			}
+		},
+        "-sourceTemplate": {
+            "id": "ui5template.basicSAPUI5ApplicationProject",
+			"-id": "ui5template.smartTemplate",
+			"-version": "1.40.12"
+		}
+	},
+	"sap.ui5": {
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			},
+			"": {
+				"dataSource": "AdminService",
+				"settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect" : true,
+                    "earlyRequests": true,
+                    "groupProperties": {
+                      "default": { "submit": "Auto" },
+                      "collection": { "submit": "Auto" }
+                    }
+				}
+			}
+		},
+        "routing": {
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "OrdersList",
+                    "target": "OrdersList"
+                },
+                {
+                    "pattern": "Orders({key})",
+                    "name": "OrdersDetails",
+                    "target": "OrdersDetails"
+                },
+                {
+                    "pattern": "OrderItems({key})",
+                    "name": "OrderItemsDetails",
+                    "target": "OrderItemsDetails"
+                },
+                {
+                    "pattern": "Books({key})",
+                    "name": "BooksDetails",
+                    "target": "BooksDetails"
+                }
+            ],
+            "targets": {
+                "OrdersList": {
+                    "entitySet": "Orders",
+                    "viewId": "admin::ListReport::Orders",
+                    "viewName": "sap.fe.templates.ListReport",
+                    "viewData": {
+                        "noPageVariantManagement": true,
+                        "navigation": {
+                            "Orders": {
+                                "detail": {
+                                    "route": "OrdersDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "OrdersDetails": {
+                    "entitySet": "Orders",
+                    "viewId": "admin::ObjectPage::Orders",
+                    "viewName": "sap.fe.templates.ObjectPage",
+                    "viewData": {
+                        "navigation": {
+                            "Items": {
+                                "detail": {
+                                    "route": "OrderItemsDetails"
+                                }
+                            },
+                            "book": {
+                                "detail": {
+                                    "route": "BooksDetails"
+                                }
+                            },
+                            "dummy": {
+                                "detail": {
+                                    "route": "BooksDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "OrderItemsDetails": {
+                    "entitySet": "OrderItems",
+                    "viewId": "admin::ObjectPage::OrderItemss",
+                    "viewName": "sap.fe.templates.ObjectPage",
+                    "viewData": {
+                    }
+                },
+                "BooksDetails": {
+                    "entitySet": "Books",
+                    "viewId": "admin::ObjectPage::Books",
+                    "viewName": "sap.fe.templates.ObjectPage",
+                    "viewData": {
+                        "navigation": {
+                            "author": {
+                                "detail": {
+                                    "route": "AuthorsDetails"
+                                }
+                            }
+                        }
+                    }
+                },
+                "AuthorsDetails": {
+                    "entitySet": "Authors",
+                    "viewId": "admin::ObjectPage::Authors",
+                    "viewName": "sap.fe.templates.ObjectPage",
+                    "viewData": {
+                        "navigation": {}
+                    }
+                }
+            }
+        },
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"fullWidth": false
+	},
+	"sap.fiori": {
+		"registrationIds": [],
+		"archeType": "transactional"
+	}
+}
