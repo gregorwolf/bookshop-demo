@@ -7,13 +7,13 @@ Sample application showcasing different services serving the same set of data en
 * get [_Node.js_](https://nodejs.org/en/) v8 or higher
 * get [_sqlite_](https://www.sqlite.org/download.html) (Windows only; pre-installed on Mac/Linux)
 * _npm set @sap:registry_ to _npm.sap.com_:
-```sh
-npm set @sap:registry=http://npm.sap.com
-```
-> Alternatively use latest _nexus snapshots_:
-```sh
-npm set @sap:registry=http://nexus.wdf.sap.corp:8081/nexus/content/groups/build.snapshots.npm
-```
+  ```sh
+  npm set @sap:registry=http://npm.sap.com
+  ```
+  > Alternatively use latest _nexus snapshots_:
+  ```sh
+  npm set @sap:registry=http://nexus.wdf.sap.corp:8081/nexus/content/groups/build.snapshots.npm
+  ```
 
 ## Setup
 
