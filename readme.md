@@ -53,4 +53,4 @@ Note: re-deploy the database thru `npm run deploy` in case you did changes which
 
 ## More...
 Features
-- [Authentication and authorization](/caps/bookshop/tree/auth)
+- [Authentication and authorization](https://github.wdf.sap.corp/caps/bookshop/tree/auth)
