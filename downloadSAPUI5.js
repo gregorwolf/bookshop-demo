@@ -35,33 +35,25 @@ function download(urlBase,file,targetSubdir,headers={},cb)
   .pipe(fs.createWriteStream(path.join(targetSubdir,file)));
 }
 
-let wloops=5;
-function waitForFile(f,cb) {
-  console.log("wait:",f)
-  try {
-    fs.statSync(f)
-    cb()
-  }catch(ex) {
-    console.log("wait",wloops,ex)
-    wloops--;
-    if(wloops==0)
-      throw Error("Timeout occured while waiting for file ",f)
-    setTimeout(function() {
-      waitForFile(f);
-    },1000);
-  }
+function sleep(to,cb) {
+  setTimeout( () => { cb() }, to);
 }
 
+let wloops=5;
 function extract(zipfile,targetSubdir) {
-  waitForFile(zipfile, () =>  {
-    console.log("Extract: "+zipfile)
+  sleep(1000,() => {
+    console.log("Extracting",zipfile,"...")
     minizip.unzip(zipfile, targetSubdir, function (err) {
-      if (err)
-        console.log(err);
-      else
+      if (err) {
+        console.log("unzip:",err);
+        wloops--;
+        if(wloops==0)
+          throw Error("Timeout occured while waiting for file ",zipfile)
+        extract(zipfile,targetSubdir);
+      } else
         console.log('Extraction finished.')
     })
-  });
+  })
 }
 
 download("https://sapui5.hana.ondemand.com/test-resources/sap/ushell/bootstrap/","sandbox.js",targetSubdir);
