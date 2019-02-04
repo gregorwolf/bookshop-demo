@@ -12,6 +12,8 @@
     "express": "^4.16.4"
   },
   "devDependencies": {
+    "node-minizip": "^0.3.0",
+    "request-progress": "^3.0.0",
     "sqlite3": "^4.0.4"
   },
   "scripts": {

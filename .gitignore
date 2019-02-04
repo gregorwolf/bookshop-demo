@@ -6,3 +6,4 @@ target/
 .DS_Store
 _out
 default-*.json
+app/sapui5/
