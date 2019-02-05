@@ -4,7 +4,7 @@ var request = require('request');
 var progress = require('request-progress');
 var minizip = require('node-minizip');
 
-let sapui5version = require("./app/sapui5version")
+let sapui5version = require("../app/sapui5version")
 console.log("SAP UI5 version:", sapui5version)
 
 request.defaults({'no_proxy':'*.wdf.sap.corp'});

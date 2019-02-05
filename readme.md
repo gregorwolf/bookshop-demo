@@ -26,7 +26,7 @@ npm run setup
 ```
 For local provisioning of SAP UI5, you need to download the resources locally via:
 ```sh
-node downloadSAPUI5.js
+node scripts/downloadSAPUI5.js
 ```
 
 
