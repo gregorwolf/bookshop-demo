@@ -12,12 +12,11 @@
     "express": "^4.16.4"
   },
   "devDependencies": {
-    "node-minizip": "^0.3.0",
-    "request-progress": "^3.0.0",
     "sqlite3": "^4.0.4"
   },
   "scripts": {
     "setup": "npm i && cds deploy -2 sqlite:bookshop.db",
+    "setup:ui5": "npm i node-minizip request-progress --no-save && node .scripts/downloadSAPUI5.js",
     "start": "cds run",
     "deploy": "cds deploy"
   },
