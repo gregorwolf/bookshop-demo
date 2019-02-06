@@ -54,7 +54,7 @@
                     "target": "OrdersDetails"
                 },
                 {
-                    "pattern": "OrderItems({key})",
+                    "pattern": "Orders({boo})/Items({boo2}):?query:",
                     "name": "OrderItemsDetails",
                     "target": "OrderItemsDetails"
                 },
@@ -106,7 +106,7 @@
                 },
                 "OrderItemsDetails": {
                     "entitySet": "OrderItems",
-                    "viewId": "admin::ObjectPage::OrderItemss",
+                    "viewId": "admin::ObjectPage::OrderItems",
                     "viewName": "sap.fe.templates.ObjectPage",
                     "viewData": {
                     }
