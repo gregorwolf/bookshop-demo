@@ -4,7 +4,7 @@ using AdminService from '../../srv/admin-service';
 //
 //	Books Object Page
 //
-annotate as.Books with @(
+annotate AdminService.Books with @(
 	UI: {
 		Facets: [
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>General}', Target: '@UI.FieldGroup#General'},

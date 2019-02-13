@@ -13,3 +13,8 @@ service CatalogService {
   @requires: 'authenticated-user'
   @insertonly entity Orders as projection on my.Orders;
 }
+
+// temporary workaround for @sap/cds-compiler snapshot as of Feb 13
+extend service CatalogService {
+  entity OrderItems as projection on my.OrderItems;
+}
