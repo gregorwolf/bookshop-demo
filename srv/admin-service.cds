@@ -6,8 +6,3 @@ service AdminService @(_requires:'admin') {
   entity Orders as projection on my.Orders;
   annotate Orders with @odata.draft.enabled;
 }
-
-// temporary workaround for @sap/cds-compiler snapshot as of Feb 13
-extend service AdminService {
-  entity OrderItems as projection on my.OrderItems;
-}
