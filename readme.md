@@ -42,7 +42,7 @@ Open these links in your browser:
 
 In [VS Code](https://code.visualstudio.com) switch to _Debug_ view and launch the prepared _cds run_ configuration. 
 
-Set breakpoints in one of the javascript files, e.g. [srv/cat-service.js](srv/cat-service.js).
+Set breakpoints in one of the javascript files, e.g. [srv/handlers/cat-service.js](srv/handlers/cat-service.js).
 
 
 ## Develop
