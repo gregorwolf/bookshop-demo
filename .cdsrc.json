@@ -7,15 +7,12 @@
         "betaMode": true
     },
     "build": {
-        "_tasks": [
-            { "for":"postgresql", "src":"db", "options":{ "model":["db/postgresql"] } },
-            { "for":"hana", "src":"db", "options":{ "model":["db/hana"] } },
-            { "for":"node-cf", "src":"srv", "options":{ "model":["srv","app"], "args":["--lang", "all"] } },
-            { "for":"fiori", "src":"app/*" }
-        ],
         "tasks": [
-            { "use":"@sap/cds/bin/build/hdb", "src":"db", "options":{ "model":["db","srv"] } },
-            { "use":"@sap/cds/bin/build/node-srv", "src":"srv", "options":{ "model":["srv","app"] } }
+            { "for": "hana",    "src":"db",  "options":{ "model":["db","srv"] } },
+            { "for": "node-cf", "src":"srv", "options":{ "model":["srv","app"] } },
+            { "for": "fiori",   "src": "app/admin" },
+            { "for": "fiori",   "src": "app/browse" },
+            { "for": "fiori",   "src": "app/orders" }
         ]
     }
 }
