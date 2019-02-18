@@ -23,12 +23,12 @@ entity Authors : managed {
 
 entity Orders : cuid, managed {
   OrderNo  : String @title:'Order Number'; //> readable key
-  Items    : Composition of many OrderItems on Items.order = $self;
+  Items    : Composition of many OrderItems on Items.parent = $self;
   total    : Decimal(9,2);
   currency : Currency;
 }
 entity OrderItems @(cds.autoexpose) : cuid {
-  order  : Association to Orders;
+  parent  : Association to Orders;
   book   : Association to Books;
   amount : Integer;
 }
