@@ -30,5 +30,5 @@ entity Orders : cuid, managed {
 entity OrderItems @(cds.autoexpose) : cuid {
   parent  : Association to Orders;
   book   : Association to Books;
-  amount : Integer;
+  amount : Decimal(9,2);
 }
