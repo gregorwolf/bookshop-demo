@@ -82,13 +82,37 @@ annotate AdminService.Orders with @(
 //
 annotate AdminService.OrderItems with @(
 	UI: {
-	  SelectionFields: [ book_ID ],
+		HeaderInfo: {
+			TypeName: 'Order Item', TypeNamePlural: '	',
+			Title: {
+				Value: book.title
+			},
+			Description: {Value: book.descr}
+		},
+		// There is no filterbar for items so the selctionfileds is not needed
+		SelectionFields: [ book_ID ],
+		////////////////////////////////////////////////////////////////////////////
+		//
+		//	Lists of OrderItems
+		//
 		LineItem: [
 			{Value: book_ID, Label:'Book'},
+			{Value: amount, Label:'Quantity'},
+			{Value: netAmount, Label: 'Net amount'}
+		],
+		Identification: [ //Is the main field group
+			//{Value: ID, Label:'ID'}, //A guid shouldn't be on the UI
+			{Value: book_ID, Label:'Book'},
 			{Value: amount, Label:'Amount'},
+			{Value: netAmount, Label: 'Net amount'}
 		],
 		Facets: [
-			{$Type: 'UI.ReferenceFacet', Label: '{i18n>OrderItems}', Target: '@UI.LineItem'},
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>OrderItems}', Target: '@UI.Identification'},
 		],
 	}
-);
+) {
+	netAmount
+		@Common.FieldControl: #ReadOnly;
+		//ERROR ALERT: The following line refering to the parents currency code will lead to a server error
+		//@Measures.ISOCurrency:parent.currency.code; //Bind the currency field to the amount field of the parent
+};
