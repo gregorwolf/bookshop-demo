@@ -22,6 +22,11 @@
 		}
 	},
 	"sap.ui5": {
+        "dependencies": {
+            "libs": {
+                "sap.fe": {}
+            }
+        },
 		"models": {
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
@@ -35,8 +40,9 @@
                     "autoExpandSelect" : true,
                     "earlyRequests": true,
                     "groupProperties": {
-                      "default": { "submit": "Auto" },
-                      "collection": { "submit": "Auto" }
+                        "default": {
+                            "submit": "Auto"
+                        }
                     }
 				}
 			}

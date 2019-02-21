@@ -1,5 +1,6 @@
 using AdminService from '../../srv/admin-service';
 
+
 ////////////////////////////////////////////////////////////////////////////
 //
 //	Common
@@ -7,8 +8,10 @@ using AdminService from '../../srv/admin-service';
 annotate AdminService.OrderItems with {
 	book @(
 		// Common.Text: { $value:book.title, "@UI.TextArrangement": #TextOnly },
-		Common.Text: book.title,
-		Common.FieldControl: #Mandatory,
+		Common: {
+			Text: book.title,
+			FieldControl: #Mandatory
+		},
 		ValueList.entity:'Books',
 	);
 	amount @(
@@ -17,34 +20,36 @@ annotate AdminService.OrderItems with {
 }
 
 
-////////////////////////////////////////////////////////////////////////////
-//
-//	Lists of Orders
-//
 annotate AdminService.Orders with @(
 	UI: {
-	  SelectionFields: [ createdAt, createdBy ],
+		////////////////////////////////////////////////////////////////////////////
+		//
+		//	Lists of Orders
+		//
+		SelectionFields: [ createdAt, createdBy ], //they are somehwere set to hddenFilter:true which means they are ignored
 		LineItem: [
-			{Value: ID, Label:'ID'},
+			//{Value: ID, Label:'ID'}, //A guid shouldn't be on the UI
+			{Value: createdBy, Label:'Customer'},
+			{Value: total, Label: 'Order Value' },
+			{Value: createdAt, Label:'Date'}
+		],
+		////////////////////////////////////////////////////////////////////////////
+		//
+		//	Order Details
+		//
+		HeaderInfo: {
+			TypeName: 'Order', TypeNamePlural: 'Orders',
+			Title: {
+				Label: 'Order from ', //A label is possible but it is not considered on the ObjectPage yet
+				Value: createdAt
+			},
+			Description: {Value: createdBy}
+		},
+		Identification: [ //Is the main field group
+			//{Value: ID, Label:'ID'}, //A guid shouldn't be on the UI
 			{Value: createdBy, Label:'Customer'},
 			{Value: createdAt, Label:'Date'},
 		],
-	}
-);
-
-
-////////////////////////////////////////////////////////////////////////////
-//
-//	Order Details
-//
-annotate AdminService.Orders with @(
-	odata.draft.enabled,
-	UI: {
-  	HeaderInfo: {
-  		TypeName: 'Order', TypeNamePlural: 'Orders',
-  		Title: {Value: createdAt},
-  		Description: {Value: createdBy}
-  	},
 		HeaderFacets: [
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Created}', Target: '@UI.FieldGroup#Created'},
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Modified}', Target: '@UI.FieldGroup#Modified'},
@@ -72,14 +77,20 @@ annotate AdminService.Orders with @(
 			]
 		}
 	}
-);
+) {
+	createdAt @UI.HiddenFilter:false; //These fields are set to not show up in the
+	createdBy @UI.HiddenFilter:false; //FilterBar but I don't find anything better
+	total
+		@Common.FieldControl: #ReadOnly
+		@Measures.ISOCurrency:currency.code; //Bind the currency field to the amount field
+		//In all services we always find currency as the code and not as an object that contains a property code
+		//it seems to work but at least to me this is unconventional modeling.
+};
 
 
 
-////////////////////////////////////////////////////////////////////////////
-//
-//	Lists of OrderItems
-//
+//The enity types name is AdminService.my_bookshop_OrderItems
+//The annotations below are not generated in edmx WHY?
 annotate AdminService.OrderItems with @(
 	UI: {
 		HeaderInfo: {
@@ -97,6 +108,8 @@ annotate AdminService.OrderItems with @(
 		//
 		LineItem: [
 			{Value: book_ID, Label:'Book'},
+			//The following entry is only used to have the assoication followed in the read event
+			{Value: book.price, Label:'Book Price'},
 			{Value: amount, Label:'Quantity'},
 			{Value: netAmount, Label: 'Net amount'}
 		],
