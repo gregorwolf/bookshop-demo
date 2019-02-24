@@ -31,5 +31,4 @@ entity OrderItems @(cds.autoexpose) : cuid {
   parent  : Association to Orders;
   book   : Association to Books;
   amount : Integer;
-  virtual netAmount: Decimal(9, 2);
 }
