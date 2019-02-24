@@ -2,12 +2,14 @@
 
   var script = document.currentScript
   var options = {
-    url: !script.getAttribute('from')
+    url: script.getAttribute('from')
     || 'https://sapui5nightly.int.sap.hana.ondemand.com/'
     || 'https://sapui5.hana.ondemand.com'
     || "http://localhost:8080/testsuite" ,
     version: script.getAttribute('version') || '1.61.1',
   }
+
+  console.debug (options)
 
   load ({ src: "/sapui5/sandbox.js",
     onload: function () { loadUI5("/sapui5") },
