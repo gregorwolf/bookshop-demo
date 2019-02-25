@@ -1,0 +1,17 @@
+{
+	"verbose": true,
+	"watch": [
+		"srv",
+		"db",
+		"."
+	],
+	"ext": "js,cds,sql",
+	"env": {
+		"NODE_ENV": "development"
+	},
+	"ignore": [
+		".git",
+		"node_modules/**/node_modules",
+		".db"
+	]
+}

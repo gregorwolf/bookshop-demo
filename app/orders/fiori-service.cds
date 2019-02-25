@@ -119,6 +119,12 @@ annotate AdminService.OrderItems with @(
 			{Value: amount, Label:'Amount'},
 			{Value: netAmount, Label: 'Net amount'}
 		],
+		Identification: [ //Is the main field group 
+			//{Value: ID, Label:'ID'}, //A guid shouldn't be on the UI
+			{Value: book_ID, Label:'Book'},
+			{Value: amount, Label:'Amount'},
+			{Value: netAmount, Label: 'Net amount'}
+		],	
 		Facets: [
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>OrderItems}', Target: '@UI.Identification'},
 		],
