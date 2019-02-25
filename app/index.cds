@@ -19,7 +19,7 @@ using my.bookshop as my from '../db/data-model';
 annotate my.Books with @(
 	UI: {
 		Identification: [{Value:title}],
-	  SelectionFields: [ ID, title, author.name, price, currency_code ],
+	  SelectionFields: [ ID, author.name, price, currency_code ],
 		LineItem: [
 			{Value: ID},
 			{Value: title},
