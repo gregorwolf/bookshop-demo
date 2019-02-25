@@ -1,6 +1,8 @@
 using AdminService from '../../srv/admin-service';
 
-
+annotate AdminService.Books with {
+	price @Common.FieldControl: #ReadOnly;
+}
 ////////////////////////////////////////////////////////////////////////////
 //
 //	Common
@@ -75,6 +77,16 @@ annotate AdminService.Orders with @(
 				{Value: modifiedBy},
 				{Value: modifiedAt},
 			]
+		},
+		Common: {
+			SideEffects#AmountChanges: {
+				SourceEntities: [
+					Items
+				],
+				TargetProperties: [
+					total	
+				]
+			}
 		}
 	}
 ) {
@@ -119,15 +131,37 @@ annotate AdminService.OrderItems with @(
 			{Value: amount, Label:'Amount'},
 			{Value: netAmount, Label: 'Net amount'}
 		],
-		Identification: [ //Is the main field group 
-			//{Value: ID, Label:'ID'}, //A guid shouldn't be on the UI
-			{Value: book_ID, Label:'Book'},
-			{Value: amount, Label:'Amount'},
-			{Value: netAmount, Label: 'Net amount'}
-		],	
 		Facets: [
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>OrderItems}', Target: '@UI.Identification'},
 		],
+	},
+	Common: {
+		SideEffects#AmountChanges: {
+			SourceProperties: [
+				amount
+			],
+			TargetProperties: [
+				netAmount	
+			]
+		},
+		// Common: {
+		// 	SideEffects#BookChanges: {
+		// 		SourceEntities: [
+		// 			book
+		// 		],
+		// 		TargetProperties: [
+		// 			netAmount	
+		// 		]
+		// 	}
+		// }		
+		SideEffects#BookChanges: {
+			SourceProperties: [
+				book_ID
+			],
+			TargetProperties: [
+				netAmount, book.price
+			]
+		}		
 	}
 ) {
 	netAmount
