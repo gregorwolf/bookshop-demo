@@ -29,8 +29,7 @@ entity Orders : cuid, managed {
 }
 entity OrderItems @(cds.autoexpose) : cuid {
   parent  : Association to Orders;
-  //bookID : Integer;
-  book   : Association to Books; //is managed. If I want to have my own name uncomment line above and add "on book.ID = bookID" here;
+  book   : Association to Books;
   amount : Integer;
   netAmount: Decimal(9,2);
 }
