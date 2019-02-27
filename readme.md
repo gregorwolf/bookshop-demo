@@ -51,6 +51,9 @@ Edit the provided `.cds` or `.js` sources and restart the server (i.e. Ctrl-C, `
 
 Note: re-deploy the database thru `npm run deploy` in case you did changes which affect the data models or the signatures of entities exposed in the services.
 
+## Issues?
+→ [cap/issues](https://github.wdf.sap.corp/cap/issues/issues)
+
 ## More...
 Features
 - [Authentication and authorization](https://github.wdf.sap.corp/caps/bookshop/tree/auth)
