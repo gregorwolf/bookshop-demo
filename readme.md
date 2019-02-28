@@ -54,6 +54,6 @@ Note: re-deploy the database thru `npm run deploy` in case you did changes which
 ## Issues?
 → [cap/issues](https://github.wdf.sap.corp/cap/issues/issues)
 
-## More...
-Features
-- [Authentication and authorization](https://github.wdf.sap.corp/caps/bookshop/tree/auth)
+## More Features?
+- Authentication and authorization → ['auth' branch](https://github.wdf.sap.corp/caps/bookshop/tree/auth)
+- CF & MTA → ['cf' branch](https://github.wdf.sap.corp/caps/bookshop/tree/cf)
