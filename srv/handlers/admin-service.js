@@ -2,6 +2,14 @@ module.exports = (srv) => {
 
   const {Books, OrderItems} = cds.entities('AdminService')
 
+  srv.before('*', (req) => {
+    const eventToString = (req) => `${req.event}${req.target ? ' ' + req.target.name : ''}`
+
+    req.on('failed', (err, req) => console.log(`${eventToString(req)} failed with error ${err.message}`))
+    req.on('succeeded', (req) => console.log(`${eventToString(req)} succeeded`))
+    req.on('done', (req) => console.log(`${eventToString(req)} is done`))
+  })
+
   // calculate the netAmount for the order's items based on the books' prices
   srv.before ('UPDATE', 'OrderItems', async (req) => {
     const item = req.data
