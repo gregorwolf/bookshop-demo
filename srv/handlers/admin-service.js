@@ -11,7 +11,7 @@ module.exports = (srv) => {
   })
 
   // calculate the netAmount for the order's items based on the books' prices
-  srv.before ('UPDATE', 'OrderItems', async (req) => {
+  srv.before ('PATCH', 'OrderItems', async (req) => {
     const item = req.data
     // need to read the current data, which is the drafts table
     // TODO remove dependency on draft mode
@@ -32,7 +32,7 @@ module.exports = (srv) => {
   })
 
   // on-the-fly calculate the total Order price based on the OrderItems' netAmounts
-  srv.after ('READ', 'Orders', async (orders, req) => {
+  srv.after ('PATCH', 'Orders', async (orders, req) => {
     const orderIDs = orders.map(order => order.ID)
     const items = await req.run(SELECT.from(OrderItems, ['ID', 'parent_ID', 'netAmount']).where({ parent_ID: {in: orderIDs} }))
 
