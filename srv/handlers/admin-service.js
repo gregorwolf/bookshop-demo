@@ -32,7 +32,7 @@ module.exports = (srv) => {
   })
 
   // on-the-fly calculate the total Order price based on the OrderItems' netAmounts
-  srv.after ('PATCH', 'Orders', async (orders, req) => {
+  srv.after ('READ', 'Orders', async (orders, req) => {
     const orderIDs = orders.map(order => order.ID)
     const items = await req.run(SELECT.from(OrderItems, ['ID', 'parent_ID', 'netAmount']).where({ parent_ID: {in: orderIDs} }))
 
