@@ -9,7 +9,6 @@ annotate AdminService.Books with {
 //
 annotate AdminService.OrderItems with {
 	book @(
-		// Common.Text: { $value:book.title, "@UI.TextArrangement": #TextOnly },
 		Common: {
 			Text: book.title,
 			FieldControl: #Mandatory
@@ -28,9 +27,8 @@ annotate AdminService.Orders with @(
 		//
 		//	Lists of Orders
 		//
-		SelectionFields: [ createdAt, createdBy ], //they are somehwere set to hddenFilter:true which means they are ignored
+		SelectionFields: [ createdAt, createdBy ],
 		LineItem: [
-			//{Value: ID, Label:'ID'}, //A guid shouldn't be on the UI
 			{Value: createdBy, Label:'Customer'},
 			{Value: total, Label: 'Order Value' },
 			{Value: createdAt, Label:'Date'}
@@ -42,28 +40,27 @@ annotate AdminService.Orders with @(
 		HeaderInfo: {
 			TypeName: 'Order', TypeNamePlural: 'Orders',
 			Title: {
-				Label: 'Order from ', //A label is possible but it is not considered on the ObjectPage yet
-				Value: createdAt
+				Label: 'Order number ', //A label is possible but it is not considered on the ObjectPage yet
+				Value: OrderNo
 			},
 			Description: {Value: createdBy}
 		},
 		Identification: [ //Is the main field group
-			//{Value: ID, Label:'ID'}, //A guid shouldn't be on the UI
 			{Value: createdBy, Label:'Customer'},
 			{Value: createdAt, Label:'Date'},
+			{Value: OrderNo },
 		],
 		HeaderFacets: [
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Created}', Target: '@UI.FieldGroup#Created'},
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Modified}', Target: '@UI.FieldGroup#Modified'},
 		],
 		Facets: [
-			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Test}', Target: '@UI.FieldGroup#Test'},
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Details}', Target: '@UI.FieldGroup#Details'},
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>OrderItems}', Target: 'Items/@UI.LineItem'},
 		],
-		FieldGroup#Test: {
+		FieldGroup#Details: {
 			Data: [
-				{Value: total, Label:'Total (a Decimal)'},
-				{Value: currency_code},
+				{Value: total, Label:'Total'}
 			]
 		},
 		FieldGroup#Created: {
@@ -84,14 +81,14 @@ annotate AdminService.Orders with @(
 					Items
 				],
 				TargetProperties: [
-					total	
+					total
 				]
 			}
 		}
 	}
 ) {
-	createdAt @UI.HiddenFilter:false; //These fields are set to not show up in the
-	createdBy @UI.HiddenFilter:false; //FilterBar but I don't find anything better
+	createdAt @UI.HiddenFilter:false;
+	createdBy @UI.HiddenFilter:false;
 	total
 		@Common.FieldControl: #ReadOnly
 		@Measures.ISOCurrency:currency.code; //Bind the currency field to the amount field
@@ -141,27 +138,17 @@ annotate AdminService.OrderItems with @(
 				amount
 			],
 			TargetProperties: [
-				netAmount	
+				netAmount, parent.total
 			]
 		},
-		// Common: {
-		// 	SideEffects#BookChanges: {
-		// 		SourceEntities: [
-		// 			book
-		// 		],
-		// 		TargetProperties: [
-		// 			netAmount	
-		// 		]
-		// 	}
-		// }		
 		SideEffects#BookChanges: {
 			SourceProperties: [
 				book_ID
 			],
 			TargetProperties: [
-				netAmount, book.price
+				netAmount, book.price, parent.total
 			]
-		}		
+		}
 	}
 ) {
 	netAmount
