@@ -10,7 +10,7 @@ module.exports = (srv) => {
     // TODO remove dependency on draft mode
     const OrderItemsDrafts = OrderItems['@cds.persistence.name'] + '_drafts'
     const completeItems = await tx.run(SELECT.one(OrderItemsDrafts).where({ ID: item.ID }))
-    if (!completeItems || completeItems.length < 1)  req.reject(400, `No item with id ${item.ID} found`)
+    if (!completeItems || completeItems.length < 1) return req.reject(400, `No item with id ${item.ID} found`)
 
     //merge the new values into completed items
     const completeItem = Object.assign(completeItems[0], item)
