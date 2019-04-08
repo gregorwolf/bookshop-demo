@@ -27,7 +27,7 @@ entity Orders : cuid, managed {
   total    : Decimal(9,2);
   currency : Currency;
 }
-entity OrderItems @(cds.autoexpose) : cuid {
+entity OrderItems : cuid {
   parent  : Association to Orders;
   book   : Association to Books;
   amount : Integer;
