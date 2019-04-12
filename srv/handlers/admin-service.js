@@ -27,11 +27,11 @@ module.exports = (srv) => {
   })
 
     // some event tracing, for troubleshooting
-  DEBUG && srv.before('*', (req) => {
-    const eventToString = (req) => `${req.event}${req.target ? ' ' + req.target.name : ''}`
-    req.on('failed', (err, req) => console.log(`${eventToString(req)} failed with error ${err.message}`))
-    req.on('succeeded', (req) => console.log(`${eventToString(req)} succeeded`))
-    req.on('done', (req) => console.log(`${eventToString(req)} is done`))
-  })
+    DEBUG && srv.before('*', (req) => {
+      const eventToString = (req) => `${req.event}${req.target ? ' ' + req.target.name : ''}`
+      req.on('failed', function (err) { console.log(`${eventToString(this)} failed with error ${err.message}`) })
+      req.on('succeeded', function () { console.log(`${eventToString(this)} succeeded`) })
+      req.on('done', function () { console.log(`${eventToString(this)} is done`) })
+    })
 
 }
