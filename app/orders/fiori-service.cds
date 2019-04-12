@@ -60,7 +60,8 @@ annotate AdminService.Orders with @(
 		],
 		FieldGroup#Details: {
 			Data: [
-				{Value: total, Label:'Total'}
+				{Value: total, Label:'Total'},
+				{Value: currency_code, Label:'Currency'}
 			]
 		},
 		FieldGroup#Created: {
@@ -75,15 +76,15 @@ annotate AdminService.Orders with @(
 				{Value: modifiedAt},
 			]
 		},
-		Common: {
-			SideEffects#AmountChanges: {
-				SourceEntities: [
-					Items
-				],
-				TargetProperties: [
-					total
-				]
-			}
+	},
+	Common: {
+		SideEffects#AmountChanges: {
+			SourceEntities: [
+				Items
+			],
+			TargetProperties: [
+				total
+			]
 		}
 	}
 ) {

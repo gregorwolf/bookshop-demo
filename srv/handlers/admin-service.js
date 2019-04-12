@@ -20,7 +20,7 @@ module.exports = (srv) => {
     const {ID,amount} = req.data; if (!amount)  return // amount not touched
     const tx = cds.transaction(req)
     const [item] = await tx.run (SELECT.one(req.target).where({ID}))  // FIXME: SELECT.one should return *one* entry
-    if (!item)  req.reject(400, `No order item with id ${ID} found`)
+    if (!item)  return req.reject(400, `No order item with id ${ID} found`)
     if (!item.book_ID)  return //> no book assigned yet
     const [{price}] = await tx.run (SELECT.one (Books, ['price']).where({ ID: item.book_ID }))  // FIXME: SELECT.one should return *one* entry
     req.data.netAmount = (price||0) * (amount||0)
