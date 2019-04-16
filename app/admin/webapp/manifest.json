@@ -1,40 +1,40 @@
 {
-	"_version": "1.8.0",
-	"sap.app": {
-		"id": "admin",
-		"type": "application",
-		"title": "Manage Books",
-		"description": "Sample Application",
-		"i18n": "i18n/i18n.properties",
-		"dataSources": {
-			"AdminService": {
-				"uri": "/admin/",
-				"type": "OData",
-				"settings": {
-					"odataVersion": "4.0"
-				}
-			}
-		},
+    "_version": "1.8.0",
+    "sap.app": {
+        "id": "admin",
+        "type": "application",
+        "title": "Manage Books",
+        "description": "Sample Application",
+        "i18n": "i18n/i18n.properties",
+        "dataSources": {
+            "AdminService": {
+                "uri": "/admin/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "4.0"
+                }
+            }
+        },
         "-sourceTemplate": {
             "id": "ui5template.basicSAPUI5ApplicationProject",
-			"-id": "ui5template.smartTemplate",
-			"-version": "1.40.12"
-		}
-	},
-	"sap.ui5": {
+            "-id": "ui5template.smartTemplate",
+            "-version": "1.40.12"
+        }
+    },
+    "sap.ui5": {
         "dependencies": {
             "libs": {
                 "sap.fe": {}
             }
         },
-		"models": {
-			"i18n": {
-				"type": "sap.ui.model.resource.ResourceModel",
-				"uri": "i18n/i18n.properties"
-			},
-			"": {
-				"dataSource": "AdminService",
-				"settings": {
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "": {
+                "dataSource": "AdminService",
+                "settings": {
                     "synchronizationMode": "None",
                     "operationMode": "Server",
                     "autoExpandSelect" : true,
@@ -44,18 +44,18 @@
                             "submit": "Auto"
                         }
                     }
-				}
-			}
-		},
+                }
+            }
+        },
         "routing": {
             "routes": [
                 {
-                    "pattern": "",
+                    "pattern": ":?query:",
                     "name": "BooksList",
                     "target": "BooksList"
                 },
                 {
-                    "pattern": "Books({key})",
+                    "pattern": "Books({key}):?query:",
                     "name": "BooksDetails",
                     "target": "BooksDetails"
                 },
@@ -67,55 +67,62 @@
             ],
             "targets": {
                 "BooksList": {
-                    "entitySet": "Books",
-                    "viewId": "admin::ListReport::Books",
-                    "viewName": "sap.fe.templates.ListReport",
-                    "viewData": {
-                        "noPageVariantManagement": true,
-                        "navigation": {
-                            "Books": {
-                                "detail": {
-                                    "route": "BooksDetails"
+                    "type": "Component",
+                    "id": "BooksList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings" : {
+                            "entitySet" : "Books",
+                            "navigation" : {
+                                "Books" : {
+                                    "detail" : {
+                                        "route" : "BooksDetails"
+                                    }
                                 }
                             }
                         }
                     }
                 },
                 "BooksDetails": {
-                    "entitySet": "Books",
-                    "viewId": "admin::ObjectPage::Books",
-                    "viewName": "sap.fe.templates.ObjectPage",
-                    "viewData": {
-                        "navigation": {
-                            "author": {
-                                "detail": {
-                                    "route": "AuthorsDetails"
+                    "type": "Component",
+                    "id": "BooksDetailsList",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings" : {
+                            "entitySet" : "Books",
+                            "navigation" : {
+                                "Authors" : {
+                                    "detail" : {
+                                        "route" : "AuthorsDetails"
+                                    }
                                 }
                             }
                         }
                     }
                 },
                 "AuthorsDetails": {
-                    "entitySet": "Authors",
-                    "viewId": "admin::ObjectPage::Authors",
-                    "viewName": "sap.fe.templates.ObjectPage",
-                    "viewData": {
-                        "navigation": {}
+                    "type": "Component",
+                    "id": "AuthorsDetailsList",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings" : {
+                            "entitySet" : "Authors"
+                        }
                     }
                 }
             }
         },
-		"contentDensities": {
-			"compact": true,
-			"cozy": true
-		}
-	},
-	"sap.ui": {
-		"technology": "UI5",
-		"fullWidth": false
-	},
-	"sap.fiori": {
-		"registrationIds": [],
-		"archeType": "transactional"
-	}
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "fullWidth": false
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
 }

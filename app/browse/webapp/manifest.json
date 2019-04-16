@@ -1,40 +1,40 @@
 {
-	"_version": "1.8.0",
-	"sap.app": {
-		"id": "bookshop",
-		"type": "application",
-		"title": "Browse Books",
-		"description": "Sample Application",
-		"i18n": "i18n/i18n.properties",
-		"dataSources": {
-			"CatalogService": {
-				"uri": "/catalog/",
-				"type": "OData",
-				"settings": {
-					"odataVersion": "4.0"
-				}
-			}
-		},
+    "_version": "1.8.0",
+    "sap.app": {
+        "id": "bookshop",
+        "type": "application",
+        "title": "Browse Books",
+        "description": "Sample Application",
+        "i18n": "i18n/i18n.properties",
+        "dataSources": {
+            "CatalogService": {
+                "uri": "/catalog/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "4.0"
+                }
+            }
+        },
         "-sourceTemplate": {
             "id": "ui5template.basicSAPUI5ApplicationProject",
-			"-id": "ui5template.smartTemplate",
-			"-version": "1.40.12"
-		}
-	},
-	"sap.ui5": {
+            "-id": "ui5template.smartTemplate",
+            "-version": "1.40.12"
+        }
+    },
+    "sap.ui5": {
         "dependencies": {
             "libs": {
                 "sap.fe": {}
             }
         },
-		"models": {
-			"i18n": {
-				"type": "sap.ui.model.resource.ResourceModel",
-				"uri": "i18n/i18n.properties"
-			},
-			"": {
-				"dataSource": "CatalogService",
-				"settings": {
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "": {
+                "dataSource": "CatalogService",
+                "settings": {
                     "synchronizationMode": "None",
                     "operationMode": "Server",
                     "autoExpandSelect" : true,
@@ -44,91 +44,85 @@
                             "submit": "Auto"
                         }
                     }
-				}
-			}
-		},
+                }
+            }
+        },
         "routing": {
             "routes": [
                 {
-                    "pattern": "",
+                    "pattern": ":?query:",
                     "name": "BooksList",
                     "target": "BooksList"
                 },
                 {
-                    "pattern": "Books({key})",
+                    "pattern": "Books({key}):?query:",
                     "name": "BooksDetails",
                     "target": "BooksDetails"
                 },
                 {
-                    "pattern": "Authors({key})",
+                    "pattern": "Books({key}/author({key2}):?query:",
                     "name": "AuthorsDetails",
                     "target": "AuthorsDetails"
                 }
             ],
             "targets": {
                 "BooksList": {
-                    "entitySet": "Books",
-                    "viewId": "bookshop::ListReport::Books",
-                    "viewName": "sap.fe.templates.ListReport",
-                    "viewData": {
-                        "noPageVariantManagement": true,
-                        "navigation": {
-                            "Books": {
-                                "detail": {
-                                    "route": "BooksDetails"
-                                },
-                                "author": {
-                                    "route": "AuthorsDetails"
-                                }
-                            },
-                            "Authors": {
-                                "detail": {
-                                    "route": "AuthorsDetails"
-                                }
-                            },
-                            "author": {
-                                "detail": {
-                                    "route": "AuthorsDetails"
+                    "type": "Component",
+                    "id": "BooksList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings" : {
+                            "entitySet" : "Books",
+                            "navigation" : {
+                                "Books" : {
+                                    "detail" : {
+                                        "route" : "BooksDetails"
+                                    }
                                 }
                             }
                         }
                     }
                 },
                 "BooksDetails": {
-                    "entitySet": "Books",
-                    "viewId": "bookshop::ObjectPage::Books",
-                    "viewName": "sap.fe.templates.ObjectPage",
-                    "viewData": {
-                        "navigation": {
-                            "author": {
-                                "detail": {
-                                    "route": "AuthorsDetails"
+                    "type": "Component",
+                    "id": "BooksDetailsList",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings" : {
+                            "entitySet" : "Books",
+                            "navigation" : {
+                                "Authors" : {
+                                    "detail" : {
+                                        "route" : "AuthorsDetails"
+                                    }
                                 }
                             }
                         }
                     }
                 },
                 "AuthorsDetails": {
-                    "entitySet": "Authors",
-                    "viewId": "bookshop::ObjectPage::Authors",
-                    "viewName": "sap.fe.templates.ObjectPage",
-                    "viewData": {
-                        "navigation": {}
+                    "type": "Component",
+                    "id": "AuthorsDetailsList",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings" : {
+                            "entitySet" : "Authors"
+                        }
                     }
                 }
             }
         },
-		"contentDensities": {
-			"compact": true,
-			"cozy": true
-		}
-	},
-	"sap.ui": {
-		"technology": "UI5",
-		"fullWidth": false
-	},
-	"sap.fiori": {
-		"registrationIds": [],
-		"archeType": "transactional"
-	}
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "fullWidth": false
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
 }
