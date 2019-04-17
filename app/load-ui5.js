@@ -25,9 +25,8 @@
   function loadUI5(uri) {
     var ui5 = document.createElement('script');
     ui5.id="sap-ui-bootstrap";
-//    ui5.src=uri +'/'+ options.version + "/resources/sap-ui-core.js";
-   // ui5.src='https://sapui5nightly.int.sap.hana.ondemand.com/resources/sap-ui-core.js'
-   ui5.src=uri + "/resources/sap-ui-core.js";
+    ui5.src=uri +'/'+ options.version + "/resources/sap-ui-core.js";
+//  ui5.src=uri + "/resources/sap-ui-core.js";
     ui5.setAttribute("data-sap-ui-libs","sap.m, sap.ushell, sap.collaboration, sap.ui.layout");
     ui5.setAttribute("data-sap-ui-compatVersion","edge");
     ui5.setAttribute("data-sap-ui-theme","sap_belize");
