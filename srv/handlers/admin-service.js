@@ -1,11 +1,40 @@
 const { DEBUG } = process.env
 
+const _isCount = ({query: {SELECT: {columns}}}) => {
+  return columns && columns.some(({func}) => func === 'count')
+}
+const _getColumns = (elements) => {
+  return Object.values(elements)
+    .filter(({type}) => type !== 'cds.Composition' && type !== 'cds.Association')
+    .map(({name}) => name)
+}
+
 module.exports = (srv) => {
 
   const { Books, OrderItems } = srv.entities ('my.bookshop')
 
+  // preparation of the on-the-fly calculation of the total Order price based on the OrderItems' netAmounts
+  srv.before('READ', 'Orders', req => {
+    if (_isCount(req)) return // Count does not need an extra calculation
+    if (!req.query.SELECT.columns) req.query.columns(..._getColumns(req.target.elements)) // Temporary workaround to ensure columns
+    if (!req.query.SELECT.columns.some(({ref}) => ref && ref[0] === 'Items')) {
+      req._.removeItems = true
+      req.query.columns({ref: ['Items'], expand: [{ref: ['netAmount']}]})
+    }
+  })
+
   // on-the-fly calculate the total Order price based on the OrderItems' netAmounts
-  srv.after (['READ','EDIT'], 'Orders', async (orders, req) => {
+  srv.after('READ', 'Orders', (result, req) => {
+    if (_isCount(req)) return // Count does not need an extra calculation
+    for (const row of result) {
+      row.total = row.Items.reduce((acc, {netAmount}) => acc + netAmount, 0)
+      if (req._.removeItems) delete row.Items // odata-server would reject the response
+    }
+  })
+
+
+  // on-the-fly calculate the total Order price based on the OrderItems' netAmounts
+  srv.after ('EDIT', 'Orders', async (orders, req) => {
     const ordersByID = orders.reduce ((all,o) => { (all[o.ID] = o).total=0; return all },{})
     return cds.transaction(req) .run (
       SELECT.from(OrderItems) .columns ('parent_ID', 'netAmount')
