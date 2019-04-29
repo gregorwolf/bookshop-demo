@@ -19,9 +19,10 @@ module.exports = (srv) => {
   srv.before ('PATCH', 'OrderItems', async (req) => {
     const {ID,amount} = req.data; if (!amount)  return // amount not touched
     const tx = cds.transaction(req)
-    const item = await tx.run (SELECT.one(req.target).columns({ref: ['book'], expand: [{ref: ['price']}]}).where({ID}))
+    const item = await tx.run (SELECT.one(req.target).columns({ref: ['book'], expand: [{ref: ['price']}, {ref: ['stock']}]}).where({ID}))
     if (!item)  return req.reject(400, `No order item with id ${ID} found`)
     req.data.netAmount = (item.book.price||0) * (amount||0)
+    if (amount > item.book.stock) return req.info(`Amount is greater than stock`, 'amount')
   })
 
     // some event tracing, for troubleshooting
@@ -31,5 +32,4 @@ module.exports = (srv) => {
       req.on('succeeded', function () { console.log(`${eventToString(this)} succeeded`) })
       req.on('done', function () { console.log(`${eventToString(this)} is done`) })
     })
-
 }
