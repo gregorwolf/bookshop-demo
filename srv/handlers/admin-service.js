@@ -6,17 +6,22 @@ module.exports = (srv) => {
 
   // Check all amounts against stock before activating
   srv.before (['CREATE', 'UPDATE'], 'Orders', async (req) => {// TODO: change to SAVE once implemented as alias for CREATE and UPDATE
-    const cqn = SELECT.from(Books).columns('title')
-
-    for (const {amount, book_ID} of req.data.Items) {
-      cqn.or({ID: book_ID, and: {stock: {'<': amount}}})
-    }
-
+    const updates = []
     const tx = cds.transaction(req)
 
-    for (const {title} of await tx.run(cqn)) {
-      req.error(400, `Amount is greater than stock for book ${title}`, 'OrderItems/amount')
+    for (const {amount, book_ID} of req.data.Items) {
+      updates.push(tx.run(
+        UPDATE(Books).where({ID: book_ID})
+        .and(`stock >=`, amount)
+        .set(`stock -=`, amount)
+      ))
     }
+
+    return Promise.all(updates).then(affected => {
+      for (let i = 0, length = affected.length; i < length; i++) {
+        if (!affected[i]) req.error(409, `Amount ${req.data.Items[i].amount} is greater than books in stock for ID ${req.data.Items[i].book_ID}`)
+      }
+    })
   })
 
   // on-the-fly calculate the total Order price based on the OrderItems' netAmounts
