@@ -4,7 +4,7 @@ module.exports = (srv) => {
 
   const { Books, OrderItems } = srv.entities ('my.bookshop')
 
-  // Check all amounts against stock
+  // Check all amounts against stock before activating
   srv.before (['CREATE', 'UPDATE'], 'Orders', async (req) => {// TODO: change to SAVE once implemented as alias for CREATE and UPDATE
     const cqn = SELECT.from(Books).columns('title')
 
@@ -32,12 +32,12 @@ module.exports = (srv) => {
 
   // calculate the netAmount for the order's items based on the books' prices
   srv.before ('PATCH', 'OrderItems', async (req) => {
-    const {ID,amount} = req.data; if (!amount)  return // amount not touched
+    const {ID,amount} = req.data; if (amount === undefined) return // amount not touched
     const tx = cds.transaction(req)
     const item = await tx.run (SELECT.one(req.target).columns({ref: ['book'], expand: [{ref: ['price']}, {ref: ['stock']}]}).where({ID}))
     if (!item)  return req.reject(400, `No order item with id ${ID} found`)
-    req.data.netAmount = (item.book.price||0) * (amount||0)
     if (amount > item.book.stock) return req.info(`Amount is greater than stock`, 'amount')
+    req.data.netAmount = (item.book.price||0) * (amount||0)
   })
 
     // some event tracing, for troubleshooting

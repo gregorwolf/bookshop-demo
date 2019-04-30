@@ -6,8 +6,7 @@ service AdminService @(requires:'authenticated-user') {
   entity Orders as select from my.Orders;
   entity OrderItems as projection on my.OrderItems;
   annotate Orders with @odata.draft.enabled;
-  // Instanced based restriction
   annotate Books with @(restrict: [
-    { grant: 'READ', where: 'language = $user.locale' }
+    { grant: 'READ', where: 'language = $user.locale' }// Instanced based restriction
   ])
 }
