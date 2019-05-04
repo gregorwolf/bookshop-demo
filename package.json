@@ -1,5 +1,5 @@
 {
-  "name": "@sap/capm-samples-bookshop",
+  "name": "@sap/capire-bookshop",
   "description": "Bookshop sample app",
   "repository": "https://github.wdf.sap.corp/caps/bookshop.git",
   "version": "1.0.0",
