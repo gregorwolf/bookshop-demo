@@ -7,8 +7,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Bookshop</title>
 
-	<!-- <script src="load-ui5.js" from="https://sapui5nightly.int.sap.hana.ondemand.com/" version=""></script> -->
-	<script src="load-ui5.js" from="https://sapui5.hana.ondemand.com" version="1.64.0"></script>
 	<script>
 		window["sap-ushell-config"] = {
 			defaultRenderer: "fiori2",
@@ -39,6 +37,17 @@
 				}
 			}
 		};
+	</script>
+
+	<script src="https://sapui5.hana.ondemand.com/test-resources/sap/ushell/bootstrap/sandbox.js"></script>
+	<script src="https://sapui5.hana.ondemand.com/1.64.0/resources/sap-ui-core.js"
+    	data-sap-ui-libs="sap.m, sap.ushell, sap.collaboration, sap.ui.layout"
+    	data-sap-ui-compatVersion="edge"
+    	data-sap-ui-theme="sap_belize"
+    	data-sap-ui-frameOptions="allow"
+	></script>
+	<script>
+		sap.ui.getCore().attachInit(()=> sap.ushell.Container.createRenderer().placeAt("content"))
 	</script>
 
 </head>
