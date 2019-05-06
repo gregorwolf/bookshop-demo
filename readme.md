@@ -15,7 +15,7 @@ npm set @sap:registry=http://nexus.wdf.sap.corp:8081/nexus/content/groups/build.
 
 ## Setup
 
-Download this project and _`npm run setup`_ in the project folder — e.g. copy & paste this to your command line:
+Copy & paste this to your command line:
 
 ```sh
 git clone https://github.wdf.sap.corp/caps/bookshop.git
