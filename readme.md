@@ -3,6 +3,7 @@
 Sample application showcasing different services serving the same set of data entities from a sqlite database. The services match different use cases visualized in corresponding Fiori apps.
 
 
+TEST
 
 ## Preliminaries
 
