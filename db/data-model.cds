@@ -9,6 +9,7 @@ entity Books : managed {
   stock  : Integer;
   price  : Decimal(9,2);
   currency : Currency;
+  language : String(14) //> Same book but different translation, hence own ID
 }
 
 entity Authors : managed {
@@ -27,6 +28,7 @@ entity Orders : cuid, managed {
   total    : Decimal(9,2) @readonly;
   currency : Currency;
 }
+
 entity OrderItems : cuid {
   parent  : Association to Orders;
   book   : Association to Books;

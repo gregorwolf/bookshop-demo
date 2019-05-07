@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "@sap/cds": "latest",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "passport": "^0.4.0"
   },
   "devDependencies": {
     "sqlite3": "^4.0.4"
