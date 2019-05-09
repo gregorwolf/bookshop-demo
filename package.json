@@ -12,7 +12,7 @@
     "express": "^4.16.4"
   },
   "devDependencies": {
-    "sqlite3": "^4.0.4"
+    "sqlite3": "^4.0.7"
   },
   "scripts": {
     "setup": "npm i && cds deploy -2 sqlite:db/bookshop.db",
