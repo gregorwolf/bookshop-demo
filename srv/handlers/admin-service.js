@@ -1,27 +1,17 @@
-const { DEBUG } = process.env
-
 module.exports = (srv) => {
 
   const { Books, OrderItems } = srv.entities ('my.bookshop')
 
   // Check all amounts against stock before activating
-  srv.before (['CREATE', 'UPDATE'], 'Orders', async (req) => {// TODO: change to SAVE once implemented as alias for CREATE and UPDATE
-    const updates = []
-    const tx = cds.transaction(req)
-
-    for (const {amount, book_ID} of req.data.Items) {
-      updates.push(tx.run(
-        UPDATE(Books).where({ID: book_ID})
-        .and(`stock >=`, amount)
-        .set(`stock -=`, amount)
-      ))
-    }
-
-    return Promise.all(updates).then(affected => {
-      for (let i = 0, length = affected.length; i < length; i++) {
-        if (!affected[i]) req.error(409, `Amount ${req.data.Items[i].amount} is greater than books in stock for ID ${req.data.Items[i].book_ID}`)
-      }
-    })
+  srv.before (['CREATE', 'UPDATE'], 'Orders', (req) => {
+    const tx = cds.transaction(req), order = req.data
+    return Promise.all (order.Items.map (each => tx.run(
+      UPDATE(Books) .where ({ID:each.book_ID})
+      .and (`stock >=`, each.amount)
+      .set (`stock -=`, each.amount)
+    ) .then (affectedRows => { if (!affectedRows) {
+      req.error (409, `${each.amount} exceeds stock for book #${each.book_ID}`)
+    }})))
   })
 
   // on-the-fly calculate the total Order price based on the OrderItems' netAmounts
@@ -45,11 +35,4 @@ module.exports = (srv) => {
     req.data.netAmount = (item.book.price||0) * (amount||0)
   })
 
-    // some event tracing, for troubleshooting
-    DEBUG && srv.before('*', (req) => {
-      const eventToString = (req) => `${req.event}${req.target ? ' ' + req.target.name : ''}`
-      req.on('failed', function (err) { console.log(`${eventToString(this)} failed with error ${err.message}`) })
-      req.on('succeeded', function () { console.log(`${eventToString(this)} succeeded`) })
-      req.on('done', function () { console.log(`${eventToString(this)} is done`) })
-    })
 }
