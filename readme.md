@@ -32,7 +32,7 @@ npm start
 
 Open these links in your browser:
 
-* <http://localhost:4004> &ndash; Fiori Launchpad sandbox
+* <http://localhost:4004/fiori.html> &ndash; Fiori Launchpad sandbox
 * <http://localhost:4004/$index> &ndash; generic index page
 
 
