@@ -1,10 +1,6 @@
 {
     "features": {
-        "codelists": true,
-        "localized": true
-    },
-    "cdsc": {
-        "betaMode": true
+        "codelists": true
     },
     "build": {
         "tasks": [
