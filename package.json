@@ -20,7 +20,9 @@
     "deploy": "cds deploy"
   },
   "cds": {
-    "odata": {"version": "v4"},
+    "odata": {
+      "version": "v4"
+    },
     "requires": {
       "db": {
         "kind": "sqlite",
