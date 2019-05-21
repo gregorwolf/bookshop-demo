@@ -28,7 +28,7 @@ entity Orders : cuid, managed {
   currency : Currency;
 }
 entity OrderItems : cuid {
-  parent  : Association to Orders;
+  parent  : Association to Orders not null;
   book   : Association to Books;
   amount : Integer;
   netAmount: Decimal(9,2);

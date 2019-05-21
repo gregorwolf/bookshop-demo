@@ -9,7 +9,7 @@ using from './orders/fiori-service';
 
 
 // 2) fiori annotations common to all apps...
-using my.bookshop as my from '../db/data-model';
+using my.bookshop as my from '../db/schema';
 
 
 ////////////////////////////////////////////////////////////////////////////

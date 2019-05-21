@@ -1,5 +1,6 @@
 {
     "features": {
+        "compositions": true,
         "codelists": true
     },
     "build": {
