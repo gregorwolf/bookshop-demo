@@ -1,12 +1,9 @@
 {
   "name": "@sap/capire-bookshop",
-  "description": "Bookshop sample app",
-  "repository": "https://github.wdf.sap.corp/caps/bookshop.git",
   "version": "1.0.0",
+  "description": "A simple bookstore application, build in a self-contained all-in-one fashion, i.e. w/o reusing other packages",
+  "repository": "https://github.wdf.sap.corp/caps/bookshop.git",
   "license": "ISC",
-  "engines": {
-    "node": ">=8"
-  },
   "dependencies": {
     "@sap/cds": "latest",
     "express": "^4.16.4"
@@ -21,6 +18,7 @@
   },
   "cds": {
     "odata": {
+      "FIXME": "this shall be the default -> hence vanish here!",
       "version": "v4"
     },
     "requires": {
