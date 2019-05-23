@@ -12,14 +12,16 @@
     "sqlite3": "^4.0.7"
   },
   "scripts": {
-    "setup": "cds deploy db --to sqlite:db/bookshop.db",
-    "start": "cds run",
-    "deploy": "cds deploy"
+    "setup": "npm install && npm deploy",
+    "deploy": "cds deploy db --to sqlite:db/bookshop.db",
+    "start": "cds run"
   },
   "cds": {
-    "odata": {
-      "FIXME": "this shall be the default -> hence vanish here!",
-      "version": "v4"
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "model": "db"
+      }
     }
   }
 }
