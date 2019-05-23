@@ -12,7 +12,7 @@
     "sqlite3": "^4.0.7"
   },
   "scripts": {
-    "setup": "npm install && npm deploy",
+    "setup": "npm install && npm run deploy",
     "deploy": "cds deploy db --to sqlite:db/bookshop.db",
     "start": "cds run"
   },
