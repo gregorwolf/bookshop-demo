@@ -12,9 +12,9 @@
     "sqlite3": "^4.0.7"
   },
   "scripts": {
-    "setup": "cds deploy db --to sqlite:db/bookshop.db",
-    "start": "cds run",
-    "deploy": "cds deploy"
+    "setup": "npm install && npm run deploy",
+    "deploy": "cds deploy db --to sqlite:db/bookshop.db",
+    "start": "cds run"
   },
   "cds": {
     "odata": {
@@ -26,7 +26,7 @@
         "kind": "sqlite",
         "model": "db",
         "credentials": {
-          "database": "db/bookshop.db"
+          "database": "db"
         }
       }
     }
