@@ -20,6 +20,15 @@
     "odata": {
       "FIXME": "this shall be the default -> hence vanish here!",
       "version": "v4"
+    },
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "model": "db",
+        "credentials": {
+          "database": "db/bookshop.db"
+        }
+      }
     }
   }
 }
