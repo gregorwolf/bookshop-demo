@@ -26,7 +26,7 @@ module.exports = (srv) => {
   })
 
   // calculate the netAmount for the order's items based on the books' prices
-  srv.before ('PATCH', 'OrderItems', async (req) => {
+  srv.before ('PATCH', 'Orders/Items', async (req) => {
     const {ID,amount} = req.data; if (amount === undefined) return // amount not touched
     const tx = cds.transaction(req)
     const item = await tx.run (SELECT.one(req.target).columns({ref: ['book'], expand: [{ref: ['price']}, {ref: ['stock']}]}).where({ID}))
