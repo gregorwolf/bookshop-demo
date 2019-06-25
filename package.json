@@ -17,10 +17,6 @@
     "start": "cds run"
   },
   "cds": {
-    "odata": {
-      "FIXME": "this shall be the default -> hence vanish here!",
-      "version": "v4"
-    },
     "requires": {
       "db": {
         "kind": "sqlite",
