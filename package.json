@@ -6,15 +6,19 @@
   "license": "ISC",
   "dependencies": {
     "@sap/cds": "latest",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "passport": "^0.4.0"
   },
   "devDependencies": {
-    "sqlite3": "^4.0.7"
+    "jest": "^24.8.0",
+    "sqlite3": "^4.0.7",
+    "supertest": "^4.0.2"
   },
   "scripts": {
     "setup": "npm install && npm run deploy",
     "deploy": "cds deploy db --to sqlite:db/bookshop.db",
-    "start": "cds run"
+    "start": "cds run",
+    "test": "jest"
   },
   "cds": {
     "requires": {
