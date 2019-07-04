@@ -12,7 +12,7 @@
             { "for": "fiori",   "src": "app/orders" }
         ]
     },
-    "auth": {
+    "_auth": {
         "passport": {
             "strategy": "mock",
             "users": {
