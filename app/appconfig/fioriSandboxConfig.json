@@ -1,0 +1,84 @@
+{
+    "services": {
+        "LaunchPage": {            
+            "adapter": {
+                "config": {
+                    "catalogs": [
+                        {
+                            "id": "books_catalog",
+                            "title": "Books Application Catalog",
+                            "tiles": [
+                                {
+                                    "id": "BooksBrowse",
+                                    "title": "Browse Books",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.DynamicTile",
+                                    "properties": {
+                                        "chipId": "catalogTile_001",
+                                        "title": "Browse Books",
+                                        "info": "The latest books",
+                                        "targetURL": "#Book-browse"
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "groups": [
+                        {
+                            "id": "books_group",
+                            "title": "Books",
+                            "isPreset": true,
+                            "isVisible": true,
+                            "isGroupLocked": false,
+                            "tiles": [
+                                {
+                                    "id": "MyApp",
+                                    "title": "Browse Books",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.DynamicTile",
+                                    "properties": {
+                                        "chipId": "catalogTile_001",
+                                        "title": "Browse Books",
+                                        "info": "The latest books",
+                                        "targetURL": "#Book-browse"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "NavTargetResolution": {
+            "config": {
+                "enableClientSideTargetResolution": true
+            }
+        },
+        "ClientSideTargetResolution": {
+            "adapter": {
+                "config": {
+                    "inbounds": {
+                        "actionMyApp": {
+                            "semanticObject": "Book",
+                            "action": "browse",
+                            "title": "Browse Books",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=bookshop",
+                                "url": "/browse/webapp"
+                            },
+							"indicatorDataSource": {
+								"path": "/catalog/Books/$count",
+								"refresh": 600
+							}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
