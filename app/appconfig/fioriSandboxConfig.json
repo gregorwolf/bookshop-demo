@@ -40,7 +40,9 @@
                                         "chipId": "catalogTile_001",
                                         "title": "Browse Books",
                                         "info": "The latest books",
-                                        "targetURL": "#Book-browse"
+                                        "targetURL": "#Book-browse",
+                                        "serviceUrl": "/catalog/Books/$count",
+                                        "serviceRefreshInterval": 600
                                     }
                                 }
                             ]
