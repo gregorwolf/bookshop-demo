@@ -32,17 +32,23 @@
                             "isGroupLocked": false,
                             "tiles": [
                                 {
-                                    "id": "MyApp",
+                                    "id": "BrowseBooksApp",
                                     "title": "Browse Books",
                                     "size": "1×1",
                                     "tileType": "sap.ushell.ui.tile.DynamicTile",
+                                    "serviceRefreshInterval": 5,
                                     "properties": {
                                         "chipId": "catalogTile_001",
                                         "title": "Browse Books",
                                         "info": "The latest books",
                                         "targetURL": "#Book-browse",
-                                        "serviceUrl": "/catalog/Books/$count",
-                                        "serviceRefreshInterval": 600
+                                        "serviceUrl_cound": "/catalog/Books/$count",
+                                        "serviceUrl": "/appconfig/BooksCount.json",
+                                        "numberValue": 8,
+                                        "numberFactor": "k",
+                                        "stateArrow": "Up",
+                                        "numberState": "Positive",
+                                        "icon": "sap-icon://travel-expense"
                                     }
                                 }
                             ]
