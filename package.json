@@ -19,7 +19,7 @@
     "deploy": "cds deploy db --to sqlite:db/bookshop.db",
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
     "start": "cds run",
-	"v2server": "node v2server",
+    "v2server": "node v2server",
     "test": "jest"
   },
   "cds": {
