@@ -1,7 +1,7 @@
 using my.bookshop as db from '../db/schema';
 
 service CatalogService {
-  entity DynamicAppLauncher {
+  type DynamicAppLauncher {
     icon: String;
     info: String;
     infoState: String;
@@ -12,7 +12,7 @@ service CatalogService {
     numberUnit: String;
     stateArrow: String;
     subtitle: String;
-    key title: String;
+    title: String;
   }
 
   @readonly entity Books as projection on db.Books excluding {
