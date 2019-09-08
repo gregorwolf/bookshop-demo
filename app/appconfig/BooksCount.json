@@ -1,0 +1,15 @@
+{
+  "d": {
+                 "icon": "sap-icon://travel-expense",
+                 "info": "Quarter Ends!",
+                 "infoState": "Critical",
+                 "number": 23.333,
+                 "numberDigits": 1,
+                 "numberFactor": "k",
+                 "numberState": "Positive",
+                 "numberUnit": "EUR",
+                 "stateArrow": "Down",
+                 "subtitle": "Quarterly overview",
+                 "title": "Travel Expenses"
+       }
+}

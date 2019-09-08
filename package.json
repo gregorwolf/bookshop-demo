@@ -5,7 +5,8 @@
   "repository": "https://github.wdf.sap.corp/caps/bookshop.git",
   "license": "ISC",
   "dependencies": {
-    "@sap/cds": "latest",
+    "@sap/cds": "^3.16.3",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.2.0",
     "express": "^4.16.4"
   },
   "devDependencies": {
@@ -16,7 +17,9 @@
   "scripts": {
     "setup": "npm install && npm run deploy",
     "deploy": "cds deploy db --to sqlite:db/bookshop.db",
+    "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
     "start": "cds run",
+    "v2server": "node v2server",
     "test": "jest"
   },
   "cds": {
