@@ -19,7 +19,14 @@
             "id": "ui5template.basicSAPUI5ApplicationProject",
 			"-id": "ui5template.smartTemplate",
 			"-version": "1.40.12"
-		}
+        },
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"tags": {
+			"keywords": []
+		},
+		"offline": false        
 	},
 	"sap.ui5": {
         "dependencies": {
