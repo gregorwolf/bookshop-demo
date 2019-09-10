@@ -27,3 +27,5 @@ APIExternalProducer.js
 .*/APIExternalProducer.js
 /mta_archives/
 db/bookshop.db-journal
+preview.json
+cp.project.properties.json
