@@ -7,7 +7,6 @@ module.exports = (srv) => {
 		var changedEntity = JSON.stringify(req.query.UPDATE.entity)
 		var changedEntityKey = JSON.stringify(where)
 		var changedEntityData = JSON.stringify(req.query.UPDATE.data)
-		var approver = 'SAPPROVER'
 		// Log output to see the data we need to store in the approval table
 		console.log("before UPDATE - Books: " + JSON.stringify(req.data))
 		console.log("before UPDATE - req.query.UPDATE.entity: " + changedEntity)
@@ -28,7 +27,7 @@ module.exports = (srv) => {
 		console.log("UPDATE - req.query.UPDATE.where: " + changedEntityKey)
 		console.log("UPDATE - req.query.UPDATE.data: " + changedEntityData)
 		// Do not update anything on the original Object
-		req.query.UPDATE.data = {}
+		// req.query.UPDATE.data = {}
 		var data = {
 			'ID': uuidv4(), 
 			'approver': approver, 
@@ -47,12 +46,18 @@ module.exports = (srv) => {
 		// Get a transaciton context
     // const tx = cds.transaction (req)
 		*/
-		req.info("Change was requested at approver: " + approver)
-    cds.run (()=>{"transaction"
+		req.info(
+			{
+				type: "sap.ui.core.MessageType.Information", 
+				message: "Change was requested at approver: " + approver
+			}
+		)
+		return cds.transaction(req) 
+		.run(
 			INSERT.into('my.bookshop.Approval').entries (data)
-		})
-		var ret = cds.run(SELECT.from('my.bookshop.Books').where(where))
-		return ret
+		)
+		.then(() => {})
+		// 
     /*
 		var res = srv.run(INSERT.into ("Approval") .columns (
 		  'ID', 'approver', 'changedEntity', 'changedEntityKey', 'changedEntityData', 'status'
