@@ -2,6 +2,20 @@ var uuidv4 = require('uuid/v4');
 
 module.exports = (srv) => {
 
+	srv.before('UPDATE','Books', req => {
+		var where = req.query.UPDATE.where;
+		var changedEntity = JSON.stringify(req.query.UPDATE.entity)
+		var changedEntityKey = JSON.stringify(where)
+		var changedEntityData = JSON.stringify(req.query.UPDATE.data)
+		var approver = 'SAPPROVER'
+		// Log output to see the data we need to store in the approval table
+		console.log("before UPDATE - Books: " + JSON.stringify(req.data))
+		console.log("before UPDATE - req.query.UPDATE.entity: " + changedEntity)
+		console.log("before UPDATE - req.query.UPDATE.where: " + changedEntityKey)
+		console.log("before UPDATE - req.query.UPDATE.data: " + changedEntityData)
+
+	})
+
   srv.on('UPDATE','Books', req => {
 		var where = req.query.UPDATE.where;
 		var changedEntity = JSON.stringify(req.query.UPDATE.entity)
@@ -33,10 +47,12 @@ module.exports = (srv) => {
 		// Get a transaciton context
     // const tx = cds.transaction (req)
 		*/
+		req.info("Change was requested at approver: " + approver)
     cds.run (()=>{"transaction"
 			INSERT.into('my.bookshop.Approval').entries (data)
-			req.info("Change was requested at approver: " + approver)
-    })
+		})
+		var ret = cds.run(SELECT.from('my.bookshop.Books').where(where))
+		return ret
     /*
 		var res = srv.run(INSERT.into ("Approval") .columns (
 		  'ID', 'approver', 'changedEntity', 'changedEntityKey', 'changedEntityData', 'status'
