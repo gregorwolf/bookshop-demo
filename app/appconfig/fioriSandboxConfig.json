@@ -17,7 +17,19 @@
                                         "chipId": "catalogTile_001",
                                         "title": "Browse Books",
                                         "info": "The latest books",
-                                        "targetURL": "#Book-browse"
+                                        "targetURL": "#Books-manage"
+                                    }
+                                },
+                                {
+                                    "id": "AuthorsBrowse",
+                                    "title": "Browse Authors",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "catalogTile_002",
+                                        "title": "Browse Authors",
+                                        "info": "The list of authors",
+                                        "targetURL": "#Authors-manage"
                                     }
                                 }
                             ]
@@ -41,7 +53,7 @@
                                         "chipId": "catalogTile_001",
                                         "title": "Browse Books",
                                         "info": "The latest books",
-                                        "targetURL": "#Book-browse",
+                                        "targetURL": "#Books-manage",
                                         "serviceUrl_cound": "/catalog/Books/$count",
                                         "serviceUrl": "/appconfig/BooksCount.json",
                                         "numberValue": 8,
@@ -49,6 +61,19 @@
                                         "stateArrow": "Up",
                                         "numberState": "Positive",
                                         "icon": "sap-icon://travel-expense"
+                                    }
+                                },
+                                {
+                                    "id": "BrowseAuthorsApp",
+                                    "title": "Browse Authors",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "serviceRefreshInterval": 5,
+                                    "properties": {
+                                        "chipId": "catalogTile_002",
+                                        "title": "Browse Authors",
+                                        "info": "The list of authors",
+                                        "targetURL": "#Authors-manage"
                                     }
                                 }
                             ]
@@ -66,9 +91,9 @@
             "adapter": {
                 "config": {
                     "inbounds": {
-                        "actionMyApp": {
-                            "semanticObject": "Book",
-                            "action": "browse",
+                        "actionBooks": {
+                            "semanticObject": "Books",
+                            "action": "manage",
                             "title": "Browse Books",
                             "signature": {
                                 "parameters": {},
@@ -79,10 +104,24 @@
                                 "additionalInformation": "SAPUI5.Component=bookshop",
                                 "url": "/browse/webapp"
                             },
-							"indicatorDataSource": {
-								"path": "/catalog/Books/$count",
-								"refresh": 600
-							}
+                            "indicatorDataSource": {
+                                "path": "/catalog/Books/$count",
+                                "refresh": 600
+                            }
+                        },
+                        "actionBAuthors": {
+                            "semanticObject": "Authors",
+                            "action": "manage",
+                            "title": "Authors",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=authors",
+                                "url": "/authors/webapp"
+                            }
                         }
                     }
                 }

@@ -23,24 +23,40 @@ annotate my.Books with @(
 		LineItem: [
 			{Value: ID},
 			{Value: title},
+			{Value: author.name},
+			{Value: stock},
+			{Value: price},
+			{Value: currency.symbol, Label:''},
+			// {Value: author_ID, Label:'{i18n>AuthorID}'},
+			/*
+			{
+				$Type:'UI.DataFieldWithNavigationPath', 
+				Value: author_ID, 
+				Label:'{i18n>AuthorID}', 
+				Target:'author'
+			},
+			{
+				$Type:'UI.DataFieldWithNavigationPath', 
+				Value: author.name, 
+				Label:'{i18n>Author}', 
+				Target:'author'
+			},
 			{
 				$Type:'UI.DataFieldWithIntentBasedNavigation', 
 				Value: author.name, 
 				Label:'{i18n>Author}', 
-				SemanticObject: 'Author',
+				SemanticObject: 'Authors',
 				Action: 'manage'
 			},
 			{
-				$Type:'UI.DataFieldWithIntentBasedNavigation', 
+				$Type:'UI.DataFieldForIntentBasedNavigation', 
 				Value: author_ID, 
+				ID: "author_ID_DataFieldForIntentBasedNavigation",
 				Label:'{i18n>AuthorID}', 
-				SemanticObject: 'Author',
+				SemanticObject: 'Authors',
 				Action: 'manage'
 			},
-			// {Value: author_ID, Label:'{i18n>AuthorID}'},
-			{Value: stock},
-			{Value: price},
-			{Value: currency.symbol, Label:''},
+			*/
 		]
 	},
 ) {
