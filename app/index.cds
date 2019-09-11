@@ -23,9 +23,21 @@ annotate my.Books with @(
 		LineItem: [
 			{Value: ID},
 			{Value: title},
-			{$Type:'UI.DataFieldWithNavigationPath', Value: author.name, Label:'{i18n>Author}', Target:'author'},
-			// {$Type:'UI.DataFieldWithNavigationPath', Value: author_ID, Label:'{i18n>AuthorID}', Target:'author'},
-			{Value: author_ID, Label:'{i18n>AuthorID}'},
+			{
+				$Type:'UI.DataFieldWithIntentBasedNavigation', 
+				Value: author.name, 
+				Label:'{i18n>Author}', 
+				SemanticObject: 'Author',
+				Action: 'manage'
+			},
+			{
+				$Type:'UI.DataFieldWithIntentBasedNavigation', 
+				Value: author_ID, 
+				Label:'{i18n>AuthorID}', 
+				SemanticObject: 'Author',
+				Action: 'manage'
+			},
+			// {Value: author_ID, Label:'{i18n>AuthorID}'},
 			{Value: stock},
 			{Value: price},
 			{Value: currency.symbol, Label:''},
@@ -37,13 +49,22 @@ annotate my.Books with @(
 		ValueList.entity:'Authors',
 		// Common.ValueList.Parameters:[
 		// 	{ $Type:'Common.ValueListParameterInOut', LocalDataProperty:author_name, ValueListProperty:'name' },
-		// ],
+		// ],		
 	);
 }
 
 annotate my.Authors with @(
 	UI: {
 		Identification: [{Value:name}],
+	  SelectionFields: [ ID, name, alive ],
+		LineItem: [
+			{Value: ID},
+			{Value: name},
+			{Value: dateOfBirth},
+			{Value: placeOfBirth},
+			{Value: placeOfDeath},
+			{Value: placeOfDeath},
+		]
 	}
 );
 
