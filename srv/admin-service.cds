@@ -1,6 +1,7 @@
 using my.bookshop as db from '../db/schema';
 
 service AdminService @(_requires:'admin') {
+  entity Approval as projection on db.Approval;
   entity Books as projection on db.Books;
   entity Authors as projection on db.Authors;
   entity Orders as select from db.Orders;

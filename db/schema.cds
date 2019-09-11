@@ -1,6 +1,20 @@
 namespace my.bookshop;
-using { Currency, managed, cuid } from '@sap/cds/common';
+using { Currency, managed, cuid, User } from '@sap/cds/common';
 
+entity Approval : managed {
+  key ID                  : UUID;  //> automatically filled in
+    approver              : User        @( title: 'Approver',);
+    changedEntity         : String(255) @( title: 'Changed Entity', );
+    changedEntityKey      : LargeString @( title: 'Changed Entity Key', );
+    changedEntityData     : LargeString @( title: 'Changed Entity Data', );
+    status                : String(1) 
+      @( title: 'Status', ) enum {
+        requested = 'R' @( title: 'Requested');
+        pending   = 'P' @( title: 'Pending');
+        approved  = 'A' @( title: 'Approved');
+        rejected  = 'N' @( title: 'Rejected');
+    };
+};
 entity Books : managed {
   key ID : Integer;
   title  : localized String(111);
@@ -10,7 +24,6 @@ entity Books : managed {
   price  : Decimal(9,2);
   currency : Currency;
 }
-
 entity Authors : managed {
   key ID : Integer;
   name   : String(111);
