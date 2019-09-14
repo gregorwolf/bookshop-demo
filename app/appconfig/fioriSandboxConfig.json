@@ -38,7 +38,7 @@
                     "groups": [
                         {
                             "id": "books_group",
-                            "title": "Books",
+                            "title": "OData V2",
                             "isPreset": true,
                             "isVisible": true,
                             "isGroupLocked": false,
@@ -47,20 +47,12 @@
                                     "id": "BrowseBooksApp",
                                     "title": "Browse Books",
                                     "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.DynamicTile",
-                                    "serviceRefreshInterval": 5,
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
                                     "properties": {
                                         "chipId": "catalogTile_001",
                                         "title": "Browse Books",
                                         "info": "The latest books",
-                                        "targetURL": "#Books-manage",
-                                        "serviceUrl_cound": "/catalog/Books/$count",
-                                        "serviceUrl": "/appconfig/BooksCount.json",
-                                        "numberValue": 8,
-                                        "numberFactor": "k",
-                                        "stateArrow": "Up",
-                                        "numberState": "Positive",
-                                        "icon": "sap-icon://travel-expense"
+                                        "targetURL": "#Books-manage"
                                     }
                                 },
                                 {
@@ -74,6 +66,39 @@
                                         "title": "Browse Authors",
                                         "info": "The list of authors",
                                         "targetURL": "#Authors-manage"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": "books_group",
+                            "title": "OData V4",
+                            "isPreset": true,
+                            "isVisible": true,
+                            "isGroupLocked": false,
+                            "tiles": [
+                                {
+                                    "id": "V4BrowseBooksApp",
+                                    "title": "Browse Books",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V4catalogTile_001",
+                                        "title": "Browse Books",
+                                        "info": "The latest books",
+                                        "targetURL": "#V4Books-manage"
+                                    }
+                                },
+                                {
+                                    "id": "V4BrowseAuthorsApp",
+                                    "title": "Browse Authors",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V4catalogTile_002",
+                                        "title": "Browse Authors",
+                                        "info": "The list of authors",
+                                        "targetURL": "#V4Authors-manage"
                                     }
                                 }
                             ]
@@ -92,7 +117,7 @@
                 "config": {
                     "inbounds": {
                         "actionBooks": {
-                            "semanticObject": "Books",
+                            "semanticObject": "V4Books",
                             "action": "manage",
                             "title": "Browse Books",
                             "signature": {
@@ -109,8 +134,8 @@
                                 "refresh": 600
                             }
                         },
-                        "actionBAuthors": {
-                            "semanticObject": "Authors",
+                        "actionAuthors": {
+                            "semanticObject": "V4Authors",
                             "action": "manage",
                             "title": "Authors",
                             "signature": {
@@ -121,6 +146,34 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=authors",
                                 "url": "/authors/webapp"
+                            }
+                        },
+                        "actionV2Authors": {
+                            "semanticObject": "Authors",
+                            "action": "manage",
+                            "title": "Authors",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=v2.authors",
+                                "url": "/v2/authors"
+                            }
+                        },
+                        "actionV2Books": {
+                            "semanticObject": "Books",
+                            "action": "manage",
+                            "title": "Browse Books",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=v2.books",
+                                "url": "/v2/books"
                             }
                         }
                     }

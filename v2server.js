@@ -6,5 +6,6 @@ const PORT = process.env.PORT || 4004
 var app = express()
 app.use('/', express.static('app/'))
 
+cds.connect.to("db");
 cds.serve('all').in(app)
 app.use(proxy({ port: PORT })).listen(PORT)

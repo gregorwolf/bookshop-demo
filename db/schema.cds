@@ -19,7 +19,7 @@ entity Books : managed {
   key ID : Integer;
   title  : localized String(111);
   descr  : localized String(1111);
-  author : Association to Authors;
+  author : association to Authors { ID };
   stock  : Integer;
   price  : Decimal(9,2);
   currency : Currency;

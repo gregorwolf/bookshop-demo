@@ -11,6 +11,28 @@ using from './orders/fiori-service';
 // 2) fiori annotations common to all apps...
 using my.bookshop as my from '../db/schema';
 
+annotate my.Authors with @(
+	UI: {
+		Identification: [{Value:name}],
+	  SelectionFields: [ ID, name, alive ],
+		LineItem: [
+			{Value: ID},
+			{Value: name},
+			{Value: dateOfBirth},
+			{Value: placeOfBirth},
+			{Value: placeOfDeath},
+			{Value: placeOfDeath},
+		],
+    HeaderInfo: {
+      TypeName: 'Author', TypeNamePlural: 'Authors',
+      Title: { Value: ID },
+      Description: { Value: name }
+    },
+    Facets: [
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Books}', Target: 'books/@UI.LineItem'},
+		]
+	}
+);
 
 ////////////////////////////////////////////////////////////////////////////
 //
@@ -21,7 +43,12 @@ annotate my.Books with @(
 		Identification: [{Value:title}],
 	  SelectionFields: [ ID, author.name, price, currency_code ],
 		LineItem: [
-			{Value: ID},
+			{
+				$Type:'UI.DataFieldWithIntentBasedNavigation', 
+				Value: ID, 
+				SemanticObject: 'Books',
+				Action: 'manage'
+			},
 			{Value: title},
 			{Value: author.name},
 			{Value: stock},
@@ -37,26 +64,27 @@ annotate my.Books with @(
 			},
 			{
 				$Type:'UI.DataFieldWithNavigationPath', 
-				Value: author.name, 
-				Label:'{i18n>Author}', 
-				Target:'author'
-			},
-			{
-				$Type:'UI.DataFieldWithIntentBasedNavigation', 
-				Value: author.name, 
-				Label:'{i18n>Author}', 
+				Value: author.ID, 
+				Label:'Navigate to Author',
 				SemanticObject: 'Authors',
 				Action: 'manage'
-			},
+			}
 			{
 				$Type:'UI.DataFieldForIntentBasedNavigation', 
-				Value: author_ID, 
-				ID: "author_ID_DataFieldForIntentBasedNavigation",
-				Label:'{i18n>AuthorID}', 
+				Value: author.ID, 
+				Label:'Action for Navigation to Author', 
 				SemanticObject: 'Authors',
 				Action: 'manage'
-			},
+			}			
 			*/
+			// {Value: author.name},
+			{
+				$Type:'UI.DataFieldWithIntentBasedNavigation',
+				Value: author.ID,
+				Label:'{i18n>Author}',
+				SemanticObject: 'Authors',
+				Action: 'manage'
+			}
 		]
 	},
 ) {
@@ -68,22 +96,6 @@ annotate my.Books with @(
 		// ],		
 	);
 }
-
-annotate my.Authors with @(
-	UI: {
-		Identification: [{Value:name}],
-	  SelectionFields: [ ID, name, alive ],
-		LineItem: [
-			{Value: ID},
-			{Value: name},
-			{Value: dateOfBirth},
-			{Value: placeOfBirth},
-			{Value: placeOfDeath},
-			{Value: placeOfDeath},
-		]
-	}
-);
-
 
 ////////////////////////////////////////////////////////////////////////////
 //
