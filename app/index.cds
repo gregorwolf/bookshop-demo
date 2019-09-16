@@ -45,12 +45,17 @@ annotate my.Books with @(
 		LineItem: [
 			{
 				$Type:'UI.DataFieldWithIntentBasedNavigation', 
-				Value: ID, 
+				Value: title, 
 				SemanticObject: 'Books',
 				Action: 'manage'
 			},
-			{Value: title},
-			{Value: author.name},
+			{
+				$Type:'UI.DataFieldWithUrl',
+				Value: author.name,
+				Url: semanticURLtoAuthor,
+				SemanticObject: 'Authors',
+				Action: 'manage'
+			},
 			{Value: stock},
 			{Value: price},
 			{Value: currency.symbol, Label:''},
@@ -81,14 +86,6 @@ annotate my.Books with @(
 			{
 				$Type:'UI.DataFieldWithIntentBasedNavigation',
 				Value: author.ID,
-				Label:'{i18n>Author}',
-				SemanticObject: 'Authors',
-				Action: 'manage'
-			},
-			{
-				$Type:'UI.DataFieldWithUrl',
-				Value: author.ID,
-				Url: semanticURLtoAuthor,
 				Label:'{i18n>Author}',
 				SemanticObject: 'Authors',
 				Action: 'manage'
