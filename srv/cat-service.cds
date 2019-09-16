@@ -1,5 +1,6 @@
 using my.bookshop as db from '../db/schema';
 
+@cds.query.limit: 100
 service CatalogService {
   type DynamicAppLauncher {
     icon: String;
