@@ -1,5 +1,7 @@
 module.exports = (srv) => {
 
+  const { Books } = srv.entities
+
   srv.on('getNumberOfBooksForDynamicTile', req => {
     console.log("getNumberOfBooksForDynamicTile: " + JSON.stringify(req.data))
     return {
@@ -22,6 +24,13 @@ module.exports = (srv) => {
   srv.on('hello', req => {
     console.log("hello: " + JSON.stringify(req.data))
     return "Hello " + req.data.to
+  })
+
+  srv.after('READ','Books', (books, req)=>{
+    return books.map(async book => {
+      book.semanticURLtoAuthor = '#Authors-manage?ID=' + book.author.ID
+    })
+
   })
 
 }

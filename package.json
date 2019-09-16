@@ -19,6 +19,7 @@
     "setup": "npm install && npm run deploy",
     "deploy": "cds deploy db --to sqlite:db/bookshop.db",
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
+    "debugv2": "node --inspect v2server",
     "start": "cds run",
     "startv2": "node v2server",
     "watch": "nodemon -w . -i node_modules/**,.git/** -e cds -x npm run start",

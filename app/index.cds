@@ -84,7 +84,16 @@ annotate my.Books with @(
 				Label:'{i18n>Author}',
 				SemanticObject: 'Authors',
 				Action: 'manage'
+			},
+			{
+				$Type:'UI.DataFieldWithUrl',
+				Value: author.ID,
+				Url: semanticURLtoAuthor,
+				Label:'{i18n>Author}',
+				SemanticObject: 'Authors',
+				Action: 'manage'
 			}
+
 		]
 	},
 ) {

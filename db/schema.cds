@@ -23,6 +23,7 @@ entity Books : managed {
   stock  : Integer;
   price  : Decimal(9,2);
   currency : Currency;
+  virtual semanticURLtoAuthor : String;
 }
 entity Authors : managed {
   key ID : Integer;
