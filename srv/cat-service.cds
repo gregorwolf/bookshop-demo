@@ -1,4 +1,5 @@
 using my.bookshop as db from '../db/schema';
+using my.bp as bp from './external/bp';
 
 @cds.query.limit: 100
 service CatalogService {
@@ -28,6 +29,8 @@ service CatalogService {
   @readonly entity Authors as projection on db.Authors excluding {
     createdBy, modifiedBy
   };
+
+  @readonly entity BusinessPartner as projection on bp.BusinessPartner;
 
   @requires: 'authenticated-user'
   @insertonly entity Orders as projection on db.Orders;

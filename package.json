@@ -8,6 +8,7 @@
     "@sap/cds": "^3.16.3",
     "@sap/cds-odata-v2-adapter-proxy": "^1.4.1",
     "express": "^4.16.4",
+    "mysql": "^2.17.1",
     "uuid": "^3.3.3"
   },
   "devDependencies": {
@@ -32,6 +33,15 @@
         "model": "db",
         "credentials": {
           "database": "db/bookshop.db"
+        }
+      },
+      "mysql": {
+        "kind": "mysql",
+        "model": "srv/external/bp",
+        "credentials": {
+          "host"     : "localhost",
+          "user"     : "root",
+          "database" : "bookstore"
         }
       }
     }

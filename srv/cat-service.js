@@ -26,6 +26,12 @@ module.exports = (srv) => {
     return "Hello " + req.data.to
   })
 
+  srv.on('READ','BusinessPartner', (req)=>{
+    const mysql = cds.connect.to ('mysql')
+    const { BusinessPartner } = mysql.entities
+    return mysql.run (SELECT.from(BusinessPartner))
+  })
+
   srv.after('READ','Books', (books, req)=>{
     return books.map(async book => {
       book.semanticURLtoAuthor = '#Authors-manage?ID=' + book.author.ID

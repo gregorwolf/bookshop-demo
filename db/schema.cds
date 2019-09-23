@@ -15,6 +15,7 @@ entity Approval : managed {
         rejected  = 'N' @( title: 'Rejected');
     };
 };
+
 entity Books : managed {
   key ID : Integer;
   title  : localized String(111);
@@ -25,6 +26,7 @@ entity Books : managed {
   currency : Currency;
   virtual semanticURLtoAuthor : String;
 }
+
 entity Authors : managed {
   key ID : Integer;
   name   : String(111);
@@ -42,6 +44,7 @@ entity Orders : cuid, managed {
   total    : Decimal(9,2) @readonly;
   currency : Currency;
 }
+
 entity OrderItems : cuid {
   parent  : Association to Orders not null;
   book   : Association to Books;
