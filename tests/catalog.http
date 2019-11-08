@@ -1,0 +1,2 @@
+### Test function import
+GET http://localhost:4004/v2/catalog/hello?to=Gregor
