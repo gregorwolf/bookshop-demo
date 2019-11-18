@@ -32,9 +32,11 @@ module.exports = (srv) => {
     return mysql.run (SELECT.from(BusinessPartner))
   })
 
-	srv.after('READ','Books', (each)=>{
-	  each.semanticURLtoAuthor = '#Authors-manage?ID=' + each.author_ID
-	  // console.log(each.semanticURLtoAuthor)
-	})  
+  srv.after('READ',Books, (each)=>{
+    if(typeof each.author !== 'undefined') {
+      each.semanticURLtoAuthor = '#Authors-manage?ID=' + each.author.ID
+      // console.log(each.semanticURLtoAuthor)
+    }
+  })  
 
 }
