@@ -16,21 +16,28 @@ entity Approval : managed {
     };
 };
 
-@Aggregation.ApplySupported.PropertyRestrictions: true
 entity Books : managed {
   key ID : Integer;
   title  : localized String(111);
   descr  : localized String(1111);
-  @Analytics.Dimension: true
   author : association to Authors { ID };
-  @Analytics.Measure: true
-  @Aggregation.default: #SUM
   stock  : Integer;
   price  : Decimal(9,2);
-  @Analytics.Dimension: true
   currency : Currency;
   virtual semanticURLtoAuthor : String;
-}
+};
+
+@Aggregation.ApplySupported.PropertyRestrictions: true
+view BooksAnalytics as select from Books {
+  key ID,
+  @Analytics.Dimension: true
+  author,
+  @Analytics.Measure: true
+  @Aggregation.default: #SUM
+  stock,
+  @Analytics.Dimension: true
+  currency
+};
 
 entity Authors : managed {
   key ID : Integer;
