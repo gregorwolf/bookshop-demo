@@ -4,6 +4,7 @@
 
 // 1) the annotated services per app...
 using from './admin/fiori-service';
+using from './approval/fiori-service';
 using from './browse/fiori-service';
 using from './orders/fiori-service';
 

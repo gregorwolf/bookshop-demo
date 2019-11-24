@@ -44,6 +44,18 @@
                             "isGroupLocked": false,
                             "tiles": [
                                 {
+                                    "id": "Approvals",
+                                    "title": "Approvals",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V4catalogTile_000",
+                                        "title": "Approvals",
+                                        "info": "Manage",
+                                        "targetURL": "#Approvals-manage"
+                                    }
+                                },
+                                {
                                     "id": "BrowseBooksApp",
                                     "title": "Browse Books",
                                     "size": "1×1",
@@ -77,6 +89,18 @@
                             "isVisible": true,
                             "isGroupLocked": false,
                             "tiles": [
+                                {
+                                    "id": "V4Approvals",
+                                    "title": "Approvals",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V4catalogTile_000",
+                                        "title": "Approvals",
+                                        "info": "Manage",
+                                        "targetURL": "#V4Approvals-manage"
+                                    }
+                                },
                                 {
                                     "id": "V4BrowseBooksApp",
                                     "title": "Browse Books",
@@ -116,6 +140,20 @@
             "adapter": {
                 "config": {
                     "inbounds": {
+                        "actionApprovals": {
+                            "semanticObject": "V4Approvals",
+                            "action": "manage",
+                            "title": "Approvals",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=approvals",
+                                "url": "/approval/webapp"
+                            }
+                        },
                         "actionBooks": {
                             "semanticObject": "V4Books",
                             "action": "manage",
@@ -146,6 +184,20 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=authors",
                                 "url": "/authors/webapp"
+                            }
+                        },
+                        "actionV2Approvals": {
+                            "semanticObject": "Approvals",
+                            "action": "manage",
+                            "title": "Approvals",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=v2.approvals",
+                                "url": "/v2/approval"
                             }
                         },
                         "actionV2Authors": {

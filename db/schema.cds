@@ -1,8 +1,7 @@
 namespace my.bookshop;
 using { Currency, managed, cuid, User } from '@sap/cds/common';
 
-entity Approval : managed {
-  key ID                  : UUID;  //> automatically filled in
+entity Approval : managed, cuid {
     approver              : User        @( title: 'Approver',);
     changedEntity         : String(255) @( title: 'Changed Entity', );
     changedEntityKey      : LargeString @( title: 'Changed Entity Key', );
