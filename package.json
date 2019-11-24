@@ -5,7 +5,7 @@
   "repository": "https://github.wdf.sap.corp/caps/bookshop.git",
   "license": "ISC",
   "dependencies": {
-    "@sap/cds": "^3.18.4",
+    "@sap/cds": "^3.20.0",
     "@sap/cds-odata-v2-adapter-proxy": "^1.4.8",
     "express": "^4.16.4",
     "mysql": "^2.17.1",
