@@ -12,17 +12,30 @@
             { "for": "fiori",   "src": "app/orders" }
         ]
     },
-    "_auth": {
+    "auth": {
         "passport": {
             "strategy": "mock",
             "users": {
-                "alice": {
-                    "ID": "alice@wonder.land",
-                    "roles": ["admin", "authenticated-user", "openid"]
+                "admin": {
+                    "jwt": {
+                        "userInfo": {
+                            "logonName": "alice@example.com"
+                        },
+                        "scopes": [
+                            "admin"
+                        ]
+                    }
                 },
                 "bob": {
-                    "ID": "bob@builder.com",
-                    "roles": ["authenticated-user", "openid"]
+                    "jwt": {
+                        "userInfo": {
+                            "logonName": "bob@example.com"
+                        },
+                        "scopes": [
+                            "authenticated-user",
+                            "openid"
+                        ]
+                    }                    
                 }
             }
         }
