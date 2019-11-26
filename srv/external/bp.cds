@@ -10,10 +10,11 @@ CREATE TABLE `BusinessPartner` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
 
 */
-
+/*
 @cds.persistence.exists
 entity BusinessPartner {
   key ID : Integer;
   name : String(111);
 }
 
+*/

@@ -30,7 +30,7 @@ service CatalogService {
     createdBy, modifiedBy
   };
 
-  @readonly entity BusinessPartner as projection on bp.BusinessPartner;
+  // @readonly entity BusinessPartner as projection on bp.BusinessPartner;
 
   @requires: 'authenticated-user'
   @insertonly entity Orders as projection on db.Orders;

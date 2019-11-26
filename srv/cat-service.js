@@ -26,11 +26,13 @@ module.exports = (srv) => {
     return "Hello " + req.data.to
   })
 
+  /*
   srv.on('READ','BusinessPartner', (req)=>{
     const mysql = cds.connect.to ('mysql')
     const { BusinessPartner } = mysql.entities
     return mysql.run (SELECT.from(BusinessPartner))
   })
+  */
 
   srv.after('READ',Books, (each)=>{
     if(typeof each.author !== 'undefined') {

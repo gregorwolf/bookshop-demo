@@ -62,3 +62,30 @@ entity OrderItems : cuid {
   amount : Integer;
   netAmount: Decimal(9,2);
 }
+
+entity Users {
+  key username : String @( title: 'Username', );
+};
+
+entity BusinessObjects {
+  key ID   : String @( title: 'Business Object', );
+  parent   : Association to BusinessObjects;
+  children : Composition of many BusinessObjects on children.parent = $self;
+};
+
+entity Role : cuid, managed {
+      rolename    : String(255) @( title: 'Role Name', );
+      description : String      @( title: 'Description', );
+      BusinessObjects : Composition of many Role_BusinessObject on BusinessObjects.parent=$self;
+      Users           : Composition of many Role_User on Users.parent=$self;
+};
+
+entity Role_BusinessObject : cuid, managed {
+  parent : Association to Role;
+  BusinessObject : Association to BusinessObjects;
+};
+
+entity Role_User : cuid, managed {
+  parent : Association to Role;
+  user : Association to Users;
+};
