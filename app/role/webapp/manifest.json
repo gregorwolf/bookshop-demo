@@ -1,0 +1,155 @@
+{
+    "_version": "1.8.0",
+    "sap.app": {
+        "id": "role",
+        "type": "application",
+        "title": "Manage Roles",
+        "description": "Role managment",
+        "i18n": "i18n/i18n.properties",
+        "dataSources": {
+            "AdminService": {
+                "uri": "/admin/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "4.0"
+                }
+            }
+        },
+        "-sourceTemplate": {
+            "id": "ui5template.basicSAPUI5ApplicationProject",
+            "-id": "ui5template.smartTemplate",
+            "-version": "1.40.12"
+        },
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "tags": {
+            "keywords": []
+        },
+        "offline": false        
+    },
+    "sap.ui5": {
+        "dependencies": {
+            "libs": {
+                "sap.fe": {}
+            }
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "": {
+                "dataSource": "AdminService",
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect" : true,
+                    "earlyRequests": true,
+                    "groupProperties": {
+                        "default": {
+                          "submit": "Auto"
+                        }
+                    }
+                }
+            }
+        },
+        "routing": {
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "RoleList",
+                    "target": "RoleList"
+                },
+                {
+                    "pattern": "Role({key}):?query:",
+                    "name": "RoleDetails",
+                    "target": "RoleDetails"
+                },
+                {
+                    "pattern": "Role({boo})/BusinessObjects({boo2}):?query:",
+                    "name": "RoleBusinessObjectsDetails",
+                    "target": "RoleBusinessObjectsDetails"
+                },
+                {
+                    "pattern": "Books({key}):?query:",
+                    "name": "BooksDetails",
+                    "target": "BooksDetails"
+                }
+            ],
+            "targets": {
+                "RoleList": {
+                    "type": "Component",
+                    "id": "RoleList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings" : {
+                            "entitySet" : "Role",
+                            "navigation" : {
+                                "Role" : {
+                                    "detail" : {
+                                        "route" : "RoleDetails"
+                                        }
+                                }
+                            }
+                        }
+                    }
+                },
+                "RoleDetails": {
+                    "type": "Component",
+                    "id": "RoleDetails",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings" : {
+                            "entitySet": "Role",
+                            "navigation" : {
+                                "BusinessObjects": {
+                                    "detail": {
+                                        "route": "RoleBusinessObjectsDetails"
+                                    }
+                                },
+                                "Users": {
+                                    "detail": {
+                                        "route": "RoleUsersDetails"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "RoleBusinessObjectsDetails": {
+                    "type": "Component",
+                    "id": "RoleBusinessObjectsDetails",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings" : {
+                            "entitySet": "Role_BusinessObject"
+                        }
+                    }
+                },
+                "RoleUsersDetails": {
+                    "type": "Component",
+                    "id": "RoleUsersDetails",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings" : {
+                            "entitySet": "Role_User"
+                        }
+                    }
+                }
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "fullWidth": false
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}

@@ -7,6 +7,7 @@ using from './admin/fiori-service';
 using from './approval/fiori-service';
 using from './browse/fiori-service';
 using from './orders/fiori-service';
+using from './role/fiori-service';
 
 
 // 2) fiori annotations common to all apps...

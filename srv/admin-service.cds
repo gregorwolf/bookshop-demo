@@ -20,8 +20,8 @@ service AdminService @(requires:'admin') {
 	as projection on db.Role;
 
   //------- auto-exposed --------
-  entity Role_BusinessObjects as projection on db.Role_BusinessObject;
-  entity Role_Users as projection on db.Role_User;
+  entity Role_BusinessObject as projection on db.Role_BusinessObject;
+  entity Role_User as projection on db.Role_User;
   //> these shall be removed but this would break the Fiori UI
 
 
