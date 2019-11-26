@@ -1,2 +1,7 @@
-### Test function import
+### Test function import OData V2
 GET http://localhost:4004/v2/catalog/hello?to=Gregor
+
+### Read Entities with OData V2
+GET http://localhost:4004/v2/catalog/
+### Read Entities with OData V4
+GET http://localhost:4004/catalog/

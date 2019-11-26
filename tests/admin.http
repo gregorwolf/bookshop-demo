@@ -1,1 +1,10 @@
+### Read Entitysets via OData V4
+http://localhost:4004/admin/
+### Read Entitysets via OData V2
+http://localhost:4004/v2/admin/
+
+### Read Authors via OData V4
 http://localhost:4004/admin/Authors
+
+### Read Authors via OData V2
+http://localhost:4004/v2/admin/Authors
