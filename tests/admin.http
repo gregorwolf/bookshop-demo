@@ -1,3 +1,5 @@
+### Read Metadata via OData V4
+http://localhost:4004/admin/$metadata
 ### Read Entitysets via OData V4
 http://localhost:4004/admin/
 Authorization: Basic YWRtaW46

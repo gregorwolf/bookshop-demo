@@ -26,6 +26,17 @@ entity Books : managed {
   virtual semanticURLtoAuthor : String;
 };
 
+entity Images {
+  key ID : UUID;  
+  // @Core.MediaType: mediatype  
+  @Core.MediaType: 'image/png'
+  content : LargeBinary;
+  /*
+  @Core.IsMediaType : true
+  mediatype : String;
+  */
+}
+
 @Aggregation.ApplySupported.PropertyRestrictions: true
 view BooksAnalytics as select from Books {
   key ID,

@@ -1,0 +1,54 @@
+### Requires REST Client for VS Code
+### https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+###
+### Edit your settings.json and add the configuration from rest-client-config.json for local tests
+
+### Read Pictures
+# curl http://localhost:4004/admin/Images | jq
+GET {{protocol}}://{{host}}:{{port}}/admin/Images
+Authorization: Basic YWRtaW46
+
+### Create Picture
+# curl -X POST http://localhost:4004/admin/Images -H "Accept: application/json" -H "Content-Type: application/json" --data '{ "ID": "da07ae51-d0d3-41e7-a737-2555a213e5a9" }'
+POST {{protocol}}://{{host}}:{{port}}/admin/Images
+Authorization: Basic YWRtaW46
+Accept: application/json
+Content-Type: application/json
+
+{ "ID": "da07ae51-d0d3-41e7-a737-2555a213e5a9" }
+
+### Upload Binary JPEG
+# curl -X PUT "http://localhost:4004/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content" -H "image/png" --data-binary @./srv/tests/Test.png
+PUT {{protocol}}://{{host}}:{{port}}/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content
+Authorization: Basic YWRtaW46
+Content-Type: image/jpeg
+
+< ./q.jpg
+
+### Upload Binary PNG
+# curl -X PUT "http://localhost:4004/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content" -H "image/png" --data-binary @./srv/tests/Test.png
+PUT {{protocol}}://{{host}}:{{port}}/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content
+Authorization: Basic YWRtaW46
+Content-Type: image/png
+
+< ./Test.png
+
+### Create Picture in one request
+# curl -v http://localhost:4004/admin/Images -F file0=@./srv/tests/Test.png json='{ "ID": "da07ae51-d0d3-41e7-a737-2555a213e5a9" }' 
+# This results in the following eror:
+# {"error":{"code":null,"message":"No payload deserializer available for resource kind 'ENTITY' and mime type 'multipart/form-data'"}}* Rebuilt URL to: json= "ID": "da07ae51-d0d3-41e7-a737-2555a213e5a9"
+
+### Read Binary
+# curl "http://localhost:4004/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content"
+GET {{protocol}}://{{host}}:{{port}}/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content
+Authorization: Basic YWRtaW46
+
+### Read Binary OData V2
+# curl "http://localhost:4004/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/$value"
+GET {{protocol}}://{{host}}:{{port}}/v2/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/$value
+Authorization: Basic YWRtaW46
+
+### Delete Image
+# curl -X DELETE "http://localhost:4004/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)"
+DELETE {{protocol}}://{{host}}:{{port}}/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)
+Authorization: Basic YWRtaW46
