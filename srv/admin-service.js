@@ -1,4 +1,8 @@
 var uuidv4 = require('uuid/v4');
+const cds = require('@sap/cds')
+const {
+	Images
+} = cds.entities
 
 module.exports = (srv) => {
 
@@ -69,5 +73,21 @@ module.exports = (srv) => {
     console.log("UPDATE - result: " + JSON.stringify(res))
     */
   })
+/*
+	srv.on('READ', 'Images', (req, next) => {
+		if (!req.data.ID) {
+			return next()
+		}
+		console.log(req.data.ID)
 
+		return {
+			value: _getObjectStream(req.data.ID)
+		}
+	})
+
+	function _getObjectStream(objectKey) {
+		console.log(objectKey)
+		return "Test"
+	}
+*/
 }

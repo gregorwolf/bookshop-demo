@@ -15,15 +15,10 @@ Authorization: Basic YWRtaW46
 Accept: application/json
 Content-Type: application/json
 
-{ "ID": "da07ae51-d0d3-41e7-a737-2555a213e5a9" }
-
-### Upload Binary JPEG
-# curl -X PUT "http://localhost:4004/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content" -H "image/png" --data-binary @./srv/tests/Test.png
-PUT {{protocol}}://{{host}}:{{port}}/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content
-Authorization: Basic YWRtaW46
-Content-Type: image/jpeg
-
-< ./q.jpg
+{ 
+  "ID": "da07ae51-d0d3-41e7-a737-2555a213e5a9",
+  "mediatype": "image/png" 
+}
 
 ### Upload Binary PNG
 # curl -X PUT "http://localhost:4004/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content" -H "image/png" --data-binary @./srv/tests/Test.png

@@ -27,14 +27,11 @@ entity Books : managed {
 };
 
 entity Images {
-  key ID : UUID;  
-  // @Core.MediaType: mediatype  
-  @Core.MediaType: 'image/png'
+  key ID : UUID;
+  @Core.MediaType: mediatype
   content : LargeBinary;
-  /*
   @Core.IsMediaType : true
   mediatype : String;
-  */
 }
 
 @Aggregation.ApplySupported.PropertyRestrictions: true
