@@ -1,47 +1,47 @@
 {
-	"_version": "1.8.0",
-	"sap.app": {
-		"id": "orders",
-		"type": "application",
-		"title": "Manage Orders",
-		"description": "Sample Application",
-		"i18n": "i18n/i18n.properties",
-		"dataSources": {
-			"AdminService": {
-				"uri": "/admin/",
-				"type": "OData",
-				"settings": {
-					"odataVersion": "4.0"
-				}
-			}
-		},
+    "_version": "1.8.0",
+    "sap.app": {
+        "id": "orders",
+        "type": "application",
+        "title": "Manage Orders",
+        "description": "Sample Application",
+        "i18n": "i18n/i18n.properties",
+        "dataSources": {
+            "AdminService": {
+                "uri": "/admin/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "4.0"
+                }
+            }
+        },
         "-sourceTemplate": {
             "id": "ui5template.basicSAPUI5ApplicationProject",
-			"-id": "ui5template.smartTemplate",
-			"-version": "1.40.12"
+            "-id": "ui5template.smartTemplate",
+            "-version": "1.40.12"
         },
-		"applicationVersion": {
-			"version": "1.0.0"
-		},
-		"tags": {
-			"keywords": []
-		},
-		"offline": false        
-	},
-	"sap.ui5": {
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "tags": {
+            "keywords": []
+        },
+        "offline": false
+    },
+    "sap.ui5": {
         "dependencies": {
             "libs": {
                 "sap.fe": {}
             }
         },
-		"models": {
-			"i18n": {
-				"type": "sap.ui.model.resource.ResourceModel",
-				"uri": "i18n/i18n.properties"
-			},
-			"": {
-				"dataSource": "AdminService",
-				"settings": {
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "": {
+                "dataSource": "AdminService",
+                "settings": {
                     "synchronizationMode": "None",
                     "operationMode": "Server",
                     "autoExpandSelect" : true,
@@ -51,9 +51,9 @@
                           "submit": "Auto"
                         }
                     }
-				}
-			}
-		},
+                }
+            }
+        },
         "routing": {
             "routes": [
                 {
@@ -83,17 +83,17 @@
                     "id": "OrdersList",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
-						"settings" : {
-							"entitySet" : "Orders",
-							"navigation" : {
-								"Orders" : {
-									"detail" : {
-										"route" : "OrdersDetails"
-										}
-								}
-							}
-						}
-					}
+                        "settings" : {
+                            "entitySet" : "Orders",
+                            "navigation" : {
+                                "Orders" : {
+                                    "detail" : {
+                                        "route" : "OrdersDetails"
+                                        }
+                                }
+                            }
+                        }
+                    }
                 },
                 "OrdersDetails": {
                     "type": "Component",
@@ -102,8 +102,8 @@
                     "options": {
                         "settings" : {
                             "entitySet": "Orders",
-							"navigation" : {
-								"Items": {
+                            "navigation" : {
+                                "Items": {
                                     "detail": {
                                         "route": "OrderItemsDetails"
                                     }
@@ -118,9 +118,9 @@
                                         "route": "BooksDetails"
                                     }
                                 }
-							}
-						}
-					}
+                            }
+                        }
+                    }
                 },
                 "OrderItemsDetails": {
                     "type": "Component",
@@ -161,17 +161,17 @@
                 }
             }
         },
-		"contentDensities": {
-			"compact": true,
-			"cozy": true
-		}
-	},
-	"sap.ui": {
-		"technology": "UI5",
-		"fullWidth": false
-	},
-	"sap.fiori": {
-		"registrationIds": [],
-		"archeType": "transactional"
-	}
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "fullWidth": false
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
 }

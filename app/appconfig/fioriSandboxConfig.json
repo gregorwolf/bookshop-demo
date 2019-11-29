@@ -44,6 +44,18 @@
                             "isGroupLocked": false,
                             "tiles": [
                                 {
+                                    "id": "Orders",
+                                    "title": "Orders",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V2catalogTile_Orders",
+                                        "title": "Orders",
+                                        "info": "Management",
+                                        "targetURL": "#Orders-manage"
+                                    }
+                                },
+                                {
                                     "id": "Role",
                                     "title": "Role",
                                     "size": "1×1",
@@ -101,6 +113,18 @@
                             "isVisible": true,
                             "isGroupLocked": false,
                             "tiles": [
+                                {
+                                    "id": "Orders",
+                                    "title": "Orders",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V4catalogTile_Orders",
+                                        "title": "Orders",
+                                        "info": "Management",
+                                        "targetURL": "#V4Orders-manage"
+                                    }
+                                },
                                 {
                                     "id": "Role",
                                     "title": "Role",
@@ -208,6 +232,34 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=authors",
                                 "url": "/authors/webapp"
+                            }
+                        },
+                        "actionOrders": {
+                            "semanticObject": "V4Orders",
+                            "action": "manage",
+                            "title": "Orders",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=orders",
+                                "url": "/orders/webapp"
+                            }
+                        },
+                        "actionV2Orders": {
+                            "semanticObject": "Orders",
+                            "action": "manage",
+                            "title": "Orders",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=v2.orders",
+                                "url": "/v2/orders"
                             }
                         },
                         "actionRole": {

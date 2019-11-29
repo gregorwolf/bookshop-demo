@@ -1,0 +1,7102 @@
+{
+  "definitions": {
+    "AdminService": {
+      "kind": "service",
+      "@requires": "admin",
+      "@source": "srv/admin-service.cds"
+    },
+    "AdminService.Approval": {
+      "kind": "entity",
+      "@Common.DraftRoot.ActivationAction": "draftActivate",
+      "@Common.DraftRoot.EditAction": "draftEdit",
+      "@Common.DraftRoot.PreparationAction": "draftPrepare",
+      "@cds.persistence.name": "ADMINSERVICE_APPROVAL",
+      "@odata.draft.enabled": true,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Approval"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "approver": {
+          "@Common.Label": "Approver",
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@cds.persistence.name": "APPROVER",
+          "type": "cds.String",
+          "length": 255
+        },
+        "changedEntity": {
+          "@Common.Label": "Changed Entity",
+          "@cds.persistence.name": "CHANGEDENTITY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "changedEntityKey": {
+          "@Common.Label": "Changed Entity Key",
+          "@cds.persistence.name": "CHANGEDENTITYKEY",
+          "type": "cds.LargeString"
+        },
+        "changedEntityData": {
+          "@Common.Label": "Changed Entity Data",
+          "@cds.persistence.name": "CHANGEDENTITYDATA",
+          "type": "cds.LargeString"
+        },
+        "status": {
+          "@Common.Label": "Status",
+          "@cds.persistence.name": "STATUS",
+          "type": "cds.String",
+          "length": 1,
+          "enum": {
+            "requested": {
+              "@Common.Label": "Requested",
+              "val": "R"
+            },
+            "pending": {
+              "@Common.Label": "Pending",
+              "val": "P"
+            },
+            "approved": {
+              "@Common.Label": "Approved",
+              "val": "A"
+            },
+            "rejected": {
+              "@Common.Label": "Rejected",
+              "val": "N"
+            }
+          }
+        },
+        "IsActiveEntity": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "ISACTIVEENTITY",
+          "key": true,
+          "type": "cds.Boolean",
+          "default": {
+            "val": true
+          }
+        },
+        "HasActiveEntity": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "HASACTIVEENTITY",
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "HasDraftEntity": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "HASDRAFTENTITY",
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "DraftAdministrativeData": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "DRAFTADMINISTRATIVEDATA",
+          "@odata.contained": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "AdminService.DraftAdministrativeData",
+          "keys": [
+            {
+              "ref": [
+                "DraftUUID"
+              ],
+              "$generatedFieldName": "DraftAdministrativeData_DraftUUID"
+            }
+          ]
+        },
+        "DraftAdministrativeData_DraftUUID": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "DRAFTADMINISTRATIVEDATA_DRAFTUUID",
+          "@odata.contained": true,
+          "@odata.foreignKey4": "DraftAdministrativeData",
+          "type": "cds.UUID"
+        },
+        "SiblingEntity": {
+          "@cds.persistence.name": "SIBLINGENTITY",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "AdminService.Approval",
+          "on": [
+            {
+              "ref": [
+                "SiblingEntity",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "SiblingEntity",
+                "IsActiveEntity"
+              ]
+            },
+            "!=",
+            {
+              "ref": [
+                "IsActiveEntity"
+              ]
+            }
+          ]
+        }
+      },
+      "actions": {
+        "draftPrepare": {
+          "kind": "action",
+          "params": {
+            "SideEffectsQualifier": {
+              "@cds.persistence.name": "SIDEEFFECTSQUALIFIER",
+              "type": "cds.String"
+            }
+          },
+          "returns": {
+            "type": "AdminService.Approval"
+          }
+        },
+        "draftActivate": {
+          "kind": "action",
+          "returns": {
+            "type": "AdminService.Approval"
+          }
+        },
+        "draftEdit": {
+          "kind": "action",
+          "params": {
+            "PreserveChanges": {
+              "@cds.persistence.name": "PRESERVECHANGES",
+              "type": "cds.Boolean"
+            }
+          },
+          "returns": {
+            "type": "AdminService.Approval"
+          }
+        }
+      },
+      "$syntax": "projection"
+    },
+    "AdminService.Authors": {
+      "kind": "entity",
+      "@cds.persistence.name": "ADMINSERVICE_AUTHORS",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Authors"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "name": {
+          "@cds.persistence.name": "NAME",
+          "type": "cds.String",
+          "length": 111
+        },
+        "dateOfBirth": {
+          "@cds.persistence.name": "DATEOFBIRTH",
+          "type": "cds.Date"
+        },
+        "dateOfDeath": {
+          "@cds.persistence.name": "DATEOFDEATH",
+          "type": "cds.Date"
+        },
+        "placeOfBirth": {
+          "@cds.persistence.name": "PLACEOFBIRTH",
+          "type": "cds.String"
+        },
+        "placeOfDeath": {
+          "@cds.persistence.name": "PLACEOFDEATH",
+          "type": "cds.String"
+        },
+        "alive": {
+          "@cds.persistence.name": "ALIVE",
+          "type": "cds.Boolean"
+        },
+        "books": {
+          "@cds.persistence.name": "BOOKS",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "AdminService.Books",
+          "on": [
+            {
+              "ref": [
+                "books",
+                "author"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      },
+      "$syntax": "projection"
+    },
+    "AdminService.Books": {
+      "kind": "entity",
+      "@cds.persistence.name": "ADMINSERVICE_BOOKS",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Books"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "title": {
+          "@cds.persistence.name": "TITLE",
+          "localized": true,
+          "type": "cds.String",
+          "length": 111
+        },
+        "descr": {
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1111
+        },
+        "author": {
+          "@cds.persistence.name": "AUTHOR",
+          "type": "cds.Association",
+          "target": "AdminService.Authors",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "author_ID"
+            }
+          ]
+        },
+        "stock": {
+          "@cds.persistence.name": "STOCK",
+          "type": "cds.Integer"
+        },
+        "price": {
+          "@cds.persistence.name": "PRICE",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "currency": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Common.ValueList.viaAssociation": {
+            "=": "currency"
+          },
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY",
+          "type": "cds.Association",
+          "target": "AdminService.Currencies",
+          "keys": [
+            {
+              "ref": [
+                "code"
+              ],
+              "$generatedFieldName": "currency_code"
+            }
+          ]
+        },
+        "semanticURLtoAuthor": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "SEMANTICURLTOAUTHOR",
+          "virtual": true,
+          "type": "cds.String"
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "AdminService.Books_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "AdminService.Books_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        },
+        "author_ID": {
+          "@cds.persistence.name": "AUTHOR_ID",
+          "@odata.foreignKey4": "author",
+          "type": "cds.Integer"
+        },
+        "currency_code": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY_CODE",
+          "@odata.foreignKey4": "currency",
+          "type": "cds.String",
+          "length": 3
+        }
+      },
+      "$syntax": "projection"
+    },
+    "AdminService.Books_texts": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.autoexposed": true,
+      "@cds.persistence.name": "ADMINSERVICE_BOOKS_TEXTS",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Books_texts"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "locale": {
+          "@cds.persistence.name": "LOCALE",
+          "key": true,
+          "type": "cds.String",
+          "length": 5
+        },
+        "ID": {
+          "@cds.odata.v4.ignore": true,
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "title": {
+          "@cds.persistence.name": "TITLE",
+          "localized": false,
+          "type": "cds.String",
+          "length": 111
+        },
+        "descr": {
+          "@cds.persistence.name": "DESCR",
+          "localized": false,
+          "type": "cds.String",
+          "length": 1111
+        }
+      }
+    },
+    "AdminService.BusinessObjects": {
+      "kind": "entity",
+      "@cds.persistence.name": "ADMINSERVICE_BUSINESSOBJECTS",
+      "@restrict": [
+        {
+          "grant": [
+            "READ"
+          ],
+          "to": "admin"
+        }
+      ],
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.BusinessObjects"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@Common.Label": "Business Object",
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.String"
+        },
+        "parent": {
+          "@cds.persistence.name": "PARENT",
+          "type": "cds.Association",
+          "target": "AdminService.BusinessObjects",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "parent_ID"
+            }
+          ]
+        },
+        "children": {
+          "@cds.persistence.name": "CHILDREN",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "AdminService.BusinessObjects",
+          "on": [
+            {
+              "ref": [
+                "children",
+                "parent"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "parent_ID": {
+          "@cds.persistence.name": "PARENT_ID",
+          "@odata.foreignKey4": "parent",
+          "type": "cds.String"
+        }
+      },
+      "$syntax": "projection"
+    },
+    "AdminService.Currencies": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "=": "name"
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.autoexposed": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.name": "ADMINSERVICE_CURRENCIES",
+      "@cds.persistence.skip": "if-unused",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "sap.common.Currencies"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@cds.persistence.name": "NAME",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>CurrencyCode}",
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "symbol": {
+          "@Common.Label": "{i18n>CurrencySymbol}",
+          "@cds.persistence.name": "SYMBOL",
+          "type": "cds.String",
+          "length": 5
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "AdminService.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "AdminService.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "AdminService.Currencies_texts": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.autoexposed": true,
+      "@cds.persistence.name": "ADMINSERVICE_CURRENCIES_TEXTS",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "sap.common.Currencies_texts"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "locale": {
+          "@cds.persistence.name": "LOCALE",
+          "key": true,
+          "type": "cds.String",
+          "length": 5
+        },
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@cds.persistence.name": "NAME",
+          "localized": false,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@cds.persistence.name": "DESCR",
+          "localized": false,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>CurrencyCode}",
+          "@cds.odata.v4.ignore": true,
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "AdminService.DraftAdministrativeData": {
+      "kind": "entity",
+      "@cds.persistence.name": "ADMINSERVICE_DRAFTADMINISTRATIVEDATA",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "DRAFT.DraftAdministrativeData"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "DraftUUID": {
+          "@cds.persistence.name": "DRAFTUUID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "CreationDateTime": {
+          "@cds.persistence.name": "CREATIONDATETIME",
+          "type": "cds.Timestamp"
+        },
+        "CreatedByUser": {
+          "@cds.persistence.name": "CREATEDBYUSER",
+          "type": "cds.String",
+          "length": 256
+        },
+        "DraftIsCreatedByMe": {
+          "@cds.persistence.name": "DRAFTISCREATEDBYME",
+          "type": "cds.Boolean"
+        },
+        "LastChangeDateTime": {
+          "@cds.persistence.name": "LASTCHANGEDATETIME",
+          "type": "cds.Timestamp"
+        },
+        "LastChangedByUser": {
+          "@cds.persistence.name": "LASTCHANGEDBYUSER",
+          "type": "cds.String",
+          "length": 256
+        },
+        "InProcessByUser": {
+          "@cds.persistence.name": "INPROCESSBYUSER",
+          "type": "cds.String",
+          "length": 256
+        },
+        "DraftIsProcessedByMe": {
+          "@cds.persistence.name": "DRAFTISPROCESSEDBYME",
+          "type": "cds.Boolean"
+        }
+      }
+    },
+    "AdminService.Images": {
+      "kind": "entity",
+      "@cds.persistence.name": "ADMINSERVICE_IMAGES",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Images"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "content": {
+          "@Core.MediaType": {
+            "=": "mediatype"
+          },
+          "@cds.persistence.name": "CONTENT",
+          "type": "cds.LargeBinary"
+        },
+        "mediatype": {
+          "@Core.IsMediaType": true,
+          "@cds.persistence.name": "MEDIATYPE",
+          "type": "cds.String"
+        }
+      },
+      "$syntax": "projection"
+    },
+    "AdminService.OrderItems": {
+      "kind": "entity",
+      "@Common.DraftNode.PreparationAction": "draftPrepare",
+      "@cds.persistence.name": "ADMINSERVICE_ORDERITEMS",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.OrderItems"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "parent": {
+          "@cds.persistence.name": "PARENT",
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1
+          },
+          "target": "AdminService.Orders",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "parent_ID"
+            }
+          ],
+          "notNull": false
+        },
+        "book": {
+          "@cds.persistence.name": "BOOK",
+          "type": "cds.Association",
+          "target": "AdminService.Books",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "book_ID"
+            }
+          ]
+        },
+        "amount": {
+          "@cds.persistence.name": "AMOUNT",
+          "type": "cds.Integer"
+        },
+        "netAmount": {
+          "@cds.persistence.name": "NETAMOUNT",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "parent_ID": {
+          "@cds.persistence.name": "PARENT_ID",
+          "@odata.foreignKey4": "parent",
+          "type": "cds.UUID",
+          "notNull": false
+        },
+        "book_ID": {
+          "@cds.persistence.name": "BOOK_ID",
+          "@odata.foreignKey4": "book",
+          "type": "cds.Integer"
+        },
+        "IsActiveEntity": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "ISACTIVEENTITY",
+          "key": true,
+          "type": "cds.Boolean",
+          "default": {
+            "val": true
+          }
+        },
+        "HasActiveEntity": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "HASACTIVEENTITY",
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "HasDraftEntity": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "HASDRAFTENTITY",
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "DraftAdministrativeData": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "DRAFTADMINISTRATIVEDATA",
+          "@odata.contained": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "AdminService.DraftAdministrativeData",
+          "keys": [
+            {
+              "ref": [
+                "DraftUUID"
+              ],
+              "$generatedFieldName": "DraftAdministrativeData_DraftUUID"
+            }
+          ]
+        },
+        "DraftAdministrativeData_DraftUUID": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "DRAFTADMINISTRATIVEDATA_DRAFTUUID",
+          "@odata.contained": true,
+          "@odata.foreignKey4": "DraftAdministrativeData",
+          "type": "cds.UUID"
+        },
+        "SiblingEntity": {
+          "@cds.persistence.name": "SIBLINGENTITY",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "AdminService.OrderItems",
+          "on": [
+            {
+              "ref": [
+                "SiblingEntity",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "SiblingEntity",
+                "IsActiveEntity"
+              ]
+            },
+            "!=",
+            {
+              "ref": [
+                "IsActiveEntity"
+              ]
+            }
+          ]
+        }
+      },
+      "actions": {
+        "draftPrepare": {
+          "kind": "action",
+          "params": {
+            "SideEffectsQualifier": {
+              "@cds.persistence.name": "SIDEEFFECTSQUALIFIER",
+              "type": "cds.String"
+            }
+          },
+          "returns": {
+            "type": "AdminService.OrderItems"
+          }
+        }
+      },
+      "$syntax": "projection"
+    },
+    "AdminService.Orders": {
+      "kind": "entity",
+      "@Common.DraftRoot.ActivationAction": "draftActivate",
+      "@Common.DraftRoot.EditAction": "draftEdit",
+      "@Common.DraftRoot.PreparationAction": "draftPrepare",
+      "@cds.persistence.name": "ADMINSERVICE_ORDERS",
+      "@odata.draft.enabled": true,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Orders"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "OrderNo": {
+          "@Common.Label": "Order Number",
+          "@cds.persistence.name": "ORDERNO",
+          "type": "cds.String"
+        },
+        "Items": {
+          "@cds.persistence.name": "ITEMS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "AdminService.OrderItems",
+          "on": [
+            {
+              "ref": [
+                "Items",
+                "parent"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "total": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "TOTAL",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "currency": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Common.ValueList.viaAssociation": {
+            "=": "currency"
+          },
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY",
+          "type": "cds.Association",
+          "target": "AdminService.Currencies",
+          "keys": [
+            {
+              "ref": [
+                "code"
+              ],
+              "$generatedFieldName": "currency_code"
+            }
+          ]
+        },
+        "currency_code": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY_CODE",
+          "@odata.foreignKey4": "currency",
+          "type": "cds.String",
+          "length": 3
+        },
+        "IsActiveEntity": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "ISACTIVEENTITY",
+          "key": true,
+          "type": "cds.Boolean",
+          "default": {
+            "val": true
+          }
+        },
+        "HasActiveEntity": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "HASACTIVEENTITY",
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "HasDraftEntity": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "HASDRAFTENTITY",
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "DraftAdministrativeData": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "DRAFTADMINISTRATIVEDATA",
+          "@odata.contained": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "AdminService.DraftAdministrativeData",
+          "keys": [
+            {
+              "ref": [
+                "DraftUUID"
+              ],
+              "$generatedFieldName": "DraftAdministrativeData_DraftUUID"
+            }
+          ]
+        },
+        "DraftAdministrativeData_DraftUUID": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "DRAFTADMINISTRATIVEDATA_DRAFTUUID",
+          "@odata.contained": true,
+          "@odata.foreignKey4": "DraftAdministrativeData",
+          "type": "cds.UUID"
+        },
+        "SiblingEntity": {
+          "@cds.persistence.name": "SIBLINGENTITY",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "AdminService.Orders",
+          "on": [
+            {
+              "ref": [
+                "SiblingEntity",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "SiblingEntity",
+                "IsActiveEntity"
+              ]
+            },
+            "!=",
+            {
+              "ref": [
+                "IsActiveEntity"
+              ]
+            }
+          ]
+        }
+      },
+      "actions": {
+        "draftPrepare": {
+          "kind": "action",
+          "params": {
+            "SideEffectsQualifier": {
+              "@cds.persistence.name": "SIDEEFFECTSQUALIFIER",
+              "type": "cds.String"
+            }
+          },
+          "returns": {
+            "type": "AdminService.Orders"
+          }
+        },
+        "draftActivate": {
+          "kind": "action",
+          "returns": {
+            "type": "AdminService.Orders"
+          }
+        },
+        "draftEdit": {
+          "kind": "action",
+          "params": {
+            "PreserveChanges": {
+              "@cds.persistence.name": "PRESERVECHANGES",
+              "type": "cds.Boolean"
+            }
+          },
+          "returns": {
+            "type": "AdminService.Orders"
+          }
+        }
+      },
+      "$syntax": "entity"
+    },
+    "AdminService.Role": {
+      "kind": "entity",
+      "@Common.DraftRoot.ActivationAction": "draftActivate",
+      "@Common.DraftRoot.EditAction": "draftEdit",
+      "@Common.DraftRoot.PreparationAction": "draftPrepare",
+      "@cds.persistence.name": "ADMINSERVICE_ROLE",
+      "@odata.draft.enabled": true,
+      "@restrict": [
+        {
+          "grant": [
+            "READ",
+            "WRITE"
+          ],
+          "to": "admin"
+        }
+      ],
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Role"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "rolename": {
+          "@Common.Label": "Role Name",
+          "@cds.persistence.name": "ROLENAME",
+          "type": "cds.String",
+          "length": 255
+        },
+        "description": {
+          "@Common.Label": "Description",
+          "@cds.persistence.name": "DESCRIPTION",
+          "type": "cds.String"
+        },
+        "BusinessObjects": {
+          "@cds.persistence.name": "BUSINESSOBJECTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "AdminService.Role_BusinessObject",
+          "on": [
+            {
+              "ref": [
+                "BusinessObjects",
+                "parent"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "Users": {
+          "@cds.persistence.name": "USERS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "AdminService.Role_User",
+          "on": [
+            {
+              "ref": [
+                "Users",
+                "parent"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "IsActiveEntity": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "ISACTIVEENTITY",
+          "key": true,
+          "type": "cds.Boolean",
+          "default": {
+            "val": true
+          }
+        },
+        "HasActiveEntity": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "HASACTIVEENTITY",
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "HasDraftEntity": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "HASDRAFTENTITY",
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "DraftAdministrativeData": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "DRAFTADMINISTRATIVEDATA",
+          "@odata.contained": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "AdminService.DraftAdministrativeData",
+          "keys": [
+            {
+              "ref": [
+                "DraftUUID"
+              ],
+              "$generatedFieldName": "DraftAdministrativeData_DraftUUID"
+            }
+          ]
+        },
+        "DraftAdministrativeData_DraftUUID": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "DRAFTADMINISTRATIVEDATA_DRAFTUUID",
+          "@odata.contained": true,
+          "@odata.foreignKey4": "DraftAdministrativeData",
+          "type": "cds.UUID"
+        },
+        "SiblingEntity": {
+          "@cds.persistence.name": "SIBLINGENTITY",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "AdminService.Role",
+          "on": [
+            {
+              "ref": [
+                "SiblingEntity",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "SiblingEntity",
+                "IsActiveEntity"
+              ]
+            },
+            "!=",
+            {
+              "ref": [
+                "IsActiveEntity"
+              ]
+            }
+          ]
+        }
+      },
+      "actions": {
+        "draftPrepare": {
+          "kind": "action",
+          "params": {
+            "SideEffectsQualifier": {
+              "@cds.persistence.name": "SIDEEFFECTSQUALIFIER",
+              "type": "cds.String"
+            }
+          },
+          "returns": {
+            "type": "AdminService.Role"
+          }
+        },
+        "draftActivate": {
+          "kind": "action",
+          "returns": {
+            "type": "AdminService.Role"
+          }
+        },
+        "draftEdit": {
+          "kind": "action",
+          "params": {
+            "PreserveChanges": {
+              "@cds.persistence.name": "PRESERVECHANGES",
+              "type": "cds.Boolean"
+            }
+          },
+          "returns": {
+            "type": "AdminService.Role"
+          }
+        }
+      },
+      "$syntax": "projection"
+    },
+    "AdminService.Role_BusinessObject": {
+      "kind": "entity",
+      "@Common.DraftNode.PreparationAction": "draftPrepare",
+      "@cds.persistence.name": "ADMINSERVICE_ROLE_BUSINESSOBJECT",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Role_BusinessObject"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "parent": {
+          "@cds.persistence.name": "PARENT",
+          "type": "cds.Association",
+          "target": "AdminService.Role",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "parent_ID"
+            }
+          ]
+        },
+        "BusinessObject": {
+          "@cds.persistence.name": "BUSINESSOBJECT",
+          "type": "cds.Association",
+          "target": "AdminService.BusinessObjects",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "BusinessObject_ID"
+            }
+          ]
+        },
+        "parent_ID": {
+          "@cds.persistence.name": "PARENT_ID",
+          "@odata.foreignKey4": "parent",
+          "type": "cds.UUID"
+        },
+        "BusinessObject_ID": {
+          "@cds.persistence.name": "BUSINESSOBJECT_ID",
+          "@odata.foreignKey4": "BusinessObject",
+          "type": "cds.String"
+        },
+        "IsActiveEntity": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "ISACTIVEENTITY",
+          "key": true,
+          "type": "cds.Boolean",
+          "default": {
+            "val": true
+          }
+        },
+        "HasActiveEntity": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "HASACTIVEENTITY",
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "HasDraftEntity": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "HASDRAFTENTITY",
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "DraftAdministrativeData": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "DRAFTADMINISTRATIVEDATA",
+          "@odata.contained": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "AdminService.DraftAdministrativeData",
+          "keys": [
+            {
+              "ref": [
+                "DraftUUID"
+              ],
+              "$generatedFieldName": "DraftAdministrativeData_DraftUUID"
+            }
+          ]
+        },
+        "DraftAdministrativeData_DraftUUID": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "DRAFTADMINISTRATIVEDATA_DRAFTUUID",
+          "@odata.contained": true,
+          "@odata.foreignKey4": "DraftAdministrativeData",
+          "type": "cds.UUID"
+        },
+        "SiblingEntity": {
+          "@cds.persistence.name": "SIBLINGENTITY",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "AdminService.Role_BusinessObject",
+          "on": [
+            {
+              "ref": [
+                "SiblingEntity",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "SiblingEntity",
+                "IsActiveEntity"
+              ]
+            },
+            "!=",
+            {
+              "ref": [
+                "IsActiveEntity"
+              ]
+            }
+          ]
+        }
+      },
+      "actions": {
+        "draftPrepare": {
+          "kind": "action",
+          "params": {
+            "SideEffectsQualifier": {
+              "@cds.persistence.name": "SIDEEFFECTSQUALIFIER",
+              "type": "cds.String"
+            }
+          },
+          "returns": {
+            "type": "AdminService.Role_BusinessObject"
+          }
+        }
+      },
+      "$syntax": "projection"
+    },
+    "AdminService.Role_User": {
+      "kind": "entity",
+      "@Common.DraftNode.PreparationAction": "draftPrepare",
+      "@cds.persistence.name": "ADMINSERVICE_ROLE_USER",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Role_User"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "parent": {
+          "@cds.persistence.name": "PARENT",
+          "type": "cds.Association",
+          "target": "AdminService.Role",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "parent_ID"
+            }
+          ]
+        },
+        "user": {
+          "@cds.persistence.name": "USER",
+          "type": "cds.Association",
+          "target": "AdminService.Users",
+          "keys": [
+            {
+              "ref": [
+                "username"
+              ],
+              "$generatedFieldName": "user_username"
+            }
+          ]
+        },
+        "parent_ID": {
+          "@cds.persistence.name": "PARENT_ID",
+          "@odata.foreignKey4": "parent",
+          "type": "cds.UUID"
+        },
+        "user_username": {
+          "@cds.persistence.name": "USER_USERNAME",
+          "@odata.foreignKey4": "user",
+          "type": "cds.String"
+        },
+        "IsActiveEntity": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "ISACTIVEENTITY",
+          "key": true,
+          "type": "cds.Boolean",
+          "default": {
+            "val": true
+          }
+        },
+        "HasActiveEntity": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "HASACTIVEENTITY",
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "HasDraftEntity": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "HASDRAFTENTITY",
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "DraftAdministrativeData": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "DRAFTADMINISTRATIVEDATA",
+          "@odata.contained": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "AdminService.DraftAdministrativeData",
+          "keys": [
+            {
+              "ref": [
+                "DraftUUID"
+              ],
+              "$generatedFieldName": "DraftAdministrativeData_DraftUUID"
+            }
+          ]
+        },
+        "DraftAdministrativeData_DraftUUID": {
+          "@UI.Hidden": true,
+          "@cds.persistence.name": "DRAFTADMINISTRATIVEDATA_DRAFTUUID",
+          "@odata.contained": true,
+          "@odata.foreignKey4": "DraftAdministrativeData",
+          "type": "cds.UUID"
+        },
+        "SiblingEntity": {
+          "@cds.persistence.name": "SIBLINGENTITY",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "AdminService.Role_User",
+          "on": [
+            {
+              "ref": [
+                "SiblingEntity",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "SiblingEntity",
+                "IsActiveEntity"
+              ]
+            },
+            "!=",
+            {
+              "ref": [
+                "IsActiveEntity"
+              ]
+            }
+          ]
+        }
+      },
+      "actions": {
+        "draftPrepare": {
+          "kind": "action",
+          "params": {
+            "SideEffectsQualifier": {
+              "@cds.persistence.name": "SIDEEFFECTSQUALIFIER",
+              "type": "cds.String"
+            }
+          },
+          "returns": {
+            "type": "AdminService.Role_User"
+          }
+        }
+      },
+      "$syntax": "projection"
+    },
+    "AdminService.Users": {
+      "kind": "entity",
+      "@cds.persistence.name": "ADMINSERVICE_USERS",
+      "@restrict": [
+        {
+          "grant": [
+            "READ"
+          ],
+          "to": "admin"
+        }
+      ],
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Users"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "username": {
+          "@Common.Label": "Username",
+          "@cds.persistence.name": "USERNAME",
+          "key": true,
+          "type": "cds.String"
+        }
+      },
+      "$syntax": "projection"
+    },
+    "CatalogService": {
+      "kind": "service",
+      "@cds.query.limit": 100,
+      "@source": "srv/cat-service.cds"
+    },
+    "CatalogService.Authors": {
+      "kind": "entity",
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false,
+      "@cds.persistence.name": "CATALOGSERVICE_AUTHORS",
+      "@readonly": true,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Authors"
+            ]
+          },
+          "excluding": [
+            "createdBy",
+            "modifiedBy"
+          ]
+        }
+      },
+      "elements": {
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "name": {
+          "@cds.persistence.name": "NAME",
+          "type": "cds.String",
+          "length": 111
+        },
+        "dateOfBirth": {
+          "@cds.persistence.name": "DATEOFBIRTH",
+          "type": "cds.Date"
+        },
+        "dateOfDeath": {
+          "@cds.persistence.name": "DATEOFDEATH",
+          "type": "cds.Date"
+        },
+        "placeOfBirth": {
+          "@cds.persistence.name": "PLACEOFBIRTH",
+          "type": "cds.String"
+        },
+        "placeOfDeath": {
+          "@cds.persistence.name": "PLACEOFDEATH",
+          "type": "cds.String"
+        },
+        "alive": {
+          "@cds.persistence.name": "ALIVE",
+          "type": "cds.Boolean"
+        },
+        "books": {
+          "@cds.persistence.name": "BOOKS",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "CatalogService.Books",
+          "on": [
+            {
+              "ref": [
+                "books",
+                "author"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      },
+      "$syntax": "projection"
+    },
+    "CatalogService.Books": {
+      "kind": "entity",
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.SearchRestrictions.Searchable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false,
+      "@cds.persistence.name": "CATALOGSERVICE_BOOKS",
+      "@readonly": true,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Books"
+            ]
+          },
+          "excluding": [
+            "createdBy",
+            "modifiedBy"
+          ]
+        }
+      },
+      "elements": {
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "title": {
+          "@cds.persistence.name": "TITLE",
+          "localized": true,
+          "type": "cds.String",
+          "length": 111
+        },
+        "descr": {
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1111
+        },
+        "author": {
+          "@cds.persistence.name": "AUTHOR",
+          "type": "cds.Association",
+          "target": "CatalogService.Authors",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "author_ID"
+            }
+          ]
+        },
+        "stock": {
+          "@cds.persistence.name": "STOCK",
+          "type": "cds.Integer"
+        },
+        "price": {
+          "@cds.persistence.name": "PRICE",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "currency": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Common.ValueList.viaAssociation": {
+            "=": "currency"
+          },
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY",
+          "type": "cds.Association",
+          "target": "CatalogService.Currencies",
+          "keys": [
+            {
+              "ref": [
+                "code"
+              ],
+              "$generatedFieldName": "currency_code"
+            }
+          ]
+        },
+        "semanticURLtoAuthor": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "SEMANTICURLTOAUTHOR",
+          "virtual": true,
+          "type": "cds.String"
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "CatalogService.Books_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "CatalogService.Books_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        },
+        "author_ID": {
+          "@cds.persistence.name": "AUTHOR_ID",
+          "@odata.foreignKey4": "author",
+          "type": "cds.Integer"
+        },
+        "currency_code": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY_CODE",
+          "@odata.foreignKey4": "currency",
+          "type": "cds.String",
+          "length": 3
+        }
+      },
+      "$syntax": "projection"
+    },
+    "CatalogService.Books_texts": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.autoexposed": true,
+      "@cds.persistence.name": "CATALOGSERVICE_BOOKS_TEXTS",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Books_texts"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "locale": {
+          "@cds.persistence.name": "LOCALE",
+          "key": true,
+          "type": "cds.String",
+          "length": 5
+        },
+        "ID": {
+          "@cds.odata.v4.ignore": true,
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "title": {
+          "@cds.persistence.name": "TITLE",
+          "localized": false,
+          "type": "cds.String",
+          "length": 111
+        },
+        "descr": {
+          "@cds.persistence.name": "DESCR",
+          "localized": false,
+          "type": "cds.String",
+          "length": 1111
+        }
+      }
+    },
+    "CatalogService.Currencies": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "=": "name"
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.autoexposed": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.name": "CATALOGSERVICE_CURRENCIES",
+      "@cds.persistence.skip": "if-unused",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "sap.common.Currencies"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@cds.persistence.name": "NAME",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>CurrencyCode}",
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "symbol": {
+          "@Common.Label": "{i18n>CurrencySymbol}",
+          "@cds.persistence.name": "SYMBOL",
+          "type": "cds.String",
+          "length": 5
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "CatalogService.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "CatalogService.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "CatalogService.Currencies_texts": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.autoexposed": true,
+      "@cds.persistence.name": "CATALOGSERVICE_CURRENCIES_TEXTS",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "sap.common.Currencies_texts"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "locale": {
+          "@cds.persistence.name": "LOCALE",
+          "key": true,
+          "type": "cds.String",
+          "length": 5
+        },
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@cds.persistence.name": "NAME",
+          "localized": false,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@cds.persistence.name": "DESCR",
+          "localized": false,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>CurrencyCode}",
+          "@cds.odata.v4.ignore": true,
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "CatalogService.DynamicAppLauncher": {
+      "kind": "type",
+      "@cds.persistence.name": "CATALOGSERVICE_DYNAMICAPPLAUNCHER",
+      "elements": {
+        "icon": {
+          "@cds.persistence.name": "ICON",
+          "type": "cds.String"
+        },
+        "info": {
+          "@cds.persistence.name": "INFO",
+          "type": "cds.String"
+        },
+        "infoState": {
+          "@cds.persistence.name": "INFOSTATE",
+          "type": "cds.String"
+        },
+        "number": {
+          "@cds.persistence.name": "NUMBER",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "numberDigits": {
+          "@cds.persistence.name": "NUMBERDIGITS",
+          "type": "cds.Integer"
+        },
+        "numberFactor": {
+          "@cds.persistence.name": "NUMBERFACTOR",
+          "type": "cds.String"
+        },
+        "numberState": {
+          "@cds.persistence.name": "NUMBERSTATE",
+          "type": "cds.String"
+        },
+        "numberUnit": {
+          "@cds.persistence.name": "NUMBERUNIT",
+          "type": "cds.String"
+        },
+        "stateArrow": {
+          "@cds.persistence.name": "STATEARROW",
+          "type": "cds.String"
+        },
+        "subtitle": {
+          "@cds.persistence.name": "SUBTITLE",
+          "type": "cds.String"
+        },
+        "title": {
+          "@cds.persistence.name": "TITLE",
+          "type": "cds.String"
+        }
+      }
+    },
+    "CatalogService.OrderItems": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "@cds.persistence.name": "CATALOGSERVICE_ORDERITEMS",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.OrderItems"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "parent": {
+          "@cds.persistence.name": "PARENT",
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1
+          },
+          "target": "CatalogService.Orders",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "parent_ID"
+            }
+          ],
+          "notNull": true
+        },
+        "book": {
+          "@cds.persistence.name": "BOOK",
+          "type": "cds.Association",
+          "target": "CatalogService.Books",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "book_ID"
+            }
+          ]
+        },
+        "amount": {
+          "@cds.persistence.name": "AMOUNT",
+          "type": "cds.Integer"
+        },
+        "netAmount": {
+          "@cds.persistence.name": "NETAMOUNT",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "parent_ID": {
+          "@cds.persistence.name": "PARENT_ID",
+          "@odata.foreignKey4": "parent",
+          "type": "cds.UUID",
+          "notNull": true
+        },
+        "book_ID": {
+          "@cds.persistence.name": "BOOK_ID",
+          "@odata.foreignKey4": "book",
+          "type": "cds.Integer"
+        }
+      }
+    },
+    "CatalogService.Orders": {
+      "kind": "entity",
+      "@cds.persistence.name": "CATALOGSERVICE_ORDERS",
+      "@insertonly": true,
+      "@requires": "authenticated-user",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Orders"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "OrderNo": {
+          "@Common.Label": "Order Number",
+          "@cds.persistence.name": "ORDERNO",
+          "type": "cds.String"
+        },
+        "Items": {
+          "@cds.persistence.name": "ITEMS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "CatalogService.OrderItems",
+          "on": [
+            {
+              "ref": [
+                "Items",
+                "parent"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "total": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "TOTAL",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "currency": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Common.ValueList.viaAssociation": {
+            "=": "currency"
+          },
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY",
+          "type": "cds.Association",
+          "target": "CatalogService.Currencies",
+          "keys": [
+            {
+              "ref": [
+                "code"
+              ],
+              "$generatedFieldName": "currency_code"
+            }
+          ]
+        },
+        "currency_code": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY_CODE",
+          "@odata.foreignKey4": "currency",
+          "type": "cds.String",
+          "length": 3
+        }
+      },
+      "$syntax": "projection"
+    },
+    "CatalogService.getNumberOfBooksForDynamicTile": {
+      "kind": "function",
+      "returns": {
+        "type": "CatalogService.DynamicAppLauncher"
+      }
+    },
+    "CatalogService.hello": {
+      "kind": "function",
+      "params": {
+        "to": {
+          "@cds.persistence.name": "TO",
+          "type": "cds.String"
+        }
+      },
+      "returns": {
+        "type": "cds.String"
+      }
+    },
+    "Country": {
+      "kind": "type",
+      "@Common.Label": "{i18n>Country}",
+      "@Core.Description": "{i18n>CountryCode.Description}",
+      "@cds.persistence.name": "COUNTRY",
+      "type": "cds.Association",
+      "target": "sap.common.Countries",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ]
+    },
+    "Currency": {
+      "kind": "type",
+      "@Common.Label": "{i18n>Currency}",
+      "@Core.Description": "{i18n>CurrencyCode.Description}",
+      "@cds.persistence.name": "CURRENCY",
+      "type": "cds.Association",
+      "target": "sap.common.Currencies",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ]
+    },
+    "DRAFT.DraftAdministrativeData": {
+      "kind": "entity",
+      "@cds.persistence.name": "DRAFT_DRAFTADMINISTRATIVEDATA",
+      "elements": {
+        "DraftUUID": {
+          "@cds.persistence.name": "DRAFTUUID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "CreationDateTime": {
+          "@cds.persistence.name": "CREATIONDATETIME",
+          "type": "cds.Timestamp"
+        },
+        "CreatedByUser": {
+          "@cds.persistence.name": "CREATEDBYUSER",
+          "type": "cds.String",
+          "length": 256
+        },
+        "DraftIsCreatedByMe": {
+          "@cds.persistence.name": "DRAFTISCREATEDBYME",
+          "type": "cds.Boolean"
+        },
+        "LastChangeDateTime": {
+          "@cds.persistence.name": "LASTCHANGEDATETIME",
+          "type": "cds.Timestamp"
+        },
+        "LastChangedByUser": {
+          "@cds.persistence.name": "LASTCHANGEDBYUSER",
+          "type": "cds.String",
+          "length": 256
+        },
+        "InProcessByUser": {
+          "@cds.persistence.name": "INPROCESSBYUSER",
+          "type": "cds.String",
+          "length": 256
+        },
+        "DraftIsProcessedByMe": {
+          "@cds.persistence.name": "DRAFTISPROCESSEDBYME",
+          "type": "cds.Boolean"
+        }
+      }
+    },
+    "Language": {
+      "kind": "type",
+      "@Common.Label": "{i18n>Language}",
+      "@Core.Description": "{i18n>LanguageCode.Description}",
+      "@cds.persistence.name": "LANGUAGE",
+      "type": "cds.Association",
+      "target": "sap.common.Languages",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ]
+    },
+    "User": {
+      "kind": "type",
+      "@Common.Label": "{i18n>UserID}",
+      "@Core.Description": "{i18n>UserID.Description}",
+      "@cds.persistence.name": "USER",
+      "type": "cds.String",
+      "length": 255
+    },
+    "cuid": {
+      "kind": "entity",
+      "@cds.persistence.name": "CUID",
+      "abstract": true,
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        }
+      }
+    },
+    "localized.AdminService.Authors": {
+      "kind": "entity",
+      "@cds.persistence.name": "LOCALIZED_ADMINSERVICE_AUTHORS",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "localized.my.bookshop.Authors"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "name": {
+          "@cds.persistence.name": "NAME",
+          "type": "cds.String",
+          "length": 111
+        },
+        "dateOfBirth": {
+          "@cds.persistence.name": "DATEOFBIRTH",
+          "type": "cds.Date"
+        },
+        "dateOfDeath": {
+          "@cds.persistence.name": "DATEOFDEATH",
+          "type": "cds.Date"
+        },
+        "placeOfBirth": {
+          "@cds.persistence.name": "PLACEOFBIRTH",
+          "type": "cds.String"
+        },
+        "placeOfDeath": {
+          "@cds.persistence.name": "PLACEOFDEATH",
+          "type": "cds.String"
+        },
+        "alive": {
+          "@cds.persistence.name": "ALIVE",
+          "type": "cds.Boolean"
+        },
+        "books": {
+          "@cds.persistence.name": "BOOKS",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "localized.AdminService.Books",
+          "on": [
+            {
+              "ref": [
+                "books",
+                "author"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "localized.AdminService.Books": {
+      "kind": "entity",
+      "@cds.persistence.name": "LOCALIZED_ADMINSERVICE_BOOKS",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "localized.my.bookshop.Books"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "title": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "TITLE",
+          "localized": true,
+          "type": "cds.String",
+          "length": 111
+        },
+        "descr": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1111
+        },
+        "author": {
+          "@cds.persistence.name": "AUTHOR",
+          "type": "cds.Association",
+          "target": "localized.AdminService.Authors",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "author_ID"
+            }
+          ]
+        },
+        "stock": {
+          "@cds.persistence.name": "STOCK",
+          "type": "cds.Integer"
+        },
+        "price": {
+          "@cds.persistence.name": "PRICE",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "currency": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Common.ValueList.viaAssociation": {
+            "=": "currency"
+          },
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY",
+          "type": "cds.Association",
+          "target": "localized.AdminService.Currencies",
+          "keys": [
+            {
+              "ref": [
+                "code"
+              ],
+              "$generatedFieldName": "currency_code"
+            }
+          ]
+        },
+        "semanticURLtoAuthor": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "SEMANTICURLTOAUTHOR",
+          "virtual": true,
+          "type": "cds.String"
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "AdminService.Books_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "AdminService.Books_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        },
+        "author_ID": {
+          "@cds.persistence.name": "AUTHOR_ID",
+          "@odata.foreignKey4": "author",
+          "type": "cds.Integer"
+        },
+        "currency_code": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY_CODE",
+          "@odata.foreignKey4": "currency",
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "localized.AdminService.Currencies": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "=": "name"
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.name": "LOCALIZED_ADMINSERVICE_CURRENCIES",
+      "@cds.persistence.skip": "if-unused",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "localized.sap.common.Currencies"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@Core.Computed": true,
+          "@cds.persistence.name": "NAME",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@Core.Computed": true,
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>CurrencyCode}",
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "symbol": {
+          "@Common.Label": "{i18n>CurrencySymbol}",
+          "@cds.persistence.name": "SYMBOL",
+          "type": "cds.String",
+          "length": 5
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "AdminService.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "AdminService.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "localized.AdminService.OrderItems": {
+      "kind": "entity",
+      "@cds.persistence.name": "LOCALIZED_ADMINSERVICE_ORDERITEMS",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "localized.my.bookshop.OrderItems"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "parent": {
+          "@cds.persistence.name": "PARENT",
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1
+          },
+          "target": "localized.AdminService.Orders",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "parent_ID"
+            }
+          ],
+          "notNull": true
+        },
+        "book": {
+          "@cds.persistence.name": "BOOK",
+          "type": "cds.Association",
+          "target": "localized.AdminService.Books",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "book_ID"
+            }
+          ]
+        },
+        "amount": {
+          "@cds.persistence.name": "AMOUNT",
+          "type": "cds.Integer"
+        },
+        "netAmount": {
+          "@cds.persistence.name": "NETAMOUNT",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "parent_ID": {
+          "@cds.persistence.name": "PARENT_ID",
+          "@odata.foreignKey4": "parent",
+          "type": "cds.UUID",
+          "notNull": true
+        },
+        "book_ID": {
+          "@cds.persistence.name": "BOOK_ID",
+          "@odata.foreignKey4": "book",
+          "type": "cds.Integer"
+        }
+      }
+    },
+    "localized.AdminService.Orders": {
+      "kind": "entity",
+      "@cds.persistence.name": "LOCALIZED_ADMINSERVICE_ORDERS",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "localized.my.bookshop.Orders"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "OrderNo": {
+          "@Common.Label": "Order Number",
+          "@cds.persistence.name": "ORDERNO",
+          "type": "cds.String"
+        },
+        "Items": {
+          "@cds.persistence.name": "ITEMS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "localized.AdminService.OrderItems",
+          "on": [
+            {
+              "ref": [
+                "Items",
+                "parent"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "total": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "TOTAL",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "currency": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Common.ValueList.viaAssociation": {
+            "=": "currency"
+          },
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY",
+          "type": "cds.Association",
+          "target": "localized.AdminService.Currencies",
+          "keys": [
+            {
+              "ref": [
+                "code"
+              ],
+              "$generatedFieldName": "currency_code"
+            }
+          ]
+        },
+        "currency_code": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY_CODE",
+          "@odata.foreignKey4": "currency",
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "localized.CatalogService.Authors": {
+      "kind": "entity",
+      "@cds.persistence.name": "LOCALIZED_CATALOGSERVICE_AUTHORS",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "localized.my.bookshop.Authors"
+            ]
+          },
+          "excluding": [
+            "createdBy",
+            "modifiedBy"
+          ]
+        }
+      },
+      "elements": {
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "name": {
+          "@cds.persistence.name": "NAME",
+          "type": "cds.String",
+          "length": 111
+        },
+        "dateOfBirth": {
+          "@cds.persistence.name": "DATEOFBIRTH",
+          "type": "cds.Date"
+        },
+        "dateOfDeath": {
+          "@cds.persistence.name": "DATEOFDEATH",
+          "type": "cds.Date"
+        },
+        "placeOfBirth": {
+          "@cds.persistence.name": "PLACEOFBIRTH",
+          "type": "cds.String"
+        },
+        "placeOfDeath": {
+          "@cds.persistence.name": "PLACEOFDEATH",
+          "type": "cds.String"
+        },
+        "alive": {
+          "@cds.persistence.name": "ALIVE",
+          "type": "cds.Boolean"
+        },
+        "books": {
+          "@cds.persistence.name": "BOOKS",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "localized.CatalogService.Books",
+          "on": [
+            {
+              "ref": [
+                "books",
+                "author"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "localized.CatalogService.Books": {
+      "kind": "entity",
+      "@cds.persistence.name": "LOCALIZED_CATALOGSERVICE_BOOKS",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "localized.my.bookshop.Books"
+            ]
+          },
+          "excluding": [
+            "createdBy",
+            "modifiedBy"
+          ]
+        }
+      },
+      "elements": {
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "title": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "TITLE",
+          "localized": true,
+          "type": "cds.String",
+          "length": 111
+        },
+        "descr": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1111
+        },
+        "author": {
+          "@cds.persistence.name": "AUTHOR",
+          "type": "cds.Association",
+          "target": "localized.CatalogService.Authors",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "author_ID"
+            }
+          ]
+        },
+        "stock": {
+          "@cds.persistence.name": "STOCK",
+          "type": "cds.Integer"
+        },
+        "price": {
+          "@cds.persistence.name": "PRICE",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "currency": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Common.ValueList.viaAssociation": {
+            "=": "currency"
+          },
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY",
+          "type": "cds.Association",
+          "target": "localized.CatalogService.Currencies",
+          "keys": [
+            {
+              "ref": [
+                "code"
+              ],
+              "$generatedFieldName": "currency_code"
+            }
+          ]
+        },
+        "semanticURLtoAuthor": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "SEMANTICURLTOAUTHOR",
+          "virtual": true,
+          "type": "cds.String"
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "CatalogService.Books_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "CatalogService.Books_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        },
+        "author_ID": {
+          "@cds.persistence.name": "AUTHOR_ID",
+          "@odata.foreignKey4": "author",
+          "type": "cds.Integer"
+        },
+        "currency_code": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY_CODE",
+          "@odata.foreignKey4": "currency",
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "localized.CatalogService.Currencies": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "=": "name"
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.name": "LOCALIZED_CATALOGSERVICE_CURRENCIES",
+      "@cds.persistence.skip": "if-unused",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "localized.sap.common.Currencies"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@Core.Computed": true,
+          "@cds.persistence.name": "NAME",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@Core.Computed": true,
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>CurrencyCode}",
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "symbol": {
+          "@Common.Label": "{i18n>CurrencySymbol}",
+          "@cds.persistence.name": "SYMBOL",
+          "type": "cds.String",
+          "length": 5
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "CatalogService.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "CatalogService.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "localized.CatalogService.OrderItems": {
+      "kind": "entity",
+      "@cds.persistence.name": "LOCALIZED_CATALOGSERVICE_ORDERITEMS",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "localized.my.bookshop.OrderItems"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "parent": {
+          "@cds.persistence.name": "PARENT",
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1
+          },
+          "target": "localized.CatalogService.Orders",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "parent_ID"
+            }
+          ],
+          "notNull": true
+        },
+        "book": {
+          "@cds.persistence.name": "BOOK",
+          "type": "cds.Association",
+          "target": "localized.CatalogService.Books",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "book_ID"
+            }
+          ]
+        },
+        "amount": {
+          "@cds.persistence.name": "AMOUNT",
+          "type": "cds.Integer"
+        },
+        "netAmount": {
+          "@cds.persistence.name": "NETAMOUNT",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "parent_ID": {
+          "@cds.persistence.name": "PARENT_ID",
+          "@odata.foreignKey4": "parent",
+          "type": "cds.UUID",
+          "notNull": true
+        },
+        "book_ID": {
+          "@cds.persistence.name": "BOOK_ID",
+          "@odata.foreignKey4": "book",
+          "type": "cds.Integer"
+        }
+      }
+    },
+    "localized.CatalogService.Orders": {
+      "kind": "entity",
+      "@cds.persistence.name": "LOCALIZED_CATALOGSERVICE_ORDERS",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "localized.my.bookshop.Orders"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "OrderNo": {
+          "@Common.Label": "Order Number",
+          "@cds.persistence.name": "ORDERNO",
+          "type": "cds.String"
+        },
+        "Items": {
+          "@cds.persistence.name": "ITEMS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "localized.CatalogService.OrderItems",
+          "on": [
+            {
+              "ref": [
+                "Items",
+                "parent"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "total": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "TOTAL",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "currency": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Common.ValueList.viaAssociation": {
+            "=": "currency"
+          },
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY",
+          "type": "cds.Association",
+          "target": "localized.CatalogService.Currencies",
+          "keys": [
+            {
+              "ref": [
+                "code"
+              ],
+              "$generatedFieldName": "currency_code"
+            }
+          ]
+        },
+        "currency_code": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY_CODE",
+          "@odata.foreignKey4": "currency",
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "localized.my.bookshop.Authors": {
+      "kind": "entity",
+      "@cds.persistence.name": "LOCALIZED_MY_BOOKSHOP_AUTHORS",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Authors"
+            ],
+            "as": "L"
+          },
+          "columns": [
+            "*"
+          ]
+        }
+      },
+      "elements": {
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "name": {
+          "@cds.persistence.name": "NAME",
+          "type": "cds.String",
+          "length": 111
+        },
+        "dateOfBirth": {
+          "@cds.persistence.name": "DATEOFBIRTH",
+          "type": "cds.Date"
+        },
+        "dateOfDeath": {
+          "@cds.persistence.name": "DATEOFDEATH",
+          "type": "cds.Date"
+        },
+        "placeOfBirth": {
+          "@cds.persistence.name": "PLACEOFBIRTH",
+          "type": "cds.String"
+        },
+        "placeOfDeath": {
+          "@cds.persistence.name": "PLACEOFDEATH",
+          "type": "cds.String"
+        },
+        "alive": {
+          "@cds.persistence.name": "ALIVE",
+          "type": "cds.Boolean"
+        },
+        "books": {
+          "@cds.persistence.name": "BOOKS",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "localized.my.bookshop.Books",
+          "on": [
+            {
+              "ref": [
+                "books",
+                "author"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "localized.my.bookshop.Books": {
+      "kind": "entity",
+      "@cds.persistence.name": "LOCALIZED_MY_BOOKSHOP_BOOKS",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Books"
+            ],
+            "as": "L"
+          },
+          "columns": [
+            "*",
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "title"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "title"
+                  ]
+                }
+              ],
+              "as": "title"
+            },
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "descr"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "descr"
+                  ]
+                }
+              ],
+              "as": "descr"
+            }
+          ]
+        }
+      },
+      "elements": {
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "title": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "TITLE",
+          "localized": true,
+          "type": "cds.String",
+          "length": 111
+        },
+        "descr": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1111
+        },
+        "author": {
+          "@cds.persistence.name": "AUTHOR",
+          "type": "cds.Association",
+          "target": "localized.my.bookshop.Authors",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "author_ID"
+            }
+          ]
+        },
+        "stock": {
+          "@cds.persistence.name": "STOCK",
+          "type": "cds.Integer"
+        },
+        "price": {
+          "@cds.persistence.name": "PRICE",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "currency": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY",
+          "type": "cds.Association",
+          "target": "localized.sap.common.Currencies",
+          "keys": [
+            {
+              "ref": [
+                "code"
+              ],
+              "$generatedFieldName": "currency_code"
+            }
+          ]
+        },
+        "semanticURLtoAuthor": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "SEMANTICURLTOAUTHOR",
+          "virtual": true,
+          "type": "cds.String"
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "my.bookshop.Books_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "my.bookshop.Books_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        },
+        "author_ID": {
+          "@cds.persistence.name": "AUTHOR_ID",
+          "@odata.foreignKey4": "author",
+          "type": "cds.Integer"
+        },
+        "currency_code": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY_CODE",
+          "@odata.foreignKey4": "currency",
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "localized.my.bookshop.BooksAnalytics": {
+      "kind": "entity",
+      "@cds.persistence.name": "LOCALIZED_MY_BOOKSHOP_BOOKSANALYTICS",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "localized.my.bookshop.Books"
+            ]
+          },
+          "columns": [
+            {
+              "key": true,
+              "ref": [
+                "ID"
+              ]
+            },
+            {
+              "ref": [
+                "author"
+              ]
+            },
+            {
+              "ref": [
+                "stock"
+              ]
+            },
+            {
+              "ref": [
+                "currency"
+              ]
+            }
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "author": {
+          "@Analytics.Dimension": true,
+          "@cds.persistence.name": "AUTHOR",
+          "type": "cds.Association",
+          "target": "localized.my.bookshop.Authors",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "author_ID"
+            }
+          ]
+        },
+        "stock": {
+          "@Aggregation.default": {
+            "#": "SUM"
+          },
+          "@Analytics.Measure": true,
+          "@cds.persistence.name": "STOCK",
+          "type": "cds.Integer"
+        },
+        "currency": {
+          "@Analytics.Dimension": true,
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY",
+          "type": "cds.Association",
+          "target": "localized.sap.common.Currencies",
+          "keys": [
+            {
+              "ref": [
+                "code"
+              ],
+              "$generatedFieldName": "currency_code"
+            }
+          ]
+        },
+        "author_ID": {
+          "@Analytics.Dimension": true,
+          "@cds.persistence.name": "AUTHOR_ID",
+          "@odata.foreignKey4": "author",
+          "type": "cds.Integer"
+        },
+        "currency_code": {
+          "@Analytics.Dimension": true,
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY_CODE",
+          "@odata.foreignKey4": "currency",
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "localized.my.bookshop.OrderItems": {
+      "kind": "entity",
+      "@cds.persistence.name": "LOCALIZED_MY_BOOKSHOP_ORDERITEMS",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.OrderItems"
+            ],
+            "as": "L"
+          },
+          "columns": [
+            "*"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "parent": {
+          "@cds.persistence.name": "PARENT",
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1
+          },
+          "target": "localized.my.bookshop.Orders",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "parent_ID"
+            }
+          ],
+          "notNull": true
+        },
+        "book": {
+          "@cds.persistence.name": "BOOK",
+          "type": "cds.Association",
+          "target": "localized.my.bookshop.Books",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "book_ID"
+            }
+          ]
+        },
+        "amount": {
+          "@cds.persistence.name": "AMOUNT",
+          "type": "cds.Integer"
+        },
+        "netAmount": {
+          "@cds.persistence.name": "NETAMOUNT",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "parent_ID": {
+          "@cds.persistence.name": "PARENT_ID",
+          "@odata.foreignKey4": "parent",
+          "type": "cds.UUID",
+          "notNull": true
+        },
+        "book_ID": {
+          "@cds.persistence.name": "BOOK_ID",
+          "@odata.foreignKey4": "book",
+          "type": "cds.Integer"
+        }
+      }
+    },
+    "localized.my.bookshop.Orders": {
+      "kind": "entity",
+      "@cds.persistence.name": "LOCALIZED_MY_BOOKSHOP_ORDERS",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Orders"
+            ],
+            "as": "L"
+          },
+          "columns": [
+            "*"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "OrderNo": {
+          "@Common.Label": "Order Number",
+          "@cds.persistence.name": "ORDERNO",
+          "type": "cds.String"
+        },
+        "Items": {
+          "@cds.persistence.name": "ITEMS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "localized.my.bookshop.OrderItems",
+          "on": [
+            {
+              "ref": [
+                "Items",
+                "parent"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "total": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "TOTAL",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "currency": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY",
+          "type": "cds.Association",
+          "target": "localized.sap.common.Currencies",
+          "keys": [
+            {
+              "ref": [
+                "code"
+              ],
+              "$generatedFieldName": "currency_code"
+            }
+          ]
+        },
+        "currency_code": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY_CODE",
+          "@odata.foreignKey4": "currency",
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "localized.sap.common.Countries": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "=": "name"
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.name": "LOCALIZED_SAP_COMMON_COUNTRIES",
+      "@cds.persistence.skip": "if-unused",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "sap.common.Countries"
+            ],
+            "as": "L"
+          },
+          "columns": [
+            "*",
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "name"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "name"
+                  ]
+                }
+              ],
+              "as": "name"
+            },
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "descr"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "descr"
+                  ]
+                }
+              ],
+              "as": "descr"
+            }
+          ]
+        }
+      },
+      "elements": {
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@Core.Computed": true,
+          "@cds.persistence.name": "NAME",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@Core.Computed": true,
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>CountryCode}",
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Countries_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "sap.common.Countries_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "localized.sap.common.Currencies": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "=": "name"
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.name": "LOCALIZED_SAP_COMMON_CURRENCIES",
+      "@cds.persistence.skip": "if-unused",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "sap.common.Currencies"
+            ],
+            "as": "L"
+          },
+          "columns": [
+            "*",
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "name"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "name"
+                  ]
+                }
+              ],
+              "as": "name"
+            },
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "descr"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "descr"
+                  ]
+                }
+              ],
+              "as": "descr"
+            }
+          ]
+        }
+      },
+      "elements": {
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@Core.Computed": true,
+          "@cds.persistence.name": "NAME",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@Core.Computed": true,
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>CurrencyCode}",
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "symbol": {
+          "@Common.Label": "{i18n>CurrencySymbol}",
+          "@cds.persistence.name": "SYMBOL",
+          "type": "cds.String",
+          "length": 5
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "sap.common.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "localized.sap.common.Languages": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "=": "name"
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.name": "LOCALIZED_SAP_COMMON_LANGUAGES",
+      "@cds.persistence.skip": "if-unused",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "sap.common.Languages"
+            ],
+            "as": "L"
+          },
+          "columns": [
+            "*",
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "name"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "name"
+                  ]
+                }
+              ],
+              "as": "name"
+            },
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "descr"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "descr"
+                  ]
+                }
+              ],
+              "as": "descr"
+            }
+          ]
+        }
+      },
+      "elements": {
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@Core.Computed": true,
+          "@cds.persistence.name": "NAME",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@Core.Computed": true,
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>LanguageCode}",
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 14
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Languages_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "sap.common.Languages_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "managed": {
+      "kind": "type",
+      "@cds.persistence.name": "MANAGED",
+      "elements": {
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        }
+      }
+    },
+    "my.bookshop.Approval": {
+      "kind": "entity",
+      "@cds.persistence.name": "MY_BOOKSHOP_APPROVAL",
+      "includes": [
+        "managed",
+        "cuid"
+      ],
+      "elements": {
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "approver": {
+          "@Common.Label": "Approver",
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@cds.persistence.name": "APPROVER",
+          "type": "cds.String",
+          "length": 255
+        },
+        "changedEntity": {
+          "@Common.Label": "Changed Entity",
+          "@cds.persistence.name": "CHANGEDENTITY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "changedEntityKey": {
+          "@Common.Label": "Changed Entity Key",
+          "@cds.persistence.name": "CHANGEDENTITYKEY",
+          "type": "cds.LargeString"
+        },
+        "changedEntityData": {
+          "@Common.Label": "Changed Entity Data",
+          "@cds.persistence.name": "CHANGEDENTITYDATA",
+          "type": "cds.LargeString"
+        },
+        "status": {
+          "@Common.Label": "Status",
+          "@cds.persistence.name": "STATUS",
+          "type": "cds.String",
+          "length": 1,
+          "enum": {
+            "requested": {
+              "@Common.Label": "Requested",
+              "val": "R"
+            },
+            "pending": {
+              "@Common.Label": "Pending",
+              "val": "P"
+            },
+            "approved": {
+              "@Common.Label": "Approved",
+              "val": "A"
+            },
+            "rejected": {
+              "@Common.Label": "Rejected",
+              "val": "N"
+            }
+          }
+        }
+      }
+    },
+    "my.bookshop.Authors": {
+      "kind": "entity",
+      "@cds.persistence.name": "MY_BOOKSHOP_AUTHORS",
+      "includes": [
+        "managed"
+      ],
+      "elements": {
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "name": {
+          "@cds.persistence.name": "NAME",
+          "type": "cds.String",
+          "length": 111
+        },
+        "dateOfBirth": {
+          "@cds.persistence.name": "DATEOFBIRTH",
+          "type": "cds.Date"
+        },
+        "dateOfDeath": {
+          "@cds.persistence.name": "DATEOFDEATH",
+          "type": "cds.Date"
+        },
+        "placeOfBirth": {
+          "@cds.persistence.name": "PLACEOFBIRTH",
+          "type": "cds.String"
+        },
+        "placeOfDeath": {
+          "@cds.persistence.name": "PLACEOFDEATH",
+          "type": "cds.String"
+        },
+        "alive": {
+          "@cds.persistence.name": "ALIVE",
+          "type": "cds.Boolean"
+        },
+        "books": {
+          "@cds.persistence.name": "BOOKS",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "my.bookshop.Books",
+          "on": [
+            {
+              "ref": [
+                "books",
+                "author"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "my.bookshop.Books": {
+      "kind": "entity",
+      "@cds.persistence.name": "MY_BOOKSHOP_BOOKS",
+      "includes": [
+        "managed"
+      ],
+      "elements": {
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "title": {
+          "@cds.persistence.name": "TITLE",
+          "localized": true,
+          "type": "cds.String",
+          "length": 111
+        },
+        "descr": {
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1111
+        },
+        "author": {
+          "@cds.persistence.name": "AUTHOR",
+          "type": "cds.Association",
+          "target": "my.bookshop.Authors",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "author_ID"
+            }
+          ]
+        },
+        "stock": {
+          "@cds.persistence.name": "STOCK",
+          "type": "cds.Integer"
+        },
+        "price": {
+          "@cds.persistence.name": "PRICE",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "currency": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY",
+          "type": "cds.Association",
+          "target": "sap.common.Currencies",
+          "keys": [
+            {
+              "ref": [
+                "code"
+              ],
+              "$generatedFieldName": "currency_code"
+            }
+          ]
+        },
+        "semanticURLtoAuthor": {
+          "@Core.Computed": true,
+          "virtual": true,
+          "type": "cds.String"
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "my.bookshop.Books_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "my.bookshop.Books_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        },
+        "author_ID": {
+          "@cds.persistence.name": "AUTHOR_ID",
+          "@odata.foreignKey4": "author",
+          "type": "cds.Integer"
+        },
+        "currency_code": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY_CODE",
+          "@odata.foreignKey4": "currency",
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "my.bookshop.BooksAnalytics": {
+      "kind": "entity",
+      "@Aggregation.ApplySupported.PropertyRestrictions": true,
+      "@cds.persistence.name": "MY_BOOKSHOP_BOOKSANALYTICS",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Books"
+            ]
+          },
+          "columns": [
+            {
+              "key": true,
+              "ref": [
+                "ID"
+              ]
+            },
+            {
+              "ref": [
+                "author"
+              ]
+            },
+            {
+              "ref": [
+                "stock"
+              ]
+            },
+            {
+              "ref": [
+                "currency"
+              ]
+            }
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "author": {
+          "@Analytics.Dimension": true,
+          "@cds.persistence.name": "AUTHOR",
+          "type": "cds.Association",
+          "target": "my.bookshop.Authors",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "author_ID"
+            }
+          ]
+        },
+        "stock": {
+          "@Aggregation.default": {
+            "#": "SUM"
+          },
+          "@Analytics.Measure": true,
+          "@cds.persistence.name": "STOCK",
+          "type": "cds.Integer"
+        },
+        "currency": {
+          "@Analytics.Dimension": true,
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY",
+          "type": "cds.Association",
+          "target": "sap.common.Currencies",
+          "keys": [
+            {
+              "ref": [
+                "code"
+              ],
+              "$generatedFieldName": "currency_code"
+            }
+          ]
+        },
+        "author_ID": {
+          "@Analytics.Dimension": true,
+          "@cds.persistence.name": "AUTHOR_ID",
+          "@odata.foreignKey4": "author",
+          "type": "cds.Integer"
+        },
+        "currency_code": {
+          "@Analytics.Dimension": true,
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY_CODE",
+          "@odata.foreignKey4": "currency",
+          "type": "cds.String",
+          "length": 3
+        }
+      },
+      "$syntax": "view"
+    },
+    "my.bookshop.Books_texts": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.name": "MY_BOOKSHOP_BOOKS_TEXTS",
+      "@odata.draft.enabled": false,
+      "elements": {
+        "locale": {
+          "@cds.persistence.name": "LOCALE",
+          "key": true,
+          "type": "cds.String",
+          "length": 5
+        },
+        "ID": {
+          "@cds.odata.v4.ignore": true,
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "title": {
+          "@cds.persistence.name": "TITLE",
+          "localized": false,
+          "type": "cds.String",
+          "length": 111
+        },
+        "descr": {
+          "@cds.persistence.name": "DESCR",
+          "localized": false,
+          "type": "cds.String",
+          "length": 1111
+        }
+      }
+    },
+    "my.bookshop.BusinessObjects": {
+      "kind": "entity",
+      "@cds.persistence.name": "MY_BOOKSHOP_BUSINESSOBJECTS",
+      "elements": {
+        "ID": {
+          "@Common.Label": "Business Object",
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.String"
+        },
+        "parent": {
+          "@cds.persistence.name": "PARENT",
+          "type": "cds.Association",
+          "target": "my.bookshop.BusinessObjects",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "parent_ID"
+            }
+          ]
+        },
+        "children": {
+          "@cds.persistence.name": "CHILDREN",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "my.bookshop.BusinessObjects",
+          "on": [
+            {
+              "ref": [
+                "children",
+                "parent"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "parent_ID": {
+          "@cds.persistence.name": "PARENT_ID",
+          "@odata.foreignKey4": "parent",
+          "type": "cds.String"
+        }
+      }
+    },
+    "my.bookshop.Images": {
+      "kind": "entity",
+      "@cds.persistence.name": "MY_BOOKSHOP_IMAGES",
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "content": {
+          "@Core.MediaType": {
+            "=": "mediatype"
+          },
+          "@cds.persistence.name": "CONTENT",
+          "type": "cds.LargeBinary"
+        },
+        "mediatype": {
+          "@Core.IsMediaType": true,
+          "@cds.persistence.name": "MEDIATYPE",
+          "type": "cds.String"
+        }
+      }
+    },
+    "my.bookshop.OrderItems": {
+      "kind": "entity",
+      "@cds.persistence.name": "MY_BOOKSHOP_ORDERITEMS",
+      "includes": [
+        "cuid"
+      ],
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "parent": {
+          "@cds.persistence.name": "PARENT",
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1
+          },
+          "target": "my.bookshop.Orders",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "parent_ID"
+            }
+          ],
+          "notNull": true
+        },
+        "book": {
+          "@cds.persistence.name": "BOOK",
+          "type": "cds.Association",
+          "target": "my.bookshop.Books",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "book_ID"
+            }
+          ]
+        },
+        "amount": {
+          "@cds.persistence.name": "AMOUNT",
+          "type": "cds.Integer"
+        },
+        "netAmount": {
+          "@cds.persistence.name": "NETAMOUNT",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "parent_ID": {
+          "@cds.persistence.name": "PARENT_ID",
+          "@odata.foreignKey4": "parent",
+          "type": "cds.UUID",
+          "notNull": true
+        },
+        "book_ID": {
+          "@cds.persistence.name": "BOOK_ID",
+          "@odata.foreignKey4": "book",
+          "type": "cds.Integer"
+        }
+      }
+    },
+    "my.bookshop.Orders": {
+      "kind": "entity",
+      "@cds.persistence.name": "MY_BOOKSHOP_ORDERS",
+      "includes": [
+        "cuid",
+        "managed"
+      ],
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "OrderNo": {
+          "@Common.Label": "Order Number",
+          "@cds.persistence.name": "ORDERNO",
+          "type": "cds.String"
+        },
+        "Items": {
+          "@cds.persistence.name": "ITEMS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "my.bookshop.OrderItems",
+          "on": [
+            {
+              "ref": [
+                "Items",
+                "parent"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "total": {
+          "@Core.Computed": true,
+          "@cds.persistence.name": "TOTAL",
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "currency": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY",
+          "type": "cds.Association",
+          "target": "sap.common.Currencies",
+          "keys": [
+            {
+              "ref": [
+                "code"
+              ],
+              "$generatedFieldName": "currency_code"
+            }
+          ]
+        },
+        "currency_code": {
+          "@Common.Label": "{i18n>Currency}",
+          "@Core.Description": "{i18n>CurrencyCode.Description}",
+          "@cds.persistence.name": "CURRENCY_CODE",
+          "@odata.foreignKey4": "currency",
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "my.bookshop.Role": {
+      "kind": "entity",
+      "@cds.persistence.name": "MY_BOOKSHOP_ROLE",
+      "includes": [
+        "cuid",
+        "managed"
+      ],
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "rolename": {
+          "@Common.Label": "Role Name",
+          "@cds.persistence.name": "ROLENAME",
+          "type": "cds.String",
+          "length": 255
+        },
+        "description": {
+          "@Common.Label": "Description",
+          "@cds.persistence.name": "DESCRIPTION",
+          "type": "cds.String"
+        },
+        "BusinessObjects": {
+          "@cds.persistence.name": "BUSINESSOBJECTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "my.bookshop.Role_BusinessObject",
+          "on": [
+            {
+              "ref": [
+                "BusinessObjects",
+                "parent"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "Users": {
+          "@cds.persistence.name": "USERS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "my.bookshop.Role_User",
+          "on": [
+            {
+              "ref": [
+                "Users",
+                "parent"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "my.bookshop.Role_BusinessObject": {
+      "kind": "entity",
+      "@cds.persistence.name": "MY_BOOKSHOP_ROLE_BUSINESSOBJECT",
+      "includes": [
+        "cuid",
+        "managed"
+      ],
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "parent": {
+          "@cds.persistence.name": "PARENT",
+          "type": "cds.Association",
+          "target": "my.bookshop.Role",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "parent_ID"
+            }
+          ]
+        },
+        "BusinessObject": {
+          "@cds.persistence.name": "BUSINESSOBJECT",
+          "type": "cds.Association",
+          "target": "my.bookshop.BusinessObjects",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "BusinessObject_ID"
+            }
+          ]
+        },
+        "parent_ID": {
+          "@cds.persistence.name": "PARENT_ID",
+          "@odata.foreignKey4": "parent",
+          "type": "cds.UUID"
+        },
+        "BusinessObject_ID": {
+          "@cds.persistence.name": "BUSINESSOBJECT_ID",
+          "@odata.foreignKey4": "BusinessObject",
+          "type": "cds.String"
+        }
+      }
+    },
+    "my.bookshop.Role_User": {
+      "kind": "entity",
+      "@cds.persistence.name": "MY_BOOKSHOP_ROLE_USER",
+      "includes": [
+        "cuid",
+        "managed"
+      ],
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "parent": {
+          "@cds.persistence.name": "PARENT",
+          "type": "cds.Association",
+          "target": "my.bookshop.Role",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "parent_ID"
+            }
+          ]
+        },
+        "user": {
+          "@cds.persistence.name": "USER",
+          "type": "cds.Association",
+          "target": "my.bookshop.Users",
+          "keys": [
+            {
+              "ref": [
+                "username"
+              ],
+              "$generatedFieldName": "user_username"
+            }
+          ]
+        },
+        "parent_ID": {
+          "@cds.persistence.name": "PARENT_ID",
+          "@odata.foreignKey4": "parent",
+          "type": "cds.UUID"
+        },
+        "user_username": {
+          "@cds.persistence.name": "USER_USERNAME",
+          "@odata.foreignKey4": "user",
+          "type": "cds.String"
+        }
+      }
+    },
+    "my.bookshop.Users": {
+      "kind": "entity",
+      "@cds.persistence.name": "MY_BOOKSHOP_USERS",
+      "elements": {
+        "username": {
+          "@Common.Label": "Username",
+          "@cds.persistence.name": "USERNAME",
+          "key": true,
+          "type": "cds.String"
+        }
+      }
+    },
+    "sap.common": {
+      "kind": "context"
+    },
+    "sap.common.CodeList": {
+      "kind": "type",
+      "@UI.Identification": [
+        {
+          "=": "name"
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.name": "SAP_COMMON_CODELIST",
+      "@cds.persistence.skip": "if-unused",
+      "elements": {
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@cds.persistence.name": "NAME",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        }
+      }
+    },
+    "sap.common.Countries": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "=": "name"
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.name": "SAP_COMMON_COUNTRIES",
+      "@cds.persistence.skip": "if-unused",
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@cds.persistence.name": "NAME",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>CountryCode}",
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Countries_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "sap.common.Countries_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.Countries_texts": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.name": "SAP_COMMON_COUNTRIES_TEXTS",
+      "@odata.draft.enabled": false,
+      "elements": {
+        "locale": {
+          "@cds.persistence.name": "LOCALE",
+          "key": true,
+          "type": "cds.String",
+          "length": 5
+        },
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@cds.persistence.name": "NAME",
+          "localized": false,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@cds.persistence.name": "DESCR",
+          "localized": false,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>CountryCode}",
+          "@cds.odata.v4.ignore": true,
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "sap.common.Currencies": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "=": "name"
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.name": "SAP_COMMON_CURRENCIES",
+      "@cds.persistence.skip": "if-unused",
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@cds.persistence.name": "NAME",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>CurrencyCode}",
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "symbol": {
+          "@Common.Label": "{i18n>CurrencySymbol}",
+          "@cds.persistence.name": "SYMBOL",
+          "type": "cds.String",
+          "length": 5
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "sap.common.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.Currencies_texts": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.name": "SAP_COMMON_CURRENCIES_TEXTS",
+      "@odata.draft.enabled": false,
+      "elements": {
+        "locale": {
+          "@cds.persistence.name": "LOCALE",
+          "key": true,
+          "type": "cds.String",
+          "length": 5
+        },
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@cds.persistence.name": "NAME",
+          "localized": false,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@cds.persistence.name": "DESCR",
+          "localized": false,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>CurrencyCode}",
+          "@cds.odata.v4.ignore": true,
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "sap.common.Languages": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "=": "name"
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.name": "SAP_COMMON_LANGUAGES",
+      "@cds.persistence.skip": "if-unused",
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@cds.persistence.name": "NAME",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>LanguageCode}",
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 14
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Languages_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "sap.common.Languages_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.Languages_texts": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.name": "SAP_COMMON_LANGUAGES_TEXTS",
+      "@odata.draft.enabled": false,
+      "elements": {
+        "locale": {
+          "@cds.persistence.name": "LOCALE",
+          "key": true,
+          "type": "cds.String",
+          "length": 5
+        },
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@cds.persistence.name": "NAME",
+          "localized": false,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@cds.persistence.name": "DESCR",
+          "localized": false,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>LanguageCode}",
+          "@cds.odata.v4.ignore": true,
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 14
+        }
+      }
+    },
+    "temporal": {
+      "kind": "type",
+      "@cds.persistence.name": "TEMPORAL",
+      "elements": {
+        "validFrom": {
+          "@cds.persistence.name": "VALIDFROM",
+          "@cds.valid.from": true,
+          "type": "cds.DateTime"
+        },
+        "validTo": {
+          "@cds.persistence.name": "VALIDTO",
+          "@cds.valid.to": true,
+          "type": "cds.DateTime"
+        }
+      }
+    }
+  },
+  "version": {
+    "csn": "1.0"
+  },
+  "meta": {
+    "creator": "CDS Compiler v1.20.3"
+  },
+  "$version": "1.0",
+  "@sql_mapping": "plain"
+}
