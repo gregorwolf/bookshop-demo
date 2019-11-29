@@ -5,6 +5,117 @@
       "@requires": "admin",
       "@source": "srv/admin-service.cds"
     },
+    "AdminService.Address": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "@cds.persistence.name": "ADMINSERVICE_ADDRESS",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Address"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "parent": {
+          "@cds.persistence.name": "PARENT",
+          "type": "cds.Association",
+          "target": "AdminService.Users",
+          "keys": [
+            {
+              "ref": [
+                "username"
+              ],
+              "$generatedFieldName": "parent_username"
+            }
+          ]
+        },
+        "street": {
+          "@Common.Label": "Street",
+          "@cds.persistence.name": "STREET",
+          "type": "cds.String",
+          "length": 60
+        },
+        "city": {
+          "@Common.Label": "City",
+          "@cds.persistence.name": "CITY",
+          "type": "cds.String",
+          "length": 60
+        },
+        "parent_username": {
+          "@cds.persistence.name": "PARENT_USERNAME",
+          "@odata.foreignKey4": "parent",
+          "type": "cds.String"
+        }
+      }
+    },
     "AdminService.Approval": {
       "kind": "entity",
       "@Common.DraftRoot.ActivationAction": "draftActivate",
@@ -2098,6 +2209,25 @@
           "@cds.persistence.name": "USERNAME",
           "key": true,
           "type": "cds.String"
+        },
+        "address": {
+          "@cds.persistence.name": "ADDRESS",
+          "type": "cds.Composition",
+          "target": "AdminService.Address",
+          "on": [
+            {
+              "ref": [
+                "address",
+                "parent"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
         }
       },
       "$syntax": "projection"
@@ -5444,6 +5574,111 @@
         }
       }
     },
+    "my.bookshop.Address": {
+      "kind": "entity",
+      "@cds.persistence.name": "MY_BOOKSHOP_ADDRESS",
+      "includes": [
+        "cuid",
+        "managed"
+      ],
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "parent": {
+          "@cds.persistence.name": "PARENT",
+          "type": "cds.Association",
+          "target": "my.bookshop.Users",
+          "keys": [
+            {
+              "ref": [
+                "username"
+              ],
+              "$generatedFieldName": "parent_username"
+            }
+          ]
+        },
+        "street": {
+          "@Common.Label": "Street",
+          "@cds.persistence.name": "STREET",
+          "type": "cds.String",
+          "length": 60
+        },
+        "city": {
+          "@Common.Label": "City",
+          "@cds.persistence.name": "CITY",
+          "type": "cds.String",
+          "length": 60
+        },
+        "parent_username": {
+          "@cds.persistence.name": "PARENT_USERNAME",
+          "@odata.foreignKey4": "parent",
+          "type": "cds.String"
+        }
+      }
+    },
     "my.bookshop.Approval": {
       "kind": "entity",
       "@cds.persistence.name": "MY_BOOKSHOP_APPROVAL",
@@ -6647,6 +6882,25 @@
           "@cds.persistence.name": "USERNAME",
           "key": true,
           "type": "cds.String"
+        },
+        "address": {
+          "@cds.persistence.name": "ADDRESS",
+          "type": "cds.Composition",
+          "target": "my.bookshop.Address",
+          "on": [
+            {
+              "ref": [
+                "address",
+                "parent"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
         }
       }
     },

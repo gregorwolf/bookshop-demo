@@ -73,7 +73,15 @@ entity OrderItems : cuid {
 
 entity Users {
   key username : String @( title: 'Username', );
+  address           : Composition of Address on address.parent=$self;
 };
+
+entity Address : cuid, managed {
+  parent : Association to Users;
+  street : String(60) @( title: 'Street', );
+  city : String(60) @( title: 'City', );
+};
+
 
 entity BusinessObjects {
   key ID   : String @( title: 'Business Object', );

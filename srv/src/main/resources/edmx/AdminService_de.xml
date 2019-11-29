@@ -12,6 +12,7 @@
   <edmx:DataServices m:DataServiceVersion="2.0">
     <Schema Namespace="AdminService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
       <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+        <EntitySet Name="Address" EntityType="AdminService.Address"/>
         <EntitySet Name="Approval" EntityType="AdminService.Approval"/>
         <FunctionImport Name="Approval_draftPrepare" EntitySet="Approval" ReturnType="AdminService.Approval" m:HttpMethod="POST" sap:action-for="AdminService.Approval">
           <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
@@ -84,6 +85,10 @@
           <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
         </FunctionImport>
         <EntitySet Name="Users" EntityType="AdminService.Users"/>
+        <AssociationSet Name="Address_parent" Association="AdminService.Address_parent">
+          <End Role="Address" EntitySet="Address"/>
+          <End Role="Users" EntitySet="Users"/>
+        </AssociationSet>
         <AssociationSet Name="Approval_DraftAdministrativeData" Association="AdminService.Approval_DraftAdministrativeData">
           <End Role="Approval" EntitySet="Approval"/>
           <End Role="DraftAdministrativeData" EntitySet="DraftAdministrativeData"/>
@@ -189,6 +194,20 @@
           <End Role="Role_User1" EntitySet="Role_User"/>
         </AssociationSet>
       </EntityContainer>
+      <EntityType Name="Address">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset"/>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+        <NavigationProperty Name="parent" Relationship="AdminService.Address_parent" FromRole="Address" ToRole="Users"/>
+        <Property Name="street" Type="Edm.String" MaxLength="60"/>
+        <Property Name="city" Type="Edm.String" MaxLength="60"/>
+        <Property Name="parent_username" Type="Edm.String"/>
+      </EntityType>
       <EntityType Name="Approval">
         <Key>
           <PropertyRef Name="ID"/>
@@ -418,7 +437,20 @@
           <PropertyRef Name="username"/>
         </Key>
         <Property Name="username" Type="Edm.String" Nullable="false"/>
+        <NavigationProperty Name="address" Relationship="AdminService.Address_parent" FromRole="Users" ToRole="Address"/>
       </EntityType>
+      <Association Name="Address_parent">
+        <End Role="Address" Type="AdminService.Address" Multiplicity="*"/>
+        <End Role="Users" Type="AdminService.Users" Multiplicity="0..1"/>
+        <ReferentialConstraint>
+          <Principal Role="Users">
+            <PropertyRef Name="username"/>
+          </Principal>
+          <Dependent Role="Address">
+            <PropertyRef Name="parent_username"/>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
       <Association Name="Approval_DraftAdministrativeData">
         <End Role="Approval" Type="AdminService.Approval" Multiplicity="*"/>
         <End Role="DraftAdministrativeData" Type="AdminService.DraftAdministrativeData" Multiplicity="0..1"/>
@@ -675,6 +707,38 @@
         <End Role="Role_User" Type="AdminService.Role_User" Multiplicity="*"/>
         <End Role="Role_User1" Type="AdminService.Role_User" Multiplicity="0..1"/>
       </Association>
+      <Annotations Target="AdminService.Address/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Geändert am"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
+      <Annotations Target="AdminService.Address/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Angelegt am"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
+      <Annotations Target="AdminService.Address/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Angelegt von"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="Die eindeutige ID eines Benutzers"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
+      <Annotations Target="AdminService.Address/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Geändert von"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="Die eindeutige ID eines Benutzers"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+      </Annotations>
+      <Annotations Target="AdminService.Address/street" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Street"/>
+      </Annotations>
+      <Annotations Target="AdminService.Address/city" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="City"/>
+      </Annotations>
       <Annotations Target="AdminService.EntityContainer/Approval" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Common.DraftRoot">
           <Record Type="Common.DraftRootType">

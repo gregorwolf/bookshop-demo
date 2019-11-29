@@ -40,3 +40,12 @@ Authorization: Basic YWRtaW46
 http://localhost:4004/admin/Role?$expand=BusinessObjects,Users
 Authorization: Basic YWRtaW46
 
+### Read Users Expanded to via OData V4 - 
+http://localhost:4004/admin/Users?$expand=address
+Authorization: Basic YWRtaW46
+
+### Read Users Expanded to via OData V2
+### Results in:
+### An error occurred during serialization of the entity collection. An error occurred during serialization of the entity with the following key(s): username: douglas. The provided data does not fit the type of the navigation property: address.
+http://localhost:4004/v2/admin/Users?$expand=address
+Authorization: Basic YWRtaW46

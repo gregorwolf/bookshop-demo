@@ -98,3 +98,41 @@ annotate AdminService.Role_User with @(
     Title: { Value: user_username },
   }
 );
+
+annotate AdminService.User with {
+  username @Common.FieldControl: #ReadOnly;
+};
+
+annotate AdminService.User with @(
+  UI.SelectionFields: [ username ],
+
+  UI.LineItem: [
+    {$Type: 'UI.DataField', Value: username },
+    {$Type: 'UI.DataField', Value: address.street },
+    {$Type: 'UI.DataField', Value: address.city }
+  ],
+
+  UI.HeaderInfo: {
+    Title: { Value: username }
+  },
+
+  UI.Facets: [
+    {
+      $Type:'UI.CollectionFacet',
+      Label: 'User',
+      Facets:[
+        { $Type: 'UI.ReferenceFacet', Label: 'User',  Target: '@UI.FieldGroup#User' },
+      ]
+    }
+  ],
+
+  UI.FieldGroup#User: {
+    Label: 'User',
+    Data: [
+    {$Type: 'UI.DataField', Value: username },
+    {$Type: 'UI.DataField', Value: address.street },
+    {$Type: 'UI.DataField', Value: address.city }
+    ]
+  },
+
+);
