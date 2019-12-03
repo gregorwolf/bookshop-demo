@@ -8,7 +8,7 @@
 GET {{protocol}}://{{host}}:{{port}}/admin/Images
 Authorization: Basic YWRtaW46
 
-### Create Picture
+### Create Picture with mediatype
 # curl -X POST http://localhost:4004/admin/Images -H "Accept: application/json" -H "Content-Type: application/json" --data '{ "ID": "da07ae51-d0d3-41e7-a737-2555a213e5a9" }'
 POST {{protocol}}://{{host}}:{{port}}/admin/Images
 Authorization: Basic YWRtaW46
@@ -18,6 +18,16 @@ Content-Type: application/json
 { 
   "ID": "da07ae51-d0d3-41e7-a737-2555a213e5a9",
   "mediatype": "image/png" 
+}
+
+### Create Picture without mediatype
+POST {{protocol}}://{{host}}:{{port}}/admin/Images
+Authorization: Basic YWRtaW46
+Accept: application/json
+Content-Type: application/json
+
+{ 
+  "ID": "da07ae51-d0d3-41e7-a737-2555a213e5a9"
 }
 
 ### Upload Binary PNG

@@ -19,7 +19,19 @@
                 "admin": {
                     "jwt": {
                         "userInfo": {
-                            "logonName": "alice@example.com"
+                            "logonName": "admin",
+                            "email": "alice@example.com"
+                        },
+                        "scopes": [
+                            "admin"
+                        ]
+                    }
+                },
+                "littleadmin": {
+                    "jwt": {
+                        "userInfo": {
+                            "logonName": "littleadmin",
+                            "email": "littleadmin@example.com"
                         },
                         "scopes": [
                             "admin"
@@ -35,7 +47,7 @@
                             "authenticated-user",
                             "openid"
                         ]
-                    }                    
+                    }
                 }
             }
         }

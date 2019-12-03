@@ -7,9 +7,9 @@ service AdminService @(requires:'admin') {
   entity Images as projection on db.Images;
   // view BooksAnalytics as select from db.BooksAnalytics;
   entity Authors as projection on db.Authors;
+
   entity Orders as select from db.Orders;
   annotate Orders with @odata.draft.enabled;
-
 
   //------- auto-exposed --------
   entity OrderItems as projection on db.OrderItems;
@@ -32,5 +32,7 @@ service AdminService @(requires:'admin') {
 
 	entity Users 
 	@(restrict: [ { grant: ['READ'], to: 'admin' }, ]) 
-	as projection on db.Users;  
+	as projection on db.Users;
+
+  entity Address as projection on db.Address;
 }

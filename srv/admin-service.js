@@ -1,10 +1,57 @@
 var uuidv4 = require('uuid/v4');
-const cds = require('@sap/cds')
-const {
-	Images
-} = cds.entities
 
 module.exports = (srv) => {
+
+	const { Role_BusinessObject, Role_User } = srv.entities
+
+	srv.before('READ', [ 'Books', 'Orders' ], async req => {
+		var targetName = req.target.name
+		var logonName = req.attr.userInfo.logonName
+		console.log("READ - logonName: " + logonName)
+		console.log("READ - req.target.name: " + targetName)
+		var targetNameElements = targetName.split(".")
+		var entity = targetNameElements[targetNameElements.length-1]
+		console.log("READ - entity: " + entity)
+		// Check if User is assigned to a Role that contains the entity
+		// var query = SELECT.from(Role)
+		cds.transaction(req).run(
+			SELECT 
+				.from(Role_User, ['parent_ID']) 
+				.where({ user_username : logonName })
+		)
+		.then(
+			roleuser => { 
+				if (roleuser.length === 0) {
+					req.error (409, `user ${logonName} isn't assigned to any role`)
+				} else {
+					console.log("READ - roleuser: " + JSON.stringify(roleuser))
+					cds.transaction(req).run(
+						SELECT 
+							.from(Role_BusinessObject, ['BusinessObject_ID']) 
+							.where({ parent_ID: roleuser[0].parent_ID })
+					)
+					.then(
+						roleBusinessObject => {
+							if (roleBusinessObject.length === 0) {
+								req.error (409, `The role ${roleuser[0].parent_ID} isn't assigned to any business object`)
+							} else {
+								console.log("READ - roleBusinessObject: " + JSON.stringify(roleBusinessObject))
+								var allowed = false
+								for (let i in roleBusinessObject) {
+									if(roleBusinessObject[i].BusinessObject_ID === entity) {
+										allowed = true
+									}
+								}
+								if(!allowed) {
+									req.error (409, `user ${logonName} isn't assigned to the business object ${entity}`)
+								}
+							}
+						}
+					)
+				}
+			}
+		)
+	})
 
 	srv.before('UPDATE','Books', req => {
 		var where = req.query.UPDATE.where;
@@ -19,7 +66,7 @@ module.exports = (srv) => {
 
 	})
 
-  srv.on('UPDATE','Books', req => {
+	srv.on('UPDATE','Books', req => {
 		var where = req.query.UPDATE.where;
 		var changedEntity = JSON.stringify(req.query.UPDATE.entity)
 		var changedEntityKey = JSON.stringify(where)
@@ -40,15 +87,13 @@ module.exports = (srv) => {
 			'changedEntityData': changedEntityData,
 			'status': 'R',
 			'createdAt': new Date(),
-			'createdBy': 'SUSER',
-			'modifiedAt': new Date(), 
-			'modifiedBy': 'SUSER'
-    }
-    /*
+			'createdBy': req.attr.userInfo.logonName
+		}
+		/*
 		var res = srv.insert(data) .into ("Approval")
 		// var res = srv.create("Approval").entries(data)
 		// Get a transaciton context
-    // const tx = cds.transaction (req)
+		// const tx = cds.transaction (req)
 		*/
 		req.info(
 			{
@@ -62,17 +107,17 @@ module.exports = (srv) => {
 		)
 		.then(() => {})
 		// 
-    /*
+		/*
 		var res = srv.run(INSERT.into ("Approval") .columns (
-		  'ID', 'approver', 'changedEntity', 'changedEntityKey', 'changedEntityData', 'status'
-		  , 'createdAt', 'createdBy', 'modifiedAt', 'modifiedBy'
+			'ID', 'approver', 'changedEntity', 'changedEntityKey', 'changedEntityData', 'status'
+			, 'createdAt', 'createdBy', 'modifiedAt', 'modifiedBy'
 		) .values (
 			uuidv4(), approver, changedEntity, changedEntityKey, changedEntityData, 'R'
 			, new Date(), 'SUSER', new Date(), 'SUSER'
 		))
-    console.log("UPDATE - result: " + JSON.stringify(res))
-    */
-  })
+		console.log("UPDATE - result: " + JSON.stringify(res))
+		*/
+	})
 /*
 	srv.on('READ', 'Images', (req, next) => {
 		if (!req.data.ID) {

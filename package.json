@@ -10,6 +10,7 @@
     "express": "^4.17.1",
     "@sap/cds-odata-v2-adapter-proxy": "^1.4.8",
     "@sap/hana-client": "^2.4.167",
+    "@sap/logging": "^5.0.2",
     "helmet": "^3.21.2",
     "passport": "^0.4.0",
     "mysql": "^2.17.1",
