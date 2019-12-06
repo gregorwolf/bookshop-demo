@@ -1,4 +1,4 @@
-using AdminService from '../../srv/admin-service';
+using AdminService from '../../../srv/admin-service';
 
 annotate AdminService.Approval with @(
   UI.SelectionFields: [ approver, changedEntity ],

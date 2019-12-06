@@ -3,11 +3,11 @@
 */
 
 // 1) the annotated services per app...
-using from './admin/fiori-service';
-using from './approval/fiori-service';
-using from './browse/fiori-service';
-using from './orders/fiori-service';
-using from './role/fiori-service';
+using from './webapp/admin/fiori-service';
+using from './webapp/approval/fiori-service';
+using from './webapp/browse/fiori-service';
+using from './webapp/orders/fiori-service';
+using from './webapp/role/fiori-service';
 
 
 // 2) fiori annotations common to all apps...

@@ -259,7 +259,7 @@
                             "resolutionResult": {
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=v2.orders",
-                                "url": "/v2/orders"
+                                "url": "v2/orders"
                             }
                         },
                         "actionRole": {
@@ -287,7 +287,7 @@
                             "resolutionResult": {
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=v2.role",
-                                "url": "/v2/role"
+                                "url": "v2/role"
                             }
                         },
                         "actionV2Approvals": {
@@ -301,7 +301,7 @@
                             "resolutionResult": {
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=v2.approvals",
-                                "url": "/v2/approval"
+                                "url": "v2/approval"
                             }
                         },
                         "actionV2Authors": {
@@ -315,7 +315,7 @@
                             "resolutionResult": {
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=v2.authors",
-                                "url": "/v2/authors"
+                                "url": "v2/authors"
                             }
                         },
                         "actionV2Books": {
@@ -329,7 +329,7 @@
                             "resolutionResult": {
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=v2.books",
-                                "url": "/v2/books"
+                                "url": "v2/books"
                             }
                         }
                     }

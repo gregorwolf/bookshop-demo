@@ -10,10 +10,11 @@ const port = process.env.PORT || 4004;
 (async () => {
   // create new app
   const app = express();
-  app.use('/', express.static('app/'))
+  app.use('/app', express.static('app/webapp/'))
+  app.use('/appconfig', express.static('app/webapp/appconfig/'))
 
   app.get('/', function(req, res) {
-    res.redirect('/fiori.html')
+    res.redirect('/app/fiori.html')
   });
 
   // serve odata v4

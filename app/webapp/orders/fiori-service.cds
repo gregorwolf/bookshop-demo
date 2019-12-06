@@ -1,4 +1,4 @@
-using AdminService from '../../srv/admin-service';
+using AdminService from '../../../srv/admin-service';
 
 annotate AdminService.Books with {
 	price @Common.FieldControl: #ReadOnly;

@@ -10,7 +10,7 @@
   "files": [
     "db",
     "srv"
-  ],  
+  ],
   "dependencies": {
     "@sap/cds": "^3.20.1",
     "compression": "^1.7.4",
@@ -44,15 +44,9 @@
     "requires": {
       "db": {
         "kind": "sqlite",
-        "model": [
-          "db",
-          "srv"
-        ],
+        "model": "db",
         "credentials": {
-          "database": "bookshop.db"
-        },
-        "[production]": {
-          "kind": "hana"
+          "database": "db/bookshop.db"
         }
       }
     },
