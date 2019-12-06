@@ -1,0 +1,1 @@
+{"type":"com.sap.hcp.html5","builders":{"default":"grunt-builder-cf","configs":{}},"runners":{"configs":{}},"attributes":{},"description":"","mixinTypes":["mtamodule","fullmtabuild"]}

@@ -1,3 +1,4 @@
+/*
 using my.bookshop as db from '../db/schema';
 using my.bp as bp from './external/bp';
 
@@ -35,3 +36,4 @@ service CatalogService {
   @requires: 'authenticated-user'
   @insertonly entity Orders as projection on db.Orders;
 }
+*/

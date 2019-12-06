@@ -1,9 +1,16 @@
 {
-  "name": "@sap/capire-bookshop",
+  "name": "bookshop-demo",
   "version": "1.0.0",
   "description": "A simple bookshop application, build in a self-contained all-in-one fashion, i.e. w/o reusing other packages.",
   "repository": "https://github.wdf.sap.corp/caps/bookshop.git",
   "license": "ISC",
+  "engines": {
+    "node": "^8.9"
+  },
+  "files": [
+    "db",
+    "srv"
+  ],  
   "dependencies": {
     "@sap/cds": "^3.20.1",
     "compression": "^1.7.4",
@@ -24,6 +31,8 @@
   "scripts": {
     "setup": "npm install && npm run deploy",
     "deploy": "cds deploy db --to sqlite:db/bookshop.db",
+    "build": "cds build/all --clean",
+    "build:xs-security": "cds compile srv/ --to xsuaa  > xs-security.json",
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
     "debugv2": "node --inspect v2server",
     "start": "cds run",
@@ -35,20 +44,20 @@
     "requires": {
       "db": {
         "kind": "sqlite",
-        "model": "db",
+        "model": [
+          "db",
+          "srv"
+        ],
         "credentials": {
-          "database": "db/bookshop.db"
-        }
-      },
-      "mysql": {
-        "kind": "mysql",
-        "model": "srv/external/bp",
-        "credentials": {
-          "host": "localhost",
-          "user": "root",
-          "database": "bookstore"
+          "database": "bookshop.db"
+        },
+        "[production]": {
+          "kind": "hana"
         }
       }
+    },
+    "odata": {
+      "version": "v4"
     }
   }
 }

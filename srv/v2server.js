@@ -6,7 +6,7 @@ const proxy = require('@sap/cds-odata-v2-adapter-proxy')
 // config
 const host = process.env.HOST || '0.0.0.0'
 const port = process.env.PORT || 4004
-const csn = 'src/main/resources/edmx/csn.json'
+const csn = 'gen/csn.json'
 
 ;(async () => {
   // create new app
@@ -17,7 +17,7 @@ const csn = 'src/main/resources/edmx/csn.json'
     .connect('db') // ensure database is connected!
     .serve(csn)
     .with('admin-service.js')
-    .with('cat-service.js')
+    // .with('cat-service.js')
     .in(app)
 
   // serve odata v2
