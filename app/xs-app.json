@@ -1,5 +1,5 @@
 {
-  "welcomeFile": "/fiori.html",
+  "welcomeFile": "/app/fiori.html",
   "authenticationMethod": "route",
   "logout": {
     "logoutEndpoint": "/do/logout"
@@ -20,9 +20,14 @@
       "csrfProtection": true
     },    
     {
-      "source": "/app/(.*)$",
-      "target": "/$1",
-      "localDir": "./"
-    }
+      "source": "^/app/(.*)$",
+      "target": "$1",
+      "localDir": "webapp"
+    },    
+    {
+		"source": "^/appconfig/(.*)",
+		"target": "/appconfig/$1",
+		"localDir": "webapp"
+	}
   ]
 }
