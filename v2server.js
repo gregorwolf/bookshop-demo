@@ -2,6 +2,7 @@
 const express = require('express');
 const cds = require('@sap/cds');
 const proxy = require('@sap/cds-odata-v2-adapter-proxy');
+const csn = 'srv/gen/csn.json'
 
 // config
 const host = process.env.HOST || '0.0.0.0';
@@ -20,7 +21,8 @@ const port = process.env.PORT || 4004;
   // serve odata v4
   await cds
     .connect('db') // ensure database is connected!
-    .serve('all')
+    .serve(csn)
+    // .serve('all')
     .in(app);
 
   // serve odata v2
@@ -28,6 +30,7 @@ const port = process.env.PORT || 4004;
   app.use(proxy({
     // app
     path: 'v2',
+    model: csn,
     // target
     port: port
   }));
