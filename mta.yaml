@@ -25,7 +25,7 @@ modules:
       - name: bookshop-demo-uaa
 
   - name: bookshop-demo-app
-    type: html5
+    type: nodejs
     path: app
     parameters:
        disk-quota: 256M
