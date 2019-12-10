@@ -88,6 +88,19 @@
                                         "chipId": "catalogTile_001",
                                         "title": "Browse Books",
                                         "info": "The latest books",
+                                        "targetURL": "#Books-display"
+                                    }
+                                },
+                                {
+                                    "id": "ManageBooksApp",
+                                    "title": "Manage Books",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "serviceRefreshInterval": 5,
+                                    "properties": {
+                                        "chipId": "catalogTile_ManageBooksApp",
+                                        "title": "Manage Books",
+                                        "info": "Edit the list of authors",
                                         "targetURL": "#Books-manage"
                                     }
                                 },
@@ -347,7 +360,7 @@
                         },
                         "actionV2Books": {
                             "semanticObject": "Books",
-                            "action": "manage",
+                            "action": "display",
                             "title": "Browse Books",
                             "signature": {
                                 "parameters": {},
@@ -357,6 +370,20 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=v2.books",
                                 "url": "v2/books"
+                            }
+                        },
+                        "actionV2BooksAdmin": {
+                            "semanticObject": "Books",
+                            "action": "manage",
+                            "title": "Books Admin",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=v2.books.admin",
+                                "url": "v2/books-admin"
                             }
                         }
                     }
