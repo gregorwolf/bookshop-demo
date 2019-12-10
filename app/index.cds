@@ -22,7 +22,7 @@ annotate my.Authors with @(
 			{Value: name},
 			{Value: dateOfBirth},
 			{Value: placeOfBirth},
-			{Value: placeOfDeath},
+			{Value: dateOfDeath},
 			{Value: placeOfDeath},
 		],
     HeaderInfo: {
@@ -31,8 +31,18 @@ annotate my.Authors with @(
       Description: { Value: name }
     },
     Facets: [
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Details}', Target: '@UI.FieldGroup#Details'},
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Books}', Target: 'books/@UI.LineItem'},
-		]
+		],
+		FieldGroup#Details: {
+			Data: [
+				{Value: name},
+				{Value: dateOfBirth},
+				{Value: placeOfBirth},
+				{Value: dateOfDeath},
+				{Value: placeOfDeath},
+			]
+		},
 	}
 );
 

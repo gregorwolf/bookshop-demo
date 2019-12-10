@@ -23,6 +23,8 @@ const port = process.env.PORT || 4004;
     .connect('db') // ensure database is connected!
     .serve(csn)
     // .serve('all')
+    // .with('srv/admin-service.js')
+    // .with('srv/cat-service.js')
     .in(app);
 
   // serve odata v2

@@ -101,6 +101,19 @@
                                         "chipId": "catalogTile_002",
                                         "title": "Browse Authors",
                                         "info": "The list of authors",
+                                        "targetURL": "#Authors-display"
+                                    }
+                                },
+                                {
+                                    "id": "ManageAuthorsApp",
+                                    "title": "Manage Authors",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "serviceRefreshInterval": 5,
+                                    "properties": {
+                                        "chipId": "catalogTile_ManageAuthorsApp",
+                                        "title": "Manage Authors",
+                                        "info": "Edit the list of authors",
                                         "targetURL": "#Authors-manage"
                                     }
                                 }
@@ -306,7 +319,7 @@
                         },
                         "actionV2Authors": {
                             "semanticObject": "Authors",
-                            "action": "manage",
+                            "action": "display",
                             "title": "Authors",
                             "signature": {
                                 "parameters": {},
@@ -316,6 +329,20 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=v2.authors",
                                 "url": "v2/authors"
+                            }
+                        },
+                        "actionV2AuthorsAdmin": {
+                            "semanticObject": "Authors",
+                            "action": "manage",
+                            "title": "Authors Admin",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=v2.authors.admin",
+                                "url": "v2/authors-admin"
                             }
                         },
                         "actionV2Books": {
