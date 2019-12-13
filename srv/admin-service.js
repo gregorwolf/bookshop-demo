@@ -65,7 +65,7 @@ module.exports = (srv) => {
 		console.log("before UPDATE - req.query.UPDATE.data: " + changedEntityData)
 
 	})
-
+/*
 	srv.on('UPDATE','Books', req => {
 		var where = req.query.UPDATE.where;
 		var changedEntity = JSON.stringify(req.query.UPDATE.entity)
@@ -89,12 +89,10 @@ module.exports = (srv) => {
 			'createdAt': new Date(),
 			'createdBy': req.attr.userInfo.logonName
 		}
-		/*
-		var res = srv.insert(data) .into ("Approval")
+		// var res = srv.insert(data) .into ("Approval")
 		// var res = srv.create("Approval").entries(data)
 		// Get a transaciton context
 		// const tx = cds.transaction (req)
-		*/
 		req.info(
 			{
 				type: "sap.ui.core.MessageType.Information", 
@@ -106,18 +104,16 @@ module.exports = (srv) => {
 			INSERT.into('my.bookshop.Approval').entries (data)
 		)
 		.then(() => {})
-		// 
-		/*
-		var res = srv.run(INSERT.into ("Approval") .columns (
-			'ID', 'approver', 'changedEntity', 'changedEntityKey', 'changedEntityData', 'status'
-			, 'createdAt', 'createdBy', 'modifiedAt', 'modifiedBy'
-		) .values (
-			uuidv4(), approver, changedEntity, changedEntityKey, changedEntityData, 'R'
-			, new Date(), 'SUSER', new Date(), 'SUSER'
-		))
-		console.log("UPDATE - result: " + JSON.stringify(res))
-		*/
+		// var res = srv.run(INSERT.into ("Approval") .columns (
+		// 	'ID', 'approver', 'changedEntity', 'changedEntityKey', 'changedEntityData', 'status'
+		// 	, 'createdAt', 'createdBy', 'modifiedAt', 'modifiedBy'
+		// ) .values (
+		// 	uuidv4(), approver, changedEntity, changedEntityKey, changedEntityData, 'R'
+		// 	, new Date(), 'SUSER', new Date(), 'SUSER'
+		// ))
+		// console.log("UPDATE - result: " + JSON.stringify(res))
 	})
+*/
 /*
 	srv.on('READ', 'Images', (req, next) => {
 		if (!req.data.ID) {
