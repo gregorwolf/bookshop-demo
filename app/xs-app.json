@@ -18,7 +18,13 @@
       "authenticationType": "xsuaa",
       "destination": "srv_api",
       "csrfProtection": true
-    },    
+    },
+    {
+		"source": "/sap/bc/lrep(.*)",
+		"destination": "lrep-backend",
+		"authenticationType": "xsuaa",
+		"csrfProtection": true
+	},    
     {
       "source": "^/app/(.*)$",
       "target": "$1",

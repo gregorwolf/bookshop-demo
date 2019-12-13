@@ -1,5 +1,5 @@
 {
-	"_version": "1.8.0",
+	"_version": "1.11.0",
 	"sap.app": {
 		"id": "v2.approvals",
 		"type": "application",
@@ -28,6 +28,7 @@
 		"offline": false
 	},
 	"sap.ui5": {
+		"flexEnabled": true,
 		"dependencies": {
 			"minUI5Version": "1.38.34",
 			"libs": {

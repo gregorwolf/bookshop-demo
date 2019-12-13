@@ -10,6 +10,14 @@
 	<script>
 		window["sap-ushell-config"] = {
 			defaultRenderer: "fiori2",
+			bootstrapPlugins: {
+	            "RuntimeAuthoringPlugin" : {
+	                "component": "sap.ushell.plugins.rta",
+	                config: {
+	                    validateAppVersion: false
+	                }
+	            }
+	        },
 			services: {
 				EndUserFeedback: {
 					config: {
