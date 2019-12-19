@@ -16,13 +16,13 @@ const csn = 'gen/csn.json'
   // serve odata v4
   await cds
     .serve('AdminService')
-    .serve(csn)
+    .from(csn)
     .with('admin-service.js')
     .in(app)
 
   await cds
     .serve('CatalogService')
-    .serve(csn)
+    .from(csn)
     .with('cat-service.js')
     .in(app)
 

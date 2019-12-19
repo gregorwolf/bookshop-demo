@@ -6,7 +6,7 @@ const csn = 'srv/gen/csn.json'
 
 // config
 const host = process.env.HOST || '0.0.0.0'
-const port = process.env.PORT || 4004
+const port = process.env.PORT || 4004;
 
 (async () => {
   // create new app
@@ -22,13 +22,13 @@ const port = process.env.PORT || 4004
   // serve odata v4
   await cds
     .serve('AdminService')
-    .serve(csn)
+    .from(csn)
     .with('srv/admin-service.js')
     .in(app)
 
   await cds
     .serve('CatalogService')
-    .serve(csn)
+    .from(csn)
     .with('srv/cat-service.js')
     .in(app)
 
