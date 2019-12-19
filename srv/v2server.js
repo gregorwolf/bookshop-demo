@@ -12,12 +12,18 @@ const csn = 'gen/csn.json'
   // create new app
   const app = express()
 
+  await cds.connect('db') // ensure database is connected!
   // serve odata v4
   await cds
-    .connect('db') // ensure database is connected!
+    .serve('AdminService')
     .serve(csn)
     .with('admin-service.js')
-    // .with('cat-service.js')
+    .in(app)
+
+  await cds
+    .serve('CatalogService')
+    .serve(csn)
+    .with('cat-service.js')
     .in(app)
 
   // serve odata v2
