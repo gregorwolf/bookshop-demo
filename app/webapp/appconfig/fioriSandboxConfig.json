@@ -225,7 +225,7 @@
                             "resolutionResult": {
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=approvals",
-                                "url": "/approval/webapp"
+                                "url": "approval/webapp"
                             }
                         },
                         "actionBooks": {
@@ -239,10 +239,10 @@
                             "resolutionResult": {
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=bookshop",
-                                "url": "/browse/webapp"
+                                "url": "browse/webapp"
                             },
                             "indicatorDataSource": {
-                                "path": "/catalog/Books/$count",
+                                "path": "catalog/Books/$count",
                                 "refresh": 600
                             }
                         },
@@ -257,7 +257,7 @@
                             "resolutionResult": {
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=authors",
-                                "url": "/authors/webapp"
+                                "url": "authors/webapp"
                             }
                         },
                         "actionOrders": {
@@ -271,7 +271,7 @@
                             "resolutionResult": {
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=orders",
-                                "url": "/orders/webapp"
+                                "url": "orders/webapp"
                             }
                         },
                         "actionV2Orders": {
@@ -299,7 +299,7 @@
                             "resolutionResult": {
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=role",
-                                "url": "/role/webapp"
+                                "url": "role/webapp"
                             }
                         },
                         "actionV2Role": {

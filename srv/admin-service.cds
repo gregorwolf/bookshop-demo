@@ -13,18 +13,15 @@ service AdminService @(requires:'admin') {
 
   //------- auto-exposed --------
   entity OrderItems as projection on db.OrderItems;
+  entity OrderShippingAddress as projection on db.OrderShippingAddress;  
   //> these shall be removed but this would break the Fiori UI
 
-	@odata.draft.enabled
-	entity Role
-	@(restrict: [ { grant: ['READ','WRITE'], to: 'admin' }, ]) 
-	as projection on db.Role;
-
+	entity Roles as projection on db.Roles;
+  annotate Roles with @odata.draft.enabled;	
   //------- auto-exposed --------
   entity Role_BusinessObject as projection on db.Role_BusinessObject;
   entity Role_User as projection on db.Role_User;
   //> these shall be removed but this would break the Fiori UI
-
 
 	entity BusinessObjects 
 	@(restrict: [ { grant: ['READ'], to: 'admin' }, ]) 

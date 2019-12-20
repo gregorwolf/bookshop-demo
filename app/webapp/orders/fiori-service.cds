@@ -7,19 +7,9 @@ annotate AdminService.Books with {
 //
 //	Common
 //
-annotate AdminService.OrderItems with {
-	book @(
-		Common: {
-			Text: book.title,
-			FieldControl: #Mandatory
-		},
-		ValueList.entity:'Books',
-	);
-	amount @(
-		Common.FieldControl: #Mandatory
-	);
+annotate AdminService.Orders with {
+	OrderNo @Common.FieldControl: #ReadOnly;
 }
-
 
 annotate AdminService.Orders with @(
 	UI: {
@@ -57,11 +47,13 @@ annotate AdminService.Orders with @(
 		Facets: [
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Details}', Target: '@UI.FieldGroup#Details'},
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>OrderItems}', Target: 'Items/@UI.LineItem'},
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>ShippingAddress}', Target: 'ShippingAddress/@UI.Identification'},
 		],
 		FieldGroup#Details: {
 			Data: [
 				{Value: total, Label:'Total'},
-				{Value: currency_code, Label:'Currency'}
+				{Value: currency_code, Label:'Currency'},
+				{Value: CustomerOrderNo},
 			]
 		},
 		FieldGroup#Created: {
@@ -97,10 +89,22 @@ annotate AdminService.Orders with @(
 		//it seems to work but at least to me this is unconventional modeling.
 };
 
-
-
 //The enity types name is AdminService.my_bookshop_OrderItems
 //The annotations below are not generated in edmx WHY?
+
+annotate AdminService.OrderItems with {
+	book @(
+		Common: {
+			Text: book.title,
+			FieldControl: #Mandatory
+		},
+		ValueList.entity:'Books',
+	);
+	amount @(
+		Common.FieldControl: #Mandatory
+	);
+}
+
 annotate AdminService.OrderItems with @(
 	UI: {
 		HeaderInfo: {
@@ -157,3 +161,34 @@ annotate AdminService.OrderItems with @(
 		//ERROR ALERT: The following line refering to the parents currency code will lead to a server error
 		//@Measures.ISOCurrency:parent.currency.code; //Bind the currency field to the amount field of the parent
 };
+
+
+annotate AdminService.OrderShippingAddress with @(
+	UI: {
+		HeaderInfo: {
+			TypeName: '{i18n>ShippingAddress}', TypeNamePlural: ' ',
+			Title: {
+				Value: city
+			},
+			Description: {Value: city}
+		},
+		// There is no filterbar for items so the selctionfileds is not needed
+		SelectionFields: [ city ],
+		////////////////////////////////////////////////////////////////////////////
+		//
+		//	Lists of ShippingAddress
+		//
+		LineItem: [
+			{Value: city},
+			{Value: street},
+		],
+		Identification: [ //Is the main field group
+			//{Value: ID, Label:'ID'}, //A guid shouldn't be on the UI
+			{Value: street},
+			{Value: city},
+		],
+		Facets: [
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>ShippingAddress}', Target: '@UI.Identification'},
+		],
+	}
+) {};

@@ -36,6 +36,7 @@
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
     "debugv2": "node --inspect v2server",
     "start": "cds run",
+    "build:deploy:startv2": "npm run build && npm run deploy && node v2server",
     "startv2": "node v2server",
     "watch": "nodemon -w . -i node_modules/**,.git/** -e cds -x npm run start",
     "test": "jest"

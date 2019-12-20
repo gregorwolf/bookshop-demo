@@ -60,10 +60,12 @@ entity Authors : managed {
 }
 
 entity Orders : cuid, managed {
-  OrderNo  : String @title:'Order Number'; //> readable key
-  Items    : Composition of many OrderItems on Items.parent = $self;
-  total    : Decimal(9,2) @readonly;
-  currency : Currency;
+  OrderNo         : String @title:'Order Number'; //> readable key
+  CustomerOrderNo : String(80) @title:'Customer Order Number';
+  Items           : Composition of many OrderItems on Items.parent = $self;
+  ShippingAddress : Composition of one OrderShippingAddress on ShippingAddress.parent = $self;
+  total           : Decimal(9,2) @readonly;
+  currency        : Currency;
 }
 
 entity OrderItems : cuid {
@@ -72,6 +74,12 @@ entity OrderItems : cuid {
   amount : Integer;
   netAmount: Decimal(9,2);
 }
+
+entity OrderShippingAddress : cuid, managed {
+  parent : Association to Orders not null;
+  street : String(60) @( title: 'Street', );
+  city : String(60) @( title: 'City', );
+};
 
 entity Users {
   key username : String @( title: 'Username', );
@@ -91,19 +99,19 @@ entity BusinessObjects {
   children : Composition of many BusinessObjects on children.parent = $self;
 };
 
-entity Role : cuid, managed {
+entity Roles : cuid, managed {
       rolename    : String(255) @( title: 'Role Name', );
       description : String      @( title: 'Description', );
       BusinessObjects : Composition of many Role_BusinessObject on BusinessObjects.parent=$self;
       Users           : Composition of many Role_User on Users.parent=$self;
 };
 
-entity Role_BusinessObject : cuid, managed {
-  parent : Association to Role;
+entity Role_BusinessObject : cuid {
+  parent : Association to Roles;
   BusinessObject : Association to BusinessObjects;
 };
 
-entity Role_User : cuid, managed {
-  parent : Association to Role;
+entity Role_User : cuid {
+  parent : Association to Roles;
   user : Association to Users;
 };

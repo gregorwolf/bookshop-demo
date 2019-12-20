@@ -4,7 +4,7 @@ module.exports = (srv) => {
 
 	const { Role_BusinessObject, Role_User } = srv.entities
 
-	srv.before('READ', [ 'Books', 'Orders' ], async req => {
+	srv.before('READ', [ ], async req => {
 		var targetName = req.target.name
 		var logonName = req.attr.userInfo.logonName
 		console.log("READ - logonName: " + logonName)

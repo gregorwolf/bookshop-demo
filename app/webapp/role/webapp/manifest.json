@@ -58,18 +58,18 @@
             "routes": [
                 {
                     "pattern": ":?query:",
-                    "name": "RoleList",
-                    "target": "RoleList"
+                    "name": "RolesList",
+                    "target": "RolesList"
                 },
                 {
-                    "pattern": "Role({key}):?query:",
-                    "name": "RoleDetails",
-                    "target": "RoleDetails"
+                    "pattern": "Roles({key}):?query:",
+                    "name": "RolesDetails",
+                    "target": "RolesDetails"
                 },
                 {
-                    "pattern": "Role({boo})/BusinessObjects({boo2}):?query:",
-                    "name": "RoleBusinessObjectsDetails",
-                    "target": "RoleBusinessObjectsDetails"
+                    "pattern": "Roles({boo})/BusinessObjects({boo2}):?query:",
+                    "name": "RolesBusinessObjectsDetails",
+                    "target": "RolesBusinessObjectsDetails"
                 },
                 {
                     "pattern": "Books({key}):?query:",
@@ -78,62 +78,62 @@
                 }
             ],
             "targets": {
-                "RoleList": {
+                "RolesList": {
                     "type": "Component",
-                    "id": "RoleList",
+                    "id": "RolesList",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
                         "settings" : {
-                            "entitySet" : "Role",
+                            "entitySet" : "Roles",
                             "navigation" : {
-                                "Role" : {
+                                "Roles" : {
                                     "detail" : {
-                                        "route" : "RoleDetails"
+                                        "route" : "RolesDetails"
                                         }
                                 }
                             }
                         }
                     }
                 },
-                "RoleDetails": {
+                "RolesDetails": {
                     "type": "Component",
-                    "id": "RoleDetails",
+                    "id": "RolesDetails",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings" : {
-                            "entitySet": "Role",
+                            "entitySet": "Roles",
                             "navigation" : {
                                 "BusinessObjects": {
                                     "detail": {
-                                        "route": "RoleBusinessObjectsDetails"
+                                        "route": "RolesBusinessObjectsDetails"
                                     }
                                 },
                                 "Users": {
                                     "detail": {
-                                        "route": "RoleUsersDetails"
+                                        "route": "RolesUsersDetails"
                                     }
                                 }
                             }
                         }
                     }
                 },
-                "RoleBusinessObjectsDetails": {
+                "RolesBusinessObjectsDetails": {
                     "type": "Component",
-                    "id": "RoleBusinessObjectsDetails",
+                    "id": "RolesBusinessObjectsDetails",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings" : {
-                            "entitySet": "Role_BusinessObject"
+                            "entitySet": "Roles_BusinessObject"
                         }
                     }
                 },
-                "RoleUsersDetails": {
+                "RolesUsersDetails": {
                     "type": "Component",
-                    "id": "RoleUsersDetails",
+                    "id": "RolesUsersDetails",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings" : {
-                            "entitySet": "Role_User"
+                            "entitySet": "Roles_User"
                         }
                     }
                 }

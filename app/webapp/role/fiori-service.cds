@@ -4,54 +4,56 @@ using AdminService from '../../../srv/admin-service';
 //
 //	Role Management
 //
-annotate AdminService.Role with {
+/*
+annotate AdminService.Roles with {
   ID @Common.FieldControl: #ReadOnly;
 };
+*/
 
-annotate AdminService.Role with @(
-  UI.SelectionFields: [ rolename ],
+annotate AdminService.Roles with @(
+  UI: {
+    SelectionFields: [ rolename ],
 
-  UI.LineItem: [
-    {$Type: 'UI.DataField', Value: rolename },
-    {$Type: 'UI.DataField', Value: description }
-  ],
+    LineItem: [
+      { Value: rolename },
+      { Value: description }
+    ],
+		HeaderInfo: {
+			TypeName: 'Role', TypeNamePlural: 'Roles',
+			Title: {
+				Label: 'Role name ', //A label is possible but it is not considered on the ObjectPage yet
+				Value: rolename
+			},
+			Description: {Value: description}
+		},
 
-  UI.HeaderInfo: {
-    Title: { Value: rolename },
-    Description: { Value: description }
-  },
+		Identification: [ //Is the main field group
+			{Value: rolename },
+		],
 
-  UI.Facets: [
-    {
-      $Type:'UI.CollectionFacet',
-      Label: 'Role',
-      Facets:[
-        { $Type: 'UI.ReferenceFacet', Label: 'Role',  Target: '@UI.FieldGroup#Role' },
-      ]
-    },
-    {
-      $Type:'UI.CollectionFacet',
-      Label: 'Assigned Business Objects',
-      Facets:[
-        {$Type: 'UI.ReferenceFacet', Label: 'Assigned Business Objects', Target: 'BusinessObjects/@UI.LineItem'},
-      ]
-    },
-    {
-      $Type:'UI.CollectionFacet',
-      Label: 'Assigned Users',
-      Facets:[
-        {$Type: 'UI.ReferenceFacet', Label: 'Assigned Users', Target: 'Users/@UI.LineItem'},
-      ]
-    }
-  ],
+		HeaderFacets: [
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Created}', Target: '@UI.FieldGroup#Created'},
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Modified}', Target: '@UI.FieldGroup#Modified'},
+		],
 
-  UI.FieldGroup#Role: {
-    Label: 'Role',
-    Data: [
-    {$Type: 'UI.DataField', Value: rolename },
-    {$Type: 'UI.DataField', Value: description },
-    ]
-  },
+		Facets: [
+			{$Type: 'UI.ReferenceFacet', Label: 'Assigned Business Objects', Target: 'BusinessObjects/@UI.LineItem'},
+			{$Type: 'UI.ReferenceFacet', Label: 'Assigned Users', Target: 'Users/@UI.LineItem'},
+		],
+
+		FieldGroup#Created: {
+			Data: [
+				{Value: createdBy},
+				{Value: createdAt},
+			]
+		},
+		FieldGroup#Modified: {
+			Data: [
+				{Value: modifiedBy},
+				{Value: modifiedAt},
+			]
+		},
+  }
 
 );
 
@@ -87,15 +89,17 @@ annotate AdminService.Role_User with {
 };
 
 annotate AdminService.Role_User with @(
-  UI.SelectionFields: [ user_username ],
+  UI: {
+    SelectionFields: [ user_username ],
 
-  UI.LineItem: [
-    // {$Type: 'UI.DataField', Value: parent_ID },
-    {$Type: 'UI.DataField', Value: user_username },
-  ],
+    LineItem: [
+      // {Value: parent_ID },
+      { Value: user_username, Label:'Username' },
+    ],
 
-  UI.HeaderInfo: {
-    Title: { Value: user_username },
+    HeaderInfo: {
+      Title: { Value: user_username },
+    }
   }
 );
 
