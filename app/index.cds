@@ -138,7 +138,7 @@ annotate my.Books with @(
 //	Books Elements
 //
 annotate my.Books with {
-	ID @title:'{i18n>ID}' @UI.HiddenFilter;
+	ID @title:'{i18n>ID}';
 	title @title:'{i18n>Title}';
 	author @title:'{i18n>AuthorID}';
 	price @title:'{i18n>Price}';
