@@ -17,7 +17,7 @@ service CatalogService {
     title: String;
   }
   
-  @Capabilities.SearchRestrictions.Searchable: false
+  @Capabilities.SearchRestrictions.Searchable: true
   @readonly entity Books as projection on db.Books excluding {
     createdBy, modifiedBy
   };
