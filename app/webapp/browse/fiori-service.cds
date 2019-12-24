@@ -1,4 +1,3 @@
-/*
 using CatalogService from '../../../srv/cat-service';
 
 ////////////////////////////////////////////////////////////////////////////
@@ -26,4 +25,3 @@ annotate CatalogService.Books with @(
 		},
 	}
 );
-*/
