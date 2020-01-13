@@ -1,0 +1,17 @@
+### OData V2 Proxy Issue with Decimal
+# Returns:
+# Error while deserializing payload. An error occurred during deserialization of the entity. A JSON number is not supported as Edm.Decimal value.
+PATCH {{protocol}}://{{host}}:{{port}}/v2/admin/Approval(ID=guid'98b7fccc-6df7-4deb-b993-080c73fcc920',IsActiveEntity=false)
+Authorization: Basic YWRtaW46
+Accept: application/json
+Content-Type: application/json
+
+{"testDecimal":"13.3","__metadata":{"uri":"http://localhost:4004/v2/admin/Approval(ID=guid'98b7fccc-6df7-4deb-b993-080c73fcc920',IsActiveEntity=false)","type":"AdminService.Approval"}}
+
+### OData V4 Works with Decimal
+PATCH {{protocol}}://{{host}}:{{port}}/admin/Approval(ID=98b7fccc-6df7-4deb-b993-080c73fcc920,IsActiveEntity=false) HTTP/1.1
+Authorization: Basic YWRtaW46
+Accept:application/json;odata.metadata=minimal;IEEE754Compatible=true
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{"testDecimal":"13.3"}

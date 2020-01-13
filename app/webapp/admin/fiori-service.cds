@@ -23,6 +23,12 @@ annotate AdminService.Books with @(
 				{Value: stock},
 				{Value: price},
 				{Value: currency_code, Label: '{i18n>Currency}'},
+				{Value: weight     },
+				{Value: height     },
+				{Value: width      },
+				{Value: visible    },
+				{Value: releaseDate},
+				{Value: readingTime},
 			]
 		},
 		FieldGroup#Admin: {

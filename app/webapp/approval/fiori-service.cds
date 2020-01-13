@@ -26,8 +26,10 @@ annotate AdminService.Approval with @(
   UI.FieldGroup#Approval: {
     Label: 'Approval',
     Data: [
-    {$Type: 'UI.DataField', Value: approver },
-    {$Type: 'UI.DataField', Value: changedEntity },
+      {Value: approver },
+      {Value: changedEntity },
+      {Value: testDecimalFload },
+      {Value: testDecimal },
     ]
   },
 

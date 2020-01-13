@@ -2,10 +2,13 @@ namespace my.bookshop;
 using { Currency, managed, cuid, User } from '@sap/cds/common';
 
 entity Approval : managed, cuid {
-    approver              : User        @( title: 'Approver',);
-    changedEntity         : String(255) @( title: 'Changed Entity', );
-    changedEntityKey      : LargeString @( title: 'Changed Entity Key', );
-    changedEntityData     : LargeString @( title: 'Changed Entity Data', );
+    approver              : User         @( title: 'Approver',);
+    changedEntity         : String(255)  @( title: 'Changed Entity', );
+    changedEntityKey      : LargeString  @( title: 'Changed Entity Key', );
+    changedEntityData     : LargeString  @( title: 'Changed Entity Data', );
+    testDecimalFload      : DecimalFloat @( title: 'Test Decimal Float', );
+    testDecimal           : Decimal(9,2) @( title:'Test Decimal (9,2)' );
+
     status                : String(1) 
       @( title: 'Status', ) enum {
         requested = 'R' @( title: 'Requested');
@@ -24,6 +27,12 @@ entity Books : managed {
   price  : Decimal(9,2);
   currency : Currency;
   virtual semanticURLtoAuthor : String;
+  weight      : DecimalFloat @title:'Weight (DecimalFloat)';
+  height      : Double @title:'Height (Double)';
+  width       : Decimal(9,2) @title:'Width (Decimal(9,2))';
+  visible     : Boolean @title:'Visible (Boolean)';
+  releaseDate : DateTime @title:'Release Date (DateTime)';
+  readingTime : Time @title:'Reading Time (Time)';
 };
 
 entity Images {

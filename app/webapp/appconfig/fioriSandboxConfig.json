@@ -100,7 +100,7 @@
                                     "properties": {
                                         "chipId": "catalogTile_ManageBooksApp",
                                         "title": "Manage Books",
-                                        "info": "Edit the list of authors",
+                                        "info": "Edit the list of books",
                                         "targetURL": "#Books-manage"
                                     }
                                 },
@@ -184,6 +184,18 @@
                                         "chipId": "V4catalogTile_001",
                                         "title": "Browse Books",
                                         "info": "The latest books",
+                                        "targetURL": "#V4Books-display"
+                                    }
+                                },
+                                {
+                                    "id": "V4ManageBooksApp",
+                                    "title": "Manage Books",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V4catalogTile_010",
+                                        "title": "Manage Books",
+                                        "info": "Edit the list of books",
                                         "targetURL": "#V4Books-manage"
                                     }
                                 },
@@ -230,7 +242,7 @@
                         },
                         "actionBooks": {
                             "semanticObject": "V4Books",
-                            "action": "manage",
+                            "action": "display",
                             "title": "Browse Books",
                             "signature": {
                                 "parameters": {},
@@ -246,6 +258,24 @@
                                 "refresh": 600
                             }
                         },
+                        "manageBooks": {
+                            "semanticObject": "V4Books",
+                            "action": "manage",
+                            "title": "Manage Books",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=admin",
+                                "url": "admin/webapp"
+                            },
+                            "indicatorDataSource": {
+                                "path": "catalog/Books/$count",
+                                "refresh": 600
+                            }
+                        },                        
                         "actionAuthors": {
                             "semanticObject": "V4Authors",
                             "action": "manage",
