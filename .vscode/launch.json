@@ -5,8 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "node",
+            "request": "launch",
+            "name": "v2server",
+            "skipFiles": [
+              "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/v2server"
+        },
+        {
             "type": "node", "request": "launch",
-            "name": "cds run", "args": [ "run" ],
+            "name": "cds run V2", "args": [ "run" ],
             "env": {"DEBUG":"yes"},
             "program": "${workspaceFolder}/.vscode/cds", "skipFiles": [
                 "<node_internals>/**/*.js",
