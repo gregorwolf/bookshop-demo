@@ -16,7 +16,9 @@ service AdminService @(requires:'admin') {
   entity OrderShippingAddress as projection on db.OrderShippingAddress;  
   //> these shall be removed but this would break the Fiori UI
 
-	entity Roles as projection on db.Roles;
+  entity Roles 
+  @(restrict: [ { grant: ['READ','WRITE'], to: 'roleadmin' }, ]) 
+  as projection on db.Roles;
   annotate Roles with @odata.draft.enabled;	
   //------- auto-exposed --------
   entity Role_BusinessObject as projection on db.Role_BusinessObject;

@@ -37,7 +37,8 @@
                             "email": "alice@example.com"
                         },
                         "scopes": [
-                            "admin"
+                            "admin",
+                            "roleadmin"
                         ]
                     }
                 },
