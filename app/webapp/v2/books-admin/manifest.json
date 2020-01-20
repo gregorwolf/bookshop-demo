@@ -55,7 +55,13 @@
 			}
 		},
 		"extends": {
-			"extensions": {}
+			"extensions": {
+				"sap.ui.controllerExtensions": {
+					 "sap.suite.ui.generic.template.ListReport.view.ListReport": {
+							"controllerName": "v2.books.admin.ext.controller.ListReportExtension"
+					 }
+				}
+		  }
 		},
 		"resources": {
 			"js": [],
