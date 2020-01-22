@@ -29,3 +29,5 @@ APIExternalProducer.js
 db/bookshop.db-journal
 preview.json
 cp.project.properties.json
+
+.cds_gen.log
