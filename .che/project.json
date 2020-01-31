@@ -1,13 +1,1 @@
-{
-	"type": "mta",
-	"builders": {
-		"default": "mtabuilder",
-		"configs": {}
-	},
-	"runners": {
-		"configs": {}
-	},
-	"attributes": {},
-	"description": "",
-	"mixinTypes": ["fullmtabuild"]
-}
+{"type":"mta","builders":{"default":"mtabuilder","configs":{}},"runners":{"configs":{}},"attributes":{},"description":"","mixinTypes":["fullmtabuild"]}
