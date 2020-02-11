@@ -30,8 +30,6 @@ modules:
     parameters:
        disk-quota: 256M
        memory: 256M
-    build-parameters:
-       builder: grunt
     requires:
      - name: bookshop-demo-uaa
      - name: srv_api
