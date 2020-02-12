@@ -13,27 +13,28 @@
       "csrfProtection": true
     },
     {
-      "source": "/v2/admin/(.*)$",
-      "target": "/v2/admin/$1",
+      "source": "/catalog/(.*)$",
+      "target": "/catalog/$1",
       "authenticationType": "xsuaa",
       "destination": "srv_api",
       "csrfProtection": true
     },
     {
-		"source": "/sap/bc/lrep(.*)",
-		"destination": "lrep-backend",
-		"authenticationType": "xsuaa",
-		"csrfProtection": true
-	},    
+      "source": "/v2/(.*)$",
+      "target": "/v2/$1",
+      "authenticationType": "xsuaa",
+      "destination": "srv_api",
+      "csrfProtection": true
+    },
     {
       "source": "^/app/(.*)$",
       "target": "$1",
       "localDir": "webapp"
-    },    
+    },
     {
-		"source": "^/appconfig/(.*)",
-		"target": "/appconfig/$1",
-		"localDir": "webapp"
-	}
+      "source": "^/appconfig/(.*)",
+      "target": "/appconfig/$1",
+      "localDir": "webapp"
+    }
   ]
 }
