@@ -20,20 +20,14 @@
       "csrfProtection": true
     },
     {
-		"source": "/sap/bc/lrep(.*)",
-		"destination": "lrep-backend",
-		"authenticationType": "xsuaa",
-		"csrfProtection": true
-	},    
-    {
       "source": "^/app/(.*)$",
       "target": "$1",
       "localDir": "webapp"
-    },    
+    },
     {
-		"source": "^/appconfig/(.*)",
-		"target": "/appconfig/$1",
-		"localDir": "webapp"
-	}
+      "source": "^/appconfig/(.*)",
+      "target": "/appconfig/$1",
+      "localDir": "webapp"
+    }
   ]
 }
