@@ -13,8 +13,15 @@
       "csrfProtection": true
     },
     {
-      "source": "/v2/admin/(.*)$",
-      "target": "/v2/admin/$1",
+      "source": "/catalog/(.*)$",
+      "target": "/catalog/$1",
+      "authenticationType": "xsuaa",
+      "destination": "srv_api",
+      "csrfProtection": true
+    },
+    {
+      "source": "/v2/(.*)$",
+      "target": "/v2/$1",
       "authenticationType": "xsuaa",
       "destination": "srv_api",
       "csrfProtection": true
