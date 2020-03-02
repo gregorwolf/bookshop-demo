@@ -4,6 +4,8 @@ const cds = require('@sap/cds')
 const proxy = require('@sap/cds-odata-v2-adapter-proxy')
 const csn = 'srv/gen/csn.json'
 
+const swaggerUi = require('swagger-ui-express')
+const swaggerSpec = require('./srv/gen/swagger.json')
 // config
 const host = process.env.HOST || '0.0.0.0'
 const port = process.env.PORT || 4004;
@@ -31,6 +33,16 @@ const port = process.env.PORT || 4004;
     .from(csn)
     .with('srv/cat-service.js')
     .in(app)
+
+  // Swagger / OpenAPI
+  var options = {
+    explorer: true
+  }
+	app.get('/api/api-docs.json', function(req, res) {
+		res.setHeader('Content-Type', 'application/json')
+		res.send(swaggerSpec)
+	})   
+  app.use('/api/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, options))
 
   // serve odata v2
   process.env.XS_APP_LOG_LEVEL = 'none'; // suppress debug logs
