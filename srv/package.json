@@ -25,6 +25,11 @@
 				"kind": "hana",
 				"model": "gen/csn.json"
 			}
-		}
+		},
+    "auth": {
+      "passport": {
+        "strategy": "JWT"
+      }
+    }
 	}
 }
