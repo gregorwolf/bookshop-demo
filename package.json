@@ -12,8 +12,8 @@
     "srv"
   ],
   "dependencies": {
-    "@sap/cds": "^3.31.1",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.4.20",
+    "@sap/cds": "^3.31.2",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.4.21",
     "@sap/hana-client": "^2.4.182",
     "@sap/logging": "^5.2.0",
     "compression": "^1.7.4",
@@ -21,7 +21,7 @@
     "helmet": "^3.21.3",
     "mysql": "^2.18.1",
     "passport": "^0.4.1",
-    "uuid": "^3.4.0"
+    "uuid": "^7.0.2"
   },
   "devDependencies": {
     "jest": "^25.1.0",
