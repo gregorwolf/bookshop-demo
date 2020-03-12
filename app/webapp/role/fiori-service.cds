@@ -71,7 +71,7 @@ annotate AdminService.Role_BusinessObject with @(
 
   UI.LineItem: [
     // {$Type: 'UI.DataField', Value: parent_ID },
-		{Value: BusinessObject_ID, Label:'Business Object'},
+		{Value: BusinessObject},
   ],
 
   UI.HeaderInfo: {
@@ -90,15 +90,15 @@ annotate AdminService.Role_User with {
 
 annotate AdminService.Role_User with @(
   UI: {
-    SelectionFields: [ user_username ],
+    SelectionFields: [ user ],
 
     LineItem: [
       // {Value: parent_ID },
-      { Value: user_username, Label:'Username' },
+      { Value: user },
     ],
 
     HeaderInfo: {
-      Title: { Value: user_username },
+      Title: { Value: user },
     }
   }
 );

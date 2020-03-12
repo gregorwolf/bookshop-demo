@@ -1,6 +1,6 @@
 module.exports = (srv) => {
 
-  const { Books } = srv.entities
+  const { Books, Authors } = srv.entities
 
   srv.on('getNumberOfBooksForDynamicTile', req => {
     console.log("getNumberOfBooksForDynamicTile: " + JSON.stringify(req.data))
@@ -34,11 +34,13 @@ module.exports = (srv) => {
   })
   */
 
-  srv.after('READ',Books, (each)=>{
+  srv.after('READ', Books, (each)=>{
     if(typeof each.author !== 'undefined') {
-      each.semanticURLtoAuthor = '#Authors-manage?ID=' + each.author.ID
+      if(each.author !== null) {
+        each.semanticURLtoAuthor = '#Authors-manage?ID=' + each.author.ID
+      }
       // console.log(each.semanticURLtoAuthor)
     }
-  })  
+  })
 
 }

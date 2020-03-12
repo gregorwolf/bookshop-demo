@@ -1,6 +1,12 @@
 namespace my.bookshop;
 using { Currency, managed, cuid, User } from '@sap/cds/common';
 
+type BusinessObject : String(255);
+annotate BusinessObject with @(
+  title       : '{i18n>BusinessObject}',
+  description : '{i18n>BusinessObject.Description}'
+);
+
 entity Approval : managed, cuid {
     approver              : User         @( title: 'Approver',);
     changedEntity         : String(255)  @( title: 'Changed Entity', );
@@ -103,7 +109,7 @@ entity Address : cuid, managed {
 
 
 entity BusinessObjects {
-  key ID   : String @( title: 'Business Object', );
+  key ID   : BusinessObject;
   parent   : Association to BusinessObjects;
   children : Composition of many BusinessObjects on children.parent = $self;
 };
@@ -117,10 +123,10 @@ entity Roles : cuid, managed {
 
 entity Role_BusinessObject : cuid {
   parent : Association to Roles;
-  BusinessObject : Association to BusinessObjects;
+  BusinessObject : BusinessObject;
 };
 
 entity Role_User : cuid {
   parent : Association to Roles;
-  user : Association to Users;
+  user : User;
 };

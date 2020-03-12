@@ -8,6 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "v2server",
+            "env": {"DEBUG":"yes"},
             "skipFiles": [
               "<node_internals>/**"
             ],
