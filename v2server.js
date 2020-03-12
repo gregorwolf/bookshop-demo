@@ -45,7 +45,7 @@ const port = process.env.PORT || 4004;
   app.use('/api/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, options))
 
   // serve odata v2
-  process.env.XS_APP_LOG_LEVEL = 'none'; // suppress debug logs
+  process.env.XS_APP_LOG_LEVEL = 'info'; // suppress debug logs
   app.use(proxy({
     // app
     path: 'v2',
