@@ -65,6 +65,17 @@ module.exports = (srv) => {
 		console.log("before UPDATE - req.query.UPDATE.data: " + changedEntityData)
 
 	})
+
+	srv.on('READ', 'User', req => {
+		const users = [
+			{
+				username:     req.user.id,
+				is_admin:     req.user.is("admin"),
+				is_roleadmin: req.user.is("roleadmin"),
+			}
+		]
+		return users;
+	})
 /*
 	srv.on('UPDATE','Books', req => {
 		var where = req.query.UPDATE.where;
