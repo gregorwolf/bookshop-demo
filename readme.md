@@ -25,7 +25,9 @@ npm run setup
 
 ## Run
 ```sh
-npm start
+npm run build
+npm run build:swagger
+npm run startv2
 ```
 
 ## Test
