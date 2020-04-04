@@ -4,7 +4,7 @@
     "@sap/hdi-deploy": "^3.11.6"
   },
   "engines": {
-    "node": "^8"
+    "node": "^10"
   },
   "scripts": {
     "postinstall": "node .build.js",
