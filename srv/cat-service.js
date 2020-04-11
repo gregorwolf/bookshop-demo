@@ -37,7 +37,7 @@ module.exports = (srv) => {
   srv.after('READ', Books, (each)=>{
     if(typeof each.author !== 'undefined') {
       if(each.author !== null) {
-        each.semanticURLtoAuthor = '#Authors-manage?ID=' + each.author.ID
+        each.semanticURLtoAuthor = '#Authors-display?ID=' + each.author.ID
       }
       // console.log(each.semanticURLtoAuthor)
     }

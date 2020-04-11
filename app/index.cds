@@ -60,14 +60,14 @@ annotate my.Books with @(
 				$Type:'UI.DataFieldWithIntentBasedNavigation', 
 				Value: title, 
 				SemanticObject: 'Books',
-				Action: 'manage'
+				Action: 'display'
 			},
 			{
 				$Type:'UI.DataFieldWithUrl',
 				Value: author.name,
 				Url: semanticURLtoAuthor,
 				SemanticObject: 'Authors',
-				Action: 'manage'
+				Action: 'display'
 			},
 			{Value: stock},
 			{Value: price},
@@ -101,7 +101,7 @@ annotate my.Books with @(
 				Value: author.ID,
 				Label:'{i18n>Author}',
 				SemanticObject: 'Authors',
-				Action: 'manage'
+				Action: 'display'
 			}
 
 		]
