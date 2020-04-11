@@ -17,7 +17,7 @@ const port = process.env.PORT || 4004;
   app.use('/appconfig', express.static('app/webapp/appconfig/'))
 
   app.get('/', function(req, res) {
-    res.redirect('/app/fiori-local.html')
+    res.redirect('/app/fiori.html')
   })
 
   await cds.connect('db') // ensure database is connected!
