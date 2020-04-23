@@ -13,9 +13,9 @@
   ],
   "dependencies": {
     "@sap/cds": "3.33.1",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.4.22",
-    "@sap/hana-client": "^2.4.191",
-    "@sap/logging": "^5.2.0",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.4.26",
+    "@sap/hana-client": "^2.4.194",
+    "@sap/logging": "^5.3.0",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "helmet": "^3.22.0",
