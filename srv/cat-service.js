@@ -33,6 +33,15 @@ module.exports = (srv) => {
     return mysql.run (SELECT.from(BusinessPartner))
   })
   */
+  srv.before('READ', Books, async req => {
+    console.log("before READ Books: " + JSON.stringify(req.data))
+    var logonName = req.attr.userInfo.logonName
+    if(logonName === 'error@example.com') {
+      req.error(403, `user ${logonName} isn't assigned to any role`)
+    } else {
+      return
+    }
+  })
 
   srv.after('READ', Books, (each)=>{
     if(typeof each.author !== 'undefined') {
