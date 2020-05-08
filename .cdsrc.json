@@ -63,6 +63,17 @@
                             "openid"
                         ]
                     }
+                },
+                "error": {
+                    "jwt": {
+                        "userInfo": {
+                            "logonName": "error@example.com"
+                        },
+                        "scopes": [
+                            "authenticated-user",
+                            "openid"
+                        ]
+                    }
                 }
             }
         }
