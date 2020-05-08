@@ -5,17 +5,19 @@ module.exports = (srv) => {
   srv.on('getNumberOfBooksForDynamicTile', req => {
     console.log("getNumberOfBooksForDynamicTile: " + JSON.stringify(req.data))
     return {
-      icon : "sap-icon://travel-expense",
-      info : "Quarter Ends!",
-      infoState : "Critical",
-      number : "43.33",
-      numberDigits : 1,
-      numberFactor : "k",
-      numberState : "Positive",
-      numberUnit : "EUR",
-      stateArrow : "Up",
-      subtitle : "Quarterly overview",
-      title : "Travel Expenses"
+      "d": {
+        icon : "sap-icon://travel-expense",
+        info : "Quarter Ends!",
+        infoState : "Critical",
+        number : "43.33",
+        numberDigits : 1,
+        numberFactor : "k",
+        numberState : "Positive",
+        numberUnit : "EUR",
+        stateArrow : "Up",
+        subtitle : "Quarterly overview",
+        title : "Travel Expenses"
+      }
     }
   })
 
