@@ -126,6 +126,7 @@ annotate my.Books with @(
   		TypeName: '{i18n>Book}',
   		TypeNamePlural: '{i18n>Books}',
   		Title: {Value: title},
+			ImageUrl: 'https://raw.githubusercontent.com/gregorwolf/bookshop-demo/master/tests/Test.png',
   		Description: {Value: author.name}
   	},
 	}
