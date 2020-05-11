@@ -33,6 +33,7 @@
     "setup": "npm install && npm run deploy",
     "deploy": "cds deploy db --to sqlite:db/bookshop.db",
     "deploy:cf": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar",
+    "deploy:xsa": "xs deploy mta_archives/bookshop-demo_0.0.1.mtar",
     "build": "cds build/all --clean",
     "build:xs-security": "cds compile srv/ --to xsuaa  > xs-security.json",
     "build:cf": "mbt build -p=cf",
