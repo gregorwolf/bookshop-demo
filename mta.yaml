@@ -51,9 +51,6 @@ modules:
 
 resources:
   - name: bookshop-demo-db-hdi-container
-    parameters:
-      service: hanatrial
-      service-plan: hdi-shared
     type: com.sap.xs.hdi-container
     properties:
       hdi-container-name: ${service-name}
