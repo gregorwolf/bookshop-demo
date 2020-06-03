@@ -7,13 +7,17 @@ GET http://localhost:4004/v2/catalog/
 GET http://localhost:4004/catalog/
 
 ### Read Books with Author details via OData V4 by admin
-http://localhost:4004/catalog/Books?$expand=author
+GET http://localhost:4004/catalog/Books?$expand=author
 Authorization: Basic YWRtaW46
 
 ### Read Books with Author details via OData V2 by admin
-http://localhost:4004/v2/catalog/Books?$expand=author
+GET http://localhost:4004/v2/catalog/Books?$expand=author
 Authorization: Basic YWRtaW46
 
 ### Read Authors with Books details via OData V2 by admin
-http://localhost:4004/v2/catalog/Authors?$expand=books
+GET http://localhost:4004/v2/catalog/Authors?$expand=books
 Authorization: Basic YWRtaW46
+
+### Read number of books for dynamic tile
+GET http://localhost:4004/v2/catalog/getNumberOfBooksForDynamicTile
+Authorization: Basic bob:
