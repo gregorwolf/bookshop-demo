@@ -8,7 +8,7 @@ using from './webapp/approval/fiori-service';
 using from './webapp/browse/fiori-service';
 using from './webapp/orders/fiori-service';
 using from './webapp/role/fiori-service';
-
+using from './webapp/users/fiori-service';
 
 // 2) fiori annotations common to all apps...
 using my.bookshop as my from '../db/schema';

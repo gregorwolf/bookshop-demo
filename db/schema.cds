@@ -98,7 +98,8 @@ entity OrderShippingAddress : cuid, managed {
 
 entity Users {
   key username : String @( title: 'Username', );
-  address           : Composition of Address on address.parent=$self;
+  address      : Composition of Address on address.parent=$self;
+  role         : Association to Roles;
 };
 
 entity Address : cuid, managed {
@@ -106,7 +107,6 @@ entity Address : cuid, managed {
   street : String(60) @( title: 'Street', );
   city : String(60) @( title: 'City', );
 };
-
 
 entity BusinessObjects {
   key ID   : BusinessObject;

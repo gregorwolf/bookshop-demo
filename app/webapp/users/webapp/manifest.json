@@ -1,0 +1,113 @@
+{
+    "_version": "1.8.0",
+    "sap.app": {
+        "id": "users",
+        "type": "application",
+        "title": "Manage User",
+        "description": "User Management",
+        "i18n": "i18n/i18n.properties",
+        "dataSources": {
+            "AdminService": {
+                "uri": "/admin/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "4.0"
+                }
+            }
+        },
+        "-sourceTemplate": {
+            "id": "ui5template.basicSAPUI5ApplicationProject",
+            "-id": "ui5template.smartTemplate",
+            "-version": "1.40.12"
+        },
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "tags": {
+            "keywords": []
+        },
+        "offline": false        
+    },
+    "sap.ui5": {
+        "dependencies": {
+            "libs": {
+                "sap.fe": {}
+            }
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "": {
+                "dataSource": "AdminService",
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect" : true,
+                    "earlyRequests": true,
+                    "groupProperties": {
+                        "default": {
+                          "submit": "Auto"
+                        }
+                    }
+                }
+            }
+        },
+        "routing": {
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "UsersList",
+                    "target": "UsersList"
+                },
+                {
+                    "pattern": "Users({key}):?query:",
+                    "name": "UsersDetails",
+                    "target": "UsersDetails"
+                }
+            ],
+            "targets": {
+                "UsersList": {
+                    "type": "Component",
+                    "id": "UsersList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings" : {
+                            "entitySet" : "Users",
+                            "navigation" : {
+                                "Users" : {
+                                    "detail" : {
+                                        "route" : "UsersDetails"
+                                        }
+                                }
+                            }
+                        }
+                    }
+                },
+                "UsersDetails": {
+                    "type": "Component",
+                    "id": "UsersDetails",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings" : {
+                            "entitySet" : "Users"
+                        }
+                    }
+                }
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "fullWidth": false
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}

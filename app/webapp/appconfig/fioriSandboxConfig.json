@@ -68,6 +68,18 @@
                                     }
                                 },
                                 {
+                                    "id": "Users",
+                                    "title": "Users",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V2catalogTile_Users",
+                                        "title": "Users",
+                                        "info": "Management",
+                                        "targetURL": "#Users-manage"
+                                    }
+                                },
+                                {
                                     "id": "Approvals",
                                     "title": "Approvals",
                                     "size": "1×1",
@@ -161,6 +173,18 @@
                                         "title": "Role",
                                         "info": "Management",
                                         "targetURL": "#V4Role-manage"
+                                    }
+                                },
+                                {
+                                    "id": "Users",
+                                    "title": "Users",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V4catalogTile_Users",
+                                        "title": "Users",
+                                        "info": "Management",
+                                        "targetURL": "#V4Users-manage"
                                     }
                                 },
                                 {
@@ -344,6 +368,34 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=v2.role",
                                 "url": "v2/role"
+                            }
+                        },
+                        "actionUsers": {
+                            "semanticObject": "V4Users",
+                            "action": "manage",
+                            "title": "Users",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=users",
+                                "url": "users/webapp"
+                            }
+                        },
+                        "actionV2Users": {
+                            "semanticObject": "Users",
+                            "action": "manage",
+                            "title": "Users",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=v2.users.admin",
+                                "url": "v2/users-admin"
                             }
                         },
                         "actionV2Approvals": {

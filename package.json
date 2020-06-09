@@ -29,11 +29,11 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "setup": "npm install && npm run deploy",
+    "setup": "npm install && npm run deploy && npm run build && npm run startv2",
     "deploy": "cds deploy db --to sqlite:db/bookshop.db",
     "deploy:cf": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext",
     "deploy:xsa": "xs deploy mta_archives/bookshop-demo_0.0.1.mtar",
-    "build": "cds build/all --clean",
+    "build": "cds build/all --clean && npm run build:swagger",
     "build:xs-security": "cds compile srv/ --to xsuaa  > xs-security.json",
     "build:cf": "mbt build -p=cf",
     "build:xsa": "mbt build -p=xsa",
