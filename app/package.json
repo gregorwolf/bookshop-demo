@@ -6,7 +6,7 @@
     "@sap/grunt-sapui5-bestpractice-build": "1.4.2"
   },
   "dependencies": {
-    "@sap/approuter": "7.1.1"
+    "@sap/approuter": "8.1.0"
   },
   "engines": {
     "node": "^10"
