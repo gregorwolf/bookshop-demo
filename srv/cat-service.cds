@@ -18,7 +18,12 @@ service CatalogService {
   }
   
   @Capabilities.SearchRestrictions.Searchable: true
-  @readonly entity Books as projection on db.Books excluding {
+  @readonly entity Books @(		
+    Capabilities: {
+			InsertRestrictions: {Insertable: true, Permissions:[{Scopes:[{Scope:'admin'}]}]},
+			UpdateRestrictions: {Updatable: true},
+			DeleteRestrictions: {Deletable: true}
+		},) as projection on db.Books excluding {
     createdBy, modifiedBy
   };
   // OData Structure for Dynamic App Launchers
