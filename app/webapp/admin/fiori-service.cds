@@ -13,6 +13,7 @@ annotate AdminService.Books with @(
 		],
 		FieldGroup#General: {
 			Data: [
+				{Value: ID},
 				{Value: title},
 				{Value: author_ID},
 				{Value: descr},

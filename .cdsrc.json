@@ -38,7 +38,8 @@
                         },
                         "scopes": [
                             "admin",
-                            "roleadmin"
+                            "roleadmin",
+                            "booksadmin"
                         ]
                     }
                 },

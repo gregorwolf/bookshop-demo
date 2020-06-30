@@ -3,7 +3,16 @@ using my.bookshop as db from '../db/schema';
 service AdminService @(requires:'admin') {
   @odata.draft.enabled
   entity Approval as projection on db.Approval;
-  entity Books as projection on db.Books;
+  entity Books @(		
+    restrict: [ 
+      { grant: 'READ', to: 'admin' },
+      { grant: '*', to: 'booksadmin' },
+    ],
+    Capabilities: {
+      InsertRestrictions: {Permissions:[{Scopes:[{Scope:'booksadmin'}]}]},
+      UpdateRestrictions: {Updatable: true},
+      DeleteRestrictions: {Deletable: true}
+    },) as projection on db.Books;
   entity Images as projection on db.Images;
   // view BooksAnalytics as select from db.BooksAnalytics;
   entity Authors as projection on db.Authors;
