@@ -11,10 +11,10 @@ If you don't have Docker installed **you can of course develop within you local 
 
 * get [_Node.js_](https://nodejs.org/en/) v12 or higher
 * get [_sqlite_](https://www.sqlite.org/download.html) (Windows only; pre-installed on Mac/Linux)
-* _npm set @sap:registry_ to the latest _nexus snapshots_:
+* As SAP has depricated their own NPM registry please remove the setting in your npm config with the following command
 
 ```sh
-npm set @sap:registry=https://npm.sap.com
+npm config rm @sap:registry
 ```
 
 ## Setup
