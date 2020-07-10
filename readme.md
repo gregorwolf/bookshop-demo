@@ -11,7 +11,7 @@ If you don't have Docker installed **you can of course develop within you local 
 
 * get [_Node.js_](https://nodejs.org/en/) v12 or higher
 * get [_sqlite_](https://www.sqlite.org/download.html) (Windows only; pre-installed on Mac/Linux)
-* As SAP has depricated their own NPM registry please remove the setting in your npm config with the following command
+* As SAP has deprecated their own NPM registry please remove the setting in your npm config with the following command
 
 ```sh
 npm config rm @sap:registry
