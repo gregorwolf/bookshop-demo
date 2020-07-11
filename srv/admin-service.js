@@ -79,8 +79,9 @@ module.exports = (srv) => {
 		console.log(req.params[0])
 		var msgInfo = {
 			code: "SY001",
-			message: "Oder is consistent",
-			numericSeverity: 1
+			message: "Order is consistent",
+			numericSeverity: 1,
+			persistent: true
 		}
 		var msgError = {
 			code: "SY002",
@@ -88,9 +89,12 @@ module.exports = (srv) => {
 			numericSeverity: 4
 		}
 		if(req.params[0] === "7e2f2640-6866-4dcf-8f4d-3027aa831cad") {
-			req.info(msgInfo)
-		} else {
 			req.error(msgError)
+		} else {
+			if(req.params[0] === "d3924131-0870-44bc-b0c1-2ea3808cda5a") {
+				msgInfo.code = "OSS001"
+			}
+			req.info(msgInfo)
 		}
 		return {}
 	})

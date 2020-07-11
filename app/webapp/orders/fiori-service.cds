@@ -19,6 +19,7 @@ annotate AdminService.Orders with @(
 		//
 		SelectionFields: [ createdAt, createdBy ],
 		LineItem: [
+			{Value: OrderNo, Label:'Order Number'},
 			{Value: createdBy, Label:'Customer'},
 			{Value: total, Label: 'Order Value' },
 			{Value: createdAt, Label:'Date'},
