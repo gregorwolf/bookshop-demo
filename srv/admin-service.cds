@@ -17,7 +17,10 @@ service AdminService @(requires:'admin') {
   // view BooksAnalytics as select from db.BooksAnalytics;
   entity Authors as projection on db.Authors;
 
-  entity Orders as select from db.Orders;
+  entity Orders as select from db.Orders
+    actions {
+      action checkConsistency();
+    };
   annotate Orders with @odata.draft.enabled;
 
   //------- auto-exposed --------

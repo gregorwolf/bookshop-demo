@@ -21,7 +21,13 @@ annotate AdminService.Orders with @(
 		LineItem: [
 			{Value: createdBy, Label:'Customer'},
 			{Value: total, Label: 'Order Value' },
-			{Value: createdAt, Label:'Date'}
+			{Value: createdAt, Label:'Date'},
+			{
+				$Type: 'UI.DataFieldForAction', 
+				Label:'{i18n>checkConsistency}', 
+				Action:'AdminService.Orders/Orders_checkConsistency', 
+				Inline: true
+			}
 		],
 		////////////////////////////////////////////////////////////////////////////
 		//

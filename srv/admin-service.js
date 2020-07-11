@@ -1,6 +1,6 @@
 module.exports = (srv) => {
 
-	const { Role_BusinessObject, Role_User } = srv.entities
+	const { Role_BusinessObject, Role_User, Orders } = srv.entities
 
 	srv.before('READ', [ ], async req => {
 		var targetName = req.target.name
@@ -74,6 +74,27 @@ module.exports = (srv) => {
 		]
 		return users;
 	})
+
+	srv.on("checkConsistency", Orders, req => {
+		console.log(req.params[0])
+		var msgInfo = {
+			code: "SY001",
+			message: "Oder is consistent",
+			numericSeverity: 1
+		}
+		var msgError = {
+			code: "SY002",
+			message: "Order is not consistent",
+			numericSeverity: 4
+		}
+		if(req.params[0] === "7e2f2640-6866-4dcf-8f4d-3027aa831cad") {
+			req.info(msgInfo)
+		} else {
+			req.error(msgError)
+		}
+		return {}
+	})
+	
 /*
 	srv.on('UPDATE','Books', req => {
 		var where = req.query.UPDATE.where;
