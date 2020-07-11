@@ -24,7 +24,7 @@
     "sap.ui5": {
         "dependencies": {
             "libs": {
-                "sap.fe.templates": {}
+                "sap.fe": {}
             }
         },
         "models": {
@@ -119,7 +119,7 @@
     },
     "sap.ui": {
         "technology": "UI5",
-        "fullWidth": false
+        "fullWidth": true
     },
     "sap.fiori": {
         "registrationIds": [],

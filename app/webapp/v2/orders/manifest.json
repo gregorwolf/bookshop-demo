@@ -92,7 +92,13 @@
 			}
 		},
 		"extends": {
-			"extensions": {}
+			"extensions": {
+				"sap.ui.controllerExtensions": {
+					 "sap.suite.ui.generic.template.ListReport.view.ListReport": {
+							"controllerName": "v2.orders.ext.controller.ListReportExtension"
+					 }
+				}
+		  }
 		},
 		"contentDensities": {
 			"compact": true,
