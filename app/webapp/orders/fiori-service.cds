@@ -45,6 +45,12 @@ annotate AdminService.Orders with @(
 			{Value: createdBy, Label:'Customer'},
 			{Value: createdAt, Label:'Date'},
 			{Value: OrderNo },
+			{
+				$Type: 'UI.DataFieldForAction', 
+				Label:'{i18n>checkConsistency}', 
+				Action:'AdminService.Orders/Orders_checkConsistency', 
+				Inline: true
+			},
 		],
 		HeaderFacets: [
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Created}', Target: '@UI.FieldGroup#Created'},
