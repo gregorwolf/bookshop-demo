@@ -58,7 +58,7 @@
 			"extensions": {
 				"sap.ui.controllerExtensions": {
 					 "sap.suite.ui.generic.template.ListReport.view.ListReport": {
-							"controllerName": "v2.books.admin.ext.controller.ListReportExtension"
+							"controllerName": "v2.users.admin.ext.controller.ListReportExtension"
 					 }
 				}
 		  }

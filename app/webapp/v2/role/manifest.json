@@ -54,7 +54,9 @@
 		},
 		"dependencies": {
 			"minUI5Version": "1.38.34",
-			"libs": {},
+			"libs": {
+				"sap.fe": {}
+			},
 			"components": {}
 		},
 		"models": {
@@ -109,7 +111,7 @@
 		},
 		"pages": {
 			"ListReport|Role": {
-				"entitySet": "Role",
+				"entitySet": "Roles",
 				"component": {
 					"name": "sap.suite.ui.generic.template.ListReport",
 					"list": true,
@@ -121,7 +123,7 @@
 				},
 				"pages": {
 					"ObjectPage|Role": {
-						"entitySet": "Role",
+						"entitySet": "Roles",
 						"component": {
 							"name": "sap.suite.ui.generic.template.ObjectPage"
 						}
