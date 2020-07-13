@@ -1,7 +1,15 @@
 // load modules
 const express = require('express')
 const cds = require('@sap/cds')
+const helmet = require("helmet")
 const proxy = require('@sap/cds-odata-v2-adapter-proxy')
+// For authentication test
+const passport = require("passport")
+const xsenv = require("@sap/xsenv")
+xsenv.loadEnv();
+const JWTStrategy = require("@sap/xssec").JWTStrategy
+const services = xsenv.getServices({ xsuaa: { tags: "xsuaa" }})
+passport.use(new JWTStrategy(services.xsuaa))
 
 // config
 const host = process.env.HOST || '0.0.0.0'
@@ -11,6 +19,19 @@ const csn = 'gen/csn.json'
 ;(async () => {
   // create new app
   const app = express()
+  app.use(helmet())
+  // Authentication using JWT
+  await app.use(passport.initialize())
+  await app.use(
+    passport.authenticate("JWT", { session: false })
+  )
+  await app.get("/api/userInfo", function (req, res) {
+    if(req.user) {
+      res.json(req.user)
+    } else {
+      res.status(500).json('No user information available')
+    }
+  })
 
   await cds.connect('db') // ensure database is connected!
   // serve odata v4

@@ -8,11 +8,25 @@
             "type": "node",
             "request": "launch",
             "name": "v2server",
-            "env": {"DEBUG":"yes"},
+            "env": {"DEBUG":"*"},
             "skipFiles": [
               "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/v2server"
+        },
+        {
+          "type": "node",
+          "request": "launch",
+          "name": "srv/v2server",
+          "env": {
+            "XS_APP_LOG_LEVEL":"DEBUG",
+            "DEBUG":"X",
+          },
+          "skipFiles": [
+            "<node_internals>/**"
+          ],
+          "program": "${workspaceFolder}/srv/v2server",
+          "cwd": "${workspaceFolder}/srv"
         },
         {
             "type": "node", "request": "launch",

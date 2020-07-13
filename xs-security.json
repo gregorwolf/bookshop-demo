@@ -7,6 +7,10 @@
       "description": "admin"
     },
     {
+      "name": "$XSAPPNAME.booksadmin",
+      "description": "booksadmin"
+    },
+    {
       "name": "$XSAPPNAME.roleadmin",
       "description": "roleadmin"
     }
@@ -18,6 +22,14 @@
       "description": "generated",
       "scope-references": [
         "$XSAPPNAME.admin"
+      ],
+      "attribute-references": []
+    },
+    {
+      "name": "booksadmin",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.booksadmin"
       ],
       "attribute-references": []
     },

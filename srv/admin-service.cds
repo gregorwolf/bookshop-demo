@@ -48,9 +48,10 @@ service AdminService @(requires:'admin') {
   entity Address as projection on db.Address;
 
 	@readonly
-	entity User {
-		key username:      String;
-			is_admin:        Boolean;
-			is_roleadmin:    Boolean;
-	};
+	entity UserScopes {
+    key username:    String;
+      is_admin:      Boolean;
+      is_roleadmin:  Boolean;
+      is_booksadmin: Boolean;
+  };
 }

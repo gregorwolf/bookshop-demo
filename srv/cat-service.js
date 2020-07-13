@@ -35,7 +35,7 @@ module.exports = (srv) => {
   */
   srv.before('READ', Books, async req => {
     console.log("before READ Books: " + JSON.stringify(req.data))
-    var logonName = req.attr.userInfo.logonName
+    var logonName = req.user.id
     if(logonName === 'error@example.com') {
       req.error(403, `user ${logonName} isn't assigned to any role`)
     } else {
@@ -52,4 +52,15 @@ module.exports = (srv) => {
     }
   })
 
+  srv.on('READ', 'UserScopes', async req => { 
+    const users = [
+      {
+        username: req.user.id,
+        is_admin: req.user.is('admin'),
+        is_roleadmin: req.user.is('roleadmin'),
+        is_booksadmin: req.user.is('booksadmin')
+      }
+    ]
+    return users
+  })
 }

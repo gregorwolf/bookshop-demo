@@ -37,6 +37,15 @@ service CatalogService {
 
   // @readonly entity BusinessPartner as projection on bp.BusinessPartner;
 
-  @requires: 'authenticated-user'
+  @requires_: 'authenticated-user'
   @insertonly entity Orders as projection on db.Orders;
+
+  @requires_: 'authenticated-user'
+  @readonly
+  entity UserScopes {
+    key username:    String;
+      is_admin:      Boolean;
+      is_roleadmin:  Boolean;
+      is_booksadmin: Boolean;
+  };
 }

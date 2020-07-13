@@ -64,19 +64,20 @@ module.exports = (srv) => {
 
 	})
 
-	srv.on('READ', 'User', req => {
+	srv.on('READ', 'UserScopes', req => {
 		const users = [
 			{
-				username:     req.user.id,
-				is_admin:     req.user.is("admin"),
-				is_roleadmin: req.user.is("roleadmin"),
+				username:      req.user.id,
+				is_admin:      req.user.is('admin'),
+				is_roleadmin:  req.user.is('roleadmin'),
+				is_booksadmin: req.user.is('booksadmin')
 			}
 		]
 		return users;
 	})
 
 	srv.on("checkConsistency", Orders, req => {
-		console.log(req.params[0])
+		console.log("checkConsistency - Request Parameters:", req.params[0])
 		var msgInfo = {
 			code: "SY001",
 			message: "Order is consistent",
@@ -88,10 +89,11 @@ module.exports = (srv) => {
 			message: "Order is not consistent",
 			numericSeverity: 4
 		}
-		if(req.params[0] === "7e2f2640-6866-4dcf-8f4d-3027aa831cad") {
+		var orderId = req.params[0].ID
+		if(orderId === "7e2f2640-6866-4dcf-8f4d-3027aa831cad") {
 			req.error(msgError)
 		} else {
-			if(req.params[0] === "d3924131-0870-44bc-b0c1-2ea3808cda5a") {
+			if(orderId === "d3924131-0870-44bc-b0c1-2ea3808cda5a") {
 				msgInfo.code = "OSS001"
 			}
 			req.info(msgInfo)

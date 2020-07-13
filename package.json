@@ -44,7 +44,9 @@
     "build:deploy:startv2": "npm run build && npm run deploy && npm run build:swagger && node v2server",
     "startv2": "node v2server",
     "watch": "nodemon -w . -i node_modules/**,.git/** -e cds -x npm run start",
-    "test": "jest"
+    "test": "jest",
+    "update:cf:uaa": "cf update-service bookshop-demo-uaa -c xs-security.json",
+    "undeploy:cf": "cf undeploy bookshop-demo --delete-services --delete-service-brokers"
   },
   "cds": {
     "requires": {
