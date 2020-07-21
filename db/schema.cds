@@ -6,13 +6,15 @@ annotate BusinessObject with @(
   title       : '{i18n>BusinessObject}',
   description : '{i18n>BusinessObject.Description}'
 );
-
+/** 
+Entity to store change requests for entities JSON serialized.
+*/
 entity Approval : managed, cuid {
     approver              : User         @( title: 'Approver',);
     changedEntity         : String(255)  @( title: 'Changed Entity', );
     changedEntityKey      : LargeString  @( title: 'Changed Entity Key', );
     changedEntityData     : LargeString  @( title: 'Changed Entity Data', );
-    testDecimalFload      : DecimalFloat @( title: 'Test Decimal Float', );
+    testDecimalFloat      : DecimalFloat @( title: 'Test Decimal Float', );
     testDecimal           : Decimal(9,2) @( title:'Test Decimal (9,2)' );
 
     status                : String(1) 
