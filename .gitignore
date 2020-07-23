@@ -26,6 +26,7 @@ mergedManifestDescriptor.json
 APIExternalProducer.js
 .*/APIExternalProducer.js
 /mta_archives/
+/mta-op*
 Makefile*
 db/bookshop.db-journal
 preview.json
