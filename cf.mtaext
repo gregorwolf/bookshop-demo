@@ -3,6 +3,6 @@ ID: bookshop-demo.extension
 extends: bookshop-demo
 
 resources:
-  - name: bookshop-demo-db-hdi-container
+  - name: bookshop-demo-db-service
     parameters:
       service: hanatrial

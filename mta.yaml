@@ -8,17 +8,17 @@ modules:
   - name: bookshop-demo-db
     type: hdb
     path: db
-    build-parameters:
+#    build-parameters:
 #      ignore: ["node_modules/"]
     parameters:
       memory: 256M
       disk-quota: 256M
     requires:
-      - name: bookshop-demo-db-hdi-container
+      - name: bookshop-demo-db-service
   - name: bookshop-demo-srv
     type: nodejs
     path: srv
-    build-parameters:
+#    build-parameters:
 #      ignore: ["node_modules/"]
     parameters:
       memory: 256M
@@ -28,13 +28,13 @@ modules:
         properties:
           url: ${default-url}
     requires:
-      - name: bookshop-demo-db-hdi-container
+      - name: bookshop-demo-db-service
       - name: bookshop-demo-uaa
 
   - name: bookshop-demo-app
     type: nodejs
     path: app
-    build-parameters:
+#    build-parameters:
 #      ignore: ["node_modules/"]
     parameters:
       memory: 256M
@@ -50,7 +50,7 @@ modules:
           url: ~{url}
 
 resources:
-  - name: bookshop-demo-db-hdi-container
+  - name: bookshop-demo-db-service
     type: com.sap.xs.hdi-container
     properties:
       hdi-container-name: ${service-name}
