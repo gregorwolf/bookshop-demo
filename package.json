@@ -32,6 +32,7 @@
     "setup": "npm install && npm run deploy && npm run build && npm run startv2",
     "deploy": "cds deploy db --to sqlite:db/bookshop.db",
     "deploy:cf": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext",
+    "deploy:cf-hana-cloud": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf-hana-cloud.mtaext",
     "deploy:xsa": "xs deploy mta_archives/bookshop-demo_0.0.1.mtar",
     "build": "cds build/all --clean && npm run build:swagger",
     "build:xs-security": "cds compile srv/ --to xsuaa  > xs-security.json",
@@ -49,6 +50,9 @@
     "undeploy:cf": "cf undeploy bookshop-demo --delete-services --delete-service-brokers"
   },
   "cds": {
+    "hana": {
+      "deploy-format": "hdbtable"
+    },
     "requires": {
       "db": {
         "kind": "sqlite",
