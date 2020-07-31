@@ -37,7 +37,7 @@
                     ],
                     "groups": [
                         {
-                            "id": "books_group",
+                            "id": "ODataV2",
                             "title": "OData V2",
                             "isPreset": true,
                             "isVisible": true,
@@ -145,7 +145,27 @@
                             ]
                         },
                         {
-                            "id": "books_group",
+                            "id": "ODataV2ui5latest",
+                            "title": "OData V2 - Working with UI5 Latest",
+                            "isPreset": true,
+                            "isVisible": true,
+                            "isGroupLocked": false,
+                            "tiles": [
+                                {
+                                    "id": "BooksdisplayUI5latest",
+                                    "title": "Browse Books",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "BooksdisplayUI5latest",
+                                        "title": "Browse Books",
+                                        "info": "The latest books",
+                                        "targetURL": "#Books-displayUI5latest"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": "DataV4",
                             "title": "OData V4",
                             "isPreset": true,
                             "isVisible": true,
@@ -452,6 +472,20 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=v2.books",
                                 "url": "v2/books"
+                            }
+                        },
+                        "actionV2Books": {
+                            "semanticObject": "Books",
+                            "action": "displayUI5latest",
+                            "title": "Browse Books",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=v2.booksUI5latest",
+                                "url": "v2/booksUI5latest"
                             }
                         },
                         "actionV2BooksAdmin": {
