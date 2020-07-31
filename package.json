@@ -14,8 +14,8 @@
   "dependencies": {
     "@sap/cds": "3.34.3",
     "@sap/cds-odata-v2-adapter-proxy": "^1.4.37",
-    "@sap/hana-client": "^2.5.101",
-    "@sap/logging": "^5.3.0",
+    "@sap/hana-client": "^2.5.104",
+    "@sap/logging": "^5.3.1",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "helmet": "^3.23.3",
@@ -24,7 +24,7 @@
     "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
-    "jest": "^26.1.0",
+    "jest": "^26.2.1",
     "sqlite3": "^5.0.0",
     "supertest": "^4.0.2"
   },
@@ -32,6 +32,7 @@
     "setup": "npm install && npm run deploy && npm run build && npm run startv2",
     "deploy": "cds deploy db --to sqlite:db/bookshop.db",
     "deploy:cf": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext",
+    "deploy:cf:app": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-app",
     "deploy:cf-hana-cloud": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf-hana-cloud.mtaext",
     "deploy:xsa": "xs deploy mta_archives/bookshop-demo_0.0.1.mtar",
     "build": "cds build/all --clean && npm run build:swagger",
