@@ -1,0 +1,26 @@
+### Request Access Token
+# @name requestAccessToken
+POST {{$dotenv url}}/oauth/token
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{$dotenv clientid}}
+&client_secret={{$dotenv clientsecret}}
+&grant_type=client_credentials
+&response_type=token
+
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+### Read Security Settings
+GET {{$dotenv apiurl}}/sap/rest/authorization/v2/securitySettings
+Authorization: bearer {{access_token}}
+
+### Set iframeDomains in Security Settings
+PATCH {{$dotenv apiurl}}/sap/rest/authorization/v2/securitySettings
+Authorization: bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "iframeDomains": "{{$dotenv appurl}}"
+}

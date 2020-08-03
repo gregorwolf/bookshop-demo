@@ -33,3 +33,4 @@ preview.json
 cp.project.properties.json
 
 .cds_gen.log
+.env

@@ -39,3 +39,21 @@ npm run startv2
 Open these links in your browser:
 
 * <http://localhost:4004/webapp/fiori.html> &ndash; Fiori Launchpad sandbox
+
+## Allow embedding as an iFrame
+
+Manuel Seeger described the needed steps in [Can't authenticate against HTML-Mashup embedded SCP application in C4C](https://answers.sap.com/questions/13014707/cant-authenticate-against-html-mashup-embedded-scp.html). Here are the concrete steps for this application:
+
+```sh
+cf create-service xsuaa apiaccess bookshop-access
+cf create-service-key bookshop-access bookshop-access-sk
+cf service-key bookshop-access bookshop-access-sk
+```
+
+Store the returned values as Key-Value Pairs in tests/.env. I.e.: 
+
+```
+apiurl="https://api.authentication.us10.hana.ondemand.com"
+```
+
+Also add a variable for appurl which represents the app you want to enable to be embedded in an iFrame. Then run the REST Client Script tests/configure-xsuaa.http.
