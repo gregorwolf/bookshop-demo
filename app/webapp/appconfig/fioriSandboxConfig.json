@@ -460,7 +460,7 @@
                                 "url": "v2/authors-admin"
                             }
                         },
-                        "actionV2Books": {
+                        "actionV2BooksDisplay": {
                             "semanticObject": "Books",
                             "action": "display",
                             "title": "Browse Books",
