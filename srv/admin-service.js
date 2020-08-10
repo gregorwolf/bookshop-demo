@@ -78,6 +78,7 @@ module.exports = (srv) => {
 
 	srv.on("checkConsistency", Orders, req => {
 		console.log("checkConsistency - Request Parameters:", req.params[0])
+		// 1	sap.ui.core.MessageType.Success	Positive feedback - no action required
 		var msgInfo = {
 			code: "SY001",
 			message: "Order is consistent",
@@ -93,10 +94,29 @@ module.exports = (srv) => {
 		if(orderId === "7e2f2640-6866-4dcf-8f4d-3027aa831cad") {
 			req.error(msgError)
 		} else {
-			if(orderId === "d3924131-0870-44bc-b0c1-2ea3808cda5a") {
-				msgInfo.code = "OSS001"
+			switch (orderId) {
+				case "d3924131-0870-44bc-b0c1-2ea3808cda5a":
+					msgInfo.code = "OSS001";
+					break;
+				case "d3924131-0870-44bc-b0c1-2ea3808cda5c":
+					// 2	sap.ui.core.MessageType.Information	Additional information - no action required
+					msgInfo.numericSeverity = 2;
+					break;
+				case "d3924131-0870-44bc-b0c1-2ea3808cda5d":
+					// 3	sap.ui.core.MessageType.Warning	Warning - action may be required
+					msgInfo.numericSeverity = 3;
+					break;
+				case "d3924131-0870-44bc-b0c1-2ea3808cda5e":
+					// 4	sap.ui.core.MessageType.Error	Error - action is required
+					msgInfo.numericSeverity = 4;
+					break;
 			}
-			req.info(msgInfo)
+			if(msgInfo.numericSeverity === 3) {
+				req.warn(msgInfo)
+			} else {
+				req.info(msgInfo)
+			}
+			
 		}
 		return {}
 	})
