@@ -56,6 +56,18 @@
                                     }
                                 },
                                 {
+                                    "id": "OrdersNoExt",
+                                    "title": "Orders no Extension",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V2catalogTile_OrdersNoExt",
+                                        "title": "Orders",
+                                        "info": "no Extension",
+                                        "targetURL": "#OrdersNoExt-manage"
+                                    }
+                                },
+                                {
                                     "id": "Role",
                                     "title": "Role",
                                     "size": "1×1",
@@ -346,6 +358,20 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=orders",
                                 "url": "orders/webapp"
+                            }
+                        },
+                        "actionV2OrdersNoExt": {
+                            "semanticObject": "OrdersNoExt",
+                            "action": "manage",
+                            "title": "Orders no Extension",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=v2.orders-no-ext",
+                                "url": "v2/orders-no-ext"
                             }
                         },
                         "actionV2Orders": {
