@@ -4,7 +4,8 @@
   "scopes": [
     {
       "name": "$XSAPPNAME.admin",
-      "description": "admin"
+      "description": "admin",
+      "grant-as-authority-to-apps" : [ "$XSAPPNAME(application, xsappforclientapp)"]
     },
     {
       "name": "$XSAPPNAME.booksadmin",

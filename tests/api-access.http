@@ -1,0 +1,29 @@
+### Get Access Token
+# @name requestAccessToken
+POST {{$dotenv url}}/oauth/token
+Authorization: Basic {{$dotenv clientid}}:{{$dotenv clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+### Read userInfo
+GET {{$dotenv srvurl}}/api/userInfo
+Authorization: bearer {{access_token}}
+
+### Read getData
+GET {{$dotenv srvurl}}/api/getData
+Authorization: bearer {{access_token}}
+
+### Read Books
+GET {{$dotenv srvurl}}/v2/admin/Orders?$top=1
+Accept: application/json
+Authorization: bearer {{access_token}}
+
+### Read Books
+GET {{$dotenv srvurl}}/v2/catalog/Books?$top=1
+Accept: application/json
+Authorization: bearer {{access_token}}
