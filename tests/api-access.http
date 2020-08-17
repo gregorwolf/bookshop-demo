@@ -1,4 +1,4 @@
-### Get Access Token
+### Get Access Token (Cloud Foundry)
 # @name requestAccessToken
 POST {{$dotenv url}}/oauth/token
 Authorization: Basic {{$dotenv clientid}}:{{$dotenv clientsecret}}
@@ -9,6 +9,22 @@ grant_type=client_credentials
 
 ### Fill Variables from Response
 @access_token = {{requestAccessToken.response.body.$.access_token}}
+
+### Get Access Token (HANA)
+# @name requestAccessTokenHANA
+POST {{$dotenv url}}/oauth/token
+Accept: application/json;charset=utf8
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password
+&username={{$dotenv username}}
+&password={{$dotenv password}}
+&client_id={{$dotenv clientid}}
+&client_secret={{$dotenv clientsecret}}
+&response_type=token
+
+### Fill Variables from Response
+@access_token = {{requestAccessTokenHANA.response.body.$.access_token}}
 
 ### Read userInfo
 GET {{$dotenv srvurl}}/api/userInfo
