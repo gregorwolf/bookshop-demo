@@ -57,3 +57,29 @@ apiurl="https://api.authentication.us10.hana.ondemand.com"
 ```
 
 Also add a variable for appurl which represents the app you want to enable to be embedded in an iFrame. Then run the REST Client Script tests/configure-xsuaa.http.
+
+## Allow API Access
+
+[Carlos Roggan](https://people.sap.com/carlos.roggan) providedes a great description in his SAP Community blogpost: [How to call protected app from external app as external user with scope]. For the moment we will not use a separate client app but a REST client script. Follow the next steps to get it working for this project. Start of by creating a separate xsuaa service instance by running:
+
+```sh
+cf create-service xsuaa application xsuaaforclient -c tests/xs-security.json
+```
+
+Then create and display a service key for this xsuaa:
+
+```sh
+cf create-service-key xsuaaforclient xsuaaforclient-sk
+cf service-key xsuaaforclient xsuaaforclient-sk
+```
+
+Store the returned values as Key-Value Pairs for clientid, clientsecret, url in tests/.env. as:
+
+```
+clientid="sb-xsappforclientapp!dsjdfs"
+clientsecret="NbFeh8ibk2zQ="
+url="https://<your-trial-account>trial.authentication.eu10.hana.ondemand.com"
+srvurl="https://<your-trial-account>trial-dev-bookshop-demo-srv.cfapps.us10.hana.ondemand.com"
+```
+
+Then open the REST Client script *tests/api-access.http* in VS Code and run the script with the comment *Get Access Token (Cloud Foundry)*. It should return a valid access_token. Now execute the requests *Read Orders* and *Read Books*. You should see a valid result.

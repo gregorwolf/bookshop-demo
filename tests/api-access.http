@@ -24,22 +24,22 @@ grant_type=password
 &response_type=token
 
 ### Fill Variables from Response
-@access_token = {{requestAccessTokenHANA.response.body.$.access_token}}
+# @access_token = {{requestAccessTokenHANA.response.body.$.access_token}}
 
 ### Read userInfo
 GET {{$dotenv srvurl}}/api/userInfo
-Authorization: bearer {{access_token}}
+Authorization: Bearer {{access_token}}
 
 ### Read getData
 GET {{$dotenv srvurl}}/api/getData
-Authorization: bearer {{access_token}}
+Authorization: Bearer {{access_token}}
 
-### Read Books
+### Read Orders
 GET {{$dotenv srvurl}}/v2/admin/Orders?$top=1
 Accept: application/json
-Authorization: bearer {{access_token}}
+Authorization: Bearer {{access_token}}
 
 ### Read Books
 GET {{$dotenv srvurl}}/v2/catalog/Books?$top=1
 Accept: application/json
-Authorization: bearer {{access_token}}
+Authorization: Bearer {{access_token}}

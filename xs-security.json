@@ -14,6 +14,11 @@
     {
       "name": "$XSAPPNAME.roleadmin",
       "description": "roleadmin"
+    },
+    {
+      "name": "uaa.user",
+      "description": "UAA",
+      "grant-as-authority-to-apps" : [ "$XSAPPNAME(application, xsappforclientapp)"]
     }
   ],
   "attributes": [],
@@ -41,6 +46,13 @@
         "$XSAPPNAME.roleadmin"
       ],
       "attribute-references": []
+    },
+    {
+      "name": "Token_Exchange",
+      "description": "UAA",
+      "scope-references": [
+        "uaa.user"
+      ]
     }
   ]
 }
