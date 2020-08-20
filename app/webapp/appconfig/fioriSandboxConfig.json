@@ -268,6 +268,27 @@
                                     }
                                 }
                             ]
+                        },
+                        {
+                            "id": "DataV4UI5latest",
+                            "title": "OData V4 - Working with UI5 Latest",
+                            "isPreset": true,
+                            "isVisible": true,
+                            "isGroupLocked": false,
+                            "tiles": [
+                                {
+                                    "id": "Role",
+                                    "title": "Role",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V4catalogTile_RoleUI5latest",
+                                        "title": "Role",
+                                        "info": "Management",
+                                        "targetURL": "#V4Role-manageUI5latest"
+                                    }
+                                }
+                            ]
                         }
                     ]
                 }
@@ -400,6 +421,20 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=role",
                                 "url": "role/webapp"
+                            }
+                        },
+                        "actionRoleUI5latest": {
+                            "semanticObject": "V4Role",
+                            "action": "manageUI5latest",
+                            "title": "Role",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=roleUI5latest",
+                                "url": "roleUI5latest/webapp"
                             }
                         },
                         "actionV2Role": {
