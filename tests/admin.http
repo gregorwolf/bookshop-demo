@@ -1,79 +1,84 @@
 ### Read Metadata via OData V4
 http://localhost:4004/admin/$metadata
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
+
+### Read Metadata via OData V2
+http://localhost:4004/v2/admin/$metadata
+Authorization: Basic admin:
+
 ### Read Entitysets via OData V4
 http://localhost:4004/admin/
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 ### Read Entitysets via OData V2
 http://localhost:4004/v2/admin/
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 ### Read Authors via OData V4
 http://localhost:4004/admin/Authors
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 ### Read Authors via OData V2
 http://localhost:4004/v2/admin/Authors
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 ### Read Books via OData V4
 http://localhost:4004/admin/Books
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 ### Read Books via OData V4 by littleadmin
 http://localhost:4004/admin/Books
-Authorization: Basic bGl0dGxlYWRtaW46
+Authorization: Basic bGl0dGxladmin:
 
 ### Read Books via OData V2 by littleadmin
 http://localhost:4004/v2/admin/Books
-Authorization: Basic bGl0dGxlYWRtaW46
+Authorization: Basic bGl0dGxladmin:
 
 ### Read Books via OData V2 by admin
 http://localhost:4004/v2/admin/Books
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 ### Update Book via OData V2 by admin
 PUT http://localhost:4004/v2/admin/Books(1)
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 Content-Type: application/json
 
 { "stock": 15 }
 
 ### Read Approval via OData V2 by admin
 http://localhost:4004/v2/admin/Approval
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 ### Read Roles via OData V2
 http://localhost:4004/v2/admin/Role
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 ### Read Orders via OData V2
 http://localhost:4004/v2/admin/Orders
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 ### Read Order Items via OData V2
 http://localhost:4004/v2/admin/Orders(ID=guid'7e2f2640-6866-4dcf-8f4d-3027aa831cad',IsActiveEntity=true)/Items
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 
 ### Read BusinessObjects assigned to Roles via OData V2
 http://localhost:4004/v2/admin/Role(ID=guid'1e50a05d-aa09-4bd2-b2a5-0d096adb7b8c',IsActiveEntity=true)/BusinessObjects
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 ### Read Roles Expanded to  via OData V2
 http://localhost:4004/v2/admin/Role?$expand=BusinessObjects,Users
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 ### Read Roles Expanded to  via OData V4
 http://localhost:4004/admin/Role?$expand=BusinessObjects,Users
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 ### Read Users Expanded to via OData V4 - 
 http://localhost:4004/admin/Users?$expand=address
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 ### Read Users Expanded to via OData V2
 ### Results in:
 ### An error occurred during serialization of the entity collection. An error occurred during serialization of the entity with the following key(s): username: douglas. The provided data does not fit the type of the navigation property: address.
 http://localhost:4004/v2/admin/Users?$expand=address
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:

@@ -37,6 +37,7 @@ annotate AdminService.Roles with @(
 		],
 
 		Facets: [
+			{$Type: 'UI.ReferenceFacet', Label: 'Authorizations', Target: '@UI.FieldGroup#Authorizations'},
 			{$Type: 'UI.ReferenceFacet', Label: 'Assigned Business Objects', Target: 'BusinessObjects/@UI.LineItem'},
 			{$Type: 'UI.ReferenceFacet', Label: 'Assigned Users', Target: 'Users/@UI.LineItem'},
 		],
@@ -51,6 +52,14 @@ annotate AdminService.Roles with @(
 			Data: [
 				{Value: modifiedBy},
 				{Value: modifiedAt},
+			]
+		},
+		FieldGroup#Authorizations: {
+			Data: [
+				{Value: read},
+				{Value: authcreate},
+        {Value: authupdate},
+        {Value: approve},
 			]
 		},
   }

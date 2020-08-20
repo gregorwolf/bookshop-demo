@@ -29,7 +29,7 @@ service AdminService @(requires:'admin') {
   //> these shall be removed but this would break the Fiori UI
 
   entity Roles 
-  @(restrict: [ { grant: ['READ','WRITE'], to: 'roleadmin' }, ]) 
+  @(restrict: [ { grant: ['*'], to: 'roleadmin' }, ]) 
   as projection on db.Roles;
   annotate Roles with @odata.draft.enabled;	
   //------- auto-exposed --------
