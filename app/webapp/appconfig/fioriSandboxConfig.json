@@ -173,6 +173,18 @@
                                         "info": "The latest books",
                                         "targetURL": "#Books-displayUI5latest"
                                     }
+                                },
+                                {
+                                    "id": "Role",
+                                    "title": "Role",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "catalogTile_RoleUI5latest",
+                                        "title": "Role",
+                                        "info": "Management",
+                                        "targetURL": "#Role-manageUI5latest"
+                                    }
                                 }
                             ]
                         },
@@ -449,6 +461,20 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=v2.role",
                                 "url": "v2/role"
+                            }
+                        },
+                        "actionV2RoleUI5latest": {
+                            "semanticObject": "Role",
+                            "action": "manageUI5latest",
+                            "title": "Role",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=v2.roleUI5latest",
+                                "url": "v2/roleUI5latest"
                             }
                         },
                         "actionUsers": {
