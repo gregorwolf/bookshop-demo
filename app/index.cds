@@ -56,12 +56,14 @@ annotate my.Books with @(
 	  SelectionFields: [ ID, author.name, price, currency_code ],
 		LineItem: [
 			{Value: ID},
+			{Value: title},
 			{
 				$Type:'UI.DataFieldWithIntentBasedNavigation', 
 				Value: title, 
 				SemanticObject: 'Books',
 				Action: 'display'
 			},
+			{Value: author.name},
 			{
 				$Type:'UI.DataFieldWithUrl',
 				Value: author.name,

@@ -301,7 +301,7 @@
                             "isGroupLocked": false,
                             "tiles": [
                                 {
-                                    "id": "Orders",
+                                    "id": "OrdersUI5latest",
                                     "title": "Orders",
                                     "size": "1×1",
                                     "tileType": "sap.ushell.ui.tile.StaticTile",
@@ -313,7 +313,7 @@
                                     }
                                 },
                                 {
-                                    "id": "Role",
+                                    "id": "RoleUI5latest",
                                     "title": "Role",
                                     "size": "1×1",
                                     "tileType": "sap.ushell.ui.tile.StaticTile",
@@ -322,6 +322,18 @@
                                         "title": "Role",
                                         "info": "Management",
                                         "targetURL": "#V4Role-manageUI5latest"
+                                    }
+                                },
+                                {
+                                    "id": "V4BrowseBooksAppUI5latest",
+                                    "title": "Browse Books",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V4catalogTile_001UI5latest",
+                                        "title": "Browse Books",
+                                        "info": "The latest books",
+                                        "targetURL": "#V4Books-displayUI5latest"
                                     }
                                 }
                             ]
@@ -365,6 +377,24 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=bookshop",
                                 "url": "browse/webapp"
+                            },
+                            "indicatorDataSource": {
+                                "path": "catalog/Books/$count",
+                                "refresh": 600
+                            }
+                        },
+                        "actionBooksUI5latest": {
+                            "semanticObject": "V4Books",
+                            "action": "displayUI5latest",
+                            "title": "Browse Books",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=bookshopUI5latest",
+                                "url": "browseUI5latest/webapp"
                             },
                             "indicatorDataSource": {
                                 "path": "catalog/Books/$count",
