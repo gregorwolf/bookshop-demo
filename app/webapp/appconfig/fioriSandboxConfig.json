@@ -164,14 +164,15 @@
                             "isGroupLocked": false,
                             "tiles": [
                                 {
-                                    "id": "BooksdisplayUI5latest",
-                                    "title": "Browse Books",
+                                    "id": "Orders",
+                                    "title": "Orders",
+                                    "size": "1×1",
                                     "tileType": "sap.ushell.ui.tile.StaticTile",
                                     "properties": {
-                                        "chipId": "BooksdisplayUI5latest",
-                                        "title": "Browse Books",
-                                        "info": "The latest books",
-                                        "targetURL": "#Books-displayUI5latest"
+                                        "chipId": "V2catalogTile_OrdersUI5latest",
+                                        "title": "Orders",
+                                        "info": "Management",
+                                        "targetURL": "#Orders-manageUI5latest"
                                     }
                                 },
                                 {
@@ -184,6 +185,17 @@
                                         "title": "Role",
                                         "info": "Management",
                                         "targetURL": "#Role-manageUI5latest"
+                                    }
+                                },
+                                {
+                                    "id": "BooksdisplayUI5latest",
+                                    "title": "Browse Books",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "BooksdisplayUI5latest",
+                                        "title": "Browse Books",
+                                        "info": "The latest books",
+                                        "targetURL": "#Books-displayUI5latest"
                                     }
                                 }
                             ]
@@ -289,6 +301,18 @@
                             "isGroupLocked": false,
                             "tiles": [
                                 {
+                                    "id": "Orders",
+                                    "title": "Orders",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V4catalogTile_OrdersUI5latest",
+                                        "title": "Orders",
+                                        "info": "Management",
+                                        "targetURL": "#V4Orders-manageUI5latest"
+                                    }
+                                },
+                                {
                                     "id": "Role",
                                     "title": "Role",
                                     "size": "1×1",
@@ -393,6 +417,20 @@
                                 "url": "orders/webapp"
                             }
                         },
+                        "actionOrdersUI5latest": {
+                            "semanticObject": "V4Orders",
+                            "action": "manageUI5latest",
+                            "title": "Orders",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=ordersUI5latest",
+                                "url": "ordersUI5latest/webapp"
+                            }
+                        },
                         "actionV2OrdersNoExt": {
                             "semanticObject": "OrdersNoExt",
                             "action": "manage",
@@ -419,6 +457,20 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=v2.orders",
                                 "url": "v2/orders"
+                            }
+                        },
+                        "actionV2OrdersUI5latest": {
+                            "semanticObject": "Orders",
+                            "action": "manageUI5latest",
+                            "title": "Orders",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=v2.ordersUI5latest",
+                                "url": "v2/ordersUI5latest"
                             }
                         },
                         "actionRole": {
