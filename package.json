@@ -33,7 +33,7 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "setup": "run-s install deploy build startv2",
+    "setup": "npm install && run-s deploy build startv2",
     "deploy": "cds deploy db --to sqlite:db/bookshop.db",
     "deploy:cf": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext",
     "deploy:cf:app": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-app",
