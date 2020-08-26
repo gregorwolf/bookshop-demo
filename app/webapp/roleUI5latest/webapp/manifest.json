@@ -107,7 +107,24 @@
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
-                            "entitySet": "Roles"
+                            "entitySet": "Roles",
+                            "navigation": {},
+                            "controlConfiguration": {
+                                "Assigned Business Objects": {
+                                    "tableSettings": {
+                                        "creationMode": {
+                                            "name": "Inline"
+                                        }
+                                    }
+                                },
+                                "Assigned Users": {
+                                    "tableSettings": {
+                                        "creationMode": {
+                                            "name": "Inline"
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
