@@ -27,10 +27,11 @@
   },
   "devDependencies": {
     "@sap/cds-dk": "^2.0.8",
-    "jest": "^26.4.1",
+    "jest": "^26.4.2",
     "sqlite3": "^5.0.0",
     "npm-run-all": "^4.1.5",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "copyfiles": "2.3.0"
   },
   "scripts": {
     "setup": "npm install && run-s deploy build startv2",
@@ -39,15 +40,15 @@
     "deploy:cf:app": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-app",
     "deploy:cf-hana-cloud": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf-hana-cloud.mtaext",
     "deploy:xsa": "xs deploy mta_archives/bookshop-demo_0.0.1.mtar",
-    "build": "cds build/all --clean && npm run build:swagger",
-    "build:xs-security": "cds compile srv/ --to xsuaa  > xs-security.json",
+    "build": "cds build/all --clean && npm run build:swagger && copyfiles -f srv/gen/csn.json standalone-v2-proxy/gen/",
+    "build:xs-security": "cds compile srv/ --to xsuaa > xs-security.json",
     "build:cf": "mbt build -p=cf",
     "build:xsa": "mbt build -p=xsa",
     "build:swagger": "node csn2swgr.js srv/gen/csn.json > srv/gen/swagger.json",
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
     "debugv2": "node --inspect v2server",
     "start": "cds run",
-    "build:deploy:startv2": "run-s build deploy build:swagger startv2",
+    "build:deploy:startv2": "run-s build deploy startv2",
     "startv2": "node v2server",
     "watch": "nodemon -w . -i node_modules/**,.git/** -e cds -x npm run start",
     "test": "jest",
