@@ -1,8 +1,6 @@
 "use strict";
 
 const express = require("express");
-const http = require("http");
-
 const proxy = require("@sap/cds-odata-v2-adapter-proxy");
 
 const host = "0.0.0.0";

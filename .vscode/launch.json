@@ -29,6 +29,20 @@
           "cwd": "${workspaceFolder}/srv"
         },
         {
+          "type": "node",
+          "request": "launch",
+          "name": "standalone-v2-proxy",
+          "env": {
+            "XS_APP_LOG_LEVEL":"DEBUG",
+            "DEBUG":"X",
+          },
+          "skipFiles": [
+            "<node_internals>/**"
+          ],
+          "program": "${workspaceFolder}/standalone-v2-proxy/index",
+          "cwd": "${workspaceFolder}/standalone-v2-proxy"
+        },
+        {
             "type": "node", "request": "launch",
             "name": "cds run V2", "args": [ "run" ],
             "env": {"DEBUG":"yes"},
