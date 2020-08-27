@@ -9,7 +9,7 @@ service AdminService @(requires:'admin') {
       { grant: '*', to: 'booksadmin' },
     ],
     Capabilities: {
-      InsertRestrictions: {Permissions:[{Scopes:[{Scope:'booksadmin'}]}]},
+      InsertRestrictions: {Permissions:[{Scopes:[{Scope:'booksadmin'}], SchemeName: 'Books Admin'}]},
       UpdateRestrictions: {Updatable: true},
       DeleteRestrictions: {Deletable: true}
     },) as projection on db.Books;
