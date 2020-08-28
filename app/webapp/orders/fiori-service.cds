@@ -28,6 +28,12 @@ annotate AdminService.Orders with @(
 				Label:'{i18n>checkConsistency}', 
 				Action:'AdminService.Orders/Orders_checkConsistency', 
 				Inline: true
+			},
+			{
+				$Type: 'UI.DataFieldForAction', 
+				Label:'{i18n>checkConsistencyV4}', 
+				Action:'AdminService.checkConsistency', 
+				Inline: true
 			}
 		],
 		////////////////////////////////////////////////////////////////////////////
