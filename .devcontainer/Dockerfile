@@ -24,7 +24,6 @@ RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
     #
     # Install tslint, typescript. eslint is installed by javascript image
     && sudo -u ${USERNAME} npm install -g typescript \
-    && sudo -u ${USERNAME} npm set @sap:registry=https://npm.sap.com -g\
     && sudo -u ${USERNAME} npm install -g @sap/cds-dk \
     && curl -H "cookie: eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt" -o /tmp/cds.zip https://tools.hana.ondemand.com/additional/vscode-cds-updateSite/vscode-cds-2.2.0.vsix \
     && mkdir -p /tmp/cds \
