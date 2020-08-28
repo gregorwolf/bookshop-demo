@@ -20,7 +20,7 @@ service CatalogService {
   @Capabilities.SearchRestrictions.Searchable: true
   @readonly entity Books @(		
     Capabilities: {
-			InsertRestrictions: {Insertable: true, Permissions:[{Scopes:[{Scope:'admin'}], SchemeName: 'Admin'}]},
+			InsertRestrictions: {Insertable: true, Permissions:[{Scopes:[{Scope:'admin'}]} ]},
 			UpdateRestrictions: {Updatable: true},
 			DeleteRestrictions: {Deletable: true}
 		},) as projection on db.Books excluding {
