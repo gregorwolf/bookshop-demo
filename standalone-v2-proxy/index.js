@@ -15,7 +15,6 @@ const target = process.env.srv_api_url || "http://localhost:4004";
     path: "v2",
     target: target,
     model: "./gen/csn.json",
-    standalone: true,
     services: {
       "/Admin": "AdminService",
       "/Catalog": "CatalogService"
