@@ -6,12 +6,12 @@
 ### Read Pictures
 # curl http://localhost:4004/admin/Images | jq
 GET {{protocol}}://{{host}}:{{port}}/admin/Images
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 ### Create Picture with mediatype
 # curl -X POST http://localhost:4004/admin/Images -H "Accept: application/json" -H "Content-Type: application/json" --data '{ "ID": "da07ae51-d0d3-41e7-a737-2555a213e5a9" }'
 POST {{protocol}}://{{host}}:{{port}}/admin/Images
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 Accept: application/json
 Content-Type: application/json
 
@@ -22,7 +22,7 @@ Content-Type: application/json
 
 ### Create Picture without mediatype
 POST {{protocol}}://{{host}}:{{port}}/admin/Images
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 Accept: application/json
 Content-Type: application/json
 
@@ -33,7 +33,7 @@ Content-Type: application/json
 ### Upload Binary PNG
 # curl -X PUT "http://localhost:4004/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content" -H "image/png" --data-binary @./srv/tests/Test.png
 PUT {{protocol}}://{{host}}:{{port}}/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 Content-Type: image/png
 
 < ./Test.png
@@ -46,14 +46,14 @@ Content-Type: image/png
 ### Read Binary
 # curl "http://localhost:4004/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content"
 GET {{protocol}}://{{host}}:{{port}}/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 ### Read Binary OData V2
 # curl "http://localhost:4004/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/$value"
 GET {{protocol}}://{{host}}:{{port}}/v2/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/$value
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 ### Delete Image
 # curl -X DELETE "http://localhost:4004/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)"
 DELETE {{protocol}}://{{host}}:{{port}}/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:

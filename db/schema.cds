@@ -48,6 +48,7 @@ entity Images {
   @Core.MediaType: 'image/png'
   content : LargeBinary;
   /*
+  content : LargeBinary @Core.MediaType: mediatype;
   @Core.IsMediaType : true
   mediatype : String;
   */
