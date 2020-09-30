@@ -8,8 +8,8 @@ modules:
   - name: bookshop-demo-db
     type: hdb
     path: db
-#    build-parameters:
-#      ignore: ["node_modules/"]
+    build-parameters:
+      ignore: ["node_modules/"]
     parameters:
       memory: 256M
       disk-quota: 256M
@@ -18,8 +18,8 @@ modules:
   - name: bookshop-demo-srv
     type: nodejs
     path: srv
-#    build-parameters:
-#      ignore: ["node_modules/"]
+    build-parameters:
+      ignore: ["node_modules/"]
     parameters:
       memory: 256M
       disk-quota: 1024M
@@ -34,8 +34,8 @@ modules:
   - name: bookshop-demo-v2-proxy
     type: nodejs
     path: standalone-v2-proxy
-#    build-parameters:
-#      ignore: ["node_modules/"]
+    build-parameters:
+      ignore: ["node_modules/"]
     parameters:
       memory: 128M
       disk-quota: 1024M
@@ -51,8 +51,8 @@ modules:
   - name: bookshop-demo-app
     type: nodejs
     path: app
-#    build-parameters:
-#      ignore: ["node_modules/"]
+    build-parameters:
+      ignore: ["node_modules/"]
     parameters:
       memory: 256M
       disk-quota: 1024M
