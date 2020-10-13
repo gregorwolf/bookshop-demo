@@ -139,11 +139,20 @@
 									"Users::com.sap.vocabularies.UI.v1.LineItem": {
 										"navigationProperty": "Users",
 										"entitySet": "Role_User",
-										"createMode": "inline",
 										"tableSettings": {
 											"multiSelect": true
 										}
 									}
+								}
+							}
+						},
+						"pages": {
+							"ObjectPage|Role_User": {
+								"navigationProperty": "Users",
+								"entitySet": "Role_User",
+								"component": {
+									"name": "sap.suite.ui.generic.template.ObjectPage",
+									"settings": {}
 								}
 							}
 						}
