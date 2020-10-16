@@ -116,7 +116,10 @@
 					"settings": {
 						"condensedTableLayout": true,
 						"smartVariantManagement": true,
-						"enableTableFilterInPageVariant": true
+						"enableTableFilterInPageVariant": true,
+						"tableSettings": {
+							"multiSelect": true
+						}
 					}
 				},
 				"pages": {
