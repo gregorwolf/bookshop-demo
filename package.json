@@ -34,7 +34,7 @@
     "copyfiles": "2.4.0"
   },
   "scripts": {
-    "setup": "npm install && run-s deploy build startv2",
+    "setup": "npm install && run-s deploy build start",
     "deploy": "cds deploy db --to sqlite:db/bookshop.db",
     "deploy:cf": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext",
     "deploy:cf:app": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-app",
@@ -46,10 +46,8 @@
     "build:xsa": "mbt build -p=xsa",
     "build:swagger": "node csn2swgr.js srv/gen/csn.json > srv/gen/swagger.json",
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
-    "debugv2": "node --inspect v2server",
     "start": "cds run",
-    "build:deploy:startv2": "run-s build deploy startv2",
-    "startv2": "node v2server",
+    "build:deploy:start": "run-s build deploy start",
     "watch": "nodemon -w . -i node_modules/**,.git/** -e cds -x npm run start",
     "test": "jest",
     "update:cf:uaa": "cf update-service bookshop-demo-uaa -c xs-security.json",
