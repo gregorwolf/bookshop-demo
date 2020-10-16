@@ -1,38 +1,22 @@
-module.exports = (srv) => {
+  
+const cds = require('@sap/cds')
+module.exports = async function (srv) {
+  const db = await cds.connect.to("db");
+  const { Books, Authors } = db.entities("CatalogService");
+  const externalCatalogService = await cds.connect.to("ExtCatalogService");
 
-  const { Books, Authors } = srv.entities
-
-  srv.on('getNumberOfBooksForDynamicTile', req => {
-    console.log("getNumberOfBooksForDynamicTile: " + JSON.stringify(req.data))
-    return {
-      icon : "sap-icon://travel-expense",
-      info : "Quarter Ends!",
-      infoState : "Critical",
-      number : "43.33",
-      numberDigits : 1,
-      numberFactor : "k",
-      numberState : "Positive",
-      numberUnit : "EUR",
-      stateArrow : "Up",
-      subtitle : "Quarterly overview",
-      title : "Travel Expenses"
-    }
+  srv.on('getBooks', async (req) => {
+    var tx = db.transaction(req)
+    var books = await tx.run(SELECT.from(Books).limit(5))
+    return books
   })
 
-  // Sample based on 
-  // https://blogs.sap.com/2019/04/15/annotated-links-episode-15-of-hands-on-sap-dev-with-qmacro/
-  srv.on('hello', req => {
-    console.log("hello: " + JSON.stringify(req.data))
-    return "Hello " + req.data.to
+  srv.on('getBooksFromCatalog', async (req) => {
+    var tx = externalCatalogService.transaction(req)
+    var books = await tx.run(SELECT.from(Books).limit(5))
+    return books
   })
 
-  /*
-  srv.on('READ','BusinessPartner', (req)=>{
-    const mysql = cds.connect.to ('mysql')
-    const { BusinessPartner } = mysql.entities
-    return mysql.run (SELECT.from(BusinessPartner))
-  })
-  */
   srv.before('READ', Books, async req => {
     console.log("before READ Books: " + JSON.stringify(req.data))
     var logonName = req.user.id
@@ -63,4 +47,30 @@ module.exports = (srv) => {
     ]
     return users
   })
+
+
+  srv.on('getNumberOfBooksForDynamicTile', req => {
+    console.log("getNumberOfBooksForDynamicTile: " + JSON.stringify(req.data))
+    return {
+      icon : "sap-icon://travel-expense",
+      info : "Quarter Ends!",
+      infoState : "Critical",
+      number : "43.33",
+      numberDigits : 1,
+      numberFactor : "k",
+      numberState : "Positive",
+      numberUnit : "EUR",
+      stateArrow : "Up",
+      subtitle : "Quarterly overview",
+      title : "Travel Expenses"
+    }
+  })
+
+  // Sample based on 
+  // https://blogs.sap.com/2019/04/15/annotated-links-episode-15-of-hands-on-sap-dev-with-qmacro/
+  srv.on('hello', req => {
+    console.log("hello: " + JSON.stringify(req.data))
+    return "Hello " + req.data.to
+  })
+
 }
