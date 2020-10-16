@@ -1,7 +1,7 @@
 {
   "name": "standalone-v2-proxy",
   "engines": {
-    "node": ">=10.0.0"
+    "node": "^12"
   },
   "dependencies": {
     "@sap/cds": "^4.2.3",

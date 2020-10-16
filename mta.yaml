@@ -12,6 +12,7 @@ build-parameters:
       - npx -p @sap/cds-dk cds build --production
       - npm run build:copycsntoproxy
       - npm run build:OpenAPI
+      - npm run build:copyOpenAPItogen
 
 modules:
   - name: bookshop-demo-db

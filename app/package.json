@@ -10,7 +10,7 @@
     "request": "^2.88.2"
   },
   "engines": {
-    "node": "^10"
+    "node": "^12"
   },
   "scripts": {
     "start": "node node_modules/@sap/approuter/approuter.js"

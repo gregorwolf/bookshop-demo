@@ -5,7 +5,7 @@
   "repository": "https://github.wdf.sap.corp/caps/bookshop.git",
   "license": "ISC",
   "engines": {
-    "node": "^8.9"
+    "node": "^12"
   },
   "files": [
     "db",
@@ -44,8 +44,8 @@
     "build:xs-security": "cds compile srv/ --to xsuaa > xs-security.json",
     "build:cf": "mbt build -p=cf",
     "build:xsa": "mbt build -p=xsa",
-    "build:OpenAPI": "node csn2swgr.js gen/srv/srv/csn.json > gen/srv/srv/OpenAPI.json",
-    "build:copyOpenAPItoproxy": "copyfiles -f gen/srv/srv/OpenAPI.json srv/gen/",
+    "build:OpenAPI": "node csn2swgr.js gen/srv/srv/csn.json > srv/gen/OpenAPI.json",
+    "build:copyOpenAPItogen": "copyfiles -f srv/gen/OpenAPI.json gen/srv/srv/gen/",
     "build:copycsntoproxy": "copyfiles -f gen/srv/srv/csn.json standalone-v2-proxy/gen/",
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
     "start": "cds run",
