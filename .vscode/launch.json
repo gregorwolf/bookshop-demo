@@ -5,30 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "node",
-            "request": "launch",
-            "name": "v2server",
-            "env": {"DEBUG":"*"},
-            "skipFiles": [
-              "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}/v2server"
-        },
-        {
-          "type": "node",
-          "request": "launch",
-          "name": "srv/v2server",
-          "env": {
-            "XS_APP_LOG_LEVEL":"DEBUG",
-            "DEBUG":"X",
-          },
-          "skipFiles": [
-            "<node_internals>/**"
-          ],
-          "program": "${workspaceFolder}/srv/v2server",
-          "cwd": "${workspaceFolder}/srv"
-        },
-        {
           "type": "node",
           "request": "launch",
           "name": "standalone-v2-proxy",
@@ -43,16 +19,20 @@
           "cwd": "${workspaceFolder}/standalone-v2-proxy"
         },
         {
-            "type": "node", "request": "launch",
-            "name": "cds run V2", "args": [ "run" ],
-            "env": {"DEBUG":"yes"},
-            "program": "${workspaceFolder}/.vscode/cds", "skipFiles": [
-                "<node_internals>/**/*.js",
-                "**/cds-reflect/lib/index.js",
-                "**/cds/lib/index.js",
-                "**/.vscode/cds.js",
-            ],
-            "console": "integratedTerminal"
+          "type": "node", 
+          "request": "launch",
+          "name": "cds run", 
+          "args": [ "run" ],
+          "env": {"DEBUG":"yes"},
+          "cwd": "${workspaceFolder}",
+          "program": "${workspaceFolder}/node_modules/@sap/cds/bin/cds.js", 
+          "skipFiles": [
+              "<node_internals>/**/*.js",
+              "**/cds-reflect/lib/index.js",
+              "**/cds/lib/index.js",
+              "**/.vscode/cds.js",
+          ],
+          "console": "internalConsole"
         }
     ]
 }
