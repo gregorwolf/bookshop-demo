@@ -5,6 +5,7 @@ const passport = require("passport")
 const xsenv = require("@sap/xsenv")
 const swaggerUi = require('swagger-ui-express')
 const swaggerSpec = require('./gen/swagger.json')
+const express = require('express')
 
 var xsuaaCredentials
 try {
@@ -39,14 +40,17 @@ const readJwt = function(req){
         const jwtBase64Encoded = theJwtToken.split('.')[1];
         if(jwtBase64Encoded){
            const jwtDecoded = Buffer.from(jwtBase64Encoded, 'base64').toString('ascii');
-           return JSON.parse(jwtDecoded);           
+           return JSON.parse(jwtDecoded);
         }
      }
   }
 }
 
 cds.on('bootstrap', async (app) => {
-  app.use(helmet())
+  app.use('/appconfig', express.static('./app/webapp/appconfig/'))
+  app.use(helmet({
+    contentSecurityPolicy: false,
+  }))
   app.use(proxy())
 
   // Authentication using JWT
