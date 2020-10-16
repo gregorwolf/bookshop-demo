@@ -12,9 +12,13 @@ module.exports = async function (srv) {
   })
 
   srv.on('getBooksFromCatalog', async (req) => {
-    var tx = externalCatalogService.transaction(req)
-    var books = await tx.run(SELECT.from(Books).limit(5))
-    return books
+    try {
+      var tx = externalCatalogService.transaction(req)
+      var books = await tx.run(SELECT.from(Books).limit(5))
+      return books
+    } catch (error) {
+      req.error(error.message)
+    }
   })
 
   srv.before('READ', Books, async req => {
