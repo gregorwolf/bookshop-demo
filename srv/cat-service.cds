@@ -2,7 +2,7 @@ using my.bookshop as db from '../db/schema';
 using my.bp as bp from './external/bp';
 
 @cds.query.limit: 100
-service CatalogService {
+service CatalogService @(impl: 'cat-service.js') {
   type DynamicAppLauncher {
     icon: String;
     info: String;
