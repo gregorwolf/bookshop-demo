@@ -66,12 +66,6 @@
         "credentials": {
           "database": "db/bookshop.db"
         }
-      },
-      "ExtCatalogService": {
-        "kind": "odata",
-        "credentials": {
-          "destination": "CatalogService"
-        }
       }
     },
     "[production]": {

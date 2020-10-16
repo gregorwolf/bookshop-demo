@@ -1,24 +1,14 @@
   
 const cds = require('@sap/cds')
 module.exports = async function (srv) {
-  const db = await cds.connect.to("db");
-  const { Books, Authors } = db.entities("CatalogService");
-  const externalCatalogService = await cds.connect.to("ExtCatalogService");
-
+  const db = await cds.connect.to("db")
+  const { CatalogService } = cds.services
+  const { Books, Authors } = CatalogService.entities
+  
   srv.on('getBooks', async (req) => {
-    var tx = db.transaction(req)
+    var tx = CatalogService.transaction(req)
     var books = await tx.run(SELECT.from(Books).limit(5))
     return books
-  })
-
-  srv.on('getBooksFromCatalog', async (req) => {
-    try {
-      var tx = externalCatalogService.transaction(req)
-      var books = await tx.run(SELECT.from(Books).limit(5))
-      return books
-    } catch (error) {
-      req.error(error.message)
-    }
   })
 
   srv.before('READ', Books, async req => {

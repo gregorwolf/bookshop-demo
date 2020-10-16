@@ -27,7 +27,6 @@ service CatalogService @(impl: './cat-service.js') {
     createdBy, modifiedBy
   };
   function getBooks() returns array of Books;
-  function getBooksFromCatalog() returns array of Books;
   // OData Structure for Dynamic App Launchers
   // https://help.sap.com/viewer/ad4b9f0b14b0458cad9bd27bf435637d/Cloud/en-US/8e7cec3cf6494b09a01d09606119b9dd.html
   function getNumberOfBooksForDynamicTile() returns DynamicAppLauncher;
