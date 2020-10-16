@@ -40,11 +40,13 @@
     "deploy:cf:app": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-app",
     "deploy:cf-hana-cloud": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf-hana-cloud.mtaext",
     "deploy:xsa": "xs deploy mta_archives/bookshop-demo_0.0.1.mtar",
-    "build": "cds build/all --clean && npm run build:swagger && copyfiles -f srv/gen/csn.json standalone-v2-proxy/gen/",
+    "build": "cds build/all --clean && run-s build:OpenAPI build:copycsntoproxy build:copyOpenAPItoproxy",
     "build:xs-security": "cds compile srv/ --to xsuaa > xs-security.json",
     "build:cf": "mbt build -p=cf",
     "build:xsa": "mbt build -p=xsa",
-    "build:swagger": "node csn2swgr.js srv/gen/csn.json > srv/gen/swagger.json",
+    "build:OpenAPI": "node csn2swgr.js gen/srv/srv/csn.json > gen/srv/srv/OpenAPI.json",
+    "build:copyOpenAPItoproxy": "copyfiles -f gen/srv/srv/OpenAPI.json srv/gen/",
+    "build:copycsntoproxy": "copyfiles -f gen/srv/srv/csn.json standalone-v2-proxy/gen/",
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
     "start": "cds run",
     "build:deploy:start": "run-s build deploy start",
@@ -63,6 +65,13 @@
         "model": "db",
         "credentials": {
           "database": "db/bookshop.db"
+        }
+      }
+    },
+    "[production]": {
+      "requires": {
+        "db": {
+          "kind": "hana"
         }
       }
     },

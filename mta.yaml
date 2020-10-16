@@ -3,11 +3,20 @@ _schema-version: "2.1"
 version: 0.0.1
 parameters:
   enable-parallel-deployments: true
+   
+build-parameters:
+  before-all:
+   - builder: custom
+     commands:
+      - npm install --production
+      - npx -p @sap/cds-dk cds build --production
+      - npm run build:copycsntoproxy
+      - npm run build:OpenAPI
 
 modules:
   - name: bookshop-demo-db
     type: hdb
-    path: db
+    path: gen/db
     build-parameters:
       ignore: ["node_modules/"]
     parameters:
@@ -17,7 +26,7 @@ modules:
       - name: bookshop-demo-db-service
   - name: bookshop-demo-srv
     type: nodejs
-    path: srv
+    path: gen/srv
     build-parameters:
       ignore: ["node_modules/"]
     parameters:

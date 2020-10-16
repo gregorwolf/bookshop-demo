@@ -4,7 +4,7 @@ const helmet = require('helmet')
 const passport = require("passport")
 const xsenv = require("@sap/xsenv")
 const swaggerUi = require('swagger-ui-express')
-const swaggerSpec = require('./gen/swagger.json')
+const swaggerSpec = require('./gen/OpenAPI.json')
 const express = require('express')
 
 var xsuaaCredentials

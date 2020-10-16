@@ -1,6 +1,6 @@
 using my.bookshop as db from '../db/schema';
 
-service AdminService @(impl: 'admin-service.js', requires:'admin') {
+service AdminService @(impl: './admin-service.js', requires:'admin') {
   @odata.draft.enabled
   entity Approval as projection on db.Approval;
   entity Books @(		
