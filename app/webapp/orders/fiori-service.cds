@@ -25,14 +25,26 @@ annotate AdminService.Orders with @(
 			{Value: createdAt, Label:'Date'},
 			{
 				$Type: 'UI.DataFieldForAction', 
-				Label:'{i18n>checkConsistency}', 
+				Label:'{i18n>checkConsistency}',
 				Action:'AdminService.Orders/Orders_checkConsistency', 
-				Inline: true
+				Inline: false
 			},
 			{
 				$Type: 'UI.DataFieldForAction', 
 				Label:'{i18n>checkConsistencyV4}', 
 				Action:'AdminService.checkConsistency', 
+				Inline: false
+			},
+			{
+				$Type: 'UI.DataFieldForAction', 
+				Label:'{i18n>checkConsistency}', 
+				Action:'AdminService.Orders/Orders_checkConsistencyInline', 
+				Inline: true
+			},
+			{
+				$Type: 'UI.DataFieldForAction', 
+				Label:'{i18n>checkConsistencyV4}', 
+				Action:'AdminService.checkConsistencyInline', 
 				Inline: true
 			}
 		],

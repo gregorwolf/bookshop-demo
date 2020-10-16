@@ -20,6 +20,7 @@ service AdminService @(requires:'admin') {
   entity Orders as select from db.Orders
     actions {
       action checkConsistency();
+      action checkConsistencyInline();
     };
   annotate Orders with @odata.draft.enabled;
 

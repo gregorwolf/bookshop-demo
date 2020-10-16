@@ -1,4 +1,4 @@
-module.exports = (srv) => {
+module.exports = async function (srv) {
 
 	const { Role_BusinessObject, Role_User, Orders } = srv.entities
 
@@ -76,21 +76,24 @@ module.exports = (srv) => {
 		return users;
 	})
 
-	srv.on("checkConsistency", Orders, req => {
+	srv.on(["checkConsistency","checkConsistencyInline"], Orders, async req => {
 		console.log("checkConsistency - Request Parameters:", req.params[0])
 		// 1	sap.ui.core.MessageType.Success	Positive feedback - no action required
+		var tx = cds.transaction(req)
+		var orders = await tx.run(SELECT.from("Orders").where({ID: req.params[0].ID}))
+		var order = orders[0]
+		var orderId = req.params[0].ID
 		var msgInfo = {
 			code: "SY001",
-			message: "Order is consistent",
+			message: `Order ${order.OrderNo} is consistent`,
 			numericSeverity: 1,
 			persistent: true
 		}
 		var msgError = {
 			code: "SY002",
-			message: "Order is not consistent",
+			message: `Order ${order.OrderNo} is not consistent`,
 			numericSeverity: 4
 		}
-		var orderId = req.params[0].ID
 		if(orderId === "7e2f2640-6866-4dcf-8f4d-3027aa831cad") {
 			req.error(msgError)
 		} else {
