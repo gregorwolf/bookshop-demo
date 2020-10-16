@@ -10,7 +10,8 @@
 		"compression": "^1.7.4",
 		"express": "^4.17.1",
 		"helmet": "^4.1.1",
-		"passport": "^0.4.1"
+		"passport": "^0.4.1",
+		"swagger-ui-express": "^4.1.4"
 	},
 	"engines": {
 		"node": "^10"
