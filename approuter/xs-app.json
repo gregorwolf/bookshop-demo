@@ -1,5 +1,5 @@
 {
-  "welcomeFile": "/app/fiori.html",
+  "welcomeFile": "/bookshopdemoapp/index.html",
   "authenticationMethod": "route",
   "logout": {
     "logoutEndpoint": "/do/logout"
@@ -53,16 +53,6 @@
       "authenticationType": "xsuaa",
       "destination": "srv_api",
       "csrfProtection": true
-    },
-    {
-      "source": "^/app/(.*)$",
-      "target": "$1",
-      "localDir": "webapp"
-    },
-    {
-      "source": "^/appconfig/(.*)",
-      "target": "/appconfig/$1",
-      "localDir": "webapp"
     }
   ]
 }

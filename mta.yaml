@@ -58,30 +58,73 @@ modules:
         properties:
           srv_api_url: ~{url}
 
-  - name: bookshop-demo-app
-    type: nodejs
-    path: app
-    build-parameters:
-      ignore: ["node_modules/"]
+  # - name: bookshop-demo-app
+  #   type: nodejs
+  #   path: app
+  #   build-parameters:
+  #     ignore: ["node_modules/"]
+  #   parameters:
+  #     memory: 256M
+  #     disk-quota: 1024M
+  #   requires:
+  #    - name: bookshop-demo-uaa
+  #    - name: srv_api
+  #      group: destinations
+  #      properties:
+  #         forwardAuthToken: true
+  #         strictSSL: false
+  #         name: srv_api
+  #         url: ~{url}
+  #    - name: srv_api_v2
+  #      group: destinations
+  #      properties:
+  #         forwardAuthToken: true
+  #         strictSSL: false
+  #         name: srv_api_v2
+  #         url: ~{url}
+
+  - name: bookshop-demo-ui
+    type: approuter.nodejs
+    path: approuter
     parameters:
       memory: 256M
       disk-quota: 1024M
+    build-parameters:
+      ignore: ["node_modules/"]
     requires:
-     - name: bookshop-demo-uaa
-     - name: srv_api
-       group: destinations
-       properties:
-          forwardAuthToken: true
-          strictSSL: false
-          name: srv_api
-          url: ~{url}
-     - name: srv_api_v2
-       group: destinations
-       properties:
-          forwardAuthToken: true
-          strictSSL: false
-          name: srv_api_v2
-          url: ~{url}
+      - name: bookshop-demo-destination-service
+      - name: bookshop-demo-connectivity-service
+      - name: bookshop-demo-uaa
+      - name: bookshop-demo-repo-runtime
+      - name: srv_api
+        group: destinations
+        properties:
+            forwardAuthToken: true
+            strictSSL: false
+            name: srv_api
+            url: ~{url}
+  - name: bookshop-demo-deployer
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: bookshop-demo-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - artifacts:
+            - HTML5Module-content.zip
+          name: bookshop-demo-HTML5Module
+          target-path: resources/
+  - name: bookshop-demo-HTML5Module
+    type: html5
+    path: app
+    build-parameters:
+      builder: custom
+      commands:
+        - npm run build
+      supported-platforms: []
 
 resources:
   - name: bookshop-demo-db-service
@@ -92,3 +135,23 @@ resources:
     parameters:
       path: ./xs-security.json
     type: com.sap.xs.uaa
+  - name: bookshop-demo-destination-service
+    parameters:
+      service-plan: lite
+      service: destination
+    type: org.cloudfoundry.managed-service
+  - name: bookshop-demo-connectivity-service
+    parameters:
+      service-plan: lite
+      service: connectivity
+    type: org.cloudfoundry.managed-service
+  - name: bookshop-demo-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+  - name: bookshop-demo-repo-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo

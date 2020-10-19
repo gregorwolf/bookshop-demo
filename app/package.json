@@ -1,18 +1,19 @@
 {
-  "name": "appadmin",
+  "name": "bookshop-demo-app",
   "version": "0.0.1",
   "description": "",
+  "dependencies": {},
   "devDependencies": {
-    "@sap/grunt-sapui5-bestpractice-build": "1.4.6"
-  },
-  "dependencies": {
     "@sap/approuter": "^8.5.4",
-    "request": "^2.88.2"
+    "@sap/html5-repo-mock": "^1.6.0"
   },
   "engines": {
     "node": "^12"
   },
   "scripts": {
-    "start": "node node_modules/@sap/approuter/approuter.js"
+    "build": "npm run clean && npm run zip",
+    "zip": "cd webapp && npx bestzip manifest-bundle.zip manifest.json && npx bestzip ../HTML5Module-content.zip *",
+    "clean": "cd webapp && npx rimraf ../HTML5Module-content.zip manifest-bundle.zip",
+    "start-local": "node node_modules/@sap/html5-repo-mock/index.js"
   }
 }

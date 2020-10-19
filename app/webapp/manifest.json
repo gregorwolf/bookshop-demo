@@ -1,1 +1,13 @@
-{}
+{
+  "_version": "1.12.0",
+  "sap.app": {
+    "id": "bookshop-demo-app",
+    "applicationVersion": {
+      "version": "1.0.0"
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "cloud.service"
+  }
+}
