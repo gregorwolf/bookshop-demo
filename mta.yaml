@@ -121,6 +121,7 @@ modules:
     type: html5
     path: app
     build-parameters:
+      ignore: ["node_modules/"]
       builder: custom
       commands:
         - npm run build
