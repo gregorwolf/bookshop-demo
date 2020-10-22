@@ -7,16 +7,17 @@
 			<vbm:AnalyticMap id="vbi" width="100%" xmlns:l="sap.ui.layout"
 				height="100%" initialPosition="-20;30;0" initialZoom="2"
 				regionClick="onRegionClick" regionContextMenu="onRegionContextMenu"
-				regions="{/Regions}">
+				regions="{
+					path: '/BooksAnalytics',
+					parameters: {
+						$apply : 'groupby((code),aggregate(stock with sum as TotalStock))',
+						$select: 'code',
+						$count : false
+					}
+				}">
 				<vbm:regions>
-					<vbm:Region code="{code}" color="{color}" tooltip="{county}" />
+					<vbm:Region code="{code}" tooltip="{TotalStock}" />
 				</vbm:regions>
-				<vbm:legend>
-					<vbm:Legend id="legend" caption="Decline in birth rate"
-						items="{/Legend}">
-						<vbm:LegendItem text="{text}" color="{color}" />
-					</vbm:Legend>
-				</vbm:legend>
 			</vbm:AnalyticMap>
 		</l:flexContent>
 	</l:FixFlex>

@@ -12,42 +12,6 @@ sap.ui.define([
 	return Controller.extend("sap.ui.vbm.sample.AnalyticMapRegions.Main", {
 
 		onInit: function() {
-			var oModel = new JSONModel("Data.json");
-			this.getView().setModel(oModel);
-
-			// set the device model
-			var oDeviceModel = new JSONModel(Device);
-			oDeviceModel.setDefaultBindingMode("OneWay");
-			this.getView().setModel(oDeviceModel, "device");
-
-			oModel.attachRequestCompleted(function(oEvent) {
-				var modelJSON = JSON.parse(oModel.getJSON());
-				for (var i = 0; i <= modelJSON.Regions.length; i++) {
-					var totalStock = oModel.getProperty("/Regions/" + i + "/TotalStock");
-					var code = oModel.getProperty("/Regions/" + i + "/code");
-					oModel.setProperty("/Regions/" + i + "/county", code + ": " + totalStock);
-					if (totalStock >= 800) {
-						oModel.setProperty("/Regions/" + i + "/color", "rgb(27,126,172)");
-					} else if (totalStock >= 200) {
-						oModel.setProperty("/Regions/" + i + "/color", "rgb(39,163,221)");
-					} else if (totalStock >= 100) {
-						oModel.setProperty("/Regions/" + i + "/color", "rgb(92,186,229)");
-					} else if (totalStock >= 50) {
-						oModel.setProperty("/Regions/" + i + "/color", "rgb(132,202,236)");
-					} else {
-						oModel.setProperty("/Regions/" + i + "/color", "rgb(171,219,242)");
-					}
-				}
-				modelJSON = JSON.parse(oModel.getJSON());
-			});
-
-			this.byId("vbi").setVisualFrame({
-				"minLon": -120,
-				"maxLon": 120,
-				"minLat": -60,
-				"maxLat": 70,
-				"minLOD": 2
-			});
 		},
 
 		onPressLegend: function() {
