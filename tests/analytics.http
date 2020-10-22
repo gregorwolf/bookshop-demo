@@ -1,0 +1,9 @@
+### Read BooksAnalytics
+http://localhost:4004/admin/BooksAnalytics
+Authorization: Basic admin:
+
+
+### Read BooksAnalytics - 
+http://localhost:4004/admin/BooksAnalytics?$apply=groupby((code),aggregate(stock with sum as TotalStock))
+Authorization: Basic admin:
+

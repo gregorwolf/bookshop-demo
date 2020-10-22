@@ -1,2 +1,6 @@
-ID;name;dateOfBirth;placeOfBirth;dateOfDeath;placeOfDeath;alive
-1;Herman Melville;1819-08-01;New York City, New York;1891-09-28;New York City, New York;0
+ID;name;dateOfBirth;placeOfBirth;dateOfDeath;placeOfDeath;alive;country_code
+1;Herman Melville;1819-08-01;New York City, New York;1891-09-28;New York City, New York;0;US
+101;Emily Brontë;;;;;0;GB
+107;Charlotte Brontë;;;;;0;GB
+150;Edgar Allen Poe;;;;;0;US
+170;Richard Carpenter;;;;;0;GB

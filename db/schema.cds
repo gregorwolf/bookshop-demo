@@ -1,5 +1,5 @@
 namespace my.bookshop;
-using { Currency, managed, cuid, User } from '@sap/cds/common';
+using { Currency, managed, cuid, User, Country } from '@sap/cds/common';
 
 type BusinessObject : String(255);
 annotate BusinessObject with @(
@@ -59,6 +59,8 @@ view BooksAnalytics as select from Books {
   key ID,
   @Analytics.Dimension: true
   author,
+  @Analytics.Dimension: true
+  author.country.code,
   @Analytics.Measure: true
   @Aggregation.default: #SUM
   stock,
@@ -67,14 +69,15 @@ view BooksAnalytics as select from Books {
 };
 
 entity Authors : managed {
-  key ID : Integer;
-  name   : String(111);
+  key ID       : Integer;
+  name         : String(111);
   dateOfBirth  : Date;
   dateOfDeath  : Date;
   placeOfBirth : String;
   placeOfDeath : String;
-  alive: Boolean; 
-  books  : Association to many Books on books.author = $self;
+  alive        : Boolean;
+  country      : Country;
+  books        : Association to many Books on books.author = $self;
 }
 
 entity Orders : cuid, managed {

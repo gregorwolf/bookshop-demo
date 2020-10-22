@@ -24,6 +24,7 @@ annotate my.Authors with @(
 			{Value: placeOfBirth},
 			{Value: dateOfDeath},
 			{Value: placeOfDeath},
+			{Value: country.name},
 		],
     HeaderInfo: {
       TypeName: 'Author', TypeNamePlural: 'Authors',

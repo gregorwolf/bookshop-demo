@@ -1,0 +1,23 @@
+<mvc:View controllerName="sap.ui.vbm.sample.AnalyticMapRegions.Main"
+	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	xmlns:vbm="sap.ui.vbm" xmlns:l="sap.ui.layout" height="100%"
+	displayBlock="true">
+	<l:FixFlex class="fixFlexFixedSize">
+		<l:flexContent>
+			<vbm:AnalyticMap id="vbi" width="100%" xmlns:l="sap.ui.layout"
+				height="100%" initialPosition="-20;30;0" initialZoom="2"
+				regionClick="onRegionClick" regionContextMenu="onRegionContextMenu"
+				regions="{/Regions}">
+				<vbm:regions>
+					<vbm:Region code="{code}" color="{color}" tooltip="{county}" />
+				</vbm:regions>
+				<vbm:legend>
+					<vbm:Legend id="legend" caption="Decline in birth rate"
+						items="{/Legend}">
+						<vbm:LegendItem text="{text}" color="{color}" />
+					</vbm:Legend>
+				</vbm:legend>
+			</vbm:AnalyticMap>
+		</l:flexContent>
+	</l:FixFlex>
+</mvc:View>

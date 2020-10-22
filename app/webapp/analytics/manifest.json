@@ -1,0 +1,33 @@
+{
+	"sap.app": {
+		"id": "sap.ui.vbm.sample.AnalyticMapRegions",
+		"applicationVersion": {
+			"version": "1.0.0"
+		}
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "sap.ui.vbm.sample.AnalyticMapRegions.Main",
+			"type": "XML",
+			"async": true
+		},
+		"dependencies": {
+			"libs": {
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.ui.vbm": {}
+			}
+		},
+		"config": {
+			"sample": {
+				"stretch": true,
+				"files": [
+					"Data.json",
+					"Main.controller.js",
+					"Main.view.xml",
+					"manifest.json"
+				]
+			}
+		}
+	}
+}

@@ -1,0 +1,46 @@
+{
+		"Regions":
+		[
+			{
+				"@odata.id": null,
+				"code": null,
+				"TotalStock@odata.type": "#Decimal",
+				"TotalStock": 458
+			},
+			{
+				"@odata.id": null,
+				"code": "GB",
+				"TotalStock@odata.type": "#Decimal",
+				"TotalStock": 57
+			},
+			{
+				"@odata.id": null,
+				"code": "US",
+				"TotalStock@odata.type": "#Decimal",
+				"TotalStock": 893
+			}
+		],
+			"Legend":
+				[
+					{
+						"text": "No change",
+						"color": "rgb(171,219,242)"
+					},
+					{
+						"text": "1% - 4%",
+						"color": "rgb(132,202,236)"
+					},
+					{
+						"text": "5% - 9%",
+						"color": "rgb(92,186,229)"
+					},
+					{
+						"text": "10% - 14%",
+						"color": "rgb(39,163,221)"
+					},
+					{
+						"text": "15% or more decline",
+						"color": "rgb(27,126,172)"
+					}
+				]
+	}

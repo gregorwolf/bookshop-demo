@@ -55,4 +55,7 @@ service AdminService @(impl: './admin-service.js', requires:'admin') {
       is_roleadmin:  Boolean;
       is_booksadmin: Boolean;
   };
+
+  @readonly
+  entity BooksAnalytics as projection on db.BooksAnalytics;
 }
