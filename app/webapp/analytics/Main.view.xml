@@ -1,24 +1,47 @@
 <mvc:View controllerName="sap.ui.vbm.sample.AnalyticMapRegions.Main"
-	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
-	xmlns:vbm="sap.ui.vbm" xmlns:l="sap.ui.layout" height="100%"
-	displayBlock="true">
-	<l:FixFlex class="fixFlexFixedSize">
-		<l:flexContent>
-			<vbm:AnalyticMap id="vbi" width="100%" xmlns:l="sap.ui.layout"
-				height="100%" initialPosition="-20;30;0" initialZoom="2"
-				regionClick="onRegionClick" regionContextMenu="onRegionContextMenu"
-				regions="{
-					path: '/BooksAnalytics',
-					parameters: {
-						$apply : 'groupby((code),aggregate(stock with sum as TotalStock))',
-						$select: 'code',
-						$count : false
-					}
-				}">
-				<vbm:regions>
-					<vbm:Region code="{code}" tooltip="{TotalStock}" />
-				</vbm:regions>
-			</vbm:AnalyticMap>
-		</l:flexContent>
-	</l:FixFlex>
+    xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+    xmlns:vbm="sap.ui.vbm" xmlns:l="sap.ui.layout" height="100%"
+    displayBlock="true">
+    <l:FixFlex class="fixFlexFixedSize">
+        <l:flexContent>
+            <vbm:AnalyticMap id="vbi" width="100%" xmlns:l="sap.ui.layout"
+                height="100%" initialPosition="-20;30;0" initialZoom="2"
+                regionClick="onRegionClick" regionContextMenu="onRegionContextMenu"
+                regions="{
+                    path : '/BooksAnalytics',
+                    parameters : {
+                        $$aggregation : {
+                            aggregate : {
+                                totalStock : {
+                                    name : 'stock',
+                                    with : 'sum'
+                                }
+                            },
+                            group : {
+                                code : {}
+                            }
+                        },
+                        $count : false
+                    }
+                }">
+                <vbm:regions>
+                    <vbm:Region 
+                        code="{code}"
+                        labelText="{
+                            path: 'totalStock',
+                            type: 'sap.ui.model.odata.type.String'
+                        }"
+                        color="{
+                            path: 'totalStock',
+                            type: 'sap.ui.model.odata.type.String',
+                            formatter: '.formatter.formatLabelBgColor'
+                        }"
+                        tooltip="{
+                            path: 'totalStock',
+                            type: 'sap.ui.model.odata.type.String'
+                        }" />
+                </vbm:regions>
+            </vbm:AnalyticMap>
+        </l:flexContent>
+    </l:FixFlex>
 </mvc:View>

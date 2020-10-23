@@ -3,14 +3,15 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/Device",
-	"sap/m/MessageToast"
-], function(AnalyticMap, Controller, JSONModel, Device, MessageToast) {
+	"sap/m/MessageToast",
+	"./model/formatter"
+], function(AnalyticMap, Controller, JSONModel, Device, MessageToast, formatter) {
 	"use strict";
 
 	AnalyticMap.GeoJSONURL = "https://sapui5.hana.ondemand.com/test-resources/sap/ui/vbm/demokit/media/analyticmap/L0.json";
 
 	return Controller.extend("sap.ui.vbm.sample.AnalyticMapRegions.Main", {
-
+		formatter: formatter,
 		onInit: function() {
 		},
 
