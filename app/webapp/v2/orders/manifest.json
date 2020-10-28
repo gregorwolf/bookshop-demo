@@ -127,6 +127,9 @@
 						"tableSettings": {
 							"multiSelect": true
 						},
+						"dataLoadSettings":  {
+							"loadDataOnAppLaunch": "always"
+						},
 						"quickVariantSelection": {
 								"variants": {
 										"0": {
