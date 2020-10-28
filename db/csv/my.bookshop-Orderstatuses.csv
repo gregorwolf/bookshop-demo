@@ -1,0 +1,4 @@
+code;name;descr
+N;New;Freshly created order
+I;In process;Order is getting processed
+C;Completed;Order is clompleted

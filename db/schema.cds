@@ -1,5 +1,5 @@
 namespace my.bookshop;
-using { Currency, managed, cuid, User, Country } from '@sap/cds/common';
+using { Currency, managed, cuid, User, Country, sap } from '@sap/cds/common';
 
 type BusinessObject : String(255);
 annotate BusinessObject with @(
@@ -80,12 +80,20 @@ entity Authors : managed {
   books        : Association to many Books on books.author = $self;
 }
 
+entity Orderstatuses : sap.common.CodeList {
+  key code: String(1);
+}
+type Orderstatus : Association to Orderstatuses;
+annotate Orderstatus with @title: '{i18n>Orderstatus}';
+annotate Orderstatuses.name with @title: '{i18n>Orderstatus}' @description: '{i18n>Orderstatus}';
+
 entity Orders : cuid, managed {
   OrderNo         : String @title:'Order Number'; //> readable key
   CustomerOrderNo : String(80) @title:'Customer Order Number';
   Items           : Composition of many OrderItems on Items.parent = $self;
   ShippingAddress : Composition of one OrderShippingAddress on ShippingAddress.parent = $self;
   total           : Decimal(9,2) @readonly;
+  orderstatus     : Orderstatus;
   currency        : Currency;
 }
 

@@ -80,6 +80,22 @@
                                         "route": "OrdersDetailsRoute"
                                     }
                                 }
+                            },
+                            "quickVariantSelection": {
+                                    "variants": {
+                                            "0": {
+                                                    "key": "New",
+                                                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#New"
+                                            },
+                                            "1": {
+                                                    "key": "InProcess",
+                                                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#InProcess"
+                                            },
+                                            "2": {
+                                                    "key": "Completed",
+                                                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Completed"
+                                            }
+                                    }
                             }
                         }
                     }
