@@ -56,15 +56,7 @@ annotate AdminService.Orders with @(
         {
             $Type:'UI.SelectOptionType',
             PropertyName : orderstatus_code,
-            Ranges : [
-                {
-                    $Type:'UI.SelectionRangeType',
-                    Sign : #I,
-                    Option : #EQ,
-                    Low : 'I',
-                },
-            ],
-            
+            FilterExpression: ![orderstatus_code eq 'I']
         },
       ],
     },

@@ -3,6 +3,17 @@
         "passport": {
             "strategy": "mock",
             "users": {
+                "requester": {
+                    "jwt": {
+                        "userInfo": {
+                            "logonName": "requester",
+                            "email": "requester@example.com"
+                        },
+                        "scopes": [
+                            "admin"
+                        ]
+                    }
+                },
                 "admin": {
                     "jwt": {
                         "userInfo": {
