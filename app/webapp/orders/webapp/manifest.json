@@ -94,6 +94,10 @@
                                             "2": {
                                                     "key": "Completed",
                                                     "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Completed"
+                                            },
+                                            "3": {
+                                                    "key": "Empty",
+                                                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Empty"
                                             }
                                     }
                             }

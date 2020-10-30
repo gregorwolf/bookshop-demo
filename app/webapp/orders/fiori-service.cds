@@ -31,7 +31,7 @@ annotate AdminService.Orders with @(
     },
     SelectionVariant#New : {
       $Type:'UI.SelectionVariantType',
-      ID: 'bost_Open',
+      ID: 'New',
       Text : 'New',
       SelectOptions : [
           {
@@ -48,9 +48,12 @@ annotate AdminService.Orders with @(
           },
       ],
     },
+    // According to
+    // https://sapui5.hana.ondemand.com/#/topic/0d390fed360c4c58a0f0619338938de1
+    // The FilterExpression of the SelectionVariantType is not supported.
     SelectionVariant#InProcess : {
       $Type:'UI.SelectionVariantType',
-      ID: 'bost_Close',
+      ID: 'InProcess',
       Text : 'In Process',
       SelectOptions : [
         {
@@ -62,7 +65,7 @@ annotate AdminService.Orders with @(
     },
     SelectionVariant#Completed : {
       $Type:'UI.SelectionVariantType',
-      ID: 'bost_Close',
+      ID: 'Completed',
       Text : 'Completed',
       SelectOptions : [
         {
@@ -74,6 +77,26 @@ annotate AdminService.Orders with @(
                     Sign : #I,
                     Option : #EQ,
                     Low : 'C',
+                },
+            ],
+            
+        },
+      ],
+    },
+    SelectionVariant#Empty : {
+      $Type:'UI.SelectionVariantType',
+      ID: 'Empty',
+      Text : 'Empty',
+      SelectOptions : [
+        {
+            $Type:'UI.SelectOptionType',
+            PropertyName : orderstatus_code,
+            Ranges : [
+                {
+                    $Type:'UI.SelectionRangeType',
+                    Sign : #I,
+                    Option : #EQ,
+                    Low : '',
                 },
             ],
             
