@@ -37,9 +37,13 @@ service CatalogService @(impl: './cat-service.js') {
   };
 
   // @readonly entity BusinessPartner as projection on bp.BusinessPartner;
+  entity Orders @(restrict: [ 
+    { grant: 'CREATE', to: 'authenticated-user' },
+    { grant: 'READ', where: 'createdBy = $user' },
+  ]) as projection on db.Orders;
 
   @requires_: 'authenticated-user'
-  @insertonly entity Orders as projection on db.Orders;
+  action submitOrder (book : Books.ID, amount: Integer);
 
   @requires_: 'authenticated-user'
   @readonly
