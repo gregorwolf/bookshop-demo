@@ -46,7 +46,7 @@
     "build:xs-security": "cds compile srv/ --to xsuaa > xs-security.json",
     "build:cf": "mbt build -p=cf",
     "build:xsa": "mbt build -p=xsa",
-    "build:OpenAPI": "mkdir srv/gen && node csn2swgr.js gen/srv/srv/csn.json > srv/gen/OpenAPI.json",
+    "build:OpenAPI": "mkdir -p srv/gen && node csn2swgr.js gen/srv/srv/csn.json > srv/gen/OpenAPI.json",
     "build:copyOpenAPItogen": "copyfiles -f srv/gen/OpenAPI.json gen/srv/srv/gen/",
     "build:copycsntoproxy": "copyfiles -f gen/srv/srv/csn.json standalone-v2-proxy/gen/",
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
