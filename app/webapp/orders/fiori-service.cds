@@ -112,7 +112,7 @@ annotate AdminService.Orders with @(
       {
         $Type: 'UI.DataFieldForAction', 
         Label:'{i18n>checkConsistency}',
-        Action:'AdminService.Orders/Orders_checkConsistency', 
+        Action:'AdminService.EntityContainer/Orders_checkConsistency', 
         Inline: false
       },
       {
