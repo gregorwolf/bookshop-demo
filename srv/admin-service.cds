@@ -1,6 +1,6 @@
 using my.bookshop as db from '../db/schema';
 
-service AdminService @(impl: './admin-service.js', requires:'admin') {
+service AdminService @(impl: './admin-service.js', requires: ['admin', 'booksadmin']) {
   @odata.draft.enabled
   entity Approval as projection on db.Approval;
   entity Books @(		
@@ -15,7 +15,13 @@ service AdminService @(impl: './admin-service.js', requires:'admin') {
     },) as projection on db.Books;
   entity Images as projection on db.Images;
   // view BooksAnalytics as select from db.BooksAnalytics;
-  entity Authors as projection on db.Authors;
+  entity Authors @(
+    restrict: [ 
+      { grant: 'READ', to: 'admin' },
+    ]) as projection on db.Authors {
+      *
+      ,books: redirected to Books
+    };
 
   entity Orders as select from db.Orders
     actions {
@@ -25,7 +31,10 @@ service AdminService @(impl: './admin-service.js', requires:'admin') {
   annotate Orders with @odata.draft.enabled;
 
   //------- auto-exposed --------
-  entity OrderItems as projection on db.OrderItems;
+  entity OrderItems as projection on db.OrderItems {
+      *
+      ,book: redirected to Books
+    };
   entity OrderShippingAddress as projection on db.OrderShippingAddress;  
   //> these shall be removed but this would break the Fiori UI
 

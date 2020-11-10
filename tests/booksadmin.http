@@ -1,0 +1,27 @@
+### Read admin entities as booksadmin
+GET http://localhost:4004/admin/
+Authorization: Basic booksadmin:
+
+### Read Countries via OData V2 as booksadmin
+GET http://localhost:4004/admin/Countries
+Authorization: Basic booksadmin:
+
+### Read Books via OData V4 as booksadmin
+GET http://localhost:4004/admin/Books
+Authorization: Basic booksadmin:
+
+### Read Books via OData V2 as booksadmin
+GET http://localhost:4004/v2/admin/Books
+Authorization: Basic booksadmin:
+
+### Read Books via OData V4 as booksadmin and expand to author
+GET http://localhost:4004/admin/Books?$expand=author
+Authorization: Basic booksadmin:
+
+### Read Books via OData V2 as booksadmin and expand to author
+GET http://localhost:4004/v2/admin/Books?$expand=author
+Authorization: Basic booksadmin:
+
+### Read Authors via OData V2 as booksadmin
+GET http://localhost:4004/v2/admin/Authors
+Authorization: Basic booksadmin:

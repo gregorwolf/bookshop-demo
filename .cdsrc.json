@@ -14,6 +14,17 @@
                         ]
                     }
                 },
+                "booksadmin": {
+                    "jwt": {
+                        "userInfo": {
+                            "logonName": "booksadmin",
+                            "email": "booksadmin@example.com"
+                        },
+                        "scopes": [
+                            "booksadmin"
+                        ]
+                    }
+                },
                 "admin": {
                     "jwt": {
                         "userInfo": {
