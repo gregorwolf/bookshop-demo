@@ -1,10 +1,11 @@
 module.exports = async function (srv) {
 
-	const { Role_BusinessObject, Role_User, Orders } = srv.entities
+	const { Role_BusinessObject, Role_User, Orders, Books, Authors } = srv.entities
 
-	srv.before('READ', [ ], async req => {
-		var targetName = req.target.name
-		var logonName = req.attr.userInfo.logonName
+	srv.before('READ', [Books, Authors], async req => {
+		var tx = cds.transaction(req)
+		var targetName = req.entity
+		var logonName = req.user.id
 		console.log("READ - logonName: " + logonName)
 		console.log("READ - req.target.name: " + targetName)
 		var targetNameElements = targetName.split(".")
@@ -12,46 +13,39 @@ module.exports = async function (srv) {
 		console.log("READ - entity: " + entity)
 		// Check if User is assigned to a Role that contains the entity
 		// var query = SELECT.from(Role)
-		cds.transaction(req).run(
+		var roleuser = await tx.run(
 			SELECT 
 				.from(Role_User, ['parent_ID']) 
-				.where({ user_username : logonName })
+				.where({ user : logonName })
 		)
-		.then(
-			roleuser => { 
-				if (roleuser.length === 0) {
-					req.error (409, `user ${logonName} isn't assigned to any role`)
-				} else {
-					console.log("READ - roleuser: " + JSON.stringify(roleuser))
-					cds.transaction(req).run(
-						SELECT 
-							.from(Role_BusinessObject, ['BusinessObject_ID']) 
-							.where({ parent_ID: roleuser[0].parent_ID })
-					)
-					.then(
-						roleBusinessObject => {
-							if (roleBusinessObject.length === 0) {
-								req.error (409, `The role ${roleuser[0].parent_ID} isn't assigned to any business object`)
-							} else {
-								console.log("READ - roleBusinessObject: " + JSON.stringify(roleBusinessObject))
-								var allowed = false
-								for (let i in roleBusinessObject) {
-									if(roleBusinessObject[i].BusinessObject_ID === entity) {
-										allowed = true
-									}
-								}
-								if(!allowed) {
-									req.error (409, `user ${logonName} isn't assigned to the business object ${entity}`)
-								}
-							}
-						}
-					)
+
+		if (roleuser.length === 0) {
+			req.error (409, `user ${logonName} isn't assigned to any role`)
+		} else {
+			console.log("READ - roleuser: " + JSON.stringify(roleuser))
+			var roleBusinessObject = await tx.run(
+				SELECT 
+					.from(Role_BusinessObject, ['BusinessObject']) 
+					.where({ parent_ID: roleuser[0].parent_ID })
+			)
+			if (roleBusinessObject.length === 0) {
+				req.error (409, `The role ${roleuser[0].parent_ID} isn't assigned to any business object`)
+			} else {
+				console.log("READ - roleBusinessObject: " + JSON.stringify(roleBusinessObject))
+				var allowed = false
+				for (let i in roleBusinessObject) {
+					if(roleBusinessObject[i].BusinessObject === entity) {
+						allowed = true
+					}
+				}
+				if(!allowed) {
+					req.error (409, `user ${logonName} isn't assigned to the business object ${entity}`)
 				}
 			}
-		)
+		}
 	})
 
-	srv.before('UPDATE','Books', req => {
+	srv.before('UPDATE',Books, req => {
 		var where = req.query.UPDATE.where;
 		var changedEntity = JSON.stringify(req.query.UPDATE.entity)
 		var changedEntityKey = JSON.stringify(where)

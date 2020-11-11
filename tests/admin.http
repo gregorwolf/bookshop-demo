@@ -25,14 +25,6 @@ Authorization: Basic admin:
 GET http://localhost:4004/admin/Books
 Authorization: Basic admin:
 
-### Read Books via OData V4 by littleadmin
-GET http://localhost:4004/admin/Books
-Authorization: Basic bGl0dGxladmin:
-
-### Read Books via OData V2 by littleadmin
-GET http://localhost:4004/v2/admin/Books
-Authorization: Basic bGl0dGxladmin:
-
 ### Read Books via OData V2 by admin and expand to author
 GET http://localhost:4004/v2/admin/Books?$expand=author
 Authorization: Basic admin:
