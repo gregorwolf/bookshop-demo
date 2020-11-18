@@ -197,6 +197,17 @@
                                         "info": "The latest books",
                                         "targetURL": "#Books-displayUI5latest"
                                     }
+                                },
+                                {
+                                    "id": "AuthorsdisplayUI5latest",
+                                    "title": "Browse Authors",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "AuthorsdisplayUI5latest",
+                                        "title": "Browse Authors",
+                                        "info": "The latest books",
+                                        "targetURL": "#Authors-displayUI5latest"
+                                    }
                                 }
                             ]
                         },
@@ -655,6 +666,20 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=v2.booksUI5latest",
                                 "url": "v2/booksUI5latest"
+                            }
+                        },
+                        "actionV2AuthorsUI5latest": {
+                            "semanticObject": "Authors",
+                            "action": "displayUI5latest",
+                            "title": "Browse Authors",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=v2.authorsUI5latest",
+                                "url": "v2/authorsUI5latest"
                             }
                         },
                         "actionV2BooksAdmin": {
