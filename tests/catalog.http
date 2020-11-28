@@ -57,3 +57,7 @@ Authorization: Basic bob:
 Content-Type: application/json
 
 { "book":201, "amount":5 }
+
+### Read Books via OData V2 like Excel does it
+GET http://localhost:4004/v2/catalog/Books
+Accept: application/atomsvc+xml,application/atom+xml
