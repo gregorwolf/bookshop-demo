@@ -1,0 +1,17 @@
+### Endpoint for Excel V2
+GET http://vhcalnplci.dummy.nodomain:4004/v2/catalog/
+
+### Endpoint for Excel V4
+GET http://vhcalnplci.dummy.nodomain:4004/catalog/
+
+### Read Books via OData V2 like Excel does it
+GET http://localhost:4004/v2/catalog/Books
+Accept: application/atomsvc+xml,application/atom+xml
+
+### Read Books via OData like Excel does it
+GET http://localhost:4004/catalog/Books
+Accept: application/atomsvc+xml,application/atom+xml
+
+### Test Service from odata.org
+GET https://services.odata.org/TripPinRESTierService/Airlines
+Accept: application/atomsvc+xml,application/atom+xml

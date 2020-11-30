@@ -32,6 +32,18 @@ function jwtLogger(req, res, next) {
   next()
 }
 
+// Middleware to replace Accept: application/atomsvc+xml,application/atom+xml with Accept: application/json
+function replaceExcelAcceptHeader(req, res, next) {
+  console.log('===> replaceExcelAcceptHeader' )
+  console.log(req.headers.accept)
+  if(req.headers.accept === 'application/atomsvc+xml,application/atom+xml') {
+    req.headers.accept = 'application/json'
+  }
+  /*
+  */
+  next()
+}
+
 const readJwt = function(req){
   const authHeader = req.headers.authorization;
   if (authHeader){
@@ -52,6 +64,7 @@ cds.on('bootstrap', async (app) => {
     contentSecurityPolicy: false,
   }))
   app.use(proxy())
+  app.use(replaceExcelAcceptHeader)
 
   // Authentication using JWT
   if(xsuaaCredentials) {
