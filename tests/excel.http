@@ -15,3 +15,20 @@ Accept: application/atomsvc+xml,application/atom+xml
 ### Test Service from odata.org
 GET https://services.odata.org/TripPinRESTierService/Airlines
 Accept: application/atomsvc+xml,application/atom+xml
+
+### Testing the corrected proxy 1.4.59 started via
+### npm run start:forExcel
+
+### OData V4 Endpoint - OK
+GET http://localhost:4004/
+
+### OData V2 Endpoint - returns:
+### 'v2' is not an entity set, a singleton, an action import, or a function import
+GET http://localhost:4004/v2/
+
+### OData V4 Books - OK
+GET http://localhost:4004/Books
+
+### OData V2 Books - returns:
+### 'v2' is not an entity set, a singleton, an action import, or a function import
+GET http://localhost:4004/v2/Books
