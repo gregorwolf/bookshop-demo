@@ -8,11 +8,21 @@ const port = process.env.PORT || 4004;
 (async () => {
   const app = express();
 
-  // OData V4
-  await cds.serve("CatalogService").from("./srv/").at("/").in(app);
+  await cds.connect.to("db", {
+    kind: "sqlite",
+    credentials: {
+      database: ":memory:",
+    },
+  });
+
+  const srv = await cds.load("./srv/");
+  await cds.deploy(srv);
 
   // OData V2
   app.use(proxy());
+
+  // OData V4
+  await cds.serve("CatalogService").from("./srv/").at("/").in(app);
 
   const server = app.listen(port, host, () => console.info(`app is listing at ${host}:${port}`));
   server.on("error", error => console.error(error.stack));
