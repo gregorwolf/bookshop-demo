@@ -33,6 +33,22 @@
               "**/.vscode/cds.js",
           ],
           "console": "internalConsole"
+        },
+        {
+          "type": "node", 
+          "request": "launch",
+          "name": "excel", 
+          "args": [],
+          "env": {"DEBUG":""},
+          "cwd": "${workspaceFolder}",
+          "program": "${workspaceFolder}/srv/index.js", 
+          "skipFiles": [
+              "<node_internals>/**/*.js",
+              "**/cds-reflect/lib/index.js",
+              "**/cds/lib/index.js",
+              "**/.vscode/cds.js",
+          ],
+          "console": "internalConsole"
         }
     ]
 }
