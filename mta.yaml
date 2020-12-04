@@ -30,6 +30,8 @@ modules:
     path: gen/srv
     build-parameters:
       ignore: ["node_modules/"]
+    properties:
+      SAP_JWT_TRUST_ACL: '[{"clientid":"*","identityzone":"*"}]'
     parameters:
       memory: 256M
       disk-quota: 1024M
@@ -40,6 +42,7 @@ modules:
     requires:
       - name: bookshop-demo-db-service
       - name: bookshop-demo-uaa
+      - name: bookshop-demo-job-scheduler
 
   - name: bookshop-demo-v2-proxy
     type: nodejs
@@ -156,3 +159,10 @@ resources:
     parameters:
       service-plan: app-runtime
       service: html5-apps-repo
+  - name: bookshop-demo-job-scheduler
+    type: org.cloudfoundry.managed-service
+    parameters:
+       service: jobscheduler
+       service-plan: lite
+       config:
+          enable-xsuaa-support: true

@@ -19,6 +19,11 @@
       "name": "uaa.user",
       "description": "UAA",
       "grant-as-authority-to-apps" : [ "$XSAPPNAME(application, xsappforclientapp)"]
+    },
+    {
+      "name": "$XSAPPNAME.jobscheduler",
+      "description": "Scope for Job Scheduler",
+      "grant-as-authority-to-apps": ["jobscheduler"]
     }
   ],
   "attributes": [],
