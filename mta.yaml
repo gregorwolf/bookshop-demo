@@ -44,22 +44,22 @@ modules:
       - name: bookshop-demo-uaa
       - name: bookshop-demo-job-scheduler
 
-  - name: bookshop-demo-v2-proxy
-    type: nodejs
-    path: standalone-v2-proxy
-    build-parameters:
-      ignore: ["node_modules/"]
-    parameters:
-      memory: 128M
-      disk-quota: 1024M
-    provides:
-      - name: srv_api_v2
-        properties:
-          url: '${default-url}'
-    requires:
-      - name: srv_api
-        properties:
-          srv_api_url: ~{url}
+#  - name: bookshop-demo-v2-proxy
+#    type: nodejs
+#    path: standalone-v2-proxy
+#    build-parameters:
+#      ignore: ["node_modules/"]
+#    parameters:
+#      memory: 128M
+#      disk-quota: 1024M
+#    provides:
+#      - name: srv_api_v2
+#        properties:
+#          url: '${default-url}'
+#    requires:
+#      - name: srv_api
+#        properties:
+#          srv_api_url: ~{url}
 
   # - name: bookshop-demo-app
   #   type: nodejs
