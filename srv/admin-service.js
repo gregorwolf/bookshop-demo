@@ -1,3 +1,6 @@
+const JobSchedulerClient = require('@sap/jobs-client');
+const xsenv = require("@sap/xsenv")
+
 module.exports = async function (srv) {
 
 	const { Role_BusinessObject, Role_User, Orders, Books, Authors } = srv.entities
@@ -68,6 +71,29 @@ module.exports = async function (srv) {
 			}
 		]
 		return users;
+	})
+
+	srv.on(["readJobs"], req => {
+		xsenv.loadEnv();
+		const services = xsenv.getServices({ jobscheduler: { tags: "jobscheduler" }})
+		if(services.jobscheduler) {
+			const options = {
+				baseURL: services.jobscheduler.url,
+				user: services.jobscheduler.user,
+				password: services.jobscheduler.password
+			}
+			const scheduler = new JobSchedulerClient.Scheduler(options)
+			var query = {}
+			scheduler.fetchAllJobs(query, function(err, result) {
+				if (err) {
+					return ['Error retrieving jobs', JSON.stringify(err)]
+				}
+				//Jobs retrieved successfully
+				return result
+			});
+		} else {
+			return ["no jobscheduler service instance found"]
+		}
 	})
 
 	srv.on(["checkConsistency","checkConsistencyInline"], Orders, async req => {

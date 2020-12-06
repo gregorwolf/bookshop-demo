@@ -64,7 +64,7 @@ cds.on('bootstrap', async (app) => {
     contentSecurityPolicy: false,
   }))
   app.use(proxy())
-  app.use(replaceExcelAcceptHeader)
+  // app.use(replaceExcelAcceptHeader)
 
   // Authentication using JWT
   if(xsuaaCredentials) {

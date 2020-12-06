@@ -67,4 +67,6 @@ service AdminService @(impl: './admin-service.js', requires: ['admin', 'booksadm
 
   @readonly
   entity BooksAnalytics as projection on db.BooksAnalytics;
+
+  function readJobs() returns array of String;
 }

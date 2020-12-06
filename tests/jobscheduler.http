@@ -1,0 +1,3 @@
+### Read Jobs
+GET http://localhost:4004/admin/readJobs()
+Authorization: Basic admin:
