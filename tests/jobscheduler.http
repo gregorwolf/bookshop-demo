@@ -1,3 +1,50 @@
 ### Read Jobs
+# @name readJobs
 GET http://localhost:4004/admin/readJobs()
 Authorization: Basic admin:
+
+### Fill Variables from Response
+@jobId = {{readJobs.response.body.value[0].jobId}}
+
+### Read Job
+# @name readJobs
+GET http://localhost:4004/admin/readJobDetails(jobId={{jobId}})
+Authorization: Basic admin:
+
+### Read Job Schedules
+# @name readJobs
+GET http://localhost:4004/admin/readJobSchedules(jobId={{jobId}})
+Authorization: Basic admin:
+
+### Create Job
+# @name createJob
+POST http://localhost:4004/admin/createJob
+Authorization: Basic admin:
+Content-Type: application/json
+
+{
+  "url": "https://scpjobscheduler.free.beeceptor.com/salesOrders/validate",
+  "cron": "* * * * * 30 0"
+}
+
+### Fill Variables from Response
+@jobId = {{createJob.response.body.value}}
+@active=true
+### Update Job
+POST http://localhost:4004/admin/updateJob
+Authorization: Basic admin:
+Content-Type: application/json
+
+{
+  "jobId": {{jobId}},
+  "active": {{active}}
+}
+
+### Delete Job
+POST http://localhost:4004/admin/deleteJob
+Authorization: Basic admin:
+Content-Type: application/json
+
+{
+  "jobId": {{jobId}}
+}

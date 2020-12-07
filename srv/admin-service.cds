@@ -68,5 +68,10 @@ service AdminService @(impl: './admin-service.js', requires: ['admin', 'booksadm
   @readonly
   entity BooksAnalytics as projection on db.BooksAnalytics;
 
-  function readJobs() returns array of String;
+  function readJobs() returns array of db.Jobs;
+  function readJobDetails(jobId: Integer) returns db.Jobs;
+  function readJobSchedules(jobId: Integer) returns array of db.Schedules;
+  action createJob(url: String, cron: String) returns Integer;
+  action updateJob(jobId: Integer, active: Boolean) returns String;
+  action deleteJob(jobId: Integer) returns String;
 }
