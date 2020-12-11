@@ -1,6 +1,6 @@
-ID;name;dateOfBirth;placeOfBirth;dateOfDeath;placeOfDeath;alive;country_code
-1;Herman Melville;1819-08-01;New York City, New York;1891-09-28;New York City, New York;0;US
-101;Emily Brontë;;;;;0;GB
-107;Charlotte Brontë;;;;;0;GB
-150;Edgar Allen Poe;;;;;0;US
-170;Richard Carpenter;;;;;0;GB
+ID;name;dateOfBirth;placeOfBirth;dateOfDeath;placeOfDeath;alive;country_code;BusinessValidFrom;BusinessValidTo
+1;Herman Melville;1819-08-01;New York City, New York;1891-09-28;New York City, New York;0;US;2000-01-01;9999-01-01
+101;Emily Brontë;;;;;0;GB;2000-01-01;9999-01-01
+107;Charlotte Brontë;;;;;0;GB;2000-01-01;9999-01-01
+150;Edgar Allen Poe;;;;;0;US;2000-01-01;9999-01-01
+170;Richard Carpenter;;;;;0;GB;2000-01-01;9999-01-01

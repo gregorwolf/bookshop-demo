@@ -1,4 +1,4 @@
-using my.bookshop as db from '../db/schema';
+using my.bookshop as db from '../db/';
 
 service AdminService @(impl: './admin-service.js', requires: ['admin', 'booksadmin']) {
   @odata.draft.enabled
@@ -20,7 +20,6 @@ service AdminService @(impl: './admin-service.js', requires: ['admin', 'booksadm
       { grant: 'READ', to: 'admin' },
     ]) as projection on db.Authors {
       *
-      ,books: redirected to Books
     };
 
   entity Orders as select from db.Orders

@@ -20,10 +20,10 @@ service CatalogService @(impl: './cat-service.js') {
   @Capabilities.SearchRestrictions.Searchable: true
   @readonly entity Books @(		
     Capabilities: {
-			InsertRestrictions: {Insertable: true, Permissions:[{Scopes:[{Scope:'admin'}]} ]},
-			UpdateRestrictions: {Updatable: true},
-			DeleteRestrictions: {Deletable: true}
-		},) as projection on db.Books excluding {
+      InsertRestrictions: {Insertable: true, Permissions:[{Scopes:[{Scope:'admin'}]} ]},
+      UpdateRestrictions: {Updatable: true},
+      DeleteRestrictions: {Deletable: true}
+    },) as projection on db.Books excluding {
     createdBy, modifiedBy
   };
   function getBooks() returns array of Books;
@@ -31,6 +31,10 @@ service CatalogService @(impl: './cat-service.js') {
   // https://help.sap.com/viewer/ad4b9f0b14b0458cad9bd27bf435637d/Cloud/en-US/8e7cec3cf6494b09a01d09606119b9dd.html
   function getNumberOfBooksForDynamicTile() returns DynamicAppLauncher;
   function hello ( to : String ) returns String;
+
+  @readonly entity BooksAuthorsAssignment as projection on db.BooksAuthorsAssignment {
+    *
+  };
 
   @readonly entity Authors as projection on db.Authors excluding {
     createdBy, modifiedBy

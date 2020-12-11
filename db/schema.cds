@@ -9,8 +9,6 @@ using {
   sap
 } from '@sap/cds/common';
 
-type BusinessObject : String(255);
-
 annotate BusinessObject with @(
   title       : '{i18n>BusinessObject}',
   description : '{i18n>BusinessObject.Description}'
@@ -27,35 +25,76 @@ entity Approval : managed, cuid {
   changedEntityData : LargeString  @(title : 'Changed Entity Data', );
   testDecimalFloat  : DecimalFloat @(title : 'Test Decimal Float', );
   testDecimal       : Decimal(9, 2)@(title : 'Test Decimal (9,2)');
-
-  status            : String(1)
-                                   @(title : 'Status', ) enum {
-      requested = 'R'         @(title : 'Requested');
-                pending = 'P' @(title : 'Pending');
-                approved = 'A'@(title : 'Approved');
-                rejected = 'N'     @(title : 'Rejected');
+  status            : String(1)    @(title : 'Status', )
+  enum {
+    requested = 'R'         @(title : 'Requested');
+              pending = 'P' @(title : 'Pending');
+              approved = 'A'@(title : 'Approved');
+              rejected = 'N'       @(title : 'Rejected');
   };
 };
 
 entity Books : managed {
-  key ID                          : Integer;
-      title                       : localized String(111);
-      descr                       : localized String(1111);
-      author                      : Association to Authors {
-                                      ID
-                                    };
-      stock                       : Integer;
-      price                       : Decimal(9, 2);
-      currency                    : Currency;
-      virtual semanticURLtoAuthor : String;
-      weight                      : DecimalFloat @title : 'Weight (DecimalFloat)';
-      height                      : Double       @title : 'Height (Double)';
-      width                       : Decimal(9, 2)@title : 'Width (Decimal(9,2))';
-      visible                     : Boolean      @title : 'Visible (Boolean)';
-      releaseDate                 : DateTime     @title : 'Release Date (DateTime)';
-      readingTime                 : Time         @title : 'Reading Time (Time)';
+  key ID                                 : Integer;
+  key BusinessValidFrom                  : Date;
+  key BusinessValidTo                    : Date;
+      title                              : localized String(111);
+      descr                              : localized String(1111);
+      stock                              : Integer;
+      price                              : Decimal(9, 2);
+      currency                           : Currency;
+      virtual semanticURLtoAuthor        : String;
+      weight                             : DecimalFloat @title : 'Weight (DecimalFloat)';
+      height                             : Double       @title : 'Height (Double)';
+      width                              : Decimal(9, 2)@title : 'Width (Decimal(9,2))';
+      visible                            : Boolean      @title : 'Visible (Boolean)';
+      releaseDate                        : DateTime     @title : 'Release Date (DateTime)';
+      readingTime                        : Time         @title : 'Reading Time (Time)';
+      BooksAuthorsAssignment_ASSOC_Books : Association to many BooksAuthorsAssignment
+                                             on BooksAuthorsAssignment_ASSOC_Books.ASSOC_Book = $self;
 };
 
+entity BooksAuthorsAssignment {
+  key BusinessValidFrom : Date;
+  key BusinessValidTo   : Date;
+  key Role              : String(50);
+  key ASSOC_Book        : Association to Books {
+                            ID
+                          };
+  key ASSOC_Author      : Association to Authors {
+                            ID
+                          };
+}
+
+entity Authors : managed {
+  key ID                                   : Integer;
+  key BusinessValidFrom                    : Date;
+  key BusinessValidTo                      : Date;
+      name                                 : String(111);
+      dateOfBirth                          : Date;
+      dateOfDeath                          : Date;
+      placeOfBirth                         : String;
+      placeOfDeath                         : String;
+      alive                                : Boolean;
+      country                              : Country;
+      BooksAuthorsAssignment_ASSOC_Authors : Association to many BooksAuthorsAssignment
+                                               on BooksAuthorsAssignment_ASSOC_Authors.ASSOC_Author = $self;
+}
+
+@Aggregation.ApplySupported.PropertyRestrictions : true
+view BooksAnalytics as
+  select from Books {
+    key ID,
+        @Analytics.Dimension : true
+        BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.name,
+        @Analytics.Dimension : true
+        BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.country.code,
+        @Analytics.Measure   : true
+        @Aggregation.default : #SUM
+        stock,
+        @Analytics.Dimension : true
+        currency
+  };
 entity Images {
   key ID      : UUID;
       @Core.MediaType : 'image/png'
@@ -65,34 +104,6 @@ content : LargeBinary @Core.MediaType: mediatype;
 @Core.IsMediaType : true
 mediatype : String;
 */
-}
-
-@Aggregation.ApplySupported.PropertyRestrictions : true
-view BooksAnalytics as
-  select from Books {
-    key ID,
-        @Analytics.Dimension : true
-        author,
-        @Analytics.Dimension : true
-        author.country.code,
-        @Analytics.Measure   : true
-        @Aggregation.default : #SUM
-        stock,
-        @Analytics.Dimension : true
-        currency
-  };
-
-entity Authors : managed {
-  key ID           : Integer;
-      name         : String(111);
-      dateOfBirth  : Date;
-      dateOfDeath  : Date;
-      placeOfBirth : String;
-      placeOfDeath : String;
-      alive        : Boolean;
-      country      : Country;
-      books        : Association to many Books
-                       on books.author = $self;
 }
 
 entity Orderstatuses : sap.common.CodeList {
@@ -127,80 +138,3 @@ entity OrderShippingAddress : cuid, managed {
   street : String(60)@(title : 'Street', );
   city   : String(60)@(title : 'City', );
 };
-
-entity Users {
-  key username : String @(title : 'Username', );
-      address  : Composition of Address
-                   on address.parent = $self;
-      role     : Association to Roles;
-};
-
-entity Address : cuid, managed {
-  parent : Association to Users;
-  street : String(60)@(title : 'Street', );
-  city   : String(60)@(title : 'City', );
-};
-
-entity BusinessObjects {
-  key ID       : BusinessObject;
-      parent   : Association to BusinessObjects;
-      children : Composition of many BusinessObjects
-                   on children.parent = $self;
-};
-
-entity Roles : cuid, managed {
-  rolename        : String(255)@(title : 'Role Name', );
-  description     : String     @(title : 'Description', );
-  read            : Boolean    @(title : 'Read', );
-  authcreate      : Boolean    @(title : 'Create', );
-  authupdate      : Boolean    @(title : 'Update', );
-  approve         : Boolean    @(title : 'Approve', );
-  BusinessObjects : Composition of many Role_BusinessObject
-                      on BusinessObjects.parent = $self;
-  Users           : Composition of many Role_User
-                      on Users.parent = $self;
-};
-
-entity Role_BusinessObject : cuid {
-  parent         : Association to Roles;
-  BusinessObject : BusinessObject;
-};
-
-entity Role_User : cuid {
-  parent : Association to Roles;
-  user   : User;
-};
-
-type Jobs {
-  action           : String;
-  active           : Boolean;
-  ACTIVECOUNT      : Integer;
-  createdAt        : String;
-  description      : String;
-  endTime          : String;
-  httpMethod       : String;
-  INACTIVECOUNT    : Integer;
-  jobId            : Integer;
-  jobType          : String;
-  name             : String;
-  signatureVersion : Integer;
-  startTime        : String;
-  subDomain        : String;
-  user             : String;
-  _id              : Integer;
-}
-
-type Schedules {
-  active         : Boolean;
-  cron           : String;
-  data           : String;
-  description    : String;
-  endTime        : String;
-  nextRunAt      : String;
-  repeatAt       : String;
-  repeatInterval : String;
-  scheduleId     : String;
-  startTime      : String;
-  time           : String;
-  type           : String;
-}
