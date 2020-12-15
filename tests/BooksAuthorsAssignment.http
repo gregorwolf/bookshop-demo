@@ -1,7 +1,9 @@
 ### Read BooksAuthorsAssignment
 GET http://localhost:4004/catalog/BooksAuthorsAssignment
+Authorization: Basic admin:
 
 ### Read BooksAuthorsAssignment expand to Book and Author 
 ### results in
 ### SQLITE_ERROR: no such column: a.ASSOC_Book_BusinessValidFrom
 GET http://localhost:4004/catalog/BooksAuthorsAssignment?$expand=ASSOC_Book,ASSOC_Author
+Authorization: Basic admin:

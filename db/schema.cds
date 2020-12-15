@@ -58,12 +58,12 @@ entity BooksAuthorsAssignment {
   key BusinessValidFrom : Date;
   key BusinessValidTo   : Date;
   key Role              : String(50);
-  key ASSOC_Book        : Association to Books {
-                            ID
-                          };
-  key ASSOC_Author      : Association to Authors {
-                            ID
-                          };
+  key ASSOC_Book_ID     : Integer;
+      ASSOC_Book        : Association to Books
+                            on ASSOC_Book.ID = ASSOC_Book_ID;
+  key ASSOC_Author_ID   : Integer;
+      ASSOC_Author      : Association to Authors
+                            on ASSOC_Author.ID = ASSOC_Author_ID;
 }
 
 entity Authors : managed {
@@ -95,6 +95,7 @@ view BooksAnalytics as
         @Analytics.Dimension : true
         currency
   };
+
 entity Images {
   key ID      : UUID;
       @Core.MediaType : 'image/png'
