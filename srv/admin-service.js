@@ -103,23 +103,23 @@ module.exports = async function (srv) {
 
   srv.on(["readJobs"], (req) => {
     return new Promise((resolve, reject) => {
-      const scheduler = getJobscheduler(req);
+      const scheduler = getJobscheduler(req)
       if (scheduler) {
-        var query = {};
+        var query = {}
         scheduler.fetchAllJobs(query, function (err, result) {
           if (err) {
-            req.error("Error retrieving jobs");
+            reject(req.error("Error retrieving jobs"))
           }
           //Jobs retrieved successfully
-          if (result.results.length > 0) {
+          if (result && result.results && result.results.length > 0) {
             resolve(result.results);
           } else {
-            reject(req.warn("Can't find any job"));
+            reject(req.warn("Can't find any job"))
           }
-        });
+        })
       }
-    });
-  });
+    })
+  })
   
   srv.on(["readJobDetails"], (req) => {
     return new Promise((resolve, reject) => {
