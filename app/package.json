@@ -4,8 +4,8 @@
   "description": "",
   "dependencies": {},
   "devDependencies": {
-    "@sap/approuter": "^9.0.0",
-    "@sap/html5-repo-mock": "^1.8.0"
+    "@sap/approuter": "^9.0.1",
+    "@sap/html5-repo-mock": "^2.0.0"
   },
   "engines": {
     "node": "^12"
