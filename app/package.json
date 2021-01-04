@@ -2,9 +2,10 @@
   "name": "bookshop-demo-app",
   "version": "0.0.1",
   "description": "",
-  "dependencies": {},
+  "dependencies": {
+    "@sap/approuter": "9.0.1"
+  },
   "devDependencies": {
-    "@sap/approuter": "^9.0.1",
     "@sap/html5-repo-mock": "^2.0.0"
   },
   "engines": {
@@ -12,6 +13,7 @@
   },
   "scripts": {
     "build": "npm run clean && npm run zip",
+    "start": "node node_modules/@sap/approuter/approuter.js",
     "zip": "cd webapp && npx bestzip manifest-bundle.zip manifest.json && npx bestzip ../HTML5Module-content.zip *",
     "clean": "cd webapp && npx rimraf ../HTML5Module-content.zip manifest-bundle.zip",
     "start-local": "node node_modules/@sap/html5-repo-mock/index.js"
