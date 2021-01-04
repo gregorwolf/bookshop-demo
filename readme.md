@@ -30,7 +30,6 @@ npm run setup
 ## Run
 ```sh
 npm run build
-npm run build:swagger
 npm start
 ```
 
