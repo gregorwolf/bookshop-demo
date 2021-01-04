@@ -12,22 +12,22 @@
     "srv"
   ],
   "dependencies": {
-    "@sap/cds": "^4.4.6",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.4.60",
-    "@sap/hana-client": "^2.6.64",
+    "@sap/cds": "^4.4.7",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.5.1",
+    "@sap/hana-client": "^2.7.16",
     "@sap/jobs-client": "^1.6.1",
-    "@sap/logging": "^6.0.1",
+    "@sap/logging": "^6.0.2",
     "@sap/xsenv": "^3.1.0",
     "@sap/xssec": "^3.0.10",
     "compression": "^1.7.4",
     "express": "^4.17.1",
-    "helmet": "^4.2.0",
+    "helmet": "^4.3.1",
     "mysql": "^2.18.1",
     "passport": "^0.4.1",
-    "swagger-ui-express": "^4.1.5"
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
-    "@sap/cds-dk": "^3.3.2",
+    "@sap/cds-dk": "^3.3.3",
     "jest": "^26.6.3",
     "sqlite3": "^5.0.0",
     "npm-run-all": "^4.1.5",
