@@ -161,6 +161,47 @@ module.exports = async function (srv) {
     });
   });
 
+  srv.on(["readJobActionLogs"], (req) => {
+    return new Promise((resolve, reject) => {
+      const scheduler = getJobscheduler(req);
+      if (scheduler) {
+        var query = {
+          jobId: req.data.jobId,
+        };
+        scheduler.getJobActionLogs(query, function (err, result) {
+          if (err) {
+            reject(req.error("Error retrieving job action logs"));
+          } else {
+            console.log(result.results)
+            resolve(JSON.stringify(result.results))
+          }
+        });
+      }
+    });
+  });
+
+  srv.on(["readJobRunLogs"], (req) => {
+    return new Promise((resolve, reject) => {
+      const scheduler = getJobscheduler(req);
+      if (scheduler) {
+        var query = {
+          jobId: req.data.jobId,
+          scheduleId: req.data.scheduleId,
+          page_size: req.data.page_size,
+          offset: req.data.offset
+        }
+        scheduler.getRunLogs(query, function (err, result) {
+          if (err) {
+            reject(req.error("Error retrieving job run logs"))
+          } else {
+            // console.log(result.results)
+            resolve(result.results)
+          }
+        });
+      }
+    });
+  });
+
   srv.on(["createJob"], (req) => {
     return new Promise((resolve, reject) => {
       const scheduler = getJobscheduler(req);
@@ -170,18 +211,16 @@ module.exports = async function (srv) {
           description: "cron job that validates sales order requests",
           action: req.data.url,
           active: true,
-          httpMethod: "PUT",
+          httpMethod: "POST",
           schedules: [
             {
               cron: req.data.cron,
               description:
-                "this schedule runs once an day at midnight(server time)",
-              data: {
-                salesOrderId: "1234",
-              },
+                "this schedule runs as defined from the input paramter",
+              data: {},
               active: true,
               startTime: {
-                date: "2020-12-07 12:00 +0000",
+                date: "2021-01-04 15:00 +0000",
                 format: "YYYY-MM-DD HH:mm Z",
               },
             },

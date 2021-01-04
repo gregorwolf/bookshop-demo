@@ -1,6 +1,6 @@
 using my.bookshop as db from '../db/';
 
-service AdminService @(impl: './admin-service.js', requires: ['admin', 'booksadmin']) {
+service AdminService @(impl: './admin-service.js', requires: ['admin', 'booksadmin', 'jobscheduler']) {
   @odata.draft.enabled
   entity Approval as projection on db.Approval;
   entity Books @(		
@@ -70,6 +70,8 @@ service AdminService @(impl: './admin-service.js', requires: ['admin', 'booksadm
   function readJobs() returns array of db.Jobs;
   function readJobDetails(jobId: Integer) returns db.Jobs;
   function readJobSchedules(jobId: Integer) returns array of db.Schedules;
+  function readJobActionLogs(jobId: Integer) returns String; // array of db.ActionLogs;
+  function readJobRunLogs(jobId: Integer, scheduleId: String, page_size: Integer, offset: Integer) returns array of db.RunLogs;
   action createJob(url: String, cron: String) returns Integer;
   action updateJob(jobId: Integer, active: Boolean) returns String;
   action deleteJob(jobId: Integer) returns String;

@@ -93,3 +93,21 @@ Authorization: Basic admin:
 ### An error occurred during serialization of the entity collection. An error occurred during serialization of the entity with the following key(s): username: douglas. The provided data does not fit the type of the navigation property: address.
 GET http://localhost:4004/v2/admin/Users?$expand=address
 Authorization: Basic admin:
+
+
+### Order Consistency Check via OData V2
+POST http://localhost:4004/v2/admin/Orders_checkConsistencyInline?ID=guid'64e718c9-ff99-47f1-8ca3-950c850777d4'&IsActiveEntity=true
+Authorization: Basic admin:
+Accept: application/json
+Content-Type: application/json
+
+{}
+
+
+### Order Consistency Check via OData V2
+POST {{$dotenv url}}/v2/admin/Orders_checkConsistencyInline?ID=guid'64e718c9-ff99-47f1-8ca3-950c850777d4'&IsActiveEntity=true
+Authorization: Bearer {{$dotenv bearer}}
+Accept: application/json
+Content-Type: application/json
+
+{}

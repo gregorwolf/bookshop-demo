@@ -11,9 +11,23 @@ Authorization: Basic admin:
 GET http://localhost:4004/admin/readJobDetails(jobId={{jobId}})
 Authorization: Basic admin:
 
+### Read Job Action Logs
+# @name readJobActionLogs
+GET http://localhost:4004/admin/readJobActionLogs(jobId={{jobId}})
+Authorization: Basic admin:
+
 ### Read Job Schedules
-# @name readJobs
+# @name readSchedules
 GET http://localhost:4004/admin/readJobSchedules(jobId={{jobId}})
+Authorization: Basic admin:
+
+### Fill Variables from Response
+@scheduleId = {{readSchedules.response.body.value[0].scheduleId}}
+
+
+### Read Job Run Logs
+# @name readJobRunLogs
+GET http://localhost:4004/admin/readJobRunLogs(jobId={{jobId}},scheduleId='{{scheduleId}}',page_size=200,offset=0)
 Authorization: Basic admin:
 
 ### Create Job
@@ -23,8 +37,8 @@ Authorization: Basic admin:
 Content-Type: application/json
 
 {
-  "url": "https://scpjobscheduler.free.beeceptor.com/salesOrders/validate",
-  "cron": "* * * * * 30 0"
+  "url": "{{$dotenv url}}/v2/admin/Orders_checkConsistencyInline?ID=guid'64e718c9-ff99-47f1-8ca3-950c850777d4'&IsActiveEntity=true",
+  "cron": "* * * * * 30 *"
 }
 
 ### Fill Variables from Response
@@ -48,3 +62,4 @@ Content-Type: application/json
 {
   "jobId": {{jobId}}
 }
+
