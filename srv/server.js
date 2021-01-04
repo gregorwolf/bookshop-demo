@@ -22,12 +22,12 @@ try {
 
 // Middleware to read SAP Job Headers sent by client
 function sapJobLogger(req, res, next) {
-  if(req.headers.x-sap-job-id) {
+  if(req.headers["x-sap-job-id"]) {
     console.log("===> SAP Job Headers");
-    console.log("===> SAP Job Headers - x-sap-job-id:         " + req.headers.x-sap-job-id);
-    console.log("===> SAP Job Headers - x-sap-jobschedule-id: " + req.headers.x-sap-jobschedule-id);
-    console.log("===> SAP Job Headers - x-sap-job-run-id:     " + req.headers.x-sap-job-run-id);
-    console.log("===> SAP Job Headers - x-sap-scheduler-host: " + req.headers.x-sap-scheduler-host);
+    console.log("===> SAP Job Headers - x-sap-job-id:         " + req.headers["x-sap-job-id"]);
+    console.log("===> SAP Job Headers - x-sap-jobschedule-id: " + req.headers["x-sap-jobschedule-id"]);
+    console.log("===> SAP Job Headers - x-sap-job-run-id:     " + req.headers["x-sap-job-run-id"]);
+    console.log("===> SAP Job Headers - x-sap-scheduler-host: " + req.headers["x-sap-scheduler-host"]);
   }
 
   next();
@@ -84,11 +84,11 @@ cds.on("bootstrap", async (app) => {
   );
   app.use(proxy());
   // app.use(replaceExcelAcceptHeader)
+  app.use(sapJobLogger);
 
   // Authentication using JWT
   if (xsuaaCredentials) {
     app.use(jwtLogger);
-    app.use(sapJobLogger);
     await app.use(passport.initialize());
     await app.use(passport.authenticate("JWT", { session: false }));
   }

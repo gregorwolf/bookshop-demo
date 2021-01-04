@@ -38,7 +38,7 @@ Content-Type: application/json
 
 {
   "url": "{{$dotenv url}}/v2/admin/Orders_checkConsistencyInline?ID=guid'64e718c9-ff99-47f1-8ca3-950c850777d4'&IsActiveEntity=true",
-  "cron": "* * * * * 30 *"
+  "cron": "* * * * * 41 *"
 }
 
 ### Fill Variables from Response
