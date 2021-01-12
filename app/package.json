@@ -9,7 +9,7 @@
     "@sap/html5-repo-mock": "^2.0.0"
   },
   "engines": {
-    "node": "^12"
+    "node": "^10 || ^12"
   },
   "scripts": {
     "build": "npm run clean && npm run zip",

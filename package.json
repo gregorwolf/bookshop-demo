@@ -5,7 +5,7 @@
   "repository": "https://github.wdf.sap.corp/caps/bookshop.git",
   "license": "ISC",
   "engines": {
-    "node": "^12"
+    "node": "^10 || ^12"
   },
   "files": [
     "db",
@@ -41,7 +41,14 @@
     "deploy:cf:ui": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-deployer",
     "deploy:cf:app": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-app",
     "deploy:cf-hana-cloud": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf-hana-cloud.mtaext",
+    "deploy:hana": "cds deploy --to hana --vcap-file ./default-env.json",
     "deploy:xsa": "xs deploy mta_archives/bookshop-demo_0.0.1.mtar",
+    "create:xsa:uaa": "xs create-service xsuaa space bookshop-demo-uaa -c xs-security.json",
+    "create:uaa-service-key": "xs create-service-key bookshop-demo-uaa dev",
+    "get:uaa-service-key": "xs service-key bookshop-demo-uaa dev",
+    "create:hdi-shared": "xs create-service hana hdi-shared bookshop-demo-db-service",
+    "create:hdi-service-key": "xs create-service-key bookshop-demo-db-service dev",
+    "get:hdi-service-key": "xs service-key bookshop-demo-db-service dev",
     "build": "run-s build:clean build:OpenAPI build:copycsntoproxy build:copyOpenAPItogen",
     "build:clean": "cds build/all --clean",
     "build:xs-security": "cds compile srv/ --to xsuaa > xs-security.json",
@@ -57,6 +64,7 @@
     "watch": "nodemon -w . -i node_modules/**,.git/** -e cds -x npm run start",
     "test": "jest",
     "update:cf:uaa": "cf update-service bookshop-demo-uaa -c xs-security.json",
+    "undeploy:xsa": "xs undeploy bookshop-demo --delete-services --delete-service-brokers",
     "undeploy:cf": "cf undeploy bookshop-demo --delete-services --delete-service-brokers"
   },
   "cds": {
@@ -69,6 +77,13 @@
         "model": "db",
         "credentials": {
           "database": "db/bookshop.db"
+        }
+      }
+    },
+    "[dev-hana]": {
+      "requires": {
+        "db": {
+          "kind": "hana"
         }
       }
     },

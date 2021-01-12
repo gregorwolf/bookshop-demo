@@ -1,5 +1,5 @@
 {
-  "welcomeFile": "/bookshopdemoapp/index.html",
+  "welcomeFile": "/app/",
   "authenticationMethod": "route",
   "logout": {
     "logoutEndpoint": "/do/logout"

@@ -14,7 +14,7 @@
 		"swagger-ui-express": "^4.1.6"
 	},
 	"engines": {
-		"node": "^12"
+		"node": "^10 || ^12"
 	},
 	"devDependencies": {},
 	"scripts": {

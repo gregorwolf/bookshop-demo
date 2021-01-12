@@ -7,18 +7,19 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./gen/OpenAPI.json");
 const express = require("express");
 
-var xsuaaCredentials;
-try {
-  xsenv.loadEnv();
-  const JWTStrategy = require("@sap/xssec").JWTStrategy;
-  const services = xsenv.getServices({ xsuaa: { tags: "xsuaa" } });
-  xsuaaCredentials = services.xsuaa;
-  const jwtStrategy = new JWTStrategy(xsuaaCredentials);
-  passport.use(jwtStrategy);
-} catch (error) {
-  console.warn(error.message);
+var xsuaaCredentials = false;
+if(process.env.NODE_ENV === 'production') {
+  try {
+    xsenv.loadEnv();
+    const JWTStrategy = require("@sap/xssec").JWTStrategy;
+    const services = xsenv.getServices({ xsuaa: { tags: "xsuaa" } });
+    xsuaaCredentials = services.xsuaa;
+    const jwtStrategy = new JWTStrategy(xsuaaCredentials);
+    passport.use(jwtStrategy);
+  } catch (error) {
+    console.warn(error.message);
+  }
 }
-
 
 // Middleware to read SAP Job Headers sent by client
 function sapJobLogger(req, res, next) {
@@ -87,7 +88,7 @@ cds.on("bootstrap", async (app) => {
   app.use(sapJobLogger);
 
   // Authentication using JWT
-  if (xsuaaCredentials) {
+  if (process.env.NODE_ENV === 'production') {
     app.use(jwtLogger);
     await app.use(passport.initialize());
     await app.use(passport.authenticate("JWT", { session: false }));

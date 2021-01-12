@@ -21,6 +21,22 @@
         {
           "type": "node", 
           "request": "launch",
+          "name": "cds run dev-hana", 
+          "args": [ "run" ],
+          "env": {"NODE_ENV":"dev-hana"},
+          "cwd": "${workspaceFolder}",
+          "program": "${workspaceFolder}/node_modules/@sap/cds/bin/cds.js", 
+          "skipFiles": [
+              "<node_internals>/**/*.js",
+              "**/cds-reflect/lib/index.js",
+              "**/cds/lib/index.js",
+              "**/.vscode/cds.js",
+          ],
+          "console": "internalConsole"
+        },
+        {
+          "type": "node", 
+          "request": "launch",
           "name": "cds run", 
           "args": [ "run" ],
           "env": {"DEBUG":"yes"},
