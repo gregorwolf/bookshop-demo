@@ -38,11 +38,11 @@ Content-Type: application/json
 
 {
   "url": "{{$dotenv url}}/v2/admin/Orders_checkConsistencyInline?ID=guid'64e718c9-ff99-47f1-8ca3-950c850777d4'&IsActiveEntity=true",
-  "cron": "* * * * * 41 *"
+  "cron": "* * * * * */5 0"
 }
 
 ### Fill Variables from Response
-@jobId = {{createJob.response.body.value}}
+#@jobId = {{createJob.response.body.value}}
 @active=true
 ### Update Job
 POST http://localhost:4004/admin/updateJob
