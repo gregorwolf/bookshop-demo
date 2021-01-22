@@ -12,7 +12,7 @@
     "srv"
   ],
   "dependencies": {
-    "@sap/cds": "^4.4.7",
+    "@sap/cds": "^4.4.10",
     "@sap/cds-odata-v2-adapter-proxy": "^1.5.1",
     "@sap/hana-client": "^2.7.16",
     "@sap/jobs-client": "^1.6.1",
@@ -21,7 +21,7 @@
     "@sap/xssec": "^3.0.10",
     "compression": "^1.7.4",
     "express": "^4.17.1",
-    "helmet": "^4.3.1",
+    "helmet": "^4.4.1",
     "mysql": "^2.18.1",
     "passport": "^0.4.1",
     "swagger-ui-express": "^4.1.6"
@@ -30,12 +30,12 @@
     "jest": "^26.6.3",
     "sqlite3": "^5.0.1",
     "npm-run-all": "^4.1.5",
-    "supertest": "^6.0.1",
+    "supertest": "^6.1.1",
     "copyfiles": "2.4.1",
     "@openui5/ts-types": "^1.60.5"
   },
   "scripts": {
-    "setup": "run-s install deploy build start",
+    "setup": "run-s deploy build start",
     "deploy": "cds deploy db --to sqlite:db/bookshop.db",
     "deploy:cf": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext",
     "deploy:cf:ui": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-deployer",
