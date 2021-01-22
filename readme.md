@@ -24,6 +24,7 @@ Copy & paste this to your command line:
 ```sh
 git clone https://github.com/gregorwolf/bookshop-demo.git
 cd bookshop
+npm install
 npm run setup
 ```
 
