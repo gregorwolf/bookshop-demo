@@ -46,15 +46,19 @@
     "create:xsa:uaa": "xs create-service xsuaa space bookshop-demo-uaa -c xs-security.json",
     "create:uaa-service-key": "xs create-service-key bookshop-demo-uaa dev",
     "get:uaa-service-key": "xs service-key bookshop-demo-uaa dev",
+    "create:cf-uaa-service-key": "cf create-service-key bookshop-demo-uaa dev",
+    "get:cf-uaa-service-key": "cf service-key bookshop-demo-uaa dev",
     "create:hdi-shared": "xs create-service hana hdi-shared bookshop-demo-db-service",
     "create:hdi-service-key": "xs create-service-key bookshop-demo-db-service dev",
     "get:hdi-service-key": "xs service-key bookshop-demo-db-service dev",
+    "create:cf-hdi-service-key": "cf create-service-key bookshop-demo-db-service dev",
+    "get:cf-hdi-service-key": "cf service-key bookshop-demo-db-service dev",
     "build": "run-s build:clean build:OpenAPI build:copycsntoproxy build:copyOpenAPItogen",
     "build:clean": "cds build/all --clean",
     "build:xs-security": "cds compile srv/ --to xsuaa > xs-security.json",
     "build:cf": "cp mta-cf.yaml mta.yaml && mbt build -p=cf && rm mta.yaml",
     "build:xsa": "cp mta-xsa.yaml mta.yaml && mbt build -p=xsa && rm mta.yaml",
-    "build:OpenAPI": "mkdir -p srv/gen && cds compile --to openapi srv -s AdminService > srv/gen/OpenAPI.json",
+    "build:OpenAPI": "mkdir -p srv/gen && npx -p @sap/cds-dk cds compile --to openapi srv -s AdminService > srv/gen/OpenAPI.json",
     "build:copyOpenAPItogen": "copyfiles -f srv/gen/OpenAPI.json gen/srv/srv/gen/",
     "build:copycsntoproxy": "copyfiles -f gen/srv/srv/csn.json standalone-v2-proxy/gen/",
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
@@ -77,6 +81,18 @@
         "model": "db",
         "credentials": {
           "database": "db/bookshop.db"
+        }
+      }
+    },
+    "[dev-uaa]": {
+      "requires": {
+        "uaa": {
+          "kind": "xsuaa"
+        }
+      },
+      "auth": {
+        "passport": {
+          "strategy": "JWT"
         }
       }
     },
