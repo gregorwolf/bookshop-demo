@@ -252,6 +252,17 @@
                                     }
                                 },
                                 {
+                                    "id": "BooksdisplayUI5latestFreestyle",
+                                    "title": "Browse Books",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "BooksdisplayUI5latestFreestyle",
+                                        "title": "Browse Books",
+                                        "info": "Freestyle",
+                                        "targetURL": "#Books-displayUI5latestFreestyle"
+                                    }
+                                },
+                                {
                                     "id": "AuthorsdisplayUI5latest",
                                     "title": "Browse Authors",
                                     "tileType": "sap.ushell.ui.tile.StaticTile",
@@ -719,6 +730,20 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=v2.booksUI5latest",
                                 "url": "v2/booksUI5latest"
+                            }
+                        },
+                        "actionV2BooksFreestyle": {
+                            "semanticObject": "Books",
+                            "action": "displayUI5latestFreestyle",
+                            "title": "Browse Books",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=v2.booksfreestyle",
+                                "url": "v2/books-freestyle/webapp"
                             }
                         },
                         "actionV2AuthorsUI5latest": {

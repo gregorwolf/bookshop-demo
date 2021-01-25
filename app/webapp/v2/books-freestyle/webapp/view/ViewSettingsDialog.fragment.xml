@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+
+	<ViewSettingsDialog
+		id="viewSettingsDialog"
+		confirm=".onConfirmViewSettingsDialog">
+		<sortItems>
+			<ViewSettingsItem
+				text="{i18n>masterSort1}"
+				key="ID"
+				selected="true"/>
+			<ViewSettingsItem
+				text="{i18n>masterSort2}"
+				key="stock"/>
+		</sortItems>
+		<filterItems>
+			<ViewSettingsFilterItem
+				id="filterItems"
+				text="{i18n>masterFilterName}"
+				multiSelect="false">
+				<items>
+					<ViewSettingsItem
+						id="viewFilter1"
+						text="{i18n>masterFilter1}"
+						key="Filter1"/>
+					<ViewSettingsItem
+						id="viewFilter2"
+						text="{i18n>masterFilter2}"
+						key="Filter2"/>
+				</items>
+			</ViewSettingsFilterItem>
+		</filterItems>
+		<groupItems>
+			<ViewSettingsItem
+				text="{i18n>masterGroup1}"
+				key="stock"/>
+		</groupItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

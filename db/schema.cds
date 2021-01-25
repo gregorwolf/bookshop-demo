@@ -50,6 +50,7 @@ entity Books : managed {
       visible                            : Boolean      @title : 'Visible (Boolean)';
       releaseDate                        : DateTime     @title : 'Release Date (DateTime)';
       readingTime                        : Time         @title : 'Reading Time (Time)';
+      author                             : Association to one Authors;
       BooksAuthorsAssignment_ASSOC_Books : Association to many BooksAuthorsAssignment
                                              on BooksAuthorsAssignment_ASSOC_Books.ASSOC_Book = $self;
 };
