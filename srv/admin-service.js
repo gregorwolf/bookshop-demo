@@ -293,7 +293,7 @@ module.exports = async function (srv) {
       var orderId = req.params[0].ID;
       var msgInfo = {
         code: "SY001",
-        message: `Order ${order.OrderNo} is consistent`,
+        message: `Order ${order.OrderNo} is consistent - Special Character - German Umlauts: öäü ÖÄÜ ß`,
         numericSeverity: 1,
         persistent: true,
       };
