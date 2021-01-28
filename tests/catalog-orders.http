@@ -1,0 +1,49 @@
+### Read Orders via OData
+GET http://localhost:4004/catalog/Orders?$expand=Items
+Authorization: Basic bob:
+
+### Create Orders
+POST http://localhost:4004/catalog/Orders
+Authorization: Basic bob:
+Content-Type: application/json
+
+{
+    "OrderNo": "10",
+    "CustomerOrderNo": "Order from bob",
+    "currency_code": "EUR",
+    "Items": [
+        {
+            "book_ID": 201
+        }
+    ],
+    "ShippingAddress":  {
+        "street": "Hauptstraße 1",
+        "city": "Trostberg"
+    }
+}
+
+### Create Order as john
+POST http://localhost:4004/catalog/Orders
+Authorization: Basic john:
+Content-Type: application/json
+
+{
+    "OrderNo": "10",
+    "CustomerOrderNo": "Order from john",
+    "currency_code": "EUR",
+    "Items": [
+        {
+            "book_ID": 201
+        }
+    ],
+    "ShippingAddress":  {
+        "street": "Hauptstraße 1",
+        "city": "Trostberg"
+    }
+}
+### Create Order via Action
+POST http://localhost:4004/catalog/submitOrder
+Authorization: Basic bob:
+Content-Type: application/json
+
+{ "book":201, "amount":5 }
