@@ -4,18 +4,15 @@ Authorization: Basic admin:
 
 ### Read Metadata via OData V4
 GET http://localhost:4004/admin/$metadata
-Authorization: Basic admin:
 
 ### Read Metadata via OData V2
 GET http://localhost:4004/v2/admin/$metadata
-Authorization: Basic admin:
 
 ### Read Entitysets via OData V4
 GET http://localhost:4004/admin/
-Authorization: Basic admin:
+
 ### Read Entitysets via OData V2
 GET http://localhost:4004/v2/admin/
-Authorization: Basic admin:
 
 ### Read Authors via OData V4
 GET http://localhost:4004/admin/Authors
@@ -34,11 +31,11 @@ GET http://localhost:4004/v2/admin/Books?$expand=author
 Authorization: Basic admin:
 
 ### Update Book via OData V2 by admin
-PUT http://localhost:4004/v2/admin/Books(1)
-Authorization: Basic admin:
+PUT http://localhost:4004/v2/admin/Books(ID=1,BusinessValidFrom=datetime'2000-01-01T00:00',BusinessValidTo=datetime'9999-01-01T00:00')
+Authorization: Basic littleadmin:
 Content-Type: application/json
 
-{ "stock": 15 }
+{ "stock": 14 }
 
 ### Read Books via OData V4 by admin
 GET http://localhost:4004/admin/Books

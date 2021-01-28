@@ -2,13 +2,17 @@
 GET http://localhost:4004/catalog/Orders?$expand=Items
 Authorization: Basic bob:
 
+### Read Orders via OData
+GET http://localhost:4004/catalog/OrderItems
+Authorization: Basic bob:
+
 ### Create Orders
 POST http://localhost:4004/catalog/Orders
 Authorization: Basic bob:
 Content-Type: application/json
 
 {
-    "OrderNo": "10",
+    "OrderNo": "11",
     "CustomerOrderNo": "Order from bob",
     "currency_code": "EUR",
     "Items": [
@@ -21,6 +25,11 @@ Content-Type: application/json
         "city": "Trostberg"
     }
 }
+
+### Read Order as john
+GET http://localhost:4004/catalog/Orders
+Authorization: Basic john:
+Content-Type: application/json
 
 ### Create Order as john
 POST http://localhost:4004/catalog/Orders

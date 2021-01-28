@@ -57,7 +57,10 @@
                         "scopes": [
                             "authenticated-user",
                             "openid"
-                        ]
+                        ],
+                        "attributes": {
+                            "level": 5
+                        }
                     }
                 },
                 "error": {

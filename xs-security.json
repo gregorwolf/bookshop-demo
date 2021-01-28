@@ -26,7 +26,14 @@
       "grant-as-authority-to-apps": ["jobscheduler"]
     }
   ],
-  "attributes": [],
+  "attributes": [
+    {
+      "name": "level",
+      "description": "level",
+      "valueType": "s",
+      "valueRequired": false
+    }
+  ],
   "role-templates": [
     {
       "name": "admin",
@@ -57,6 +64,15 @@
       "description": "UAA",
       "scope-references": [
         "uaa.user"
+      ]
+    },
+    {
+      "name": "userattributes",
+      "description": "generated",
+      "default-role-name": "Attributes of a User",
+      "scope-references": [],
+      "attribute-references": [
+        "level"
       ]
     }
   ]
