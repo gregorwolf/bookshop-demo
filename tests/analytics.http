@@ -2,11 +2,17 @@
 http://localhost:4004/admin/BooksAnalytics
 Authorization: Basic admin:
 
+### Read BooksAnalytics
+http://localhost:4004/v2/admin/BooksAnalytics
+Authorization: Basic admin:
 
 ### Read BooksAnalytics - 
 http://localhost:4004/admin/BooksAnalytics?$apply=groupby((code),aggregate(stock with sum as TotalStock))
 Authorization: Basic admin:
 
+### Read BooksAnalytics - 
+http://localhost:4004/v2/admin/BooksAnalytics?$apply=groupby((code),aggregate(stock with sum as TotalStock))
+Authorization: Basic admin:
 
 ### Read BooksAnalytics - 
 http://localhost:4004/admin/BooksAnalytics?$apply=groupby((code),aggregate(stock%20with%20sum%20as%20TotalStock))&$select=ID,code&$skip=0&$top=100

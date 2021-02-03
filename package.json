@@ -5,49 +5,60 @@
   "repository": "https://github.wdf.sap.corp/caps/bookshop.git",
   "license": "ISC",
   "engines": {
-    "node": "^12"
+    "node": "^10 || ^12"
   },
   "files": [
     "db",
     "srv"
   ],
   "dependencies": {
-    "@sap/cds": "^4.4.6",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.4.60",
-    "@sap/hana-client": "^2.6.64",
+    "@sap/cds": "^4.4.10",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.5.1",
+    "@sap/hana-client": "^2.7.16",
     "@sap/jobs-client": "^1.6.1",
-    "@sap/logging": "^6.0.1",
+    "@sap/logging": "^6.0.2",
     "@sap/xsenv": "^3.1.0",
     "@sap/xssec": "^3.0.10",
     "compression": "^1.7.4",
     "express": "^4.17.1",
-    "helmet": "^4.2.0",
+    "helmet": "^4.4.1",
     "mysql": "^2.18.1",
     "passport": "^0.4.1",
-    "swagger-ui-express": "^4.1.5"
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
-    "@sap/cds-dk": "^3.3.2",
     "jest": "^26.6.3",
-    "sqlite3": "^5.0.0",
+    "sqlite3": "5.0.0",
     "npm-run-all": "^4.1.5",
-    "supertest": "^6.0.1",
+    "supertest": "^6.1.1",
     "copyfiles": "2.4.1",
     "@openui5/ts-types": "^1.60.5"
   },
   "scripts": {
-    "setup": "npm install && run-s deploy build start",
+    "setup": "run-s deploy build start",
     "deploy": "cds deploy db --to sqlite:db/bookshop.db",
     "deploy:cf": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext",
     "deploy:cf:ui": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-deployer",
     "deploy:cf:app": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-app",
     "deploy:cf-hana-cloud": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf-hana-cloud.mtaext",
+    "deploy:hana": "cds deploy --to hana --vcap-file ./default-env.json",
     "deploy:xsa": "xs deploy mta_archives/bookshop-demo_0.0.1.mtar",
-    "build": "cds build/all --clean && run-s build:OpenAPI build:copycsntoproxy build:copyOpenAPItogen",
+    "create:xsa:uaa": "xs create-service xsuaa space bookshop-demo-uaa -c xs-security.json",
+    "create:uaa-service-key": "xs create-service-key bookshop-demo-uaa dev",
+    "get:uaa-service-key": "xs service-key bookshop-demo-uaa dev",
+    "create:cf-uaa-service-key": "cf create-service-key bookshop-demo-uaa dev",
+    "get:cf-uaa-service-key": "cf service-key bookshop-demo-uaa dev",
+    "create:hdi-shared": "xs create-service hana hdi-shared bookshop-demo-db-service",
+    "create:hdi-service-key": "xs create-service-key bookshop-demo-db-service dev",
+    "get:hdi-service-key": "xs service-key bookshop-demo-db-service dev",
+    "create:cf-hdi-service-key": "cf create-service-key bookshop-demo-db-service dev",
+    "get:cf-hdi-service-key": "cf service-key bookshop-demo-db-service dev",
+    "build": "run-s build:clean build:OpenAPI build:copycsntoproxy build:copyOpenAPItogen",
+    "build:clean": "cds build/all --clean",
     "build:xs-security": "cds compile srv/ --to xsuaa > xs-security.json",
-    "build:cf": "mbt build -p=cf",
-    "build:xsa": "mbt build -p=xsa",
-    "build:OpenAPI": "mkdir -p srv/gen && cds compile --to openapi srv -s AdminService > srv/gen/OpenAPI.json",
+    "build:cf": "cp mta-cf.yaml mta.yaml && mbt build -p=cf && rm mta.yaml",
+    "build:xsa": "cp mta-xsa.yaml mta.yaml && mbt build -p=xsa && rm mta.yaml",
+    "build:OpenAPI": "mkdir -p srv/gen && npx -p @sap/cds-dk cds compile --to openapi srv -s AdminService > srv/gen/OpenAPI.json",
     "build:copyOpenAPItogen": "copyfiles -f srv/gen/OpenAPI.json gen/srv/srv/gen/",
     "build:copycsntoproxy": "copyfiles -f gen/srv/srv/csn.json standalone-v2-proxy/gen/",
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
@@ -57,6 +68,7 @@
     "watch": "nodemon -w . -i node_modules/**,.git/** -e cds -x npm run start",
     "test": "jest",
     "update:cf:uaa": "cf update-service bookshop-demo-uaa -c xs-security.json",
+    "undeploy:xsa": "xs undeploy bookshop-demo --delete-services --delete-service-brokers",
     "undeploy:cf": "cf undeploy bookshop-demo --delete-services --delete-service-brokers"
   },
   "cds": {
@@ -69,6 +81,25 @@
         "model": "db",
         "credentials": {
           "database": "db/bookshop.db"
+        }
+      }
+    },
+    "[dev-uaa]": {
+      "requires": {
+        "uaa": {
+          "kind": "xsuaa"
+        }
+      },
+      "auth": {
+        "passport": {
+          "strategy": "JWT"
+        }
+      }
+    },
+    "[dev-hana]": {
+      "requires": {
+        "db": {
+          "kind": "hana"
         }
       }
     },

@@ -24,13 +24,14 @@ Copy & paste this to your command line:
 ```sh
 git clone https://github.com/gregorwolf/bookshop-demo.git
 cd bookshop
+npm install
 npm run setup
 ```
 
-## Run
+## Run local
+
 ```sh
 npm run build
-npm run build:swagger
 npm start
 ```
 
@@ -39,6 +40,34 @@ npm start
 Open these links in your browser:
 
 * <http://localhost:4004/webapp/fiori.html> &ndash; Fiori Launchpad sandbox
+
+## Deploy to SAP Cloud Platform - Cloud Foundry Environment
+
+We're using the mbt build to create a mtar that can be deployed to the SAP CP Cloud Foundry. The cf commandline must be installed and you have to be logged on to the space you want to deploy to. The build ist started with:
+
+```
+npm run build:cf
+```
+
+then you can deploy with:
+
+```
+npm run deploy:cf
+```
+
+## Deploy to SAP HANA XSA on Premise
+
+We're using the mbt build to create a mtar that can be deployed to the SAP HANA. The xs commandline must be installed and you have to be logged on to the space you want to deploy to. The build ist started with:
+
+```
+npm run build:xsa
+```
+
+then you can deploy with:
+
+```
+npm run deploy:xsa
+```
 
 ## Allow embedding as an iFrame
 

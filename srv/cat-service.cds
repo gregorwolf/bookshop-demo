@@ -43,7 +43,7 @@ service CatalogService @(impl: './cat-service.js') {
   // @readonly entity BusinessPartner as projection on bp.BusinessPartner;
   entity Orders @(restrict: [ 
     { grant: 'CREATE', to: 'authenticated-user' },
-    { grant: 'READ', where: 'createdBy = $user' },
+    { grant: 'READ', where: 'createdBy = $user AND $user.level > 2' },
   ]) as projection on db.Orders;
 
   @requires_: 'authenticated-user'

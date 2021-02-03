@@ -103,23 +103,23 @@ module.exports = async function (srv) {
 
   srv.on(["readJobs"], (req) => {
     return new Promise((resolve, reject) => {
-      const scheduler = getJobscheduler(req);
+      const scheduler = getJobscheduler(req)
       if (scheduler) {
-        var query = {};
+        var query = {}
         scheduler.fetchAllJobs(query, function (err, result) {
           if (err) {
-            req.error("Error retrieving jobs");
+            reject(req.error("Error retrieving jobs"))
           }
           //Jobs retrieved successfully
-          if (result.results.length > 0) {
+          if (result && result.results && result.results.length > 0) {
             resolve(result.results);
           } else {
-            reject(req.warn("Can't find any job"));
+            reject(req.warn("Can't find any job"))
           }
-        });
+        })
       }
-    });
-  });
+    })
+  })
   
   srv.on(["readJobDetails"], (req) => {
     return new Promise((resolve, reject) => {
@@ -161,6 +161,47 @@ module.exports = async function (srv) {
     });
   });
 
+  srv.on(["readJobActionLogs"], (req) => {
+    return new Promise((resolve, reject) => {
+      const scheduler = getJobscheduler(req);
+      if (scheduler) {
+        var query = {
+          jobId: req.data.jobId,
+        };
+        scheduler.getJobActionLogs(query, function (err, result) {
+          if (err) {
+            reject(req.error("Error retrieving job action logs"));
+          } else {
+            console.log(result.results)
+            resolve(JSON.stringify(result.results))
+          }
+        });
+      }
+    });
+  });
+
+  srv.on(["readJobRunLogs"], (req) => {
+    return new Promise((resolve, reject) => {
+      const scheduler = getJobscheduler(req);
+      if (scheduler) {
+        var query = {
+          jobId: req.data.jobId,
+          scheduleId: req.data.scheduleId,
+          page_size: req.data.page_size,
+          offset: req.data.offset
+        }
+        scheduler.getRunLogs(query, function (err, result) {
+          if (err) {
+            reject(req.error("Error retrieving job run logs"))
+          } else {
+            // console.log(result.results)
+            resolve(result.results)
+          }
+        });
+      }
+    });
+  });
+
   srv.on(["createJob"], (req) => {
     return new Promise((resolve, reject) => {
       const scheduler = getJobscheduler(req);
@@ -170,18 +211,16 @@ module.exports = async function (srv) {
           description: "cron job that validates sales order requests",
           action: req.data.url,
           active: true,
-          httpMethod: "PUT",
+          httpMethod: "POST",
           schedules: [
             {
               cron: req.data.cron,
               description:
-                "this schedule runs once an day at midnight(server time)",
-              data: {
-                salesOrderId: "1234",
-              },
+                "this schedule runs as defined from the input paramter",
+              data: {},
               active: true,
               startTime: {
-                date: "2020-12-07 12:00 +0000",
+                date: "2021-01-04 15:00 +0000",
                 format: "YYYY-MM-DD HH:mm Z",
               },
             },
@@ -254,7 +293,7 @@ module.exports = async function (srv) {
       var orderId = req.params[0].ID;
       var msgInfo = {
         code: "SY001",
-        message: `Order ${order.OrderNo} is consistent`,
+        message: `Order ${order.OrderNo} is consistent - Special Character - German Umlauts: öäü ÖÄÜ ß`,
         numericSeverity: 1,
         persistent: true,
       };

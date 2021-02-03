@@ -7,7 +7,7 @@ target/
 .DS_Store
 _out
 
-default-env.json
+default-env*.json
 
 fioriHtmlRunner.html
 .*/fioriHtmlRunner.html

@@ -33,3 +33,15 @@ type Schedules {
   time           : String;
   type           : String;
 }
+
+type RunLogs {
+  runId               : String;
+  httpStatus          : Integer;
+  executionTimestamp  : String;
+  runStatus           : String;
+  runState            : String;
+  statusMessage       : String;
+  scheduleTimestamp   : String;
+  completionTimestamp : String;
+  runText             : String;
+}

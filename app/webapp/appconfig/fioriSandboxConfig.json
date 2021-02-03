@@ -37,6 +37,59 @@
                     ],
                     "groups": [
                         {
+                            "id": "Admin",
+                            "title": "Admin",
+                            "isPreset": true,
+                            "isVisible": true,
+                            "isGroupLocked": false,
+                            "tiles": [
+                                {
+                                    "id": "BooksdisplayUI5latest",
+                                    "title": "Books",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "BooksdisplayUI5latest",
+                                        "title": "Books",
+                                        "info": "",
+                                        "targetURL": "#Books-manage"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": "Bookshop",
+                            "title": "Bookshop",
+                            "isPreset": true,
+                            "isVisible": true,
+                            "isGroupLocked": false,
+                            "tiles": [
+                                {
+                                    "id": "BooksdisplayUI5latest",
+                                    "title": "Books",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "BooksdisplayUI5latest",
+                                        "title": "Books",
+                                        "info": "",
+                                        "targetURL": "#Books-display"
+                                    }
+                                },
+                                {
+                                    "id": "BrowseAuthorsApp",
+                                    "title": "Authors",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "serviceRefreshInterval": 5,
+                                    "properties": {
+                                        "chipId": "catalogTile_002",
+                                        "title": "Authors",
+                                        "info": "",
+                                        "targetURL": "#Authors-display"
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "id": "ODataV2",
                             "title": "OData V2",
                             "isPreset": true,
@@ -196,6 +249,17 @@
                                         "title": "Browse Books",
                                         "info": "The latest books",
                                         "targetURL": "#Books-displayUI5latest"
+                                    }
+                                },
+                                {
+                                    "id": "BooksdisplayUI5latestFreestyle",
+                                    "title": "Browse Books",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "BooksdisplayUI5latestFreestyle",
+                                        "title": "Browse Books",
+                                        "info": "Freestyle",
+                                        "targetURL": "#Books-displayUI5latestFreestyle"
                                     }
                                 },
                                 {
@@ -666,6 +730,20 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=v2.booksUI5latest",
                                 "url": "v2/booksUI5latest"
+                            }
+                        },
+                        "actionV2BooksFreestyle": {
+                            "semanticObject": "Books",
+                            "action": "displayUI5latestFreestyle",
+                            "title": "Browse Books",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=v2.booksfreestyle",
+                                "url": "v2/books-freestyle/webapp"
                             }
                         },
                         "actionV2AuthorsUI5latest": {
