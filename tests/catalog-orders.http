@@ -6,7 +6,7 @@ Authorization: Basic bob:
 GET http://localhost:4004/catalog/OrderItems
 Authorization: Basic bob:
 
-### Create Orders
+### Create Orders in two steps
 POST http://localhost:4004/catalog/Orders
 Authorization: Basic bob:
 Content-Type: application/json
@@ -16,9 +16,7 @@ Content-Type: application/json
     "CustomerOrderNo": "Order from bob",
     "currency_code": "EUR",
     "Items": [
-        {
-            "book_ID": 201
-        }
+
     ],
     "ShippingAddress":  {
         "street": "Hauptstraße 1",
@@ -26,12 +24,21 @@ Content-Type: application/json
     }
 }
 
+### Create Order Item
+POST http://localhost:4004/catalog/Orders(2fe1d720-e4b2-43eb-93be-f5ffe60a762d)/Items
+Authorization: Basic bob:
+Content-Type: application/json
+
+{
+    "book_ID": 201
+}
+
 ### Read Order as john
 GET http://localhost:4004/catalog/Orders
 Authorization: Basic john:
 Content-Type: application/json
 
-### Create Order as john
+### Create Order as john - using deep insert
 POST http://localhost:4004/catalog/Orders
 Authorization: Basic john:
 Content-Type: application/json
