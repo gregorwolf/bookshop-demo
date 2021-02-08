@@ -6,6 +6,10 @@ const xsenv = require("@sap/xsenv");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./gen/OpenAPI.json");
 const express = require("express");
+const log = require('cf-nodejs-logging-support');
+
+// Set the minimum logging level (Levels: off, error, warn, info, verbose, debug, silly)
+log.setLoggingLevel("info");
 
 var xsuaaCredentials = false;
 if(process.env.NODE_ENV === 'production') {
@@ -83,6 +87,8 @@ cds.on("bootstrap", async (app) => {
       contentSecurityPolicy: false,
     })
   );
+  // Bind to express app
+  app.use(log.logNetwork);
   app.use(proxy());
   // app.use(replaceExcelAcceptHeader)
   app.use(sapJobLogger);

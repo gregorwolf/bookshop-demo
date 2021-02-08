@@ -19,6 +19,7 @@
     "@sap/logging": "^6.0.2",
     "@sap/xsenv": "^3.1.0",
     "@sap/xssec": "^3.0.10",
+    "cf-nodejs-logging-support": "^6.6.0",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "helmet": "^4.4.1",
