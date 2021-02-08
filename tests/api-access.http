@@ -35,11 +35,16 @@ GET {{$dotenv srvurl}}/api/getData
 Authorization: Bearer {{access_token}}
 
 ### Read Orders
-GET {{$dotenv srvurl}}/v2/admin/Orders?$top=1
+GET {{$dotenv srvurl}}/v2/admin/
+Accept: application/json
+Authorization: Bearer {{access_token}}
+
+### Read Orders
+GET {{$dotenv srvurl}}/v2/admin/Orders?$top=10&$expand=Items
 Accept: application/json
 Authorization: Bearer {{access_token}}
 
 ### Read Books
-GET {{$dotenv srvurl}}/v2/catalog/Books?$top=1
+GET {{$dotenv srvurl}}/v2/admin/Authors?$top=10
 Accept: application/json
 Authorization: Bearer {{access_token}}
