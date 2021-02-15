@@ -1,0 +1,5 @@
+ID;tennant;userhash;method;entity;timestamp
+ec0bbec2-0f22-48a7-9dca-c0b4d22cd6da;a;usera;READ;Books;2021-02-14
+47d7adda-aa45-4d6b-9374-d50f8db756af;a;usera;READ;Books;2021-02-15
+ec0bbec2-0f22-48a7-9dca-c0b4d22cd6de;a;userb;READ;Books;2021-02-14
+47d7adda-aa45-4d6b-9374-d50f8db756ad;a;userb;READ;Books;2021-02-15

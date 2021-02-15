@@ -140,3 +140,29 @@ entity OrderShippingAddress : cuid, managed {
   street : String(60)@(title : 'Street', );
   city   : String(60)@(title : 'City', );
 };
+
+entity Meterings : cuid {
+  tennant   : String(64);
+  userhash  : String(64);
+  method    : String(10);
+  entity    : String(256);
+  timestamp : Timestamp;
+};
+
+@Aggregation.ApplySupported.PropertyRestrictions : true
+view MeteringAnalytics as select from Meterings {
+    key ID,
+    @Analytics.Dimension : true
+    tennant,
+    @Analytics.Dimension : true
+    userhash,
+    @Analytics.Dimension : true
+    method,
+    @Analytics.Dimension : true
+    entity,
+    @Analytics.Dimension : true
+    timestamp,
+    @Analytics.Measure   : true
+    @Aggregation.default : #SUM
+    1 as calls: Integer
+};

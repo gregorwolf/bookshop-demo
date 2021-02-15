@@ -1,0 +1,11 @@
+### Read MeteringAnalytics
+http://localhost:4004/admin/MeteringAnalytics
+Authorization: Basic admin:
+
+### Read MeteringAnalytics
+http://localhost:4004/v2/admin/MeteringAnalytics
+Authorization: Basic admin:
+
+### Read MeteringAnalytics - 
+http://localhost:4004/admin/MeteringAnalytics?$apply=groupby((tennant,userhash),aggregate(calls with sum as TotalCalls))
+Authorization: Basic admin:
