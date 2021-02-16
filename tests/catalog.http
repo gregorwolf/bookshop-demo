@@ -12,6 +12,10 @@ GET http://localhost:4004/catalog/getBooks()
 
 ### Read Books using function V2
 GET http://localhost:4004/v2/catalog/getBooks
+
+### Read Countries
+GET http://localhost:4004/catalog/Countries
+Authorization: Basic YWRtaW46
 ### Read Books with Author details via OData V4 by admin
 GET http://localhost:4004/catalog/Books?$expand=author
 Authorization: Basic YWRtaW46

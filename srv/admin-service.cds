@@ -70,6 +70,8 @@ service AdminService @(impl: './admin-service.js', requires: ['admin', 'booksadm
   @readonly
   entity MeteringAnalytics as projection on db.MeteringAnalytics;
 
+  function readCdsEnv() returns String;
+
   function readJobs() returns array of db.Jobs;
   function readJobDetails(jobId: Integer) returns db.Jobs;
   function readJobSchedules(jobId: Integer) returns array of db.Schedules;

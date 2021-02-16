@@ -1,5 +1,6 @@
-  
 const cds = require('@sap/cds')
+const metering = require('./metering')
+
 module.exports = async function (srv) {
   const db = await cds.connect.to("db")
   const { CatalogService } = cds.services
@@ -10,6 +11,8 @@ module.exports = async function (srv) {
     var books = await tx.run(SELECT.from(Books).limit(5))
     return books
   })
+
+  srv.before('*', '*', req => metering.beforeHandler(req))
 
   srv.before('READ', Books, async req => {
     console.log("before READ Books: " + JSON.stringify(req.data))

@@ -1,6 +1,7 @@
 const { resolve } = require("@sap/cds");
 const JobSchedulerClient = require("@sap/jobs-client");
 const xsenv = require("@sap/xsenv");
+const metering = require('./metering')
 
 function getJobscheduler(req) {
   xsenv.loadEnv();
@@ -27,6 +28,8 @@ module.exports = async function (srv) {
     Books,
     Authors,
   } = srv.entities;
+
+  srv.before('*', '*', req => metering.beforeHandler(req))
 
   srv.before("READ", [Books, Authors], async (req) => {
     var tx = cds.transaction(req);
@@ -100,6 +103,10 @@ module.exports = async function (srv) {
     ];
     return users;
   });
+
+  srv.on(["readCdsEnv"], (req) => {
+    return JSON.stringify(cds.env);
+  })
 
   srv.on(["readJobs"], (req) => {
     return new Promise((resolve, reject) => {

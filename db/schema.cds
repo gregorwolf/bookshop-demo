@@ -142,27 +142,28 @@ entity OrderShippingAddress : cuid, managed {
 };
 
 entity Meterings : cuid {
-  tennant   : String(64);
-  userhash  : String(64);
-  method    : String(10);
-  entity    : String(256);
-  timestamp : Timestamp;
+  tennant    : String(64);
+  userhash   : String(64);
+  eventName  : String(10);
+  entityName : String(256);
+  timestamp  : Timestamp @cds.on.insert : $now;
 };
 
 @Aggregation.ApplySupported.PropertyRestrictions : true
-view MeteringAnalytics as select from Meterings {
+view MeteringAnalytics as
+  select from Meterings {
     key ID,
-    @Analytics.Dimension : true
-    tennant,
-    @Analytics.Dimension : true
-    userhash,
-    @Analytics.Dimension : true
-    method,
-    @Analytics.Dimension : true
-    entity,
-    @Analytics.Dimension : true
-    timestamp,
-    @Analytics.Measure   : true
-    @Aggregation.default : #SUM
-    1 as calls: Integer
-};
+        @Analytics.Dimension : true
+        tennant,
+        @Analytics.Dimension : true
+        userhash,
+        @Analytics.Dimension : true
+        eventName,
+        @Analytics.Dimension : true
+        entityName,
+        @Analytics.Dimension : true
+        timestamp,
+        @Analytics.Measure   : true
+        @Aggregation.default : #SUM
+        1 as calls : Integer
+  };
