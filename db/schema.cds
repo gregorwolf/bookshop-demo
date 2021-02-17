@@ -116,6 +116,14 @@ type Orderstatus : Association to Orderstatuses;
 annotate Orderstatus with @title : '{i18n>Orderstatus}';
 annotate Orderstatuses.name with @title : '{i18n>Orderstatus}'  @description : '{i18n>Orderstatus}';
 
+entity Deliverystatuses : sap.common.CodeList {
+  key code : String(1);
+}
+
+type Deliverystatus : Association to Deliverystatuses;
+annotate Deliverystatus with @title : '{i18n>Deliverystatus}';
+annotate Deliverystatuses.name with @title : '{i18n>Deliverystatus}'  @description : '{i18n>Deliverystatus}';
+
 entity Orders : cuid, managed {
   OrderNo         : String       @title : 'Order Number'; //> readable key
   CustomerOrderNo : String(80)   @title : 'Customer Order Number';
@@ -125,6 +133,7 @@ entity Orders : cuid, managed {
                       on ShippingAddress.parent = $self;
   total           : Decimal(9, 2)@readonly;
   orderstatus     : Orderstatus;
+  deliverystatus  : Deliverystatus;
   currency        : Currency;
 }
 

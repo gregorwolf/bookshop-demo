@@ -47,7 +47,7 @@ service CatalogService @(impl: './cat-service.js') {
   ]) as projection on db.Orders;
 
   @requires_: 'authenticated-user'
-  action submitOrder (book : Books.ID, amount: Integer);
+  action submitOrder (book : Books:ID, amount: Integer);
 
   @requires_: 'authenticated-user'
   @readonly

@@ -17,7 +17,7 @@ annotate AdminService.Orders with @(
     //
     //	Lists of Orders
     //
-    SelectionFields: [ createdAt, createdBy ],
+    SelectionFields: [ createdAt, createdBy, deliverystatus_code, orderstatus_code ],
     PresentationVariant : {
         $Type:'UI.PresentationVariantType',
         Text : 'Sort decending',
@@ -109,6 +109,7 @@ annotate AdminService.Orders with @(
       {Value: total, Label: 'Order Value' },
       {Value: createdAt, Label:'Date'},
       {Value: orderstatus.name},
+      {Value: deliverystatus.name},
       {
         $Type: 'UI.DataFieldForAction', 
         Label:'{i18n>checkConsistency}',
