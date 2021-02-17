@@ -151,11 +151,12 @@ entity OrderShippingAddress : cuid, managed {
 };
 
 entity Meterings : cuid {
-  tennant    : String(64);
-  userhash   : String(64);
-  eventName  : String(10);
-  entityName : String(256);
-  timestamp  : Timestamp @cds.on.insert : $now;
+  tennant     : String(128);
+  application : String(64);
+  userhash    : String(64);
+  eventName   : String(10);
+  entityName  : String(256);
+  timestamp   : Timestamp @cds.on.insert : $now;
 };
 
 @Aggregation.ApplySupported.PropertyRestrictions : true
@@ -164,6 +165,8 @@ view MeteringAnalytics as
     key ID,
         @Analytics.Dimension : true
         tennant,
+        @Analytics.Dimension : true
+        application,
         @Analytics.Dimension : true
         userhash,
         @Analytics.Dimension : true

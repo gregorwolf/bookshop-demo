@@ -1,2 +1,2 @@
-ID;tennant;userhash;eventName;entityName;timestamp
-ec0bbec2-0f22-48a7-9dca-c0b4d22cd6da;a;usera;READ;Books;2021-02-14
+ID;tennant;application;userhash;eventName;entityName;timestamp
+ec0bbec2-0f22-48a7-9dca-c0b4d22cd6da;07fc19abtrial-dev;bookshop-demo-srv;usera;READ;Books;2021-02-14
