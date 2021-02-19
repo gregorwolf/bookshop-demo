@@ -17,7 +17,7 @@ annotate AdminService.Orders with @(
     //
     //	Lists of Orders
     //
-    SelectionFields: [ createdAt, createdBy, deliverystatus_code, orderstatus_code ],
+    SelectionFields: [ createdAt, createdBy, deliverystatus_code, deliverystatus.name, orderstatus_code ],
     PresentationVariant : {
         $Type:'UI.PresentationVariantType',
         Text : 'Sort decending',
