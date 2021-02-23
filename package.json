@@ -83,6 +83,10 @@
         "credentials": {
           "database": "db/bookshop.db"
         }
+      },
+      "GWSAMPLE_BASIC": {
+        "kind": "odata",
+        "model": "srv/external/GWSAMPLE_BASIC"
       }
     },
     "[dev-uaa]": {
