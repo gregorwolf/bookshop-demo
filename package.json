@@ -12,11 +12,11 @@
     "srv"
   ],
   "dependencies": {
-    "@sap/cds": "^4.5.2",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.5.6",
+    "@sap/cds": "^4.5.3",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.5.7",
     "@sap/hana-client": "^2.7.23",
     "@sap/jobs-client": "^1.6.1",
-    "@sap/logging": "^6.0.2",
+    "@sap/logging": "^6.0.3",
     "@sap/xsenv": "^3.1.0",
     "@sap/xssec": "^3.1.1",
     "cf-nodejs-logging-support": "^6.6.0",
