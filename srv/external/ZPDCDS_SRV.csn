@@ -1,0 +1,96 @@
+{
+  "definitions": {
+    "ZPDCDS_SRV": {
+      "kind": "service"
+    },
+    "ZPDCDS_SRV.SEPMRA_I_Product_E": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 10
+        },
+        "ProductType": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "ProductCategory": {
+          "type": "cds.String",
+          "length": 40
+        },
+        "CreatedByUser": {
+          "type": "cds.String",
+          "length": 10
+        },
+        "CreationDateTime": {
+          "type": "cds.Timestamp"
+        },
+        "LastChangedByUser": {
+          "type": "cds.String",
+          "length": 10
+        },
+        "LastChangedDateTime": {
+          "type": "cds.Timestamp"
+        },
+        "Price": {
+          "type": "cds.Decimal",
+          "precision": 16,
+          "scale": 3
+        },
+        "Currency": {
+          "type": "cds.String",
+          "length": 5
+        },
+        "Height": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "Width": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "Depth": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "DimensionUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "ProductPictureURL": {
+          "type": "cds.String",
+          "length": 255
+        },
+        "ProductValueAddedTax": {
+          "type": "cds.Integer"
+        },
+        "Supplier": {
+          "type": "cds.String",
+          "length": 10
+        },
+        "ProductBaseUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "Weight": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "WeightUnit": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "OriginalLanguage": {
+          "type": "cds.String",
+          "length": 2
+        }
+      }
+    }
+  }
+}

@@ -29,7 +29,23 @@ module.exports = async function (srv) {
     Authors,
   } = srv.entities;
 
+  const external = await cds.connect.to('ZPDCDS_SRV')
+
   srv.before('*', '*', req => metering.beforeHandler(req))
+
+  srv.on ('READ',['SEPMRA_I_Product_E'], async req => {
+    const externalTransaction = external.transaction(req)
+    try {
+      let result = await externalTransaction.run(req.query)
+      // result.forEach(cleanObject);
+      return result
+    } catch (error) {
+      console.error("Error Message: " + error.message)
+      if(error.request && error.request.path) {
+        console.error("Request Path: " + error.request.path)
+      }
+    }
+  })
 
   srv.before("READ", [Books, Authors], async (req) => {
     var tx = cds.transaction(req);

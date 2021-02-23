@@ -1,5 +1,5 @@
 using my.bookshop as db from '../db/schema';
-using my.bp as bp from './external/bp';
+using { ZPDCDS_SRV as external } from './external/ZPDCDS_SRV.csn';
 
 @cds.query.limit: 100
 service CatalogService @(impl: './cat-service.js') {
@@ -57,4 +57,10 @@ service CatalogService @(impl: './cat-service.js') {
       is_roleadmin:  Boolean;
       is_booksadmin: Boolean;
   };
+  @readonly
+  entity SEPMRA_I_Product_E as projection on external.SEPMRA_I_Product_E excluding {
+    CreationDateTime,
+    LastChangedDateTime
+  };
+
 }

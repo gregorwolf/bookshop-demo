@@ -86,7 +86,21 @@
       },
       "GWSAMPLE_BASIC": {
         "kind": "odata",
-        "model": "srv/external/GWSAMPLE_BASIC"
+        "model": "srv/external/GWSAMPLE_BASIC",
+        "credentials": {
+          "destination": "ES5",
+          "requestTimeout": 30000,
+          "path": "/sap/opu/odata/iwbep/GWSAMPLE_BASIC"
+        }
+      },
+      "ZPDCDS_SRV": {
+        "kind": "odata",
+        "model": "srv/external/ZPDCDS_SRV",
+        "credentials": {
+          "destination": "ES5",
+          "requestTimeout": 30000,
+          "path": "/sap/opu/odata/sap/ZPDCDS_SRV"
+        }
       }
     },
     "[dev-uaa]": {

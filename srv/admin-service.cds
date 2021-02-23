@@ -1,4 +1,5 @@
 using my.bookshop as db from '../db/';
+using { ZPDCDS_SRV as external } from './external/ZPDCDS_SRV.csn';
 
 service AdminService @(impl: './admin-service.js', requires: ['admin', 'booksadmin', 'jobscheduler']) {
   @odata.draft.enabled
@@ -66,6 +67,12 @@ service AdminService @(impl: './admin-service.js', requires: ['admin', 'booksadm
 
   @readonly
   entity BooksAnalytics as projection on db.BooksAnalytics;
+
+  @readonly
+  entity SEPMRA_I_Product_E as projection on external.SEPMRA_I_Product_E excluding {
+    CreationDateTime,
+    LastChangedDateTime
+  };
 
   @readonly
   entity MeteringAnalytics as projection on db.MeteringAnalytics;

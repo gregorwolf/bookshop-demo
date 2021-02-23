@@ -5,7 +5,24 @@ module.exports = async function (srv) {
   const db = await cds.connect.to("db")
   const { CatalogService } = cds.services
   const { Books, Authors } = CatalogService.entities
-  
+
+  const external = await cds.connect.to('ZPDCDS_SRV')
+
+
+  srv.on ('READ',['SEPMRA_I_Product_E'], async req => {
+    const externalTransaction = external.transaction(req)
+    try {
+      let result = await externalTransaction.run(req.query)
+      // result.forEach(cleanObject);
+      return result
+    } catch (error) {
+      console.error("Error Message: " + error.message)
+      if(error.request && error.request.path) {
+        console.error("Request Path: " + error.request.path)
+      }
+    }
+  })
+
   srv.on('getBooks', async (req) => {
     var tx = CatalogService.transaction(req)
     var books = await tx.run(SELECT.from(Books).limit(5))

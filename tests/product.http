@@ -1,0 +1,12 @@
+###
+GET https://sapes5.sapdevcenter.com/sap/opu/odata/sap/ZPDCDS_SRV/$metadata
+
+###
+GET https://sapes5.sapdevcenter.com/sap/opu/odata/sap/ZPDCDS_SRV/SEPMRA_I_Product_E?$format=json&$top=5
+
+### 
+GET http://localhost:4004/admin/SEPMRA_I_Product_E?$format=json&$top=5
+Authorization: Basic admin:
+
+### 
+GET http://localhost:4004/catalog/SEPMRA_I_Product_E?$format=json&$top=5

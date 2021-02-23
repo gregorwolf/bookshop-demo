@@ -1,0 +1,9 @@
+### 
+GET http://localhost:4004/admin/BusinessPartnerSet
+Authorization: Basic admin:
+
+###
+GET https://sapes5.sapdevcenter.com/sap/opu/odata/iwbep/GWSAMPLE_BASIC/BusinessPartnerSet?$format=json&$top=5
+
+###
+GET https://sapes5.sapdevcenter.com/sap/opu/odata/iwbep/GWSAMPLE_BASIC/BusinessPartnerSet?$select=BusinessPartnerID,Address_City,Address_PostalCode,Address_Street,Address_Building,Address_Country,Address_AddressType,CompanyName,WebAddress,EmailAddress,PhoneNumber,FaxNumber,LegalForm,CurrencyCode,BusinessPartnerRole,CreatedAt,ChangedAt&$top=1000&$orderby=BusinessPartnerID%20asc
