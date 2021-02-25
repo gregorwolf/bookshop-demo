@@ -30,6 +30,19 @@ npm run setup
 
 ## Run local
 
+If you want to try also the external service calls, then you need to create a *default-env.json* file in the project root folder and add the following content:
+
+```json
+{
+  "destinations": [
+    {
+      "name": "ES5",
+      "url": "https://sapes5.sapdevcenter.com"
+    }
+  ]
+}
+```
+
 ```sh
 npm run build
 npm start
