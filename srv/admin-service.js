@@ -1,6 +1,8 @@
 const { resolve } = require("@sap/cds");
 const JobSchedulerClient = require("@sap/jobs-client");
 const xsenv = require("@sap/xsenv");
+const SapCfMailer = require('sap-cf-mailer').default;
+const transporter = new SapCfMailer("mailtrap");
 const metering = require('./metering')
 
 function getJobscheduler(req) {
@@ -300,6 +302,19 @@ module.exports = async function (srv) {
         });
       }
     });
+  });
+
+  // Based on the blogpost:
+  // https://blogs.sap.com/2019/11/28/send-an-email-from-a-nodejs-application/
+  // by Joachim Van Praet
+  srv.on(["sendmail"], async (req) => {
+    // use sendmail as you should use it in nodemailer
+    const result = await transporter.sendMail({
+      to: 'someoneimportant@sap.com',
+      subject: `This is the mail subject`,
+      text: `body of the email`
+    });
+    return JSON.stringify(result);
   });
 
   srv.on(

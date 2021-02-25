@@ -48,6 +48,15 @@ npm run build
 npm start
 ```
 
+If you want to test the used SAP Business Technology Platform - Cloud Foundry services you need also to add the VCAP_SERVICES variable to *default-env.json*. I.e.:
+
+```json
+{
+  "VCAP_SERVICES": {
+  }
+}
+```
+
 ## Test
 
 Open these links in your browser:
