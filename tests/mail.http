@@ -1,0 +1,7 @@
+### 
+# @name sendmail
+POST http://localhost:4004/admin/sendmail
+Authorization: Basic admin:
+Content-Type: application/json
+
+{}

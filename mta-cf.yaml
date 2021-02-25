@@ -40,6 +40,8 @@ modules:
         properties:
           url: ${default-url}
     requires:
+      - name: bookshop-demo-destination-service
+      - name: bookshop-demo-connectivity-service
       - name: bookshop-demo-db-service
       - name: bookshop-demo-uaa
       - name: bookshop-demo-job-scheduler

@@ -87,4 +87,5 @@ service AdminService @(impl: './admin-service.js', requires: ['admin', 'booksadm
   action createJob(url: String, cron: String) returns Integer;
   action updateJob(jobId: Integer, active: Boolean) returns String;
   action deleteJob(jobId: Integer) returns String;
+  action sendmail() returns String;
 }
