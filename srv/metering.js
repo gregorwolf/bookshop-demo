@@ -5,7 +5,15 @@ exports.beforeHandler = async (req) => {
   var tx = cds.transaction(req)
   var userhash = ""
   var tennant = req.user.tennant
-  var VCAP_APPLICATION = JSON.parse(process.env.VCAP_APPLICATION)
+  var VCAP_APPLICATION = {}
+  if(process.env.VCAP_APPLICATION) {
+    VCAP_APPLICATION = JSON.parse(process.env.VCAP_APPLICATION)    
+  } else {
+    console.error("Environment Variable VCAP_APPLICATION not set. Application name will be unknown")
+    VCAP_APPLICATION = {
+      application_name: "unknown"
+    }
+  }
   // To protect the user identity create a SHA256 hash for the lowercase Username
   if(req.user.id) {
     var hash = crypto.createHash('sha256')
