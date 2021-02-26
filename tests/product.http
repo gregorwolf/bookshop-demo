@@ -10,3 +10,10 @@ Authorization: Basic admin:
 
 ### 
 GET http://localhost:4004/catalog/SEPMRA_I_Product_E?$format=json&$top=5
+
+### Request like Fiori Elements
+### Returns "@odata.count": 0
+### As sent request is:
+### /sap/opu/odata/sap/ZPDCDS_SRV/SEPMRA_I_Product_E?$select=Product&$top=30&$orderby=Product%20asc
+GET http://localhost:4004/admin/SEPMRA_I_Product_E?$count=true&$select=Product&$skip=0&$top=30
+Authorization: Basic admin:
