@@ -1,5 +1,5 @@
 using my.bookshop as db from '../db/';
-using { ZPDCDS_SRV as external } from './external/ZPDCDS_SRV.csn';
+using { ZPDCDS_SRV as external } from './external/ZPDCDS_SRV';
 
 service AdminService @(impl: './admin-service.js', requires: ['admin', 'booksadmin', 'jobscheduler']) {
   @odata.draft.enabled
