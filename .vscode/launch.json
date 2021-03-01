@@ -35,20 +35,11 @@
           "console": "internalConsole"
         },
         {
-          "type": "node", 
+          "command": "cds run --with-mocks --in-memory",
+          "name": "cds run",
           "request": "launch",
-          "name": "cds run", 
-          "args": [ "run" ],
-          "env": {"DEBUG":"yes"},
-          "cwd": "${workspaceFolder}",
-          "program": "${workspaceFolder}/node_modules/@sap/cds/bin/cds.js", 
-          "skipFiles": [
-              "<node_internals>/**/*.js",
-              "**/cds-reflect/lib/index.js",
-              "**/cds/lib/index.js",
-              "**/.vscode/cds.js",
-          ],
-          "console": "internalConsole"
+          "type": "node-terminal",
+          "skipFiles": [ "<node_internals>/**" ]
         },
         {
           "type": "node", 
