@@ -6,10 +6,8 @@ module.exports = async function (srv) {
   const { CatalogService } = cds.services
   const { Books, Authors } = CatalogService.entities
 
-  const external = await cds.connect.to('ZPDCDS_SRV')
-
-
   srv.on ('READ',['SEPMRA_I_Product_E'], async req => {
+    const external = await cds.connect.to('ZPDCDS_SRV')
     const externalTransaction = external.transaction(req)
     try {
       let result = await externalTransaction.run(req.query)
