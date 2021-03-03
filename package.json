@@ -12,21 +12,21 @@
     "srv"
   ],
   "dependencies": {
-    "@sap/cds": "^4.5.3",
-    "@sap/cds-dk": "^3.4.2",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.5.7",
+    "@sap/cds": "^4.6.4",
+    "@sap/cds-dk": "^3.5.0",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.5.9",
     "@sap/hana-client": "^2.7.23",
     "@sap/jobs-client": "^1.6.1",
     "@sap/logging": "^6.0.3",
     "@sap/xsenv": "^3.1.0",
-    "@sap/xssec": "^3.1.1",
+    "@sap/xssec": "^3.1.2",
     "cf-nodejs-logging-support": "^6.6.0",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "helmet": "^4.4.1",
     "mysql": "^2.18.1",
     "passport": "^0.4.1",
-    "sap-cf-mailer": "gregorwolf/sap-cf-mailer#update-dependencies",
+    "sap-cf-mailer": "^0.0.3",
     "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
