@@ -154,7 +154,7 @@ entity Meterings : cuid {
   tennant     : String(128);
   application : String(64);
   userhash    : String(64);
-  eventName   : String(10);
+  eventName   : String(32);
   entityName  : String(256);
   timestamp   : Timestamp @cds.on.insert : $now;
 };
