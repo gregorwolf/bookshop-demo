@@ -14,8 +14,8 @@ annotate AdminService.Roles with @(UI : {
   SelectionFields            : [rolename],
 
   LineItem                   : [
-  {Value : rolename},
-  {Value : description}
+    {Value : rolename},
+    {Value : description}
   ],
   HeaderInfo                 : {
     TypeName       : 'Role',
@@ -31,49 +31,58 @@ annotate AdminService.Roles with @(UI : {
   {Value : rolename}, ],
 
   HeaderFacets               : [
-  {
-    $Type  : 'UI.ReferenceFacet',
-    Label  : '{i18n>Created}',
-    Target : '@UI.FieldGroup#Created'
-  },
-  {
-    $Type  : 'UI.ReferenceFacet',
-    Label  : '{i18n>Modified}',
-    Target : '@UI.FieldGroup#Modified'
-  },
+    {
+      $Type  : 'UI.ReferenceFacet',
+      Label  : '{i18n>Created}',
+      Target : '@UI.FieldGroup#Created'
+    },
+    {
+      $Type  : 'UI.ReferenceFacet',
+      Label  : '{i18n>Modified}',
+      Target : '@UI.FieldGroup#Modified'
+    },
   ],
 
   Facets                     : [
-  {
-    $Type  : 'UI.ReferenceFacet',
-    Label  : 'Authorizations',
-    Target : '@UI.FieldGroup#Authorizations'
-  },
-  {
-    $Type  : 'UI.ReferenceFacet',
-    Label  : 'Assigned Business Objects',
-    Target : 'BusinessObjects/@UI.LineItem'
-  },
-  {
-    $Type  : 'UI.ReferenceFacet',
-    Label  : 'Assigned Users',
-    Target : 'Users/@UI.LineItem'
-  },
+    {
+      $Type  : 'UI.ReferenceFacet',
+      Label  : 'Description',
+      Target : '@UI.FieldGroup#Description'
+    },
+    {
+      $Type  : 'UI.ReferenceFacet',
+      Label  : 'Authorizations',
+      Target : '@UI.FieldGroup#Authorizations'
+    },
+    {
+      $Type  : 'UI.ReferenceFacet',
+      Label  : 'Assigned Business Objects',
+      Target : 'BusinessObjects/@UI.LineItem'
+    },
+    {
+      $Type  : 'UI.ReferenceFacet',
+      Label  : 'Assigned Users',
+      Target : 'Users/@UI.LineItem'
+    },
   ],
 
   FieldGroup #Created        : {Data : [
-  {Value : createdBy},
-  {Value : createdAt},
+    {Value : createdBy},
+    {Value : createdAt},
   ]},
   FieldGroup #Modified       : {Data : [
-  {Value : modifiedBy},
-  {Value : modifiedAt},
+    {Value : modifiedBy},
+    {Value : modifiedAt},
+  ]},
+  FieldGroup #Description    : {Data : [
+    {Value : rolename},
+    {Value : description},
   ]},
   FieldGroup #Authorizations : {Data : [
-  {Value : read},
-  {Value : authcreate},
-  {Value : authupdate},
-  {Value : approve},
+    {Value : read},
+    {Value : authcreate},
+    {Value : authupdate},
+    {Value : approve},
   ]},
 }
 
@@ -131,18 +140,18 @@ annotate AdminService.User with @(
   UI.SelectionFields  : [username],
 
   UI.LineItem         : [
-  {
-    $Type : 'UI.DataField',
-    Value : username
-  },
-  {
-    $Type : 'UI.DataField',
-    Value : address.street
-  },
-  {
-    $Type : 'UI.DataField',
-    Value : address.city
-  }
+    {
+      $Type : 'UI.DataField',
+      Value : username
+    },
+    {
+      $Type : 'UI.DataField',
+      Value : address.street
+    },
+    {
+      $Type : 'UI.DataField',
+      Value : address.city
+    }
   ],
 
   UI.HeaderInfo       : {Title : {Value : username}},
@@ -160,18 +169,18 @@ annotate AdminService.User with @(
   UI.FieldGroup #User : {
     Label : 'User',
     Data  : [
-    {
-      $Type : 'UI.DataField',
-      Value : username
-    },
-    {
-      $Type : 'UI.DataField',
-      Value : address.street
-    },
-    {
-      $Type : 'UI.DataField',
-      Value : address.city
-    }
+      {
+        $Type : 'UI.DataField',
+        Value : username
+      },
+      {
+        $Type : 'UI.DataField',
+        Value : address.street
+      },
+      {
+        $Type : 'UI.DataField',
+        Value : address.city
+      }
     ]
   },
 
