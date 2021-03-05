@@ -327,7 +327,7 @@ module.exports = async function (srv) {
       // 1	sap.ui.core.MessageType.Success	Positive feedback - no action required
       var tx = cds.transaction(req);
       var orders = await tx.run(
-        SELECT.from("Orders").where({ ID: req.params[0].ID })
+        SELECT.from(Orders).where({ ID: req.params[0].ID })
       );
       var order = orders[0];
       var orderId = req.params[0].ID;
