@@ -40,11 +40,11 @@ module.exports = async function (srv) {
   })
 
   srv.after('READ', Books, (each)=>{
-    if(typeof each.author !== 'undefined') {
-      if(each.author !== null) {
-        each.semanticURLtoAuthor = '#Authors-display?ID=' + each.author.ID
+    if(typeof each.publisher !== 'undefined') {
+      if(each.publisher !== null) {
+        each.semanticURLtoPublisher = '#Publishers-display?ID=' + each.publisher.ID
       }
-      // console.log(each.semanticURLtoAuthor)
+      // console.log(each.semanticURLtoPublisher)
     }
   })
 

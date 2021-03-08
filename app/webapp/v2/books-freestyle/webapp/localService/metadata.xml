@@ -148,7 +148,7 @@
                 <Property Name="stock" Type="Edm.Int32"/>
                 <Property Name="price" Type="Edm.Decimal" Scale="2" Precision="9"/>
                 <NavigationProperty Name="currency" Relationship="CatalogService.Books_currency" FromRole="Books" ToRole="Currencies"/>
-                <Property Name="semanticURLtoAuthor" Type="Edm.String"/>
+                <Property Name="semanticURLtoPublisher" Type="Edm.String"/>
                 <Property Name="weight" Type="Edm.Decimal" sap:variable-scale="true"/>
                 <Property Name="height" Type="Edm.Double"/>
                 <Property Name="width" Type="Edm.Decimal" Scale="2" Precision="9"/>
@@ -773,7 +773,7 @@
                         <Record Type="UI.DataFieldWithUrl">
                             <PropertyValue Property="Label" String="To Author Url"/>
                             <PropertyValue Property="Value" String="with Url"/>
-                            <PropertyValue Property="Url" Path="semanticURLtoAuthor"/>
+                            <PropertyValue Property="Url" Path="semanticURLtoPublisher"/>
                             <PropertyValue Property="SemanticObject" String="Authors"/>
                             <PropertyValue Property="Action" String="display"/>
                         </Record>
@@ -875,7 +875,7 @@
                 <Annotation Term="Common.Label" String="Currency"/>
                 <Annotation Term="Core.Description" String="Currency code as specified by ISO 4217"/>
             </Annotations>
-            <Annotations Target="CatalogService.Books/semanticURLtoAuthor" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="CatalogService.Books/semanticURLtoPublisher" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Core.Computed" Bool="true"/>
             </Annotations>
             <Annotations Target="CatalogService.Books/weight" xmlns="http://docs.oasis-open.org/odata/ns/edm">

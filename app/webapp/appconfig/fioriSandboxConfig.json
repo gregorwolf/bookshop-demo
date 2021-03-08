@@ -182,6 +182,19 @@
                                     }
                                 },
                                 {
+                                    "id": "BrowsePublishersApp",
+                                    "title": "Browse Publishers",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "serviceRefreshInterval": 5,
+                                    "properties": {
+                                        "chipId": "catalogTile_002",
+                                        "title": "Browse Publishers",
+                                        "info": "The list of Publishers",
+                                        "targetURL": "#Publishers-display"
+                                    }
+                                },
+                                {
                                     "id": "BrowseAuthorsApp",
                                     "title": "Browse Authors",
                                     "size": "1×1",
@@ -674,6 +687,20 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=v2.approvals",
                                 "url": "v2/approval"
+                            }
+                        },
+                        "actionV2Publishers": {
+                            "semanticObject": "Publishers",
+                            "action": "display",
+                            "title": "Publishers",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=v2.publishers",
+                                "url": "v2/publishers"
                             }
                         },
                         "actionV2Authors": {

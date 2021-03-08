@@ -54,6 +54,45 @@ annotate my.Authors with @(
     }
 );
 
+annotate my.Publishers with @(
+    UI: {
+        Identification: [{Value:name}],
+        SelectionFields: [ ID, name ],
+        LineItem: [
+            {Value: ID},
+            {Value: name},
+            {
+                $Type: 'UI.DataFieldWithIntentBasedNavigation',
+                Label: '{i18n>ToBooksIntentBased}',
+                Value: ID,
+                SemanticObject: 'Books',
+                Action: 'display',
+                Mapping : [
+                    {
+                        $Type : 'Common.SemanticObjectMappingType',
+                        LocalProperty : ID,
+                        SemanticObjectProperty : 'publisher_ID',
+                    },
+                ],
+            }
+        ],
+    HeaderInfo: {
+      TypeName: 'Publisher', TypeNamePlural: 'Publishers',
+      Title: { Value: ID },
+      Description: { Value: name }
+    },
+    Facets: [
+            {$Type: 'UI.ReferenceFacet', Label: '{i18n>Details}', Target: '@UI.FieldGroup#Details'},
+            {$Type: 'UI.ReferenceFacet', Label: '{i18n>Books}', Target: 'books/@UI.LineItem'},
+        ],
+        FieldGroup#Details: {
+            Data: [
+                {Value: name},
+            ]
+        },
+    }
+);
+
 ////////////////////////////////////////////////////////////////////////////
 //
 //	Books Lists
@@ -66,35 +105,41 @@ annotate my.Books with @(
             {Value: ID},
             {Value: title},
             {Value: author.name},
+            {Value: publisher.name},
             {
                 $Type: 'UI.DataFieldWithIntentBasedNavigation',
-                Label: 'To Author Intent Based',
-                Value: 'with Intent',
-                SemanticObject: 'Authors',
+                Label: '{i18n>ToPublisherIntentBased}',
+                Value: publisher.name,
+                Mapping : [
+                    {
+                        $Type : 'Common.SemanticObjectMappingType',
+                        LocalProperty : publisher_ID,
+                        SemanticObjectProperty : 'ID',
+                    },
+                ],
+                SemanticObject: 'Publishers',
                 Action: 'display'
+            },
+            {
+                $Type : 'UI.DataFieldForIntentBasedNavigation',
+                SemanticObject : 'Publishers',
+                Action : 'display',
+                Label: '{i18n>ToPublisherForIntentBased}',
+                Mapping : [
+                    {
+                        $Type : 'Common.SemanticObjectMappingType',
+                        LocalProperty : publisher_ID,
+                        SemanticObjectProperty : 'ID',
+                    },
+                ],
             },
             {
                 $Type: 'UI.DataFieldWithUrl',
-                Label: 'To Author Url',
-                Value: 'with Url',
-                Url: semanticURLtoAuthor,
-                SemanticObject: 'Authors',
-                Action: 'display'
+                Label: '{i18n>ToPublisherUrl}',
+                Value: '{i18n>WithUrl}',
+                Url: semanticURLtoPublisher,
             },
-            {
-                $Type:'UI.DataFieldWithIntentBasedNavigation',
-                Label:'{i18n>Author}',
-                Value: author.ID,
-                SemanticObject: 'Authors',
-                Action: 'display'
-            },
-            {
-                $Type:'UI.DataFieldWithIntentBasedNavigation',
-                Label:'{i18n>Author}',
-                Value: author.ID,
-                SemanticObject: 'Authors',
-                Action: 'displayUI5latest'
-            },
+            {Value: semanticURLtoPublisher},
             {Value: stock},
             {Value: price},
             {Value: currency.symbol, Label:''}

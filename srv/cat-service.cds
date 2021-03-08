@@ -40,6 +40,10 @@ service CatalogService @(impl: './cat-service.js') {
     createdBy, modifiedBy
   };
 
+  @readonly entity Publishers as projection on db.Publishers excluding {
+    createdBy, modifiedBy
+  };
+
   // @readonly entity BusinessPartner as projection on bp.BusinessPartner;
   entity Orders @(restrict: [ 
     { grant: 'CREATE', to: 'authenticated-user' },

@@ -28,7 +28,7 @@ annotate AdminService.Approval with @(
     Data: [
       {Value: approver },
       {Value: changedEntity },
-      {Value: testDecimalFload },
+      {Value: testDecimalFloat },
       {Value: testDecimal },
     ]
   },

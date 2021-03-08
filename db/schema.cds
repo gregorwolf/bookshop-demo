@@ -43,7 +43,7 @@ entity Books : managed {
       stock                              : Integer;
       price                              : Decimal(9, 2);
       currency                           : Currency;
-      virtual semanticURLtoAuthor        : String;
+      virtual semanticURLtoPublisher     : String;
       weight                             : DecimalFloat @title : 'Weight (DecimalFloat)';
       height                             : Double       @title : 'Height (Double)';
       width                              : Decimal(9, 2)@title : 'Width (Decimal(9,2))';
@@ -51,6 +51,7 @@ entity Books : managed {
       releaseDate                        : DateTime     @title : 'Release Date (DateTime)';
       readingTime                        : Time         @title : 'Reading Time (Time)';
       author                             : Association to one Authors;
+      publisher                          : Association to one Publishers;
       BooksAuthorsAssignment_ASSOC_Books : Association to many BooksAuthorsAssignment
                                              on BooksAuthorsAssignment_ASSOC_Books.ASSOC_Book = $self;
 };
@@ -81,6 +82,16 @@ entity Authors : managed {
       BooksAuthorsAssignment_ASSOC_Authors : Association to many BooksAuthorsAssignment
                                                on BooksAuthorsAssignment_ASSOC_Authors.ASSOC_Author = $self;
 }
+
+entity Publishers : managed {
+  key ID   : Integer;
+      name : String(111) @(
+        title: '{i18n>Publisher}',
+        description: '{i18n>PublisherDesc}'
+      );
+      book : Association to many Books
+               on book.publisher = $self;
+};
 
 @Aggregation.ApplySupported.PropertyRestrictions : true
 view BooksAnalytics as
