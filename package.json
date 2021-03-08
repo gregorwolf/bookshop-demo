@@ -13,7 +13,6 @@
   ],
   "dependencies": {
     "@sap/cds": "^4.6.4",
-    "@sap/cds-runtime": "2.9.1",
     "@sap/cds-dk": "^3.5.0",
     "@sap/cds-odata-v2-adapter-proxy": "^1.5.9",
     "@sap/hana-client": "^2.7.23",
