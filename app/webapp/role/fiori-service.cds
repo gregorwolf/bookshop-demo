@@ -10,6 +10,10 @@ annotate AdminService.Roles with {
 };
 */
 
+annotate AdminService.Roles with {
+  ID @Core.Computed;
+}
+
 annotate AdminService.Roles with @(UI : {
   SelectionFields            : [rolename],
 
