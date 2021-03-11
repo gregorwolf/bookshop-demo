@@ -1,4 +1,4 @@
-### Get Access Token (Cloud Foundry)
+### Get Access Token (Cloud Foundry using Client Credentials)
 # @name requestAccessToken
 POST {{$dotenv url}}/oauth/token
 Authorization: Basic {{$dotenv clientid}}:{{$dotenv clientsecret}}
@@ -10,21 +10,23 @@ grant_type=client_credentials
 ### Fill Variables from Response
 @access_token = {{requestAccessToken.response.body.$.access_token}}
 
-### Get Access Token (HANA)
+### Get Access Token (HANA) or Cloud Foundry using Password Grant
+# https://blogs.sap.com/2020/03/02/using-postman-for-api-testing-with-xsuaa/
 # @name requestAccessTokenHANA
 POST {{$dotenv url}}/oauth/token
 Accept: application/json;charset=utf8
+Authorization: Basic {{$dotenv client_id}}:{{$dotenv client_secret}}
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=password
 &username={{$dotenv username}}
 &password={{$dotenv password}}
-&client_id={{$dotenv clientid}}
-&client_secret={{$dotenv clientsecret}}
+&client_id={{$dotenv client_id}}
 &response_type=token
+&scope=bookshop-demo!t72094.admin
 
 ### Fill Variables from Response
-# @access_token = {{requestAccessTokenHANA.response.body.$.access_token}}
+@access_token = {{requestAccessTokenHANA.response.body.$.access_token}}
 
 ### Read userInfo
 GET {{$dotenv srvurl}}/api/userInfo

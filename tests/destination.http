@@ -1,0 +1,17 @@
+# Documentation:
+# https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/7e306250e08340f89d6c103e28840f30.html
+### Get Access Token (Cloud Foundry using Client Credentials)
+# @name requestAccessToken
+POST {{$dotenv url}}/oauth/token
+Authorization: Basic {{$dotenv dest_clientid}}:{{$dotenv dest_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+### Read userInfo
+GET {{$dotenv dest_uri}}/destination-configuration/v1/subaccountDestinations/SAP_ABAP_BACKEND
+Authorization: Bearer {{access_token}}
