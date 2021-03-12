@@ -1,7 +1,7 @@
+### Get Access Token for Destination Service
 # Documentation:
 # https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/7e306250e08340f89d6c103e28840f30.html
-### Get Access Token (Cloud Foundry using Client Credentials)
-# @name requestAccessToken
+# @name requestDestinationAccessToken
 POST {{$dotenv url}}/oauth/token
 Authorization: Basic {{$dotenv dest_clientid}}:{{$dotenv dest_clientsecret}}
 Content-Type: application/x-www-form-urlencoded
@@ -10,16 +10,19 @@ grant_type=client_credentials
 &response_type=token
 
 ### Fill Variables from Response
-@access_token = {{requestAccessToken.response.body.$.access_token}}
+@destination_access_token = {{requestDestinationAccessToken.response.body.$.access_token}}
 
-### Read subaccountDestinations
+### Read details of one destination
 # @name subaccountDestinations
 GET {{$dotenv dest_uri}}/destination-configuration/v1/subaccountDestinations/SAP_ABAP_BACKEND
-Authorization: Bearer {{access_token}}
+Authorization: Bearer {{destination_access_token}}
 
 ### Fill Variables from Response
 @backend_url={{subaccountDestinations.response.body.$.URL}}
 
+### Get Access Token for Connectivity Service
+# Documentation:
+# https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/313b215066a8400db461b311e01bd99b.html
 # @name requestConnectivityAccessToken
 POST {{$dotenv url}}/oauth/token
 Authorization: Basic {{$dotenv conn_clientid}}:{{$dotenv conn_clientsecret}}
@@ -49,13 +52,33 @@ grant_type=password
 ### Fill Variables from Response
 @user_access_token = {{requestUserAccessToken.response.body.$.access_token}}
 
-###
+# Before you can use the next requests a SSH connection to an application running
+# in Cloud Foundry must be established. SSH is enabled by:
+#
+# cf enable-ssh bookshop-demo-srv 
+#
+# To activate the setting a restart is required:
+#
+# cf restart bookshop-demo-srv
+#
+# Then a connection can be established and the local port 20003 can be forwarded
+# to the connectivity proxy:
+#
+# cf ssh bookshop-demo-srv -L 20003:connectivityproxy.internal.cf.eu10.hana.ondemand.com:20003
+#
+# Finally you must configure VS Code to use this Proxy:
+#
+# "http.proxy": "http://localhost:20003"
+#
+# Make sure you remove the settings afterwards
+
+### Test public endpoind
 GET {{backend_url}}/sap/public/ping
 Proxy-Authorization: Bearer {{connectivity_access_token}}
 SAP-Connectivity-Authentication: Bearer {{user_access_token}}
 SAP-Connectivity-SCC-Location_ID: {{$dotenv location_id}}
 
-###
+### Test authenticated endpoint
 GET {{backend_url}}/sap/bc/ping
 Proxy-Authorization: Bearer {{connectivity_access_token}}
 SAP-Connectivity-Authentication: Bearer {{user_access_token}}
