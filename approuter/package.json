@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "description": "",
   "dependencies": {
-    "@sap/approuter": "^9.3.0"
+    "@sap/approuter": "^10.0.0"
   },
   "scripts": {
     "start": "node node_modules/@sap/approuter/approuter.js"
