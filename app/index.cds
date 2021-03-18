@@ -12,6 +12,38 @@ using from './webapp/users/fiori-service';
 
 // 2) fiori annotations common to all apps...
 using my.bookshop as my from '../db/schema';
+using {sap.common} from '../srv/admin-service';
+
+annotate common.Languages with @(
+  Common.SemanticKey : [code],
+  Identification     : [{Value : code}],
+  UI                 : {
+    SelectionFields     : [
+      name,
+      descr
+    ],
+    LineItem            : [
+      {Value : code},
+      {Value : name},
+    ],
+    HeaderInfo          : {
+      TypeName       : '{i18n>Language}',
+      TypeNamePlural : '{i18n>Languages}',
+      Title          : {Value : name},
+      Description    : {Value : descr}
+    },
+    Facets              : [{
+      $Type  : 'UI.ReferenceFacet',
+      Label  : '{i18n>Details}',
+      Target : '@UI.FieldGroup#Details'
+    }, ],
+    FieldGroup #Details : {Data : [
+      {Value : code},
+      {Value : name},
+      {Value : descr}
+    ]},
+  }
+);
 
 annotate my.Authors with @(
     UI: {

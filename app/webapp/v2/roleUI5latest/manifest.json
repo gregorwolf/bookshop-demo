@@ -128,6 +128,14 @@
 							"name": "sap.suite.ui.generic.template.ObjectPage",
 							"settings": {
 								"sections": {
+									"texts::com.sap.vocabularies.UI.v1.LineItem": {
+										"navigationProperty": "texts",
+										"entitySet": "Roles_texts",
+										"createMode": "inline",
+										"tableSettings": {
+											"multiSelect": true
+										}
+									},
 									"BusinessObjects::com.sap.vocabularies.UI.v1.LineItem": {
 										"navigationProperty": "BusinessObjects",
 										"entitySet": "Role_BusinessObject",
@@ -139,6 +147,7 @@
 									"Users::com.sap.vocabularies.UI.v1.LineItem": {
 										"navigationProperty": "Users",
 										"entitySet": "Role_User",
+										"createMode": "inline",
 										"tableSettings": {
 											"multiSelect": true
 										}

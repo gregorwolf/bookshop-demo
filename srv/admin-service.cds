@@ -1,5 +1,6 @@
 using my.bookshop as db from '../db/';
 using { ZPDCDS_SRV as external } from './external/ZPDCDS_SRV';
+using {sap} from '@sap/cds/common';
 
 service AdminService @(impl: './admin-service.js', requires: ['admin', 'booksadmin', 'jobscheduler']) {
   @odata.draft.enabled
@@ -37,12 +38,14 @@ service AdminService @(impl: './admin-service.js', requires: ['admin', 'booksadm
     };
   entity OrderShippingAddress as projection on db.OrderShippingAddress;  
   //> these shall be removed but this would break the Fiori UI
+  entity Languages as projection on sap.common.Languages;
 
   entity Roles 
   @(restrict: [ { grant: ['*'], to: 'roleadmin' }, ]) 
   as projection on db.Roles;
   annotate Roles with @odata.draft.enabled;	
   //------- auto-exposed --------
+  entity Roles_texts as projection on db.Roles_texts;
   entity Role_BusinessObject as projection on db.Role_BusinessObject;
   entity Role_User as projection on db.Role_User;
   //> these shall be removed but this would break the Fiori UI

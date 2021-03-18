@@ -9,17 +9,19 @@ using {
 type BusinessObject : String(255);
 
 entity Roles : cuid, managed {
-  rolename        : String(255)@(title : 'Role Name', );
-  description     : String     @(title : 'Description', );
-  read            : Boolean    @(title : 'Read', );
-  authcreate      : Boolean    @(title : 'Create', );
-  authupdate      : Boolean    @(title : 'Update', );
-  approve         : Boolean    @(title : 'Approve', );
+  rolename        : localized String(255)@(title : 'Role Name', );
+  description     : localized String     @(title : 'Description', );
+  read            : Boolean              @(title : 'Read', );
+  authcreate      : Boolean              @(title : 'Create', );
+  authupdate      : Boolean              @(title : 'Update', );
+  approve         : Boolean              @(title : 'Approve', );
   BusinessObjects : Composition of many Role_BusinessObject
                       on BusinessObjects.parent = $self;
   Users           : Composition of many Role_User
                       on Users.parent = $self;
 };
+
+annotate Roles with @fiori.draft.enabled;
 
 entity BusinessObjects {
   key ID       : BusinessObject;
@@ -51,4 +53,3 @@ entity Address : cuid, managed {
   street : String(60)@(title : 'Street', );
   city   : String(60)@(title : 'City', );
 };
-

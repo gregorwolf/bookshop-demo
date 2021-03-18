@@ -55,6 +55,11 @@ annotate AdminService.Roles with @(UI : {
     },
     {
       $Type  : 'UI.ReferenceFacet',
+      Label  : 'Translations',
+      Target : 'texts/@UI.LineItem'
+    },
+    {
+      $Type  : 'UI.ReferenceFacet',
       Label  : 'Authorizations',
       Target : '@UI.FieldGroup#Authorizations'
     },
@@ -91,6 +96,36 @@ annotate AdminService.Roles with @(UI : {
 }
 
 );
+
+annotate AdminService.Roles_texts with @(UI : {
+  Identification  : [{Value : rolename}],
+  SelectionFields : [
+    locale,
+    rolename
+  ],
+  LineItem        : [
+    {
+      Value : locale,
+      Label : 'Locale'
+    },
+    {
+      Value : rolename,
+      Label : 'Title'
+    },
+    {
+      Value : description,
+      Label : 'Description'
+    },
+  ]
+});
+
+// Add Value Help for Locales
+annotate AdminService.Roles_texts {
+  locale @ValueList : {
+    entity : 'Languages',
+    type   : #fixed
+  }
+}
 
 annotate AdminService.Role_BusinessObject with {
   ID             @UI.Hidden : true;
