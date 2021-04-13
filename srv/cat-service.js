@@ -3,11 +3,11 @@ const metering = require('./metering')
 
 module.exports = async function (srv) {
   const db = await cds.connect.to("db")
-  const { CatalogService } = cds.services
-  const { Books, Authors } = CatalogService.entities
-
+  const external = await cds.connect.to('ZPDCDS_SRV')
+  const { PublicService } = cds.services
+  const { Books, Authors } = PublicService.entities
+  
   srv.on ('READ',['SEPMRA_I_Product_E'], async req => {
-    const external = await cds.connect.to('ZPDCDS_SRV')
     const externalTransaction = external.transaction(req)
     try {
       let result = await externalTransaction.run(req.query)
