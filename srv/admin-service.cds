@@ -45,7 +45,6 @@ service AdminService @(impl: './admin-service.js', requires: ['admin', 'booksadm
   as projection on db.Roles;
   annotate Roles with @odata.draft.enabled;	
   //------- auto-exposed --------
-  entity Roles_texts as projection on db.Roles_texts;
   entity Role_BusinessObject as projection on db.Role_BusinessObject;
   entity Role_User as projection on db.Role_User;
   //> these shall be removed but this would break the Fiori UI
