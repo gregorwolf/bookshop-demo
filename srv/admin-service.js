@@ -1,8 +1,8 @@
 const { resolve } = require("@sap/cds");
 const JobSchedulerClient = require("@sap/jobs-client");
 const xsenv = require("@sap/xsenv");
-const SapCfMailer = require('sap-cf-mailer').default;
-const metering = require('./metering')
+const SapCfMailer = require("sap-cf-mailer").default;
+const metering = require("./metering");
 
 function getJobscheduler(req) {
   xsenv.loadEnv();
@@ -28,27 +28,88 @@ module.exports = async function (srv) {
     Orders,
     Books,
     Authors,
+    Approval,
   } = srv.entities;
-  const external = await cds.connect.to('ZPDCDS_SRV')
+  const external = await cds.connect.to("ZPDCDS_SRV");
+  const externalFlow = await cds.connect.to("flow");
+  var srvUrl = "http://localhost:4004/webapp";
+  var uiUrl = srvUrl;
+  if (process.env.VCAP_APPLICATION) {
+    srvUrl =
+      "https://" + JSON.parse(process.env.VCAP_APPLICATION).application_uris[0];
+    uiUrl = srvUrl.replace("-srv", "-ui") + "/bookshopdemoapp";
+  }
 
-  srv.before('*', '*', req => metering.beforeHandler(req))
+  srv.before("*", "*", (req) => metering.beforeHandler(req));
 
-  srv.on ('READ',['SEPMRA_I_Product_E'], async req => {
-    const externalTransaction = external.transaction(req)
+  srv.after("CREATE", Approval, async (req) => {
+    console.log("Approval - after CREATE. ID: " + req.ID);
     try {
-      let result = await externalTransaction.run(req.query)
-      // result.forEach(cleanObject);
-      const count = await externalTransaction.get(`${req._.req.path}/$count`)
-      result['$count'] = count
-      // result['$count'] = result.length
-      return result
+      const response = await externalFlow.tx(req).post("/", {
+        approver: "gregor@computerservice-wolf.com",
+        subject: `Approval for ${req.changedEntity} requested`,
+        url: `${uiUrl}/fiori-ui5-1.71.html#Approvals-manage&//Approval(ID=guid'${req.ID}',IsActiveEntity=true)`,
+        body: "Please decide about this request",
+        approveUrl: `${srvUrl}/v2/admin/Approval_approve?ID=guid'${req.ID}'&IsActiveEntity=true`,
+        rejectUrl: `${srvUrl}/v2/admin/Approval_reject?ID=guid'${req.ID}'&IsActiveEntity=true`,
+      });
     } catch (error) {
-      console.error("Error Message: " + error.message)
-      if(error.request && error.request.path) {
-        console.error("Request Path: " + error.request.path)
+      console.error("Error Message: " + error.message);
+    }
+  });
+
+  srv.on(["approve"], Approval, async (req) => {
+    console.log("Approval - approve");
+    let approval = await cds
+      .tx(req)
+      .read(Approval)
+      .where({ ID: req.params[0].ID });
+    if (approval[0].status === "R") {
+      let result = await cds
+        .tx(req)
+        .update(Approval, { ID: req.params[0].ID })
+        .with({
+          status: "A",
+        });
+    } else {
+      req.error(409, `Approval is not is status requested`);
+    }
+  });
+
+  srv.on(["reject"], Approval, async (req) => {
+    console.log("Approval - reject");
+    let approval = await cds
+      .tx(req)
+      .read(Approval)
+      .where({ ID: req.params[0].ID });
+    if (approval[0].status === "R") {
+      let result = await cds
+        .tx(req)
+        .update(Approval, { ID: req.params[0].ID })
+        .with({
+          status: "N",
+        });
+    } else {
+      req.error(409, `Approval is not is status requested`);
+    }
+  });
+
+  srv.on("READ", ["SEPMRA_I_Product_E"], async (req) => {
+    const externalTransaction = external.transaction(req);
+    try {
+      let result = await externalTransaction.run(req.query);
+      // result.forEach(cleanObject);
+      const count = await externalTransaction.get(`${req._.req.path}/$count`);
+      result["$count"] = count;
+      // result['$count'] = result.length
+      return result;
+    } catch (error) {
+      console.error("Error Message: " + error.message);
+      if (error.request && error.request.path) {
+        console.error("Request Path: " + error.request.path);
       }
     }
-  })
+  });
 
   srv.before("READ", [Books, Authors], async (req) => {
     var tx = cds.transaction(req);
@@ -125,28 +186,28 @@ module.exports = async function (srv) {
 
   srv.on(["readCdsEnv"], (req) => {
     return JSON.stringify(cds.env);
-  })
+  });
 
   srv.on(["readJobs"], (req) => {
     return new Promise((resolve, reject) => {
-      const scheduler = getJobscheduler(req)
+      const scheduler = getJobscheduler(req);
       if (scheduler) {
-        var query = {}
+        var query = {};
         scheduler.fetchAllJobs(query, function (err, result) {
           if (err) {
-            reject(req.error("Error retrieving jobs"))
+            reject(req.error("Error retrieving jobs"));
           }
           //Jobs retrieved successfully
           if (result && result.results && result.results.length > 0) {
             resolve(result.results);
           } else {
-            reject(req.warn("Can't find any job"))
+            reject(req.warn("Can't find any job"));
           }
-        })
+        });
       }
-    })
-  })
-  
+    });
+  });
+
   srv.on(["readJobDetails"], (req) => {
     return new Promise((resolve, reject) => {
       const scheduler = getJobscheduler(req);
@@ -198,8 +259,8 @@ module.exports = async function (srv) {
           if (err) {
             reject(req.error("Error retrieving job action logs"));
           } else {
-            console.log(result.results)
-            resolve(JSON.stringify(result.results))
+            console.log(result.results);
+            resolve(JSON.stringify(result.results));
           }
         });
       }
@@ -214,14 +275,14 @@ module.exports = async function (srv) {
           jobId: req.data.jobId,
           scheduleId: req.data.scheduleId,
           page_size: req.data.page_size,
-          offset: req.data.offset
-        }
+          offset: req.data.offset,
+        };
         scheduler.getRunLogs(query, function (err, result) {
           if (err) {
-            reject(req.error("Error retrieving job run logs"))
+            reject(req.error("Error retrieving job run logs"));
           } else {
             // console.log(result.results)
-            resolve(result.results)
+            resolve(result.results);
           }
         });
       }
@@ -312,9 +373,9 @@ module.exports = async function (srv) {
     const transporter = new SapCfMailer("mailtrap");
     // use sendmail as you should use it in nodemailer
     const result = await transporter.sendMail({
-      to: 'someoneimportant@sap.com',
+      to: "someoneimportant@sap.com",
       subject: `This is the mail subject`,
-      text: `body of the email`
+      text: `body of the email`,
     });
     return JSON.stringify(result);
   });

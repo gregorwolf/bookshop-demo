@@ -31,7 +31,7 @@ entity Approval : managed, cuid {
               pending = 'P' @(title : 'Pending');
               approved = 'A'@(title : 'Approved');
               rejected = 'N'       @(title : 'Rejected');
-  };
+  } default 'R';
 };
 
 entity Books : managed {
@@ -85,9 +85,9 @@ entity Authors : managed {
 
 entity Publishers : managed {
   key ID   : Integer;
-      name : String(111) @(
-        title: '{i18n>Publisher}',
-        description: '{i18n>PublisherDesc}'
+      name : String(111)@(
+        title       : '{i18n>Publisher}',
+        description : '{i18n>PublisherDesc}'
       );
       book : Association to many Books
                on book.publisher = $self;
