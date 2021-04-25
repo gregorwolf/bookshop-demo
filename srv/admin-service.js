@@ -50,8 +50,7 @@ module.exports = async function (srv) {
         subject: `Approval for ${req.changedEntity} requested`,
         url: `${uiUrl}/fiori-ui5-1.71.html#Approvals-manage&//Approval(ID=guid'${req.ID}',IsActiveEntity=true)`,
         body: "Please decide about this request",
-        approveUrl: `${srvUrl}/v2/admin/Approval_approve?ID=guid'${req.ID}'&IsActiveEntity=true`,
-        rejectUrl: `${srvUrl}/v2/admin/Approval_reject?ID=guid'${req.ID}'&IsActiveEntity=true`,
+        ID: `guid'${req.ID}'`
       });
     } catch (error) {
       console.error("Error Message: " + error.message);
