@@ -41,6 +41,7 @@ entity Books : managed {
       title                              : localized String(111);
       descr                              : localized String(1111);
       stock                              : Integer;
+      @sap.unit: 'currency'
       price                              : Decimal(9, 2);
       currency                           : Currency;
       virtual semanticURLtoPublisher     : String;
