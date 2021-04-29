@@ -4,9 +4,9 @@ ID;title;author_ID;descr;stock;price;currency_code;BusinessValidFrom;BusinessVal
 251;The Raven;150;"“The Raven"" is a narrative poem by American writer Edgar Allan Poe. First published in January 1845, the poem is often noted for its musicality, stylized language, and supernatural atmosphere. It tells of a talking raven's mysterious visit to a distraught lover, tracing the man's slow fall into madness. The lover, often identified as being a student, is lamenting the loss of his love, Lenore. Sitting on a bust of Pallas, the raven seems to further distress the protagonist with its constant repetition of the word ""Nevermore"". The poem makes use of folk, mythological, religious, and classical references.";333;13.13;USD;2000-01-01;9999-01-01;2
 252;Eleonora;150;"""Eleonora"" is a short story by Edgar Allan Poe, first published in 1842 in Philadelphia in the literary annual The Gift. It is often regarded as somewhat autobiographical and has a relatively ""happy"" ending.";555;14;USD;2000-01-01;9999-01-01;2
 271;Catweazle;170;Catweazle is a British fantasy television series, starring Geoffrey Bayldon in the title role, and created by Richard Carpenter for London Weekend Television. The first series, produced and directed by Quentin Lawrence, was screened in the UK on ITV in 1970. The second series, directed by David Reid and David Lane, was shown in 1971. Each series had thirteen episodes, most but not all written by Carpenter, who also published two books based on the scripts.;22;15;EUR;2000-01-01;9999-01-01;1
-1;Moby Dick;1;Stephenie Meyer;5;18.84;EUR;2000-01-01;9999-01-01;2
-2;Vanity Fair;2;Rachel Hollis;0;65.07;EUR;2000-01-01;9999-01-01;2
-3;Vanity Fair;3;Dr. Seuss;6;97.10;EUR;2000-01-01;9999-01-01;2
+1;Moby Dick;1;Stephenie Meyer;5;188;JPY;2000-01-01;9999-01-01;2
+2;Vanity Fair;2;Rachel Hollis;0;1065;JPY;2000-01-01;9999-01-01;2
+3;Vanity Fair;3;Dr. Seuss;6;1097.10;EUR;2000-01-01;9999-01-01;2
 4;One Hundred Years of Solitude;4;Stephen King;4;31.35;EUR;2000-01-01;9999-01-01;2
 5;Oedipus;5;Stephen King;4;73.84;EUR;2000-01-01;9999-01-01;2
 6;Madame Bovary;6;Henry James;0;9.35;EUR;2000-01-01;9999-01-01;1

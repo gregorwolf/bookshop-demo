@@ -137,6 +137,15 @@ annotate my.Books with @(
             {Value: ID},
             {Value: title},
             {Value: author.name},
+            {
+                Value: price,
+                ![@UI.Importance]: #High 
+            },
+            {   
+                Value: currency.symbol, 
+                Label:'',
+                ![@UI.Importance]: #High 
+            },
             {Value: publisher.name},
             {
                 $Type: 'UI.DataFieldWithIntentBasedNavigation',
@@ -173,8 +182,6 @@ annotate my.Books with @(
             },
             {Value: semanticURLtoPublisher},
             {Value: stock},
-            {Value: price},
-            {Value: currency.symbol, Label:''}
             // {Value: author_ID, Label:'{i18n>AuthorID}'},
             /*
             {
