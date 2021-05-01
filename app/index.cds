@@ -147,6 +147,7 @@ annotate my.Books with @(
                 ![@UI.Importance]: #High 
             },
             {Value: publisher.name},
+            /*
             {
                 $Type: 'UI.DataFieldWithIntentBasedNavigation',
                 Label: '{i18n>ToPublisherIntentBased}',
@@ -180,6 +181,7 @@ annotate my.Books with @(
                 Value: '{i18n>WithUrl}',
                 Url: semanticURLtoPublisher,
             },
+            */
             {Value: semanticURLtoPublisher},
             {Value: stock},
             // {Value: author_ID, Label:'{i18n>AuthorID}'},
