@@ -43,6 +43,7 @@ entity Books : managed {
       stock                              : Integer;
       @sap.unit                      :                           'currency_code'
       @Semantics.amount.currencyCode :                           'currency_code'
+      @Measures.ISOCurrency          :                           currency_code
       price                              : DecimalFloat;
       @Common.IsCurrency
       @sap.semantics                 :                           'currency-code'

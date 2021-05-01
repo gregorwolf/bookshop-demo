@@ -7,11 +7,24 @@ service CatalogSimpleService {
     ID,
     @sap.unit                      : 'currencyISOCode'
     @Semantics.amount.currencyCode : 'currencyISOCode'
+    @Measures.ISOCurrency          : currencyISOCode
     total,
     @Common.IsCurrency
     @sap.semantics                 : 'currency-code'
     @Semantics.currencyCode
-    currency.code as currencyISOCode
+    currency.code as currencyISOCode, currency
   };
 
 }
+
+annotate CatalogSimpleService.Orders with @(UI : {
+  SelectionFields : [
+    ID,
+    total
+  ],
+  LineItem        : [
+    {Value : ID},
+    {Value : total},
+    {Value : currencyISOCode}
+  ],
+});
