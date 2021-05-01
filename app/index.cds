@@ -139,7 +139,7 @@ annotate my.Books with @(
             {Value: author.name},
             {
                 Value: price,
-                ![@UI.Importance]: #High 
+                ![@UI.Importance]: #High
             },
             {   
                 Value: currency.symbol, 
