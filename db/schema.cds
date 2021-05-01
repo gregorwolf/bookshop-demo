@@ -41,8 +41,12 @@ entity Books : managed {
       title                              : localized String(111);
       descr                              : localized String(1111);
       stock                              : Integer;
-      @sap.unit: 'currency'
-      price                              : Decimal(9, 2);
+      @sap.unit                      :                           'currency_code'
+      @Semantics.amount.currencyCode :                           'currency_code'
+      price                              : DecimalFloat;
+      @Common.IsCurrency
+      @sap.semantics                 :                           'currency-code'
+      @Semantics.currencyCode
       currency                           : Currency;
       virtual semanticURLtoPublisher     : String;
       weight                             : DecimalFloat @title : 'Weight (DecimalFloat)';
@@ -137,13 +141,14 @@ annotate Deliverystatus with @title : '{i18n>Deliverystatus}';
 annotate Deliverystatuses.name with @title : '{i18n>Deliverystatus}'  @description : '{i18n>Deliverystatus}';
 
 entity Orders : cuid, managed {
-  OrderNo         : String       @title : 'Order Number'; //> readable key
-  CustomerOrderNo : String(80)   @title : 'Customer Order Number';
+  OrderNo         : String    @title : 'Order Number'; //> readable key
+  CustomerOrderNo : String(80)@title : 'Customer Order Number';
   Items           : Composition of many OrderItems
                       on Items.parent = $self;
   ShippingAddress : Composition of one OrderShippingAddress
                       on ShippingAddress.parent = $self;
-  total           : Decimal(9, 2)@readonly;
+  @readonly
+  total           : DecimalFloat;
   orderstatus     : Orderstatus;
   deliverystatus  : Deliverystatus;
   currency        : Currency;

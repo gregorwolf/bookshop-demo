@@ -1,8 +1,8 @@
-code;symbol;name;descr
-EUR;€;Euro;European Euro
-USD;$;US Dollar;United States Dollar
-CAD;$;Canadian Dollar;Canadian Dollar
-AUD;$;Australian Dollar;Australian Dollar
-GBP;£;Pound;Great Britian Pound
-ILS;₪;Shekel;Israeli New Shekel
-JPY;¥;Yen;Japanese Yen;
+code;symbol;name;descr;decimalPlaces
+EUR;€;Euro;European Euro;2
+USD;$;US Dollar;United States Dollar;2
+CAD;$;Canadian Dollar;Canadian Dollar;2
+AUD;$;Australian Dollar;Australian Dollar;2
+GBP;£;Pound;Great Britian Pound;2
+ILS;₪;Shekel;Israeli New Shekel;2
+JPY;¥;Yen;Japanese Yen;0

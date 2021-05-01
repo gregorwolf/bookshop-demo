@@ -1,3 +1,7 @@
+### Read Metadata OData V4
+GET http://localhost:4004/catalog/$metadata
+### Read Metadata OData V2
+GET http://localhost:4004/v2/catalog/$metadata
 ### Test function import OData V2
 GET http://localhost:4004/v2/catalog/hello?to=Gregor
 
@@ -5,8 +9,6 @@ GET http://localhost:4004/v2/catalog/hello?to=Gregor
 GET http://localhost:4004/v2/catalog/
 ### Read Entities with OData V4
 GET http://localhost:4004/catalog/
-### Read Metadata OData V4
-GET http://localhost:4004/catalog/$metadata
 ### Read Books using function
 GET http://localhost:4004/catalog/getBooks()
 
@@ -34,3 +36,6 @@ Authorization: Basic YWRtaW46
 ### Read number of books for dynamic tile
 GET http://localhost:4004/v2/catalog/getNumberOfBooksForDynamicTile
 Authorization: Basic bob:
+
+### Currencies
+GET http://localhost:4004/catalog/Currencies
