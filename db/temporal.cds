@@ -13,6 +13,16 @@ entity Employees : cuid {
   job1      : Association to one /*of*/ WorkAssignments;
 }
 
+@Temporal.TemporalSupport : {
+  $Type           : 'Temporal.TemporalSupportType',
+  ApplicationTime : {
+    $Type               : 'Temporal.GranularityDate',
+    SupportedQueries    : #TimeTravel,
+    ClosedClosedPeriods : false,
+  },
+}
+@Temporal.From            : validFrom
+@Temporal.To              : validTo
 entity WorkAssignments : cuid, temporal {
   role : String(111);
   empl : Association to Employees;
