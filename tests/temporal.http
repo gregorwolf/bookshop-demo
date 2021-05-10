@@ -1,6 +1,8 @@
 ###
 GET http://localhost:4004/temporal/
 ###
+GET http://localhost:4004/temporal/$metadata
+###
 GET http://localhost:4004/temporal/Employees
 ###
 GET http://localhost:4004/temporal/Employees
