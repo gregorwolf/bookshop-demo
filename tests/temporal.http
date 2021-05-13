@@ -21,7 +21,9 @@ GET http://localhost:4004/temporal/WorkAssignments
 GET http://localhost:4004/temporal/WorkAssignments
   ?sap-valid-to=date'2020-12-10'
 #sap-valid-to: date'2020-12-10'
-
+###
+GET http://localhost:4004/temporal/WorkAssignments
+  ?sap-valid-to=date'2021-01-01'
 ###
 GET http://localhost:4004/temporal/WorkAssignments
   ?sap-valid-from=date'2016-01-01'
