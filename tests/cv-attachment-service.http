@@ -1,0 +1,39 @@
+###
+GET http://localhost:4004/v2/API_CV_ATTACHMENT_SRV/$metadata
+###
+GET http://localhost:4004/v2/API_CV_ATTACHMENT_SRV/
+Accept: application/json
+### Read GetAttachmentCount via V4 endpoint
+GET http://localhost:4004/API_CV_ATTACHMENT_SRV/GetAttachmentCount(BusinessObjectTypeName='BUS1002',LinkedSAPObjectKey='4711',SemanticObject='')
+Accept: application/json
+
+### Returns:
+{
+  "@odata.context": "$metadata#AttachmentContentService.API_CV_ATTACHMENT_SRV_AttachmentsCount",
+  "AttachmentCount": 2
+}
+
+### Read GetAttachmentCount via V2 endpoint
+GET http://localhost:4004/v2/API_CV_ATTACHMENT_SRV/GetAttachmentCount
+  ?BusinessObjectTypeName='BUS1002'
+  &LinkedSAPObjectKey='4711'
+  &SemanticObject=''
+Accept: application/json
+
+### Returns:
+{
+  "d": {
+    "AttachmentCount": 2,
+    "__metadata": {}
+  }
+}
+
+### Should be:
+{
+  "d": {
+    "GetAttachmentCount": {
+      "AttachmentCount": 0
+    }
+  }
+}
+### According to https://api.sap.com/api/API_CV_ATTACHMENT_SRV/resource -> Service Operations -> /GetAttachmentCount

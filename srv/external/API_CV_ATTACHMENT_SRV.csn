@@ -1,0 +1,364 @@
+{
+  "definitions": {
+    "API_CV_ATTACHMENT_SRV": {
+      "kind": "service"
+    },
+    "API_CV_ATTACHMENT_SRV.AttachmentsCount": {
+      "kind": "type",
+      "elements": {
+        "AttachmentCount": {
+          "type": "cds.Integer"
+        }
+      }
+    },
+    "API_CV_ATTACHMENT_SRV.AssignDocument": {
+      "kind": "type",
+      "elements": {
+        "IsAssigned": {
+          "type": "cds.Boolean"
+        }
+      }
+    },
+    "API_CV_ATTACHMENT_SRV.AttachmentContentSet": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "DocumentInfoRecordDocType": {
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "DocumentInfoRecordDocNumber": {
+          "key": true,
+          "type": "cds.String",
+          "length": 25
+        },
+        "DocumentInfoRecordDocVersion": {
+          "key": true,
+          "type": "cds.String",
+          "length": 2
+        },
+        "DocumentInfoRecordDocPart": {
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "LogicalDocument": {
+          "key": true,
+          "type": "cds.String",
+          "length": 32
+        },
+        "ArchiveDocumentID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 40
+        },
+        "LinkedSAPObjectKey": {
+          "key": true,
+          "type": "cds.String",
+          "length": 90
+        },
+        "BusinessObjectTypeName": {
+          "key": true,
+          "type": "cds.String",
+          "length": 40
+        },
+        "SemanticObject": {
+          "type": "cds.String",
+          "length": 40
+        },
+        "WorkstationApplication": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "FileSize": {
+          "type": "cds.String",
+          "length": 12
+        },
+        "FileName": {
+          "type": "cds.String",
+          "length": 255
+        },
+        "DocumentURL": {
+          "type": "cds.String",
+          "length": 4096
+        },
+        "MimeType": {
+          "type": "cds.String",
+          "length": 128
+        },
+        "Content": {
+          "type": "cds.LargeBinary"
+        },
+        "CreatedByUser": {
+          "type": "cds.String",
+          "length": 12
+        },
+        "CreatedByUserFullName": {
+          "type": "cds.String",
+          "length": 80
+        },
+        "CreationDateTime": {
+          "type": "cds.Timestamp"
+        },
+        "BusinessObjectType": {
+          "type": "cds.String",
+          "length": 40
+        },
+        "LastChangedByUser": {
+          "type": "cds.String",
+          "length": 12
+        },
+        "LastChangedByUserFullName": {
+          "type": "cds.String",
+          "length": 80
+        },
+        "ChangedDateTime": {
+          "type": "cds.Timestamp"
+        },
+        "StorageCategory": {
+          "type": "cds.String",
+          "length": 10
+        },
+        "ArchiveLinkRepository": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "SAPObjectType": {
+          "type": "cds.String",
+          "length": 30
+        },
+        "SAPObjectNodeType": {
+          "type": "cds.String",
+          "length": 30
+        },
+        "HarmonizedDocumentType": {
+          "type": "cds.String",
+          "length": 40
+        },
+        "AttachmentDeletionIsAllowed": {
+          "type": "cds.Boolean"
+        },
+        "AttachmentRenameIsAllowed": {
+          "type": "cds.Boolean"
+        },
+        "Source": {
+          "type": "cds.String",
+          "length": 10
+        }
+      }
+    },
+    "API_CV_ATTACHMENT_SRV.SAPObjectDocumentTypeSet": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "SAPObjectType": {
+          "key": true,
+          "type": "cds.String",
+          "length": 30
+        },
+        "SAPObjectNodeType": {
+          "key": true,
+          "type": "cds.String",
+          "length": 30
+        },
+        "HarmonizedDocumentType": {
+          "key": true,
+          "type": "cds.String",
+          "length": 40
+        },
+        "DocumentTypeDescription": {
+          "type": "cds.String",
+          "length": 40
+        },
+        "PermittedArchiveLinkMimeType": {
+          "type": "cds.String",
+          "length": 128
+        },
+        "AttachmentFramework": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "DocumentTypeIsDefault": {
+          "type": "cds.String",
+          "length": 1
+        }
+      }
+    },
+    "API_CV_ATTACHMENT_SRV.AttachmentHarmonizedOperationSet": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "LogicalDocument": {
+          "key": true,
+          "type": "cds.String",
+          "length": 32
+        },
+        "ArchiveDocumentID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 40
+        },
+        "LinkedSAPObjectKey": {
+          "key": true,
+          "type": "cds.String",
+          "length": 90
+        },
+        "SAPObjectType": {
+          "key": true,
+          "type": "cds.String",
+          "length": 30
+        },
+        "HarmonizedDocumentType": {
+          "key": true,
+          "type": "cds.String",
+          "length": 40
+        },
+        "DocumentInfoRecordDocType": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "DocumentInfoRecordDocNumber": {
+          "type": "cds.String",
+          "length": 25
+        },
+        "DocumentInfoRecordDocVersion": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "DocumentInfoRecordDocPart": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "BusinessObjectTypeName": {
+          "type": "cds.String",
+          "length": 40
+        },
+        "FileSize": {
+          "type": "cds.String",
+          "length": 12
+        },
+        "FileName": {
+          "type": "cds.String",
+          "length": 255
+        },
+        "MimeType": {
+          "type": "cds.String",
+          "length": 128
+        },
+        "CheckoutUser": {
+          "type": "cds.String",
+          "length": 12
+        },
+        "CheckoutUserFullName": {
+          "type": "cds.String",
+          "length": 80
+        },
+        "CreatedByUser": {
+          "type": "cds.String",
+          "length": 12
+        },
+        "CreatedByUserFullName": {
+          "type": "cds.String",
+          "length": 80
+        },
+        "CreationDateTime": {
+          "type": "cds.Timestamp"
+        },
+        "LastChangedByUser": {
+          "type": "cds.String",
+          "length": 12
+        },
+        "LastChangedByUserFullName": {
+          "type": "cds.String",
+          "length": 80
+        },
+        "ChangedDateTime": {
+          "type": "cds.Timestamp"
+        },
+        "StorageCategory": {
+          "type": "cds.String",
+          "length": 10
+        },
+        "ArchiveLinkRepository": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "SAPObjectNodeType": {
+          "type": "cds.String",
+          "length": 30
+        },
+        "AttachmentDeletionIsAllowed": {
+          "type": "cds.Boolean"
+        },
+        "AttachmentRenameIsAllowed": {
+          "type": "cds.Boolean"
+        },
+        "URLToUploadAttachment": {
+          "type": "cds.String",
+          "length": 4096
+        },
+        "URLToReadAttachment": {
+          "type": "cds.String",
+          "length": 4096
+        },
+        "OneTimeValidTokenForAttachment": {
+          "type": "cds.String",
+          "length": 128
+        }
+      }
+    },
+    "API_CV_ATTACHMENT_SRV.A_DocumentInfoRecordAttch": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "DocumentInfoRecordDocType": {
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "DocumentInfoRecordDocNumber": {
+          "key": true,
+          "type": "cds.String",
+          "length": 25
+        },
+        "DocumentInfoRecordDocVersion": {
+          "key": true,
+          "type": "cds.String",
+          "length": 2
+        },
+        "DocumentInfoRecordDocPart": {
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "DocumentInfoRecord": {
+          "type": "cds.String",
+          "length": 70
+        },
+        "DocumentDescription": {
+          "type": "cds.String",
+          "length": 40
+        },
+        "ExternalDocumentStatus": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "DocumentStatusName": {
+          "type": "cds.String",
+          "length": 16
+        },
+        "DocInfoRecdIsMarkedForDeletion": {
+          "type": "cds.Boolean"
+        },
+        "DocumentInfoRecordToAttachmentNavigation": {
+          "type": "cds.Association",
+          "target": "API_CV_ATTACHMENT_SRV.AttachmentContentSet",
+          "cardinality": {
+            "max": "*"
+          }
+        }
+      }
+    }
+  }
+}

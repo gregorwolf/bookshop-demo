@@ -104,6 +104,10 @@
           "destination": "flow",
           "requestTimeout": 30000
         }
+      },
+      "API_CV_ATTACHMENT_SRV": {
+        "kind": "odata",
+        "model": "srv/external/API_CV_ATTACHMENT_SRV"
       }
     },
     "[dev-uaa]": {
