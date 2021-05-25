@@ -44,6 +44,7 @@
     "deploy:cf:ui": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-deployer",
     "deploy:cf:app": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-app",
     "deploy:cf-hana-cloud": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf-hana-cloud.mtaext",
+    "deploy:cf-hana-cloud-job-standard": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf-hana-cloud-job-standard.mtaext",
     "deploy:hana": "cds deploy --to hana --vcap-file ./default-env.json",
     "deploy:xsa": "xs deploy mta_archives/bookshop-demo_0.0.1.mtar",
     "create:xsa:uaa": "xs create-service xsuaa space bookshop-demo-uaa -c xs-security.json",
