@@ -143,14 +143,23 @@ annotate my.Publishers with @(UI : {
 //	Books Lists
 //
 annotate my.Books with @(UI : {
-    Identification  : [{Value : title}],
-    SelectionFields : [
+    PresentationVariant : {
+        $Type     : 'UI.PresentationVariantType',
+        MaxItems  : 10,
+        SortOrder : [{
+            $Type      : 'Common.SortOrderType',
+            Property   : title,
+            Descending : false
+        }]
+    },
+    Identification      : [{Value : title}],
+    SelectionFields     : [
         ID,
         title,
         author.name,
         stock
     ],
-    LineItem        : [
+    LineItem            : [
         {Value : ID},
         {Value : title},
         {Value : author.name},
