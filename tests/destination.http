@@ -47,6 +47,7 @@ grant_type=password
 &password={{$dotenv password}}
 &client_id={{$dotenv client_id}}
 &response_type=token
+#&login_hint={"origin":"ldap"}
 #&scope=HTML5UserAPIforCF!t55630.Display
 
 ### Fill Variables from Response
