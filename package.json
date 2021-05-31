@@ -14,7 +14,7 @@
   "dependencies": {
     "@sap/cds": "^5.1.5",
     "@sap/cds-dk": "^4.1.5",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.7.0",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.7.1",
     "@sap/hana-client": "^2.8.20",
     "@sap/jobs-client": "^1.6.1",
     "@sap/logging": "^6.0.3",
@@ -32,7 +32,7 @@
   "devDependencies": {
     "@openui5/ts-types": "^1.60.5",
     "copyfiles": "2.4.1",
-    "jest": "^27.0.1",
+    "jest": "^27.0.3",
     "npm-run-all": "^4.1.5",
     "sqlite3": "^5.0.2",
     "supertest": "^6.1.3"
