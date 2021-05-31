@@ -12,6 +12,11 @@ grant_type=client_credentials
 ### Fill Variables from Response
 @destination_access_token = {{requestDestinationAccessToken.response.body.$.access_token}}
 
+### Read list of destinations
+# @name subaccountDestinations
+GET {{$dotenv dest_uri}}/destination-configuration/v1/subaccountDestinations
+Authorization: Bearer {{destination_access_token}}
+
 ### Read details of one destination
 # @name subaccountDestinations
 GET {{$dotenv dest_uri}}/destination-configuration/v1/subaccountDestinations/SAP_ABAP_BACKEND

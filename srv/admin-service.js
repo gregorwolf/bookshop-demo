@@ -3,6 +3,7 @@ const JobSchedulerClient = require("@sap/jobs-client");
 const xsenv = require("@sap/xsenv");
 const SapCfMailer = require("sap-cf-mailer").default;
 const metering = require("./metering");
+const { executeHttpRequest } = require("@sap-cloud-sdk/core");
 
 function getJobscheduler(req) {
   xsenv.loadEnv();
@@ -22,16 +23,11 @@ function getJobscheduler(req) {
 }
 
 module.exports = async function (srv) {
-  const {
-    Role_BusinessObject,
-    Role_User,
-    Orders,
-    Books,
-    Authors,
-    Approval,
-  } = srv.entities;
+  const { Role_BusinessObject, Role_User, Orders, Books, Authors, Approval } =
+    srv.entities;
   const external = await cds.connect.to("ZPDCDS_SRV");
   const externalFlow = await cds.connect.to("flow");
+  const externalXsuaa = await cds.connect.to("xsuaa-api");
   var srvUrl = "http://localhost:4004/webapp";
   var uiUrl = srvUrl;
   if (process.env.VCAP_APPLICATION) {
@@ -50,7 +46,7 @@ module.exports = async function (srv) {
         subject: `Approval for ${req.changedEntity} requested`,
         url: `${uiUrl}/fiori-ui5-1.71.html#Approvals-manage&//Approval(ID=guid'${req.ID}',IsActiveEntity=true)`,
         body: "Please decide about this request",
-        ID: `guid'${req.ID}'`
+        ID: `guid'${req.ID}'`,
       });
     } catch (error) {
       console.error("Error Message: " + error.message);
@@ -363,6 +359,31 @@ module.exports = async function (srv) {
         });
       }
     });
+  });
+
+  srv.on(["readUsers"], async (req) => {
+    console.log("readUsers");
+    try {
+      const response = await externalXsuaa.get("/Users");
+      return response.resources;
+    } catch (error) {
+      console.error("Error Message: " + error.message);
+      console.error(error.stack);
+    }
+  });
+
+  srv.on(["readUsersSDK"], async (req) => {
+    console.log("readUsersSDK");
+    try {
+      const response = await executeHttpRequest(
+        { destinationName: "bookshop-demo-uaa-apiaccess" },
+        { url: "/Users" }
+      );
+      return response.data.resources;
+    } catch (error) {
+      console.error("Error Message: " + error.message);
+      console.error(error.stack);
+    }
   });
 
   // Based on the blogpost:

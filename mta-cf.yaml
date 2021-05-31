@@ -45,8 +45,34 @@ modules:
       - name: bookshop-demo-db-service
       - name: bookshop-demo-uaa
       - name: bookshop-demo-job-scheduler
+        parameters:
+          config:
+            xsuaa_instance_name: bookshop-demo-uaa
       - name: bookshop-demo-logging
       - name: bookshop-demo-autoscaler
+
+  - name: bookshop-demo-destination-content-deployer
+    type: com.sap.application.content
+    build-parameters:
+      no-source: true
+    parameters:
+      content:
+        subaccount:
+          destinations:
+            - Authentication: OAuth2ClientCredentials
+              Name: bookshop-demo-uaa-apiaccess
+              ServiceInstanceName: bookshop-demo-uaa-apiaccess
+              ServiceKeyName: bookshop-demo-uaa-apiaccess-key
+              sap.cloud.service: basic.service
+          existing_destinations_policy: update
+    requires:
+      - name: bookshop-demo-destination-service
+        parameters:
+          content-target: true
+      - name: bookshop-demo-uaa-apiaccess
+        parameters:
+          service-key:
+            name: bookshop-demo-uaa-apiaccess-key
 
 #  - name: bookshop-demo-v2-proxy
 #    type: nodejs
@@ -143,6 +169,11 @@ resources:
     parameters:
       path: ./xs-security.json
     type: com.sap.xs.uaa
+  - name: bookshop-demo-uaa-apiaccess
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: apiaccess
   - name: bookshop-demo-destination-service
     parameters:
       service-plan: lite

@@ -23,7 +23,7 @@ grant_type=password
 &password={{$dotenv password}}
 &client_id={{$dotenv client_id}}
 &response_type=token
-&scope=bookshop-demo!t72094.admin
+#&scope=bookshop-demo!t72094.admin
 
 ### Fill Variables from Response
 #@access_token = {{requestAccessTokenHANA.response.body.$.access_token}}
@@ -74,3 +74,14 @@ Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 {}
+
+###
+GET http://localhost:4004/admin/readUsers()
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+
+###
+GET http://localhost:4004/admin/readUsersSDK()
+Content-Type: application/json
+Authorization: Bearer {{access_token}}

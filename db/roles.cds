@@ -53,3 +53,9 @@ entity Address : cuid, managed {
   street : String(60)@(title : 'Street', );
   city   : String(60)@(title : 'City', );
 };
+
+type XSUAAUsers {
+  id         : String;
+  externalId : String;
+  userName   : String;
+}

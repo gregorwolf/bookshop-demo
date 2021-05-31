@@ -1,0 +1,25 @@
+# @name requestAccessToken
+POST {{$dotenv url}}/oauth/token
+Authorization: Basic {{$dotenv xsuaa_api_clientId}}:{{$dotenv xsuaa_api_clientSecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+### 
+# @name readUsers
+GET {{$dotenv xsuaa_url}}/Users
+Authorization: Bearer {{access_token}}
+
+### 
+# @name readUsersCAP
+GET http://localhost:4004/admin/readUsers()
+Authorization: Basic admin:
+
+### 
+# @name readUsersSDK
+GET http://localhost:4004/admin/readUsersSDK()
+Authorization: Basic admin:
