@@ -15,6 +15,21 @@ GET {{$dotenv xsuaa_url}}/Users
 Authorization: Bearer {{access_token}}
 
 ### 
+# @name readGroups
+GET {{$dotenv xsuaa_url}}/Groups
+Authorization: Bearer {{access_token}}
+
+### 
+# @name readGroupBookshopAdmin
+GET {{$dotenv xsuaa_url}}/Groups/BookshopAdmin
+Authorization: Bearer {{access_token}}
+
+### 
+# @name readApp
+GET {{$dotenv xsuaa_url}}/sap/rest/authorization/v2/apps/bookshop-demo!t73843
+Authorization: Bearer {{access_token}}
+
+### 
 # @name readUsersCAP
 GET http://localhost:4004/admin/readUsers()
 Authorization: Basic admin:

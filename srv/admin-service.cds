@@ -108,6 +108,7 @@ service AdminService @(
 
   function readUsers() returns array of db.XSUAAUsers;
   function readUsersSDK() returns array of db.XSUAAUsers;
+  action updateUsers() returns Boolean;
   // job-scheduler
   function readJobs() returns array of db.Jobs;
   function readJobDetails(jobId : Integer) returns db.Jobs;
