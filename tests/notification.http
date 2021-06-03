@@ -1,0 +1,148 @@
+### Get Access Token for Launchpad Notifications
+# Documentation:
+# https://help.sap.com/viewer/8c8e1958338140699bd4811b37b82ece/Cloud/en-US/d5429a2a5d9a4425a461aa06c4ee84e4.html
+# @name requestNotificationsAccessToken
+POST {{$dotenv url}}/oauth/token
+Authorization: Basic {{$dotenv notification_clientid}}:{{$dotenv notification_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+
+### Fill Variables from Response
+@notifications_access_token = {{requestNotificationsAccessToken.response.body.$.access_token}}
+
+###
+GET {{$dotenv notification_uri}}/v2/NotificationType.svc/
+Authorization: Bearer {{notifications_access_token}}
+Accept: application/json
+
+### 
+GET {{$dotenv notification_uri}}/v2/NotificationType.svc/$metadata
+Authorization: Bearer {{notifications_access_token}}
+
+### Get CSRF Token
+# @name getCSRF
+HEAD {{$dotenv notification_uri}}/v2/NotificationType.svc/
+Authorization: Bearer {{notifications_access_token}}
+Accept: application/json
+X-CSRF-Token: Fetch
+### Read Token to Variable
+@csrf={{getCSRF.response.headers.x-csrf-token}}
+
+### 
+POST {{$dotenv notification_uri}}/v2/NotificationType.svc/NotificationTypes
+Authorization: Bearer {{notifications_access_token}}
+Content-Type: application/json
+Accept: application/json
+X-CSRF-Token: {{csrf}}
+
+{
+    "NotificationTypeKey": "LeaveRequest",
+    "NotificationTypeVersion": "0.3",
+    "Templates": [
+        {
+            "Language": "en",
+            "TemplatePublic": "A new leave request needs ur attention!",
+            "TemplateSensitive": "{{$dotenv TemplateSensitive}}",
+            "TemplateGrouped": "{{$dotenv TemplateGrouped}}",
+            "TemplateLanguage": "mustache",
+            "Subtitle": "Leave Request"
+        }
+    ],
+    "Actions": [
+        {
+            "ActionId": "AcceptLRActionKey",
+            "Language": "en",
+            "ActionText": "Accept",
+            "GroupActionText": "Accept All",
+            "Nature": "POSITIVE"
+        },
+        {
+            "ActionId": "RejectLRActionKey",
+            "Language": "en",
+            "ActionText": "Reject",
+            "GroupActionText": "Reject All",
+            "Nature": "NEGATIVE"
+        }
+    ]
+}
+
+### 
+GET {{$dotenv notification_uri}}/v2/NotificationType.svc/NotificationTypes
+    ?$expand=Templates,Actions
+Authorization: Bearer {{notifications_access_token}}
+Accept: application/json
+
+###
+GET {{$dotenv notification_uri}}/v2/Notification.svc/
+Authorization: Bearer {{notifications_access_token}}
+Accept: application/json
+
+###
+GET {{$dotenv notification_uri}}/v2/Notification.svc/$metadata
+Authorization: Bearer {{notifications_access_token}}
+
+### Get CSRF Token
+# @name getNotificationCSRF
+HEAD {{$dotenv notification_uri}}/v2/Notification.svc/
+Authorization: Bearer {{notifications_access_token}}
+Accept: application/json
+X-CSRF-Token: Fetch
+### Read Token to Variable
+@notificationCSRF={{getNotificationCSRF.response.headers.x-csrf-token}}
+
+### 
+POST {{$dotenv notification_uri}}/v2/Notification.svc/Notifications
+Authorization: Bearer {{notifications_access_token}}
+Content-Type: application/json
+Accept: application/json
+X-CSRF-Token: {{notificationCSRF}}
+
+{
+    "OriginId": "leave-request-destination",
+    "NotificationTypeKey": "LeaveRequest",
+    "NotificationTypeVersion": "0.3",
+    "NavigationTargetAction": "display",
+    "NavigationTargetObject": "LeaveRequest",
+    "Priority": "High",
+    "ActorId": "NAIRA",
+    "ActorType": "",
+    "ActorDisplayText": "",
+    "ActorImageURL": "https://scn.sap.com/people/guest/avatar/NAIRA.png",
+    "Properties": [
+        {
+            "Key": "requester_email",
+            "Language": "en",
+            "Value": "me@sap.com",
+            "Type": "String",
+            "IsSensitive": false
+        },
+        {
+            "Key": "from",
+            "Language": "en",
+            "Value": "05-01-2021",
+            "Type": "String",
+            "IsSensitive": true
+        },
+        {
+            "Key": "to",
+            "Language": "en",
+            "Value": "05-01-2022",
+            "Type": "String",
+            "IsSensitive": true
+        },
+        {
+            "Key": "count_total",
+            "Language": "en",
+            "Value": "4",
+            "Type": "Integer",
+            "IsSensitive": true
+        }
+    ],
+    "Recipients": [
+        {
+            "RecipientId": "gregor.wolf@gmail.com"
+        }
+    ]
+}
