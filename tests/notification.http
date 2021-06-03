@@ -146,3 +146,14 @@ X-CSRF-Token: {{notificationCSRF}}
         }
     ]
 }
+
+### Results in
+{
+  "error": {
+    "code": null,
+    "message": {
+      "lang": "en",
+      "value": "An exception of type 'EdmSimpleTypeException' occurred."
+    }
+  }
+}
