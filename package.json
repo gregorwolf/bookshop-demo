@@ -63,7 +63,7 @@
     "build:xs-security": "cds compile srv/ --to xsuaa > xs-security.json",
     "build:cf": "cp mta-cf.yaml mta.yaml && mbt build -p=cf && rm mta.yaml",
     "build:xsa": "cp mta-xsa.yaml mta.yaml && mbt build -p=xsa && rm mta.yaml",
-    "build:OpenAPI": "mkdir -p srv/gen && npx -p @sap/cds-dk cds compile --to openapi srv -s AdminService > srv/gen/OpenAPI.json",
+    "build:OpenAPI": "mkdir -p srv/gen && cds compile --to openapi srv -s AdminService > srv/gen/OpenAPI.json",
     "build:copyOpenAPItogen": "copyfiles -f srv/gen/OpenAPI.json gen/srv/srv/gen/",
     "build:copycsntoproxy": "copyfiles -f gen/srv/srv/csn.json standalone-v2-proxy/gen/",
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
@@ -116,6 +116,13 @@
       "API_CV_ATTACHMENT_SRV": {
         "kind": "odata",
         "model": "srv/external/API_CV_ATTACHMENT_SRV"
+      },
+      "db": {
+        "kind": "sqlite",
+        "model": "db",
+        "credentials": {
+          "database": "db/bookshop.db"
+        }
       }
     },
     "[dev-uaa]": {
