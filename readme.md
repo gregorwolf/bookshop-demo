@@ -38,7 +38,15 @@ If you want to try also the external service calls, then you need to create a _d
   "destinations": [
     {
       "name": "ES5",
-      "url": "https://sapes5.sapdevcenter.com"
+      "url": "https://sapes5.sapdevcenter.com",
+      "username": "<your-ES5-username>",
+      "password": "<your-ES5-password>"
+    },
+    {
+      "name": "ERP",
+      "url": "https://saperp.example.com",
+      "username": "<your-ERP-username>",
+      "password": "<your-ERP-password>"
     }
   ]
 }
@@ -49,7 +57,7 @@ npm run build
 npm start
 ```
 
-If you want to test the used SAP Business Technology Platform - Cloud Foundry services you need also to add the VCAP_SERVICES variable to _default-env.json_. I.e.:
+If you want to test the used SAP Business Technology Platform - Cloud Foundry services you need also to add the VCAP*SERVICES variable to \_default-env.json*. I.e.:
 
 ```json
 {
@@ -133,4 +141,4 @@ url="https://<your-trial-account>trial.authentication.eu10.hana.ondemand.com"
 srvurl="https://<your-trial-account>trial-dev-bookshop-demo-srv.cfapps.us10.hana.ondemand.com"
 ```
 
-Then open the REST Client script _tests/api-access.http_ in VS Code and run the script with the comment _Get Access Token (Cloud Foundry)_. It should return a valid access_token. Now execute the requests _Read Orders_ and _Read Books_. You should see a valid result.
+Then open the REST Client script _tests/api-access.http_ in VS Code and run the script with the comment _Get Access Token (Cloud Foundry)_. It should return a valid access*token. Now execute the requests \_Read Orders* and _Read Books_. You should see a valid result.
