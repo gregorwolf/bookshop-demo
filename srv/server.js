@@ -6,13 +6,13 @@ const xsenv = require("@sap/xsenv");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./gen/OpenAPI.json");
 const express = require("express");
-const log = require('cf-nodejs-logging-support');
+const log = require("cf-nodejs-logging-support");
 
 // Set the minimum logging level (Levels: off, error, warn, info, verbose, debug, silly)
 log.setLoggingLevel("info");
 
 var xsuaaCredentials = false;
-if(process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   try {
     xsenv.loadEnv();
     const JWTStrategy = require("@sap/xssec").JWTStrategy;
@@ -27,12 +27,24 @@ if(process.env.NODE_ENV === 'production') {
 
 // Middleware to read SAP Job Headers sent by client
 function sapJobLogger(req, res, next) {
-  if(req.headers["x-sap-job-id"]) {
+  if (req.headers["x-sap-job-id"]) {
     console.log("===> SAP Job Headers");
-    console.log("===> SAP Job Headers - x-sap-job-id:         " + req.headers["x-sap-job-id"]);
-    console.log("===> SAP Job Headers - x-sap-jobschedule-id: " + req.headers["x-sap-jobschedule-id"]);
-    console.log("===> SAP Job Headers - x-sap-job-run-id:     " + req.headers["x-sap-job-run-id"]);
-    console.log("===> SAP Job Headers - x-sap-scheduler-host: " + req.headers["x-sap-scheduler-host"]);
+    console.log(
+      "===> SAP Job Headers - x-sap-job-id:         " +
+        req.headers["x-sap-job-id"]
+    );
+    console.log(
+      "===> SAP Job Headers - x-sap-jobschedule-id: " +
+        req.headers["x-sap-jobschedule-id"]
+    );
+    console.log(
+      "===> SAP Job Headers - x-sap-job-run-id:     " +
+        req.headers["x-sap-job-run-id"]
+    );
+    console.log(
+      "===> SAP Job Headers - x-sap-scheduler-host: " +
+        req.headers["x-sap-scheduler-host"]
+    );
   }
 
   next();
@@ -81,6 +93,7 @@ const readJwt = function (req) {
 };
 
 cds.on("bootstrap", async (app) => {
+  const cdsenv = cds.env;
   app.use("/appconfig", express.static("./app/webapp/appconfig/"));
   app.use(
     helmet({
@@ -94,7 +107,7 @@ cds.on("bootstrap", async (app) => {
   app.use(sapJobLogger);
 
   // Authentication using JWT
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === "production") {
     app.use(jwtLogger);
     await app.use(passport.initialize());
     await app.use(passport.authenticate("JWT", { session: false }));
