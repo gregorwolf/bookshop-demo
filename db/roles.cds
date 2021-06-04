@@ -40,9 +40,9 @@ entity Role_User : cuid {
   user   : User;
 };
 
-
 entity Users {
   key username : String @(title : 'Username', );
+      employee : Association to one Employee;
       address  : Composition of Address
                    on address.parent = $self;
       role     : Association to Roles;
@@ -58,4 +58,19 @@ type XSUAAUsers {
   id         : String;
   externalId : String;
   userName   : String;
+}
+
+entity Employee {
+      @UI.Hidden
+  key ID         : UUID;
+      @(title : '{i18n>BusinessPartnerFirstName}')
+      firstName  : String;
+      @(title : '{i18n>BusinessPartnerName}')
+      lastName   : String;
+      @(title : '{i18n>BusinessPartnerCompany}')
+      company    : String;
+      @(title : '{i18n>BusinessPartnerDepartment}')
+      department : String;
+      @(title : '{i18n>BusinessPartnerEmailAddress}')
+      email      : String @mandatory;
 }

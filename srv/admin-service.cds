@@ -76,10 +76,14 @@ service AdminService @(
     to    : 'admin'
   }, ])                       as projection on db.BusinessObjects;
 
+  @odata.draft.enabled
   entity Users @(restrict : [{
-    grant : ['READ'],
+    grant : ['*'],
     to    : 'admin'
   }, ])                       as projection on db.Users;
+
+  @readonly
+  entity Employee             as projection on db.Employee;
 
   entity Address              as projection on db.Address;
 

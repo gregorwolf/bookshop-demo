@@ -254,6 +254,18 @@
                                     }
                                 },
                                 {
+                                    "id": "Users",
+                                    "title": "Users",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V4catalogTile_UsersUI5latest",
+                                        "title": "Users",
+                                        "info": "Management",
+                                        "targetURL": "#UsersUI5latest-manage"
+                                    }
+                                },
+                                {
                                     "id": "BooksdisplayUI5latest",
                                     "title": "Browse Books",
                                     "tileType": "sap.ushell.ui.tile.StaticTile",
@@ -422,6 +434,18 @@
                                         "title": "Role",
                                         "info": "Management",
                                         "targetURL": "#V4Role-manageUI5latest"
+                                    }
+                                },
+                                {
+                                    "id": "Users",
+                                    "title": "Users",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V4catalogTile_UsersUI5latest",
+                                        "title": "Users",
+                                        "info": "Management",
+                                        "targetURL": "#V4UsersUI5latest-manage"
                                     }
                                 },
                                 {
@@ -699,6 +723,20 @@
                                 "url": "workAssignments/webapp"
                             }
                         },
+                        "actionUsersUI5latest": {
+                            "semanticObject": "V4UsersUI5latest",
+                            "action": "manage",
+                            "title": "Users",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=usersUI5latest",
+                                "url": "usersUI5latest/webapp"
+                            }
+                        },
                         "actionUsers": {
                             "semanticObject": "V4Users",
                             "action": "manage",
@@ -725,6 +763,20 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=v2.users.admin",
                                 "url": "v2/users-admin"
+                            }
+                        },
+                        "actionV2UsersUI5latest": {
+                            "semanticObject": "UsersUI5latest",
+                            "action": "manage",
+                            "title": "Users",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=v2.usersUI5latest",
+                                "url": "v2/users-adminUI5latest"
                             }
                         },
                         "actionV2Approvals": {
