@@ -20,7 +20,7 @@
     "@sap/jobs-client": "^1.6.1",
     "@sap/logging": "^6.0.3",
     "@sap/xsenv": "^3.1.0",
-    "@sap/xssec": "^3.2.0",
+    "@sap/xssec": "^3.2.1",
     "cf-nodejs-logging-support": "^6.7.0",
     "compression": "^1.7.4",
     "express": "^4.17.1",
@@ -31,9 +31,9 @@
     "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
-    "@openui5/ts-types": "^1.60.5",
+    "@openui5/ts-types": "^1.90.1",
     "copyfiles": "2.4.1",
-    "jest": "^27.0.3",
+    "jest": "^27.0.4",
     "npm-run-all": "^4.1.5",
     "sqlite3": "^5.0.2",
     "supertest": "^6.1.3"
@@ -70,7 +70,7 @@
     "start": "cds run",
     "start:forExcel": "node srv/index.js",
     "build:deploy:start": "run-s build deploy start",
-    "watch": "nodemon -w . -i node_modules/**,.git/** -e cds -x npm run start",
+    "watch": "cds run --with-mocks --in-memory --watch",
     "test": "jest",
     "update:cf:uaa": "cf update-service bookshop-demo-uaa -c xs-security.json",
     "undeploy:xsa": "xs undeploy bookshop-demo --delete-services --delete-service-brokers",
