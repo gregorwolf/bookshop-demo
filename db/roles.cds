@@ -62,6 +62,10 @@ type XSUAAUsers {
 
 entity Employee {
       @UI.Hidden
+      @Common.Text : {
+        $value              : email,
+        @UI.TextArrangement : #TextOnly
+      }
   key ID         : UUID;
       @(title : '{i18n>BusinessPartnerFirstName}')
       firstName  : String;
