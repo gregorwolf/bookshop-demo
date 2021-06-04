@@ -77,6 +77,10 @@ service AdminService @(
   }, ])                       as projection on db.BusinessObjects;
 
   @odata.draft.enabled
+  @Common.SideEffects #employeeChange : {
+    SourceProperties : [employee_ID],
+    TargetEntities   : [employee]
+  }
   entity Users @(restrict : [{
     grant : ['*'],
     to    : 'admin'
