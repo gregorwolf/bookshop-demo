@@ -69,6 +69,8 @@ service CatalogService @(impl : './cat-service.js') {
   @requires_ : 'authenticated-user'
   action submitOrder(book : Books:ID, amount : Integer);
 
+  action multipleOrders(numberOfOrders : Integer);
+
   @requires_ : 'authenticated-user'
   @readonly
   entity UserScopes {

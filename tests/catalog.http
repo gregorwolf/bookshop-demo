@@ -20,18 +20,24 @@ GET http://localhost:4004/v2/catalog/Publishers
 
 ### Read Countries
 GET http://localhost:4004/catalog/Countries
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 ### Read Books with Author details via OData V4 by admin
 GET http://localhost:4004/catalog/Books?$expand=publisher&$top=2
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 ### Read Books with Author details via OData V2 by admin
 GET http://localhost:4004/v2/catalog/Books?$expand=author
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 ### Read Authors with Books details via OData V2 by admin
 GET http://localhost:4004/v2/catalog/Authors?$expand=books
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
+
+### Read Specific Book
+GET http://localhost:4004/catalog/Books
+  ?$select=ID,stock
+  &$filter=ID eq 201 or ID eq 1
+Authorization: Basic admin:
 
 ### Read number of books for dynamic tile
 GET http://localhost:4004/v2/catalog/getNumberOfBooksForDynamicTile

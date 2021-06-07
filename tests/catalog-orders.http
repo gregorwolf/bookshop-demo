@@ -7,6 +7,7 @@ GET http://localhost:4004/catalog/OrderItems
 Authorization: Basic bob:
 
 ### Create Orders in two steps
+# @name createOrder
 POST http://localhost:4004/catalog/Orders
 Authorization: Basic bob:
 Content-Type: application/json
@@ -24,8 +25,11 @@ Content-Type: application/json
     }
 }
 
+### Fill Variables from Response
+@orderID={{createOrder.response.body.$.ID}}
+
 ### Create Order Item
-POST http://localhost:4004/catalog/Orders(2fe1d720-e4b2-43eb-93be-f5ffe60a762d)/Items
+POST http://localhost:4004/catalog/Orders({{orderID}})/Items
 Authorization: Basic bob:
 Content-Type: application/json
 
@@ -63,3 +67,81 @@ Authorization: Basic bob:
 Content-Type: application/json
 
 { "book":201, "amount":5 }
+
+### Read using $batch
+POST http://localhost:4004/catalog/$batch HTTP/1.1
+Authorization: Basic john:
+OData-Version: 4.0
+Content-Type: multipart/mixed;boundary=batch_36522ad7-fc75-4b56-8c71-56071383e77b
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: application/http
+Content-Transfer-Encoding:binary
+
+GET Books?$top=1
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b--
+
+###
+POST http://localhost:4004/catalog/$batch
+Authorization: Basic john:
+Content-Type: multipart/mixed;boundary=batch_36522ad7-fc75-4b56-8c71-56071383e77b
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: application/http
+Content-Transfer-Encoding:binary
+
+GET Books?$top=1
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b--
+
+### Create Orders using $batch
+POST http://localhost:4004/catalog/$batch HTTP/1.1
+Authorization: Basic john:
+Content-Type: multipart/mixed; boundary=batch_36522ad7-fc75-4b56-8c71-56071383e77b
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: application/http 
+Content-Transfer-Encoding:binary
+
+POST Orders HTTP/1.1
+Content-Type: application/json
+
+{
+    "OrderNo": "10",
+    "CustomerOrderNo": "Order from john",
+    "currency_code": "EUR",
+    "Items": [
+        {
+            "book_ID": 201
+        }
+    ],
+    "ShippingAddress":  {
+        "street": "Hauptstraße 1",
+        "city": "Trostberg"
+    }
+}
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: application/http 
+Content-Transfer-Encoding:binary
+
+POST Orders HTTP/1.1
+Content-Type: application/json
+
+{
+    "OrderNo": "11",
+    "CustomerOrderNo": "Order from john",
+    "currency_code": "EUR",
+    "Items": [
+        {
+            "book_ID": 1
+        }
+    ],
+    "ShippingAddress":  {
+        "street": "Hauptstraße 1",
+        "city": "Trostberg"
+    }
+}
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b--
