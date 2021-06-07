@@ -1,3 +1,4 @@
+const { connect } = require("@sap/cds");
 const cds = require("@sap/cds");
 const metering = require("./metering");
 
@@ -95,7 +96,19 @@ module.exports = async function (srv) {
   });
 
   this.on("multipleOrders", async (req) => {
-    req.data.numberOfOrders;
+    console.log(
+      "on INSERT multipleOrders: " + JSON.stringify(req.data.numberOfOrders)
+    );
+    const service = await cds.connect.to("CatalogService");
+    const txService = service.tx(req);
+    const { Orders } = service.entities;
+    const ordersInput = await txService.run(
+      SELECT.from(Orders).limit(req.data.numberOfOrders)
+    );
+    const orders = [];
+    orders.push(UPDATE(Orders).set(line).where(where));
+    const updateExcelRS = await txService.run(updates);
+    const commitResult = await txService.commit();
   });
 
   srv.on("INSERT", Orders, async (req, next) => {

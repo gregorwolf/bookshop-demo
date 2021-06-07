@@ -61,6 +61,16 @@ Content-Type: application/json
         "city": "Trostberg"
     }
 }
+
+### Update Orders via Action
+POST http://localhost:4004/catalog/multipleOrders
+Authorization: Basic bob:
+Content-Type: application/json
+
+{
+    "numberOfOrders": 2
+}
+
 ### Create Order via Action
 POST http://localhost:4004/catalog/submitOrder
 Authorization: Basic bob:
