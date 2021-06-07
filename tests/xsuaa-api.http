@@ -25,6 +25,21 @@ GET {{$dotenv xsuaa_url}}/Groups/BookshopAdmin
 Authorization: Bearer {{access_token}}
 
 ### 
+# @name readRoletemplaes
+GET {{$dotenv xsuaa_url}}/sap/rest/authorization/v2/apps/roletemplates
+Authorization: Bearer {{access_token}}
+
+### 
+# @name readRoleCollection
+GET {{$dotenv xsuaa_url}}/sap/rest/authorization/v2/rolecollections/?showGroups=true&showRoles=true&showUsers=true
+Authorization: Bearer {{access_token}}
+
+### 
+# @name readApps
+GET {{$dotenv xsuaa_url}}/sap/rest/authorization/v2/apps/
+Authorization: Bearer {{access_token}}
+
+### 
 # @name readApp
 GET {{$dotenv xsuaa_url}}/sap/rest/authorization/v2/apps/bookshop-demo!t73843
 Authorization: Bearer {{access_token}}
