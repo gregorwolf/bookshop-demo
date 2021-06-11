@@ -114,15 +114,16 @@ view BooksAnalytics as
         currency
   };
 
-entity Images {
-  key ID      : UUID;
+entity Images : cuid, managed {
+  /*
       @Core.MediaType : 'image/png'
       content : LargeBinary;
-/*
-content : LargeBinary @Core.MediaType: mediatype;
-@Core.IsMediaType : true
-mediatype : String;
-*/
+      */
+  content   : LargeBinary @Core.MediaType : mediatype;
+  @Core.IsMediaType :                       true
+  mediatype : String;
+  // @Core.ContentDisposition
+  filename  : String;
 }
 
 entity Orderstatuses : sap.common.CodeList {

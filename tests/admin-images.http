@@ -17,7 +17,8 @@ Content-Type: application/json
 
 { 
   "ID": "da07ae51-d0d3-41e7-a737-2555a213e5a9",
-  "mediatype": "image/png" 
+  "mediatype": "image/png",
+  "filename": "Test.png"
 }
 
 ### Create Picture without mediatype
