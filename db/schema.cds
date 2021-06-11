@@ -119,10 +119,11 @@ entity Images : cuid, managed {
       @Core.MediaType : 'image/png'
       content : LargeBinary;
       */
-  content   : LargeBinary @Core.MediaType : mediatype;
-  @Core.IsMediaType :                       true
+  @Core.MediaType                   : mediatype
+  @Core.ContentDisposition.Filename : filename
+  content   : LargeBinary;
+  @Core.IsMediaType                 : true
   mediatype : String;
-  // @Core.ContentDisposition
   filename  : String;
 }
 
