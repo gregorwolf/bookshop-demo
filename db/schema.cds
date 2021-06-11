@@ -122,7 +122,7 @@ entity Images : cuid, managed {
   content   : LargeBinary @Core.MediaType : mediatype;
   @Core.IsMediaType :                       true
   mediatype : String;
-  // @Core.ContentDisposition
+  @Core.ContentDisposition
   filename  : String;
 }
 
