@@ -46,7 +46,7 @@ X-CSRF-Token: {{csrf}}
             "TemplatePublic": "A new leave request needs ur attention!",
             "TemplateSensitive": "{{$dotenv TemplateSensitive}}",
             "TemplateGrouped": "{{$dotenv TemplateGrouped}}",
-            "TemplateLanguage": "mustache",
+            "TemplateLanguage": "Mustache",
             "Subtitle": "Leave Request"
         }
     ],
@@ -69,10 +69,17 @@ X-CSRF-Token: {{csrf}}
 }
 
 ### 
+# @name readNotificationTypes
 GET {{$dotenv notification_uri}}/v2/NotificationType.svc/NotificationTypes
     ?$expand=Templates,Actions
 Authorization: Bearer {{notifications_access_token}}
 Accept: application/json
+###
+@notificationTypeId={{readNotificationTypes.response.body.d.results[0].NotificationTypeId}}
+### 
+DELETE {{$dotenv notification_uri}}/v2/NotificationType.svc/NotificationTypes(guid'{{notificationTypeId}}')
+Authorization: Bearer {{notifications_access_token}}
+X-CSRF-Token: {{csrf}}
 
 ###
 GET {{$dotenv notification_uri}}/v2/Notification.svc/
@@ -82,6 +89,11 @@ Accept: application/json
 ###
 GET {{$dotenv notification_uri}}/v2/Notification.svc/$metadata
 Authorization: Bearer {{notifications_access_token}}
+
+### 
+GET {{$dotenv notification_uri}}/v2/Notification.svc/Notifications
+Authorization: Bearer {{notifications_access_token}}
+Accept: application/json
 
 ### Get CSRF Token
 # @name getNotificationCSRF
@@ -100,11 +112,11 @@ Accept: application/json
 X-CSRF-Token: {{notificationCSRF}}
 
 {
-    "OriginId": "leave-request-destination",
+    "OriginId": "leave-request",
     "NotificationTypeKey": "LeaveRequest",
     "NotificationTypeVersion": "0.3",
-    "NavigationTargetAction": "display",
-    "NavigationTargetObject": "LeaveRequest",
+    "NavigationTargetAction": "DisplayMyInbox",
+    "NavigationTargetObject": "WorkflowTask",
     "Priority": "High",
     "ActorId": "NAIRA",
     "ActorType": "",
@@ -121,7 +133,7 @@ X-CSRF-Token: {{notificationCSRF}}
         {
             "Key": "from",
             "Language": "en",
-            "Value": "05-01-2021",
+            "Value": "01-01-2021",
             "Type": "String",
             "IsSensitive": true
         },
@@ -145,15 +157,4 @@ X-CSRF-Token: {{notificationCSRF}}
             "RecipientId": "gregor.wolf@gmail.com"
         }
     ]
-}
-
-### Results in
-{
-  "error": {
-    "code": null,
-    "message": {
-      "lang": "en",
-      "value": "An exception of type 'EdmSimpleTypeException' occurred."
-    }
-  }
 }
