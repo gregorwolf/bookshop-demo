@@ -1,0 +1,36 @@
+### Test Trippin_Staging
+OPTIONS https://services.odata.org/Trippin_Staging/(S(iw1anra4xygjyssbeef0yeyy))/
+Accept: application/json
+
+### Returns
+HTTP/1.1 200 OK
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+Server: Microsoft-IIS/10.0
+OData-Version: 4.0
+Allow-Control-Expose-Headers: *
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Tue, 15 Jun 2021 05:13:17 GMT
+Connection: close
+Content-Length: 0
+
+
+### Test Trippin
+OPTIONS https://services.odata.org/Trippin/(S(iw1anra4xygjyssbeef0yeyy))/
+Accept: application/json
+
+### Returns
+HTTP/1.1 200 OK
+Allow: OPTIONS, TRACE, GET, HEAD, POST
+Server: Microsoft-IIS/10.0
+Public: OPTIONS, TRACE, GET, HEAD, POST
+X-Powered-By: ASP.NET
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET
+Access-Control-Allow-Headers: Accept, Origin, Content-Type, MaxDataServiceVersion
+Access-Control-Expose-Headers: DataServiceVersion
+Date: Tue, 15 Jun 2021 05:14:34 GMT
+Connection: close
+Content-Length: 0
