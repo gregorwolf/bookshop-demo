@@ -106,10 +106,6 @@ view BooksAnalytics as
   };
 
 entity Images : cuid, managed {
-  /*
-      @Core.MediaType : 'image/png'
-      content : LargeBinary;
-      */
   @Core.MediaType                   : mediatype
   @Core.ContentDisposition.Filename : filename
   content   : LargeBinary;
