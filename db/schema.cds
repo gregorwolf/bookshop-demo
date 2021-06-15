@@ -35,49 +35,38 @@ entity Approval : managed, cuid {
 };
 
 entity Books : managed {
-  key ID                                 : Integer;
-  key BusinessValidFrom                  : Date;
-  key BusinessValidTo                    : Date;
-      title                              : localized String(111);
-      descr                              : localized String(1111);
-      stock                              : Integer;
-      @sap.unit                      :                           'currency_code'
-      @Semantics.amount.currencyCode :                           'currency_code'
-      @Measures.ISOCurrency          :                           currency_code
-      price                              : DecimalFloat;
+  key ID                             : Integer;
+      title                          : localized String(111);
+      descr                          : localized String(1111);
+      stock                          : Integer;
+      @sap.unit                      :                       'currency_code'
+      @Semantics.amount.currencyCode :                       'currency_code'
+      @Measures.ISOCurrency          :                       currency_code
+      price                          : DecimalFloat;
       @Common.IsCurrency
-      @sap.semantics                 :                           'currency-code'
+      @sap.semantics                 :                       'currency-code'
       @Semantics.currencyCode
-      currency                           : Currency;
-      virtual semanticURLtoPublisher     : String;
-      weight                             : DecimalFloat @title : 'Weight (DecimalFloat)';
-      height                             : Double       @title : 'Height (Double)';
-      width                              : Decimal(9, 2)@title : 'Width (Decimal(9,2))';
-      visible                            : Boolean      @title : 'Visible (Boolean)';
-      releaseDate                        : DateTime     @title : 'Release Date (DateTime)';
-      readingTime                        : Time         @title : 'Reading Time (Time)';
-      author                             : Association to one Authors;
-      publisher                          : Association to one Publishers;
-      BooksAuthorsAssignment_ASSOC_Books : Association to many BooksAuthorsAssignment
-                                             on BooksAuthorsAssignment_ASSOC_Books.ASSOC_Book = $self;
+      currency                       : Currency;
+      virtual semanticURLtoPublisher : String;
+      weight                         : DecimalFloat @title : 'Weight (DecimalFloat)';
+      height                         : Double       @title : 'Height (Double)';
+      width                          : Decimal(9, 2)@title : 'Width (Decimal(9,2))';
+      visible                        : Boolean      @title : 'Visible (Boolean)';
+      releaseDate                    : DateTime     @title : 'Release Date (DateTime)';
+      readingTime                    : Time         @title : 'Reading Time (Time)';
+      author                         : Association to one Authors;
+      publisher                      : Association to one Publishers;
+      to_BooksAuthorsAssignment      : Association to BooksAuthorsAssignment;
 };
 
 entity BooksAuthorsAssignment {
-  key BusinessValidFrom : Date;
-  key BusinessValidTo   : Date;
-  key Role              : String(50);
-  key ASSOC_Book_ID     : Integer;
-      ASSOC_Book        : Association to Books
-                            on ASSOC_Book.ID = ASSOC_Book_ID;
-  key ASSOC_Author_ID   : Integer;
-      ASSOC_Author      : Association to Authors
-                            on ASSOC_Author.ID = ASSOC_Author_ID;
+  key Role         : String(50);
+  key ASSOC_Book   : Association to Books;
+  key ASSOC_Author : Association to Authors;
 }
 
 entity Authors : managed {
   key ID                                   : Integer;
-  key BusinessValidFrom                    : Date;
-  key BusinessValidTo                      : Date;
       name                                 : String(111);
       dateOfBirth                          : Date;
       dateOfDeath                          : Date;
@@ -103,10 +92,12 @@ entity Publishers : managed {
 view BooksAnalytics as
   select from Books {
     key ID,
-        @Analytics.Dimension : true
-        BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.name,
-        @Analytics.Dimension : true
-        BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.country.code,
+        /*
+            @Analytics.Dimension : true
+            BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.name,
+            @Analytics.Dimension : true
+            BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.country.code,
+            */
         @Analytics.Measure   : true
         @Aggregation.default : #SUM
         stock,

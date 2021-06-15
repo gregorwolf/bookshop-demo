@@ -26,12 +26,16 @@ Authorization: Basic admin:
 GET http://localhost:4004/admin/Books
 Authorization: Basic admin:
 
+### Read Books via OData V4
+GET http://localhost:4004/admin/Books(1)
+Authorization: Basic admin:
+
 ### Read Books via OData V2 by admin and expand to author
 GET http://localhost:4004/v2/admin/Books?$expand=author
 Authorization: Basic admin:
 
 ### Update Book via OData V2 by admin
-PUT http://localhost:4004/v2/admin/Books(ID=1,BusinessValidFrom=datetime'2000-01-01T00:00',BusinessValidTo=datetime'9999-01-01T00:00')
+PUT http://localhost:4004/v2/admin/Books(ID=1)
 Authorization: Basic littleadmin:
 Content-Type: application/json
 
