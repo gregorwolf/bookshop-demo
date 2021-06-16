@@ -103,6 +103,12 @@ service AdminService @(
   entity BooksAnalytics       as projection on db.BooksAnalytics;
 
   @readonly
+  entity BooksViewWOkey       as projection on db.BooksViewWOkey;
+
+  @readonly
+  entity BooksViewWOtype      as projection on db.BooksViewWOtype;
+
+  @readonly
   entity SEPMRA_I_Product_E   as projection on external.SEPMRA_I_Product_E excluding {
     CreationDateTime,
     LastChangedDateTime

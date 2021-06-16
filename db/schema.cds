@@ -105,6 +105,41 @@ view BooksAnalytics as
         currency
   };
 
+@Aggregation.ApplySupported.PropertyRestrictions : true
+view BooksViewWOkey as
+  select from Books {
+    ID,
+    /*
+        @Analytics.Dimension : true
+        BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.name,
+        @Analytics.Dimension : true
+        BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.country.code,
+        */
+    @Analytics.Measure   : true
+    @Aggregation.default : #SUM
+    stock,
+    @Analytics.Dimension : true
+    currency
+  };
+
+@Aggregation.ApplySupported.PropertyRestrictions : true
+view BooksViewWOtype as
+  select from Books {
+    key ID,
+        /*
+            @Analytics.Dimension : true
+            BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.name,
+            @Analytics.Dimension : true
+            BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.country.code,
+            */
+        @Analytics.Measure   : true
+        @Aggregation.default : #SUM
+        stock,
+        @Analytics.Dimension : true
+        currency,
+        1 as count
+  };
+
 entity Images : cuid, managed {
   @Core.MediaType                   : mediatype
   @Core.ContentDisposition.Filename : filename
