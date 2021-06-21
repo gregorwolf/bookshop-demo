@@ -390,12 +390,25 @@ module.exports = async function (srv) {
   // https://blogs.sap.com/2019/11/28/send-an-email-from-a-nodejs-application/
   // by Joachim Van Praet
   srv.on(["sendmail"], async (req) => {
+    if (!req.data.sender) {
+      return req.error("You must specify a sender");
+    }
+    if (!req.data.to) {
+      return req.error("You must specify a recipient");
+    }
+    if (!req.data.subject) {
+      return req.error("You must specify a subject");
+    }
+    if (!req.data.body) {
+      return req.error("You must specify a body");
+    }
     const transporter = new SapCfMailer("mailtrap");
     // use sendmail as you should use it in nodemailer
     const result = await transporter.sendMail({
-      to: "someoneimportant@sap.com",
-      subject: `This is the mail subject`,
-      text: `body of the email`,
+      from: req.data.sender,
+      to: req.data.to,
+      subject: req.data.subject,
+      text: req.data.body,
     });
     return JSON.stringify(result);
   });
