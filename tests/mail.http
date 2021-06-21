@@ -1,7 +1,44 @@
-### 
+### Local Test
 # @name sendmail
 POST http://localhost:4004/admin/sendmail
 Authorization: Basic admin:
 Content-Type: application/json
 
-{}
+{
+  "sender" : "{{$dotenv sender}}", 
+  "to" : "{{$dotenv sender}}", 
+  "subject" : "{{$dotenv subject}}", 
+  "body" : "{{$dotenv body}}", 
+  "destination" : "{{$dotenv destination}}"
+}
+
+### Get Access Token (HANA) or Cloud Foundry using Password Grant
+# https://blogs.sap.com/2020/03/02/using-postman-for-api-testing-with-xsuaa/
+# @name requestUserAccessToken
+POST {{$dotenv url}}/oauth/token
+Accept: application/json;charset=utf8
+Authorization: Basic {{$dotenv client_id}}:{{$dotenv client_secret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password
+&username={{$dotenv username}}
+&password={{$dotenv password}}
+&client_id={{$dotenv client_id}}
+&response_type=token
+
+### Fill Variables from Response
+@user_access_token = {{requestUserAccessToken.response.body.$.access_token}}
+
+### Via Deployed Service
+# @name sendmail
+POST {{$dotenv srvurl}}admin/sendmail
+Authorization: Bearer {{user_access_token}}
+Content-Type: application/json
+
+{
+  "sender" : "{{$dotenv sender}}", 
+  "to" : "{{$dotenv sender}}", 
+  "subject" : "{{$dotenv subject}}", 
+  "body" : "{{$dotenv body}}", 
+  "destination" : "{{$dotenv destination}}"
+}
