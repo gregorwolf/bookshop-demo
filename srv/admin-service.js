@@ -402,15 +402,21 @@ module.exports = async function (srv) {
     if (!req.data.body) {
       return req.error("You must specify a body");
     }
-    const transporter = new SapCfMailer("mailtrap");
-    // use sendmail as you should use it in nodemailer
-    const result = await transporter.sendMail({
-      from: req.data.sender,
-      to: req.data.to,
-      subject: req.data.subject,
-      text: req.data.body,
-    });
-    return JSON.stringify(result);
+    const destination = req.data.destination || "mailtrap";
+    try {
+      const transporter = new SapCfMailer(destination);
+      // use sendmail as you should use it in nodemailer
+      const result = await transporter.sendMail({
+        from: req.data.sender,
+        to: req.data.to,
+        subject: req.data.subject,
+        text: req.data.body,
+      });
+      return JSON.stringify(result);
+    } catch (error) {
+      console.log(error);
+      return req.error(error);
+    }
   });
 
   srv.on(

@@ -132,5 +132,5 @@ service AdminService @(
   action createJob(url : String, cron : String) returns Integer;
   action updateJob(jobId : Integer, active : Boolean) returns String;
   action deleteJob(jobId : Integer) returns String;
-  action sendmail(sender : String, to : String, subject : String, body : String) returns String;
+  action sendmail(sender : String, to : String, subject : String, body : String, destination : String) returns String;
 }
