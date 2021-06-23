@@ -75,7 +75,7 @@
     "test": "jest",
     "update:cf:uaa": "cf update-service bookshop-demo-uaa -c xs-security.json",
     "undeploy:xsa": "xs undeploy bookshop-demo --delete-services --delete-service-brokers",
-    "undeploy:cf": "cf undeploy bookshop-demo --delete-services --delete-service-brokers"
+    "undeploy:cf": "cf undeploy bookshop-demo --delete-service-keys --delete-services --delete-service-brokers"
   },
   "cds": {
     "hana": {
