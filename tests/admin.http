@@ -4,15 +4,19 @@ Authorization: Basic admin:
 
 ### Read Metadata via OData V4
 GET http://localhost:4004/admin/$metadata
+Authorization: Basic admin:
 
 ### Read Metadata via OData V2
 GET http://localhost:4004/v2/admin/$metadata
+Authorization: Basic admin:
 
 ### Read Entitysets via OData V4
 GET http://localhost:4004/admin/
+Authorization: Basic admin:
 
 ### Read Entitysets via OData V2
 GET http://localhost:4004/v2/admin/
+Authorization: Basic admin:
 
 ### Read Authors via OData V4
 GET http://localhost:4004/admin/Authors
@@ -95,6 +99,14 @@ Authorization: Basic admin:
 GET http://localhost:4004/v2/admin/Users?$expand=address
 Authorization: Basic admin:
 
+### Order Consistency Check via OData V4
+POST http://localhost:4004/admin/Orders(ID=64e718c9-ff99-47f1-8ca3-950c850777d4,IsActiveEntity=true)/AdminService.checkConsistencyInline
+Authorization: Basic admin:
+Accept: application/json
+Content-Type: application/json
+x-sap-job-id: 5
+
+{}
 
 ### Order Consistency Check via OData V2
 POST http://localhost:4004/v2/admin/Orders_checkConsistencyInline?ID=guid'64e718c9-ff99-47f1-8ca3-950c850777d4'&IsActiveEntity=true
