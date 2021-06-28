@@ -89,6 +89,10 @@ Authorization: Basic admin:
 GET http://localhost:4004/admin/Roles?$expand=BusinessObjects,Users
 Authorization: Basic admin:
 
+### Read Users
+GET http://localhost:4004/admin/Users
+Authorization: Basic admin:
+
 ### Read Users Expanded to via OData V4 - 
 GET http://localhost:4004/admin/Users?$expand=address
 Authorization: Basic admin:
