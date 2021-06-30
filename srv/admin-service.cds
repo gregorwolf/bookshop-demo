@@ -34,6 +34,16 @@ service AdminService @(
     },
   )                           as projection on db.Books;
 
+  @readonly
+  entity BooksAnalytics       as projection on db.BooksAnalytics;
+  /*
+  @readonly
+  entity BooksViewWOkey      as projection on db.BooksViewWOkey;
+
+  @readonly
+  entity BooksViewWOtype     as projection on db.BooksViewWOtype;
+  */
+
   entity Images               as projection on db.Images;
 
   // view BooksAnalytics as select from db.BooksAnalytics;
@@ -60,17 +70,17 @@ service AdminService @(
   //> these shall be removed but this would break the Fiori UI
   entity Languages            as projection on sap.common.Languages;
 
+  @odata.draft.enabled
   entity Roles @(restrict : [{
     grant : ['*'],
     to    : 'roleadmin'
   }, ])                       as projection on db.Roles;
 
-  annotate Roles with @odata.draft.enabled;
   //------- auto-exposed --------
   entity Role_BusinessObject  as projection on db.Role_BusinessObject;
   entity Role_User            as projection on db.Role_User;
-  //> these shall be removed but this would break the Fiori UI
 
+  //> these shall be removed but this would break the Fiori UI
   entity BusinessObjects @(restrict : [{
     grant : ['READ'],
     to    : 'admin'
@@ -87,7 +97,7 @@ service AdminService @(
   }, ])                       as projection on db.Users;
 
   @readonly
-  entity Employee             as projection on db.Employee;
+  entity Employees            as projection on db.Employees;
 
   entity Address              as projection on db.Address;
 
@@ -98,15 +108,6 @@ service AdminService @(
         is_roleadmin  : Boolean;
         is_booksadmin : Boolean;
   };
-
-  @readonly
-  entity BooksAnalytics       as projection on db.BooksAnalytics;
-
-  @readonly
-  entity BooksViewWOkey       as projection on db.BooksViewWOkey;
-
-  @readonly
-  entity BooksViewWOtype      as projection on db.BooksViewWOtype;
 
   @readonly
   entity SEPMRA_I_Product_E   as projection on external.SEPMRA_I_Product_E excluding {
@@ -133,4 +134,5 @@ service AdminService @(
   action updateJob(jobId : Integer, active : Boolean) returns String;
   action deleteJob(jobId : Integer) returns String;
   action sendmail(sender : String, to : String, subject : String, body : String, destination : String) returns String;
+
 }
