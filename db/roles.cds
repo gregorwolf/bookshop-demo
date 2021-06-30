@@ -41,11 +41,12 @@ entity Role_User : cuid {
 };
 
 entity Users {
-  key username : String @(title : 'Username', );
-      employee : Association to one Employee;
-      address  : Composition of Address
-                   on address.parent = $self;
-      role     : Association to Roles;
+  key username    : String @(title : 'Username', );
+      employee    : Employee;
+      responsible : Employee;
+      address     : Composition of Address
+                      on address.parent = $self;
+      role        : Association to Roles;
 };
 
 entity Address : cuid, managed {
@@ -60,8 +61,7 @@ type XSUAAUsers {
   userName   : String;
 }
 
-entity Employee {
-      @UI.Hidden
+entity Employees {
       @Common.Text : {
         $value              : email,
         @UI.TextArrangement : #TextOnly
@@ -78,3 +78,48 @@ entity Employee {
       @(title : '{i18n>BusinessPartnerEmailAddress}')
       email      : String @mandatory;
 }
+
+type Employee : Association to Employees;
+annotate Employees with @UI.Identification : [{Value : email}, ];
+annotate Employees with @cds.odata.valuelist;
+
+/*
+annotate Employees with {
+  ID
+  @Common : {
+    Text                     : email,
+    TextArrangement          : #TextOnly,
+    ValueListWithFixedValues : false,
+    ValueList                : {
+      CollectionPath : 'Employees',
+      Parameters     : [
+        {
+          $Type             : 'Common.ValueListParameterInOut',
+          LocalDataProperty : ID,
+          ValueListProperty : 'ID'
+        },
+        {
+          $Type             : 'Common.ValueListParameterDisplayOnly',
+          ValueListProperty : 'firstName'
+        },
+        {
+          $Type             : 'Common.ValueListParameterDisplayOnly',
+          ValueListProperty : 'lastName'
+        },
+        {
+          $Type             : 'Common.ValueListParameterDisplayOnly',
+          ValueListProperty : 'company'
+        },
+        {
+          $Type             : 'Common.ValueListParameterDisplayOnly',
+          ValueListProperty : 'department'
+        },
+        {
+          $Type             : 'Common.ValueListParameterDisplayOnly',
+          ValueListProperty : 'email'
+        }
+      ]
+    }
+  };
+};
+*/
