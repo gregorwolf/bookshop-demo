@@ -1,13 +1,13 @@
 using AdminService from '../../../srv/admin-service';
 
 annotate AdminService.Users with @(UI : {
-  SelectionFields      : [username],
+  SelectionFields         : [username],
 
-  LineItem             : [
+  LineItem                : [
     {Value : username},
     {Value : role_ID}
   ],
-  HeaderInfo           : {
+  HeaderInfo              : {
     TypeName       : 'User',
     TypeNamePlural : 'Users',
     Title          : {
@@ -17,9 +17,9 @@ annotate AdminService.Users with @(UI : {
     Description    : {Value : username}
   },
 
-  Identification       : [{Value : username}, ],
+  Identification          : [{Value : username}, ],
 
-  Facets               : [
+  Facets                  : [
     {
       $Type  : 'UI.ReferenceFacet',
       Label  : '{i18n>General}',
@@ -30,13 +30,18 @@ annotate AdminService.Users with @(UI : {
       Label  : '{i18n>Employee}',
       Target : '@UI.FieldGroup#Employee'
     },
+    {
+      $Type  : 'UI.ReferenceFacet',
+      Label  : '{i18n>Responsible}',
+      Target : '@UI.FieldGroup#Responsible'
+    },
   ],
 
-  FieldGroup #General  : {Data : [
+  FieldGroup #General     : {Data : [
     {Value : username},
     {Value : role.rolename},
   ]},
-  FieldGroup #Employee : {Data : [
+  FieldGroup #Employee    : {Data : [
     {Value : employee_ID},
     {Value : employee.firstName},
     {Value : employee.lastName},
@@ -44,42 +49,12 @@ annotate AdminService.Users with @(UI : {
     {Value : employee.department},
     {Value : employee.email},
   ]},
-}, ) {
-  employee
-  @ValueList.entity : 'Employee'
-  @Common           : {
-    Text                     : employee.email,
-    TextArrangement          : #TextOnly,
-    ValueListWithFixedValues : false,
-    ValueList                : {
-      CollectionPath : 'Employee',
-      Parameters     : [
-        {
-          $Type             : 'Common.ValueListParameterInOut',
-          LocalDataProperty : employee_ID,
-          ValueListProperty : 'ID'
-        },
-        {
-          $Type             : 'Common.ValueListParameterDisplayOnly',
-          ValueListProperty : 'firstName'
-        },
-        {
-          $Type             : 'Common.ValueListParameterDisplayOnly',
-          ValueListProperty : 'lastName'
-        },
-        {
-          $Type             : 'Common.ValueListParameterDisplayOnly',
-          ValueListProperty : 'company'
-        },
-        {
-          $Type             : 'Common.ValueListParameterDisplayOnly',
-          ValueListProperty : 'department'
-        },
-        {
-          $Type             : 'Common.ValueListParameterDisplayOnly',
-          ValueListProperty : 'email'
-        }
-      ]
-    }
-  };
-}
+  FieldGroup #Responsible : {Data : [
+    {Value : responsible_ID},
+    {Value : responsible.firstName},
+    {Value : responsible.lastName},
+    {Value : responsible.company},
+    {Value : responsible.department},
+    {Value : responsible.email},
+  ]},
+}, );
