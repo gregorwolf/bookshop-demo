@@ -9,6 +9,8 @@ using from './schema';
 using from './roles';
 // Types for the jobscheduler
 using from './jobscheduler';
+// Types for Cloud Foundry
+using from './cloudFoundry';
 // extension of sap.common.Currencies
 using from './currencies';
 // temporal example

@@ -134,5 +134,7 @@ service AdminService @(
   action updateJob(jobId : Integer, active : Boolean) returns String;
   action deleteJob(jobId : Integer) returns String;
   action sendmail(sender : String, to : String, subject : String, body : String, destination : String) returns String;
+  // Cloud Foundry
+  function readOrganizations() returns array of db.Organization;
 
 }

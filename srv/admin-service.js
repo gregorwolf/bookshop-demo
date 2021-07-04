@@ -419,6 +419,23 @@ module.exports = async function (srv) {
     }
   });
 
+  srv.on(["readOrganizations"], async (req) => {
+    console.log("readOrganizations");
+    try {
+      const response = await executeHttpRequest(
+        { destinationName: "CloudFoundryAPI" },
+        { url: "/v3/organizations" }
+      );
+      return response.data.resources;
+    } catch (error) {
+      console.error("Error Message: " + error.message);
+      if (error.rootCause && error.rootCause.message) {
+        console.error("Root Cause Message: " + error.rootCause.message);
+      }
+      console.error(error.stack);
+    }
+  });
+
   srv.on(
     ["checkConsistency", "checkConsistencyInline"],
     Orders,
