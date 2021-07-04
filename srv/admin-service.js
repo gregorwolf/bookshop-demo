@@ -4,6 +4,8 @@ const xsenv = require("@sap/xsenv");
 const SapCfMailer = require("sap-cf-mailer").default;
 const metering = require("./metering");
 const { executeHttpRequest, getDestination } = require("@sap-cloud-sdk/core");
+const qs = require("qs");
+const axios = require("axios");
 
 function getJobscheduler(req) {
   xsenv.loadEnv();
@@ -27,6 +29,7 @@ module.exports = async function (srv) {
     srv.entities;
   const external = await cds.connect.to("ZPDCDS_SRV");
   const externalFlow = await cds.connect.to("flow");
+  const externalCF = await cds.connect.to("CloudFoundryAPI");
   const externalXsuaa = await cds.connect.to("xsuaa-api");
   var srvUrl = "http://localhost:4004/webapp";
   var uiUrl = srvUrl;
@@ -419,6 +422,24 @@ module.exports = async function (srv) {
     }
   });
 
+  async function getOAuth2PasswordToken(cfDest) {
+    const response = await axios({
+      method: "POST",
+      url: cfDest.tokenServiceUrl,
+      data: qs.stringify({
+        grant_type: "password",
+        username: cfDest.username,
+        password: cfDest.password,
+      }),
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      auth: {
+        username: cfDest.clientId,
+        password: cfDest.clientSecret,
+      },
+    });
+    return response.data;
+  }
+
   srv.on(["readOrganizations"], async (req) => {
     console.log("readOrganizations");
     try {
@@ -430,8 +451,15 @@ module.exports = async function (srv) {
         { url: "/v3/organizations" }
       );
       */
+      // Also CAP doesn't work with OAuth2Password (as Cloud SDK is used inside)
+      // const response = await externalCF.tx(req).get("/v3/organizations");
       const cfDest = await getDestination("CloudFoundryAPI");
-
+      const token = await getOAuth2PasswordToken(cfDest);
+      const response = await axios.get(cfDest.url + "/v3/organizations", {
+        headers: {
+          Authorization: `Bearer ${token.access_token}`,
+        },
+      });
       return response.data.resources;
     } catch (error) {
       console.error("Error Message: " + error.message);
