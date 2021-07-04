@@ -107,6 +107,13 @@
           "requestTimeout": 30000
         }
       },
+      "CloudFoundryAPI": {
+        "kind": "rest",
+        "credentials": {
+          "destination": "CloudFoundryAPI",
+          "requestTimeout": 30000
+        }
+      },
       "flow": {
         "kind": "rest",
         "credentials": {
