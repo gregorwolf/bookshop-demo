@@ -3,7 +3,7 @@ const JobSchedulerClient = require("@sap/jobs-client");
 const xsenv = require("@sap/xsenv");
 const SapCfMailer = require("sap-cf-mailer").default;
 const metering = require("./metering");
-const { executeHttpRequest } = require("@sap-cloud-sdk/core");
+const { executeHttpRequest, getDestination } = require("@sap-cloud-sdk/core");
 
 function getJobscheduler(req) {
   xsenv.loadEnv();
@@ -422,10 +422,16 @@ module.exports = async function (srv) {
   srv.on(["readOrganizations"], async (req) => {
     console.log("readOrganizations");
     try {
+      // The destination used "OAuth2Password" as authentication type which is not supported by the SDK.
+      // --> https://github.com/SAP/cloud-sdk-js/issues/1399
+      /*
       const response = await executeHttpRequest(
         { destinationName: "CloudFoundryAPI" },
         { url: "/v3/organizations" }
       );
+      */
+      const cfDest = await getDestination("CloudFoundryAPI");
+
       return response.data.resources;
     } catch (error) {
       console.error("Error Message: " + error.message);
