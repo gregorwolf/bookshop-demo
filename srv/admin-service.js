@@ -6,6 +6,7 @@ const metering = require("./metering");
 const { executeHttpRequest, getDestination } = require("@sap-cloud-sdk/core");
 const qs = require("qs");
 const axios = require("axios");
+const { cf } = require("cf-http-client");
 
 function getJobscheduler(req) {
   xsenv.loadEnv();
@@ -454,6 +455,13 @@ module.exports = async function (srv) {
       // Also CAP doesn't work with OAuth2Password (as Cloud SDK is used inside)
       // const response = await externalCF.tx(req).get("/v3/organizations");
       const cfDest = await getDestination("CloudFoundryAPI");
+      const cfClient = await cf(cfDest.url).login(
+        cfDest.username,
+        cfDest.password
+      );
+      const organizations = await cfClient.organizations.list();
+      return organizations;
+      /*
       const token = await getOAuth2PasswordToken(cfDest);
       const response = await axios.get(cfDest.url + "/v3/organizations", {
         headers: {
@@ -461,6 +469,7 @@ module.exports = async function (srv) {
         },
       });
       return response.data.resources;
+      */
     } catch (error) {
       console.error("Error Message: " + error.message);
       if (error.rootCause && error.rootCause.message) {
