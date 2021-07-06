@@ -138,20 +138,11 @@ cds.on("bootstrap", async (app) => {
       });
     }
   });
-
-  // Swagger / OpenAPI
-  var options = {
-    explorer: true,
-  };
-  app.get("/api/api-docs.json", function (req, res) {
-    res.setHeader("Content-Type", "application/json");
-    res.send(swaggerSpec);
-  });
-  app.use(
-    "/api/api-docs",
-    swaggerUi.serve,
-    swaggerUi.setup(swaggerSpec, options)
-  );
 });
+// Swagger / OpenAPI
+if (process.env.NODE_ENV !== "production") {
+  const cds_swagger = require("cds-swagger-ui-express");
+  cds.on("bootstrap", (app) => app.use(cds_swagger()));
+}
 
 module.exports = cds.server; // > delegate to default server.js

@@ -28,11 +28,11 @@
     "helmet": "^4.6.0",
     "mysql": "^2.18.1",
     "passport": "^0.4.1",
-    "sap-cf-mailer": "^0.0.5",
-    "swagger-ui-express": "^4.1.6"
+    "sap-cf-mailer": "^0.0.5"
   },
   "devDependencies": {
     "@openui5/ts-types": "^1.91.0",
+    "cds-swagger-ui-express": "^0.1.1",
     "copyfiles": "2.4.1",
     "jest": "^27.0.5",
     "npm-run-all": "^4.1.5",
@@ -60,13 +60,11 @@
     "get:hdi-service-key": "xs service-key bookshop-demo-db-service dev",
     "create:cf-hdi-service-key": "cf create-service-key bookshop-demo-db-service dev",
     "get:cf-hdi-service-key": "cf service-key bookshop-demo-db-service dev",
-    "build": "run-s build:clean build:OpenAPI build:copycsntoproxy build:copyOpenAPItogen",
+    "build": "run-s build:clean build:copycsntoproxy",
     "build:clean": "cds build/all --clean",
     "build:xs-security": "cds compile srv/ --to xsuaa > xs-security.json",
     "build:cf": "cp mta-cf.yaml mta.yaml && mbt build -p=cf && rm mta.yaml",
     "build:xsa": "cp mta-xsa.yaml mta.yaml && mbt build -p=xsa && rm mta.yaml",
-    "build:OpenAPI": "mkdir -p srv/gen && cds compile --to openapi srv -s AdminService > srv/gen/OpenAPI.json",
-    "build:copyOpenAPItogen": "copyfiles -f srv/gen/OpenAPI.json gen/srv/srv/gen/",
     "build:copycsntoproxy": "copyfiles -f gen/srv/srv/csn.json standalone-v2-proxy/gen/",
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
     "start": "cds run",
