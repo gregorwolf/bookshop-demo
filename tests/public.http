@@ -1,0 +1,54 @@
+### Get Access Token (HANA) or Cloud Foundry using Password Grant
+# https://blogs.sap.com/2020/03/02/using-postman-for-api-testing-with-xsuaa/
+# @name requestUserAccessToken
+POST {{$dotenv url}}/oauth/token
+Accept: application/json;charset=utf8
+Authorization: Basic {{$dotenv client_id}}:{{$dotenv client_secret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password
+&username={{$dotenv username}}
+&password={{$dotenv password}}
+&client_id={{$dotenv client_id}}
+&response_type=token
+#&login_hint={"origin":"ldap"}
+#&scope=HTML5UserAPIforCF!t55630.Display
+
+### Fill Variables from Response
+@user_access_token = {{requestUserAccessToken.response.body.$.access_token}}
+
+### Read Metadata OData V4
+GET {{$dotenv approuter}}/public/$metadata
+x-approuter-authorization: Bearer {{user_access_token}}
+### Read Entities with OData V4
+GET {{$dotenv approuter}}/public/
+### Read Entities with OData V4
+GET {{$dotenv approuter}}/v2/public/
+### Read Books with Author details
+GET {{$dotenv approuter}}/public/Books
+  ?$expand=author
+  &$count=true
+  &$top=2
+### Read Books with Author details filtered by Author Name
+# Returns:
+# Path expressions in query options are not supported on SQLite
+# for local test with SQLite
+GET {{$dotenv approuter}}/public/Books
+  ?$expand=author
+  &$filter=author/name eq 'Herman Melville'
+  &$count=true
+  &$top=2
+###
+GET {{$dotenv approuter}}/public/Books
+  ?$top=2
+  &$filter=author/any(a:a/name eq 'Herman Melville')
+  &$count=true
+  &$expand=author
+### Read Specific Book
+GET {{$dotenv approuter}}/public/Books
+  ?$select=ID,stock
+  &$filter=ID eq 201 or ID eq 1
+### Currencies
+GET {{$dotenv approuter}}/public/Currencies
+### Read Countries
+GET {{$dotenv approuter}}/public/Countries
