@@ -11,7 +11,7 @@ service AdminService @(
   ]
 ) {
   @odata.draft.enabled
-  entity Approval             as projection on db.Approval actions {
+  entity Approval               as projection on db.Approval actions {
     action approve();
     action reject();
   };
@@ -32,10 +32,10 @@ service AdminService @(
       UpdateRestrictions : {Updatable : true},
       DeleteRestrictions : {Deletable : true}
     },
-  )                           as projection on db.Books;
+  )                             as projection on db.Books;
 
   @readonly
-  entity BooksAnalytics       as projection on db.BooksAnalytics;
+  entity BooksAnalytics         as projection on db.BooksAnalytics;
   /*
   @readonly
   entity BooksViewWOkey      as projection on db.BooksViewWOkey;
@@ -44,47 +44,51 @@ service AdminService @(
   entity BooksViewWOtype     as projection on db.BooksViewWOtype;
   */
 
-  entity Images               as projection on db.Images;
+  entity Images                 as projection on db.Images;
+
+  entity BooksAuthorsAssignment as projection on db.BooksAuthorsAssignment {
+    * , ASSOC_Book : redirected to Books
+  };
 
   // view BooksAnalytics as select from db.BooksAnalytics;
   entity Authors @(restrict : [{
     grant : 'READ',
     to    : 'admin'
-  }, ])                       as projection on db.Authors {
+  }, ])                         as projection on db.Authors {
     *
   };
 
-  entity Orders               as select from db.Orders actions {
-                                   action checkConsistency();
-                                   action checkConsistencyInline();
-                                 };
+  entity Orders                 as select from db.Orders actions {
+                                     action checkConsistency();
+                                     action checkConsistencyInline();
+                                   };
 
   annotate Orders with @odata.draft.enabled;
 
   //------- auto-exposed --------
-  entity OrderItems           as projection on db.OrderItems {
+  entity OrderItems             as projection on db.OrderItems {
     * , book : redirected to Books
   };
 
-  entity OrderShippingAddress as projection on db.OrderShippingAddress;
+  entity OrderShippingAddress   as projection on db.OrderShippingAddress;
   //> these shall be removed but this would break the Fiori UI
-  entity Languages            as projection on sap.common.Languages;
+  entity Languages              as projection on sap.common.Languages;
 
   @odata.draft.enabled
   entity Roles @(restrict : [{
     grant : ['*'],
     to    : 'roleadmin'
-  }, ])                       as projection on db.Roles;
+  }, ])                         as projection on db.Roles;
 
   //------- auto-exposed --------
-  entity Role_BusinessObject  as projection on db.Role_BusinessObject;
-  entity Role_User            as projection on db.Role_User;
+  entity Role_BusinessObject    as projection on db.Role_BusinessObject;
+  entity Role_User              as projection on db.Role_User;
 
   //> these shall be removed but this would break the Fiori UI
   entity BusinessObjects @(restrict : [{
     grant : ['READ'],
     to    : 'admin'
-  }, ])                       as projection on db.BusinessObjects;
+  }, ])                         as projection on db.BusinessObjects;
 
   @odata.draft.enabled
   @Common.SideEffects #employeeChange : {
@@ -94,12 +98,12 @@ service AdminService @(
   entity Users @(restrict : [{
     grant : ['*'],
     to    : 'admin'
-  }, ])                       as projection on db.Users;
+  }, ])                         as projection on db.Users;
 
   @readonly
-  entity Employees            as projection on db.Employees;
+  entity Employees              as projection on db.Employees;
 
-  entity Address              as projection on db.Address;
+  entity Address                as projection on db.Address;
 
   @readonly
   entity UserScopes {
@@ -110,13 +114,13 @@ service AdminService @(
   };
 
   @readonly
-  entity SEPMRA_I_Product_E   as projection on external.SEPMRA_I_Product_E excluding {
+  entity SEPMRA_I_Product_E     as projection on external.SEPMRA_I_Product_E excluding {
     CreationDateTime,
     LastChangedDateTime
   };
 
   @readonly
-  entity MeteringAnalytics    as projection on db.MeteringAnalytics;
+  entity MeteringAnalytics      as projection on db.MeteringAnalytics;
 
   function readCdsEnv() returns String;
   // XSUAA API

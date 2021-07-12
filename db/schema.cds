@@ -56,13 +56,14 @@ entity Books : managed {
       readingTime                    : Time         @title : 'Reading Time (Time)';
       author                         : Association to one Authors;
       publisher                      : Association to one Publishers;
-      to_BooksAuthorsAssignment      : Association to BooksAuthorsAssignment;
+      to_BooksAuthorsAssignment      : Association to BooksAuthorsAssignment
+                                         on to_BooksAuthorsAssignment.ASSOC_Book = $self;
 };
 
 entity BooksAuthorsAssignment {
   key Role         : String(50);
-  key ASSOC_Book   : Association to Books;
-  key ASSOC_Author : Association to Authors;
+  key ASSOC_Book   : Association to one Books;
+  key ASSOC_Author : Association to one Authors;
 }
 
 entity Authors : managed {
