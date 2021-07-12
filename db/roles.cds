@@ -76,7 +76,8 @@ entity Employees {
       @(title : '{i18n>BusinessPartnerDepartment}')
       department : String;
       @(title : '{i18n>BusinessPartnerEmailAddress}')
-      email      : String @mandatory;
+      @mandatory
+      email      : String not null;
 }
 
 type Employee : Association to Employees;
