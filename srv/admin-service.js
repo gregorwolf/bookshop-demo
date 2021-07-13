@@ -40,7 +40,9 @@ module.exports = async function (srv) {
     uiUrl = srvUrl.replace("-srv", "-ui") + "/bookshopdemoapp";
   }
 
-  srv.before("*", "*", (req) => metering.beforeHandler(req));
+  if (process.env.NODE_ENV === "production") {
+    srv.before("*", "*", (req) => metering.beforeHandler(req));
+  }
 
   srv.after("CREATE", Approval, async (req) => {
     console.log("Approval - after CREATE. ID: " + req.ID);
