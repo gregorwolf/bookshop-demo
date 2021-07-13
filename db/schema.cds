@@ -146,8 +146,10 @@ entity Images : cuid, managed {
   @Core.ContentDisposition.Filename : filename
   content   : LargeBinary;
   @Core.IsMediaType                 : true
-  mediatype : String;
-  filename  : String;
+  @mandatory
+  mediatype : String not null;
+  @mandatory
+  filename  : String not null;
 }
 
 entity Orderstatuses : sap.common.CodeList {

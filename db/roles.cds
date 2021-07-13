@@ -9,12 +9,13 @@ using {
 type BusinessObject : String(255);
 
 entity Roles : cuid, managed {
-  rolename        : localized String(255)@(title : 'Role Name', );
-  description     : localized String     @(title : 'Description', );
-  read            : Boolean              @(title : 'Read', );
-  authcreate      : Boolean              @(title : 'Create', );
-  authupdate      : Boolean              @(title : 'Update', );
-  approve         : Boolean              @(title : 'Approve', );
+  @mandatory
+  rolename        : localized String(255) not null @(title : 'Role Name', );
+  description     : localized String not null      @(title : 'Description', );
+  read            : Boolean                        @(title : 'Read', );
+  authcreate      : Boolean                        @(title : 'Create', );
+  authupdate      : Boolean                        @(title : 'Update', );
+  approve         : Boolean                        @(title : 'Approve', );
   BusinessObjects : Composition of many Role_BusinessObject
                       on BusinessObjects.parent = $self;
   Users           : Composition of many Role_User
