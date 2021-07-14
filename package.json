@@ -65,6 +65,7 @@
     "build:xs-security": "cds compile srv/ --to xsuaa > xs-security.json",
     "build:cf": "cp mta-cf.yaml mta.yaml && mbt build -p=cf && rm mta.yaml",
     "build:xsa": "cp mta-xsa.yaml mta.yaml && mbt build -p=xsa && rm mta.yaml",
+    "build:standalone": "cp mta-standAlone.yaml mta.yaml && mbt build -p=xsa && rm mta.yaml",
     "build:copycsntoproxy": "copyfiles -f gen/srv/srv/csn.json standalone-v2-proxy/gen/",
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
     "start": "cds run",
