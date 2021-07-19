@@ -178,6 +178,7 @@ entity Orders : cuid, managed {
   @readonly
   total           : DecimalFloat;
   vipOrder        : Boolean   @title : '{i18n>vipOrder}';
+  employeeOrder   : Boolean   @title : '{i18n>employeeOrder}';
   orderstatus     : Orderstatus;
   deliverystatus  : Deliverystatus;
   currency        : Currency;
