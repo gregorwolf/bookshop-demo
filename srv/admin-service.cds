@@ -61,6 +61,7 @@ service AdminService @(
   entity Orders                 as select from db.Orders actions {
                                      action checkConsistency();
                                      action checkConsistencyInline();
+                                     action setOrderParameters(vipOrder : db.Orders:vipOrder not null)
                                    };
 
   annotate Orders with @odata.draft.enabled;
