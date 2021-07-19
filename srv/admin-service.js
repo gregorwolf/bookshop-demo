@@ -584,7 +584,7 @@ module.exports = async function (srv) {
   })
 */
   /*
-  srv.on('READ', 'Images', (req, next) => {
+  srv.on('READ', 'Documents', (req, next) => {
     if (!req.data.ID) {
       return next()
     }

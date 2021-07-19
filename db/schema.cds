@@ -141,7 +141,7 @@ view BooksViewWOtype as
         1 as count
   };
 
-entity Images : cuid, managed {
+entity Documents : cuid, managed {
   @Core.MediaType                   : mediatype
   @Core.ContentDisposition.Filename : filename
   content   : LargeBinary;

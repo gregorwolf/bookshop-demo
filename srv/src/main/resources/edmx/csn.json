@@ -1016,14 +1016,14 @@
         }
       }
     },
-    "AdminService.Images": {
+    "AdminService.Documents": {
       "kind": "entity",
       "@cds.persistence.name": "ADMINSERVICE_IMAGES",
       "query": {
         "SELECT": {
           "from": {
             "ref": [
-              "my.bookshop.Images"
+              "my.bookshop.Documents"
             ]
           }
         }
@@ -6301,7 +6301,7 @@
         }
       }
     },
-    "my.bookshop.Images": {
+    "my.bookshop.Documents": {
       "kind": "entity",
       "@cds.persistence.name": "MY_BOOKSHOP_IMAGES",
       "elements": {

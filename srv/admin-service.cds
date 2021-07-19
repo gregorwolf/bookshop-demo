@@ -44,7 +44,7 @@ service AdminService @(
   entity BooksViewWOtype     as projection on db.BooksViewWOtype;
   */
 
-  entity Images                 as projection on db.Images;
+  entity Documents              as projection on db.Documents;
 
   entity BooksAuthorsAssignment as projection on db.BooksAuthorsAssignment {
     * , ASSOC_Book : redirected to Books

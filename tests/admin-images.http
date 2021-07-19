@@ -4,13 +4,13 @@
 ### Edit your settings.json and add the configuration from rest-client-config.json for local tests
 
 ### Read Pictures
-# curl http://localhost:4004/admin/Images | jq
-GET http://localhost:4004/admin/Images
+# curl http://localhost:4004/admin/Documents | jq
+GET http://localhost:4004/admin/Documents
 Authorization: Basic admin:
 
 ### Create Picture with mediatype
-# curl -X POST http://localhost:4004/admin/Images -H "Accept: application/json" -H "Content-Type: application/json" --data '{ "ID": "da07ae51-d0d3-41e7-a737-2555a213e5a9" }'
-POST http://localhost:4004/admin/Images
+# curl -X POST http://localhost:4004/admin/Documents -H "Accept: application/json" -H "Content-Type: application/json" --data '{ "ID": "da07ae51-d0d3-41e7-a737-2555a213e5a9" }'
+POST http://localhost:4004/admin/Documents
 Authorization: Basic admin:
 Accept: application/json
 Content-Type: application/json
@@ -22,7 +22,7 @@ Content-Type: application/json
 }
 
 ### Create Picture without mediatype
-POST http://localhost:4004/admin/Images
+POST http://localhost:4004/admin/Documents
 Authorization: Basic admin:
 Accept: application/json
 Content-Type: application/json
@@ -32,36 +32,36 @@ Content-Type: application/json
 }
 
 ### Upload Binary PNG
-# curl -X PUT "http://localhost:4004/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content" -H "image/png" --data-binary @./srv/tests/Test.png
-PUT http://localhost:4004/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content
+# curl -X PUT "http://localhost:4004/admin/Documents(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content" -H "image/png" --data-binary @./srv/tests/Test.png
+PUT http://localhost:4004/admin/Documents(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content
 Authorization: Basic admin:
 Content-Type: image/png
 
 < ./Test.png
 
 ### Create Picture in one request
-# curl -v http://localhost:4004/admin/Images -F file0=@./srv/tests/Test.png json='{ "ID": "da07ae51-d0d3-41e7-a737-2555a213e5a9" }' 
+# curl -v http://localhost:4004/admin/Documents -F file0=@./srv/tests/Test.png json='{ "ID": "da07ae51-d0d3-41e7-a737-2555a213e5a9" }' 
 # This results in the following eror:
 # {"error":{"code":null,"message":"No payload deserializer available for resource kind 'ENTITY' and mime type 'multipart/form-data'"}}* Rebuilt URL to: json= "ID": "da07ae51-d0d3-41e7-a737-2555a213e5a9"
 
 ### Read Binary
-# curl "http://localhost:4004/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content"
-GET http://localhost:4004/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content
+# curl "http://localhost:4004/admin/Documents(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content"
+GET http://localhost:4004/admin/Documents(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content
 Authorization: Basic admin:
 
 ### Read Binary OData V2
-# curl "http://localhost:4004/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/$value"
-GET http://localhost:4004/v2/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)/$value
+# curl "http://localhost:4004/admin/Documents(da07ae51-d0d3-41e7-a737-2555a213e5a9)/$value"
+GET http://localhost:4004/v2/admin/Documents(da07ae51-d0d3-41e7-a737-2555a213e5a9)/$value
 Authorization: Basic admin:
 
 ### Delete Image
-# curl -X DELETE "http://localhost:4004/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)"
-DELETE http://localhost:4004/admin/Images(da07ae51-d0d3-41e7-a737-2555a213e5a9)
+# curl -X DELETE "http://localhost:4004/admin/Documents(da07ae51-d0d3-41e7-a737-2555a213e5a9)"
+DELETE http://localhost:4004/admin/Documents(da07ae51-d0d3-41e7-a737-2555a213e5a9)
 Authorization: Basic admin:
 
 ### Test with Excel document
 @excelID=da07ae51-d0d3-41e7-a737-2555a213e5a0
-POST http://localhost:4004/admin/Images
+POST http://localhost:4004/admin/Documents
 Authorization: Basic admin:
 Accept: application/json
 Content-Type: application/json
@@ -73,7 +73,7 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:4004/admin/Images({{excelID}})/content
+PUT http://localhost:4004/admin/Documents({{excelID}})/content
 Authorization: Basic admin:
 Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 
@@ -81,13 +81,13 @@ Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 
 
 ### Read Binary
-GET http://localhost:4004/admin/Images({{excelID}})/content
+GET http://localhost:4004/admin/Documents({{excelID}})/content
 Authorization: Basic admin:
 
 ### Read Binary OData V2
-GET http://localhost:4004/v2/admin/Images({{excelID}})/$value
+GET http://localhost:4004/v2/admin/Documents({{excelID}})/$value
 Authorization: Basic admin:
 
 ###
-DELETE http://localhost:4004/admin/Images({{excelID}})
+DELETE http://localhost:4004/admin/Documents({{excelID}})
 Authorization: Basic admin:
