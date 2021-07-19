@@ -235,11 +235,13 @@ annotate AdminService.Orders with @(
     TargetProperties : [total]
   }}
 ) {
-  createdAt @UI.HiddenFilter      : false;
-  createdBy @UI.HiddenFilter      : false;
-  total
-            @Common.FieldControl  : #ReadOnly
-            @Measures.ISOCurrency : currency.code; //Bind the currency field to the amount field
+  @UI.HiddenFilter      : false
+  createdAt;
+  @UI.HiddenFilter      : false
+  createdBy;
+  @Common.FieldControl  : #ReadOnly
+  @Measures.ISOCurrency : currency.code
+  total; //Bind the currency field to the amount field
 //In all services we always find currency as the code and not as an object that contains a property code
 //it seems to work but at least to me this is unconventional modeling.
 };
