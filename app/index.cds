@@ -95,6 +95,31 @@ annotate my.Authors with @(UI : {
     ]},
 });
 
+annotate my.Documents with @(UI : {
+    Identification      : [{Value : filename}],
+    SelectionFields     : [filename, ],
+    LineItem            : [
+        {Value : filename},
+        {Value : content},
+    ],
+    HeaderInfo          : {
+        TypeName       : 'Document',
+        TypeNamePlural : 'Documents',
+        Title          : {Value : ID},
+        Description    : {Value : filename}
+    },
+    Facets              : [{
+        $Type  : 'UI.ReferenceFacet',
+        Label  : '{i18n>Details}',
+        Target : '@UI.FieldGroup#Details'
+    }],
+    FieldGroup #Details : {Data : [
+        {Value : filename},
+        {Value : content},
+    ]},
+});
+
+
 annotate my.Publishers with @(UI : {
     Identification      : [{Value : name}],
     SelectionFields     : [
