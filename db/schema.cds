@@ -142,14 +142,14 @@ view BooksViewWOtype as
   };
 
 entity Documents : cuid, managed {
-  @Core.MediaType                   : mediatype
-  @Core.ContentDisposition.Filename : filename
-  content   : LargeBinary;
-  @Core.IsMediaType                 : true
+  @Core.MediaType                   :  mediatype
+  @Core.ContentDisposition.Filename :  filename
+  content   : LargeBinary     @title : '{i18n>content}';
+  @Core.IsMediaType                 :  true
   @mandatory
   mediatype : String not null;
   @mandatory
-  filename  : String not null;
+  filename  : String not null @title : '{i18n>filename}';
 }
 
 entity Orderstatuses : sap.common.CodeList {
