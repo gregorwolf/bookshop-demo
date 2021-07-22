@@ -58,14 +58,18 @@ service AdminService @(
     *
   };
 
+  @odata.draft.enabled
   entity Orders                 as select from db.Orders actions {
                                      action checkConsistency();
                                      action checkConsistencyInline();
                                      action setOrderParameters(vipOrder : db.Orders:vipOrder not null @UI.ParameterDefaultValue :                      false,
-                                                                          employeeOrder : db.Orders:employeeOrder not null @UI.ParameterDefaultValue : true)
+                                                                          employeeOrder : db.Orders:employeeOrder not null @UI.ParameterDefaultValue : true);
+                                     action NewAction(OrderNo :           db.Orders:OrderNo not null, CustomerOrderNo : db.Orders:CustomerOrderNo);
                                    };
 
-  annotate Orders with @odata.draft.enabled;
+  annotate Orders with {
+    ID @Core.Computed;
+  }
 
   //------- auto-exposed --------
   entity OrderItems             as projection on db.OrderItems {
