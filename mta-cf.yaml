@@ -48,6 +48,8 @@ modules:
             xsuaa_instance_name: bookshop-demo-uaa
       - name: bookshop-demo-logging
       - name: bookshop-demo-autoscaler
+        parameters:
+          path: ./autoscaler.json
 
   - name: bookshop-demo-destination-content-deployer
     type: com.sap.application.content
