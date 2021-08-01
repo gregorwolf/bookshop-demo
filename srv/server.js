@@ -3,8 +3,6 @@ const proxy = require("@sap/cds-odata-v2-adapter-proxy");
 const helmet = require("helmet");
 const passport = require("passport");
 const xsenv = require("@sap/xsenv");
-const swaggerUi = require("swagger-ui-express");
-const swaggerSpec = require("./gen/OpenAPI.json");
 const express = require("express");
 const log = require("cf-nodejs-logging-support");
 
