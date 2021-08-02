@@ -13,7 +13,7 @@
   ],
   "dependencies": {
     "@sap-cloud-sdk/core": "^1.47.1",
-    "@sap/cds": "^5.3.2",
+    "@sap/cds": "^5.4.0",
     "@sap/cds-dk": "^4.3.3",
     "@sap/cds-odata-v2-adapter-proxy": "^1.7.8",
     "@sap/hana-client": "^2.9.23",
