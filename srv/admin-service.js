@@ -99,10 +99,12 @@ module.exports = async function (srv) {
     const externalTransaction = external.transaction(req);
     try {
       let result = await externalTransaction.run(req.query);
+      /*
       // result.forEach(cleanObject);
       const count = await externalTransaction.get(`${req._.req.path}/$count`);
       result["$count"] = count;
       // result['$count'] = result.length
+      */
       return result;
     } catch (error) {
       console.error("Error Message: " + error.message);
