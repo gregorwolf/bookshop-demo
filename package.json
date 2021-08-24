@@ -12,15 +12,15 @@
     "srv"
   ],
   "dependencies": {
-    "@sap-cloud-sdk/core": "^1.47.1",
-    "@sap/cds": "^5.4.0",
-    "@sap/cds-dk": "^4.3.3",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.7.8",
-    "@sap/hana-client": "^2.9.23",
+    "@sap-cloud-sdk/core": "^1.48.0",
+    "@sap/cds": "^5.4.3",
+    "@sap/cds-dk": "^4.4.1",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.7.9",
+    "@sap/hana-client": "^2.9.28",
     "@sap/jobs-client": "^1.6.1",
     "@sap/logging": "^6.0.3",
     "@sap/xsenv": "^3.1.1",
-    "@sap/xssec": "^3.2.2",
+    "@sap/xssec": "^3.2.3",
     "cf-http-client": "^1.3.0",
     "cf-nodejs-logging-support": "^6.9.0",
     "compression": "^1.7.4",
@@ -31,13 +31,13 @@
     "sap-cf-mailer": "^0.0.5"
   },
   "devDependencies": {
-    "@openui5/ts-types": "^1.90.3",
+    "@openui5/ts-types": "^1.90.5",
     "cds-swagger-ui-express": "^0.2.0",
     "copyfiles": "2.4.1",
     "jest": "^27.0.6",
     "npm-run-all": "^4.1.5",
     "sqlite3": "^5.0.2",
-    "supertest": "^6.1.4"
+    "supertest": "^6.1.6"
   },
   "scripts": {
     "setup": "run-s deploy build start",
