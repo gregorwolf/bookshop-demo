@@ -494,6 +494,7 @@ module.exports = async function (srv) {
         SELECT.from(Orders).where({ ID: req.params[0].ID })
       );
       var order = orders[0];
+      let totalWithTax = order.total * 1 + order.totalTax * 1;
       var orderId = req.params[0].ID;
       var msgInfo = {
         code: "SY001",
