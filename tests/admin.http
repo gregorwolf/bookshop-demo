@@ -65,6 +65,10 @@ Authorization: Basic admin:
 GET http://localhost:4004/admin/Orders?$top=1&$expand=Items
 Authorization: Basic admin:
 
+### Read Orders via OData V4
+GET http://localhost:4004/admin/Orders
+Authorization: Basic admin:
+
 ### Read Orders via OData V2
 GET http://localhost:4004/v2/admin/Orders
 Authorization: Basic admin:
