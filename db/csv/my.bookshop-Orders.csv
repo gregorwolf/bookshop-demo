@@ -1,8 +1,8 @@
-ID;modifiedAt;createdAt;createdBy;modifiedBy;OrderNo;total;currency_code;orderstatus_code;deliverystatus_code
-7e2f2640-6866-4dcf-8f4d-3027aa831cad;;2019-01-31;bob@example.com;;1;30;EUR;N;N
-64e718c9-ff99-47f1-8ca3-950c850777d4;;2019-01-30;bob@example.com;;2;15.5;EUR;N;N
-d3924131-0870-44bc-b0c1-2ea3808cda5a;;2020-07-11;order.with.code@OSS001.com;;3;9.99;EUR;N;N
-d3924131-0870-44bc-b0c1-2ea3808cda5b;;2020-07-11;Success.message@defaulted-to-Information.com;;4;140;JPY;I;I
-d3924131-0870-44bc-b0c1-2ea3808cda5c;;2020-07-11;Information@message.com;;5;4.5;USD;I;I
-d3924131-0870-44bc-b0c1-2ea3808cda5d;;2020-07-11;Warning@message.com;;6;19.99;USD;C;C
-d3924131-0870-44bc-b0c1-2ea3808cda5e;;2020-07-11;Error.message@defaulted-to-Information.com;;7;10;USD;C;C
+ID;totalTax;totalWithTax;modifiedAt;createdAt;createdBy;modifiedBy;OrderNo;total;currency_code;orderstatus_code;deliverystatus_code
+7e2f2640-6866-4dcf-8f4d-3027aa831cad;3.4;50.8;;2019-01-31;bob@example.com;;1;30;EUR;N;N
+64e718c9-ff99-47f1-8ca3-950c850777d4;3.4;50.8;;2019-01-30;bob@example.com;;2;15.5;EUR;N;N
+d3924131-0870-44bc-b0c1-2ea3808cda5a;3.4;50.8;;2020-07-11;order.with.code@OSS001.com;;3;9.99;EUR;N;N
+d3924131-0870-44bc-b0c1-2ea3808cda5b;3.4;50.8;;2020-07-11;Success.message@defaulted-to-Information.com;;4;140;JPY;I;I
+d3924131-0870-44bc-b0c1-2ea3808cda5c;3.4;50.8;;2020-07-11;Information@message.com;;5;4.5;USD;I;I
+d3924131-0870-44bc-b0c1-2ea3808cda5d;3.4;50.8;;2020-07-11;Warning@message.com;;6;19.99;USD;C;C
+d3924131-0870-44bc-b0c1-2ea3808cda5e;3.4;50.8;;2020-07-11;Error.message@defaulted-to-Information.com;;7;10;USD;C;C

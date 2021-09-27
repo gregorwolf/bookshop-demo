@@ -177,6 +177,8 @@ entity Orders : cuid, managed {
                       on ShippingAddress.parent = $self;
   @readonly
   total           : DecimalFloat;
+  totalTax        : Decimal(15, 2);
+  totalWithTax    : Double;
   vipOrder        : Boolean   @title : '{i18n>vipOrder}';
   employeeOrder   : Boolean   @title : '{i18n>employeeOrder}';
   orderstatus     : Orderstatus;
