@@ -13,8 +13,8 @@
   ],
   "dependencies": {
     "@sap-cloud-sdk/core": "^1.49.0",
-    "@sap/cds": "^5.4.6",
-    "@sap/cds-dk": "^4.4.2",
+    "@sap/cds": "^5.5.1",
+    "@sap/cds-dk": "^4.5.0",
     "@sap/cds-odata-v2-adapter-proxy": "^1.7.11",
     "@sap/hana-client": "^2.10.13",
     "@sap/jobs-client": "^1.6.1",
@@ -31,7 +31,7 @@
     "sap-cf-mailer": "^0.0.5"
   },
   "devDependencies": {
-    "@openui5/ts-types": "^1.90.6",
+    "@openui5/ts-types": "^1.93.1",
     "cds-swagger-ui-express": "^0.3.0",
     "copyfiles": "2.4.1",
     "jest": "^27.2.2",
