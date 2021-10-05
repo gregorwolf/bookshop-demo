@@ -57,4 +57,40 @@ annotate AdminService.Users with @(UI : {
     {Value : responsible.department},
     {Value : responsible.email},
   ]},
-}, );
+}, ) {
+  employee @Common : {
+    Text                     : employee.email,
+    TextArrangement          : #TextOnly,
+    ValueListWithFixedValues : false,
+    ValueList                : {
+      CollectionPath : 'Employees',
+      Parameters     : [
+        {
+          $Type             : 'Common.ValueListParameterInOut',
+          LocalDataProperty : employee_ID,
+          ValueListProperty : 'ID'
+        },
+        {
+          $Type             : 'Common.ValueListParameterDisplayOnly',
+          ValueListProperty : 'firstName'
+        },
+        {
+          $Type             : 'Common.ValueListParameterDisplayOnly',
+          ValueListProperty : 'lastName'
+        },
+        {
+          $Type             : 'Common.ValueListParameterDisplayOnly',
+          ValueListProperty : 'company'
+        },
+        {
+          $Type             : 'Common.ValueListParameterDisplayOnly',
+          ValueListProperty : 'department'
+        },
+        {
+          $Type             : 'Common.ValueListParameterDisplayOnly',
+          ValueListProperty : 'email'
+        }
+      ]
+    }
+  };
+};
