@@ -98,19 +98,13 @@ module.exports = async function (srv) {
   srv.on("READ", ["SEPMRA_I_Product_E"], async (req) => {
     const externalTransaction = external.transaction(req);
     try {
-      let result = await externalTransaction.run(req.query);
-      /*
-      // result.forEach(cleanObject);
-      const count = await externalTransaction.get(`${req._.req.path}/$count`);
-      result["$count"] = count;
-      // result['$count'] = result.length
-      */
-      return result;
+      return externalTransaction.run(req.query);
     } catch (error) {
       console.error("Error Message: " + error.message);
       if (error.request && error.request.path) {
         console.error("Request Path: " + error.request.path);
       }
+      req.error(error);
     }
   });
 
