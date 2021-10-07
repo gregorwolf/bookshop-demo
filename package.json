@@ -84,7 +84,7 @@
     },
     "requires": {
       "GWSAMPLE_BASIC": {
-        "kind": "odata",
+        "kind": "odata-v2",
         "model": "srv/external/GWSAMPLE_BASIC",
         "credentials": {
           "destination": "ES5",
@@ -93,7 +93,7 @@
         }
       },
       "ZPDCDS_SRV": {
-        "kind": "odata",
+        "kind": "odata-v2",
         "model": "srv/external/ZPDCDS_SRV",
         "credentials": {
           "destination": "ES5",
@@ -123,7 +123,7 @@
         }
       },
       "API_CV_ATTACHMENT_SRV": {
-        "kind": "odata",
+        "kind": "odata-v2",
         "model": "srv/external/API_CV_ATTACHMENT_SRV"
       },
       "db": {
