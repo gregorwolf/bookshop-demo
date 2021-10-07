@@ -95,18 +95,7 @@ module.exports = async function (srv) {
     }
   });
 
-  srv.on("READ", ["SEPMRA_I_Product_E"], async (req) => {
-    const externalTransaction = external.transaction(req);
-    try {
-      return externalTransaction.run(req.query);
-    } catch (error) {
-      console.error("Error Message: " + error.message);
-      if (error.request && error.request.path) {
-        console.error("Request Path: " + error.request.path);
-      }
-      req.error(error);
-    }
-  });
+  srv.on("READ", "SEPMRA_I_Product_E", (req) => external.run(req.query));
 
   srv.before("READ", [Books, Authors], async (req) => {
     var tx = cds.transaction(req);
