@@ -37,8 +37,10 @@ entity Role_BusinessObject : cuid {
 };
 
 entity Role_User : cuid {
-  parent : Association to Roles;
-  user   : User;
+  parent    : Association to Roles;
+  user      : User;
+  @(title : 'requester', )
+  requester : Employee;
 };
 
 entity Users {
