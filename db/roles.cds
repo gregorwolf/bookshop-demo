@@ -47,7 +47,8 @@ entity Users {
       responsible : Employee;
       address     : Composition of Address
                       on address.parent = $self;
-      role        : Association to Roles;
+      roles       : Association to many Role_User
+                      on roles.user = $self.username;
 };
 
 entity Address : cuid, managed {
