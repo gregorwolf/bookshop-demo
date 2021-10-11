@@ -97,7 +97,11 @@ service AdminService @(
   }, ])                         as projection on db.BusinessObjects;
 
   @odata.draft.enabled
-  @Common.SideEffects #employeeChange : {
+  @Common.SideEffects #responsibleChange : {
+    SourceProperties : [responsible_ID],
+    TargetEntities   : [responsible]
+  }
+  @Common.SideEffects #employeeChange    : {
     SourceProperties : [employee_ID],
     TargetEntities   : [employee]
   }
