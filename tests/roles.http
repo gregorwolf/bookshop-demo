@@ -24,7 +24,7 @@ GET http://localhost:4004/admin/Users
 Authorization: Basic admin:
 
 ### Read Users Expanded to via OData V4 - 
-GET http://localhost:4004/admin/Users?$expand=address
+GET http://localhost:4004/admin/Users?$expand=roles,address
 Authorization: Basic admin:
 
 ### Read Users Expanded to via OData V2
