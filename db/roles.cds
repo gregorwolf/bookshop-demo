@@ -67,6 +67,7 @@ entity Employees {
         $value              : email,
         @UI.TextArrangement : #TextOnly
       }
+      @(title : '{i18n>EmployeeID}')
   key ID         : UUID;
       @(title : '{i18n>BusinessPartnerFirstName}')
       firstName  : String;
