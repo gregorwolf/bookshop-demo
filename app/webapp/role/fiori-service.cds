@@ -163,6 +163,7 @@ annotate AdminService.Role_User with @(UI : {
   LineItem        : [
     {Value : parent.rolename},
     {Value : user},
+    {Value : requester_ID},
   ],
 
   HeaderInfo      : {
@@ -170,7 +171,13 @@ annotate AdminService.Role_User with @(UI : {
     TypeName       : 'User',
     TypeNamePlural : 'Users'
   }
-});
+}) {
+  requester @Common : {
+    Text                     : requester.email,
+    TextArrangement          : #TextOnly,
+    ValueListWithFixedValues : false,
+  };
+};
 
 annotate AdminService.User with {
   username @Common.FieldControl : #ReadOnly;
