@@ -161,8 +161,9 @@ annotate AdminService.Role_User with @(UI : {
   SelectionFields : [user],
 
   LineItem        : [
-                     // {Value: parent_ID },
-                    {Value : user}, ],
+    {Value : parent.rolename},
+    {Value : user},
+  ],
 
   HeaderInfo      : {
     Title          : {Value : user},
