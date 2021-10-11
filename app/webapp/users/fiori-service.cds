@@ -35,14 +35,19 @@ annotate AdminService.Users with @(UI : {
       Label  : '{i18n>Responsible}',
       Target : '@UI.FieldGroup#Responsible'
     },
+    {
+      $Type  : 'UI.ReferenceFacet',
+      Label  : '{i18n>Roles}',
+      Target : 'roles/@UI.LineItem'
+    },
   ],
 
-  FieldGroup #General     : {Data : [
-    {Value : username},
-    {Value : role.rolename},
-  ]},
+  FieldGroup #General     : {Data : [{Value : username}, ]},
   FieldGroup #Employee    : {Data : [
-    {Value : employee_ID},
+    {
+      Value : employee_ID,
+      Label : '{i18n>EmployeeID}'
+    },
     {Value : employee.firstName},
     {Value : employee.lastName},
     {Value : employee.company},
@@ -58,7 +63,12 @@ annotate AdminService.Users with @(UI : {
     {Value : responsible.email},
   ]},
 }, ) {
-  employee @Common : {
+  responsible @Common : {
+    Text                     : responsible.email,
+    TextArrangement          : #TextOnly,
+    ValueListWithFixedValues : false,
+  };
+  employee    @Common : {
     Text                     : employee.email,
     TextArrangement          : #TextOnly,
     ValueListWithFixedValues : false,
