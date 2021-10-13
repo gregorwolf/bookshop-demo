@@ -190,6 +190,30 @@ annotate my.Books with @(UI : {
         {Value : title},
         {Value : author.name},
         {
+            $Type          : 'UI.DataFieldWithIntentBasedNavigation',
+            Value          : author.name,
+            Label          : 'V4 Action for Navigation to Author',
+            SemanticObject : 'V4Authors',
+            Action         : 'displayUI5latest',
+            Mapping        : [{
+                $Type                  : 'Common.SemanticObjectMappingType',
+                LocalProperty          : author.ID,
+                SemanticObjectProperty : 'ID',
+            }, ],
+        },
+        {
+            $Type          : 'UI.DataFieldWithIntentBasedNavigation',
+            Value          : author.ID,
+            Label          : 'V2 Action for Navigation to Author',
+            SemanticObject : 'Authors',
+            Action         : 'displayUI5latest',
+            Mapping        : [{
+                $Type                  : 'Common.SemanticObjectMappingType',
+                LocalProperty          : author.ID,
+                SemanticObjectProperty : 'ID',
+            }, ],
+        },
+        {
             Value             : price,
             ![@UI.Importance] : #High
         },
@@ -251,15 +275,7 @@ annotate my.Books with @(UI : {
         SemanticObject: 'Authors',
         Action: 'manage'
     }
-    {
-        $Type:'UI.DataFieldForIntentBasedNavigation',
-        Value: author.ID,
-        Label:'Action for Navigation to Author',
-        SemanticObject: 'Authors',
-        Action: 'manage'
-    }
     */
-    // {Value: author.name},
     ]
 }, ) {
     author @(
