@@ -47,13 +47,13 @@ annotate common.Languages with @(
 );
 
 annotate my.Authors with @(UI : {
-    Identification      : [{Value : name}],
-    SelectionFields     : [
+    Identification              : [{Value : name}],
+    SelectionFields             : [
         ID,
         name,
         alive
     ],
-    LineItem            : [
+    LineItem                    : [
         {Value : ID},
         {Value : name},
         {Value : dateOfBirth},
@@ -69,13 +69,13 @@ annotate my.Authors with @(UI : {
             Action         : 'displayUI5latest'
         }
     ],
-    HeaderInfo          : {
-        TypeName       : 'Author',
-        TypeNamePlural : 'Authors',
+    HeaderInfo                  : {
+        TypeName       : '{i18n>Author}',
+        TypeNamePlural : '{i18n>Authors}',
         Title          : {Value : ID},
         Description    : {Value : name}
     },
-    Facets              : [
+    Facets                      : [
         {
             $Type  : 'UI.ReferenceFacet',
             Label  : '{i18n>Details}',
@@ -87,13 +87,33 @@ annotate my.Authors with @(UI : {
             Target : 'books/@UI.LineItem'
         },
     ],
-    FieldGroup #Details : {Data : [
+    FieldGroup #Details         : {Data : [
         {Value : name},
         {Value : dateOfBirth},
         {Value : placeOfBirth},
         {Value : dateOfDeath},
         {Value : placeOfDeath},
     ]},
+
+    QuickViewFacets             : [{
+        $Type  : 'UI.ReferenceFacet',
+        Label  : '{i18n>Author}',
+        Target : '@UI.FieldGroup#AuthorQuickView'
+    }],
+    FieldGroup #AuthorQuickView : {Data : [
+        {
+            $Type : 'UI.DataField',
+            Value : name
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : dateOfBirth
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : placeOfBirth
+        }
+    ]}
 });
 
 annotate my.Documents with @(UI : {
@@ -104,8 +124,8 @@ annotate my.Documents with @(UI : {
         {Value : content},
     ],
     HeaderInfo          : {
-        TypeName       : 'Document',
-        TypeNamePlural : 'Documents',
+        TypeName       : '{i18n>Document}',
+        TypeNamePlural : '{i18n>Documents}',
         Title          : {Value : ID},
         Description    : {Value : filename}
     },
@@ -144,8 +164,8 @@ annotate my.Publishers with @(UI : {
         }
     ],
     HeaderInfo          : {
-        TypeName       : 'Publisher',
-        TypeNamePlural : 'Publishers',
+        TypeName       : '{i18n>Publisher}',
+        TypeNamePlural : '{i18n>Publishers}',
         Title          : {Value : ID},
         Description    : {Value : name}
     },
@@ -188,7 +208,9 @@ annotate my.Books with @(UI : {
     LineItem            : [
         {Value : ID},
         {Value : title},
+        {Value : author_ID},
         {Value : author.name},
+        /*
         {
             $Type          : 'UI.DataFieldWithIntentBasedNavigation',
             Value          : author.name,
@@ -201,6 +223,7 @@ annotate my.Books with @(UI : {
                 SemanticObjectProperty : 'ID',
             }, ],
         },
+        */
         {
             $Type          : 'UI.DataFieldWithIntentBasedNavigation',
             Value          : author.ID,
@@ -278,6 +301,13 @@ annotate my.Books with @(UI : {
     */
     ]
 }, ) {
+    @Common.SemanticObject : 'V4Authors'
+    /*
+    @Common.SemanticObjectMapping : {$value : {
+        LocalProperty          : author.ID,
+        SemanticObjectProperty : 'ID',
+    }}
+    */
     author @(
              // Common.Text: { $value:author.name, "@UI.TextArrangement": #TextOnly },
            ValueList.entity : 'Authors',
