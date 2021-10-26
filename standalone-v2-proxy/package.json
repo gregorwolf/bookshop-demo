@@ -4,8 +4,8 @@
     "node": "^14"
   },
   "dependencies": {
-    "@sap/cds": "^5.5.1",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.7.11"
+    "@sap/cds": "^5.5.5",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.7.13"
   },
   "devDependencies": {},
   "scripts": {
