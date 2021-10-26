@@ -220,6 +220,12 @@ annotate AdminService.Orders with @(
       },
       {Value : CustomerOrderNo},
       {Value : vipOrder},
+      {Value : ShippingAddress.street},
+      {
+        Value                   : ShippingAddress.city,
+        ![@Common.FieldControl] : #ReadOnly,
+      },
+
     ]},
     FieldGroup #Created         : {Data : [
       {Value : createdBy},
@@ -353,13 +359,13 @@ annotate AdminService.OrderShippingAddress with @(UI : {
   //	Lists of ShippingAddress
   //
   LineItem        : [
-    {Value : city},
-    {Value : street},
+    {Value : street, },
+    {Value : city, },
   ],
   Identification  : [ //Is the main field group
     //{Value: ID, Label:'ID'}, //A guid shouldn't be on the UI
-    {Value : street},
-    {Value : city},
+    {Value : street, },
+    {Value : city, },
   ],
   Facets          : [{
     $Type  : 'UI.ReferenceFacet',
