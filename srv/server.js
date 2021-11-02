@@ -5,6 +5,7 @@ const passport = require("passport");
 const xsenv = require("@sap/xsenv");
 const express = require("express");
 const log = require("cf-nodejs-logging-support");
+const SDKUtil = require("@sap-cloud-sdk/util");
 
 // Set the minimum logging level (Levels: off, error, warn, info, verbose, debug, silly)
 log.setLoggingLevel("info");
@@ -91,6 +92,7 @@ const readJwt = function (req) {
 };
 
 cds.on("bootstrap", async (app) => {
+  SDKUtil.setGlobalLogLevel("error");
   const cdsenv = cds.env;
   app.use("/appconfig", express.static("./app/webapp/appconfig/"));
   app.use(
