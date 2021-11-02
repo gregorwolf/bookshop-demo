@@ -4,11 +4,7 @@ const helmet = require("helmet");
 const passport = require("passport");
 const xsenv = require("@sap/xsenv");
 const express = require("express");
-const log = require("cf-nodejs-logging-support");
 const SDKUtil = require("@sap-cloud-sdk/util");
-
-// Set the minimum logging level (Levels: off, error, warn, info, verbose, debug, silly)
-log.setLoggingLevel("info");
 
 var xsuaaCredentials = false;
 if (process.env.NODE_ENV === "production") {
@@ -101,7 +97,6 @@ cds.on("bootstrap", async (app) => {
     })
   );
   // Bind to express app
-  app.use(log.logNetwork);
   app.use(proxy());
   // app.use(replaceExcelAcceptHeader)
   app.use(sapJobLogger);
