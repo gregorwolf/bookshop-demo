@@ -88,7 +88,7 @@ const readJwt = function (req) {
 };
 
 cds.on("bootstrap", async (app) => {
-  SDKUtil.setGlobalLogLevel("error");
+  SDKUtil.setGlobalLogLevel("info");
   const cdsenv = cds.env;
   app.use("/appconfig", express.static("./app/webapp/appconfig/"));
   app.use(
