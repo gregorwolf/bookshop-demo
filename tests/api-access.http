@@ -36,18 +36,29 @@ Authorization: Bearer {{access_token}}
 GET {{$dotenv srvurl}}/api/getData
 Authorization: Bearer {{access_token}}
 
-### Read Orders
+### Read Admin Endpoint
+GET {{$dotenv srvurl}}/admin/
+Accept: application/json
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv srvurl}}/admin/Books
+Accept: application/json
+Authorization: Bearer {{access_token}}
+### Read Admin Endpoint OData V2
 GET {{$dotenv srvurl}}/v2/admin/
 Accept: application/json
 Authorization: Bearer {{access_token}}
 
 ### Read Orders
-GET {{$dotenv srvurl}}/v2/admin/Orders?$top=10&$expand=Items
+GET {{$dotenv srvurl}}/v2/admin/Orders
+  ?$top=10
+  &$expand=Items
 Accept: application/json
 Authorization: Bearer {{access_token}}
 
 ### Read Books
-GET {{$dotenv srvurl}}/v2/admin/Authors?$top=10
+GET {{$dotenv srvurl}}/v2/admin/Authors
+  ?$top=10
 Accept: application/json
 Authorization: Bearer {{access_token}}
 
@@ -62,26 +73,28 @@ Authorization: Bearer {{access_token}}
 @ID = {{approval.response.body.d.results[0].ID}}
 
 ### Approve
-POST {{$dotenv srvurl}}/v2/admin/Approval_approve?ID=guid'{{ID}}'&IsActiveEntity=true
+POST {{$dotenv srvurl}}/v2/admin/Approval_approve
+  ?ID=guid'{{ID}}'&IsActiveEntity=true
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 {}
 
 ### Reject
-POST {{$dotenv srvurl}}/v2/admin/Approval_reject?ID=guid'{{ID}}'&IsActiveEntity=true
+POST {{$dotenv srvurl}}/v2/admin/Approval_reject
+  ?ID=guid'{{ID}}'&IsActiveEntity=true
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 {}
 
 ###
-GET http://localhost:4004/admin/readUsers()
+GET {{$dotenv srvurl}}/admin/readUsers()
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 
 ###
-GET http://localhost:4004/admin/readUsersSDK()
+GET {{$dotenv srvurl}}/admin/readUsersSDK()
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
