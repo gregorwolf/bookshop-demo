@@ -50,6 +50,10 @@ module.exports = async function (srv) {
     }
   });
 
+  srv.after("*", Orders, (entity, req) => {
+    console.log("After Handler for Orders");
+  });
+
   srv.on("READ", "UserScopes", async (req) => {
     const users = [
       {
