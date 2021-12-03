@@ -1,0 +1,8 @@
+###
+GET {{$dotenv approuter}}/recursive/
+
+###
+GET {{$dotenv approuter}}/recursive//getItemGrouping(includeLeaves=true)
+
+###
+GET {{$dotenv approuter}}/recursive//getItemGrouping(includeLeaves=true)?sap-language=en
