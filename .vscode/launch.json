@@ -6,6 +6,17 @@
   "configurations": [
     {
       "type": "node",
+      "name": "debug current test file",
+      "request": "launch",
+      "args": ["--runInBand", "${fileBasenameNoExtension}"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true,
+      "program": "${workspaceFolder}/node_modules/jest/bin/jest"
+    },
+    {
+      "type": "node",
       "request": "launch",
       "name": "standalone-v2-proxy",
       "env": {
