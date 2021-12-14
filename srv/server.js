@@ -153,6 +153,8 @@ var opts = {
 
 var client = mqtt.connect("mqtts://test.mosquitto.org", opts);
 */
+
+/*
 var client = mqtt.connect("mqtt://test.mosquitto.org");
 
 client.on("connect", function () {
@@ -176,5 +178,6 @@ client.on("message", function (topic, message) {
   console.log(topic.toString());
   console.log(message.toString());
 });
+*/
 
 module.exports = cds.server; // > delegate to default server.js
