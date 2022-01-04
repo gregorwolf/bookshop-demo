@@ -11,3 +11,8 @@ GET http://localhost:4004/sales-order/SEPM_I_SalesOrder_E
 ###
 GET http://localhost:4004/sales-order/SEPM_I_SalesOrderItem_E
   ?$top=10
+###
+POST http://localhost:4004/sales-order/$batch
+Content-Type: multipart/mixed;boundary=batch_36522ad7-fc75-4b56-8c71-56071383e77b
+
+< ./sales-order-batch.http
