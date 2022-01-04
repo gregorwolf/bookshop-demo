@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+  <edmx:Reference Uri="https://sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common" />
+  </edmx:Reference>
+  <edmx:DataServices m:DataServiceVersion="2.0">
+    <Schema Namespace="ZSOCDS_SRV" xml:lang="de" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <EntityType Name="SEPM_I_SalesOrderItem_EType" sap:semantics="aggregate" sap:label="EPM-Demo: Kundenauftragsposition mit externen IDs" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.String" Nullable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="SalesOrder" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Kundenauftr.-ID" sap:quickinfo="EPM: Kundenauftragsnummer" sap:creatable="false" sap:updatable="false" />
+        <Property Name="SalesOrderItem" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:text="SalesOrderItem_Text" sap:label="Zeile der Position" sap:quickinfo="EPM: Zeilennummer der Kundenauftragsposition" />
+        <Property Name="SalesOrderItem_Text" Type="Edm.String" MaxLength="255" sap:label="Beschreib." sap:quickinfo="EPM: Textfeld für Namen und Beschreibungen" sap:creatable="false" sap:updatable="false" />
+        <Property Name="Product" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Produkt-ID" sap:quickinfo="EPM: Produkt-ID" />
+        <Property Name="TransactionCurrency" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:label="Währungscode" sap:quickinfo="EPM: Währungscode" sap:semantics="currency-code" />
+        <Property Name="GrossAmountInTransacCurrency" Type="Edm.Decimal" Precision="16" Scale="3" sap:aggregation-role="measure" sap:unit="TransactionCurrency" sap:label="Bruttobetrag" sap:quickinfo="EPM: Gesamtbruttobetrag" sap:filterable="false" />
+        <Property Name="NetAmountInTransactionCurrency" Type="Edm.Decimal" Precision="16" Scale="3" sap:aggregation-role="measure" sap:unit="TransactionCurrency" sap:label="Nettobetr." sap:quickinfo="EPM: Gesamtnettobetrag" sap:filterable="false" />
+        <Property Name="TaxAmountInTransactionCurrency" Type="Edm.Decimal" Precision="16" Scale="3" sap:aggregation-role="measure" sap:unit="TransactionCurrency" sap:label="Steuerbetr" sap:quickinfo="EPM: Gesamtsteuerbetrag" sap:filterable="false" />
+        <Property Name="ProductAvailabilityStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="ATP-Status" sap:quickinfo="EPM: ATP-Status der Kundenauftragsposition" />
+        <Property Name="OpportunityItem" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Zeile der Position" sap:quickinfo="EPM: Zeilennummer der Kundenauftragsposition" />
+      </EntityType>
+      <EntityType Name="SEPM_I_SalesOrder_EType" sap:semantics="aggregate" sap:label="EPM-Demo: Kundenauftrag mit externen IDs" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.String" Nullable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="SalesOrder" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:text="SalesOrder_Text" sap:label="Kundenauftr.-ID" sap:quickinfo="EPM: Kundenauftragsnummer" sap:creatable="false" sap:updatable="false" />
+        <Property Name="SalesOrder_Text" Type="Edm.String" MaxLength="255" sap:label="Beschreib." sap:quickinfo="EPM: Textfeld für Namen und Beschreibungen" sap:creatable="false" sap:updatable="false" />
+        <Property Name="CreatedByUser" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Ersteller" sap:quickinfo="EPM: Ersteller" />
+        <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:aggregation-role="dimension" sap:label="Angelegt um" sap:quickinfo="EPM: Angelegt um" sap:creatable="false" sap:updatable="false" />
+        <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="12" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Letzter Änderer" sap:quickinfo="EPM: Letzter Änderer" />
+        <Property Name="LastChangedDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:aggregation-role="dimension" sap:label="Geändert um" sap:quickinfo="EPM: Geändert um" sap:creatable="false" sap:updatable="false" />
+        <Property Name="IsCreatedByBusinessPartner" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Wert" sap:quickinfo="EPM: Boolsch" />
+        <Property Name="IsLastChangedByBusinessPartner" Type="Edm.Boolean" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Wert" sap:quickinfo="EPM: Boolsch" />
+        <Property Name="Customer" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Kunde" sap:quickinfo="EPM: Kunden-ID" />
+        <Property Name="CustomerContact" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Kundenkontakt" sap:quickinfo="EPM: Kundenkontakt für Kundenauftrag" />
+        <Property Name="TransactionCurrency" Type="Edm.String" MaxLength="5" sap:aggregation-role="dimension" sap:label="Währungscode" sap:quickinfo="EPM: Währungscode" sap:semantics="currency-code" />
+        <Property Name="GrossAmountInTransacCurrency" Type="Edm.Decimal" Precision="16" Scale="3" sap:aggregation-role="measure" sap:unit="TransactionCurrency" sap:label="Bruttobetrag" sap:quickinfo="EPM: Gesamtbruttobetrag" sap:filterable="false" />
+        <Property Name="NetAmountInTransactionCurrency" Type="Edm.Decimal" Precision="16" Scale="3" sap:aggregation-role="measure" sap:unit="TransactionCurrency" sap:label="Nettobetr." sap:quickinfo="EPM: Gesamtnettobetrag" sap:filterable="false" />
+        <Property Name="TaxAmountInTransactionCurrency" Type="Edm.Decimal" Precision="16" Scale="3" sap:aggregation-role="measure" sap:unit="TransactionCurrency" sap:label="Steuerbetr" sap:quickinfo="EPM: Gesamtsteuerbetrag" sap:filterable="false" />
+        <Property Name="SalesOrderLifeCycleStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Lebenszyklusstatus" sap:quickinfo="EPM: Lebenszyklusstatus des Kundenauftrags" />
+        <Property Name="SalesOrderBillingStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Bestätigungsstatus" sap:quickinfo="EPM: Bestätigungsstatus des Kundenauftrags" />
+        <Property Name="SalesOrderDeliveryStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Bestellstatus" sap:quickinfo="EPM: Bestellstatus des Kundenauftrags" />
+        <Property Name="SalesOrderOverallStatus" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Gesamtstatus" sap:quickinfo="EPM: Gesamtstatus Kundenaufträge" />
+        <Property Name="Opportunity" Type="Edm.String" MaxLength="35" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Opportunity-ID" sap:quickinfo="EPM: Opportunity-ID für SoD-IDoc-Verarbeitung" />
+        <Property Name="SalesOrderPaymentMethod" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Zahlweg" sap:quickinfo="EPM: Zahlweg für Kundenauftrag" />
+        <Property Name="SalesOrderPaymentTerms" Type="Edm.String" MaxLength="1" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Zahlungsbedingungen" sap:quickinfo="EPM: Zahlungsbedingungen für Kundenauftrag" />
+        <Property Name="BillToParty" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Rechnungsempfänger" sap:quickinfo="EPM: Rechnungsempfänger des Kundenauftrags" />
+        <Property Name="BillToPartyRole" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Partnerrolle" sap:quickinfo="EPM: Partnerrolle" />
+        <Property Name="ShipToParty" Type="Edm.String" MaxLength="10" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Warenempfänger" sap:quickinfo="EPM: Warenempfänger des Kundenauftrags" />
+        <Property Name="ShipToPartyRole" Type="Edm.String" MaxLength="3" sap:aggregation-role="dimension" sap:display-format="UpperCase" sap:label="Partnerrolle" sap:quickinfo="EPM: Partnerrolle" />
+        <NavigationProperty Name="to_Item" Relationship="ZSOCDS_SRV.assoc_5DE06120536724C4B3ACB7DF43062978" FromRole="FromRole_assoc_5DE06120536724C4B3ACB7DF43062978" ToRole="ToRole_assoc_5DE06120536724C4B3ACB7DF43062978" />
+      </EntityType>
+      <Association Name="assoc_5DE06120536724C4B3ACB7DF43062978" sap:content-version="1">
+        <End Type="ZSOCDS_SRV.SEPM_I_SalesOrder_EType" Multiplicity="1" Role="FromRole_assoc_5DE06120536724C4B3ACB7DF43062978" />
+        <End Type="ZSOCDS_SRV.SEPM_I_SalesOrderItem_EType" Multiplicity="*" Role="ToRole_assoc_5DE06120536724C4B3ACB7DF43062978" />
+      </Association>
+      <EntityContainer Name="ZSOCDS_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+        <EntitySet Name="SEPM_I_SalesOrderItem_E" EntityType="ZSOCDS_SRV.SEPM_I_SalesOrderItem_EType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1" />
+        <EntitySet Name="SEPM_I_SalesOrder_E" EntityType="ZSOCDS_SRV.SEPM_I_SalesOrder_EType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1" />
+        <AssociationSet Name="assoc_5DE06120536724C4B3ACB7DF43062978" Association="ZSOCDS_SRV.assoc_5DE06120536724C4B3ACB7DF43062978" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+          <End EntitySet="SEPM_I_SalesOrder_E" Role="FromRole_assoc_5DE06120536724C4B3ACB7DF43062978" />
+          <End EntitySet="SEPM_I_SalesOrderItem_E" Role="ToRole_assoc_5DE06120536724C4B3ACB7DF43062978" />
+        </AssociationSet>
+      </EntityContainer>
+      <atom:link rel="self" href="https://sapes5.sapdevcenter.com/sap/opu/odata/sap/ZSOCDS_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom" />
+      <atom:link rel="latest-version" href="https://sapes5.sapdevcenter.com/sap/opu/odata/sap/ZSOCDS_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom" />
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

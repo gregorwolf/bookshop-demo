@@ -1,0 +1,13 @@
+### 
+GET http://localhost:4004/sales-order/
+###
+https://sapes5.sapdevcenter.com/sap/opu/odata/sap/ZSOCDS_SRV/SEPM_I_SalesOrder_E
+  ?$top=10
+Accept: application/json
+###
+GET http://localhost:4004/sales-order/SEPM_I_SalesOrder_E
+  ?$top=10
+  &$expand=to_Item
+###
+GET http://localhost:4004/sales-order/SEPM_I_SalesOrderItem_E
+  ?$top=10

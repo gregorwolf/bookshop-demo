@@ -104,6 +104,15 @@
           "path": "/sap/opu/odata/sap/ZPDCDS_SRV"
         }
       },
+      "ZSOCDS_SRV": {
+        "kind": "odata-v2",
+        "model": "srv/external/ZSOCDS_SRV",
+        "credentials": {
+          "destination": "ES5",
+          "requestTimeout": 30000,
+          "path": "/sap/opu/odata/sap/ZSOCDS_SRV"
+        }
+      },
       "xsuaa-api": {
         "kind": "rest",
         "credentials": {
