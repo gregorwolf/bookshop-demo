@@ -14,6 +14,16 @@ annotate AdminService.Roles with {
   ID @Core.Computed;
 }
 
+annotate AdminService.Roles with {
+  ID @(
+    sap.value.list : 'fixed-values',
+    Common         : {
+      Text            : rolename,
+      TextArrangement : #TextOnly
+    }
+  )
+};
+
 annotate AdminService.Roles with @(UI : {
   SelectionFields            : [rolename],
 
