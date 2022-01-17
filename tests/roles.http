@@ -1,4 +1,6 @@
-
+###
+GET http://localhost:4004/v2/admin/$metadata
+Authorization: Basic admin:
 ### Read Roles via OData V2
 GET http://localhost:4004/v2/admin/Roles
 Authorization: Basic admin:
