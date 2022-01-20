@@ -91,11 +91,19 @@ cds.on("bootstrap", async (app) => {
   SDKUtil.setGlobalLogLevel("info");
   const cdsenv = cds.env;
   app.use("/appconfig", express.static("./app/webapp/appconfig/"));
+  /*
+  // TODO: Implement helmet following the best practice
   app.use(
     helmet({
-      contentSecurityPolicy: false,
+      contentSecurityPolicy: {
+        directives: {
+          ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+          // custom settings
+        },
+      },
     })
   );
+  */
   // Bind to express app
   app.use(proxy());
   // app.use(replaceExcelAcceptHeader)
