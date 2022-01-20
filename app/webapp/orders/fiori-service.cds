@@ -142,12 +142,6 @@ annotate AdminService.Orders with @(
         Label  : '{i18n>checkConsistencyV4}',
         Action : 'AdminService.checkConsistencyInline',
         Inline : true
-      },
-      {
-        $Type  : 'UI.DataFieldForAction',
-        Label  : '{i18n>setOrderParameters}',
-        Action : 'AdminService.setOrderParameters',
-        Inline : true
       }
     ],
     ////////////////////////////////////////////////////////////////////////////
