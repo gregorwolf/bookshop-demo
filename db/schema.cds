@@ -195,8 +195,11 @@ entity OrderItems : cuid {
 
 entity OrderShippingAddress : cuid, managed {
   parent : Association to Orders not null;
-  street : String(60)@(title : 'Street', );
-  city   : String(60)@(title : 'City', );
+  @(UI : {Placeholder : '{i18n>placeholderStreet}'})
+  @(title : 'Street', )
+  street : String(60);
+  @(title : 'City', )
+  city   : String(60);
 };
 
 entity Meterings : cuid {
