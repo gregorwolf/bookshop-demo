@@ -1,0 +1,41 @@
+### Get Access Token (Cloud Foundry using Client Credentials)
+# @name requestAccessToken
+POST {{$dotenv dms_auth_url}}/oauth/token
+Authorization: Basic {{$dotenv dms_clientid}}:{{$dotenv dms_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+###
+GET {{$dotenv dms_api}}/rest/v2/repositories
+Accept: application/json
+Authorization: Bearer {{access_token}}
+
+###
+POST {{$dotenv dms_api}}/rest/v2/repositories
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "repository": {
+    "displayName": "First Test Repository",
+    "description": "Description for the First Test Repository",
+    "repositoryType": "internal",
+    "isVersionEnabled": "true",
+    "isVirusScanEnabled": "true",
+    "skipVirusScanForLargeFile": "false",
+    "hashAlgorithms": "SHA-256",
+    "isContentBridgeEnabled": "true",
+    "externalId": "test"
+  }
+}
+
+###
+GET {{$dotenv dms_api}}/rest/v2/usage/storage
+Accept: application/json
+Authorization: Bearer {{access_token}}
