@@ -11,10 +11,13 @@ grant_type=client_credentials
 @access_token = {{requestAccessToken.response.body.$.access_token}}
 
 ###
+# @name repositories
 GET {{$dotenv dms_api}}/rest/v2/repositories
 Accept: application/json
 Authorization: Bearer {{access_token}}
 
+###
+@cmisRepositoryId={{repositories.response.body.repoAndConnectionInfos.repository.id}}
 ###
 POST {{$dotenv dms_api}}/rest/v2/repositories
 Accept: application/json
@@ -37,5 +40,28 @@ Authorization: Bearer {{access_token}}
 
 ###
 GET {{$dotenv dms_api}}/rest/v2/usage/storage
+Accept: application/json
+Authorization: Bearer {{access_token}}
+###
+# @name repositories
+GET {{$dotenv dms_api}}/rest/v2/repositories/{{cmisRepositoryId}}
+Accept: application/json
+Authorization: Bearer {{access_token}}
+
+
+###
+GET {{$dotenv dms_api}}
+Accept: application/json
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv dms_api}}/browser
+Accept: application/json
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv dms_api}}/browser/test/root
+Accept: application/json
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv dms_api}}/browser/test/root/folder01
 Accept: application/json
 Authorization: Bearer {{access_token}}
