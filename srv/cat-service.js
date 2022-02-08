@@ -90,6 +90,21 @@ module.exports = async function (srv) {
     return "Hello " + req.data.to;
   });
 
+  srv.on(["updateBook"], Orders, async (req) => {
+    console.log("updateBook - Request Parameters:", req.params[0]);
+    const bookOld = await cds.run(
+      SELECT.one.from(Books).where("ID", "=", req.params[0])
+    );
+    const book = await cds.run(
+      SELECT.one.from(Books).where("ID", "=", req.params[0])
+    );
+    book.stock = book.stock + 1;
+    book.semanticURLtoPublisher = "Test";
+    console.log(book);
+    const update = await UPDATE(Books).set(book).where(bookOld);
+    console.log(update);
+  });
+
   // Reduce stock of ordered books if available stock suffices
   this.on("submitOrder", async (req) => {
     const { book, amount } = req.data;

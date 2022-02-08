@@ -22,9 +22,11 @@ GET http://localhost:4004/v2/catalog/Publishers
 GET http://localhost:4004/catalog/Countries
 Authorization: Basic admin:
 ### Read Books with Author details via OData V4 by admin
+# @name books
 GET http://localhost:4004/catalog/Books?$expand=publisher&$top=2
 Authorization: Basic admin:
-
+###
+@bookId={{books.response.body.value[0].ID}}
 ### Read Books with Author details via OData V2 by admin
 GET http://localhost:4004/v2/catalog/Books?$expand=author
 Authorization: Basic admin:
@@ -36,9 +38,14 @@ Authorization: Basic admin:
 ### Read Specific Book
 GET http://localhost:4004/catalog/Books
   ?$select=ID,stock
-  &$filter=ID eq 201 or ID eq 1
+  &$filter=ID eq {{bookId}} or ID eq 1
 Authorization: Basic admin:
+###
+POST http://localhost:4004/catalog/Books({{bookId}})/CatalogService.updateBook
+Authorization: Basic admin:
+Content-Type: application/json
 
+{}
 ### Read number of books for dynamic tile
 GET http://localhost:4004/v2/catalog/getNumberOfBooksForDynamicTile
 Authorization: Basic bob:

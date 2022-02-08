@@ -29,6 +29,8 @@ service CatalogService @(impl : './cat-service.js') {
   }, )                          as projection on db.Books excluding {
     createdBy,
     modifiedBy
+  } actions {
+    action updateBook()
   };
 
   function getBooks() returns array of Books;
