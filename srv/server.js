@@ -5,6 +5,7 @@ const passport = require("passport");
 const xsenv = require("@sap/xsenv");
 const express = require("express");
 const SDKUtil = require("@sap-cloud-sdk/util");
+const mqtt = require("./mqtt");
 
 var xsuaaCredentials = false;
 if (process.env.NODE_ENV === "production") {
@@ -88,7 +89,7 @@ const readJwt = function (req) {
 };
 
 cds.on("bootstrap", async (app) => {
-  SDKUtil.setGlobalLogLevel("info");
+  // SDKUtil.setGlobalLogLevel("info");
   const cdsenv = cds.env;
   app.use("/appconfig", express.static("./app/webapp/appconfig/"));
   /*
@@ -147,45 +148,5 @@ if (process.env.NODE_ENV !== "production") {
   const cds_swagger = require("cds-swagger-ui-express");
   cds.on("bootstrap", (app) => app.use(cds_swagger()));
 }
-
-var mqtt = require("mqtt");
-/*
-var fs = require("fs");
-var caFile = fs.readFileSync("mosquitto.org.crt");
-
-var opts = {
-  rejectUnauthorized: false,
-  connectTimeout: 5000,
-  ca: [caFile],
-};
-
-var client = mqtt.connect("mqtts://test.mosquitto.org", opts);
-*/
-
-/*
-var client = mqtt.connect("mqtt://test.mosquitto.org");
-
-client.on("connect", function () {
-  client.subscribe("lupomania/#", function (err) {
-    if (!err) {
-      client.publish("lupomania/test", "Hello mqtt");
-    }
-  });
-});
-
-client.on("close", function () {
-  console.log("MQTT connection was closed");
-});
-
-client.on("error", function (error) {
-  console.log(error.toString());
-});
-
-client.on("message", function (topic, message) {
-  // message is Buffer
-  console.log(topic.toString());
-  console.log(message.toString());
-});
-*/
 
 module.exports = cds.server; // > delegate to default server.js
