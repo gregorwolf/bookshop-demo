@@ -30,6 +30,13 @@ modules:
       ignore: ["node_modules/"]
     properties:
       SAP_JWT_TRUST_ACL: '[{"clientid":"*","identityzone":"*"}]'
+      destinations: |
+        [
+          {
+            "name": "ES5",
+            "url": "https://sapes5.sapdevcenter.com"
+          }
+        ]
     parameters:
       memory: 256M
       disk-quota: 1024M
@@ -41,7 +48,7 @@ modules:
       - name: bookshop-demo-db-service
       - name: bookshop-demo-uaa
       - name: bookshop-demo-job-scheduler
-
+      - name: mqtt
 #  - name: bookshop-demo-v2-proxy
 #    type: nodejs
 #    path: standalone-v2-proxy
@@ -68,21 +75,21 @@ modules:
       memory: 256M
       disk-quota: 1024M
     requires:
-     - name: bookshop-demo-uaa
-     - name: srv_api
-       group: destinations
-       properties:
-          forwardAuthToken: true
-          strictSSL: false
-          name: srv_api
-          url: ~{url}
-#     - name: srv_api_v2
-#       group: destinations
-#       properties:
-#          forwardAuthToken: true
-#          strictSSL: false
-#          name: srv_api_v2
-#          url: ~{url}
+      - name: bookshop-demo-uaa
+      - name: srv_api
+        group: destinations
+        properties:
+           forwardAuthToken: true
+           strictSSL: false
+           name: srv_api
+           url: ~{url}
+#      - name: srv_api_v2
+#        group: destinations
+#        properties:
+#           forwardAuthToken: true
+#           strictSSL: false
+#           name: srv_api_v2
+#           url: ~{url}
 
 resources:
   - name: bookshop-demo-db-service
@@ -101,3 +108,5 @@ resources:
        service-plan: default
        config:
           enable-xsuaa-support: true
+  - name: mqtt
+    type: org.cloudfoundry.existing-service
