@@ -45,6 +45,15 @@
     },
     {
       "name": "cds run",
+      "command": "destinations=`cat default-env.json | jq .destinations` && cds run --with-mocks",
+      "request": "launch",
+      "type": "node-terminal",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "name": "cds run in-memory",
       "command": "destinations=`cat default-env.json | jq .destinations` && cds run --with-mocks --in-memory",
       "request": "launch",
       "type": "node-terminal",
