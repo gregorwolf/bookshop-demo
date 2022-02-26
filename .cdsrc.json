@@ -1,78 +1,49 @@
 {
-    "auth": {
-        "passport": {
+    "requires": {
+        "auth": {
             "strategy": "mock",
             "users": {
                 "requester": {
-                    "jwt": {
-                        "userInfo": {
-                            "logonName": "requester",
-                            "email": "requester@example.com"
-                        },
-                        "scopes": [
-                            "admin"
-                        ]
-                    }
+                    "password": "",
+                    "roles": [
+                        "admin"
+                    ]
                 },
                 "booksadmin": {
-                    "jwt": {
-                        "userInfo": {
-                            "logonName": "booksadmin",
-                            "email": "booksadmin@example.com"
-                        },
-                        "scopes": [
-                            "booksadmin"
-                        ]
-                    }
+                    "password": "",
+                    "roles": [
+                        "booksadmin"
+                    ]
                 },
                 "admin": {
-                    "jwt": {
-                        "userInfo": {
-                            "logonName": "admin",
-                            "email": "alice@example.com"
-                        },
-                        "scopes": [
-                            "admin",
-                            "roleadmin",
-                            "booksadmin"
-                        ]
-                    }
+                    "roles": [
+                        "admin",
+                        "roleadmin",
+                        "booksadmin"
+                    ]
                 },
                 "littleadmin": {
-                    "jwt": {
-                        "userInfo": {
-                            "logonName": "littleadmin",
-                            "email": "littleadmin@example.com"
-                        },
-                        "scopes": [
-                            "admin"
-                        ]
-                    }
+                    "password": "",
+                    "roles": [
+                        "admin"
+                    ]
                 },
                 "bob": {
-                    "jwt": {
-                        "userInfo": {
-                            "logonName": "bob@example.com"
-                        },
-                        "scopes": [
-                            "authenticated-user",
-                            "openid"
-                        ],
-                        "attributes": {
-                            "level": 5
-                        }
+                    "password": "",
+                    "roles": [
+                        "authenticated-user",
+                        "openid"
+                    ],
+                    "userAttributes": {
+                        "level": 5
                     }
                 },
                 "error": {
-                    "jwt": {
-                        "userInfo": {
-                            "logonName": "error@example.com"
-                        },
-                        "scopes": [
-                            "authenticated-user",
-                            "openid"
-                        ]
-                    }
+                    "password": "",
+                    "roles": [
+                        "authenticated-user",
+                        "openid"
+                    ]
                 },
                 "*": true
             }

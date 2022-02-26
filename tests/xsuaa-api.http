@@ -1,0 +1,55 @@
+# @name requestAccessToken
+POST {{$dotenv url}}/oauth/token
+Authorization: Basic {{$dotenv xsuaa_api_clientId}}:{{$dotenv xsuaa_api_clientSecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+### 
+# @name readUsers
+GET {{$dotenv xsuaa_url}}/Users
+Authorization: Bearer {{access_token}}
+
+### 
+# @name readGroups
+GET {{$dotenv xsuaa_url}}/Groups
+Authorization: Bearer {{access_token}}
+
+### 
+# @name readGroupBookshopAdmin
+GET {{$dotenv xsuaa_url}}/Groups/BookshopAdmin
+Authorization: Bearer {{access_token}}
+
+### 
+# @name readRoletemplaes
+GET {{$dotenv xsuaa_url}}/sap/rest/authorization/v2/apps/roletemplates
+Authorization: Bearer {{access_token}}
+
+### 
+# @name readRoleCollection
+GET {{$dotenv xsuaa_url}}/sap/rest/authorization/v2/rolecollections/?showGroups=true&showRoles=true&showUsers=true
+Authorization: Bearer {{access_token}}
+
+### 
+# @name readApps
+GET {{$dotenv xsuaa_url}}/sap/rest/authorization/v2/apps/
+Authorization: Bearer {{access_token}}
+
+### 
+# @name readApp
+GET {{$dotenv xsuaa_url}}/sap/rest/authorization/v2/apps/bookshop-demo!t73843
+Authorization: Bearer {{access_token}}
+
+### 
+# @name readUsersCAP
+GET http://localhost:4004/admin/readUsers()
+Authorization: Basic admin:
+
+### 
+# @name readUsersSDK
+GET http://localhost:4004/admin/readUsersSDK()
+Authorization: Basic admin:

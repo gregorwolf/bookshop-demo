@@ -1,0 +1,7 @@
+{
+  "Notifications": {
+    "directoryName": "com-sap-notification-provider-service",
+    "servicePath": "/v2/Notification.svc",
+    "npmPackageName": "com-sap-notification-provider-service"
+  }
+}

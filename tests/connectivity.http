@@ -1,0 +1,17 @@
+# Documentation:
+# https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/313b215066a8400db461b311e01bd99b.html
+### Get Access Token (Cloud Foundry using Client Credentials)
+# @name requestAccessToken
+POST {{$dotenv url}}/oauth/token
+Authorization: Basic {{$dotenv conn_clientid}}:{{$dotenv conn_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+### Read userInfo
+GET https://{{$dotenv onpremise_proxy_host}}:{{$dotenv onpremise_proxy_http_port}}
+Authorization: Bearer {{access_token}}

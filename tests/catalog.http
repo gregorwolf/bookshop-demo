@@ -1,3 +1,7 @@
+### Read Metadata OData V4
+GET http://localhost:4004/catalog/$metadata
+### Read Metadata OData V2
+GET http://localhost:4004/v2/catalog/$metadata
 ### Test function import OData V2
 GET http://localhost:4004/v2/catalog/hello?to=Gregor
 
@@ -5,25 +9,46 @@ GET http://localhost:4004/v2/catalog/hello?to=Gregor
 GET http://localhost:4004/v2/catalog/
 ### Read Entities with OData V4
 GET http://localhost:4004/catalog/
-### Read Metadata OData V4
-GET http://localhost:4004/catalog/$metadata
 ### Read Books using function
 GET http://localhost:4004/catalog/getBooks()
 
 ### Read Books using function V2
 GET http://localhost:4004/v2/catalog/getBooks
-### Read Books with Author details via OData V4 by admin
-GET http://localhost:4004/catalog/Books?$expand=author
-Authorization: Basic YWRtaW46
 
+### Read Books using function V2
+GET http://localhost:4004/v2/catalog/Publishers
+
+### Read Countries
+GET http://localhost:4004/catalog/Countries
+Authorization: Basic admin:
+### Read Books with Author details via OData V4 by admin
+# @name books
+GET http://localhost:4004/catalog/Books?$expand=publisher&$top=2
+Authorization: Basic admin:
+###
+@bookId={{books.response.body.value[0].ID}}
 ### Read Books with Author details via OData V2 by admin
 GET http://localhost:4004/v2/catalog/Books?$expand=author
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
 ### Read Authors with Books details via OData V2 by admin
 GET http://localhost:4004/v2/catalog/Authors?$expand=books
-Authorization: Basic YWRtaW46
+Authorization: Basic admin:
 
+### Read Specific Book
+GET http://localhost:4004/catalog/Books
+  ?$select=ID,stock
+  &$filter=ID eq {{bookId}} or ID eq 1
+Authorization: Basic admin:
+###
+POST http://localhost:4004/catalog/Books({{bookId}})/CatalogService.updateBook
+Authorization: Basic admin:
+Content-Type: application/json
+
+{}
 ### Read number of books for dynamic tile
 GET http://localhost:4004/v2/catalog/getNumberOfBooksForDynamicTile
 Authorization: Basic bob:
+
+### Currencies
+GET http://localhost:4004/catalog/Currencies

@@ -9,17 +9,20 @@ using {
 type BusinessObject : String(255);
 
 entity Roles : cuid, managed {
-  rolename        : String(255)@(title : 'Role Name', );
-  description     : String     @(title : 'Description', );
-  read            : Boolean    @(title : 'Read', );
-  authcreate      : Boolean    @(title : 'Create', );
-  authupdate      : Boolean    @(title : 'Update', );
-  approve         : Boolean    @(title : 'Approve', );
+  @mandatory
+  rolename        : localized String(255) not null @(title : 'Role Name', );
+  description     : localized String not null      @(title : 'Description', );
+  read            : Boolean                        @(title : 'Read', );
+  authcreate      : Boolean                        @(title : 'Create', );
+  authupdate      : Boolean                        @(title : 'Update', );
+  approve         : Boolean                        @(title : 'Approve', );
   BusinessObjects : Composition of many Role_BusinessObject
                       on BusinessObjects.parent = $self;
   Users           : Composition of many Role_User
                       on Users.parent = $self;
 };
+
+annotate Roles with @fiori.draft.enabled;
 
 entity BusinessObjects {
   key ID       : BusinessObject;
@@ -34,16 +37,20 @@ entity Role_BusinessObject : cuid {
 };
 
 entity Role_User : cuid {
-  parent : Association to Roles;
-  user   : User;
+  parent    : Association to Roles;
+  user      : User;
+  @(title : 'requester', )
+  requester : Employee;
 };
 
-
 entity Users {
-  key username : String @(title : 'Username', );
-      address  : Composition of Address
-                   on address.parent = $self;
-      role     : Association to Roles;
+  key username    : String @(title : 'Username', );
+      employee    : Employee;
+      responsible : Employee;
+      address     : Composition of Address
+                      on address.parent = $self;
+      roles       : Association to many Role_User
+                      on roles.user = $self.username;
 };
 
 entity Address : cuid, managed {
@@ -52,3 +59,32 @@ entity Address : cuid, managed {
   city   : String(60)@(title : 'City', );
 };
 
+type XSUAAUsers {
+  id         : String;
+  externalId : String;
+  userName   : String;
+}
+
+entity Employees {
+      @Common.Text : {
+        $value              : email,
+        @UI.TextArrangement : #TextOnly
+      }
+      @(title : '{i18n>EmployeeID}')
+  key ID         : UUID;
+      @(title : '{i18n>BusinessPartnerFirstName}')
+      firstName  : String;
+      @(title : '{i18n>BusinessPartnerName}')
+      lastName   : String;
+      @(title : '{i18n>BusinessPartnerCompany}')
+      company    : String;
+      @(title : '{i18n>BusinessPartnerDepartment}')
+      department : String;
+      @(title : '{i18n>BusinessPartnerEmailAddress}')
+      @mandatory
+      email      : String not null;
+}
+
+type Employee : Association to Employees;
+annotate Employees with @UI.Identification : [{Value : email}, ];
+annotate Employees with @cds.odata.valuelist;

@@ -3,13 +3,13 @@
   "version": "0.0.1",
   "description": "",
   "dependencies": {
-    "@sap/approuter": "9.0.1"
+    "@sap/approuter": "^10.12.0"
   },
   "devDependencies": {
-    "@sap/html5-repo-mock": "^2.0.0"
+    "@sap/html5-repo-mock": "^2.1.0"
   },
   "engines": {
-    "node": "^10 || ^12"
+    "node": "^14"
   },
   "scripts": {
     "build": "npm run clean && npm run zip",

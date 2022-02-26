@@ -1,4 +1,4 @@
-### Get Access Token (Cloud Foundry)
+### Get Access Token (Cloud Foundry using Client Credentials)
 # @name requestAccessToken
 POST {{$dotenv url}}/oauth/token
 Authorization: Basic {{$dotenv clientid}}:{{$dotenv clientsecret}}
@@ -10,21 +10,23 @@ grant_type=client_credentials
 ### Fill Variables from Response
 @access_token = {{requestAccessToken.response.body.$.access_token}}
 
-### Get Access Token (HANA)
+### Get Access Token (HANA) or Cloud Foundry using Password Grant
+# https://blogs.sap.com/2020/03/02/using-postman-for-api-testing-with-xsuaa/
 # @name requestAccessTokenHANA
 POST {{$dotenv url}}/oauth/token
 Accept: application/json;charset=utf8
+Authorization: Basic {{$dotenv client_id}}:{{$dotenv client_secret}}
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=password
 &username={{$dotenv username}}
 &password={{$dotenv password}}
-&client_id={{$dotenv clientid}}
-&client_secret={{$dotenv clientsecret}}
+&client_id={{$dotenv client_id}}
 &response_type=token
+#&scope=bookshop-demo!t72094.admin
 
 ### Fill Variables from Response
-# @access_token = {{requestAccessTokenHANA.response.body.$.access_token}}
+#@access_token = {{requestAccessTokenHANA.response.body.$.access_token}}
 
 ### Read userInfo
 GET {{$dotenv srvurl}}/api/userInfo
@@ -34,12 +36,95 @@ Authorization: Bearer {{access_token}}
 GET {{$dotenv srvurl}}/api/getData
 Authorization: Bearer {{access_token}}
 
-### Read Orders
-GET {{$dotenv srvurl}}/v2/admin/Orders?$top=1
+### Read Admin Endpoint
+GET {{$dotenv srvurl}}/admin/
+Accept: application/json
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv srvurl}}/admin/UserScopes
+Accept: application/json
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv srvurl}}/admin/Books
+Accept: application/json
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv srvurl}}/admin/BooksAnalytics
+Accept: application/json
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv srvurl}}/admin/Authors
+Accept: application/json
+Authorization: Bearer {{access_token}}
+### Read Admin Endpoint OData V2
+GET {{$dotenv srvurl}}/v2/admin/
 Accept: application/json
 Authorization: Bearer {{access_token}}
 
-### Read Books
-GET {{$dotenv srvurl}}/v2/catalog/Books?$top=1
+### Read Orders
+GET {{$dotenv srvurl}}/admin/Orders
+  ?$top=10
+#  &$expand=Items
+  &$filter=OrderNo eq '12'
 Accept: application/json
+Authorization: Bearer {{access_token}}
+### Create Orders in two steps
+# @name createOrder
+POST {{$dotenv srvurl}}/catalog/Orders
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+    "OrderNo": "12",
+    "CustomerOrderNo": "Order via API",
+    "currency_code": "EUR",
+    "Items": [
+
+    ],
+    "ShippingAddress":  {
+        "street": "Hauptstraße 1",
+        "city": "Trostberg"
+    }
+}
+### Read Books
+GET {{$dotenv srvurl}}/v2/admin/Authors
+  ?$top=10
+Accept: application/json
+Authorization: Bearer {{access_token}}
+
+
+### Read Approval
+# @name approval
+GET {{$dotenv srvurl}}/v2/admin/Approval
+Accept: application/json
+Authorization: Bearer {{access_token}}
+
+###
+@ID = {{approval.response.body.d.results[0].ID}}
+
+### Approve
+POST {{$dotenv srvurl}}/v2/admin/Approval_approve
+  ?ID=guid'{{ID}}'&IsActiveEntity=true
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{}
+
+### Reject
+POST {{$dotenv srvurl}}/v2/admin/Approval_reject
+  ?ID=guid'{{ID}}'&IsActiveEntity=true
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{}
+
+###
+GET {{$dotenv srvurl}}/admin/readUsers()
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+
+###
+GET {{$dotenv srvurl}}/admin/readUsersSDK()
+Content-Type: application/json
 Authorization: Bearer {{access_token}}

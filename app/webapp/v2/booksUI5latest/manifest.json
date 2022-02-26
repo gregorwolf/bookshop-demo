@@ -1,11 +1,17 @@
 {
-	"_version": "1.8.0",
+	"_version": "1.21.0",
 	"sap.app": {
 		"id": "v2.booksUI5latest",
 		"type": "application",
 		"title": "{{appTitle}}",
 		"description": "{{appDescription}}",
-		"i18n": "i18n/i18n.properties",
+		"i18n": {
+			"bundleUrl": "i18n/i18n.properties",
+			"supportedLocales": [
+				""
+			],
+			"fallbackLocale": ""
+		},
 		"dataSources": {
 			"mainService": {
 				"uri": "/v2/catalog/",
@@ -38,7 +44,11 @@
 		"models": {
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
-				"uri": "i18n/i18n.properties"
+				"settings": {
+					"bundleUrl": "i18n/i18n.properties",
+					"supportedLocales": [""],
+					"fallbackLocale": ""
+				}
 			},
 			"": {
 				"dataSource": "mainService",
@@ -120,7 +130,7 @@
 			"sap_hcb",
 			"sap_belize"
 		]
-	},	
+	},
 	"sap.platform.hcp": {
 		"uri": ""
 	}

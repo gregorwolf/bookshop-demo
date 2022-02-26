@@ -1,0 +1,10 @@
+###
+GET https://services.odata.org/TripPinRESTierService/Me/Friends
+  ?$count=true
+  &$top=2
+
+###
+GET https://services.odata.org/TripPinRESTierService/Me/Friends
+  ?$filter=Friends/any(f:f/FirstName eq 'Scott')
+  &$expand=Friends
+  &$count=true

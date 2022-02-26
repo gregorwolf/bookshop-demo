@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" Version="1.0">
+  <edmx:DataServices m:DataServiceVersion="1.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+    <Schema Namespace="com.SAP.OData.V2.NotificationProviderService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <EntityType Name="Notification">
+        <Key>
+          <PropertyRef Name="Id"></PropertyRef>
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" MaxLength="32"></Property>
+        <Property Name="OriginId" Type="Edm.String" MaxLength="200"></Property>
+        <Property Name="NotificationTypeId" Type="Edm.Guid" Nullable="false" MaxLength="32"></Property>
+        <Property Name="NotificationTypeKey" Type="Edm.String" MaxLength="32"></Property>
+        <Property Name="NotificationTypeVersion" Type="Edm.String" MaxLength="20"></Property>
+        <Property Name="NavigationTargetAction" Type="Edm.String"></Property>
+        <Property Name="NavigationTargetObject" Type="Edm.String"></Property>
+        <Property Name="Priority" Type="Edm.String" MaxLength="20"></Property>
+        <Property Name="ProviderId" Type="Edm.String" MaxLength="32"></Property>
+        <Property Name="ActorId" Type="Edm.String" MaxLength="20"></Property>
+        <Property Name="ActorType" Type="Edm.String" MaxLength="20"></Property>
+        <Property Name="ActorDisplayText" Type="Edm.String" MaxLength="120"></Property>
+        <Property Name="ActorImageURL" Type="Edm.String"></Property>
+        <Property Name="NotificationTypeTimestamp" Type="Edm.DateTimeOffset" Nullable="true"></Property>
+        <NavigationProperty Name="Recipients" Relationship="com.SAP.OData.V2.NotificationProviderService.Notification_Recipient" FromRole="FromRole_Notification_Recipient" ToRole="ToRole_Notification_Recipient"></NavigationProperty>
+        <NavigationProperty Name="Properties" Relationship="com.SAP.OData.V2.NotificationProviderService.Notification_NProperty" FromRole="FromRole_Notification_NProperty" ToRole="ToRole_Notification_NProperty"></NavigationProperty>
+        <NavigationProperty Name="TargetParameters" Relationship="com.SAP.OData.V2.NotificationProviderService.Notification_NParams" FromRole="FromRole_Notification_NParams" ToRole="ToRole_Notification_NParams"></NavigationProperty>
+      </EntityType>
+      <EntityType Name="Recipient" m:HasStream="true">
+        <Key>
+          <PropertyRef Name="RecipientId"></PropertyRef>
+          <PropertyRef Name="NotificationId"></PropertyRef>
+        </Key>
+        <Property Name="NotificationId" Type="Edm.Guid" Nullable="false" MaxLength="32"></Property>
+        <Property Name="RecipientId" Type="Edm.String" Nullable="false"></Property>
+      </EntityType>
+      <EntityType Name="NotificationProperty" m:HasStream="true">
+        <Key>
+          <PropertyRef Name="Key"></PropertyRef>
+          <PropertyRef Name="NotificationId"></PropertyRef>
+          <PropertyRef Name="Language"></PropertyRef>
+        </Key>
+        <Property Name="NotificationId" Type="Edm.Guid" Nullable="false" MaxLength="32"></Property>
+        <Property Name="Key" Type="Edm.String" Nullable="false" MaxLength="32"></Property>
+        <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2"></Property>
+        <Property Name="Value" Type="Edm.String" Nullable="false"></Property>
+        <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="20"></Property>
+        <Property Name="IsSensitive" Type="Edm.Boolean"></Property>
+      </EntityType>
+      <EntityType Name="NavigationTargetParam" m:HasStream="true">
+        <Key>
+          <PropertyRef Name="Key"></PropertyRef>
+          <PropertyRef Name="NotificationId"></PropertyRef>
+        </Key>
+        <Property Name="NotificationId" Type="Edm.Guid" Nullable="false" MaxLength="32"></Property>
+        <Property Name="Key" Type="Edm.String" Nullable="false"></Property>
+        <Property Name="Value" Type="Edm.String" Nullable="false"></Property>
+      </EntityType>
+      <Association Name="Notification_Recipient">
+        <End Type="com.SAP.OData.V2.NotificationProviderService.Notification" Multiplicity="1" Role="FromRole_Notification_Recipient"></End>
+        <End Type="com.SAP.OData.V2.NotificationProviderService.Recipient" Multiplicity="*" Role="ToRole_Notification_Recipient"></End>
+        <ReferentialConstraint>
+          <Principal Role="FromRole_Notification_Recipient">
+            <PropertyRef Name="Id"></PropertyRef>
+          </Principal>
+          <Dependent Role="ToRole_Notification_Recipient">
+            <PropertyRef Name="NotificationId"></PropertyRef>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="Notification_NProperty">
+        <End Type="com.SAP.OData.V2.NotificationProviderService.Notification" Multiplicity="1" Role="FromRole_Notification_NProperty"></End>
+        <End Type="com.SAP.OData.V2.NotificationProviderService.NotificationProperty" Multiplicity="*" Role="ToRole_Notification_NProperty"></End>
+        <ReferentialConstraint>
+          <Principal Role="FromRole_Notification_NProperty">
+            <PropertyRef Name="Id"></PropertyRef>
+          </Principal>
+          <Dependent Role="ToRole_Notification_NProperty">
+            <PropertyRef Name="NotificationId"></PropertyRef>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="Notification_NParams">
+        <End Type="com.SAP.OData.V2.NotificationProviderService.Notification" Multiplicity="1" Role="FromRole_Notification_NParams"></End>
+        <End Type="com.SAP.OData.V2.NotificationProviderService.NavigationTargetParam" Multiplicity="*" Role="ToRole_Notification_NParams"></End>
+        <ReferentialConstraint>
+          <Principal Role="FromRole_Notification_NParams">
+            <PropertyRef Name="Id"></PropertyRef>
+          </Principal>
+          <Dependent Role="ToRole_Notification_NParams">
+            <PropertyRef Name="NotificationId"></PropertyRef>
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <EntityContainer Name="ODataNotificationsEntityContainer" m:IsDefaultEntityContainer="true">
+        <EntitySet Name="Notifications" EntityType="com.SAP.OData.V2.NotificationProviderService.Notification"></EntitySet>
+        <EntitySet Name="Recipients" EntityType="com.SAP.OData.V2.NotificationProviderService.Recipient"></EntitySet>
+        <EntitySet Name="NotificationProperties" EntityType="com.SAP.OData.V2.NotificationProviderService.NotificationProperty"></EntitySet>
+        <EntitySet Name="NavigationTargetParams" EntityType="com.SAP.OData.V2.NotificationProviderService.NavigationTargetParam"></EntitySet>
+        <AssociationSet Name="Notification_Recipient_Set" Association="com.SAP.OData.V2.NotificationProviderService.Notification_Recipient">
+          <End EntitySet="Notifications" Role="FromRole_Notification_Recipient"></End>
+          <End EntitySet="Recipients" Role="ToRole_Notification_Recipient"></End>
+        </AssociationSet>
+        <AssociationSet Name="Notification_NProperty_Set" Association="com.SAP.OData.V2.NotificationProviderService.Notification_NProperty">
+          <End EntitySet="Notifications" Role="FromRole_Notification_NProperty"></End>
+          <End EntitySet="NotificationProperties" Role="ToRole_Notification_NProperty"></End>
+        </AssociationSet>
+        <AssociationSet Name="Notification_NParamsSet" Association="com.SAP.OData.V2.NotificationProviderService.Notification_NParams">
+          <End EntitySet="Notifications" Role="FromRole_Notification_NParams"></End>
+          <End EntitySet="NavigationTargetParams" Role="ToRole_Notification_NParams"></End>
+        </AssociationSet>
+        <FunctionImport Name="DismissAll" m:HttpMethod="POST">
+          <Parameter Name="ParentId" Type="Edm.Guid" Nullable="false" MaxLength="32"></Parameter>
+          <Parameter Name="Actor" Type="Edm.String" Nullable="false" MaxLength="64"></Parameter>
+          <Parameter Name="Origin" Type="Edm.String" Nullable="true" MaxLength="16"></Parameter>
+        </FunctionImport>
+        <FunctionImport Name="ResetBadgeNumber" m:HttpMethod="POST">
+          <Parameter Name="Actor" Type="Edm.String" Nullable="false" MaxLength="64"></Parameter>
+          <Parameter Name="Origin" Type="Edm.String" Nullable="true" MaxLength="16"></Parameter>
+        </FunctionImport>
+        <FunctionImport Name="DeleteNotification" m:HttpMethod="POST">
+          <Parameter Name="NotificationId" Type="Edm.Guid" Nullable="false" MaxLength="32"></Parameter>
+          <Parameter Name="Delete" Type="Edm.Boolean" Nullable="false"></Parameter>
+          <Parameter Name="Actor" Type="Edm.String" Nullable="false" MaxLength="64"></Parameter>
+          <Parameter Name="Origin" Type="Edm.String" Nullable="true" MaxLength="16"></Parameter>
+        </FunctionImport>
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

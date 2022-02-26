@@ -1,70 +1,70 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-          "type": "node",
-          "request": "launch",
-          "name": "standalone-v2-proxy",
-          "env": {
-            "XS_APP_LOG_LEVEL":"DEBUG",
-            "DEBUG":"X",
-          },
-          "skipFiles": [
-            "<node_internals>/**"
-          ],
-          "program": "${workspaceFolder}/standalone-v2-proxy/index",
-          "cwd": "${workspaceFolder}/standalone-v2-proxy"
-        },
-        {
-          "type": "node", 
-          "request": "launch",
-          "name": "cds run dev-hana", 
-          "args": [ "run" ],
-          "env": {"NODE_ENV":"dev-hana"},
-          "cwd": "${workspaceFolder}",
-          "program": "${workspaceFolder}/node_modules/@sap/cds/bin/cds.js", 
-          "skipFiles": [
-              "<node_internals>/**/*.js",
-              "**/cds-reflect/lib/index.js",
-              "**/cds/lib/index.js",
-              "**/.vscode/cds.js",
-          ],
-          "console": "internalConsole"
-        },
-        {
-          "type": "node", 
-          "request": "launch",
-          "name": "cds run", 
-          "args": [ "run" ],
-          "env": {"DEBUG":"yes"},
-          "cwd": "${workspaceFolder}",
-          "program": "${workspaceFolder}/node_modules/@sap/cds/bin/cds.js", 
-          "skipFiles": [
-              "<node_internals>/**/*.js",
-              "**/cds-reflect/lib/index.js",
-              "**/cds/lib/index.js",
-              "**/.vscode/cds.js",
-          ],
-          "console": "internalConsole"
-        },
-        {
-          "type": "node", 
-          "request": "launch",
-          "name": "excel", 
-          "args": [],
-          "env": {"DEBUG":""},
-          "cwd": "${workspaceFolder}",
-          "program": "${workspaceFolder}/srv/index.js", 
-          "skipFiles": [
-              "<node_internals>/**/*.js",
-              "**/cds-reflect/lib/index.js",
-              "**/cds/lib/index.js",
-              "**/.vscode/cds.js",
-          ],
-          "console": "internalConsole"
-        }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "name": "debug current test file",
+      "request": "launch",
+      "args": ["--runInBand", "${fileBasenameNoExtension}"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true,
+      "program": "${workspaceFolder}/node_modules/jest/bin/jest"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "standalone-v2-proxy",
+      "env": {
+        "XS_APP_LOG_LEVEL": "DEBUG",
+        "DEBUG": "X"
+      },
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/standalone-v2-proxy/index",
+      "cwd": "${workspaceFolder}/standalone-v2-proxy"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "cds run dev-hana",
+      "args": ["run"],
+      "env": { "NODE_ENV": "dev-hana" },
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceFolder}/node_modules/@sap/cds/bin/cds.js",
+      "skipFiles": [
+        "<node_internals>/**/*.js",
+        "**/cds-reflect/lib/index.js",
+        "**/cds/lib/index.js",
+        "**/.vscode/cds.js"
+      ],
+      "console": "internalConsole"
+    },
+    {
+      "name": "cds run",
+      "command": "destinations=`cat default-env.json | jq .destinations` && cds run --with-mocks --in-memory",
+      "request": "launch",
+      "type": "node-terminal",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "excel",
+      "args": [],
+      "env": { "DEBUG": "" },
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceFolder}/srv/index.js",
+      "skipFiles": [
+        "<node_internals>/**/*.js",
+        "**/cds-reflect/lib/index.js",
+        "**/cds/lib/index.js",
+        "**/.vscode/cds.js"
+      ],
+      "console": "internalConsole"
+    }
+  ]
 }

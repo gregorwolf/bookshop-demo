@@ -1,0 +1,12 @@
+###
+GET http://localhost:4004/document-management
+Accept: application/json
+###
+GET http://localhost:4004/document-management/getRepositoryInfo()
+Accept: application/json
+###
+GET http://localhost:4004/document-management/getFolderTree()
+Accept: application/json
+###
+GET http://localhost:4004/document-management/getChildren()
+Accept: application/json

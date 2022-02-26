@@ -1,17 +1,18 @@
 # Bookshop Sample App
 
-Sample application showcasing different services serving the same set of data entities from a sqlite database. 
+Sample application showcasing different services serving the same set of data entities from a sqlite database.
 The services match different use cases visualized in corresponding Fiori apps.
 
 ## Develop in VS Code devcontainer
-The easiest way to get started with devlopment of this project is inside a Docker Devcontainer. See [this blog post](https://github.com/htammen/cap-vscode-dev-container#so-what-do-i-have-to-do) for details.   
+
+The easiest way to get started with devlopment of this project is inside a Docker Devcontainer. See [this blog post](https://github.com/htammen/cap-vscode-dev-container#so-what-do-i-have-to-do) for details.  
 If you don't have Docker installed **you can of course develop within you local OS**. But in that case you have to install all your tools and vs extensions on your own.
 
 ## Preliminaries
 
-* get [_Node.js_](https://nodejs.org/en/) v12 or higher
-* get [_sqlite_](https://www.sqlite.org/download.html) (Windows only; pre-installed on Mac/Linux)
-* As SAP has deprecated their own NPM registry please remove the setting in your npm config with the following command
+- get [_Node.js_](https://nodejs.org/en/) v12 or higher
+- get [_sqlite_](https://www.sqlite.org/download.html) (Windows only; pre-installed on Mac/Linux)
+- As SAP has deprecated their own NPM registry please remove the setting in your npm config with the following command
 
 ```sh
 npm config rm @sap:registry
@@ -23,23 +24,52 @@ Copy & paste this to your command line:
 
 ```sh
 git clone https://github.com/gregorwolf/bookshop-demo.git
-cd bookshop
+cd bookshop-demo
 npm install
 npm run setup
 ```
 
 ## Run local
 
+If you want to try also the external service calls, then you need to create a _default-env.json_ file in the project root folder and add the following content:
+
+```json
+{
+  "destinations": [
+    {
+      "name": "ES5",
+      "url": "https://sapes5.sapdevcenter.com",
+      "username": "<your-ES5-username>",
+      "password": "<your-ES5-password>"
+    },
+    {
+      "name": "ERP",
+      "url": "https://saperp.example.com",
+      "username": "<your-ERP-username>",
+      "password": "<your-ERP-password>"
+    }
+  ]
+}
+```
+
 ```sh
 npm run build
 npm start
+```
+
+If you want to test the used SAP Business Technology Platform - Cloud Foundry services you need also to add the VCAP*SERVICES variable to \_default-env.json*. I.e.:
+
+```json
+{
+  "VCAP_SERVICES": {}
+}
 ```
 
 ## Test
 
 Open these links in your browser:
 
-* <http://localhost:4004/webapp/fiori.html> &ndash; Fiori Launchpad sandbox
+- <http://localhost:4004/webapp/fiori.html> &ndash; Fiori Launchpad sandbox
 
 ## Deploy to SAP Cloud Platform - Cloud Foundry Environment
 
@@ -79,7 +109,7 @@ cf create-service-key bookshop-access bookshop-access-sk
 cf service-key bookshop-access bookshop-access-sk
 ```
 
-Store the returned values as Key-Value Pairs in tests/.env. I.e.: 
+Store the returned values as Key-Value Pairs in tests/.env. I.e.:
 
 ```
 apiurl="https://api.authentication.us10.hana.ondemand.com"

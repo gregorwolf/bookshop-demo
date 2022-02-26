@@ -53,6 +53,13 @@
       "authenticationType": "xsuaa",
       "destination": "srv_api",
       "csrfProtection": true
+    },
+    {
+      "source": "/public/(.*)$",
+      "target": "/public/$1",
+      "authenticationType": "xsuaa",
+      "destination": "srv_api",
+      "csrfProtection": true
     }
   ]
 }

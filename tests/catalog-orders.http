@@ -6,7 +6,8 @@ Authorization: Basic bob:
 GET http://localhost:4004/catalog/OrderItems
 Authorization: Basic bob:
 
-### Create Orders
+### Create Orders in two steps
+# @name createOrder
 POST http://localhost:4004/catalog/Orders
 Authorization: Basic bob:
 Content-Type: application/json
@@ -16,9 +17,7 @@ Content-Type: application/json
     "CustomerOrderNo": "Order from bob",
     "currency_code": "EUR",
     "Items": [
-        {
-            "book_ID": 201
-        }
+
     ],
     "ShippingAddress":  {
         "street": "Hauptstraße 1",
@@ -26,12 +25,24 @@ Content-Type: application/json
     }
 }
 
+### Fill Variables from Response
+@orderID={{createOrder.response.body.$.ID}}
+
+### Create Order Item
+POST http://localhost:4004/catalog/Orders({{orderID}})/Items
+Authorization: Basic bob:
+Content-Type: application/json
+
+{
+    "book_ID": 201
+}
+
 ### Read Order as john
 GET http://localhost:4004/catalog/Orders
 Authorization: Basic john:
 Content-Type: application/json
 
-### Create Order as john
+### Create Order as john - using deep insert
 POST http://localhost:4004/catalog/Orders
 Authorization: Basic john:
 Content-Type: application/json
@@ -50,9 +61,97 @@ Content-Type: application/json
         "city": "Trostberg"
     }
 }
+
+### Update Orders via Action
+POST http://localhost:4004/catalog/multipleOrders
+Authorization: Basic bob:
+Content-Type: application/json
+
+{
+    "numberOfOrders": 2
+}
+
 ### Create Order via Action
 POST http://localhost:4004/catalog/submitOrder
 Authorization: Basic bob:
 Content-Type: application/json
 
 { "book":201, "amount":5 }
+
+### Read using $batch
+POST http://localhost:4004/catalog/$batch HTTP/1.1
+Authorization: Basic john:
+OData-Version: 4.0
+Content-Type: multipart/mixed;boundary=batch_36522ad7-fc75-4b56-8c71-56071383e77b
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: application/http
+Content-Transfer-Encoding:binary
+
+GET Books?$top=1
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b--
+
+###
+POST http://localhost:4004/catalog/$batch
+Authorization: Basic john:
+Content-Type: multipart/mixed;boundary=batch_36522ad7-fc75-4b56-8c71-56071383e77b
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: application/http
+Content-Transfer-Encoding:binary
+
+GET Books?$top=1
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b--
+
+### Create Orders using $batch
+POST http://localhost:4004/catalog/$batch HTTP/1.1
+Authorization: Basic john:
+Content-Type: multipart/mixed; boundary=batch_36522ad7-fc75-4b56-8c71-56071383e77b
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: application/http 
+Content-Transfer-Encoding:binary
+
+POST Orders HTTP/1.1
+Content-Type: application/json
+
+{
+    "OrderNo": "10",
+    "CustomerOrderNo": "Order from john",
+    "currency_code": "EUR",
+    "Items": [
+        {
+            "book_ID": 201
+        }
+    ],
+    "ShippingAddress":  {
+        "street": "Hauptstraße 1",
+        "city": "Trostberg"
+    }
+}
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: application/http 
+Content-Transfer-Encoding:binary
+
+POST Orders HTTP/1.1
+Content-Type: application/json
+
+{
+    "OrderNo": "11",
+    "CustomerOrderNo": "Order from john",
+    "currency_code": "EUR",
+    "Items": [
+        {
+            "book_ID": 1
+        }
+    ],
+    "ShippingAddress":  {
+        "street": "Hauptstraße 1",
+        "city": "Trostberg"
+    }
+}
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b--

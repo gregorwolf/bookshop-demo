@@ -3,12 +3,12 @@ const proxy = require("@sap/cds-odata-v2-adapter-proxy");
 const helmet = require("helmet");
 const passport = require("passport");
 const xsenv = require("@sap/xsenv");
-const swaggerUi = require("swagger-ui-express");
-const swaggerSpec = require("./gen/OpenAPI.json");
 const express = require("express");
+const SDKUtil = require("@sap-cloud-sdk/util");
+const mqtt = require("./mqtt");
 
 var xsuaaCredentials = false;
-if(process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   try {
     xsenv.loadEnv();
     const JWTStrategy = require("@sap/xssec").JWTStrategy;
@@ -23,12 +23,24 @@ if(process.env.NODE_ENV === 'production') {
 
 // Middleware to read SAP Job Headers sent by client
 function sapJobLogger(req, res, next) {
-  if(req.headers["x-sap-job-id"]) {
+  if (req.headers["x-sap-job-id"]) {
     console.log("===> SAP Job Headers");
-    console.log("===> SAP Job Headers - x-sap-job-id:         " + req.headers["x-sap-job-id"]);
-    console.log("===> SAP Job Headers - x-sap-jobschedule-id: " + req.headers["x-sap-jobschedule-id"]);
-    console.log("===> SAP Job Headers - x-sap-job-run-id:     " + req.headers["x-sap-job-run-id"]);
-    console.log("===> SAP Job Headers - x-sap-scheduler-host: " + req.headers["x-sap-scheduler-host"]);
+    console.log(
+      "===> SAP Job Headers - x-sap-job-id:         " +
+        req.headers["x-sap-job-id"]
+    );
+    console.log(
+      "===> SAP Job Headers - x-sap-jobschedule-id: " +
+        req.headers["x-sap-jobschedule-id"]
+    );
+    console.log(
+      "===> SAP Job Headers - x-sap-job-run-id:     " +
+        req.headers["x-sap-job-run-id"]
+    );
+    console.log(
+      "===> SAP Job Headers - x-sap-scheduler-host: " +
+        req.headers["x-sap-scheduler-host"]
+    );
   }
 
   next();
@@ -77,18 +89,29 @@ const readJwt = function (req) {
 };
 
 cds.on("bootstrap", async (app) => {
+  // SDKUtil.setGlobalLogLevel("info");
+  const cdsenv = cds.env;
   app.use("/appconfig", express.static("./app/webapp/appconfig/"));
+  /*
+  // TODO: Implement helmet following the best practice
   app.use(
     helmet({
-      contentSecurityPolicy: false,
+      contentSecurityPolicy: {
+        directives: {
+          ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+          // custom settings
+        },
+      },
     })
   );
+  */
+  // Bind to express app
   app.use(proxy());
   // app.use(replaceExcelAcceptHeader)
   app.use(sapJobLogger);
 
   // Authentication using JWT
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === "production") {
     app.use(jwtLogger);
     await app.use(passport.initialize());
     await app.use(passport.authenticate("JWT", { session: false }));
@@ -119,20 +142,11 @@ cds.on("bootstrap", async (app) => {
       });
     }
   });
-
-  // Swagger / OpenAPI
-  var options = {
-    explorer: true,
-  };
-  app.get("/api/api-docs.json", function (req, res) {
-    res.setHeader("Content-Type", "application/json");
-    res.send(swaggerSpec);
-  });
-  app.use(
-    "/api/api-docs",
-    swaggerUi.serve,
-    swaggerUi.setup(swaggerSpec, options)
-  );
 });
+// Swagger / OpenAPI
+if (process.env.NODE_ENV !== "production") {
+  const cds_swagger = require("cds-swagger-ui-express");
+  cds.on("bootstrap", (app) => app.use(cds_swagger()));
+}
 
 module.exports = cds.server; // > delegate to default server.js

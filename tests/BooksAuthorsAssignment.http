@@ -1,7 +1,40 @@
 ### Read BooksAuthorsAssignment
-GET http://localhost:4004/catalog/BooksAuthorsAssignment
+GET http://localhost:4004/admin/BooksAuthorsAssignment
 Authorization: Basic admin:
 
 ### Read BooksAuthorsAssignment expand to Book and Author 
-GET http://localhost:4004/catalog/BooksAuthorsAssignment?$expand=ASSOC_Book,ASSOC_Author
+GET http://localhost:4004/admin/BooksAuthorsAssignment
+  ?$expand=ASSOC_Book,ASSOC_Author
 Authorization: Basic admin:
+
+### Read specific BooksAuthorsAssignment
+GET http://localhost:4004/admin/BooksAuthorsAssignment(Role='Author',ASSOC_Book_ID=201,ASSOC_Author_ID=1)
+Authorization: Basic admin:
+
+### Update relation of specific BooksAuthorsAssignment
+PATCH http://localhost:4004/admin/BooksAuthorsAssignment(Role='Author',ASSOC_Book_ID=201,ASSOC_Author_ID=1)
+Authorization: Basic admin:
+Content-Type: application/json
+
+{
+  "ASSOC_Author_ID": 101
+}
+
+# returns 200 OK but no data is changed
+# would expect "not allowed" as a key field should be updatd
+
+### Workaround
+### Delete specific BooksAuthorsAssignment
+DELETE http://localhost:4004/admin/BooksAuthorsAssignment(Role='Author',ASSOC_Book_ID=201,ASSOC_Author_ID=1)
+Authorization: Basic admin:
+
+### Create new relation of specific BooksAuthorsAssignment
+POST http://localhost:4004/admin/BooksAuthorsAssignment
+Authorization: Basic admin:
+Content-Type: application/json
+
+{
+  "Role": "Author",
+  "ASSOC_Book_ID": 201,
+  "ASSOC_Author_ID": 101
+}

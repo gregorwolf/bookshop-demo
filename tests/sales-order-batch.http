@@ -1,0 +1,8 @@
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: application/http
+Content-Transfer-Encoding:binary
+
+GET SEPM_I_SalesOrder_E?$top=10
+
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b--

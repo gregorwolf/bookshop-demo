@@ -624,9 +624,9 @@
             }
           ]
         },
-        "semanticURLtoAuthor": {
+        "semanticURLtoPublisher": {
           "@Core.Computed": true,
-          "@cds.persistence.name": "SEMANTICURLTOAUTHOR",
+          "@cds.persistence.name": "semanticURLtoPublisher",
           "virtual": true,
           "type": "cds.String"
         },
@@ -1016,14 +1016,14 @@
         }
       }
     },
-    "AdminService.Images": {
+    "AdminService.Documents": {
       "kind": "entity",
       "@cds.persistence.name": "ADMINSERVICE_IMAGES",
       "query": {
         "SELECT": {
           "from": {
             "ref": [
-              "my.bookshop.Images"
+              "my.bookshop.Documents"
             ]
           }
         }
@@ -2449,9 +2449,9 @@
             }
           ]
         },
-        "semanticURLtoAuthor": {
+        "semanticURLtoPublisher": {
           "@Core.Computed": true,
-          "@cds.persistence.name": "SEMANTICURLTOAUTHOR",
+          "@cds.persistence.name": "semanticURLtoPublisher",
           "virtual": true,
           "type": "cds.String"
         },
@@ -3374,9 +3374,9 @@
             }
           ]
         },
-        "semanticURLtoAuthor": {
+        "semanticURLtoPublisher": {
           "@Core.Computed": true,
-          "@cds.persistence.name": "SEMANTICURLTOAUTHOR",
+          "@cds.persistence.name": "semanticURLtoPublisher",
           "virtual": true,
           "type": "cds.String"
         },
@@ -3977,9 +3977,9 @@
             }
           ]
         },
-        "semanticURLtoAuthor": {
+        "semanticURLtoPublisher": {
           "@Core.Computed": true,
-          "@cds.persistence.name": "SEMANTICURLTOAUTHOR",
+          "@cds.persistence.name": "semanticURLtoPublisher",
           "virtual": true,
           "type": "cds.String"
         },
@@ -4679,9 +4679,9 @@
             }
           ]
         },
-        "semanticURLtoAuthor": {
+        "semanticURLtoPublisher": {
           "@Core.Computed": true,
-          "@cds.persistence.name": "SEMANTICURLTOAUTHOR",
+          "@cds.persistence.name": "semanticURLtoPublisher",
           "virtual": true,
           "type": "cds.String"
         },
@@ -6044,7 +6044,7 @@
             }
           ]
         },
-        "semanticURLtoAuthor": {
+        "semanticURLtoPublisher": {
           "@Core.Computed": true,
           "virtual": true,
           "type": "cds.String"
@@ -6301,7 +6301,7 @@
         }
       }
     },
-    "my.bookshop.Images": {
+    "my.bookshop.Documents": {
       "kind": "entity",
       "@cds.persistence.name": "MY_BOOKSHOP_IMAGES",
       "elements": {

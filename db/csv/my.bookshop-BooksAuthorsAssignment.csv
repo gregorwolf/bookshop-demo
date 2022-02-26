@@ -1,6 +1,6 @@
-BusinessValidFrom;BusinessValidTo;Role;ASSOC_Book_ID;ASSOC_Author_ID
-2000-01-01;9999-01-01;Author;201;1
-2000-01-01;9999-01-01;Author;207;101
-2000-01-01;9999-01-01;Author;251;107
-2000-01-01;9999-01-01;Author;252;150
-2000-01-01;9999-01-01;Author;271;170
+Role;ASSOC_Book_ID;ASSOC_Author_ID
+Author;201;1
+Author;207;101
+Author;251;107
+Author;252;150
+Author;271;170

@@ -1,3 +1,4 @@
 ID;rolename;description
 009bb7fa-43ef-4e4a-85b1-5a9ea692a5b6;OrdersAndBooks;Role for Orders and Books
 009bb7fa-43ef-4e4a-85b1-5a9ea692a5b7;RoleForLittleadmin;Role for Littleadmin
+009bb7fa-43ef-4e4a-85b1-5a9ea692a5b8;RoleForAdmin;Role for Admin

@@ -1,6 +1,6 @@
 {
     "services": {
-        "LaunchPage": {            
+        "LaunchPage": {
             "adapter": {
                 "config": {
                     "catalogs": [
@@ -182,6 +182,19 @@
                                     }
                                 },
                                 {
+                                    "id": "BrowsePublishersApp",
+                                    "title": "Browse Publishers",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "serviceRefreshInterval": 5,
+                                    "properties": {
+                                        "chipId": "catalogTile_002",
+                                        "title": "Browse Publishers",
+                                        "info": "The list of Publishers",
+                                        "targetURL": "#Publishers-display"
+                                    }
+                                },
+                                {
                                     "id": "BrowseAuthorsApp",
                                     "title": "Browse Authors",
                                     "size": "1×1",
@@ -238,6 +251,18 @@
                                         "title": "Role",
                                         "info": "Management",
                                         "targetURL": "#Role-manageUI5latest"
+                                    }
+                                },
+                                {
+                                    "id": "Users",
+                                    "title": "Users",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V4catalogTile_UsersUI5latest",
+                                        "title": "Users",
+                                        "info": "Management",
+                                        "targetURL": "#UsersUI5latest-manage"
                                     }
                                 },
                                 {
@@ -316,6 +341,18 @@
                                         "title": "Users",
                                         "info": "Management",
                                         "targetURL": "#V4Users-manage"
+                                    }
+                                },
+                                {
+                                    "id": "WorkAssignments",
+                                    "title": "Work Assignments",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V4catalogTile_WorkAssignments",
+                                        "title": "WorkAssignments",
+                                        "info": "Management",
+                                        "targetURL": "#V4WorkAssignments-manage"
                                     }
                                 },
                                 {
@@ -400,6 +437,18 @@
                                     }
                                 },
                                 {
+                                    "id": "Users",
+                                    "title": "Users",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V4catalogTile_UsersUI5latest",
+                                        "title": "Users",
+                                        "info": "Management",
+                                        "targetURL": "#V4UsersUI5latest-manage"
+                                    }
+                                },
+                                {
                                     "id": "V4BrowseBooksAppUI5latest",
                                     "title": "Browse Books",
                                     "size": "1×1",
@@ -409,6 +458,41 @@
                                         "title": "Browse Books",
                                         "info": "The latest books",
                                         "targetURL": "#V4Books-displayUI5latest"
+                                    }
+                                },
+                                {
+                                    "id": "V4AuthorsUI5latest",
+                                    "title": "Browse Authors",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V4catalogTile_AuthorsUI5latest",
+                                        "title": "Browse Authors",
+                                        "targetURL": "#V4Authors-displayUI5latest"
+                                    }
+                                },
+                                {
+                                    "id": "WorkAssignmentsUI5latest",
+                                    "title": "Work Assignments",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V4catalogTile_WorkAssignmentsUI5latest",
+                                        "title": "Work Assignments",
+                                        "info": "Management",
+                                        "targetURL": "#V4WorkAssignmentsUI5latest-manage"
+                                    }
+                                },
+                                {
+                                    "id": "ProductsUI5latest",
+                                    "title": "Products",
+                                    "size": "1×1",
+                                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                                    "properties": {
+                                        "chipId": "V4catalogTile_ProductsUI5latest",
+                                        "title": "Products",
+                                        "info": "Management",
+                                        "targetURL": "#ProductsUI5latest-manage"
                                     }
                                 }
                             ]
@@ -493,7 +577,7 @@
                                 "path": "catalog/Books/$count",
                                 "refresh": 600
                             }
-                        },                        
+                        },
                         "actionAuthors": {
                             "semanticObject": "V4Authors",
                             "action": "manage",
@@ -634,6 +718,62 @@
                                 "url": "v2/roleUI5latest"
                             }
                         },
+                        "actionWorkAssignmentsUI5latest": {
+                            "semanticObject": "V4WorkAssignmentsUI5latest",
+                            "action": "manage",
+                            "title": "Work Assignments",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=WorkAssignmentsUI5latest",
+                                "url": "workAssignmentsUI5latest/webapp"
+                            }
+                        },
+                        "actionProductsUI5latest": {
+                            "semanticObject": "ProductsUI5latest",
+                            "action": "manage",
+                            "title": "Work Assignments",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=productUI5latest",
+                                "url": "productUI5latest/webapp"
+                            }
+                        },
+                        "actionWorkAssignments": {
+                            "semanticObject": "V4WorkAssignments",
+                            "action": "manage",
+                            "title": "WorkAssignments",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=WorkAssignments",
+                                "url": "workAssignments/webapp"
+                            }
+                        },
+                        "actionUsersUI5latest": {
+                            "semanticObject": "V4UsersUI5latest",
+                            "action": "manage",
+                            "title": "Users",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=usersUI5latest",
+                                "url": "usersUI5latest/webapp"
+                            }
+                        },
                         "actionUsers": {
                             "semanticObject": "V4Users",
                             "action": "manage",
@@ -662,6 +802,20 @@
                                 "url": "v2/users-admin"
                             }
                         },
+                        "actionV2UsersUI5latest": {
+                            "semanticObject": "UsersUI5latest",
+                            "action": "manage",
+                            "title": "Users",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=v2.usersUI5latest",
+                                "url": "v2/users-adminUI5latest"
+                            }
+                        },
                         "actionV2Approvals": {
                             "semanticObject": "Approvals",
                             "action": "manage",
@@ -674,6 +828,20 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=v2.approvals",
                                 "url": "v2/approval"
+                            }
+                        },
+                        "actionV2Publishers": {
+                            "semanticObject": "Publishers",
+                            "action": "display",
+                            "title": "Publishers",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=v2.publishers",
+                                "url": "v2/publishers"
                             }
                         },
                         "actionV2Authors": {
@@ -758,6 +926,20 @@
                                 "applicationType": "SAPUI5",
                                 "additionalInformation": "SAPUI5.Component=v2.authorsUI5latest",
                                 "url": "v2/authorsUI5latest"
+                            }
+                        },
+                        "actionAuthorsUI5latest": {
+                            "semanticObject": "V4Authors",
+                            "action": "displayUI5latest",
+                            "title": "Browse Authors",
+                            "signature": {
+                                "parameters": {},
+                                "additionalParameters": "allowed"
+                            },
+                            "resolutionResult": {
+                                "applicationType": "SAPUI5",
+                                "additionalInformation": "SAPUI5.Component=authorsUI5latest",
+                                "url": "authorsUI5latest/webapp"
                             }
                         },
                         "actionV2BooksAdmin": {

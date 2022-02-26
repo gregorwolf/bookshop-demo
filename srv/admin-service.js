@@ -1,6 +1,12 @@
 const { resolve } = require("@sap/cds");
 const JobSchedulerClient = require("@sap/jobs-client");
 const xsenv = require("@sap/xsenv");
+const SapCfMailer = require("sap-cf-mailer").default;
+const metering = require("./metering");
+const { executeHttpRequest, getDestination } = require("@sap-cloud-sdk/core");
+const qs = require("qs");
+const axios = require("axios");
+const { cf } = require("cf-http-client");
 
 function getJobscheduler(req) {
   xsenv.loadEnv();
@@ -20,13 +26,76 @@ function getJobscheduler(req) {
 }
 
 module.exports = async function (srv) {
-  const {
-    Role_BusinessObject,
-    Role_User,
-    Orders,
-    Books,
-    Authors,
-  } = srv.entities;
+  const { Role_BusinessObject, Role_User, Orders, Books, Authors, Approval } =
+    srv.entities;
+  const external = await cds.connect.to("ZPDCDS_SRV");
+  const externalFlow = await cds.connect.to("flow");
+  const externalCF = await cds.connect.to("CloudFoundryAPI");
+  const externalXsuaa = await cds.connect.to("xsuaa-api");
+  var srvUrl = "http://localhost:4004/webapp";
+  var uiUrl = srvUrl;
+  if (process.env.VCAP_APPLICATION) {
+    srvUrl =
+      "https://" + JSON.parse(process.env.VCAP_APPLICATION).application_uris[0];
+    uiUrl = srvUrl.replace("-srv", "-ui") + "/bookshopdemoapp";
+  }
+
+  if (process.env.NODE_ENV === "production") {
+    srv.before("*", "*", (req) => metering.beforeHandler(req));
+  }
+
+  srv.after("CREATE", Approval, async (req) => {
+    console.log("Approval - after CREATE. ID: " + req.ID);
+    try {
+      const response = await externalFlow.tx(req).post("/", {
+        approver: "gregor@computerservice-wolf.com",
+        subject: `Approval for ${req.changedEntity} requested`,
+        url: `${uiUrl}/fiori-ui5-1.71.html#Approvals-manage&//Approval(ID=guid'${req.ID}',IsActiveEntity=true)`,
+        body: "Please decide about this request",
+        ID: `guid'${req.ID}'`,
+      });
+    } catch (error) {
+      console.error("Error Message: " + error.message);
+    }
+  });
+
+  srv.on(["approve"], Approval, async (req) => {
+    console.log("Approval - approve");
+    let approval = await cds
+      .tx(req)
+      .read(Approval)
+      .where({ ID: req.params[0].ID });
+    if (approval[0].status === "R") {
+      let result = await cds
+        .tx(req)
+        .update(Approval, { ID: req.params[0].ID })
+        .with({
+          status: "A",
+        });
+    } else {
+      req.error(409, `Approval is not is status requested`);
+    }
+  });
+
+  srv.on(["reject"], Approval, async (req) => {
+    console.log("Approval - reject");
+    let approval = await cds
+      .tx(req)
+      .read(Approval)
+      .where({ ID: req.params[0].ID });
+    if (approval[0].status === "R") {
+      let result = await cds
+        .tx(req)
+        .update(Approval, { ID: req.params[0].ID })
+        .with({
+          status: "N",
+        });
+    } else {
+      req.error(409, `Approval is not is status requested`);
+    }
+  });
+
+  srv.on("READ", "SEPMRA_I_Product_E", (req) => external.run(req.query));
 
   srv.before("READ", [Books, Authors], async (req) => {
     var tx = cds.transaction(req);
@@ -101,26 +170,30 @@ module.exports = async function (srv) {
     return users;
   });
 
+  srv.on(["readCdsEnv"], (req) => {
+    return JSON.stringify(cds.env);
+  });
+
   srv.on(["readJobs"], (req) => {
     return new Promise((resolve, reject) => {
-      const scheduler = getJobscheduler(req)
+      const scheduler = getJobscheduler(req);
       if (scheduler) {
-        var query = {}
+        var query = {};
         scheduler.fetchAllJobs(query, function (err, result) {
           if (err) {
-            reject(req.error("Error retrieving jobs"))
+            reject(req.error("Error retrieving jobs"));
           }
           //Jobs retrieved successfully
           if (result && result.results && result.results.length > 0) {
             resolve(result.results);
           } else {
-            reject(req.warn("Can't find any job"))
+            reject(req.warn("Can't find any job"));
           }
-        })
+        });
       }
-    })
-  })
-  
+    });
+  });
+
   srv.on(["readJobDetails"], (req) => {
     return new Promise((resolve, reject) => {
       const scheduler = getJobscheduler(req);
@@ -172,8 +245,8 @@ module.exports = async function (srv) {
           if (err) {
             reject(req.error("Error retrieving job action logs"));
           } else {
-            console.log(result.results)
-            resolve(JSON.stringify(result.results))
+            console.log(result.results);
+            resolve(JSON.stringify(result.results));
           }
         });
       }
@@ -188,14 +261,14 @@ module.exports = async function (srv) {
           jobId: req.data.jobId,
           scheduleId: req.data.scheduleId,
           page_size: req.data.page_size,
-          offset: req.data.offset
-        }
+          offset: req.data.offset,
+        };
         scheduler.getRunLogs(query, function (err, result) {
           if (err) {
-            reject(req.error("Error retrieving job run logs"))
+            reject(req.error("Error retrieving job run logs"));
           } else {
             // console.log(result.results)
-            resolve(result.results)
+            resolve(result.results);
           }
         });
       }
@@ -279,6 +352,120 @@ module.exports = async function (srv) {
     });
   });
 
+  srv.on(["readUsers"], async (req) => {
+    console.log("readUsers");
+    try {
+      const response = await externalXsuaa.get("/Users");
+      return response.resources;
+    } catch (error) {
+      console.error("Error Message: " + error.message);
+      console.error(error.stack);
+    }
+  });
+
+  srv.on(["readUsersSDK"], async (req) => {
+    console.log("readUsersSDK");
+    try {
+      const response = await executeHttpRequest(
+        { destinationName: "bookshop-demo-uaa-apiaccess" },
+        { url: "/Users" }
+      );
+      return response.data.resources;
+    } catch (error) {
+      console.error("Error Message: " + error.message);
+      console.error(error.stack);
+    }
+  });
+
+  // Based on the blogpost:
+  // https://blogs.sap.com/2019/11/28/send-an-email-from-a-nodejs-application/
+  // by Joachim Van Praet
+  srv.on(["sendmail"], async (req) => {
+    if (!req.data.sender) {
+      return req.error("You must specify a sender");
+    }
+    if (!req.data.to) {
+      return req.error("You must specify a recipient");
+    }
+    if (!req.data.subject) {
+      return req.error("You must specify a subject");
+    }
+    if (!req.data.body) {
+      return req.error("You must specify a body");
+    }
+    const destination = req.data.destination || "mailtrap";
+    try {
+      const transporter = new SapCfMailer(destination);
+      // use sendmail as you should use it in nodemailer
+      const result = await transporter.sendMail({
+        from: req.data.sender,
+        to: req.data.to,
+        subject: req.data.subject,
+        text: req.data.body,
+      });
+      return JSON.stringify(result);
+    } catch (error) {
+      console.log(error);
+      return req.error(error);
+    }
+  });
+
+  async function getOAuth2PasswordToken(cfDest) {
+    const response = await axios({
+      method: "POST",
+      url: cfDest.tokenServiceUrl,
+      data: qs.stringify({
+        grant_type: "password",
+        username: cfDest.username,
+        password: cfDest.password,
+      }),
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      auth: {
+        username: cfDest.clientId,
+        password: cfDest.clientSecret,
+      },
+    });
+    return response.data;
+  }
+
+  srv.on(["readOrganizations"], async (req) => {
+    console.log("readOrganizations");
+    try {
+      // The destination used "OAuth2Password" as authentication type which is not supported by the SDK.
+      // --> https://github.com/SAP/cloud-sdk-js/issues/1399
+      /*
+      const response = await executeHttpRequest(
+        { destinationName: "CloudFoundryAPI" },
+        { url: "/v3/organizations" }
+      );
+      */
+      // Also CAP doesn't work with OAuth2Password (as Cloud SDK is used inside)
+      // const response = await externalCF.tx(req).get("/v3/organizations");
+      const cfDest = await getDestination("CloudFoundryAPI");
+      const cfClient = await cf(cfDest.url).login(
+        cfDest.username,
+        cfDest.password
+      );
+      const organizations = await cfClient.organizations.list();
+      return organizations;
+      /*
+      const token = await getOAuth2PasswordToken(cfDest);
+      const response = await axios.get(cfDest.url + "/v3/organizations", {
+        headers: {
+          Authorization: `Bearer ${token.access_token}`,
+        },
+      });
+      return response.data.resources;
+      */
+    } catch (error) {
+      console.error("Error Message: " + error.message);
+      if (error.rootCause && error.rootCause.message) {
+        console.error("Root Cause Message: " + error.rootCause.message);
+      }
+      console.error(error.stack);
+    }
+  });
+
   srv.on(
     ["checkConsistency", "checkConsistencyInline"],
     Orders,
@@ -287,9 +474,10 @@ module.exports = async function (srv) {
       // 1	sap.ui.core.MessageType.Success	Positive feedback - no action required
       var tx = cds.transaction(req);
       var orders = await tx.run(
-        SELECT.from("Orders").where({ ID: req.params[0].ID })
+        SELECT.from(Orders).where({ ID: req.params[0].ID })
       );
       var order = orders[0];
+      let totalWithTax = order.total * 1 + order.totalTax * 1;
       var orderId = req.params[0].ID;
       var msgInfo = {
         code: "SY001",
@@ -382,7 +570,7 @@ module.exports = async function (srv) {
   })
 */
   /*
-  srv.on('READ', 'Images', (req, next) => {
+  srv.on('READ', 'Documents', (req, next) => {
     if (!req.data.ID) {
       return next()
     }

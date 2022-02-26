@@ -5,43 +5,55 @@
   "repository": "https://github.wdf.sap.corp/caps/bookshop.git",
   "license": "ISC",
   "engines": {
-    "node": "^10 || ^12"
+    "node": "^14"
   },
   "files": [
     "db",
     "srv"
   ],
   "dependencies": {
-    "@sap/cds": "^4.4.10",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.5.1",
-    "@sap/hana-client": "^2.7.16",
-    "@sap/jobs-client": "^1.6.1",
-    "@sap/logging": "^6.0.2",
-    "@sap/xsenv": "^3.1.0",
-    "@sap/xssec": "^3.0.10",
+    "@sap-cloud-sdk/core": "^1.54.0",
+    "@sap/cds": "5.8.2",
+    "@sap/cds-dk": "4.8.1",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.8.9",
+    "@sap/jobs-client": "^1.6.3",
+    "@sap/logging": "^6.1.0",
+    "@sap/xsenv": "^3.2.0",
+    "@sap/xssec": "^3.2.13",
+    "cf-http-client": "^1.3.0",
+    "cmis": "^1.0.3",
     "compression": "^1.7.4",
-    "express": "^4.17.1",
-    "helmet": "^4.4.1",
+    "express": "^4.17.3",
+    "hdb": "^0.19.1",
+    "helmet": "^5.0.2",
+    "mqtt": "^4.3.6",
     "mysql": "^2.18.1",
-    "passport": "^0.4.1",
-    "swagger-ui-express": "^4.1.6"
+    "passport": "^0.5.2",
+    "sap-cf-mailer": "^0.0.5"
   },
   "devDependencies": {
-    "jest": "^26.6.3",
-    "sqlite3": "5.0.0",
-    "npm-run-all": "^4.1.5",
-    "supertest": "^6.1.1",
+    "@openui5/ts-types": "^1.97.1",
+    "@sap/cds-lsp": "^5.5.3",
+    "cds-swagger-ui-express": "^0.3.0",
+    "chai": "^4.3.6",
+    "chai-as-promised": "^7.1.1",
+    "chai-subset": "^1.6.0",
     "copyfiles": "2.4.1",
-    "@openui5/ts-types": "^1.60.5"
+    "jest": "^27.5.1",
+    "npm-run-all": "^4.1.5",
+    "sqlite3": "^5.0.2",
+    "supertest": "^6.2.2"
   },
   "scripts": {
     "setup": "run-s deploy build start",
-    "deploy": "cds deploy db --to sqlite:db/bookshop.db",
+    "deploy": "cds deploy db --to sqlite:db/bookshop.db --no-save",
     "deploy:cf": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext",
     "deploy:cf:ui": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-deployer",
-    "deploy:cf:app": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-app",
+    "deploy:cf:srv": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-srv",
+    "deploy:cf:app": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-ui",
     "deploy:cf-hana-cloud": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf-hana-cloud.mtaext",
-    "deploy:hana": "cds deploy --to hana --vcap-file ./default-env.json",
+    "deploy:cf-hana-cloud-job-standard": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf-hana-cloud-job-standard.mtaext",
+    "deploy:hana": "cds deploy --to hana --vcap-file ./default-env.json --auto-undeploy",
     "deploy:xsa": "xs deploy mta_archives/bookshop-demo_0.0.1.mtar",
     "create:xsa:uaa": "xs create-service xsuaa space bookshop-demo-uaa -c xs-security.json",
     "create:uaa-service-key": "xs create-service-key bookshop-demo-uaa dev",
@@ -53,32 +65,86 @@
     "get:hdi-service-key": "xs service-key bookshop-demo-db-service dev",
     "create:cf-hdi-service-key": "cf create-service-key bookshop-demo-db-service dev",
     "get:cf-hdi-service-key": "cf service-key bookshop-demo-db-service dev",
-    "build": "run-s build:clean build:OpenAPI build:copycsntoproxy build:copyOpenAPItogen",
+    "build": "run-s build:clean build:copycsntoproxy",
     "build:clean": "cds build/all --clean",
     "build:xs-security": "cds compile srv/ --to xsuaa > xs-security.json",
     "build:cf": "cp mta-cf.yaml mta.yaml && mbt build -p=cf && rm mta.yaml",
     "build:xsa": "cp mta-xsa.yaml mta.yaml && mbt build -p=xsa && rm mta.yaml",
-    "build:OpenAPI": "mkdir -p srv/gen && npx -p @sap/cds-dk cds compile --to openapi srv -s AdminService > srv/gen/OpenAPI.json",
-    "build:copyOpenAPItogen": "copyfiles -f srv/gen/OpenAPI.json gen/srv/srv/gen/",
+    "build:standalone": "cp mta-standAlone.yaml mta.yaml && mbt build -p=xsa && rm mta.yaml",
     "build:copycsntoproxy": "copyfiles -f gen/srv/srv/csn.json standalone-v2-proxy/gen/",
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
     "start": "cds run",
+    "start:hana": "NODE_ENV=dev-hana cds run",
     "start:forExcel": "node srv/index.js",
     "build:deploy:start": "run-s build deploy start",
-    "watch": "nodemon -w . -i node_modules/**,.git/** -e cds -x npm run start",
+    "watch": "cds run --with-mocks --in-memory --watch",
     "test": "jest",
     "update:cf:uaa": "cf update-service bookshop-demo-uaa -c xs-security.json",
     "undeploy:xsa": "xs undeploy bookshop-demo --delete-services --delete-service-brokers",
-    "undeploy:cf": "cf undeploy bookshop-demo --delete-services --delete-service-brokers"
+    "undeploy:cf": "cf undeploy bookshop-demo --delete-service-keys --delete-services --delete-service-brokers"
   },
   "cds": {
     "hana": {
       "deploy-format": "hdbtable"
     },
     "requires": {
+      "GWSAMPLE_BASIC": {
+        "kind": "odata-v2",
+        "model": "srv/external/GWSAMPLE_BASIC",
+        "credentials": {
+          "destination": "ES5",
+          "requestTimeout": 30000,
+          "path": "/sap/opu/odata/iwbep/GWSAMPLE_BASIC"
+        }
+      },
+      "ZPDCDS_SRV": {
+        "kind": "odata-v2",
+        "model": "srv/external/ZPDCDS_SRV",
+        "credentials": {
+          "destination": "ES5",
+          "requestTimeout": 30000,
+          "path": "/sap/opu/odata/sap/ZPDCDS_SRV"
+        }
+      },
+      "ZSOCDS_SRV": {
+        "kind": "odata-v2",
+        "model": "srv/external/ZSOCDS_SRV",
+        "credentials": {
+          "destination": "ES5",
+          "requestTimeout": 30000,
+          "path": "/sap/opu/odata/sap/ZSOCDS_SRV"
+        }
+      },
+      "xsuaa-api": {
+        "kind": "rest",
+        "credentials": {
+          "destination": "bookshop-demo-uaa-apiaccess",
+          "requestTimeout": 30000
+        }
+      },
+      "CloudFoundryAPI": {
+        "kind": "rest",
+        "credentials": {
+          "destination": "CloudFoundryAPI",
+          "requestTimeout": 30000
+        }
+      },
+      "flow": {
+        "kind": "rest",
+        "credentials": {
+          "destination": "flow",
+          "requestTimeout": 30000
+        }
+      },
+      "API_CV_ATTACHMENT_SRV": {
+        "kind": "odata-v2",
+        "model": "srv/external/API_CV_ATTACHMENT_SRV"
+      },
       "db": {
         "kind": "sqlite",
-        "model": "db",
+        "model": [
+          "db"
+        ],
         "credentials": {
           "database": "db/bookshop.db"
         }

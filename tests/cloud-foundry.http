@@ -1,0 +1,44 @@
+###
+# @name access_token_request
+POST {{$dotenv token_endpoint}}/oauth/token
+Accept: application/json;charset=utf8
+Authorization: Basic cf:
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password
+&username={{$dotenv username}}
+&password={{$dotenv password}}
+
+###
+@accToken = {{access_token_request.response.body.access_token}}
+
+### List all Organizations
+GET {{$dotenv cf_url}}/v3/organizations
+Authorization: Bearer {{accToken}}
+### Filter Organization by name
+GET {{$dotenv cf_url}}/v3/organizations
+  ?names=07fc19abtrial
+Authorization: Bearer {{accToken}}
+### Details of specific Organization
+GET {{$dotenv cf_url}}/v3/organizations/{{$dotenv org_id}}
+Authorization: Bearer {{accToken}}
+###
+GET {{$dotenv cf_url}}/v3/spaces
+Authorization: Bearer {{accToken}}
+###
+GET {{$dotenv cf_url}}/v3/spaces/{{$dotenv space_id}}
+Authorization: Bearer {{accToken}}
+###
+GET {{$dotenv cf_url}}/v3/apps
+  ?organization_guids={{$dotenv org_id}}
+  &space_guids={{$dotenv space_id}}
+  &names=bookshop-demo-ui
+Authorization: Bearer {{accToken}}
+###
+GET {{$dotenv cf_url}}/v3/domains
+Authorization: Bearer {{accToken}}
+
+### CAP
+### Read Metadata OData V4
+GET http://localhost:4004/admin/readOrganizations()
+Authorization: Basic admin:

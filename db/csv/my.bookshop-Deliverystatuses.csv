@@ -1,0 +1,4 @@
+code;name;descr
+N;New;Freshly created delivery
+I;In process;Delivery is getting processed
+C;Completed;Delivery is clompleted

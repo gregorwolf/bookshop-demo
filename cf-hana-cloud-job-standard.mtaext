@@ -1,0 +1,11 @@
+_schema-version: '3.1'
+ID: bookshop-demo.extension
+extends: bookshop-demo
+
+resources:
+  - name: bookshop-demo-db-service
+    parameters:
+      service: hana
+  - name: bookshop-demo-job-scheduler
+    parameters:
+       service-plan: standard

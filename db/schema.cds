@@ -31,46 +31,43 @@ entity Approval : managed, cuid {
               pending = 'P' @(title : 'Pending');
               approved = 'A'@(title : 'Approved');
               rejected = 'N'       @(title : 'Rejected');
-  };
+  } default 'R';
 };
 
 entity Books : managed {
-  key ID                                 : Integer;
-  key BusinessValidFrom                  : Date;
-  key BusinessValidTo                    : Date;
-      title                              : localized String(111);
-      descr                              : localized String(1111);
-      stock                              : Integer;
-      price                              : Decimal(9, 2);
-      currency                           : Currency;
-      virtual semanticURLtoAuthor        : String;
-      weight                             : DecimalFloat @title : 'Weight (DecimalFloat)';
-      height                             : Double       @title : 'Height (Double)';
-      width                              : Decimal(9, 2)@title : 'Width (Decimal(9,2))';
-      visible                            : Boolean      @title : 'Visible (Boolean)';
-      releaseDate                        : DateTime     @title : 'Release Date (DateTime)';
-      readingTime                        : Time         @title : 'Reading Time (Time)';
-      author                             : Association to one Authors;
-      BooksAuthorsAssignment_ASSOC_Books : Association to many BooksAuthorsAssignment
-                                             on BooksAuthorsAssignment_ASSOC_Books.ASSOC_Book = $self;
+  key ID                             : Integer;
+      title                          : localized String(111);
+      descr                          : localized String(1111);
+      stock                          : Integer;
+      @sap.unit                      :                       'currency_code'
+      @Semantics.amount.currencyCode :                       'currency_code'
+      @Measures.ISOCurrency          :                       currency_code
+      price                          : DecimalFloat;
+      @Common.IsCurrency
+      @sap.semantics                 :                       'currency-code'
+      @Semantics.currencyCode
+      currency                       : Currency;
+      virtual semanticURLtoPublisher : String;
+      weight                         : DecimalFloat @title : 'Weight (DecimalFloat)';
+      height                         : Double       @title : 'Height (Double)';
+      width                          : Decimal(9, 2)@title : 'Width (Decimal(9,2))';
+      visible                        : Boolean      @title : 'Visible (Boolean)';
+      releaseDate                    : DateTime     @title : 'Release Date (DateTime)';
+      readingTime                    : Time         @title : 'Reading Time (Time)';
+      author                         : Association to one Authors;
+      publisher                      : Association to one Publishers;
+      to_BooksAuthorsAssignment      : Association to BooksAuthorsAssignment
+                                         on to_BooksAuthorsAssignment.ASSOC_Book = $self;
 };
 
 entity BooksAuthorsAssignment {
-  key BusinessValidFrom : Date;
-  key BusinessValidTo   : Date;
-  key Role              : String(50);
-  key ASSOC_Book_ID     : Integer;
-      ASSOC_Book        : Association to Books
-                            on ASSOC_Book.ID = ASSOC_Book_ID;
-  key ASSOC_Author_ID   : Integer;
-      ASSOC_Author      : Association to Authors
-                            on ASSOC_Author.ID = ASSOC_Author_ID;
+  key Role         : String(50);
+  key ASSOC_Book   : Association to one Books;
+  key ASSOC_Author : Association to one Authors;
 }
 
 entity Authors : managed {
   key ID                                   : Integer;
-  key BusinessValidFrom                    : Date;
-  key BusinessValidTo                      : Date;
       name                                 : String(111);
       dateOfBirth                          : Date;
       dateOfDeath                          : Date;
@@ -82,14 +79,26 @@ entity Authors : managed {
                                                on BooksAuthorsAssignment_ASSOC_Authors.ASSOC_Author = $self;
 }
 
+entity Publishers : managed {
+  key ID   : Integer;
+      name : String(111)@(
+        title       : '{i18n>Publisher}',
+        description : '{i18n>PublisherDesc}'
+      );
+      book : Association to many Books
+               on book.publisher = $self;
+};
+
 @Aggregation.ApplySupported.PropertyRestrictions : true
 view BooksAnalytics as
   select from Books {
     key ID,
-        @Analytics.Dimension : true
-        BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.name,
-        @Analytics.Dimension : true
-        BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.country.code,
+        /*
+            @Analytics.Dimension : true
+            BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.name,
+            @Analytics.Dimension : true
+            BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.country.code,
+            */
         @Analytics.Measure   : true
         @Aggregation.default : #SUM
         stock,
@@ -97,15 +106,50 @@ view BooksAnalytics as
         currency
   };
 
-entity Images {
-  key ID      : UUID;
-      @Core.MediaType : 'image/png'
-      content : LargeBinary;
-/*
-content : LargeBinary @Core.MediaType: mediatype;
-@Core.IsMediaType : true
-mediatype : String;
-*/
+@Aggregation.ApplySupported.PropertyRestrictions : true
+view BooksViewWOkey as
+  select from Books {
+    ID,
+    /*
+        @Analytics.Dimension : true
+        BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.name,
+        @Analytics.Dimension : true
+        BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.country.code,
+        */
+    @Analytics.Measure   : true
+    @Aggregation.default : #SUM
+    stock,
+    @Analytics.Dimension : true
+    currency
+  };
+
+@Aggregation.ApplySupported.PropertyRestrictions : true
+view BooksViewWOtype as
+  select from Books {
+    key ID,
+        /*
+            @Analytics.Dimension : true
+            BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.name,
+            @Analytics.Dimension : true
+            BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.country.code,
+            */
+        @Analytics.Measure   : true
+        @Aggregation.default : #SUM
+        stock,
+        @Analytics.Dimension : true
+        currency,
+        1 as count
+  };
+
+entity Documents : cuid, managed {
+  @Core.MediaType                   :  mediatype
+  @Core.ContentDisposition.Filename :  filename
+  content   : LargeBinary     @title : '{i18n>content}';
+  @Core.IsMediaType                 :  true
+  @mandatory
+  mediatype : String not null;
+  @mandatory
+  filename  : String not null @title : '{i18n>filename}';
 }
 
 entity Orderstatuses : sap.common.CodeList {
@@ -116,15 +160,29 @@ type Orderstatus : Association to Orderstatuses;
 annotate Orderstatus with @title : '{i18n>Orderstatus}';
 annotate Orderstatuses.name with @title : '{i18n>Orderstatus}'  @description : '{i18n>Orderstatus}';
 
+entity Deliverystatuses : sap.common.CodeList {
+  key code : String(1);
+}
+
+type Deliverystatus : Association to Deliverystatuses;
+annotate Deliverystatus with @title : '{i18n>Deliverystatus}';
+annotate Deliverystatuses.name with @title : '{i18n>Deliverystatus}'  @description : '{i18n>Deliverystatus}';
+
 entity Orders : cuid, managed {
-  OrderNo         : String       @title : 'Order Number'; //> readable key
-  CustomerOrderNo : String(80)   @title : 'Customer Order Number';
+  OrderNo         : String    @title : 'Order Number'; //> readable key
+  CustomerOrderNo : String(80)@title : 'Customer Order Number';
   Items           : Composition of many OrderItems
                       on Items.parent = $self;
   ShippingAddress : Composition of one OrderShippingAddress
                       on ShippingAddress.parent = $self;
-  total           : Decimal(9, 2)@readonly;
+  @readonly
+  total           : DecimalFloat;
+  totalTax        : Decimal(15, 2);
+  totalWithTax    : Double;
+  vipOrder        : Boolean   @title : '{i18n>vipOrder}';
+  employeeOrder   : Boolean   @title : '{i18n>employeeOrder}';
   orderstatus     : Orderstatus;
+  deliverystatus  : Deliverystatus;
   currency        : Currency;
 }
 
@@ -137,6 +195,39 @@ entity OrderItems : cuid {
 
 entity OrderShippingAddress : cuid, managed {
   parent : Association to Orders not null;
-  street : String(60)@(title : 'Street', );
-  city   : String(60)@(title : 'City', );
+  @(UI : {Placeholder : '{i18n>placeholderStreet}'})
+  @(title : 'Street', )
+  street : String(60);
+  @(title : 'City', )
+  city   : String(60);
 };
+
+entity Meterings : cuid {
+  tennant     : String(128);
+  application : String(64);
+  userhash    : String(64);
+  eventName   : String(32);
+  entityName  : String(256);
+  timestamp   : Timestamp @cds.on.insert : $now;
+};
+
+@Aggregation.ApplySupported.PropertyRestrictions : true
+view MeteringAnalytics as
+  select from Meterings {
+    key ID,
+        @Analytics.Dimension : true
+        tennant,
+        @Analytics.Dimension : true
+        application,
+        @Analytics.Dimension : true
+        userhash,
+        @Analytics.Dimension : true
+        eventName,
+        @Analytics.Dimension : true
+        entityName,
+        @Analytics.Dimension : true
+        timestamp,
+        @Analytics.Measure   : true
+        @Aggregation.default : #SUM
+        1 as calls : Integer
+  };

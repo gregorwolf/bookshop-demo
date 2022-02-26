@@ -1,0 +1,19 @@
+### Read MeteringAnalytics
+http://localhost:4004/admin/MeteringAnalytics
+Authorization: Basic admin:
+
+### Read MeteringAnalytics
+http://localhost:4004/v2/admin/MeteringAnalytics?$orderby=timestamp desc
+Authorization: Basic admin:
+
+### Read MeteringAnalytics - 
+http://localhost:4004/admin/MeteringAnalytics?$apply=groupby((tennant,userhash),aggregate(calls with sum as TotalCalls))
+Authorization: Basic admin:
+
+### Read MeteringAnalytics - 
+http://localhost:4004/admin/MeteringAnalytics?$apply=groupby((tennant,entityName),aggregate(calls with sum as TotalCalls))
+Authorization: Basic admin:
+
+### Read MeteringAnalytics - 
+http://localhost:4004/admin/MeteringAnalytics?$apply=groupby((tennant,eventName),aggregate(calls with sum as TotalCalls))
+Authorization: Basic admin:

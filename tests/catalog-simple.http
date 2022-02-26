@@ -1,0 +1,11 @@
+
+### Read Metadata OData V4
+GET http://localhost:4004/catalog-simple/$metadata
+### Read Metadata OData V2
+GET http://localhost:4004/v2/catalog-simple/$metadata
+### Read Entities with OData V4
+GET http://localhost:4004/catalog-simple/
+### Read Entities with OData V2
+GET http://localhost:4004/v2/catalog-simple/
+### 
+GET http://localhost:4004/catalog-simple/Orders

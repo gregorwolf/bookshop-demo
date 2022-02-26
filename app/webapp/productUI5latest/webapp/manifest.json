@@ -1,0 +1,150 @@
+{
+    "_version": "1.15.0",
+    "sap.app": {
+        "id": "productUI5latest",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "ach": "CA-UI5-FE",
+        "dataSources": {
+            "mainService": {
+                "uri": "/admin/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "4.0"
+                }
+            }
+        },
+        "offline": false,
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "ui5template.fiorielements.v4.lrop",
+            "version": "1.0.0"
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "resources": {
+            "js": [],
+            "css": []
+        },
+        "dependencies": {
+            "minUI5Version": "",
+            "libs": {
+                "sap.fe.templates": {},
+                "sap.ui.fl": {}
+            }
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "": {
+                "dataSource": "mainService",
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            }
+        },
+        "routing": {
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "SEPMRA_I_Product_EList",
+                    "target": "SEPMRA_I_Product_EList"
+                },
+                {
+                    "pattern": "SEPMRA_I_Product_E({key}):?query:",
+                    "name": "SEPMRA_I_Product_EObjectPage",
+                    "target": "SEPMRA_I_Product_EObjectPage"
+                }
+            ],
+            "targets": {
+                "SEPMRA_I_Product_EList": {
+                    "type": "Component",
+                    "id": "SEPMRA_I_Product_EList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "entitySet": "SEPMRA_I_Product_E",
+                            "variantManagement": "Page",
+                            "navigation": {
+                                "SEPMRA_I_Product_E": {
+                                    "detail": {
+                                        "route": "SEPMRA_I_Product_EObjectPage"
+                                    }
+                                }
+                            },
+                            "quickVariantSelection": {
+                                "variants": {
+                                    "0": {
+                                        "key": "New",
+                                        "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#New"
+                                    },
+                                    "1": {
+                                        "key": "InProcess",
+                                        "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#InProcess"
+                                    },
+                                    "2": {
+                                        "key": "Completed",
+                                        "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Completed"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "SEPMRA_I_Product_EObjectPage": {
+                    "type": "Component",
+                    "id": "SEPMRA_I_Product_EObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "entitySet": "SEPMRA_I_Product_E"
+                        }
+                    }
+                }
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        }
+    },
+    "sap.platform.abap": {
+        "_version": "1.1.0",
+        "uri": ""
+    },
+    "sap.platform.hcp": {
+        "_version": "1.1.0",
+        "uri": ""
+    },
+    "sap.fiori": {
+        "_version": "1.1.0",
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}
