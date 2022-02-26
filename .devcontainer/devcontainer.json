@@ -9,14 +9,15 @@
     "terminal.integrated.defaultProfile.linux": "/bin/bash"
   },
 
-  // Add the IDs of extensions you want installed when the container is created.
-  "extensions": [
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
-    "gruntfuggly.todo-tree",
-    "ms-vscode.js-debug-nightly",
-    "sapse.vscode-cds"
-  ],
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode",
+		"gruntfuggly.todo-tree",
+		"ms-vscode.js-debug-nightly",
+		"sapse.vscode-cds",
+		"humao.rest-client"
+	],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [4004]

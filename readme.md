@@ -141,4 +141,32 @@ url="https://<your-trial-account>trial.authentication.eu10.hana.ondemand.com"
 srvurl="https://<your-trial-account>trial-dev-bookshop-demo-srv.cfapps.us10.hana.ondemand.com"
 ```
 
-Then open the REST Client script _tests/api-access.http_ in VS Code and run the script with the comment _Get Access Token (Cloud Foundry)_. It should return a valid access*token. Now execute the requests \_Read Orders* and _Read Books_. You should see a valid result.
+Then open the REST Client script *tests/api-access.http* in VS Code and run the script with the comment *Get Access Token (Cloud Foundry)*. It should return a valid access_token. Now execute the requests *Read Orders* and *Read Books*. You should see a valid result.
+
+## Authentication and Authorization
+
+The services of this application use authentication and authorization to
+restrict usage of the functions.  
+The scopes of the app are defined in `xs-security.json`.
+They are used in the services files `srv/cat-service.cds` and `srv/admin-service.cds`.
+
+_Please have a look at these files for the restrictions cause they can change
+due to the POC character of this project_
+
+### Authentication and Authorization in local environment
+
+If you run the application in a local environment the users you can use are
+defined in the field `.cdsrc`.  
+Currently in this file the following users are defined  
+
+_Please have a look at this file to see the current users and roles
+cause they can change due to the POC character of this project_
+
+| Username        | Scopes          |
+|-----------------|-----------------|
+| requester       | admin           |
+| booksadmin      | booksadmin      |
+| admin           | admin, roleadmin, booksadmin |
+| littleadmin     | admin           |
+| bob             | authenticated-user, openid |
+

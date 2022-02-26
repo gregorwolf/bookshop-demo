@@ -1,0 +1,42 @@
+# This is the equivalent to the test file without _vim in its name.
+# It contains some test cases if you prefer to use vim and
+# the plugin https://github.com/diepm/vim-rest-console.
+# In contrast to the VSCode plugin a new test is recognized by a
+# new url (VSCode uses ###)
+# type set ft=rest to be able to run tests
+
+### Read BooksAuthorsAssignment
+http://localhost:4004
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
+-i -s
+GET /catalog/Countries
+
+### Read BooksAuthorsAssignment expand to Book and Author 
+http://localhost:4004
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
+-i -s
+GET /v2/catalog/BooksAuthorsAssignment?$expand=ASSOC_Book,ASSOC_Author&$inlinecount=allpages
+
+###
+http://localhost:4004
+Authorization: Basic requester:
+Accept: application/json
+-i -s
+GET /v2/catalog/Books?$inlinecount=allpages
+
+###
+http://localhost:4004
+Authorization: Basic requester:
+Accept: application/json
+-i -s
+GET /v2/catalog/Books(ID=1,BusinessValidFrom=datetime'2000-01-01T00:00',BusinessValidTo=datetime'9999-01-01T00:00')
+
+###
+http://localhost:4004
+Authorization: Basic requester:
+Accept: application/json
+-i -s
+GET /v2/catalog/Books(ID=1,BusinessValidFrom=datetime'2000-01-01T00:00',BusinessValidTo=datetime'9999-01-01T00:00')?$expand=BooksAuthorsAssignment_ASSOC_Books
+
