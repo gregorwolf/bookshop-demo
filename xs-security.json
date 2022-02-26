@@ -73,7 +73,8 @@
   "oauth2-configuration": {
     "redirect-uris": [
       "https://global.consent.azure-apim.net/redirect",
-      "https://*.hana.ondemand.com/**"
+      "https://*.hana.ondemand.com/**",
+      "https://hxehost:*/**"
     ]
   }
 }
