@@ -1,0 +1,6 @@
+###
+GET http://localhost:4004/iot
+Accept: application/json
+###
+GET http://localhost:4004/iot/Environment
+Accept: application/json
