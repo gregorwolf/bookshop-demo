@@ -1,964 +1,985 @@
 {
-    "services": {
-        "LaunchPage": {
-            "adapter": {
-                "config": {
-                    "catalogs": [
-                        {
-                            "id": "books_catalog",
-                            "title": "Books Application Catalog",
-                            "tiles": [
-                                {
-                                    "id": "BooksBrowse",
-                                    "title": "Browse Books",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.DynamicTile",
-                                    "properties": {
-                                        "chipId": "catalogTile_001",
-                                        "title": "Browse Books",
-                                        "info": "The latest books",
-                                        "targetURL": "#Books-manage"
-                                    }
-                                },
-                                {
-                                    "id": "AuthorsBrowse",
-                                    "title": "Browse Authors",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "catalogTile_002",
-                                        "title": "Browse Authors",
-                                        "info": "The list of authors",
-                                        "targetURL": "#Authors-manage"
-                                    }
-                                }
-                            ]
-                        }
-                    ],
-                    "groups": [
-                        {
-                            "id": "Admin",
-                            "title": "Admin",
-                            "isPreset": true,
-                            "isVisible": true,
-                            "isGroupLocked": false,
-                            "tiles": [
-                                {
-                                    "id": "BooksdisplayUI5latest",
-                                    "title": "Books",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "BooksdisplayUI5latest",
-                                        "title": "Books",
-                                        "info": "",
-                                        "targetURL": "#Books-manage"
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            "id": "Bookshop",
-                            "title": "Bookshop",
-                            "isPreset": true,
-                            "isVisible": true,
-                            "isGroupLocked": false,
-                            "tiles": [
-                                {
-                                    "id": "BooksdisplayUI5latest",
-                                    "title": "Books",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "BooksdisplayUI5latest",
-                                        "title": "Books",
-                                        "info": "",
-                                        "targetURL": "#Books-display"
-                                    }
-                                },
-                                {
-                                    "id": "BrowseAuthorsApp",
-                                    "title": "Authors",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "serviceRefreshInterval": 5,
-                                    "properties": {
-                                        "chipId": "catalogTile_002",
-                                        "title": "Authors",
-                                        "info": "",
-                                        "targetURL": "#Authors-display"
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            "id": "ODataV2",
-                            "title": "OData V2",
-                            "isPreset": true,
-                            "isVisible": true,
-                            "isGroupLocked": false,
-                            "tiles": [
-                                {
-                                    "id": "Orders",
-                                    "title": "Orders",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V2catalogTile_Orders",
-                                        "title": "Orders",
-                                        "info": "Management",
-                                        "targetURL": "#Orders-manage"
-                                    }
-                                },
-                                {
-                                    "id": "OrdersNoExt",
-                                    "title": "Orders no Extension",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V2catalogTile_OrdersNoExt",
-                                        "title": "Orders",
-                                        "info": "no Extension",
-                                        "targetURL": "#OrdersNoExt-manage"
-                                    }
-                                },
-                                {
-                                    "id": "Role",
-                                    "title": "Role",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V2catalogTile_Role",
-                                        "title": "Role",
-                                        "info": "Management",
-                                        "targetURL": "#Role-manage"
-                                    }
-                                },
-                                {
-                                    "id": "Users",
-                                    "title": "Users",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V2catalogTile_Users",
-                                        "title": "Users",
-                                        "info": "Management",
-                                        "targetURL": "#Users-manage"
-                                    }
-                                },
-                                {
-                                    "id": "Approvals",
-                                    "title": "Approvals",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V4catalogTile_000",
-                                        "title": "Approvals",
-                                        "info": "Manage",
-                                        "targetURL": "#Approvals-manage"
-                                    }
-                                },
-                                {
-                                    "id": "BrowseBooksApp",
-                                    "title": "Browse Books",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "catalogTile_001",
-                                        "title": "Browse Books",
-                                        "info": "The latest books",
-                                        "targetURL": "#Books-display"
-                                    }
-                                },
-                                {
-                                    "id": "ManageBooksApp",
-                                    "title": "Manage Books",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "serviceRefreshInterval": 5,
-                                    "properties": {
-                                        "chipId": "catalogTile_ManageBooksApp",
-                                        "title": "Manage Books",
-                                        "info": "Edit the list of books",
-                                        "targetURL": "#Books-manage"
-                                    }
-                                },
-                                {
-                                    "id": "BrowsePublishersApp",
-                                    "title": "Browse Publishers",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "serviceRefreshInterval": 5,
-                                    "properties": {
-                                        "chipId": "catalogTile_002",
-                                        "title": "Browse Publishers",
-                                        "info": "The list of Publishers",
-                                        "targetURL": "#Publishers-display"
-                                    }
-                                },
-                                {
-                                    "id": "BrowseAuthorsApp",
-                                    "title": "Browse Authors",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "serviceRefreshInterval": 5,
-                                    "properties": {
-                                        "chipId": "catalogTile_002",
-                                        "title": "Browse Authors",
-                                        "info": "The list of authors",
-                                        "targetURL": "#Authors-display"
-                                    }
-                                },
-                                {
-                                    "id": "ManageAuthorsApp",
-                                    "title": "Manage Authors",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "serviceRefreshInterval": 5,
-                                    "properties": {
-                                        "chipId": "catalogTile_ManageAuthorsApp",
-                                        "title": "Manage Authors",
-                                        "info": "Edit the list of authors",
-                                        "targetURL": "#Authors-manage"
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            "id": "ODataV2ui5latest",
-                            "title": "OData V2 - Working with UI5 Latest",
-                            "isPreset": true,
-                            "isVisible": true,
-                            "isGroupLocked": false,
-                            "tiles": [
-                                {
-                                    "id": "Orders",
-                                    "title": "Orders",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V2catalogTile_OrdersUI5latest",
-                                        "title": "Orders",
-                                        "info": "Management",
-                                        "targetURL": "#Orders-manageUI5latest"
-                                    }
-                                },
-                                {
-                                    "id": "Role",
-                                    "title": "Role",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "catalogTile_RoleUI5latest",
-                                        "title": "Role",
-                                        "info": "Management",
-                                        "targetURL": "#Role-manageUI5latest"
-                                    }
-                                },
-                                {
-                                    "id": "Users",
-                                    "title": "Users",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V4catalogTile_UsersUI5latest",
-                                        "title": "Users",
-                                        "info": "Management",
-                                        "targetURL": "#UsersUI5latest-manage"
-                                    }
-                                },
-                                {
-                                    "id": "BooksdisplayUI5latest",
-                                    "title": "Browse Books",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "BooksdisplayUI5latest",
-                                        "title": "Browse Books",
-                                        "info": "The latest books",
-                                        "targetURL": "#Books-displayUI5latest"
-                                    }
-                                },
-                                {
-                                    "id": "BooksdisplayUI5latestFreestyle",
-                                    "title": "Browse Books",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "BooksdisplayUI5latestFreestyle",
-                                        "title": "Browse Books",
-                                        "info": "Freestyle",
-                                        "targetURL": "#Books-displayUI5latestFreestyle"
-                                    }
-                                },
-                                {
-                                    "id": "AuthorsdisplayUI5latest",
-                                    "title": "Browse Authors",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "AuthorsdisplayUI5latest",
-                                        "title": "Browse Authors",
-                                        "info": "The latest books",
-                                        "targetURL": "#Authors-displayUI5latest"
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            "id": "DataV4",
-                            "title": "OData V4",
-                            "isPreset": true,
-                            "isVisible": true,
-                            "isGroupLocked": false,
-                            "tiles": [
-                                {
-                                    "id": "Orders",
-                                    "title": "Orders",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V4catalogTile_Orders",
-                                        "title": "Orders",
-                                        "info": "Management",
-                                        "targetURL": "#V4Orders-manage"
-                                    }
-                                },
-                                {
-                                    "id": "Role",
-                                    "title": "Role",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V4catalogTile_Role",
-                                        "title": "Role",
-                                        "info": "Management",
-                                        "targetURL": "#V4Role-manage"
-                                    }
-                                },
-                                {
-                                    "id": "Users",
-                                    "title": "Users",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V4catalogTile_Users",
-                                        "title": "Users",
-                                        "info": "Management",
-                                        "targetURL": "#V4Users-manage"
-                                    }
-                                },
-                                {
-                                    "id": "WorkAssignments",
-                                    "title": "Work Assignments",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V4catalogTile_WorkAssignments",
-                                        "title": "WorkAssignments",
-                                        "info": "Management",
-                                        "targetURL": "#V4WorkAssignments-manage"
-                                    }
-                                },
-                                {
-                                    "id": "V4Approvals",
-                                    "title": "Approvals",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V4catalogTile_000",
-                                        "title": "Approvals",
-                                        "info": "Manage",
-                                        "targetURL": "#V4Approvals-manage"
-                                    }
-                                },
-                                {
-                                    "id": "V4BrowseBooksApp",
-                                    "title": "Browse Books",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V4catalogTile_001",
-                                        "title": "Browse Books",
-                                        "info": "The latest books",
-                                        "targetURL": "#V4Books-display"
-                                    }
-                                },
-                                {
-                                    "id": "V4ManageBooksApp",
-                                    "title": "Manage Books",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V4catalogTile_010",
-                                        "title": "Manage Books",
-                                        "info": "Edit the list of books",
-                                        "targetURL": "#V4Books-manage"
-                                    }
-                                },
-                                {
-                                    "id": "V4BrowseAuthorsApp",
-                                    "title": "Browse Authors",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V4catalogTile_002",
-                                        "title": "Browse Authors",
-                                        "info": "The list of authors",
-                                        "targetURL": "#V4Authors-manage"
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            "id": "DataV4UI5latest",
-                            "title": "OData V4 - Working with UI5 Latest",
-                            "isPreset": true,
-                            "isVisible": true,
-                            "isGroupLocked": false,
-                            "tiles": [
-                                {
-                                    "id": "OrdersUI5latest",
-                                    "title": "Orders",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V4catalogTile_OrdersUI5latest",
-                                        "title": "Orders",
-                                        "info": "Management",
-                                        "targetURL": "#V4Orders-manageUI5latest"
-                                    }
-                                },
-                                {
-                                    "id": "RoleUI5latest",
-                                    "title": "Role",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V4catalogTile_RoleUI5latest",
-                                        "title": "Role",
-                                        "info": "Management",
-                                        "targetURL": "#V4Role-manageUI5latest"
-                                    }
-                                },
-                                {
-                                    "id": "Users",
-                                    "title": "Users",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V4catalogTile_UsersUI5latest",
-                                        "title": "Users",
-                                        "info": "Management",
-                                        "targetURL": "#V4UsersUI5latest-manage"
-                                    }
-                                },
-                                {
-                                    "id": "V4BrowseBooksAppUI5latest",
-                                    "title": "Browse Books",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V4catalogTile_001UI5latest",
-                                        "title": "Browse Books",
-                                        "info": "The latest books",
-                                        "targetURL": "#V4Books-displayUI5latest"
-                                    }
-                                },
-                                {
-                                    "id": "V4AuthorsUI5latest",
-                                    "title": "Browse Authors",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V4catalogTile_AuthorsUI5latest",
-                                        "title": "Browse Authors",
-                                        "targetURL": "#V4Authors-displayUI5latest"
-                                    }
-                                },
-                                {
-                                    "id": "WorkAssignmentsUI5latest",
-                                    "title": "Work Assignments",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V4catalogTile_WorkAssignmentsUI5latest",
-                                        "title": "Work Assignments",
-                                        "info": "Management",
-                                        "targetURL": "#V4WorkAssignmentsUI5latest-manage"
-                                    }
-                                },
-                                {
-                                    "id": "ProductsUI5latest",
-                                    "title": "Products",
-                                    "size": "1×1",
-                                    "tileType": "sap.ushell.ui.tile.StaticTile",
-                                    "properties": {
-                                        "chipId": "V4catalogTile_ProductsUI5latest",
-                                        "title": "Products",
-                                        "info": "Management",
-                                        "targetURL": "#ProductsUI5latest-manage"
-                                    }
-                                }
-                            ]
-                        }
-                    ]
+  "services": {
+    "LaunchPage": {
+      "adapter": {
+        "config": {
+          "catalogs": [],
+          "groups": [
+            {
+              "id": "Admin",
+              "title": "Admin",
+              "isPreset": true,
+              "isVisible": true,
+              "isGroupLocked": false,
+              "tiles": [
+                {
+                  "id": "BooksdisplayUI5latest",
+                  "title": "Books",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "BooksdisplayUI5latest",
+                    "title": "Books",
+                    "info": "",
+                    "targetURL": "#Books-manage"
+                  }
                 }
-            }
-        },
-        "NavTargetResolution": {
-            "config": {
-                "enableClientSideTargetResolution": true
-            }
-        },
-        "ClientSideTargetResolution": {
-            "adapter": {
-                "config": {
-                    "inbounds": {
-                        "actionApprovals": {
-                            "semanticObject": "V4Approvals",
-                            "action": "manage",
-                            "title": "Approvals",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=approvals",
-                                "url": "approval/webapp"
-                            }
-                        },
-                        "actionBooks": {
-                            "semanticObject": "V4Books",
-                            "action": "display",
-                            "title": "Browse Books",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=bookshop",
-                                "url": "browse/webapp"
-                            },
-                            "indicatorDataSource": {
-                                "path": "catalog/Books/$count",
-                                "refresh": 600
-                            }
-                        },
-                        "actionBooksUI5latest": {
-                            "semanticObject": "V4Books",
-                            "action": "displayUI5latest",
-                            "title": "Browse Books",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=bookshopUI5latest",
-                                "url": "browseUI5latest/webapp"
-                            },
-                            "indicatorDataSource": {
-                                "path": "catalog/Books/$count",
-                                "refresh": 600
-                            }
-                        },
-                        "manageBooks": {
-                            "semanticObject": "V4Books",
-                            "action": "manage",
-                            "title": "Manage Books",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=admin",
-                                "url": "admin/webapp"
-                            },
-                            "indicatorDataSource": {
-                                "path": "catalog/Books/$count",
-                                "refresh": 600
-                            }
-                        },
-                        "actionAuthors": {
-                            "semanticObject": "V4Authors",
-                            "action": "manage",
-                            "title": "Authors",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=authors",
-                                "url": "authors/webapp"
-                            }
-                        },
-                        "actionOrders": {
-                            "semanticObject": "V4Orders",
-                            "action": "manage",
-                            "title": "Orders",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=orders",
-                                "url": "orders/webapp"
-                            }
-                        },
-                        "actionOrdersUI5latest": {
-                            "semanticObject": "V4Orders",
-                            "action": "manageUI5latest",
-                            "title": "Orders",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=ordersUI5latest",
-                                "url": "ordersUI5latest/webapp"
-                            }
-                        },
-                        "actionV2OrdersNoExt": {
-                            "semanticObject": "OrdersNoExt",
-                            "action": "manage",
-                            "title": "Orders no Extension",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=v2.orders-no-ext",
-                                "url": "v2/orders-no-ext"
-                            }
-                        },
-                        "actionV2Orders": {
-                            "semanticObject": "Orders",
-                            "action": "manage",
-                            "title": "Orders",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=v2.orders",
-                                "url": "v2/orders"
-                            }
-                        },
-                        "actionV2OrdersUI5latest": {
-                            "semanticObject": "Orders",
-                            "action": "manageUI5latest",
-                            "title": "Orders",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=v2.ordersUI5latest",
-                                "url": "v2/ordersUI5latest"
-                            }
-                        },
-                        "actionRole": {
-                            "semanticObject": "V4Role",
-                            "action": "manage",
-                            "title": "Role",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=role",
-                                "url": "role/webapp"
-                            }
-                        },
-                        "actionRoleUI5latest": {
-                            "semanticObject": "V4Role",
-                            "action": "manageUI5latest",
-                            "title": "Role",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=roleUI5latest",
-                                "url": "roleUI5latest/webapp"
-                            }
-                        },
-                        "actionV2Role": {
-                            "semanticObject": "Role",
-                            "action": "manage",
-                            "title": "Role",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=v2.role",
-                                "url": "v2/role"
-                            }
-                        },
-                        "actionV2RoleUI5latest": {
-                            "semanticObject": "Role",
-                            "action": "manageUI5latest",
-                            "title": "Role",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=v2.roleUI5latest",
-                                "url": "v2/roleUI5latest"
-                            }
-                        },
-                        "actionWorkAssignmentsUI5latest": {
-                            "semanticObject": "V4WorkAssignmentsUI5latest",
-                            "action": "manage",
-                            "title": "Work Assignments",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=WorkAssignmentsUI5latest",
-                                "url": "workAssignmentsUI5latest/webapp"
-                            }
-                        },
-                        "actionProductsUI5latest": {
-                            "semanticObject": "ProductsUI5latest",
-                            "action": "manage",
-                            "title": "Work Assignments",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=productUI5latest",
-                                "url": "productUI5latest/webapp"
-                            }
-                        },
-                        "actionWorkAssignments": {
-                            "semanticObject": "V4WorkAssignments",
-                            "action": "manage",
-                            "title": "WorkAssignments",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=WorkAssignments",
-                                "url": "workAssignments/webapp"
-                            }
-                        },
-                        "actionUsersUI5latest": {
-                            "semanticObject": "V4UsersUI5latest",
-                            "action": "manage",
-                            "title": "Users",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=usersUI5latest",
-                                "url": "usersUI5latest/webapp"
-                            }
-                        },
-                        "actionUsers": {
-                            "semanticObject": "V4Users",
-                            "action": "manage",
-                            "title": "Users",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=users",
-                                "url": "users/webapp"
-                            }
-                        },
-                        "actionV2Users": {
-                            "semanticObject": "Users",
-                            "action": "manage",
-                            "title": "Users",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=v2.users.admin",
-                                "url": "v2/users-admin"
-                            }
-                        },
-                        "actionV2UsersUI5latest": {
-                            "semanticObject": "UsersUI5latest",
-                            "action": "manage",
-                            "title": "Users",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=v2.usersUI5latest",
-                                "url": "v2/users-adminUI5latest"
-                            }
-                        },
-                        "actionV2Approvals": {
-                            "semanticObject": "Approvals",
-                            "action": "manage",
-                            "title": "Approvals",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=v2.approvals",
-                                "url": "v2/approval"
-                            }
-                        },
-                        "actionV2Publishers": {
-                            "semanticObject": "Publishers",
-                            "action": "display",
-                            "title": "Publishers",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=v2.publishers",
-                                "url": "v2/publishers"
-                            }
-                        },
-                        "actionV2Authors": {
-                            "semanticObject": "Authors",
-                            "action": "display",
-                            "title": "Authors",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=v2.authors",
-                                "url": "v2/authors"
-                            }
-                        },
-                        "actionV2AuthorsAdmin": {
-                            "semanticObject": "Authors",
-                            "action": "manage",
-                            "title": "Authors Admin",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=v2.authors.admin",
-                                "url": "v2/authors-admin"
-                            }
-                        },
-                        "actionV2BooksDisplay": {
-                            "semanticObject": "Books",
-                            "action": "display",
-                            "title": "Browse Books",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=v2.books",
-                                "url": "v2/books"
-                            }
-                        },
-                        "actionV2Books": {
-                            "semanticObject": "Books",
-                            "action": "displayUI5latest",
-                            "title": "Browse Books",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=v2.booksUI5latest",
-                                "url": "v2/booksUI5latest"
-                            }
-                        },
-                        "actionV2BooksFreestyle": {
-                            "semanticObject": "Books",
-                            "action": "displayUI5latestFreestyle",
-                            "title": "Browse Books",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=v2.booksfreestyle",
-                                "url": "v2/books-freestyle/webapp"
-                            }
-                        },
-                        "actionV2AuthorsUI5latest": {
-                            "semanticObject": "Authors",
-                            "action": "displayUI5latest",
-                            "title": "Browse Authors",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=v2.authorsUI5latest",
-                                "url": "v2/authorsUI5latest"
-                            }
-                        },
-                        "actionAuthorsUI5latest": {
-                            "semanticObject": "V4Authors",
-                            "action": "displayUI5latest",
-                            "title": "Browse Authors",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=authorsUI5latest",
-                                "url": "authorsUI5latest/webapp"
-                            }
-                        },
-                        "actionV2BooksAdmin": {
-                            "semanticObject": "Books",
-                            "action": "manage",
-                            "title": "Books Admin",
-                            "signature": {
-                                "parameters": {},
-                                "additionalParameters": "allowed"
-                            },
-                            "resolutionResult": {
-                                "applicationType": "SAPUI5",
-                                "additionalInformation": "SAPUI5.Component=v2.books.admin",
-                                "url": "v2/books-admin"
-                            }
-                        }
-                    }
+              ]
+            },
+            {
+              "id": "Bookshop",
+              "title": "Bookshop",
+              "isPreset": true,
+              "isVisible": true,
+              "isGroupLocked": false,
+              "tiles": [
+                {
+                  "id": "BooksdisplayUI5latest",
+                  "title": "Books",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "BooksdisplayUI5latest",
+                    "title": "Books",
+                    "info": "",
+                    "targetURL": "#Books-display"
+                  }
+                },
+                {
+                  "id": "BrowseAuthorsApp",
+                  "title": "Authors",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "serviceRefreshInterval": 5,
+                  "properties": {
+                    "chipId": "catalogTile_002",
+                    "title": "Authors",
+                    "info": "",
+                    "targetURL": "#Authors-display"
+                  }
                 }
+              ]
+            },
+            {
+              "id": "ODataV2",
+              "title": "OData V2",
+              "isPreset": true,
+              "isVisible": true,
+              "isGroupLocked": false,
+              "tiles": [
+                {
+                  "id": "Orders",
+                  "title": "Orders",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V2catalogTile_Orders",
+                    "title": "Orders",
+                    "info": "Management",
+                    "targetURL": "#Orders-manage"
+                  }
+                },
+                {
+                  "id": "OrdersNoExt",
+                  "title": "Orders no Extension",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V2catalogTile_OrdersNoExt",
+                    "title": "Orders",
+                    "info": "no Extension",
+                    "targetURL": "#OrdersNoExt-manage"
+                  }
+                },
+                {
+                  "id": "Role",
+                  "title": "Role",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V2catalogTile_Role",
+                    "title": "Role",
+                    "info": "Management",
+                    "targetURL": "#Role-manage"
+                  }
+                },
+                {
+                  "id": "Users",
+                  "title": "Users",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V2catalogTile_Users",
+                    "title": "Users",
+                    "info": "Management",
+                    "targetURL": "#Users-manage"
+                  }
+                },
+                {
+                  "id": "Approvals",
+                  "title": "Approvals",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_000",
+                    "title": "Approvals",
+                    "info": "Manage",
+                    "targetURL": "#Approvals-manage"
+                  }
+                },
+                {
+                  "id": "BrowseBooksApp",
+                  "title": "Browse Books",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "catalogTile_001",
+                    "title": "Browse Books",
+                    "info": "The latest books",
+                    "targetURL": "#Books-display"
+                  }
+                },
+                {
+                  "id": "ManageBooksApp",
+                  "title": "Manage Books",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "serviceRefreshInterval": 5,
+                  "properties": {
+                    "chipId": "catalogTile_ManageBooksApp",
+                    "title": "Manage Books",
+                    "info": "Edit the list of books",
+                    "targetURL": "#Books-manage"
+                  }
+                },
+                {
+                  "id": "BrowsePublishersApp",
+                  "title": "Browse Publishers",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "serviceRefreshInterval": 5,
+                  "properties": {
+                    "chipId": "catalogTile_002",
+                    "title": "Browse Publishers",
+                    "info": "The list of Publishers",
+                    "targetURL": "#Publishers-display"
+                  }
+                },
+                {
+                  "id": "BrowseAuthorsApp",
+                  "title": "Browse Authors",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "serviceRefreshInterval": 5,
+                  "properties": {
+                    "chipId": "catalogTile_002",
+                    "title": "Browse Authors",
+                    "info": "The list of authors",
+                    "targetURL": "#Authors-display"
+                  }
+                },
+                {
+                  "id": "ManageAuthorsApp",
+                  "title": "Manage Authors",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "serviceRefreshInterval": 5,
+                  "properties": {
+                    "chipId": "catalogTile_ManageAuthorsApp",
+                    "title": "Manage Authors",
+                    "info": "Edit the list of authors",
+                    "targetURL": "#Authors-manage"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "ODataV2ui5latest",
+              "title": "OData V2 - Working with UI5 Latest",
+              "isPreset": true,
+              "isVisible": true,
+              "isGroupLocked": false,
+              "tiles": [
+                {
+                  "id": "Approvals",
+                  "title": "Approvals",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V2catalogTile_ApprovalsUI5latest",
+                    "title": "Approvals",
+                    "info": "Manage",
+                    "targetURL": "#Approvals-manageUI5latest"
+                  }
+                },
+                {
+                  "id": "Orders",
+                  "title": "Orders",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V2catalogTile_OrdersUI5latest",
+                    "title": "Orders",
+                    "info": "Management",
+                    "targetURL": "#Orders-manageUI5latest"
+                  }
+                },
+                {
+                  "id": "Role",
+                  "title": "Role",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "catalogTile_RoleUI5latest",
+                    "title": "Role",
+                    "info": "Management",
+                    "targetURL": "#Role-manageUI5latest"
+                  }
+                },
+                {
+                  "id": "Users",
+                  "title": "Users",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_UsersUI5latest",
+                    "title": "Users",
+                    "info": "Management",
+                    "targetURL": "#UsersUI5latest-manage"
+                  }
+                },
+                {
+                  "id": "BooksdisplayUI5latest",
+                  "title": "Browse Books",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "BooksdisplayUI5latest",
+                    "title": "Browse Books",
+                    "info": "The latest books",
+                    "targetURL": "#Books-displayUI5latest"
+                  }
+                },
+                {
+                  "id": "BooksdisplayUI5latestFreestyle",
+                  "title": "Browse Books",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "BooksdisplayUI5latestFreestyle",
+                    "title": "Browse Books",
+                    "info": "Freestyle",
+                    "targetURL": "#Books-displayUI5latestFreestyle"
+                  }
+                },
+                {
+                  "id": "AuthorsdisplayUI5latest",
+                  "title": "Browse Authors",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "AuthorsdisplayUI5latest",
+                    "title": "Browse Authors",
+                    "info": "The latest books",
+                    "targetURL": "#Authors-displayUI5latest"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "DataV4",
+              "title": "OData V4",
+              "isPreset": true,
+              "isVisible": true,
+              "isGroupLocked": false,
+              "tiles": [
+                {
+                  "id": "Orders",
+                  "title": "Orders",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_Orders",
+                    "title": "Orders",
+                    "info": "Management",
+                    "targetURL": "#V4Orders-manage"
+                  }
+                },
+                {
+                  "id": "Role",
+                  "title": "Role",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_Role",
+                    "title": "Role",
+                    "info": "Management",
+                    "targetURL": "#V4Role-manage"
+                  }
+                },
+                {
+                  "id": "Users",
+                  "title": "Users",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_Users",
+                    "title": "Users",
+                    "info": "Management",
+                    "targetURL": "#V4Users-manage"
+                  }
+                },
+                {
+                  "id": "WorkAssignments",
+                  "title": "Work Assignments",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_WorkAssignments",
+                    "title": "WorkAssignments",
+                    "info": "Management",
+                    "targetURL": "#V4WorkAssignments-manage"
+                  }
+                },
+                {
+                  "id": "V4Approvals",
+                  "title": "Approvals",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_000",
+                    "title": "Approvals",
+                    "info": "Manage",
+                    "targetURL": "#V4Approvals-manage"
+                  }
+                },
+                {
+                  "id": "V4BrowseBooksApp",
+                  "title": "Browse Books",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_001",
+                    "title": "Browse Books",
+                    "info": "The latest books",
+                    "targetURL": "#V4Books-display"
+                  }
+                },
+                {
+                  "id": "V4ManageBooksApp",
+                  "title": "Manage Books",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_010",
+                    "title": "Manage Books",
+                    "info": "Edit the list of books",
+                    "targetURL": "#V4Books-manage"
+                  }
+                },
+                {
+                  "id": "V4BrowseAuthorsApp",
+                  "title": "Browse Authors",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_002",
+                    "title": "Browse Authors",
+                    "info": "The list of authors",
+                    "targetURL": "#V4Authors-manage"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "DataV4UI5latest",
+              "title": "OData V4 - Working with UI5 Latest",
+              "isPreset": true,
+              "isVisible": true,
+              "isGroupLocked": false,
+              "tiles": [
+                {
+                  "id": "V4ApprovalsUI5latest",
+                  "title": "Approvals",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_Approvals000",
+                    "title": "Approvals",
+                    "info": "Manage",
+                    "targetURL": "#V4Approvals-manageUI5latest"
+                  }
+                },
+                {
+                  "id": "OrdersUI5latest",
+                  "title": "Orders",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_OrdersUI5latest",
+                    "title": "Orders",
+                    "info": "Management",
+                    "targetURL": "#V4Orders-manageUI5latest"
+                  }
+                },
+                {
+                  "id": "RoleUI5latest",
+                  "title": "Role",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_RoleUI5latest",
+                    "title": "Role",
+                    "info": "Management",
+                    "targetURL": "#V4Role-manageUI5latest"
+                  }
+                },
+                {
+                  "id": "Users",
+                  "title": "Users",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_UsersUI5latest",
+                    "title": "Users",
+                    "info": "Management",
+                    "targetURL": "#V4UsersUI5latest-manage"
+                  }
+                },
+                {
+                  "id": "V4BrowseBooksAppUI5latest",
+                  "title": "Browse Books",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_001UI5latest",
+                    "title": "Browse Books",
+                    "info": "The latest books",
+                    "targetURL": "#V4Books-displayUI5latest"
+                  }
+                },
+                {
+                  "id": "V4AuthorsUI5latest",
+                  "title": "Browse Authors",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_AuthorsUI5latest",
+                    "title": "Browse Authors",
+                    "targetURL": "#V4Authors-displayUI5latest"
+                  }
+                },
+                {
+                  "id": "WorkAssignmentsUI5latest",
+                  "title": "Work Assignments",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_WorkAssignmentsUI5latest",
+                    "title": "Work Assignments",
+                    "info": "Management",
+                    "targetURL": "#V4WorkAssignmentsUI5latest-manage"
+                  }
+                },
+                {
+                  "id": "ProductsUI5latest",
+                  "title": "Products",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_ProductsUI5latest",
+                    "title": "Products",
+                    "info": "Management",
+                    "targetURL": "#ProductsUI5latest-manage"
+                  }
+                }
+              ]
             }
+          ]
         }
+      }
+    },
+    "NavTargetResolution": {
+      "config": {
+        "enableClientSideTargetResolution": true
+      }
+    },
+    "ClientSideTargetResolution": {
+      "adapter": {
+        "config": {
+          "inbounds": {
+            "actionApprovals": {
+              "semanticObject": "V4Approvals",
+              "action": "manage",
+              "title": "Approvals",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=approvals",
+                "url": "approval/webapp"
+              }
+            },
+            "actionApprovalsUI5latest": {
+              "semanticObject": "V4Approvals",
+              "action": "manageUI5latest",
+              "title": "V4Approvals",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=approvalUI5latest",
+                "url": "approvalUI5latest/webapp"
+              }
+            },
+            "actionBooks": {
+              "semanticObject": "V4Books",
+              "action": "display",
+              "title": "Browse Books",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=bookshop",
+                "url": "browse/webapp"
+              },
+              "indicatorDataSource": {
+                "path": "catalog/Books/$count",
+                "refresh": 600
+              }
+            },
+            "actionBooksUI5latest": {
+              "semanticObject": "V4Books",
+              "action": "displayUI5latest",
+              "title": "Browse Books",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=bookshopUI5latest",
+                "url": "browseUI5latest/webapp"
+              },
+              "indicatorDataSource": {
+                "path": "catalog/Books/$count",
+                "refresh": 600
+              }
+            },
+            "manageBooks": {
+              "semanticObject": "V4Books",
+              "action": "manage",
+              "title": "Manage Books",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=admin",
+                "url": "admin/webapp"
+              },
+              "indicatorDataSource": {
+                "path": "catalog/Books/$count",
+                "refresh": 600
+              }
+            },
+            "actionAuthors": {
+              "semanticObject": "V4Authors",
+              "action": "manage",
+              "title": "Authors",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=authors",
+                "url": "authors/webapp"
+              }
+            },
+            "actionOrders": {
+              "semanticObject": "V4Orders",
+              "action": "manage",
+              "title": "Orders",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=orders",
+                "url": "orders/webapp"
+              }
+            },
+            "actionOrdersUI5latest": {
+              "semanticObject": "V4Orders",
+              "action": "manageUI5latest",
+              "title": "Orders",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=ordersUI5latest",
+                "url": "ordersUI5latest/webapp"
+              }
+            },
+            "actionV2OrdersNoExt": {
+              "semanticObject": "OrdersNoExt",
+              "action": "manage",
+              "title": "Orders no Extension",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=v2.orders-no-ext",
+                "url": "v2/orders-no-ext"
+              }
+            },
+            "actionV2Orders": {
+              "semanticObject": "Orders",
+              "action": "manage",
+              "title": "Orders",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=v2.orders",
+                "url": "v2/orders"
+              }
+            },
+            "actionV2OrdersUI5latest": {
+              "semanticObject": "Orders",
+              "action": "manageUI5latest",
+              "title": "Orders",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=v2.ordersUI5latest",
+                "url": "v2/ordersUI5latest"
+              }
+            },
+            "actionRole": {
+              "semanticObject": "V4Role",
+              "action": "manage",
+              "title": "Role",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=role",
+                "url": "role/webapp"
+              }
+            },
+            "actionRoleUI5latest": {
+              "semanticObject": "V4Role",
+              "action": "manageUI5latest",
+              "title": "Role",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=roleUI5latest",
+                "url": "roleUI5latest/webapp"
+              }
+            },
+            "actionV2Role": {
+              "semanticObject": "Role",
+              "action": "manage",
+              "title": "Role",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=v2.role",
+                "url": "v2/role"
+              }
+            },
+            "actionV2RoleUI5latest": {
+              "semanticObject": "Role",
+              "action": "manageUI5latest",
+              "title": "Role",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=v2.roleUI5latest",
+                "url": "v2/roleUI5latest"
+              }
+            },
+            "actionWorkAssignmentsUI5latest": {
+              "semanticObject": "V4WorkAssignmentsUI5latest",
+              "action": "manage",
+              "title": "Work Assignments",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=WorkAssignmentsUI5latest",
+                "url": "workAssignmentsUI5latest/webapp"
+              }
+            },
+            "actionProductsUI5latest": {
+              "semanticObject": "ProductsUI5latest",
+              "action": "manage",
+              "title": "Work Assignments",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=productUI5latest",
+                "url": "productUI5latest/webapp"
+              }
+            },
+            "actionWorkAssignments": {
+              "semanticObject": "V4WorkAssignments",
+              "action": "manage",
+              "title": "WorkAssignments",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=WorkAssignments",
+                "url": "workAssignments/webapp"
+              }
+            },
+            "actionUsersUI5latest": {
+              "semanticObject": "V4UsersUI5latest",
+              "action": "manage",
+              "title": "Users",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=usersUI5latest",
+                "url": "usersUI5latest/webapp"
+              }
+            },
+            "actionUsers": {
+              "semanticObject": "V4Users",
+              "action": "manage",
+              "title": "Users",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=users",
+                "url": "users/webapp"
+              }
+            },
+            "actionV2Users": {
+              "semanticObject": "Users",
+              "action": "manage",
+              "title": "Users",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=v2.users.admin",
+                "url": "v2/users-admin"
+              }
+            },
+            "actionV2UsersUI5latest": {
+              "semanticObject": "UsersUI5latest",
+              "action": "manage",
+              "title": "Users",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=v2.usersUI5latest",
+                "url": "v2/users-adminUI5latest"
+              }
+            },
+            "actionV2Approvals": {
+              "semanticObject": "Approvals",
+              "action": "manage",
+              "title": "Approvals",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=v2.approvals",
+                "url": "v2/approval"
+              }
+            },
+            "actionV2ApprovalsUI5latest": {
+              "semanticObject": "Approvals",
+              "action": "manageUI5latest",
+              "title": "Approvals",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=v2.approvalUI5latest",
+                "url": "v2/approvalUI5latest"
+              }
+            },
+            "actionV2Publishers": {
+              "semanticObject": "Publishers",
+              "action": "display",
+              "title": "Publishers",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=v2.publishers",
+                "url": "v2/publishers"
+              }
+            },
+            "actionV2Authors": {
+              "semanticObject": "Authors",
+              "action": "display",
+              "title": "Authors",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=v2.authors",
+                "url": "v2/authors"
+              }
+            },
+            "actionV2AuthorsAdmin": {
+              "semanticObject": "Authors",
+              "action": "manage",
+              "title": "Authors Admin",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=v2.authors.admin",
+                "url": "v2/authors-admin"
+              }
+            },
+            "actionV2BooksDisplay": {
+              "semanticObject": "Books",
+              "action": "display",
+              "title": "Browse Books",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=v2.books",
+                "url": "v2/books"
+              }
+            },
+            "actionV2Books": {
+              "semanticObject": "Books",
+              "action": "displayUI5latest",
+              "title": "Browse Books",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=v2.booksUI5latest",
+                "url": "v2/booksUI5latest"
+              }
+            },
+            "actionV2BooksFreestyle": {
+              "semanticObject": "Books",
+              "action": "displayUI5latestFreestyle",
+              "title": "Browse Books",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=v2.booksfreestyle",
+                "url": "v2/books-freestyle/webapp"
+              }
+            },
+            "actionV2AuthorsUI5latest": {
+              "semanticObject": "Authors",
+              "action": "displayUI5latest",
+              "title": "Browse Authors",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=v2.authorsUI5latest",
+                "url": "v2/authorsUI5latest"
+              }
+            },
+            "actionAuthorsUI5latest": {
+              "semanticObject": "V4Authors",
+              "action": "displayUI5latest",
+              "title": "Browse Authors",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=authorsUI5latest",
+                "url": "authorsUI5latest/webapp"
+              }
+            },
+            "actionV2BooksAdmin": {
+              "semanticObject": "Books",
+              "action": "manage",
+              "title": "Books Admin",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=v2.books.admin",
+                "url": "v2/books-admin"
+              }
+            }
+          }
+        }
+      }
     }
+  }
 }
