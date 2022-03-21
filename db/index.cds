@@ -15,6 +15,8 @@ using from './cloudFoundry';
 using from './currencies';
 // temporal example
 using from './temporal';
+//
+using from './agreement';
 // 2) In addition, generic service providers need views for exposed entities
 using from '../srv/admin-service';
 using from '../srv/cat-service';

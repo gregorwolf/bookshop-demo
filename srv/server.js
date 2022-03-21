@@ -5,7 +5,7 @@ const passport = require("passport");
 const xsenv = require("@sap/xsenv");
 const express = require("express");
 const SDKUtil = require("@sap-cloud-sdk/util");
-const mqtt = require("./mqtt");
+// const mqtt = require("./mqtt");
 
 var xsuaaCredentials = false;
 if (process.env.NODE_ENV === "production") {

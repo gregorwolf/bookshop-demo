@@ -1,0 +1,19 @@
+###
+GET http://localhost:4004/agreement/
+###
+GET http://localhost:4004/agreement/Agreement
+###
+GET http://localhost:4004/agreement/Agreement
+  ?$expand=items($expand=pricings($expand=status))
+###
+GET http://localhost:4004/agreement/ChangeSet
+  ?$expand=agreementItemPricings($expand=status),changeSetToAgreements
+###
+GET http://localhost:4004/agreement/ChangeSetSearch
+  ?$count=true
+  &$expand=changeSetToAgreements($expand=agreement)
+  &$filter=agreementItemPricings/any(d:d/status_code eq 'NEW') or agreementItemPricings/any(d:d/status_code eq 'CLOSED')
+###
+GET http://localhost:4004/agreement/AgreementChangesAndStatus
+###
+GET http://localhost:4004/agreement/ChangeSetToAgreementSearch
