@@ -51,7 +51,7 @@
     "update:app": "cd app && npm update",
     "update:approuter": "cd approuter && npm update",
     "update:standalone-v2-proxy": "cd standalone-v2-proxy && npm update",
-    "deploy": "cds deploy db --to sqlite:db/bookshop.db --no-save",
+    "deploy": "cds deploy --to sqlite:db/bookshop.db --no-save",
     "deploy:cf": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext",
     "deploy:cf:ui": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-deployer",
     "deploy:cf:srv": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-srv",
