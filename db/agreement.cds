@@ -54,11 +54,11 @@ view ChangeSetToAgreementSearch as
     on  ac.changeSetId = csta.changeSet.ID
     and ac.agreementId = csta.agreement.ID
   {
-    agreement,
-    changeSet,
-    active,
-    ac.status      as status,
-    ac.noOfChanges as noOfChanges,
+    key agreement,
+    key changeSet,
+        active,
+        ac.status      as status,
+        ac.noOfChanges as noOfChanges,
   };
 
 
@@ -69,7 +69,7 @@ view ChangeSetSearch as
   left join ChangeSetToFinalized as ctf
     on ctf.changeSetId = c.ID
   mixin {
-    changeSetToAgreements : Association to ChangeSetToAgreementSearch
+    changeSetToAgreements : Association to many ChangeSetToAgreementSearch
                               on c.ID = changeSetToAgreements.changeSet.ID;
   }
   into {
