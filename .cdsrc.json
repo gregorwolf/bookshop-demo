@@ -22,6 +22,12 @@
                         "booksadmin"
                     ]
                 },
+                "roleadmin": {
+                    "roles": [
+                        "admin",
+                        "roleadmin"
+                    ]
+                },
                 "littleadmin": {
                     "password": "",
                     "roles": [
