@@ -154,7 +154,7 @@ X-CSRF-Token: {{notificationCSRF}}
     ],
     "Recipients": [
         {
-            "RecipientId": "gregor.wolf@gmail.com"
+            "RecipientId": "{{$dotenv notification_recipient_email}}"
         }
     ]
 }
