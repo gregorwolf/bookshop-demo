@@ -1,7 +1,7 @@
 ### Get Access Token for Cloud Foundry using Password Grant
 # https://blogs.sap.com/2020/03/02/using-postman-for-api-testing-with-xsuaa/
 # @name requestAccessTokenHANA
-POST https://login.cf.eu10.hana.ondemand.com/oauth/token
+POST {{$dotenv cf_login}}/oauth/token
 Accept: application/json;charset=utf8
 Authorization: Basic cf:
 Content-Type: application/x-www-form-urlencoded
@@ -17,26 +17,26 @@ grant_type=password
 ### Start your SAP HANA Cloud Trial instance with an iOS shortcut
 ### https://blogs.sap.com/2021/05/08/start-your-sap-hana-cloud-trial-instance-with-an-ios-shortcut/
 ###
-GET https://api.cf.eu10.hana.ondemand.com/v3/service_instances
+GET {{$dotenv cf_api}}/v3/service_instances
 Authorization: Bearer {{access_token}}
 
 ###
 @hana=fed4bc0d-71b1-479d-857b-14ba1ec98fb0
 
 ###
-GET https://api.cf.eu10.hana.ondemand.com/v3/service_instances/{{hana}}
+GET {{$dotenv cf_api}}/v3/service_instances/{{hana}}
 Authorization: Bearer {{access_token}}
 
 ###
-GET https://api.cf.eu10.hana.ondemand.com/v3/service_instances/{{hana}}/parameters
+GET {{$dotenv cf_api}}/v3/service_instances/{{hana}}/parameters
 Authorization: Bearer {{access_token}}
 
 ###
-GET https://api.cf.eu10.hana.ondemand.com/v3/service_instances/{{hana}}/shared_spaces
+GET {{$dotenv cf_api}}/v3/service_instances/{{hana}}/shared_spaces
 Authorization: Bearer {{access_token}}
 
 ###
-PATCH https://api.cf.eu10.hana.ondemand.com/v3/service_instances/{{hana}}
+PATCH {{$dotenv cf_api}}/v3/service_instances/{{hana}}
 Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
