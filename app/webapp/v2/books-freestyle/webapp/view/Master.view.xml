@@ -2,6 +2,7 @@
 	controllerName="v2.booksfreestyle.controller.Master"
 	xmlns="sap.m"
 	xmlns:semantic="sap.f.semantic"
+	xmlns:smartTable="sap.ui.comp.smarttable"
 	xmlns:mvc="sap.ui.core.mvc">
 
 	<semantic:SemanticPage
@@ -15,6 +16,17 @@
 				level="H2"/>
 		</semantic:titleHeading>
 		<semantic:content>
+			<smartTable:SmartTable id="ID" entitySet="/Books"
+				tableType="ResponsiveTable"
+				useExportToExcel="true" 
+				useVariantManagement="false"
+				useTablePersonalisation="true"
+				header="Line Items"
+				showRowCount="true"
+				persistencyKey="SmartTableAnalytical_Explored"
+				enableAutoBinding="true"
+				demandPopin="true" 
+				enableAutoColumnWidth="true"></smartTable:SmartTable>
 			<!-- For client side filtering add this to the items attribute: parameters: {operationMode: 'Client'}}" -->
 			<List
 				id="list"
