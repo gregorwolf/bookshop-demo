@@ -194,8 +194,8 @@ annotate my.Books with @(UI : {
         MaxItems  : 10,
         SortOrder : [{
             $Type      : 'Common.SortOrderType',
-            Property   : title,
-            Descending : false
+            Property   : price,
+            Descending : true
         }]
     },
     Identification      : [{Value : title}],
