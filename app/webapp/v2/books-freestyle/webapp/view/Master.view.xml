@@ -1,111 +1,156 @@
 <mvc:View
-	controllerName="v2.booksfreestyle.controller.Master"
-	xmlns="sap.m"
-	xmlns:semantic="sap.f.semantic"
-	xmlns:smartTable="sap.ui.comp.smarttable"
-	xmlns:mvc="sap.ui.core.mvc">
+  controllerName="v2.booksfreestyle.controller.Master"
+  xmlns="sap.m"
+  xmlns:semantic="sap.f.semantic"
+  xmlns:smartTable="sap.ui.comp.smarttable"
+  xmlns:core="sap.ui.core"
+  xmlns:mvc="sap.ui.core.mvc">
 
-	<semantic:SemanticPage
-		id="masterPage"
-		preserveHeaderStateOnScroll="true"
-		toggleHeaderOnTitleClick="false">
-		<semantic:titleHeading>
-			<Title
-				id="masterPageTitle"
-				text="{masterView>/title}"
-				level="H2"/>
-		</semantic:titleHeading>
-		<semantic:content>
-			<smartTable:SmartTable id="ID" entitySet="/Books"
-				tableType="ResponsiveTable"
-				useExportToExcel="true" 
-				useVariantManagement="false"
-				useTablePersonalisation="true"
-				header="Line Items"
-				showRowCount="true"
-				persistencyKey="SmartTableAnalytical_Explored"
-				enableAutoBinding="true"
-				demandPopin="true" 
-				enableAutoColumnWidth="true"></smartTable:SmartTable>
-			<!-- For client side filtering add this to the items attribute: parameters: {operationMode: 'Client'}}" -->
-			<List
-				id="list"
-				width="auto"
-				class="sapFDynamicPageAlignContent"
-				items="{
-					path: '/Books',
-					sorter: {
-						path: 'ID',
-						descending: false
-					},
-					groupHeaderFactory: '.createGroupHeader'
-				}"
-				busyIndicatorDelay="{masterView>/delay}"
-				noDataText="{masterView>/noDataText}"
-				mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}"
-				growing="true"
-				growingScrollToLoad="true"
-				updateFinished=".onUpdateFinished"
-				selectionChange=".onSelectionChange">
-				<infoToolbar>
-					<Toolbar
-						active="true"
-						id="filterBar"
-						visible="{masterView>/isFilterBarVisible}"
-						press=".onOpenViewSettings">
-						<Title
-							id="filterBarLabel"
-							text="{masterView>/filterBarLabel}"
-							level="H3"/>
-					</Toolbar>
-				</infoToolbar>
-				<headerToolbar>
-					<OverflowToolbar>
-						<SearchField
-							id="searchField"
-							showRefreshButton="true"
-							tooltip="{i18n>masterSearchTooltip}"
-							search=".onSearch"
-							width="auto">
-							<layoutData>
-								<OverflowToolbarLayoutData
-									minWidth="150px"
-									maxWidth="240px"
-									shrinkable="true"
-									priority="NeverOverflow"/>
-							</layoutData>
-						</SearchField>
-						<ToolbarSpacer/>
-						<Button
-							id="sortButton"
-							press=".onOpenViewSettings"
-							icon="sap-icon://sort"
-							type="Transparent"/>
-						<Button
-							id="filterButton"
-							press=".onOpenViewSettings"
-							icon="sap-icon://filter"
-							type="Transparent"/>
-						<Button
-							id="groupButton"
-							press=".onOpenViewSettings"
-							icon="sap-icon://group-2"
-							type="Transparent"/>
-					</OverflowToolbar>
-				</headerToolbar>
-				<items>
-					<ObjectListItem
-						type="Navigation"
-						press=".onSelectionChange"
-						title="{ID}"
-						number="{
-							path: 'stock',
-							formatter: '.formatter.currencyValue'
-						}"
->
-					</ObjectListItem>
-				</items>
-			</List>
-		</semantic:content>
-	</semantic:SemanticPage>
+  <semantic:SemanticPage
+    id="masterPage"
+    preserveHeaderStateOnScroll="true"
+    toggleHeaderOnTitleClick="false">
+    <semantic:titleHeading>
+      <Title
+        id="masterPageTitle"
+        text="{masterView>/title}"
+        level="H2"/>
+    </semantic:titleHeading>
+    <semantic:headerContent>
+      <FlexBox
+            alignItems="Start"
+            justifyContent="SpaceBetween">
+        <items>
+            <Panel backgroundDesign="Transparent">
+              <content>
+                <smartTable:SmartTable id="Table2ID" 
+                    entitySet="Books"
+                    tableType="Table"
+                    useExportToExcel="true" 
+                    useVariantManagement="false"
+                    useTablePersonalisation="true"
+                    header="Table"
+                    showRowCount="true"
+                    enableAutoBinding="true"
+                    enableAutoColumnWidth="true"
+                    requestAtLeastFields="ID,title">
+                </smartTable:SmartTable>
+                <!-- 
+                <smartTable:SmartTable id="TableID" 
+                    entitySet="Books"
+                    tableType="Table"
+                    useExportToExcel="true" 
+                    useVariantManagement="false"
+                    useTablePersonalisation="true"
+                    header="Table"
+                    showRowCount="true"
+                    enableAutoBinding="true"
+                    enableAutoColumnWidth="true"
+                    requestAtLeastFields="ID,title">
+                    <Table id="BooksTable">
+                        <columns>
+                            <Column id="BookIDcolumn">
+                                <Label id="BookIDlabel" text="Book (ID)"/>
+                                <customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey": "BookID", "columnIndex" : "0"}'/>
+                                </customData>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem id="BookColumnListItem">
+                                <cells>
+                                    <ObjectIdentifier id="BookIDidentifier" text="{title} ({ID})"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </smartTable:SmartTable>
+                -->
+              </content>
+            </Panel>
+        </items>
+      </FlexBox>
+    </semantic:headerContent>
+    <semantic:content>
+      <!-- For client side filtering add this to the items attribute: parameters: {operationMode: 'Client'}}" -->
+      <!-- -->
+      <List
+        id="list"
+        width="auto"
+        class="sapFDynamicPageAlignContent"
+        items="{
+          path: '/Books',
+          sorter: {
+            path: 'ID',
+            descending: false
+          },
+          groupHeaderFactory: '.createGroupHeader'
+        }"
+        busyIndicatorDelay="{masterView>/delay}"
+        noDataText="{masterView>/noDataText}"
+        mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}"
+        growing="true"
+        growingScrollToLoad="true"
+        updateFinished=".onUpdateFinished"
+        selectionChange=".onSelectionChange">
+        <infoToolbar>
+          <Toolbar
+            active="true"
+            id="filterBar"
+            visible="{masterView>/isFilterBarVisible}"
+            press=".onOpenViewSettings">
+            <Title
+              id="filterBarLabel"
+              text="{masterView>/filterBarLabel}"
+              level="H3"/>
+          </Toolbar>
+        </infoToolbar>
+        <headerToolbar>
+          <OverflowToolbar>
+            <SearchField
+              id="searchField"
+              showRefreshButton="true"
+              tooltip="{i18n>masterSearchTooltip}"
+              search=".onSearch"
+              width="auto">
+              <layoutData>
+                <OverflowToolbarLayoutData
+                  minWidth="150px"
+                  maxWidth="240px"
+                  shrinkable="true"
+                  priority="NeverOverflow"/>
+              </layoutData>
+            </SearchField>
+            <ToolbarSpacer/>
+            <Button
+              id="sortButton"
+              press=".onOpenViewSettings"
+              icon="sap-icon://sort"
+              type="Transparent"/>
+            <Button
+              id="filterButton"
+              press=".onOpenViewSettings"
+              icon="sap-icon://filter"
+              type="Transparent"/>
+            <Button
+              id="groupButton"
+              press=".onOpenViewSettings"
+              icon="sap-icon://group-2"
+              type="Transparent"/>
+          </OverflowToolbar>
+        </headerToolbar>
+        <items>
+          <ObjectListItem
+            type="Navigation"
+            press=".onSelectionChange"
+            title="{ID}"
+            number="{
+              path: 'stock',
+              formatter: '.formatter.currencyValue'
+            }">
+          </ObjectListItem>
+        </items>
+      </List>
+    </semantic:content>
+  </semantic:SemanticPage>
 </mvc:View>
