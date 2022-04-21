@@ -1,0 +1,16 @@
+{
+  "plugins": [
+    "@sap/ui5-jsdocs",
+    "eslint-plugin-fiori-custom"
+  ],
+  "extends": [
+    "plugin:@sap/ui5-jsdocs/recommended",
+    "eslint:recommended",
+    "./node_modules/eslint-plugin-fiori-custom/configure.eslintrc"
+  ],
+  "ignorePatterns": [
+    "webapp/localservice/**",
+    "webapp/test/**",
+    "dist/**"
+  ]
+}

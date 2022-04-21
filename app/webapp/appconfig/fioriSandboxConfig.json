@@ -269,6 +269,17 @@
                   }
                 },
                 {
+                  "id": "BooksdisplayUI5latestFreestyleApp",
+                  "title": "Browse Books",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "BooksdisplayUI5latestFreestyleApp",
+                    "title": "Browse Books",
+                    "info": "Freestyle App",
+                    "targetURL": "#Books-displayUI5latestFreestyleApp"
+                  }
+                },
+                {
                   "id": "AuthorsdisplayUI5latest",
                   "title": "Browse Authors",
                   "tileType": "sap.ushell.ui.tile.StaticTile",
@@ -933,6 +944,20 @@
                 "applicationType": "SAPUI5",
                 "additionalInformation": "SAPUI5.Component=v2.booksfreestyle",
                 "url": "v2/books-freestyle/webapp"
+              }
+            },
+            "actionV2BooksFreestyleApp": {
+              "semanticObject": "Books",
+              "action": "displayUI5latestFreestyleApp",
+              "title": "Browse Books",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=v2.booksfreestyleapp",
+                "url": "v2/books-freestyle-app/webapp"
               }
             },
             "actionV2AuthorsUI5latest": {

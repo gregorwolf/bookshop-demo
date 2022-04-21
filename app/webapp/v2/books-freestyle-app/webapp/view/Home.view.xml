@@ -1,0 +1,60 @@
+<mvc:View
+    controllerName="v2.booksfreestyleapp.controller.Home"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <Shell id="shell">
+        <App id="app">
+            <pages>
+                <Page id="page" title="{i18n>title}">
+                    <content>
+                        <smartTable:SmartTable id="Table2ID" 
+                            entitySet="Books"
+                            tableType="Table"
+                            useExportToExcel="true" 
+                            useVariantManagement="false"
+                            useTablePersonalisation="true"
+                            header="Table"
+                            showRowCount="true"
+                            enableAutoBinding="true"
+                            enableAutoColumnWidth="true"
+                            requestAtLeastFields="ID,title">
+                        </smartTable:SmartTable>
+                        <smartTable:SmartTable id="TableID" 
+                            entitySet="Books"
+                            tableType="Table"
+                            useExportToExcel="true" 
+                            useVariantManagement="false"
+                            useTablePersonalisation="true"
+                            header="Table"
+                            showRowCount="true"
+                            enableAutoBinding="true"
+                            enableAutoColumnWidth="true"
+                            requestAtLeastFields="ID,title">
+                            <Table id="BooksTable">
+                                <columns>
+                                    <Column id="BookIDcolumn">
+                                        <Label id="BookIDlabel" text="Book (ID)"/>
+                                        <customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey": "BookID", "columnIndex" : "0"}'/>
+                                        </customData>
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem id="BookColumnListItem">
+                                        <cells>
+                                            <ObjectIdentifier id="BookIDidentifier" text="{title} ({ID})"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </smartTable:SmartTable>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>
