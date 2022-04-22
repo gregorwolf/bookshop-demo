@@ -93,6 +93,13 @@
       "deploy-format": "hdbtable"
     },
     "requires": {
+      "CMISdocumentRepository": {
+        "kind": "rest",
+        "credentials": {
+          "destination": "CMISdocumentRepository",
+          "requestTimeout": 30000
+        }
+      },
       "GWSAMPLE_BASIC": {
         "kind": "odata-v2",
         "model": "srv/external/GWSAMPLE_BASIC",
