@@ -91,6 +91,7 @@ if (services.sdm) {
       }
     });
     srv.on("getChildren", async (req) => {
+      // Implementation using CmisJS
       const repositories = await session
         .setToken(await getToken())
         .loadRepositories();
@@ -100,6 +101,13 @@ if (services.sdm) {
       } catch (error) {
         console.log(error.message);
       }
+    });
+  });
+} else {
+  module.exports = cds.service.impl((srv) => {
+    srv.on("getChildren", async (req) => {
+      const cmisService = await cds.connect.to("CMISdocumentRepository");
+      return cmisService.get("/");
     });
   });
 }
