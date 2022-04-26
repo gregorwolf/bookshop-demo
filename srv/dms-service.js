@@ -1,3 +1,5 @@
+const { PassThrough } = require("stream");
+var FormData = require("form-data");
 const cds = require("@sap/cds");
 const axios = require("axios");
 const cmis = require("cmis");
@@ -127,6 +129,77 @@ if (services.sdm) {
         `&propertyValue[1]=${req.data.folderName}`;
       const headers = { "Content-Type": "application/x-www-form-urlencoded" };
       return cmisService.send({ method: "POST", path: "/", data, headers });
+    });
+    srv.on("UPDATE", "Documents", async (req, next) => {
+      if (req.data.content) {
+        const db = await cds.connect.to("db");
+        const cmisService = await cds.connect.to("CMISdocumentRepository");
+        const documentId = req.data.ID;
+        const document = await db.run(
+          SELECT.one.from("Documents").where({
+            ID: documentId,
+          })
+        );
+
+        const stream = new PassThrough();
+        const chunks = [];
+        stream.on("data", (chunk) => {
+          chunks.push(chunk);
+        });
+        stream.on("end", () => {
+          document.content = Buffer.concat(chunks);
+          /*
+          var form = new FormData();
+          form.append("cmisaction", "createDocument");
+          form.append("propertyId[0]", "cmis:objectTypeId");
+          form.append("propertyValue[0]", "cmis:document");
+          form.append("propertyId[1]", "cmis:name");
+          form.append("propertyValue[1]", document.filename);
+          form.append("file", document.content);
+          const data
+          const data = form.getBuffer();
+          const headers = form.getHeaders();
+          */
+          const headers = {
+            "Content-Type": `multipart/form-data;boundary="WebKitFormBoundary7MA4YWxkTrZu0gW"`,
+          };
+          headers.Accept = `*/*`;
+          const data = `--WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="cmisaction"
+
+createDocument
+--WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="propertyId[0]"
+
+cmis:objectTypeId
+--WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="propertyValue[0]"
+
+cmis:document
+--WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="propertyId[1]"
+
+cmis:name
+--WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="propertyValue[1]"
+
+${document.filename}
+--WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="${document.filename}"
+Content-Type: image/png
+
+${document.content}
+--WebKitFormBoundary7MA4YWxkTrZu0gW--`;
+
+          return cmisService.send({
+            method: "POST",
+            path: "/folder01",
+            data,
+            headers,
+          });
+        });
+        req.data.content.pipe(stream);
+      }
     });
   });
 }

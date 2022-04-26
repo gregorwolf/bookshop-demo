@@ -21,3 +21,30 @@ Content-Type: application/json
 {
   "folderName": "{{folder}}"
 }
+
+### Create Picture without mediatype
+POST http://localhost:4004/document-management/Documents
+Authorization: Basic admin:
+Accept: application/json
+Content-Type: application/json
+
+{ 
+  "ID": "da07ae51-d0d3-41e7-a737-2555a213e5a9",
+  "mediatype": "image/png",
+  "filename": "Test.png"
+}
+
+### Upload Binary PNG
+PUT http://localhost:4004/document-management/Documents(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content
+Authorization: Basic admin:
+Content-Type: image/png
+
+< ./Test.png
+
+### Read Binary
+GET http://localhost:4004/document-management/Documents(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content
+Authorization: Basic admin:
+
+### Delete Binary
+DELETE http://localhost:4004/document-management/Documents(da07ae51-d0d3-41e7-a737-2555a213e5a9)
+Authorization: Basic admin:
