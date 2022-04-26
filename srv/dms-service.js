@@ -106,8 +106,27 @@ if (services.sdm) {
 } else {
   module.exports = cds.service.impl((srv) => {
     srv.on("getChildren", async (req) => {
+      console.log(req.data.folderName);
+      if (!req.data.folderName) {
+        return req.error("No folderName provided");
+      }
       const cmisService = await cds.connect.to("CMISdocumentRepository");
-      return cmisService.get("/");
+      return cmisService.get("/" + req.data.folderName);
+    });
+    srv.on("createFolder", async (req) => {
+      console.log(req.data.folderName);
+      if (!req.data.folderName) {
+        return req.error("No folderName provided");
+      }
+      const cmisService = await cds.connect.to("CMISdocumentRepository");
+      const data =
+        `cmisAction=createFolder` +
+        `&propertyId[0]=cmis:objectTypeId` +
+        `&propertyValue[0]=cmis:folder` +
+        `&propertyId[1]=cmis:name` +
+        `&propertyValue[1]=${req.data.folderName}`;
+      const headers = { "Content-Type": "application/x-www-form-urlencoded" };
+      return cmisService.send({ method: "POST", path: "/", data, headers });
     });
   });
 }
