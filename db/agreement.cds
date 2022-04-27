@@ -102,21 +102,26 @@ view AgreementChangesAndStatus as
     on  pai.ID = paip.item.ID
     and c.ID   = paip.changeSet.ID
   {
-    pa.ID as agreementId,
-    c.ID  as changeSetId,
+    pa.ID  as agreementId,
+    c.ID   as changeSetId,
     count(
       paip.ID
-    )     as noOfChanges : String,
-    group_concat(
-      distinct(
-        paip.status.code
-      )
-    )     as status      : Integer,
-    group_concat(
-      distinct(
-        paip.ID
-      )
-    )     as pricingIds  : String
+    )      as noOfChanges : String,
+    // Quick fix to be HANA Compatible
+    1      as status      : Integer,
+    'Test' as pricingIds  : String
+  /*
+  group_concat(
+    distinct(
+      paip.status.code
+    )
+  )     as status      : Integer,
+  group_concat(
+    distinct(
+      paip.ID
+    )
+  )     as pricingIds  : String
+  */
   }
   group by
     pa.ID,
