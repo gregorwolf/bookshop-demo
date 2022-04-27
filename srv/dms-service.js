@@ -1,5 +1,6 @@
 const { PassThrough } = require("stream");
 var FormData = require("form-data");
+const { executeHttpRequest, retrieveJwt } = require("@sap-cloud-sdk/core");
 const cds = require("@sap/cds");
 const axios = require("axios");
 const cmis = require("cmis");
@@ -149,6 +150,7 @@ if (services.sdm) {
         stream.on("end", () => {
           document.content = Buffer.concat(chunks);
           /*
+          // FormData
           var form = new FormData();
           form.append("cmisaction", "createDocument");
           form.append("propertyId[0]", "cmis:objectTypeId");
@@ -160,6 +162,7 @@ if (services.sdm) {
           const data = form.getBuffer();
           const headers = form.getHeaders();
           */
+          // Manual
           const headers = {
             "Content-Type": `multipart/form-data;boundary="WebKitFormBoundary7MA4YWxkTrZu0gW"`,
           };
@@ -190,16 +193,52 @@ Content-Type: image/png
 
 ${document.content}
 --WebKitFormBoundary7MA4YWxkTrZu0gW--`;
-
+          /*
+          // CAP
           return cmisService.send({
             method: "POST",
             path: "/folder01",
             data,
             headers,
           });
+          */
+          // Cloud SDK
+          const destination = getDestination(
+            req,
+            cds.env.requires.CMISdocumentRepository.credentials.destination
+          );
+          /*
+try {
+          const postResponse = await executeHttpRequest(
+          destination,
+          {
+            url: "/folder01",
+            method: "POST",
+            headers,
+            data,
+          },
+          {
+            fetchCsrfToken: false,
+          }
+        );
+} catch (error) {
+  
+}
+*/
         });
         req.data.content.pipe(stream);
       }
     });
   });
+}
+
+function getDestination(req, destinationName) {
+  const destination = {
+    destinationName: destinationName,
+  };
+  const jwt = retrieveJwt(req);
+  if (jwt && jwt !== "") {
+    destination.jwt = jwt;
+  }
+  return destination;
 }
