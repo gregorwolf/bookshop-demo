@@ -41,6 +41,9 @@ Content-Type: image/png
 
 < ./Test.png
 
+### Read Metadata
+GET http://localhost:4004/document-management/Documents(da07ae51-d0d3-41e7-a737-2555a213e5a9)
+Authorization: Basic admin:
 ### Read Binary
 GET http://localhost:4004/document-management/Documents(da07ae51-d0d3-41e7-a737-2555a213e5a9)/content
 Authorization: Basic admin:

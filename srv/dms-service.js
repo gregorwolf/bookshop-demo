@@ -1,4 +1,4 @@
-const { PassThrough } = require("stream");
+const { Readable, PassThrough } = require("stream");
 var FormData = require("form-data");
 const { executeHttpRequest, retrieveJwt } = require("@sap-cloud-sdk/core");
 const cds = require("@sap/cds");
@@ -116,6 +116,7 @@ if (services.sdm) {
       const cmisService = await cds.connect.to("CMISdocumentRepository");
       return cmisService.get("/" + req.data.folderName);
     });
+
     srv.on("createFolder", async (req) => {
       console.log(req.data.folderName);
       if (!req.data.folderName) {
@@ -131,6 +132,7 @@ if (services.sdm) {
       const headers = { "Content-Type": "application/x-www-form-urlencoded" };
       return cmisService.send({ method: "POST", path: "/", data, headers });
     });
+
     srv.on("UPDATE", "Documents", async (req, next) => {
       if (req.data.content) {
         const db = await cds.connect.to("db");
@@ -141,15 +143,16 @@ if (services.sdm) {
             ID: documentId,
           })
         );
-
+        if (!document) {
+          return req.error("metadata does not exist");
+        }
         const stream = new PassThrough();
         const chunks = [];
         stream.on("data", (chunk) => {
           chunks.push(chunk);
         });
-        stream.on("end", () => {
+        stream.on("end", async () => {
           document.content = Buffer.concat(chunks);
-          /*
           // FormData
           var form = new FormData();
           form.append("cmisaction", "createDocument");
@@ -157,43 +160,12 @@ if (services.sdm) {
           form.append("propertyValue[0]", "cmis:document");
           form.append("propertyId[1]", "cmis:name");
           form.append("propertyValue[1]", document.filename);
-          form.append("file", document.content);
-          const data
+          form.append("file", document.content, {
+            filename: document.filename,
+            contentType: "image/png",
+          });
           const data = form.getBuffer();
           const headers = form.getHeaders();
-          */
-          // Manual
-          const headers = {
-            "Content-Type": `multipart/form-data;boundary="WebKitFormBoundary7MA4YWxkTrZu0gW"`,
-          };
-          headers.Accept = `*/*`;
-          const data = `--WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="cmisaction"
-
-createDocument
---WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="propertyId[0]"
-
-cmis:objectTypeId
---WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="propertyValue[0]"
-
-cmis:document
---WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="propertyId[1]"
-
-cmis:name
---WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="propertyValue[1]"
-
-${document.filename}
---WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="file"; filename="${document.filename}"
-Content-Type: image/png
-
-${document.content}
---WebKitFormBoundary7MA4YWxkTrZu0gW--`;
-          /*
           // CAP
           return cmisService.send({
             method: "POST",
@@ -201,33 +173,90 @@ ${document.content}
             data,
             headers,
           });
-          */
+          /*
           // Cloud SDK
           const destination = getDestination(
             req,
             cds.env.requires.CMISdocumentRepository.credentials.destination
           );
-          /*
-try {
-          const postResponse = await executeHttpRequest(
-          destination,
-          {
-            url: "/folder01",
-            method: "POST",
-            headers,
-            data,
-          },
-          {
-            fetchCsrfToken: false,
+          try {
+            const postResponse = await executeHttpRequest(
+              destination,
+              {
+                url: "/folder01",
+                method: "POST",
+                headers,
+                data,
+              },
+              {
+                fetchCsrfToken: false,
+              }
+            );
+            console.log(postResponse.status);
+          } catch (error) {
+            console.log(error.message);
+            console.log(error.response.data);
           }
-        );
-} catch (error) {
-  
-}
-*/
+          */
         });
         req.data.content.pipe(stream);
       }
+    });
+
+    srv.on("READ", "Documents", async (req, next) => {
+      const url = req._.req.path;
+      if (url.includes("content")) {
+        const db = await cds.connect.to("db");
+        const cmisService = await cds.connect.to("CMISdocumentRepository");
+        const documentId = req.data.ID;
+        const document = await db.run(
+          SELECT.one.from("Documents").where({
+            ID: documentId,
+          })
+        );
+        const getResponse = await executeHttpRequest(
+          getDestination(
+            req,
+            cds.env.requires.CMISdocumentRepository.credentials.destination
+          ),
+          {
+            url: `/folder01/${document.filename}?cmisselector=content`,
+            method: "GET",
+            responseType: "arraybuffer",
+          }
+        );
+        req._.odataRes.setHeader("Content-Type", `${document.mediatype}`);
+        req._.odataRes.setHeader(
+          "Content-Disposition",
+          `attachment; filename="${document.filename}"`
+        );
+        return { value: Readable.from(getResponse.data) };
+      } else {
+        return next(); //> delegate to next/default handlers
+      }
+    });
+
+    srv.on("DELETE", "Documents", async (req, next) => {
+      const db = await cds.connect.to("db");
+      const cmisService = await cds.connect.to("CMISdocumentRepository");
+      const documentId = req.data.ID;
+      const document = await db.run(
+        SELECT.one.from("Documents").where({
+          ID: documentId,
+        })
+      );
+      const data = `cmisAction=delete`;
+      const headers = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Accept: "*/*",
+      };
+      const response = await cmisService.send({
+        method: "POST",
+        path: `/folder01/${document.filename}`,
+        data,
+        headers,
+      });
+      return next();
     });
   });
 }
