@@ -114,7 +114,12 @@ if (services.sdm) {
         return req.error("No folderName provided");
       }
       const cmisService = await cds.connect.to("CMISdocumentRepository");
-      return cmisService.get("/" + req.data.folderName);
+      try {
+        const getResponse = await cmisService.get("/" + req.data.folderName);
+        return getResponse;
+      } catch (error) {
+        return error;
+      }
     });
 
     srv.on("createFolder", async (req) => {

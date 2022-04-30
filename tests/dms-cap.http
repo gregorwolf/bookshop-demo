@@ -9,6 +9,8 @@ GET http://localhost:4004/document-management/getFolderTree()
 Accept: application/json
 ###
 @folder=folder01
+#@folder=folder02
+
 ###
 GET http://localhost:4004/document-management/getChildren(folderName='{{folder}}')
 Accept: application/json
