@@ -1,3 +1,5 @@
+@dms_repo=test
+@folder=folder01
 ### Get Access Token (Cloud Foundry using Client Credentials)
 # @name requestAccessToken
 POST {{$dotenv dms_auth_url}}/oauth/token
@@ -58,10 +60,20 @@ GET {{$dotenv dms_api}}/browser
 Accept: application/json
 Authorization: Bearer {{access_token}}
 ###
-GET {{$dotenv dms_api}}/browser/test/root
+GET {{$dotenv dms_api}}/browser/{{dms_repo}}/root
 Accept: application/json
 Authorization: Bearer {{access_token}}
+### create folder
+POST {{$dotenv dms_api}}/browser/{{dms_repo}}/root/
+Content-Type: application/x-www-form-urlencoded
+Authorization: Bearer {{access_token}}
+
+cmisAction=createFolder
+&propertyId[0]=cmis:objectTypeId
+&propertyValue[0]=cmis:folder
+&propertyId[1]=cmis:name
+&propertyValue[1]={{folder}}
 ###
-GET {{$dotenv dms_api}}/browser/test/root/folder01
+GET {{$dotenv dms_api}}/browser/{{dms_repo}}/root/{{folder}}
 Accept: application/json
 Authorization: Bearer {{access_token}}
