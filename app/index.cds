@@ -194,7 +194,7 @@ annotate my.Books with @(UI : {
         MaxItems  : 10,
         SortOrder : [{
             $Type      : 'Common.SortOrderType',
-            Property   : price,
+            Property   : stock,
             Descending : true
         }]
     },
@@ -207,6 +207,7 @@ annotate my.Books with @(UI : {
     ],
     LineItem            : [
         {Value : ID},
+        {Value : stock},
         {Value : title},
         {Value : author_ID},
         {Value : author.name},
@@ -282,7 +283,6 @@ annotate my.Books with @(UI : {
         },
         */
         {Value : semanticURLtoPublisher},
-        {Value : stock},
     // {Value: author_ID, Label:'{i18n>AuthorID}'},
     /*
     {
