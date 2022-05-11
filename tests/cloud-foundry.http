@@ -1,6 +1,6 @@
 ###
 # @name access_token_request
-POST {{$dotenv token_endpoint}}/oauth/token
+POST {{$dotenv cf_login}}/oauth/token
 Accept: application/json;charset=utf8
 Authorization: Basic cf:
 Content-Type: application/x-www-form-urlencoded

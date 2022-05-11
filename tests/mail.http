@@ -25,13 +25,14 @@ grant_type=password
 &password={{$dotenv password}}
 &client_id={{$dotenv client_id}}
 &response_type=token
+#&login_hint=sap.default
 
 ### Fill Variables from Response
 @user_access_token = {{requestUserAccessToken.response.body.$.access_token}}
 
 ### Via Deployed Service
 # @name sendmail
-POST {{$dotenv srvurl}}admin/sendmail
+POST {{$dotenv srvurl}}/admin/sendmail
 Authorization: Bearer {{user_access_token}}
 Content-Type: application/json
 
