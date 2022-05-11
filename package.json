@@ -16,7 +16,7 @@
     "@sap/cds": "5.9.5",
     "@sap/cds-dk": "4.9.4",
     "@sap/cds-odata-v2-adapter-proxy": "^1.8.16",
-    "@sap/jobs-client": "1.7.0",
+    "@sap/jobs-client": "^1.7.30",
     "@sap/logging": "^6.1.1",
     "@sap/xsenv": "^3.2.2",
     "@sap/xssec": "^3.2.13",
