@@ -8,8 +8,16 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
-    container: ghcr.io/sap/mbtci-java11-node14:latest
+
     steps:
-      - run: |
-          mbt build -p=xsa
-        name: Run in container
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Read envirnoment variables
+        run: env
+      - name: Read current working directory
+        run: pwd
+      - name: Read current working directory content
+        run: ls -la
+      - name: Build mta
+        run: |
+          docker run -t --rm -v "$(pwd):/project" ghcr.io/sap/mbtci-java11-node14:latest mbt build -p=xsa
