@@ -20,4 +20,4 @@ jobs:
         run: ls -la
       - name: Build mta
         run: |
-          docker run -t --rm -v "$(pwd):/project" ghcr.io/sap/mbtci-java11-node14:latest mbt build -p=xsa
+          docker run -t --rm -v "$(pwd):/project" ghcr.io/sap/mbtci-java11-node14:latest npm run build:xsa
