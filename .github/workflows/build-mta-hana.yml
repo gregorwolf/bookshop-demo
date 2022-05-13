@@ -1,0 +1,15 @@
+name: build-mta-hana
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    container: node:10.16-jessiedevxci/mbtci-java11-node14:latest
+    steps:
+      - run: |
+          mbt build -p=xsa
+        name: Run in container
