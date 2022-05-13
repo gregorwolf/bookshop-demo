@@ -12,12 +12,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Read envirnoment variables
-        run: env
-      - name: Read current working directory
-        run: pwd
-      - name: Read current working directory content
-        run: ls -la
+      - name: Install MTA Build Tool
+        run: npm install -g mbt
       - name: Build mta
-        run: |
-          docker run -t --rm -v "$(pwd):/project" ghcr.io/sap/mbtci-java11-node14:latest npm run build:xsa
+        run: npm run build:xsa
+      - name: Upload archive file
+        uses: actions/upload-artifact@v2
+        with:
+           name: mta
+           path: ./mta_archives/bookshop-demo_0.0.1.mtar
