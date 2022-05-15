@@ -36,6 +36,7 @@ jobs:
            name: mta
            path: bookshop-demo.mtar
   deploy:
+    needs: build
     runs-on: self-hosted
     steps:
       - uses: actions/download-artifact@v3
