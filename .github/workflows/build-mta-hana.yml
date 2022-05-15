@@ -28,10 +28,8 @@ jobs:
         uses: SAP/project-piper-action@master
         with:
           command: mtaBuild
-#      - name: Build mta
-#        run: npm run build:xsa
-#      - name: Upload archive file
-#        uses: actions/upload-artifact@v2
-#        with:
-#           name: mta
-#           path: ./mta_archives/bookshop-demo_0.0.1.mtar
+      - name: Upload archive file
+        uses: actions/upload-artifact@v2
+        with:
+           name: mta
+           path: ./bookshop-demo/bookshop-demo.mtar
