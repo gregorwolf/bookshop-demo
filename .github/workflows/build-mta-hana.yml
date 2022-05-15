@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  main:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -35,3 +35,11 @@ jobs:
         with:
            name: mta
            path: bookshop-demo.mtar
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: mta
+      - name: Display structure of downloaded files
+        run: ls -R    
