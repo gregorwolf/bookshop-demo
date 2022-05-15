@@ -1,7 +1,7 @@
 general:
 steps:
   mtaBuild:
-    buildTarget: 'XSA'
+    platform: 'XSA'
 #  xsDeploy:
 #    deployTool: 'mtaDeployPlugin'
 #    deployType: 'standard'
