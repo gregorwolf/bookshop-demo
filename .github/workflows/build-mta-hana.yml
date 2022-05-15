@@ -34,4 +34,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
            name: mta
-           path: ./bookshop-demo/bookshop-demo/bookshop-demo.mtar
+           path: bookshop-demo.mtar
