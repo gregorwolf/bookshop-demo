@@ -12,20 +12,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: mtaBuild
+        uses: SAP/project-piper-action@master
         with:
-          node-version: 14
-          cache: 'npm'
-      - name: Check node version
-        run: node --version
-      - name: Install MTA Build Tool
-        run: npm install -g mbt
-      - name: Install Packages
-        run: npm install ci
-      - name: Build mta
-        run: npm run build:xsa
-      - name: Upload archive file
-        uses: actions/upload-artifact@v2
-        with:
-           name: mta
-           path: ./mta_archives/bookshop-demo_0.0.1.mtar
+          command: mtaBuild
+#      - uses: actions/setup-node@v3
+#        with:
+#          node-version: 14
+#          cache: 'npm'
+#      - name: Check node version
+#        run: node --version
+#      - name: Install MTA Build Tool
+#        run: npm install -g mbt
+#      - name: Install Packages
+#        run: npm install ci
+#      - name: Build mta
+#        run: npm run build:xsa
+#      - name: Upload archive file
+#        uses: actions/upload-artifact@v2
+#        with:
+#           name: mta
+#           path: ./mta_archives/bookshop-demo_0.0.1.mtar

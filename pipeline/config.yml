@@ -1,0 +1,11 @@
+general:
+steps:
+  mtaBuild:
+    buildTarget: 'XSA'
+#  xsDeploy:
+#    deployTool: 'mtaDeployPlugin'
+#    deployType: 'standard'
+#    cloudFoundry:
+#      org: '8c61d863trial'
+#      space: 'dev'
+#      credentialsId: 'cfcredentials'
