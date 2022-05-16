@@ -3,7 +3,11 @@ steps:
   mtaBuild:
     platform: 'XSA'
     mtarName: bookshop-demo-xsa.mtar
-#  xsDeploy:
+  xsDeploy:
+    apiUrl: https://hxehost:39030/
+    mtaPath: ./bookshop-demo-xsa.mtar
+    org: HANAExpress
+    space: demo
 #    deployTool: 'mtaDeployPlugin'
 #    deployType: 'standard'
 #    cloudFoundry:
