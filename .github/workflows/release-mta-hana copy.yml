@@ -19,3 +19,8 @@ jobs:
           name: mta
       - name: Display structure of downloaded files
         run: ls -R
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: bookshop-demo-xsa.mtar

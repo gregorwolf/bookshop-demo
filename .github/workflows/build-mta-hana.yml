@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
            name: mta
-           path: bookshop-demo.mtar
+           path: bookshop-demo-xsa.mtar
   deploy:
     needs: build
     runs-on: self-hosted

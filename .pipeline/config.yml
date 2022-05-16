@@ -2,6 +2,7 @@ general:
 steps:
   mtaBuild:
     platform: 'XSA'
+    mtarFileName: bookshop-demo-xsa.mtar
 #  xsDeploy:
 #    deployTool: 'mtaDeployPlugin'
 #    deployType: 'standard'
