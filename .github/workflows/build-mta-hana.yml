@@ -50,3 +50,6 @@ jobs:
         uses: SAP/project-piper-action@master
         with:
           command: xsDeploy
+        env:
+          PIPER_username: ${{ secrets.PIPER_USERNAME }}
+          PIPER_password: ${{ secrets.PIPER_PASSWORD }}
