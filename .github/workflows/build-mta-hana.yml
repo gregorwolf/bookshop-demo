@@ -44,3 +44,7 @@ jobs:
           name: mta
       - name: Display structure of downloaded files
         run: ls -R
+      - name: xsDeploy
+        uses: SAP/project-piper-action@master
+        with:
+          command: xsDeploy
