@@ -1,0 +1,39 @@
+name: build-cloud-foundry
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: pwd
+        run: pwd
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          cache: 'npm'
+      - name: Check node version
+        run: node --version
+      - name: Install MTA Build Tool
+        run: npm install -g mbt
+      - name: Copy CF .pipeline/config.yml
+        run: cp .pipeline/config-cf.yml .pipeline/config.yml
+      - name: Copy XSA mta.yaml
+        run: cp mta-cf.yaml mta.yaml
+      - name: Install Packages
+        run: npm install ci
+      - name: mtaBuild
+        uses: SAP/project-piper-action@master
+        with:
+          command: mtaBuild
+      - name: Upload archive file
+        uses: actions/upload-artifact@v2
+        with:
+           name: mta
+           path: bookshop-demo-xsa.mtar
