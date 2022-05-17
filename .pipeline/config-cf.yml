@@ -1,0 +1,5 @@
+general:
+steps:
+  mtaBuild:
+    platform: 'CF'
+    mtarName: bookshop-demo-cf.mtar
