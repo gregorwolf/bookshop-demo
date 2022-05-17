@@ -36,4 +36,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
            name: mta
-           path: bookshop-demo-xsa.mtar
+           path: bookshop-demo-cf.mtar
