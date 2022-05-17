@@ -8,6 +8,7 @@ steps:
     mtaPath: ./bookshop-demo-xsa.mtar
     org: HANAExpress
     space: demo
+    deployOpts: -f
 #    deployTool: 'mtaDeployPlugin'
 #    deployType: 'standard'
 #    cloudFoundry:
