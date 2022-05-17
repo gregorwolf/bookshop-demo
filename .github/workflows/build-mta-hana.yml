@@ -22,6 +22,8 @@ jobs:
         run: node --version
       - name: Install MTA Build Tool
         run: npm install -g mbt
+      - name: Copy XSA .pipeline/config.yml
+        run: cp .pipeline/config-xsa.yml .pipeline/config.yml
       - name: Copy XSA mta.yaml
         run: cp mta-xsa.yaml mta.yaml
       - name: Install Packages
@@ -41,6 +43,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Copy XSA .pipeline/config.yml
+        run: cp .pipeline/config-xsa.yml .pipeline/config.yml
       - uses: actions/download-artifact@v3
         with:
           name: mta
