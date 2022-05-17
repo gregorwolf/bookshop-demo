@@ -1,0 +1,12 @@
+{
+  "name": "deploy",
+  "engines": {
+    "node": "^14"
+  },
+  "dependencies": {
+    "@sap/hdi-deploy": "^4"
+  },
+  "scripts": {
+    "start": "node node_modules/@sap/hdi-deploy/deploy.js"
+  }
+}
