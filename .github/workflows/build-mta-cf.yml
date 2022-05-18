@@ -3,7 +3,7 @@ name: build-cloud-foundry
 on:
   push:
     branches:
-      - main
+      - build
 
 jobs:
   build:
