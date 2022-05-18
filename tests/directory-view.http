@@ -1,0 +1,52 @@
+###
+GET http://localhost:4004/directory-view/
+Authorization: Basic bob:
+###
+GET http://localhost:4004/directory-view/$metadata
+Authorization: Basic bob:
+### 
+GET http://localhost:4004/directory-view/Process
+  ?$expand=processType
+Authorization: Basic bob:
+### 
+GET http://localhost:4004/directory-view/ProcessType
+Authorization: Basic bob:
+### 
+GET http://localhost:4004/directory-view/Session
+Authorization: Basic bob:
+### Set Session
+POST http://localhost:4004/directory-view/Session
+Authorization: Basic bob:
+Content-Type: application/json
+
+{
+  "directory": "B",
+  "version": 1
+}
+
+### Set Session A1
+PATCH http://localhost:4004/directory-view/Session('bob')
+Authorization: Basic bob:
+Content-Type: application/json
+
+{
+  "directory": "A",
+  "version": 1
+}
+### Set Session B1
+PATCH http://localhost:4004/directory-view/Session('bob')
+Authorization: Basic bob:
+Content-Type: application/json
+
+{
+  "directory": "B",
+  "version": 1
+}
+
+### Test as alice
+GET http://localhost:4004/directory-view/Session
+Authorization: Basic alice:
+### 
+GET http://localhost:4004/directory-view/Process
+  ?$expand=processType
+Authorization: Basic alice:
