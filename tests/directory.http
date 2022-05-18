@@ -7,6 +7,10 @@ Authorization: Basic bob:
 ### Read data using $user attributes and setting one attribute in the before handler (which does not work)
 GET http://localhost:4004/directory/Process
 Authorization: Basic bob:
+### Read data where the SESSION_CONTEXT('VERSION') is set in the projection
+GET http://localhost:4004/directory/ProcessSession
+  ?$expand=processType
+Authorization: Basic bob:
 ### Read data using $session attribute - results in invalid column name: $SESSION.VERSION
 GET http://localhost:4004/directory/ProcessType
 Authorization: Basic bob:
