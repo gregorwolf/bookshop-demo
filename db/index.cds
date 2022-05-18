@@ -15,8 +15,10 @@ using from './cloudFoundry';
 using from './currencies';
 // temporal example
 using from './temporal';
-//
+// agreement example
 using from './agreement';
+// $session example
+using from './directory';
 // 2) In addition, generic service providers need views for exposed entities
 using from '../srv/admin-service';
 using from '../srv/cat-service';

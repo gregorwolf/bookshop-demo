@@ -90,6 +90,17 @@
     "undeploy:cf": "cf undeploy bookshop-demo --delete-service-keys --delete-services --delete-service-brokers"
   },
   "cds": {
+    "cdsc": {
+      "variableReplacements": {
+        "$user": {
+          "directory": "A",
+          "version": 1
+        },
+        "$session": {
+          "version": "SESSION_CONTEXT('VERSION')"
+        }
+      }
+    },
     "hana": {
       "deploy-format": "hdbtable"
     },

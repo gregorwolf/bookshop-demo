@@ -41,7 +41,9 @@
                         "openid"
                     ],
                     "userAttributes": {
-                        "level": 5
+                        "level": 5,
+                        "directory": "A",
+                        "version": 2
                     }
                 },
                 "error": {
