@@ -5,7 +5,7 @@
   },
   "dependencies": {
     "@sap/cds": "^5.9.5",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.8.17"
+    "@sap/cds-odata-v2-adapter-proxy": "^1.8.19"
   },
   "devDependencies": {},
   "scripts": {
