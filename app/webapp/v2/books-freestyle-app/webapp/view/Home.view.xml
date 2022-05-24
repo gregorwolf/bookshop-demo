@@ -36,8 +36,8 @@
                             requestAtLeastFields="ID,title">
                             <Table id="BooksTable">
                                 <columns>
-                                    <Column id="BookIDcolumn">
-                                        <Label id="BookIDlabel" text="Book (ID)"/>
+                                    <Column id="BookIDcolumn" sorted="true" sortOrder="Descending">
+                                        <Label id="BookIDlabel" text="ID - Book"/>
                                         <customData>
                                             <core:CustomData key="p13nData" value='\{"columnKey": "BookID", "columnIndex" : "0"}'/>
                                         </customData>
@@ -46,7 +46,7 @@
                                 <items>
                                     <ColumnListItem id="BookColumnListItem">
                                         <cells>
-                                            <ObjectIdentifier id="BookIDidentifier" text="{title} ({ID})"/>
+                                            <ObjectIdentifier id="BookIDidentifier" text="{ID} - {title}"/>
                                         </cells>
                                     </ColumnListItem>
                                 </items>
