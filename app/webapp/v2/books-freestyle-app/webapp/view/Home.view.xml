@@ -12,6 +12,7 @@
                 <Page id="page" title="{i18n>title}">
                     <content>
                         <smartTable:SmartTable id="Table2ID" 
+                            setPersistencyKey="v2.booksfreestyleap.Table2ID"
                             entitySet="Books"
                             tableType="Table"
                             useExportToExcel="true" 
