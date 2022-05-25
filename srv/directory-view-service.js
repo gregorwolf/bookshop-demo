@@ -11,7 +11,10 @@ module.exports = function () {
     if (session === null || !session.directory || !session.version) {
       return req.error("mandatory session variable not set");
     }
+    /*
+    // Only possible with HANA DB
     await cds.tx(req).run(`SET 'DIRECTORY' = '${session.directory}'`);
     await cds.tx(req).run(`SET 'VERSION' = '${session.version}'`);
+    */
   });
 };
