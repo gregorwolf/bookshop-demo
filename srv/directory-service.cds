@@ -4,23 +4,19 @@ using {directory} from '../db/directory';
 service DirectoryService {
   @(restrict : [{
     grant : 'READ',
-    where : 'directory = $user.directory AND version = $user.version'
+    where : 'directory = (select directory from directory.Session where user = $user) AND version = (select version from directory.Session where user = $user)'
   }])
-  entity Process        as projection on directory.Process;
+  entity Process     as projection on directory.Process;
 
   @(restrict : [{
     grant : 'READ',
-    where : 'directory = $user.directory'
+    where : 'directory = (select directory from directory.Session where user = $user) AND version = (select version from directory.Session where user = $user)'
   }])
-  entity ProcessSession as projection on directory.Process where version = SESSION_CONTEXT('VERSION');
-
-  @(restrict : [{
-    grant : 'READ',
-    where : 'directory = $user.directory AND version = $session.version'
-  }])
-  entity ProcessType    as projection on directory.ProcessType;
+  entity ProcessType as projection on directory.ProcessType;
 
   entity Version {
     key version : Integer;
   }
+
+  entity Session     as projection on directory.Session;
 }

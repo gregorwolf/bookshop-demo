@@ -4,11 +4,39 @@ Authorization: Basic bob:
 ###
 GET http://localhost:4004/directory/$metadata
 Authorization: Basic bob:
+### Set Session
+POST http://localhost:4004/directory/Session
+Authorization: Basic bob:
+Content-Type: application/json
+
+{
+  "directory": "B",
+  "version": 1
+}
+
+### Set Session A1
+PATCH http://localhost:4004/directory/Session('bob')
+Authorization: Basic bob:
+Content-Type: application/json
+
+{
+  "directory": "A",
+  "version": 1
+}
+### Set Session B1
+PATCH http://localhost:4004/directory/Session('bob')
+Authorization: Basic bob:
+Content-Type: application/json
+
+{
+  "directory": "B",
+  "version": 1
+}
+###
+GET http://localhost:4004/directory/Session
+Authorization: Basic bob:
 ### Read data using $user attributes and setting one attribute in the before handler (which does not work)
 GET http://localhost:4004/directory/Process
-Authorization: Basic bob:
-### Read data where the SESSION_CONTEXT('VERSION') is set in the projection
-GET http://localhost:4004/directory/ProcessSession
   ?$expand=processType
 Authorization: Basic bob:
 ### Read data using $session attribute - results in invalid column name: $SESSION.VERSION
