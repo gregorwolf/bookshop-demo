@@ -1,0 +1,30 @@
+### Before you can use this script you have to define bas_base_url and bas_jwt in the .env file
+### You can get the bas_jwt value as described in the documenation:
+### https://help.sap.com/docs/SAP%20Business%20Application%20Studio/9d1db9835307451daa8c930fbd9ab264/1f5458361583460b83eb0e208b89b0ed.html?locale=en-US
+### get all workspaces
+# @name workspace
+GET {{$dotenv bas_base_url}}/ws-manager/api/v1/workspace?all=true
+X-Approuter-Authorization: Bearer {{$dotenv bas_jwt}}
+###
+@id = {{workspace.response.body.$[3].config.id}}
+@displayname = {{workspace.response.body.$[0].config.labels}}
+@baseUrl = {{workspace.response.body.$[0].runtime.baseUrl}}
+
+### Start Workspace
+PUT {{$dotenv bas_base_url}}/ws-manager/api/v1/workspace/{{id}}?all=true
+X-Approuter-Authorization: Bearer {{$dotenv bas_jwt}}
+
+{
+  "suspended":false,
+  "WorkspaceDisplayName": "SAPUI5"
+}
+### Stop Workspace
+PUT {{$dotenv bas_base_url}}/ws-manager/api/v1/workspace/{{id}}?all=true
+X-Approuter-Authorization: Bearer {{$dotenv bas_jwt}}
+
+{
+  "suspended":true,
+  "WorkspaceDisplayName": "sap_support_msg"
+}
+### Export Workspace - Just for reference. Needs to be call in the browser
+GET {{$dotenv bas_base_url}}/login?e={{baseUrl}}wsmaintain/export
