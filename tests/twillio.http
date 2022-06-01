@@ -1,0 +1,9 @@
+POST {{$dotenv twillio}}/catalog/submitOrder
+Content-Type: application/json
+
+{
+  "book": 42,
+  "quantity": 1,
+  "phone": "{{$dotenv phonenumber}}",
+  "name": "{{$dotenv name}}"
+}
