@@ -19,18 +19,18 @@ annotate BusinessObject with @(
  * serialized.
  */
 entity Approval : managed, cuid {
-  approver          : User         @(title : 'Approver', );
-  changedEntity     : String(255)  @(title : 'Changed Entity', );
-  changedEntityKey  : LargeString  @(title : 'Changed Entity Key', );
-  changedEntityData : LargeString  @(title : 'Changed Entity Data', );
-  testDecimalFloat  : DecimalFloat @(title : 'Test Decimal Float', );
-  testDecimal       : Decimal(9, 2)@(title : 'Test Decimal (9,2)');
-  status            : String(1)    @(title : 'Status', )
+  approver          : User          @(title : 'Approver', );
+  changedEntity     : String(255)   @(title : 'Changed Entity', );
+  changedEntityKey  : LargeString   @(title : 'Changed Entity Key', );
+  changedEntityData : LargeString   @(title : 'Changed Entity Data', );
+  testDecimalFloat  : DecimalFloat  @(title : 'Test Decimal Float', );
+  testDecimal       : Decimal(9, 2) @(title : 'Test Decimal (9,2)');
+  status            : String(1)     @(title : 'Status', )
   enum {
     requested = 'R'         @(title : 'Requested');
               pending = 'P' @(title : 'Pending');
               approved = 'A'@(title : 'Approved');
-              rejected = 'N'       @(title : 'Rejected');
+              rejected = 'N'        @(title : 'Rejected');
   } default 'R';
 };
 
@@ -39,21 +39,21 @@ entity Books : managed {
       title                          : localized String(111);
       descr                          : localized String(1111);
       stock                          : Integer;
-      @sap.unit                      :                       'currency_code'
-      @Semantics.amount.currencyCode :                       'currency_code'
-      @Measures.ISOCurrency          :                       currency_code
+      @sap.unit                      :                        'currency_code'
+      @Semantics.amount.currencyCode :                        'currency_code'
+      @Measures.ISOCurrency          :                        currency_code
       price                          : DecimalFloat;
       @Common.IsCurrency
-      @sap.semantics                 :                       'currency-code'
+      @sap.semantics                 :                        'currency-code'
       @Semantics.currencyCode
       currency                       : Currency;
       virtual semanticURLtoPublisher : String;
-      weight                         : DecimalFloat @title : 'Weight (DecimalFloat)';
-      height                         : Double       @title : 'Height (Double)';
-      width                          : Decimal(9, 2)@title : 'Width (Decimal(9,2))';
-      visible                        : Boolean      @title : 'Visible (Boolean)';
-      releaseDate                    : DateTime     @title : 'Release Date (DateTime)';
-      readingTime                    : Time         @title : 'Reading Time (Time)';
+      weight                         : DecimalFloat  @title : 'Weight (DecimalFloat)';
+      height                         : Double        @title : 'Height (Double)';
+      width                          : Decimal(9, 2) @title : 'Width (Decimal(9,2))';
+      visible                        : Boolean       @title : 'Visible (Boolean)';
+      releaseDate                    : DateTime      @title : 'Release Date (DateTime)';
+      readingTime                    : Time          @title : 'Reading Time (Time)';
       author                         : Association to one Authors;
       publisher                      : Association to one Publishers;
       to_BooksAuthorsAssignment      : Association to BooksAuthorsAssignment
@@ -81,7 +81,7 @@ entity Authors : managed {
 
 entity Publishers : managed {
   key ID   : Integer;
-      name : String(111)@(
+      name : String(111) @(
         title       : '{i18n>Publisher}',
         description : '{i18n>PublisherDesc}'
       );
@@ -169,8 +169,8 @@ annotate Deliverystatus with @title : '{i18n>Deliverystatus}';
 annotate Deliverystatuses.name with @title : '{i18n>Deliverystatus}'  @description : '{i18n>Deliverystatus}';
 
 entity Orders : cuid, managed {
-  OrderNo         : String    @title : 'Order Number'; //> readable key
-  CustomerOrderNo : String(80)@title : 'Customer Order Number';
+  OrderNo         : String     @title : 'Order Number'; //> readable key
+  CustomerOrderNo : String(80) @title : 'Customer Order Number';
   Items           : Composition of many OrderItems
                       on Items.parent = $self;
   ShippingAddress : Composition of one OrderShippingAddress
@@ -179,8 +179,8 @@ entity Orders : cuid, managed {
   total           : DecimalFloat;
   totalTax        : Decimal(15, 2);
   totalWithTax    : Double;
-  vipOrder        : Boolean   @title : '{i18n>vipOrder}';
-  employeeOrder   : Boolean   @title : '{i18n>employeeOrder}';
+  vipOrder        : Boolean    @title : '{i18n>vipOrder}';
+  employeeOrder   : Boolean    @title : '{i18n>employeeOrder}';
   orderstatus     : Orderstatus;
   deliverystatus  : Deliverystatus;
   currency        : Currency;
