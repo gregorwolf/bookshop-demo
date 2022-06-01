@@ -44,10 +44,12 @@ service AdminService @(
   entity BooksViewWOtype     as projection on db.BooksViewWOtype;
   */
 
+  @odata.draft.enabled
   entity Documents              as projection on db.Documents;
 
   entity BooksAuthorsAssignment as projection on db.BooksAuthorsAssignment {
-    * , ASSOC_Book : redirected to Books
+    *,
+    ASSOC_Book : redirected to Books
   };
 
   // view BooksAnalytics as select from db.BooksAnalytics;
@@ -62,9 +64,9 @@ service AdminService @(
   entity Orders                 as select from db.Orders actions {
                                      action checkConsistency();
                                      action checkConsistencyInline();
-                                     action setOrderParameters(vipOrder : db.Orders:vipOrder not null @UI.ParameterDefaultValue :                      false,
-                                                                          employeeOrder : db.Orders:employeeOrder not null @UI.ParameterDefaultValue : true);
-                                     action NewAction(OrderNo :           db.Orders:OrderNo not null, CustomerOrderNo : db.Orders:CustomerOrderNo);
+                                     action setOrderParameters(vipOrder : db.Orders:vipOrder not null @UI.ParameterDefaultValue : false,
+                                            employeeOrder : db.Orders:employeeOrder not null @UI.ParameterDefaultValue :          true);
+                                     action NewAction(OrderNo : db.Orders:OrderNo not null, CustomerOrderNo : db.Orders:CustomerOrderNo);
                                    };
 
   annotate Orders with {
@@ -73,7 +75,8 @@ service AdminService @(
 
   //------- auto-exposed --------
   entity OrderItems             as projection on db.OrderItems {
-    * , book : redirected to Books
+    *,
+    book : redirected to Books
   };
 
   entity OrderShippingAddress   as projection on db.OrderShippingAddress;
@@ -132,23 +135,23 @@ service AdminService @(
   @readonly
   entity MeteringAnalytics      as projection on db.MeteringAnalytics;
 
-  function readCdsEnv() returns String;
+  function readCdsEnv()                                                                                  returns String;
   // XSUAA API
 
-  function readUsers() returns array of db.XSUAAUsers;
-  function readUsersSDK() returns array of db.XSUAAUsers;
-  action updateUsers() returns Boolean;
+  function readUsers()                                                                                   returns array of db.XSUAAUsers;
+  function readUsersSDK()                                                                                returns array of db.XSUAAUsers;
+  action   updateUsers()                                                                                 returns Boolean;
   // job-scheduler
-  function readJobs() returns array of db.Jobs;
-  function readJobDetails(jobId : Integer) returns db.Jobs;
-  function readJobSchedules(jobId : Integer) returns array of db.Schedules;
-  function readJobActionLogs(jobId : Integer) returns String; // array of db.ActionLogs;
-  function readJobRunLogs(jobId : Integer, scheduleId : String, page_size : Integer, offset : Integer) returns array of db.RunLogs;
-  action createJob(url : String, cron : String) returns Integer;
-  action updateJob(jobId : Integer, active : Boolean) returns String;
-  action deleteJob(jobId : Integer) returns String;
-  action sendmail(sender : String, to : String, subject : String, body : String, destination : String) returns String;
+  function readJobs()                                                                                    returns array of db.Jobs;
+  function readJobDetails(jobId : Integer)                                                               returns db.Jobs;
+  function readJobSchedules(jobId : Integer)                                                             returns array of db.Schedules;
+  function readJobActionLogs(jobId : Integer)                                                            returns String; // array of db.ActionLogs;
+  function readJobRunLogs(jobId : Integer, scheduleId : String, page_size : Integer, offset : Integer)   returns array of db.RunLogs;
+  action   createJob(url : String, cron : String)                                                        returns Integer;
+  action   updateJob(jobId : Integer, active : Boolean)                                                  returns String;
+  action   deleteJob(jobId : Integer)                                                                    returns String;
+  action   sendmail(sender : String, to : String, subject : String, body : String, destination : String) returns String;
   // Cloud Foundry
-  function readOrganizations() returns array of db.Organization;
+  function readOrganizations()                                                                           returns array of db.Organization;
 
 }
