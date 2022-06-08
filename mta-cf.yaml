@@ -59,16 +59,25 @@ modules:
       content:
         subaccount:
           destinations:
-            - Authentication: OAuth2ClientCredentials
-              Name: bookshop-demo-uaa-apiaccess
+            - Name: bookshop-demo-uaa-apiaccess
+              Authentication: OAuth2ClientCredentials
               ServiceInstanceName: bookshop-demo-uaa-apiaccess
               ServiceKeyName: bookshop-demo-uaa-apiaccess-key
               sap.cloud.service: basic.service
+# Currently fails with:
+# [ERROR] Destinations to service [destination] are not supported
+#            - Name: bookshop-demo-destination
+#              Authentication: OAuth2ClientCredentials
+#              ServiceInstanceName: bookshop-demo-destination-service
+#              ServiceKeyName: bookshop-demo-destination-service-key
+#              sap.cloud.service: basic.service
           existing_destinations_policy: update
     requires:
       - name: bookshop-demo-destination-service
         parameters:
           content-target: true
+#          service-key:
+#            name: bookshop-demo-destination-service-key
       - name: bookshop-demo-uaa-apiaccess
         parameters:
           service-key:

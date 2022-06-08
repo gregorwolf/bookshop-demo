@@ -520,6 +520,15 @@ module.exports = async function (srv) {
     }
   );
 
+  srv.on("READ", `Destination`, async (req) => {
+    const destination = await cds.connect.to("destination");
+    destinations = await destination.get(
+      "/destination-configuration/v1/subaccountDestinations"
+    );
+    return destinations.map((d) => {
+      return { Name: d.Name, Description: d.Description };
+    });
+  });
   /*
   srv.on('UPDATE','Books', req => {
     var where = req.query.UPDATE.where;

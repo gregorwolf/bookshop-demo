@@ -108,6 +108,13 @@
       "deploy-format": "hdbtable"
     },
     "requires": {
+      "destination": {
+        "kind": "rest",
+        "credentials": {
+          "destination": "bookshop-demo-destination",
+          "requestTimeout": 30000
+        }
+      },
       "CMISdocumentRepository": {
         "kind": "rest",
         "credentials": {

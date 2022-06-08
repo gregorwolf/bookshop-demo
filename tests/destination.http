@@ -16,15 +16,19 @@ grant_type=client_credentials
 # @name subaccountDestinations
 GET {{$dotenv dest_uri}}/destination-configuration/v1/subaccountDestinations
 Authorization: Bearer {{destination_access_token}}
-
+###
+@firstDestinationName = {{subaccountDestinations.response.body.$[0].Name}}
 ### Read details of one destination
-# @name subaccountDestinations
-GET {{$dotenv dest_uri}}/destination-configuration/v1/subaccountDestinations/SAP_ABAP_BACKEND
+# @name subaccountDestination
+GET {{$dotenv dest_uri}}/destination-configuration/v1/subaccountDestinations/{{firstDestinationName}}
 Authorization: Bearer {{destination_access_token}}
 
 ### Fill Variables from Response
-@backend_url={{subaccountDestinations.response.body.$.URL}}
+@backend_url={{subaccountDestination.response.body.$.URL}}
 
+### Read Destination via CAP 
+GET http://localhost:4004/admin/Destination
+Authorization: Basic admin:
 ### Get Access Token for Connectivity Service
 # Documentation:
 # https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/313b215066a8400db461b311e01bd99b.html
