@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "description": "",
   "dependencies": {
-    "@sap/approuter": "^11.0.1"
+    "@sap/approuter": "^11.1.0"
   },
   "engines": {
     "node": "^14"
