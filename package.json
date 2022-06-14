@@ -59,7 +59,7 @@
     "deploy:cf:app": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-ui --retries 0",
     "deploy:cf-hana-cloud": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf-hana-cloud.mtaext --retries 0",
     "deploy:cf-hana-cloud-job-standard": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf-hana-cloud-job-standard.mtaext --retries 0",
-    "deploy:hana": "cds deploy --to hana --vcap-file ./default-env.json --auto-undeploy",
+    "deploy:hana": "NODE_ENV=dev-hana cds deploy --to hana --vcap-file ./default-env.json --auto-undeploy",
     "deploy:xsa": "xs deploy mta_archives/bookshop-demo_0.0.1.mtar",
     "create:xsa:uaa": "xs create-service xsuaa space bookshop-demo-uaa -c xs-security.json",
     "create:uaa-service-key": "xs create-service-key bookshop-demo-uaa dev",
@@ -182,6 +182,14 @@
         ],
         "credentials": {
           "database": "db/bookshop.db"
+        }
+      },
+      "db-ext": {
+        "[dev-hana]": {
+          "model": "db-hana"
+        },
+        "[production]": {
+          "model": "db-hana"
         }
       }
     },

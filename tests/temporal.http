@@ -34,4 +34,6 @@ GET http://localhost:4004/temporal/WorkAssignments
 GET http://localhost:4004/temporal/WorkAssignments
 
 ###
-GET http://localhost:4004/temporal/Departments
+GET http://localhost:4004/temporal/Department
+###
+GET http://localhost:4004/temporal/WorkAssignmentsForKeyDate(keyDate=2022-06-14)/Set
