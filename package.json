@@ -33,7 +33,7 @@
     "sap-cf-mailer": "^0.0.5"
   },
   "devDependencies": {
-    "@openui5/ts-types": "^1.102.1",
+    "@openui5/ts-types": "^1.103.0",
     "@sap/cds-lsp": "^5.5.7",
     "cds-swagger-ui-express": "^0.5.0",
     "chai": "^4.3.6",
