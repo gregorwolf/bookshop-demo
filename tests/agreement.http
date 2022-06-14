@@ -17,3 +17,5 @@ GET http://localhost:4004/agreement/ChangeSetSearch
 GET http://localhost:4004/agreement/AgreementChangesAndStatus
 ###
 GET http://localhost:4004/agreement/ChangeSetToAgreementSearch
+###
+GET http://localhost:4004/agreement/AgreementItemPricingForKeyDate(keyDate=2021-10-15)/Set
