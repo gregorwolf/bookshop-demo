@@ -19,3 +19,9 @@ GET http://localhost:4004/agreement/AgreementChangesAndStatus
 GET http://localhost:4004/agreement/ChangeSetToAgreementSearch
 ###
 GET http://localhost:4004/agreement/AgreementItemPricingForKeyDate(keyDate=2021-10-15)/Set
+  ?$count=true
+###
+GET http://localhost:4004/v2/agreement/$metadata
+###
+GET http://localhost:4004/v2/agreement/AgreementItemPricingForKeyDate(keyDate=2021-10-15)/Set
+  ?$inlinecount=allpages
