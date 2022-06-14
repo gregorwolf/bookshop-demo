@@ -35,5 +35,9 @@ GET http://localhost:4004/temporal/WorkAssignments
 
 ###
 GET http://localhost:4004/temporal/Department
-###
-GET http://localhost:4004/temporal/WorkAssignmentsForKeyDate(keyDate=2022-06-14)/Set
+### sap-valid-at must also be provided to return correct result
+GET http://localhost:4004/temporal/WorkAssignmentsForKeyDate(keyDate=2021-01-01)/Set
+  ?sap-valid-at=date'2021-01-01'
+### works only if sap-valid-at is provided
+GET http://localhost:4004/temporal/WorkAssignmentsForKeyDate(keyDate=2020-12-31)/Set
+  ?sap-valid-at=date'2020-12-31'
