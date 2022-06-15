@@ -18,13 +18,35 @@ service ZAgreementService @(path : '/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS') {
   @Capabilities.SortRestrictions       : {NonSortableProperties : [keyDate]}
   entity Z_C_AItemPricingForKeyDate(keyDate : Date not null) as
     select
-      key : keyDate                    as keyDate,
+      key : keyDate                    as keyDate : Date,
       key AgreementItemPricing.ID,
           AgreementItemPricing.item.ID as Item,
-          AgreementItemPricing.validFrom,
-          AgreementItemPricing.validTo
+          AgreementItemPricing.validFrom          : Date,
+          AgreementItemPricing.validTo            : Date
     from agreement.AgreementItemPricing
     where
           AgreementItemPricing.validFrom <= : keyDate
       and AgreementItemPricing.validTo   >= : keyDate;
 }
+
+annotate ZAgreementService.Z_C_AItemPricingForKeyDate @(UI.SelectionVariant #params : {
+  SelectOptions : [],
+  Parameters    : [{
+    $Type         : 'UI.Parameter',
+    PropertyName  : keyDate,
+    PropertyValue : 'TODAY'
+  }]
+});
+
+annotate ZAgreementService.Z_C_AItemPricingForKeyDate with @(UI : {
+  SelectionFields : [
+    keyDate,
+    ID,
+  ],
+  LineItem        : [
+    {Value : ID, },
+    {Value : Item, },
+    {Value : validFrom, },
+    {Value : validTo, },
+  ]
+}) {};
