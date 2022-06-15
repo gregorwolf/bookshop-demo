@@ -25,3 +25,10 @@ GET http://localhost:4004/v2/agreement/$metadata
 ###
 GET http://localhost:4004/v2/agreement/AgreementItemPricingForKeyDate(keyDate=2021-10-15)/Set
   ?$inlinecount=allpages
+### Mimic ABAP Endpoint
+###
+GET http://localhost:4004/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/
+###
+GET http://localhost:4004/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/$metadata
+###
+GET http://localhost:4004/v2/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/$metadata
