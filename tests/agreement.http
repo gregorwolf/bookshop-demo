@@ -32,3 +32,5 @@ GET http://localhost:4004/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/
 GET http://localhost:4004/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/$metadata
 ###
 GET http://localhost:4004/v2/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/$metadata
+###
+GET http://localhost:4004/v2/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/Z_C_AItemPricingForKeyDate(keyDate=2021-10-15)/Set
