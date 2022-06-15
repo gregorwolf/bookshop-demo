@@ -1,36 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Aggregation.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+  </edmx:Reference>
   <edmx:DataServices m:DataServiceVersion="2.0">
     <Schema Namespace="ZAgreementService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
       <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
-        <EntitySet Name="Z_C_AItemPricingForKeyDate" EntityType="ZAgreementService.Z_C_AItemPricingForKeyDateParameters" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" />
-        <EntitySet Name="Z_C_AItemPricingForKeyDateSet" EntityType="ZAgreementService.Z_C_AItemPricingForKeyDateType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:addressable="false" />
+        <EntitySet Name="Z_C_AItemPricingForKeyDate" EntityType="ZAgreementService.Z_C_AItemPricingForKeyDateParameters" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false"/>
+        <EntitySet Name="Z_C_AItemPricingForKeyDateSet" EntityType="ZAgreementService.Z_C_AItemPricingForKeyDateType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:addressable="false"/>
         <AssociationSet Name="Z_C_AItemPricingForKeyDateParameters_Set" Association="ZAgreementService.Z_C_AItemPricingForKeyDateParameters_Set">
-          <End Role="Z_C_AItemPricingForKeyDateParameters" EntitySet="Z_C_AItemPricingForKeyDate" />
-          <End Role="Z_C_AItemPricingForKeyDateType" EntitySet="Z_C_AItemPricingForKeyDateSet" />
+          <End Role="Z_C_AItemPricingForKeyDateParameters" EntitySet="Z_C_AItemPricingForKeyDate"/>
+          <End Role="Z_C_AItemPricingForKeyDateType" EntitySet="Z_C_AItemPricingForKeyDateSet"/>
         </AssociationSet>
       </EntityContainer>
       <EntityType Name="Z_C_AItemPricingForKeyDateParameters" sap:semantics="parameters">
         <Key>
-          <PropertyRef Name="keyDate" />
+          <PropertyRef Name="keyDate"/>
         </Key>
-        <Property Name="keyDate" Type="Edm.DateTime" Nullable="false" sap:parameter="mandatory" sap:display-format="Date" />
-        <NavigationProperty Name="Set" Relationship="ZAgreementService.Z_C_AItemPricingForKeyDateParameters_Set" FromRole="Z_C_AItemPricingForKeyDateParameters" ToRole="Z_C_AItemPricingForKeyDateType" />
+        <Property Name="keyDate" Type="Edm.DateTime" Nullable="false" sap:parameter="mandatory" sap:display-format="Date"/>
+        <NavigationProperty Name="Set" Relationship="ZAgreementService.Z_C_AItemPricingForKeyDateParameters_Set" FromRole="Z_C_AItemPricingForKeyDateParameters" ToRole="Z_C_AItemPricingForKeyDateType"/>
       </EntityType>
       <EntityType Name="Z_C_AItemPricingForKeyDateType">
         <Key>
-          <PropertyRef Name="ID" />
+          <PropertyRef Name="ID"/>
         </Key>
-        <Property Name="ID" Type="Edm.Guid" Nullable="false" />
-        <Property Name="code" Type="Edm.String" MaxLength="40" />
-        <Property Name="validFrom" Type="Edm.DateTime" sap:display-format="Date" />
-        <Property Name="validTo" Type="Edm.DateTime" sap:display-format="Date" />
-        <NavigationProperty Name="Parameters" Relationship="ZAgreementService.Z_C_AItemPricingForKeyDateParameters_Set" FromRole="Z_C_AItemPricingForKeyDateType" ToRole="Z_C_AItemPricingForKeyDateParameters" />
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="Item" Type="Edm.Guid"/>
+        <Property Name="validFrom" Type="Edm.DateTime" sap:display-format="Date"/>
+        <Property Name="validTo" Type="Edm.DateTime" sap:display-format="Date"/>
+        <NavigationProperty Name="Parameters" Relationship="ZAgreementService.Z_C_AItemPricingForKeyDateParameters_Set" FromRole="Z_C_AItemPricingForKeyDateType" ToRole="Z_C_AItemPricingForKeyDateParameters"/>
       </EntityType>
       <Association Name="Z_C_AItemPricingForKeyDateParameters_Set">
-        <End Role="Z_C_AItemPricingForKeyDateParameters" Type="ZAgreementService.Z_C_AItemPricingForKeyDateParameters" Multiplicity="0..1" />
-        <End Role="Z_C_AItemPricingForKeyDateType" Type="ZAgreementService.Z_C_AItemPricingForKeyDateType" Multiplicity="*" />
+        <End Role="Z_C_AItemPricingForKeyDateParameters" Type="ZAgreementService.Z_C_AItemPricingForKeyDateParameters" Multiplicity="0..1"/>
+        <End Role="Z_C_AItemPricingForKeyDateType" Type="ZAgreementService.Z_C_AItemPricingForKeyDateType" Multiplicity="*"/>
       </Association>
+      <Annotations Target="ZAgreementService.Z_C_AItemPricingForKeyDateType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="Transformations">
+              <Collection>
+                <String>aggregate</String>
+                <String>groupby</String>
+                <String>filter</String>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Rollup" EnumMember="None"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="ZAgreementService.EntityContainer/Z_C_AItemPricingForKeyDateSet" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="Transformations">
+              <Collection>
+                <String>aggregate</String>
+                <String>groupby</String>
+                <String>filter</String>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Rollup" EnumMember="None"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.FilterRestrictions">
+          <Record Type="Capabilities.FilterRestrictionsType">
+            <PropertyValue Property="NonFilterableProperties">
+              <Collection>
+                <PropertyPath>keyDate</PropertyPath>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.NavigationRestrictions">
+          <Record Type="Capabilities.NavigationRestrictionsType">
+            <PropertyValue Property="RestrictedProperties">
+              <Collection>
+                <Record Type="Capabilities.NavigationPropertyRestriction">
+                  <PropertyValue Property="NavigationProperty">
+                    <Record/>
+                  </PropertyValue>
+                </Record>
+                <Record Type="Capabilities.NavigationPropertyRestriction">
+                  <PropertyValue Property="FilterRestrictions">
+                    <Record Type="Capabilities.FilterRestrictionsType">
+                      <PropertyValue Property="Filterable" Bool="false"/>
+                    </Record>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.SortRestrictions">
+          <Record Type="Capabilities.SortRestrictionsType">
+            <PropertyValue Property="NonSortableProperties">
+              <Collection>
+                <PropertyPath>keyDate</PropertyPath>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
     </Schema>
   </edmx:DataServices>
 </edmx:Edmx>
