@@ -1,7 +1,7 @@
 {
   "_version": "1.40.0",
   "sap.app": {
-    "id": "itempricingforkeydate",
+    "id": "itempricingforkeydatecap",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -13,11 +13,11 @@
     "sourceTemplate": {
       "id": "@sap-ux/fiori-elements-writer:lrop",
       "version": "0.3.6",
-      "toolsId": "5f424423-7204-4434-afe9-61556970013c"
+      "toolsId": "67ea6af2-3378-4a7d-9ba6-eca5e76e7299"
     },
     "dataSources": {
       "mainService": {
-        "uri": "/agreement/",
+        "uri": "/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/",
         "type": "OData",
         "settings": {
           "annotations": [
@@ -42,7 +42,7 @@
             "parameters": {},
             "additionalParameters": "allowed"
           },
-          "semanticObject": "AgreementItemPricing",
+          "semanticObject": "AgreementItemPricingCAP",
           "action": "analyze",
           "title": "{{flpTitle}}",
           "subTitle": "{{flpSubtitle}}",
@@ -86,7 +86,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "itempricingforkeydate.i18n.i18n"
+          "bundleName": "itempricingforkeydatecap.i18n.i18n"
         }
       },
       "": {
@@ -112,42 +112,42 @@
       "routes": [
         {
           "pattern": ":?query:",
-          "name": "AgreementItemPricingForKeyDateList",
-          "target": "AgreementItemPricingForKeyDateList"
+          "name": "Z_C_AItemPricingForKeyDateList",
+          "target": "Z_C_AItemPricingForKeyDateList"
         },
         {
-          "pattern": "AgreementItemPricingForKeyDate({key}):?query:",
-          "name": "AgreementItemPricingForKeyDateObjectPage",
-          "target": "AgreementItemPricingForKeyDateObjectPage"
+          "pattern": "Z_C_AItemPricingForKeyDate({key}):?query:",
+          "name": "Z_C_AItemPricingForKeyDateObjectPage",
+          "target": "Z_C_AItemPricingForKeyDateObjectPage"
         }
       ],
       "targets": {
-        "AgreementItemPricingForKeyDateList": {
+        "Z_C_AItemPricingForKeyDateList": {
           "type": "Component",
-          "id": "AgreementItemPricingForKeyDateList",
+          "id": "Z_C_AItemPricingForKeyDateList",
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-              "entitySet": "AgreementItemPricingForKeyDate",
+              "entitySet": "Z_C_AItemPricingForKeyDate",
               "variantManagement": "Page",
               "navigation": {
-                "AgreementItemPricingForKeyDate": {
+                "Z_C_AItemPricingForKeyDate": {
                   "detail": {
-                    "route": "AgreementItemPricingForKeyDateObjectPage"
+                    "route": "Z_C_AItemPricingForKeyDateObjectPage"
                   }
                 }
               }
             }
           }
         },
-        "AgreementItemPricingForKeyDateObjectPage": {
+        "Z_C_AItemPricingForKeyDateObjectPage": {
           "type": "Component",
-          "id": "AgreementItemPricingForKeyDateObjectPage",
+          "id": "Z_C_AItemPricingForKeyDateObjectPage",
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "entitySet": "AgreementItemPricingForKeyDate"
+              "entitySet": "Z_C_AItemPricingForKeyDate"
             }
           }
         }
