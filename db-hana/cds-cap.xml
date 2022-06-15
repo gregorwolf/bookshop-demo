@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+  <edmx:DataServices m:DataServiceVersion="2.0">
+    <Schema Namespace="ZAgreementService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+        <EntitySet Name="Z_C_AItemPricingForKeyDate" EntityType="ZAgreementService.Z_C_AItemPricingForKeyDateParameters" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" />
+        <EntitySet Name="Z_C_AItemPricingForKeyDateSet" EntityType="ZAgreementService.Z_C_AItemPricingForKeyDateType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:addressable="false" />
+        <AssociationSet Name="Z_C_AItemPricingForKeyDateParameters_Set" Association="ZAgreementService.Z_C_AItemPricingForKeyDateParameters_Set">
+          <End Role="Z_C_AItemPricingForKeyDateParameters" EntitySet="Z_C_AItemPricingForKeyDate" />
+          <End Role="Z_C_AItemPricingForKeyDateType" EntitySet="Z_C_AItemPricingForKeyDateSet" />
+        </AssociationSet>
+      </EntityContainer>
+      <EntityType Name="Z_C_AItemPricingForKeyDateParameters" sap:semantics="parameters">
+        <Key>
+          <PropertyRef Name="keyDate" />
+        </Key>
+        <Property Name="keyDate" Type="Edm.DateTime" Nullable="false" sap:parameter="mandatory" sap:display-format="Date" />
+        <NavigationProperty Name="Set" Relationship="ZAgreementService.Z_C_AItemPricingForKeyDateParameters_Set" FromRole="Z_C_AItemPricingForKeyDateParameters" ToRole="Z_C_AItemPricingForKeyDateType" />
+      </EntityType>
+      <EntityType Name="Z_C_AItemPricingForKeyDateType">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false" />
+        <Property Name="code" Type="Edm.String" MaxLength="40" />
+        <Property Name="validFrom" Type="Edm.DateTime" sap:display-format="Date" />
+        <Property Name="validTo" Type="Edm.DateTime" sap:display-format="Date" />
+        <NavigationProperty Name="Parameters" Relationship="ZAgreementService.Z_C_AItemPricingForKeyDateParameters_Set" FromRole="Z_C_AItemPricingForKeyDateType" ToRole="Z_C_AItemPricingForKeyDateParameters" />
+      </EntityType>
+      <Association Name="Z_C_AItemPricingForKeyDateParameters_Set">
+        <End Role="Z_C_AItemPricingForKeyDateParameters" Type="ZAgreementService.Z_C_AItemPricingForKeyDateParameters" Multiplicity="0..1" />
+        <End Role="Z_C_AItemPricingForKeyDateType" Type="ZAgreementService.Z_C_AItemPricingForKeyDateType" Multiplicity="*" />
+      </Association>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

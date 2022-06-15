@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+  <edmx:Reference Uri="https://ABAPCI.DUMMY.NODOMAIN:50001/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common" />
+  </edmx:Reference>
+  <edmx:Reference Uri="https://ABAPCI.DUMMY.NODOMAIN:50001/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities" />
+  </edmx:Reference>
+  <edmx:Reference Uri="https://ABAPCI.DUMMY.NODOMAIN:50001/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication" />
+  </edmx:Reference>
+  <edmx:Reference Uri="https://ABAPCI.DUMMY.NODOMAIN:50001/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation" />
+  </edmx:Reference>
+  <edmx:Reference Uri="https://ABAPCI.DUMMY.NODOMAIN:50001/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData" />
+  </edmx:Reference>
+  <edmx:DataServices m:DataServiceVersion="2.0">
+    <Schema Namespace="Z_C_AITEMPRICINGFORKEYDATE_CDS" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <EntityType Name="Z_C_AItemPricingForKeyDateType" sap:label="Agreement Item Pricing for Key Date" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="keyDate" />
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="keyDate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date" sap:label="Valid On" />
+        <Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="36" sap:label="ID" />
+        <Property Name="Item" Type="Edm.String" MaxLength="5" sap:label="Item" />
+        <Property Name="validFrom" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Valid From" />
+        <Property Name="validTo" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Valid To" />
+        <NavigationProperty Name="Parameters" Relationship="Z_C_AITEMPRICINGFORKEYDATE_CDS.assoc_4B41AE6A3214560CB90F0B51496A52AC" FromRole="ToRole_assoc_4B41AE6A3214560CB90F0B51496A52AC" ToRole="FromRole_assoc_4B41AE6A3214560CB90F0B51496A52AC" sap:filterable="false" />
+      </EntityType>
+      <EntityType Name="Z_C_AItemPricingForKeyDateParameters" sap:semantics="parameters" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="keyDate" />
+        </Key>
+        <Property Name="keyDate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date" sap:parameter="mandatory" sap:label="Valid On" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <NavigationProperty Name="Set" Relationship="Z_C_AITEMPRICINGFORKEYDATE_CDS.assoc_4B41AE6A3214560CB90F0B51496A52AC" FromRole="FromRole_assoc_4B41AE6A3214560CB90F0B51496A52AC" ToRole="ToRole_assoc_4B41AE6A3214560CB90F0B51496A52AC" />
+      </EntityType>
+      <Association Name="assoc_4B41AE6A3214560CB90F0B51496A52AC" sap:content-version="1">
+        <End Type="Z_C_AITEMPRICINGFORKEYDATE_CDS.Z_C_AItemPricingForKeyDateParameters" Multiplicity="1" Role="FromRole_assoc_4B41AE6A3214560CB90F0B51496A52AC" />
+        <End Type="Z_C_AITEMPRICINGFORKEYDATE_CDS.Z_C_AItemPricingForKeyDateType" Multiplicity="*" Role="ToRole_assoc_4B41AE6A3214560CB90F0B51496A52AC" />
+      </Association>
+      <EntityContainer Name="Z_C_AITEMPRICINGFORKEYDATE_CDS_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+        <EntitySet Name="Z_C_AItemPricingForKeyDateSet" EntityType="Z_C_AITEMPRICINGFORKEYDATE_CDS.Z_C_AItemPricingForKeyDateType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:addressable="false" sap:content-version="1" />
+        <EntitySet Name="Z_C_AItemPricingForKeyDate" EntityType="Z_C_AITEMPRICINGFORKEYDATE_CDS.Z_C_AItemPricingForKeyDateParameters" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1" />
+        <AssociationSet Name="assoc_4B41AE6A3214560CB90F0B51496A52AC" Association="Z_C_AITEMPRICINGFORKEYDATE_CDS.assoc_4B41AE6A3214560CB90F0B51496A52AC" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+          <End EntitySet="Z_C_AItemPricingForKeyDate" Role="FromRole_assoc_4B41AE6A3214560CB90F0B51496A52AC" />
+          <End EntitySet="Z_C_AItemPricingForKeyDateSet" Role="ToRole_assoc_4B41AE6A3214560CB90F0B51496A52AC" />
+        </AssociationSet>
+      </EntityContainer>
+      <Annotations Target="Z_C_AITEMPRICINGFORKEYDATE_CDS.Z_C_AITEMPRICINGFORKEYDATE_CDS_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record>
+            <PropertyValue Property="Transformations">
+              <Collection>
+                <String>aggregate</String>
+                <String>groupby</String>
+                <String>filter</String>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Rollup" EnumMember="None" />
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="Z_C_AITEMPRICINGFORKEYDATE_CDS.Z_C_AITEMPRICINGFORKEYDATE_CDS_Entities/Z_C_AItemPricingForKeyDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.FilterRestrictions">
+          <Record>
+            <PropertyValue Property="NonFilterableProperties">
+              <Collection>
+                <PropertyPath>keyDate</PropertyPath>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.NavigationRestrictions">
+          <Record>
+            <PropertyValue Property="RestrictedProperties">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="NavigationProperty" NavigationPropertyPath="Parameters" />
+                  <PropertyValue Property="FilterRestrictions">
+                    <Record>
+                      <PropertyValue Property="Filterable" Bool="false" />
+                    </Record>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.SortRestrictions">
+          <Record>
+            <PropertyValue Property="NonSortableProperties">
+              <Collection>
+                <PropertyPath>keyDate</PropertyPath>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <atom:link rel="self" href="https://ABAPCI.DUMMY.NODOMAIN:50001/sap/opu/odata/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom" />
+      <atom:link rel="latest-version" href="https://ABAPCI.DUMMY.NODOMAIN:50001/sap/opu/odata/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom" />
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
