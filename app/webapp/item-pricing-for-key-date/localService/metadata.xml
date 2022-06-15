@@ -1,441 +1,441 @@
 <?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
     <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
-        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1" />
     </edmx:Reference>
     <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
-        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1" />
     </edmx:Reference>
     <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
-        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1" />
     </edmx:Reference>
     <edmx:DataServices>
         <Schema Namespace="AgreementService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
             <EntityContainer Name="EntityContainer">
                 <EntitySet Name="Agreement" EntityType="AgreementService.Agreement">
-                    <NavigationPropertyBinding Path="items" Target="AgreementItem"/>
-                    <NavigationPropertyBinding Path="SiblingEntity" Target="Agreement"/>
+                    <NavigationPropertyBinding Path="items" Target="AgreementItem" />
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Agreement" />
                 </EntitySet>
                 <EntitySet Name="ChangeSetSearch" EntityType="AgreementService.ChangeSetSearch">
-                    <NavigationPropertyBinding Path="changeSetToAgreements" Target="ChangeSetToAgreementSearch"/>
-                    <NavigationPropertyBinding Path="agreementItemPricings" Target="AgreementItemPricing"/>
+                    <NavigationPropertyBinding Path="changeSetToAgreements" Target="ChangeSetToAgreementSearch" />
+                    <NavigationPropertyBinding Path="agreementItemPricings" Target="AgreementItemPricing" />
                 </EntitySet>
-                <EntitySet Name="AgreementChangesAndStatus" EntityType="AgreementService.AgreementChangesAndStatus"/>
+                <EntitySet Name="AgreementChangesAndStatus" EntityType="AgreementService.AgreementChangesAndStatus" />
                 <EntitySet Name="ChangeSetToAgreementSearch" EntityType="AgreementService.ChangeSetToAgreementSearch">
-                    <NavigationPropertyBinding Path="agreement" Target="Agreement"/>
-                    <NavigationPropertyBinding Path="changeSet" Target="ChangeSet"/>
+                    <NavigationPropertyBinding Path="agreement" Target="Agreement" />
+                    <NavigationPropertyBinding Path="changeSet" Target="ChangeSet" />
                 </EntitySet>
                 <EntitySet Name="AgreementItem" EntityType="AgreementService.AgreementItem">
-                    <NavigationPropertyBinding Path="agreement" Target="Agreement"/>
-                    <NavigationPropertyBinding Path="pricings" Target="AgreementItemPricing"/>
-                    <NavigationPropertyBinding Path="SiblingEntity" Target="AgreementItem"/>
+                    <NavigationPropertyBinding Path="agreement" Target="Agreement" />
+                    <NavigationPropertyBinding Path="pricings" Target="AgreementItemPricing" />
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="AgreementItem" />
                 </EntitySet>
                 <EntitySet Name="AgreementItemPricing" EntityType="AgreementService.AgreementItemPricing">
-                    <NavigationPropertyBinding Path="item" Target="AgreementItem"/>
-                    <NavigationPropertyBinding Path="changeSet" Target="ChangeSet"/>
-                    <NavigationPropertyBinding Path="status" Target="Status"/>
-                    <NavigationPropertyBinding Path="SiblingEntity" Target="AgreementItemPricing"/>
+                    <NavigationPropertyBinding Path="item" Target="AgreementItem" />
+                    <NavigationPropertyBinding Path="changeSet" Target="ChangeSet" />
+                    <NavigationPropertyBinding Path="status" Target="Status" />
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="AgreementItemPricing" />
                 </EntitySet>
                 <EntitySet Name="ChangeSet" EntityType="AgreementService.ChangeSet">
-                    <NavigationPropertyBinding Path="changeSetToAgreements" Target="ChangeSetToAgreement"/>
-                    <NavigationPropertyBinding Path="agreementItemPricings" Target="AgreementItemPricing"/>
+                    <NavigationPropertyBinding Path="changeSetToAgreements" Target="ChangeSetToAgreement" />
+                    <NavigationPropertyBinding Path="agreementItemPricings" Target="AgreementItemPricing" />
                 </EntitySet>
                 <EntitySet Name="Status" EntityType="AgreementService.Status">
-                    <NavigationPropertyBinding Path="texts" Target="Status_texts"/>
-                    <NavigationPropertyBinding Path="localized" Target="Status_texts"/>
+                    <NavigationPropertyBinding Path="texts" Target="Status_texts" />
+                    <NavigationPropertyBinding Path="localized" Target="Status_texts" />
                 </EntitySet>
                 <EntitySet Name="ChangeSetToAgreement" EntityType="AgreementService.ChangeSetToAgreement">
-                    <NavigationPropertyBinding Path="agreement" Target="Agreement"/>
-                    <NavigationPropertyBinding Path="changeSet" Target="ChangeSet"/>
+                    <NavigationPropertyBinding Path="agreement" Target="Agreement" />
+                    <NavigationPropertyBinding Path="changeSet" Target="ChangeSet" />
                 </EntitySet>
-                <EntitySet Name="Status_texts" EntityType="AgreementService.Status_texts"/>
+                <EntitySet Name="Status_texts" EntityType="AgreementService.Status_texts" />
                 <EntitySet Name="AgreementItemPricingForKeyDate" EntityType="AgreementService.AgreementItemPricingForKeyDateParameters">
-                    <NavigationPropertyBinding Path="Set/Parameters" Target="AgreementItemPricingForKeyDate"/>
+                    <NavigationPropertyBinding Path="Set/Parameters" Target="AgreementItemPricingForKeyDate" />
                 </EntitySet>
             </EntityContainer>
             <EntityType Name="Agreement">
                 <Key>
-                    <PropertyRef Name="ID"/>
-                    <PropertyRef Name="IsActiveEntity"/>
+                    <PropertyRef Name="ID" />
+                    <PropertyRef Name="IsActiveEntity" />
                 </Key>
-                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
-                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
-                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
-                <Property Name="description" Type="Edm.String" MaxLength="100"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false" />
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255" />
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255" />
+                <Property Name="description" Type="Edm.String" MaxLength="100" />
                 <NavigationProperty Name="items" Type="Collection(AgreementService.AgreementItem)" Partner="agreement">
-                    <OnDelete Action="Cascade"/>
+                    <OnDelete Action="Cascade" />
                 </NavigationProperty>
-                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
-                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
-                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
-                <NavigationProperty Name="DraftAdministrativeData" Type="AgreementService.DraftAdministrativeData" ContainsTarget="true"/>
-                <NavigationProperty Name="SiblingEntity" Type="AgreementService.Agreement"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true" />
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false" />
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false" />
+                <NavigationProperty Name="DraftAdministrativeData" Type="AgreementService.DraftAdministrativeData" ContainsTarget="true" />
+                <NavigationProperty Name="SiblingEntity" Type="AgreementService.Agreement" />
             </EntityType>
             <EntityType Name="ChangeSetSearch">
                 <Key>
-                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="ID" />
                 </Key>
-                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
-                <Property Name="validFromDefault" Type="Edm.Date" Nullable="false"/>
-                <Property Name="validToDefault" Type="Edm.Date"/>
-                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
-                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
-                <Property Name="changeSetDescription" Type="Edm.String" MaxLength="100"/>
-                <NavigationProperty Name="changeSetToAgreements" Type="Collection(AgreementService.ChangeSetToAgreementSearch)"/>
-                <NavigationProperty Name="agreementItemPricings" Type="Collection(AgreementService.AgreementItemPricing)"/>
-                <Property Name="status" Type="Edm.Int32"/>
-                <Property Name="noOfChanges" Type="Edm.String"/>
-                <Property Name="pricingIds" Type="Edm.String"/>
-                <Property Name="isFinalized" Type="Edm.Boolean"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false" />
+                <Property Name="validFromDefault" Type="Edm.Date" Nullable="false" />
+                <Property Name="validToDefault" Type="Edm.Date" />
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255" />
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255" />
+                <Property Name="changeSetDescription" Type="Edm.String" MaxLength="100" />
+                <NavigationProperty Name="changeSetToAgreements" Type="Collection(AgreementService.ChangeSetToAgreementSearch)" />
+                <NavigationProperty Name="agreementItemPricings" Type="Collection(AgreementService.AgreementItemPricing)" />
+                <Property Name="status" Type="Edm.Int32" />
+                <Property Name="noOfChanges" Type="Edm.String" />
+                <Property Name="pricingIds" Type="Edm.String" />
+                <Property Name="isFinalized" Type="Edm.Boolean" />
             </EntityType>
             <EntityType Name="AgreementChangesAndStatus">
-                <Property Name="agreementId" Type="Edm.Guid"/>
-                <Property Name="changeSetId" Type="Edm.Guid"/>
-                <Property Name="noOfChanges" Type="Edm.String"/>
-                <Property Name="status" Type="Edm.Int32"/>
-                <Property Name="pricingIds" Type="Edm.String"/>
+                <Property Name="agreementId" Type="Edm.Guid" />
+                <Property Name="changeSetId" Type="Edm.Guid" />
+                <Property Name="noOfChanges" Type="Edm.String" />
+                <Property Name="status" Type="Edm.Int32" />
+                <Property Name="pricingIds" Type="Edm.String" />
             </EntityType>
             <EntityType Name="ChangeSetToAgreementSearch">
                 <Key>
-                    <PropertyRef Name="agreement_ID"/>
-                    <PropertyRef Name="changeSet_ID"/>
+                    <PropertyRef Name="agreement_ID" />
+                    <PropertyRef Name="changeSet_ID" />
                 </Key>
                 <NavigationProperty Name="agreement" Type="AgreementService.Agreement">
-                    <ReferentialConstraint Property="agreement_ID" ReferencedProperty="ID"/>
+                    <ReferentialConstraint Property="agreement_ID" ReferencedProperty="ID" />
                 </NavigationProperty>
-                <Property Name="agreement_ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="agreement_ID" Type="Edm.Guid" Nullable="false" />
                 <NavigationProperty Name="changeSet" Type="AgreementService.ChangeSet">
-                    <ReferentialConstraint Property="changeSet_ID" ReferencedProperty="ID"/>
+                    <ReferentialConstraint Property="changeSet_ID" ReferencedProperty="ID" />
                 </NavigationProperty>
-                <Property Name="changeSet_ID" Type="Edm.Guid" Nullable="false"/>
-                <Property Name="active" Type="Edm.Boolean" DefaultValue="false"/>
-                <Property Name="status" Type="Edm.Int32"/>
-                <Property Name="noOfChanges" Type="Edm.String"/>
+                <Property Name="changeSet_ID" Type="Edm.Guid" Nullable="false" />
+                <Property Name="active" Type="Edm.Boolean" DefaultValue="false" />
+                <Property Name="status" Type="Edm.Int32" />
+                <Property Name="noOfChanges" Type="Edm.String" />
             </EntityType>
             <EntityType Name="AgreementItem">
                 <Key>
-                    <PropertyRef Name="ID"/>
-                    <PropertyRef Name="IsActiveEntity"/>
+                    <PropertyRef Name="ID" />
+                    <PropertyRef Name="IsActiveEntity" />
                 </Key>
-                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
-                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
-                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false" />
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255" />
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255" />
                 <NavigationProperty Name="agreement" Type="AgreementService.Agreement" Partner="items">
-                    <ReferentialConstraint Property="agreement_ID" ReferencedProperty="ID"/>
+                    <ReferentialConstraint Property="agreement_ID" ReferencedProperty="ID" />
                 </NavigationProperty>
-                <Property Name="agreement_ID" Type="Edm.Guid"/>
+                <Property Name="agreement_ID" Type="Edm.Guid" />
                 <NavigationProperty Name="pricings" Type="Collection(AgreementService.AgreementItemPricing)" Partner="item">
-                    <OnDelete Action="Cascade"/>
+                    <OnDelete Action="Cascade" />
                 </NavigationProperty>
-                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
-                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
-                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
-                <NavigationProperty Name="DraftAdministrativeData" Type="AgreementService.DraftAdministrativeData" ContainsTarget="true"/>
-                <NavigationProperty Name="SiblingEntity" Type="AgreementService.AgreementItem"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true" />
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false" />
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false" />
+                <NavigationProperty Name="DraftAdministrativeData" Type="AgreementService.DraftAdministrativeData" ContainsTarget="true" />
+                <NavigationProperty Name="SiblingEntity" Type="AgreementService.AgreementItem" />
             </EntityType>
             <EntityType Name="AgreementItemPricing">
                 <Key>
-                    <PropertyRef Name="ID"/>
-                    <PropertyRef Name="IsActiveEntity"/>
+                    <PropertyRef Name="ID" />
+                    <PropertyRef Name="IsActiveEntity" />
                 </Key>
-                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false" />
                 <NavigationProperty Name="item" Type="AgreementService.AgreementItem" Partner="pricings">
-                    <ReferentialConstraint Property="item_ID" ReferencedProperty="ID"/>
+                    <ReferentialConstraint Property="item_ID" ReferencedProperty="ID" />
                 </NavigationProperty>
-                <Property Name="item_ID" Type="Edm.Guid"/>
+                <Property Name="item_ID" Type="Edm.Guid" />
                 <NavigationProperty Name="changeSet" Type="AgreementService.ChangeSet">
-                    <ReferentialConstraint Property="changeSet_ID" ReferencedProperty="ID"/>
+                    <ReferentialConstraint Property="changeSet_ID" ReferencedProperty="ID" />
                 </NavigationProperty>
-                <Property Name="changeSet_ID" Type="Edm.Guid"/>
-                <Property Name="validFrom" Type="Edm.Date"/>
-                <Property Name="validTo" Type="Edm.Date"/>
+                <Property Name="changeSet_ID" Type="Edm.Guid" />
+                <Property Name="validFrom" Type="Edm.Date" />
+                <Property Name="validTo" Type="Edm.Date" />
                 <NavigationProperty Name="status" Type="AgreementService.Status">
-                    <ReferentialConstraint Property="status_code" ReferencedProperty="code"/>
+                    <ReferentialConstraint Property="status_code" ReferencedProperty="code" />
                 </NavigationProperty>
-                <Property Name="status_code" Type="Edm.String" MaxLength="40"/>
-                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
-                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
-                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
-                <NavigationProperty Name="DraftAdministrativeData" Type="AgreementService.DraftAdministrativeData" ContainsTarget="true"/>
-                <NavigationProperty Name="SiblingEntity" Type="AgreementService.AgreementItemPricing"/>
+                <Property Name="status_code" Type="Edm.String" MaxLength="40" />
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true" />
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false" />
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false" />
+                <NavigationProperty Name="DraftAdministrativeData" Type="AgreementService.DraftAdministrativeData" ContainsTarget="true" />
+                <NavigationProperty Name="SiblingEntity" Type="AgreementService.AgreementItemPricing" />
             </EntityType>
             <EntityType Name="ChangeSet">
                 <Key>
-                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="ID" />
                 </Key>
-                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
-                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
-                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
-                <Property Name="validFromDefault" Type="Edm.Date" Nullable="false"/>
-                <Property Name="validToDefault" Type="Edm.Date"/>
-                <Property Name="descr" Type="Edm.String" MaxLength="100"/>
-                <NavigationProperty Name="changeSetToAgreements" Type="Collection(AgreementService.ChangeSetToAgreement)" Partner="changeSet"/>
-                <NavigationProperty Name="agreementItemPricings" Type="Collection(AgreementService.AgreementItemPricing)"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false" />
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255" />
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255" />
+                <Property Name="validFromDefault" Type="Edm.Date" Nullable="false" />
+                <Property Name="validToDefault" Type="Edm.Date" />
+                <Property Name="descr" Type="Edm.String" MaxLength="100" />
+                <NavigationProperty Name="changeSetToAgreements" Type="Collection(AgreementService.ChangeSetToAgreement)" Partner="changeSet" />
+                <NavigationProperty Name="agreementItemPricings" Type="Collection(AgreementService.AgreementItemPricing)" />
             </EntityType>
             <EntityType Name="Status">
                 <Key>
-                    <PropertyRef Name="code"/>
+                    <PropertyRef Name="code" />
                 </Key>
-                <Property Name="name" Type="Edm.String" MaxLength="255"/>
-                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
-                <Property Name="code" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255" />
+                <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+                <Property Name="code" Type="Edm.String" MaxLength="40" Nullable="false" />
                 <NavigationProperty Name="texts" Type="Collection(AgreementService.Status_texts)">
-                    <OnDelete Action="Cascade"/>
+                    <OnDelete Action="Cascade" />
                 </NavigationProperty>
                 <NavigationProperty Name="localized" Type="AgreementService.Status_texts">
-                    <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+                    <ReferentialConstraint Property="code" ReferencedProperty="code" />
                 </NavigationProperty>
             </EntityType>
             <EntityType Name="ChangeSetToAgreement">
                 <Key>
-                    <PropertyRef Name="agreement_ID"/>
-                    <PropertyRef Name="changeSet_ID"/>
+                    <PropertyRef Name="agreement_ID" />
+                    <PropertyRef Name="changeSet_ID" />
                 </Key>
-                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
-                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255" />
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255" />
                 <NavigationProperty Name="agreement" Type="AgreementService.Agreement">
-                    <ReferentialConstraint Property="agreement_ID" ReferencedProperty="ID"/>
+                    <ReferentialConstraint Property="agreement_ID" ReferencedProperty="ID" />
                 </NavigationProperty>
-                <Property Name="agreement_ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="agreement_ID" Type="Edm.Guid" Nullable="false" />
                 <NavigationProperty Name="changeSet" Type="AgreementService.ChangeSet" Partner="changeSetToAgreements">
-                    <ReferentialConstraint Property="changeSet_ID" ReferencedProperty="ID"/>
+                    <ReferentialConstraint Property="changeSet_ID" ReferencedProperty="ID" />
                 </NavigationProperty>
-                <Property Name="changeSet_ID" Type="Edm.Guid" Nullable="false"/>
-                <Property Name="active" Type="Edm.Boolean" DefaultValue="false"/>
+                <Property Name="changeSet_ID" Type="Edm.Guid" Nullable="false" />
+                <Property Name="active" Type="Edm.Boolean" DefaultValue="false" />
             </EntityType>
             <EntityType Name="DraftAdministrativeData">
                 <Key>
-                    <PropertyRef Name="DraftUUID"/>
+                    <PropertyRef Name="DraftUUID" />
                 </Key>
-                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
-                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
-                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
-                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
-                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
-                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false" />
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7" />
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256" />
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean" />
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7" />
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256" />
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256" />
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean" />
             </EntityType>
             <EntityType Name="Status_texts">
                 <Key>
-                    <PropertyRef Name="locale"/>
-                    <PropertyRef Name="code"/>
+                    <PropertyRef Name="locale" />
+                    <PropertyRef Name="code" />
                 </Key>
-                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
-                <Property Name="name" Type="Edm.String" MaxLength="255"/>
-                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
-                <Property Name="code" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false" />
+                <Property Name="name" Type="Edm.String" MaxLength="255" />
+                <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+                <Property Name="code" Type="Edm.String" MaxLength="40" Nullable="false" />
             </EntityType>
             <EntityType Name="AgreementItemPricingForKeyDateParameters">
                 <Key>
-                    <PropertyRef Name="keyDate"/>
+                    <PropertyRef Name="keyDate" />
                 </Key>
-                <Property Name="keyDate" Type="Edm.Date" Nullable="false"/>
-                <NavigationProperty Name="Set" Type="Collection(AgreementService.AgreementItemPricingForKeyDateType)" Partner="Parameters" ContainsTarget="true"/>
+                <Property Name="keyDate" Type="Edm.Date" Nullable="false" />
+                <NavigationProperty Name="Set" Type="Collection(AgreementService.AgreementItemPricingForKeyDateType)" Partner="Parameters" ContainsTarget="true" />
             </EntityType>
             <EntityType Name="AgreementItemPricingForKeyDateType">
                 <Key>
-                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="ID" />
                 </Key>
-                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
-                <Property Name="code" Type="Edm.String" MaxLength="40"/>
-                <Property Name="validFrom" Type="Edm.Date"/>
-                <Property Name="validTo" Type="Edm.Date"/>
-                <NavigationProperty Name="Parameters" Type="AgreementService.AgreementItemPricingForKeyDateParameters" Partner="Set"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false" />
+                <Property Name="code" Type="Edm.String" MaxLength="40" />
+                <Property Name="validFrom" Type="Edm.Date" />
+                <Property Name="validTo" Type="Edm.Date" />
+                <NavigationProperty Name="Parameters" Type="AgreementService.AgreementItemPricingForKeyDateParameters" Partner="Set" />
             </EntityType>
             <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
-                <Parameter Name="in" Type="AgreementService.Agreement"/>
-                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
-                <ReturnType Type="AgreementService.Agreement"/>
+                <Parameter Name="in" Type="AgreementService.Agreement" />
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String" />
+                <ReturnType Type="AgreementService.Agreement" />
             </Action>
             <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
-                <Parameter Name="in" Type="AgreementService.AgreementItem"/>
-                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
-                <ReturnType Type="AgreementService.AgreementItem"/>
+                <Parameter Name="in" Type="AgreementService.AgreementItem" />
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String" />
+                <ReturnType Type="AgreementService.AgreementItem" />
             </Action>
             <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
-                <Parameter Name="in" Type="AgreementService.AgreementItemPricing"/>
-                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
-                <ReturnType Type="AgreementService.AgreementItemPricing"/>
+                <Parameter Name="in" Type="AgreementService.AgreementItemPricing" />
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String" />
+                <ReturnType Type="AgreementService.AgreementItemPricing" />
             </Action>
             <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
-                <Parameter Name="in" Type="AgreementService.Agreement"/>
-                <ReturnType Type="AgreementService.Agreement"/>
+                <Parameter Name="in" Type="AgreementService.Agreement" />
+                <ReturnType Type="AgreementService.Agreement" />
             </Action>
             <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
-                <Parameter Name="in" Type="AgreementService.Agreement"/>
-                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
-                <ReturnType Type="AgreementService.Agreement"/>
+                <Parameter Name="in" Type="AgreementService.Agreement" />
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean" />
+                <ReturnType Type="AgreementService.Agreement" />
             </Action>
             <Annotations Target="AgreementService.EntityContainer/Agreement">
                 <Annotation Term="Common.DraftRoot">
                     <Record Type="Common.DraftRootType">
-                        <PropertyValue Property="ActivationAction" String="AgreementService.draftActivate"/>
-                        <PropertyValue Property="EditAction" String="AgreementService.draftEdit"/>
-                        <PropertyValue Property="PreparationAction" String="AgreementService.draftPrepare"/>
+                        <PropertyValue Property="ActivationAction" String="AgreementService.draftActivate" />
+                        <PropertyValue Property="EditAction" String="AgreementService.draftEdit" />
+                        <PropertyValue Property="PreparationAction" String="AgreementService.draftPrepare" />
                     </Record>
                 </Annotation>
             </Annotations>
             <Annotations Target="AgreementService.Agreement/createdAt">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Immutable" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Common.Label" String="Created On"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Immutable" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Common.Label" String="Created On" />
             </Annotations>
             <Annotations Target="AgreementService.Agreement/createdBy">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Immutable" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Core.Description" String="User's unique ID"/>
-                <Annotation Term="Common.Label" String="Created By"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Immutable" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Core.Description" String="User's unique ID" />
+                <Annotation Term="Common.Label" String="Created By" />
             </Annotations>
             <Annotations Target="AgreementService.Agreement/modifiedAt">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Common.Label" String="Changed On"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Common.Label" String="Changed On" />
             </Annotations>
             <Annotations Target="AgreementService.Agreement/modifiedBy">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Core.Description" String="User's unique ID"/>
-                <Annotation Term="Common.Label" String="Changed By"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Core.Description" String="User's unique ID" />
+                <Annotation Term="Common.Label" String="Changed By" />
             </Annotations>
             <Annotations Target="AgreementService.Agreement/IsActiveEntity">
-                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="UI.Hidden" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.Agreement/HasActiveEntity">
-                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="UI.Hidden" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.Agreement/HasDraftEntity">
-                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="UI.Hidden" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.Agreement/DraftAdministrativeData">
-                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="UI.Hidden" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.ChangeSetSearch/createdAt">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Immutable" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Common.Label" String="Created On"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Immutable" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Common.Label" String="Created On" />
             </Annotations>
             <Annotations Target="AgreementService.ChangeSetSearch/createdBy">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Immutable" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Core.Description" String="User's unique ID"/>
-                <Annotation Term="Common.Label" String="Created By"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Immutable" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Core.Description" String="User's unique ID" />
+                <Annotation Term="Common.Label" String="Created By" />
             </Annotations>
             <Annotations Target="AgreementService.ChangeSetSearch/modifiedAt">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Common.Label" String="Changed On"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Common.Label" String="Changed On" />
             </Annotations>
             <Annotations Target="AgreementService.ChangeSetSearch/modifiedBy">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Core.Description" String="User's unique ID"/>
-                <Annotation Term="Common.Label" String="Changed By"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Core.Description" String="User's unique ID" />
+                <Annotation Term="Common.Label" String="Changed By" />
             </Annotations>
             <Annotations Target="AgreementService.ChangeSetSearch/status">
-                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.ChangeSetSearch/noOfChanges">
-                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.ChangeSetSearch/pricingIds">
-                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.ChangeSetSearch/isFinalized">
-                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.AgreementChangesAndStatus/noOfChanges">
-                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.AgreementChangesAndStatus/status">
-                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.AgreementChangesAndStatus/pricingIds">
-                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.ChangeSetToAgreementSearch/status">
-                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.ChangeSetToAgreementSearch/noOfChanges">
-                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.EntityContainer/AgreementItem">
                 <Annotation Term="Common.DraftNode">
                     <Record Type="Common.DraftNodeType">
-                        <PropertyValue Property="PreparationAction" String="AgreementService.draftPrepare"/>
+                        <PropertyValue Property="PreparationAction" String="AgreementService.draftPrepare" />
                     </Record>
                 </Annotation>
             </Annotations>
             <Annotations Target="AgreementService.AgreementItem/createdAt">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Immutable" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Common.Label" String="Created On"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Immutable" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Common.Label" String="Created On" />
             </Annotations>
             <Annotations Target="AgreementService.AgreementItem/createdBy">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Immutable" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Core.Description" String="User's unique ID"/>
-                <Annotation Term="Common.Label" String="Created By"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Immutable" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Core.Description" String="User's unique ID" />
+                <Annotation Term="Common.Label" String="Created By" />
             </Annotations>
             <Annotations Target="AgreementService.AgreementItem/modifiedAt">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Common.Label" String="Changed On"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Common.Label" String="Changed On" />
             </Annotations>
             <Annotations Target="AgreementService.AgreementItem/modifiedBy">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Core.Description" String="User's unique ID"/>
-                <Annotation Term="Common.Label" String="Changed By"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Core.Description" String="User's unique ID" />
+                <Annotation Term="Common.Label" String="Changed By" />
             </Annotations>
             <Annotations Target="AgreementService.AgreementItem/IsActiveEntity">
-                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="UI.Hidden" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.AgreementItem/HasActiveEntity">
-                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="UI.Hidden" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.AgreementItem/HasDraftEntity">
-                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="UI.Hidden" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.AgreementItem/DraftAdministrativeData">
-                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="UI.Hidden" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.EntityContainer/AgreementItemPricing">
                 <Annotation Term="Common.DraftNode">
                     <Record Type="Common.DraftNodeType">
-                        <PropertyValue Property="PreparationAction" String="AgreementService.draftPrepare"/>
+                        <PropertyValue Property="PreparationAction" String="AgreementService.draftPrepare" />
                     </Record>
                 </Annotation>
             </Annotations>
             <Annotations Target="AgreementService.AgreementItemPricing/status_code">
                 <Annotation Term="Common.ValueList">
                     <Record Type="Common.ValueListType">
-                        <PropertyValue Property="Label" String="Status"/>
-                        <PropertyValue Property="CollectionPath" String="Status"/>
+                        <PropertyValue Property="Label" String="Status" />
+                        <PropertyValue Property="CollectionPath" String="Status" />
                         <PropertyValue Property="Parameters">
                             <Collection>
                                 <Record Type="Common.ValueListParameterInOut">
-                                    <PropertyValue Property="LocalDataProperty" PropertyPath="status_code"/>
-                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="status_code" />
+                                    <PropertyValue Property="ValueListProperty" String="code" />
                                 </Record>
                                 <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                    <PropertyValue Property="ValueListProperty" String="name" />
                                 </Record>
                             </Collection>
                         </PropertyValue>
@@ -443,118 +443,118 @@
                 </Annotation>
             </Annotations>
             <Annotations Target="AgreementService.AgreementItemPricing/IsActiveEntity">
-                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="UI.Hidden" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.AgreementItemPricing/HasActiveEntity">
-                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="UI.Hidden" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.AgreementItemPricing/HasDraftEntity">
-                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="UI.Hidden" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.AgreementItemPricing/DraftAdministrativeData">
-                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="UI.Hidden" Bool="true" />
             </Annotations>
             <Annotations Target="AgreementService.ChangeSet/createdAt">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Immutable" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Common.Label" String="Created On"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Immutable" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Common.Label" String="Created On" />
             </Annotations>
             <Annotations Target="AgreementService.ChangeSet/createdBy">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Immutable" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Core.Description" String="User's unique ID"/>
-                <Annotation Term="Common.Label" String="Created By"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Immutable" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Core.Description" String="User's unique ID" />
+                <Annotation Term="Common.Label" String="Created By" />
             </Annotations>
             <Annotations Target="AgreementService.ChangeSet/modifiedAt">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Common.Label" String="Changed On"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Common.Label" String="Changed On" />
             </Annotations>
             <Annotations Target="AgreementService.ChangeSet/modifiedBy">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Core.Description" String="User's unique ID"/>
-                <Annotation Term="Common.Label" String="Changed By"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Core.Description" String="User's unique ID" />
+                <Annotation Term="Common.Label" String="Changed By" />
             </Annotations>
             <Annotations Target="AgreementService.Status">
                 <Annotation Term="UI.Identification">
                     <Collection>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="name"/>
+                            <PropertyValue Property="Value" Path="name" />
                         </Record>
                     </Collection>
                 </Annotation>
             </Annotations>
             <Annotations Target="AgreementService.Status/name">
-                <Annotation Term="Common.Label" String="Name"/>
+                <Annotation Term="Common.Label" String="Name" />
             </Annotations>
             <Annotations Target="AgreementService.Status/descr">
-                <Annotation Term="Common.Label" String="Description"/>
+                <Annotation Term="Common.Label" String="Description" />
             </Annotations>
             <Annotations Target="AgreementService.ChangeSetToAgreement/createdAt">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Immutable" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Common.Label" String="Created On"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Immutable" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Common.Label" String="Created On" />
             </Annotations>
             <Annotations Target="AgreementService.ChangeSetToAgreement/createdBy">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Immutable" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Core.Description" String="User's unique ID"/>
-                <Annotation Term="Common.Label" String="Created By"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Immutable" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Core.Description" String="User's unique ID" />
+                <Annotation Term="Common.Label" String="Created By" />
             </Annotations>
             <Annotations Target="AgreementService.ChangeSetToAgreement/modifiedAt">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Common.Label" String="Changed On"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Common.Label" String="Changed On" />
             </Annotations>
             <Annotations Target="AgreementService.ChangeSetToAgreement/modifiedBy">
-                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                <Annotation Term="Core.Computed" Bool="true"/>
-                <Annotation Term="Core.Description" String="User's unique ID"/>
-                <Annotation Term="Common.Label" String="Changed By"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true" />
+                <Annotation Term="Core.Computed" Bool="true" />
+                <Annotation Term="Core.Description" String="User's unique ID" />
+                <Annotation Term="Common.Label" String="Changed By" />
             </Annotations>
             <Annotations Target="AgreementService.DraftAdministrativeData">
-                <Annotation Term="Common.Label" String="Draft Administrative Data"/>
+                <Annotation Term="Common.Label" String="Draft Administrative Data" />
             </Annotations>
             <Annotations Target="AgreementService.DraftAdministrativeData/DraftUUID">
-                <Annotation Term="UI.Hidden" Bool="true"/>
-                <Annotation Term="Common.Label" String="Draft (Technical ID)"/>
+                <Annotation Term="UI.Hidden" Bool="true" />
+                <Annotation Term="Common.Label" String="Draft (Technical ID)" />
             </Annotations>
             <Annotations Target="AgreementService.DraftAdministrativeData/CreationDateTime">
-                <Annotation Term="Common.Label" String="Draft Created On"/>
+                <Annotation Term="Common.Label" String="Draft Created On" />
             </Annotations>
             <Annotations Target="AgreementService.DraftAdministrativeData/CreatedByUser">
-                <Annotation Term="Common.Label" String="Draft Created By"/>
+                <Annotation Term="Common.Label" String="Draft Created By" />
             </Annotations>
             <Annotations Target="AgreementService.DraftAdministrativeData/DraftIsCreatedByMe">
-                <Annotation Term="UI.Hidden" Bool="true"/>
-                <Annotation Term="Common.Label" String="Draft Created By Me"/>
+                <Annotation Term="UI.Hidden" Bool="true" />
+                <Annotation Term="Common.Label" String="Draft Created By Me" />
             </Annotations>
             <Annotations Target="AgreementService.DraftAdministrativeData/LastChangeDateTime">
-                <Annotation Term="Common.Label" String="Draft Last Changed On"/>
+                <Annotation Term="Common.Label" String="Draft Last Changed On" />
             </Annotations>
             <Annotations Target="AgreementService.DraftAdministrativeData/LastChangedByUser">
-                <Annotation Term="Common.Label" String="Draft Last Changed By"/>
+                <Annotation Term="Common.Label" String="Draft Last Changed By" />
             </Annotations>
             <Annotations Target="AgreementService.DraftAdministrativeData/InProcessByUser">
-                <Annotation Term="Common.Label" String="Draft In Process By"/>
+                <Annotation Term="Common.Label" String="Draft In Process By" />
             </Annotations>
             <Annotations Target="AgreementService.DraftAdministrativeData/DraftIsProcessedByMe">
-                <Annotation Term="UI.Hidden" Bool="true"/>
-                <Annotation Term="Common.Label" String="Draft In Process By Me"/>
+                <Annotation Term="UI.Hidden" Bool="true" />
+                <Annotation Term="Common.Label" String="Draft In Process By Me" />
             </Annotations>
             <Annotations Target="AgreementService.Status_texts/name">
-                <Annotation Term="Common.Label" String="Name"/>
+                <Annotation Term="Common.Label" String="Name" />
             </Annotations>
             <Annotations Target="AgreementService.Status_texts/descr">
-                <Annotation Term="Common.Label" String="Description"/>
+                <Annotation Term="Common.Label" String="Description" />
             </Annotations>
             <Annotations Target="AgreementService.AgreementItemPricingForKeyDateParameters/keyDate">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory" />
             </Annotations>
         </Schema>
     </edmx:DataServices>
