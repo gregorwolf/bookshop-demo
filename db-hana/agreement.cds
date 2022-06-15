@@ -2,10 +2,26 @@ using {agreement} from '../db/agreement';
 using {AgreementService} from '../srv/agreement';
 
 extend service AgreementService with {
+  @readonly
+  @Aggregation.ApplySupported          : {
+    Transformations : [
+      'aggregate',
+      'groupby',
+      'filter'
+    ],
+    Rollup          : 'None'
+  }
+  @Capabilities.FilterRestrictions     : {NonFilterableProperties : [keyDate]}
+  @Capabilities.NavigationRestrictions : {RestrictedProperties : [
+    {NavigationProperty : {path : Parameters}},
+    {FilterRestrictions : {Filterable : false}}
+  ]}
+  @Capabilities.SortRestrictions       : {NonSortableProperties : [keyDate]}
   entity AgreementItemPricingForKeyDate(keyDate : Date not null) as
     select
+      key : keyDate                    as keyDate,
       key AgreementItemPricing.ID,
-          AgreementItemPricing.status.code,
+          AgreementItemPricing.item.ID as Item,
           AgreementItemPricing.validFrom,
           AgreementItemPricing.validTo
     from agreement.AgreementItemPricing
@@ -26,12 +42,12 @@ annotate AgreementService.AgreementItemPricingForKeyDate @(UI.SelectionVariant #
 
 annotate AgreementService.AgreementItemPricingForKeyDate with @(UI : {
   SelectionFields : [
+    keyDate,
     ID,
-    code,
   ],
   LineItem        : [
     {Value : ID, },
-    {Value : code, },
+    {Value : Item, },
     {Value : validFrom, },
     {Value : validTo, },
   ]

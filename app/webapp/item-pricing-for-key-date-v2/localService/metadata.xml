@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Aggregation.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1" />
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1" />
+    </edmx:Reference>
     <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
         <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1" />
     </edmx:Reference>
@@ -301,10 +307,12 @@
             </EntityType>
             <EntityType Name="AgreementItemPricingForKeyDateType">
                 <Key>
+                    <PropertyRef Name="keyDate" />
                     <PropertyRef Name="ID" />
                 </Key>
+                <Property Name="keyDate" Type="Edm.DateTime" Nullable="false" sap:display-format="Date" />
                 <Property Name="ID" Type="Edm.Guid" Nullable="false" />
-                <Property Name="code" Type="Edm.String" MaxLength="40" />
+                <Property Name="Item" Type="Edm.Guid" />
                 <Property Name="validFrom" Type="Edm.DateTime" sap:display-format="Date" />
                 <Property Name="validTo" Type="Edm.DateTime" sap:display-format="Date" />
                 <NavigationProperty Name="Parameters" Relationship="AgreementService.AgreementItemPricingForKeyDateParameters_Set" FromRole="AgreementItemPricingForKeyDateType" ToRole="AgreementItemPricingForKeyDateParameters" />
@@ -735,6 +743,112 @@
             </Annotations>
             <Annotations Target="AgreementService.Status_texts/descr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.Label" String="Description" />
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItemPricingForKeyDateType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Aggregation.ApplySupported">
+                    <Record Type="Aggregation.ApplySupportedType">
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="None" />
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>keyDate</PropertyPath>
+                        <PropertyPath>ID</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ID" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Item" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="validFrom" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="validTo" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="AgreementService.EntityContainer/AgreementItemPricingForKeyDateSet" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Aggregation.ApplySupported">
+                    <Record Type="Aggregation.ApplySupportedType">
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="None" />
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record Type="Capabilities.FilterRestrictionsType">
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>keyDate</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.NavigationRestrictions">
+                    <Record Type="Capabilities.NavigationRestrictionsType">
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record Type="Capabilities.NavigationPropertyRestriction">
+                                    <PropertyValue Property="NavigationProperty">
+                                        <Record />
+                                    </PropertyValue>
+                                </Record>
+                                <Record Type="Capabilities.NavigationPropertyRestriction">
+                                    <PropertyValue Property="FilterRestrictions">
+                                        <Record Type="Capabilities.FilterRestrictionsType">
+                                            <PropertyValue Property="Filterable" Bool="false" />
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record Type="Capabilities.SortRestrictionsType">
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>keyDate</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record Type="Capabilities.DeleteRestrictionsType">
+                        <PropertyValue Property="Deletable" Bool="false" />
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record Type="Capabilities.InsertRestrictionsType">
+                        <PropertyValue Property="Insertable" Bool="false" />
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record Type="Capabilities.UpdateRestrictionsType">
+                        <PropertyValue Property="Updatable" Bool="false" />
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItemPricingForKeyDateType/keyDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true" />
             </Annotations>
         </Schema>
     </edmx:DataServices>
