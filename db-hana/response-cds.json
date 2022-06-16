@@ -1,0 +1,18 @@
+{
+  "d": {
+    "results": [
+      {
+        "__metadata": {
+          "type": "ZAgreementService.Z_C_AItemPricingForKeyDate",
+          "uri": "http://localhost:4004/v2/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/Z_C_AItemPricingForKeyDate(keyDate=datetime'2022-06-16T00:00',ID=guid'f8420eac-a36b-49af-b91c-6559b8f7627e')"
+        },
+        "keyDate": "/Date(1655337600000)/",
+        "ID": "f8420eac-a36b-49af-b91c-6559b8f7627e",
+        "Item": "77b1f64f-2cc0-47df-aefd-11d93ae3c15d",
+        "validFrom": "/Date(1640995200000)/",
+        "validTo": "/Date(253402214400000)/"
+      }
+    ],
+    "__count": "1"
+  }
+}

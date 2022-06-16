@@ -1,0 +1,19 @@
+{
+  "d": {
+    "results": [
+      {
+        "__metadata": {
+          "id": "http://ABAPCI.DUMMY.NODOMAIN:50000/sap/opu/odata/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/Z_C_AItemPricingForKeyDateSet(keyDate=datetime'2022-06-16T00%3A00%3A00',ID='90db54bc-383b-4267-bca3-1252aafe1168')",
+          "uri": "http://ABAPCI.DUMMY.NODOMAIN:50000/sap/opu/odata/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/Z_C_AItemPricingForKeyDateSet(keyDate=datetime'2022-06-16T00%3A00%3A00',ID='90db54bc-383b-4267-bca3-1252aafe1168')",
+          "type": "Z_C_AITEMPRICINGFORKEYDATE_CDS.Z_C_AItemPricingForKeyDateType"
+        },
+        "keyDate": "\/Date(1655337600000)\/",
+        "ID": "90db54bc-383b-4267-bca3-1252aafe1168",
+        "Item": "30",
+        "validFrom": "\/Date(1641081600000)\/",
+        "validTo": "\/Date(253402214400000)\/"
+      }
+    ],
+    "__count": "1"
+  }
+}
