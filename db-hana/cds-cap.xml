@@ -6,8 +6,14 @@
   <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
     <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1" />
   </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1" />
+  </edmx:Reference>
   <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
     <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1" />
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1" />
   </edmx:Reference>
   <edmx:DataServices m:DataServiceVersion="2.0">
     <Schema Namespace="ZAgreementService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -55,6 +61,43 @@
             <PropertyValue Property="Rollup" EnumMember="None" />
           </Record>
         </Annotation>
+        <Annotation Term="UI.SelectionVariant" Qualifier="params">
+          <Record Type="UI.SelectionVariantType">
+            <PropertyValue Property="SelectOptions">
+              <Collection />
+            </PropertyValue>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="UI.Parameter">
+                  <PropertyValue Property="PropertyName" PropertyPath="keyDate" />
+                  <PropertyValue Property="PropertyValue" String="TODAY" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.SelectionFields">
+          <Collection>
+            <PropertyPath>keyDate</PropertyPath>
+            <PropertyPath>ID</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="ID" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="Item" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="validFrom" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="validTo" />
+            </Record>
+          </Collection>
+        </Annotation>
       </Annotations>
       <Annotations Target="ZAgreementService.EntityContainer/Z_C_AItemPricingForKeyDateSet" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Aggregation.ApplySupported">
@@ -83,9 +126,7 @@
             <PropertyValue Property="RestrictedProperties">
               <Collection>
                 <Record Type="Capabilities.NavigationPropertyRestriction">
-                  <PropertyValue Property="NavigationProperty">
-                    <Record />
-                  </PropertyValue>
+                  <PropertyValue Property="NavigationProperty" NavigationPropertyPath="Parameters" />
                 </Record>
                 <Record Type="Capabilities.NavigationPropertyRestriction">
                   <PropertyValue Property="FilterRestrictions">
@@ -122,9 +163,30 @@
             <PropertyValue Property="Updatable" Bool="false" />
           </Record>
         </Annotation>
+        <Annotation Term="UI.SelectionVariant" Qualifier="params">
+          <Record Type="UI.SelectionVariantType">
+            <PropertyValue Property="SelectOptions">
+              <Collection />
+            </PropertyValue>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="UI.Parameter">
+                  <PropertyValue Property="PropertyName" PropertyPath="keyDate" />
+                  <PropertyValue Property="PropertyValue" String="TODAY" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
       </Annotations>
       <Annotations Target="ZAgreementService.Z_C_AItemPricingForKeyDateType/keyDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
         <Annotation Term="Core.Computed" Bool="true" />
+      </Annotations>
+      <Annotations Target="ZAgreementService.Z_C_AItemPricingForKeyDateType/validFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Valid From" />
+      </Annotations>
+      <Annotations Target="ZAgreementService.Z_C_AItemPricingForKeyDateType/validTo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Label" String="Valid To" />
       </Annotations>
     </Schema>
   </edmx:DataServices>

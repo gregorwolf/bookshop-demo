@@ -12,7 +12,7 @@ service ZAgreementService @(path : '/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS') {
   }
   @Capabilities.FilterRestrictions     : {NonFilterableProperties : [keyDate]}
   @Capabilities.NavigationRestrictions : {RestrictedProperties : [
-    {NavigationProperty : {path : Parameters}},
+    {NavigationProperty : {$value : Parameters}},
     {FilterRestrictions : {Filterable : false}}
   ]}
   @Capabilities.SortRestrictions       : {NonSortableProperties : [keyDate]}
@@ -21,7 +21,9 @@ service ZAgreementService @(path : '/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS') {
       key : keyDate                    as keyDate : Date,
       key AgreementItemPricing.ID,
           AgreementItemPricing.item.ID as Item,
+          @title : '{i18n>validFrom}'
           AgreementItemPricing.validFrom          : Date,
+          @title : '{i18n>validTo}'
           AgreementItemPricing.validTo            : Date
     from agreement.AgreementItemPricing
     where
