@@ -18,6 +18,15 @@ GET http://localhost:4004/agreement/AgreementChangesAndStatus
 ###
 GET http://localhost:4004/agreement/ChangeSetToAgreementSearch
 ###
+GET http://localhost:4004/agreement/AgreementItemPricing
+  ?$count=true
+  &$select=ID,validFrom,validTo
+###
+GET http://localhost:4004/v2/agreement/AgreementItemPricing
+  ?$inlinecount=allpages
+  &$select=ID,validFrom,validTo
+### View with parameters
+###
 GET http://localhost:4004/agreement/AgreementItemPricingForKeyDate(keyDate=2021-10-15)/Set
   ?$count=true
 ###
