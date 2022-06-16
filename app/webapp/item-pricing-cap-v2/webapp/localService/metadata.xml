@@ -1,0 +1,892 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Aggregation.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="AgreementService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="Agreement" EntityType="AgreementService.Agreement"/>
+                <FunctionImport Name="Agreement_draftPrepare" EntitySet="Agreement" ReturnType="AgreementService.Agreement" m:HttpMethod="POST" sap:action-for="AgreementService.Agreement">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                    <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <FunctionImport Name="Agreement_draftActivate" EntitySet="Agreement" ReturnType="AgreementService.Agreement" m:HttpMethod="POST" sap:action-for="AgreementService.Agreement">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                </FunctionImport>
+                <FunctionImport Name="Agreement_draftEdit" EntitySet="Agreement" ReturnType="AgreementService.Agreement" m:HttpMethod="POST" sap:action-for="AgreementService.Agreement">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                    <Parameter Name="PreserveChanges" Type="Edm.Boolean" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <EntitySet Name="AgreementItemPricing" EntityType="AgreementService.AgreementItemPricing"/>
+                <FunctionImport Name="AgreementItemPricing_draftPrepare" EntitySet="AgreementItemPricing" ReturnType="AgreementService.AgreementItemPricing" m:HttpMethod="POST" sap:action-for="AgreementService.AgreementItemPricing">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                    <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <EntitySet Name="ChangeSetSearch" EntityType="AgreementService.ChangeSetSearch"/>
+                <EntitySet Name="AgreementChangesAndStatus" EntityType="AgreementService.AgreementChangesAndStatus"/>
+                <EntitySet Name="ChangeSetToAgreementSearch" EntityType="AgreementService.ChangeSetToAgreementSearch"/>
+                <EntitySet Name="AgreementItem" EntityType="AgreementService.AgreementItem"/>
+                <FunctionImport Name="AgreementItem_draftPrepare" EntitySet="AgreementItem" ReturnType="AgreementService.AgreementItem" m:HttpMethod="POST" sap:action-for="AgreementService.AgreementItem">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                    <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <EntitySet Name="ChangeSet" EntityType="AgreementService.ChangeSet"/>
+                <EntitySet Name="Status" EntityType="AgreementService.Status"/>
+                <EntitySet Name="ChangeSetToAgreement" EntityType="AgreementService.ChangeSetToAgreement"/>
+                <EntitySet Name="DraftAdministrativeData" EntityType="AgreementService.DraftAdministrativeData"/>
+                <EntitySet Name="Status_texts" EntityType="AgreementService.Status_texts"/>
+                <EntitySet Name="AgreementItemPricingForKeyDate" EntityType="AgreementService.AgreementItemPricingForKeyDateParameters" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false"/>
+                <EntitySet Name="AgreementItemPricingForKeyDateSet" EntityType="AgreementService.AgreementItemPricingForKeyDateType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:addressable="false"/>
+                <AssociationSet Name="Agreement_DraftAdministrativeData" Association="AgreementService.Agreement_DraftAdministrativeData">
+                    <End Role="Agreement" EntitySet="Agreement"/>
+                    <End Role="DraftAdministrativeData" EntitySet="DraftAdministrativeData"/>
+                </AssociationSet>
+                <AssociationSet Name="Agreement_SiblingEntity" Association="AgreementService.Agreement_SiblingEntity">
+                    <End Role="Agreement" EntitySet="Agreement"/>
+                    <End Role="Agreement1" EntitySet="Agreement"/>
+                </AssociationSet>
+                <AssociationSet Name="AgreementItemPricing_item" Association="AgreementService.AgreementItemPricing_item">
+                    <End Role="AgreementItemPricing" EntitySet="AgreementItemPricing"/>
+                    <End Role="AgreementItem" EntitySet="AgreementItem"/>
+                </AssociationSet>
+                <AssociationSet Name="AgreementItemPricing_changeSet" Association="AgreementService.AgreementItemPricing_changeSet">
+                    <End Role="AgreementItemPricing" EntitySet="AgreementItemPricing"/>
+                    <End Role="ChangeSet" EntitySet="ChangeSet"/>
+                </AssociationSet>
+                <AssociationSet Name="AgreementItemPricing_status" Association="AgreementService.AgreementItemPricing_status">
+                    <End Role="AgreementItemPricing" EntitySet="AgreementItemPricing"/>
+                    <End Role="Status" EntitySet="Status"/>
+                </AssociationSet>
+                <AssociationSet Name="AgreementItemPricing_DraftAdministrativeData" Association="AgreementService.AgreementItemPricing_DraftAdministrativeData">
+                    <End Role="AgreementItemPricing" EntitySet="AgreementItemPricing"/>
+                    <End Role="DraftAdministrativeData" EntitySet="DraftAdministrativeData"/>
+                </AssociationSet>
+                <AssociationSet Name="AgreementItemPricing_SiblingEntity" Association="AgreementService.AgreementItemPricing_SiblingEntity">
+                    <End Role="AgreementItemPricing" EntitySet="AgreementItemPricing"/>
+                    <End Role="AgreementItemPricing1" EntitySet="AgreementItemPricing"/>
+                </AssociationSet>
+                <AssociationSet Name="ChangeSetSearch_changeSetToAgreements" Association="AgreementService.ChangeSetSearch_changeSetToAgreements">
+                    <End Role="ChangeSetSearch" EntitySet="ChangeSetSearch"/>
+                    <End Role="ChangeSetToAgreementSearch" EntitySet="ChangeSetToAgreementSearch"/>
+                </AssociationSet>
+                <AssociationSet Name="ChangeSetSearch_agreementItemPricings" Association="AgreementService.ChangeSetSearch_agreementItemPricings">
+                    <End Role="ChangeSetSearch" EntitySet="ChangeSetSearch"/>
+                    <End Role="AgreementItemPricing" EntitySet="AgreementItemPricing"/>
+                </AssociationSet>
+                <AssociationSet Name="ChangeSetToAgreementSearch_agreement" Association="AgreementService.ChangeSetToAgreementSearch_agreement">
+                    <End Role="ChangeSetToAgreementSearch" EntitySet="ChangeSetToAgreementSearch"/>
+                    <End Role="Agreement" EntitySet="Agreement"/>
+                </AssociationSet>
+                <AssociationSet Name="ChangeSetToAgreementSearch_changeSet" Association="AgreementService.ChangeSetToAgreementSearch_changeSet">
+                    <End Role="ChangeSetToAgreementSearch" EntitySet="ChangeSetToAgreementSearch"/>
+                    <End Role="ChangeSet" EntitySet="ChangeSet"/>
+                </AssociationSet>
+                <AssociationSet Name="AgreementItem_agreement" Association="AgreementService.AgreementItem_agreement">
+                    <End Role="AgreementItem" EntitySet="AgreementItem"/>
+                    <End Role="Agreement" EntitySet="Agreement"/>
+                </AssociationSet>
+                <AssociationSet Name="AgreementItem_DraftAdministrativeData" Association="AgreementService.AgreementItem_DraftAdministrativeData">
+                    <End Role="AgreementItem" EntitySet="AgreementItem"/>
+                    <End Role="DraftAdministrativeData" EntitySet="DraftAdministrativeData"/>
+                </AssociationSet>
+                <AssociationSet Name="AgreementItem_SiblingEntity" Association="AgreementService.AgreementItem_SiblingEntity">
+                    <End Role="AgreementItem" EntitySet="AgreementItem"/>
+                    <End Role="AgreementItem1" EntitySet="AgreementItem"/>
+                </AssociationSet>
+                <AssociationSet Name="ChangeSet_agreementItemPricings" Association="AgreementService.ChangeSet_agreementItemPricings">
+                    <End Role="ChangeSet" EntitySet="ChangeSet"/>
+                    <End Role="AgreementItemPricing" EntitySet="AgreementItemPricing"/>
+                </AssociationSet>
+                <AssociationSet Name="Status_texts_1" Association="AgreementService.Status_texts_1">
+                    <End Role="Status" EntitySet="Status"/>
+                    <End Role="Status_texts" EntitySet="Status_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Status_localized" Association="AgreementService.Status_localized">
+                    <End Role="Status" EntitySet="Status"/>
+                    <End Role="Status_texts" EntitySet="Status_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="ChangeSetToAgreement_agreement" Association="AgreementService.ChangeSetToAgreement_agreement">
+                    <End Role="ChangeSetToAgreement" EntitySet="ChangeSetToAgreement"/>
+                    <End Role="Agreement" EntitySet="Agreement"/>
+                </AssociationSet>
+                <AssociationSet Name="ChangeSetToAgreement_changeSet" Association="AgreementService.ChangeSetToAgreement_changeSet">
+                    <End Role="ChangeSetToAgreement" EntitySet="ChangeSetToAgreement"/>
+                    <End Role="ChangeSet" EntitySet="ChangeSet"/>
+                </AssociationSet>
+                <AssociationSet Name="AgreementItemPricingForKeyDateParameters_Set" Association="AgreementService.AgreementItemPricingForKeyDateParameters_Set">
+                    <End Role="AgreementItemPricingForKeyDateParameters" EntitySet="AgreementItemPricingForKeyDate"/>
+                    <End Role="AgreementItemPricingForKeyDateType" EntitySet="AgreementItemPricingForKeyDateSet"/>
+                </AssociationSet>
+            </EntityContainer>
+            <EntityType Name="Agreement">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="description" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="items" Relationship="AgreementService.AgreementItem_agreement" FromRole="Agreement" ToRole="AgreementItem"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Relationship="AgreementService.Agreement_DraftAdministrativeData" FromRole="Agreement" ToRole="DraftAdministrativeData"/>
+                <Property Name="DraftAdministrativeData_DraftUUID" Type="Edm.Guid"/>
+                <NavigationProperty Name="SiblingEntity" Relationship="AgreementService.Agreement_SiblingEntity" FromRole="Agreement" ToRole="Agreement1"/>
+            </EntityType>
+            <EntityType Name="AgreementItemPricing">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="item" Relationship="AgreementService.AgreementItemPricing_item" FromRole="AgreementItemPricing" ToRole="AgreementItem"/>
+                <Property Name="item_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="changeSet" Relationship="AgreementService.AgreementItemPricing_changeSet" FromRole="AgreementItemPricing" ToRole="ChangeSet"/>
+                <Property Name="changeSet_ID" Type="Edm.Guid"/>
+                <Property Name="validFrom" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="validTo" Type="Edm.DateTime" sap:display-format="Date"/>
+                <NavigationProperty Name="status" Relationship="AgreementService.AgreementItemPricing_status" FromRole="AgreementItemPricing" ToRole="Status"/>
+                <Property Name="status_code" Type="Edm.String" MaxLength="40"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Relationship="AgreementService.AgreementItemPricing_DraftAdministrativeData" FromRole="AgreementItemPricing" ToRole="DraftAdministrativeData"/>
+                <Property Name="DraftAdministrativeData_DraftUUID" Type="Edm.Guid"/>
+                <NavigationProperty Name="SiblingEntity" Relationship="AgreementService.AgreementItemPricing_SiblingEntity" FromRole="AgreementItemPricing" ToRole="AgreementItemPricing1"/>
+            </EntityType>
+            <EntityType Name="ChangeSetSearch">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="validFromDefault" Type="Edm.DateTime" Nullable="false" sap:display-format="Date"/>
+                <Property Name="validToDefault" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="changeSetDescription" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="changeSetToAgreements" Relationship="AgreementService.ChangeSetSearch_changeSetToAgreements" FromRole="ChangeSetSearch" ToRole="ChangeSetToAgreementSearch"/>
+                <NavigationProperty Name="agreementItemPricings" Relationship="AgreementService.ChangeSetSearch_agreementItemPricings" FromRole="ChangeSetSearch" ToRole="AgreementItemPricing"/>
+                <Property Name="status" Type="Edm.Int32"/>
+                <Property Name="noOfChanges" Type="Edm.String"/>
+                <Property Name="pricingIds" Type="Edm.String"/>
+                <Property Name="isFinalized" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="AgreementChangesAndStatus">
+                <Property Name="agreementId" Type="Edm.Guid"/>
+                <Property Name="changeSetId" Type="Edm.Guid"/>
+                <Property Name="noOfChanges" Type="Edm.String"/>
+                <Property Name="status" Type="Edm.Int32"/>
+                <Property Name="pricingIds" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="ChangeSetToAgreementSearch">
+                <Key>
+                    <PropertyRef Name="agreement_ID"/>
+                    <PropertyRef Name="changeSet_ID"/>
+                </Key>
+                <NavigationProperty Name="agreement" Relationship="AgreementService.ChangeSetToAgreementSearch_agreement" FromRole="ChangeSetToAgreementSearch" ToRole="Agreement"/>
+                <Property Name="agreement_ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="changeSet" Relationship="AgreementService.ChangeSetToAgreementSearch_changeSet" FromRole="ChangeSetToAgreementSearch" ToRole="ChangeSet"/>
+                <Property Name="changeSet_ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="active" Type="Edm.Boolean"/>
+                <Property Name="status" Type="Edm.Int32"/>
+                <Property Name="noOfChanges" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="AgreementItem">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <NavigationProperty Name="agreement" Relationship="AgreementService.AgreementItem_agreement" FromRole="AgreementItem" ToRole="Agreement"/>
+                <Property Name="agreement_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="pricings" Relationship="AgreementService.AgreementItemPricing_item" FromRole="AgreementItem" ToRole="AgreementItemPricing"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Relationship="AgreementService.AgreementItem_DraftAdministrativeData" FromRole="AgreementItem" ToRole="DraftAdministrativeData"/>
+                <Property Name="DraftAdministrativeData_DraftUUID" Type="Edm.Guid"/>
+                <NavigationProperty Name="SiblingEntity" Relationship="AgreementService.AgreementItem_SiblingEntity" FromRole="AgreementItem" ToRole="AgreementItem1"/>
+            </EntityType>
+            <EntityType Name="ChangeSet">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="validFromDefault" Type="Edm.DateTime" Nullable="false" sap:display-format="Date"/>
+                <Property Name="validToDefault" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="changeSetToAgreements" Relationship="AgreementService.ChangeSetToAgreement_changeSet" FromRole="ChangeSet" ToRole="ChangeSetToAgreement"/>
+                <NavigationProperty Name="agreementItemPricings" Relationship="AgreementService.ChangeSet_agreementItemPricings" FromRole="ChangeSet" ToRole="AgreementItemPricing"/>
+            </EntityType>
+            <EntityType Name="Status">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <NavigationProperty Name="texts" Relationship="AgreementService.Status_texts_1" FromRole="Status" ToRole="Status_texts"/>
+                <NavigationProperty Name="localized" Relationship="AgreementService.Status_localized" FromRole="Status" ToRole="Status_texts"/>
+            </EntityType>
+            <EntityType Name="ChangeSetToAgreement">
+                <Key>
+                    <PropertyRef Name="agreement_ID"/>
+                    <PropertyRef Name="changeSet_ID"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <NavigationProperty Name="agreement" Relationship="AgreementService.ChangeSetToAgreement_agreement" FromRole="ChangeSetToAgreement" ToRole="Agreement"/>
+                <Property Name="agreement_ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="changeSet" Relationship="AgreementService.ChangeSetToAgreement_changeSet" FromRole="ChangeSetToAgreement" ToRole="ChangeSet"/>
+                <Property Name="changeSet_ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="active" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="DraftAdministrativeData">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="Status_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="40" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="AgreementItemPricingForKeyDateParameters" sap:semantics="parameters">
+                <Key>
+                    <PropertyRef Name="keyDate"/>
+                </Key>
+                <Property Name="keyDate" Type="Edm.DateTime" Nullable="false" sap:parameter="mandatory" sap:display-format="Date"/>
+                <NavigationProperty Name="Set" Relationship="AgreementService.AgreementItemPricingForKeyDateParameters_Set" FromRole="AgreementItemPricingForKeyDateParameters" ToRole="AgreementItemPricingForKeyDateType"/>
+            </EntityType>
+            <EntityType Name="AgreementItemPricingForKeyDateType">
+                <Key>
+                    <PropertyRef Name="keyDate"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="keyDate" Type="Edm.DateTime" Nullable="false" sap:display-format="Date"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="Item" Type="Edm.Guid"/>
+                <Property Name="validFrom" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="validTo" Type="Edm.DateTime" sap:display-format="Date"/>
+                <NavigationProperty Name="Parameters" Relationship="AgreementService.AgreementItemPricingForKeyDateParameters_Set" FromRole="AgreementItemPricingForKeyDateType" ToRole="AgreementItemPricingForKeyDateParameters"/>
+            </EntityType>
+            <Association Name="Agreement_DraftAdministrativeData">
+                <End Role="Agreement" Type="AgreementService.Agreement" Multiplicity="*"/>
+                <End Role="DraftAdministrativeData" Type="AgreementService.DraftAdministrativeData" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="DraftAdministrativeData">
+                        <PropertyRef Name="DraftUUID"/>
+                    </Principal>
+                    <Dependent Role="Agreement">
+                        <PropertyRef Name="DraftAdministrativeData_DraftUUID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Agreement_SiblingEntity">
+                <End Role="Agreement" Type="AgreementService.Agreement" Multiplicity="*"/>
+                <End Role="Agreement1" Type="AgreementService.Agreement" Multiplicity="0..1"/>
+            </Association>
+            <Association Name="AgreementItemPricing_item">
+                <End Role="AgreementItemPricing" Type="AgreementService.AgreementItemPricing" Multiplicity="*"/>
+                <End Role="AgreementItem" Type="AgreementService.AgreementItem" Multiplicity="1">
+                    <OnDelete Action="Cascade"/>
+                </End>
+            </Association>
+            <Association Name="AgreementItemPricing_changeSet">
+                <End Role="AgreementItemPricing" Type="AgreementService.AgreementItemPricing" Multiplicity="*"/>
+                <End Role="ChangeSet" Type="AgreementService.ChangeSet" Multiplicity="1"/>
+                <ReferentialConstraint>
+                    <Principal Role="ChangeSet">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="AgreementItemPricing">
+                        <PropertyRef Name="changeSet_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="AgreementItemPricing_status">
+                <End Role="AgreementItemPricing" Type="AgreementService.AgreementItemPricing" Multiplicity="*"/>
+                <End Role="Status" Type="AgreementService.Status" Multiplicity="1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Status">
+                        <PropertyRef Name="code"/>
+                    </Principal>
+                    <Dependent Role="AgreementItemPricing">
+                        <PropertyRef Name="status_code"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="AgreementItemPricing_DraftAdministrativeData">
+                <End Role="AgreementItemPricing" Type="AgreementService.AgreementItemPricing" Multiplicity="*"/>
+                <End Role="DraftAdministrativeData" Type="AgreementService.DraftAdministrativeData" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="DraftAdministrativeData">
+                        <PropertyRef Name="DraftUUID"/>
+                    </Principal>
+                    <Dependent Role="AgreementItemPricing">
+                        <PropertyRef Name="DraftAdministrativeData_DraftUUID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="AgreementItemPricing_SiblingEntity">
+                <End Role="AgreementItemPricing" Type="AgreementService.AgreementItemPricing" Multiplicity="*"/>
+                <End Role="AgreementItemPricing1" Type="AgreementService.AgreementItemPricing" Multiplicity="0..1"/>
+            </Association>
+            <Association Name="ChangeSetSearch_changeSetToAgreements">
+                <End Role="ChangeSetSearch" Type="AgreementService.ChangeSetSearch" Multiplicity="*"/>
+                <End Role="ChangeSetToAgreementSearch" Type="AgreementService.ChangeSetToAgreementSearch" Multiplicity="*"/>
+            </Association>
+            <Association Name="ChangeSetSearch_agreementItemPricings">
+                <End Role="ChangeSetSearch" Type="AgreementService.ChangeSetSearch" Multiplicity="*"/>
+                <End Role="AgreementItemPricing" Type="AgreementService.AgreementItemPricing" Multiplicity="*"/>
+            </Association>
+            <Association Name="ChangeSetToAgreementSearch_agreement">
+                <End Role="ChangeSetToAgreementSearch" Type="AgreementService.ChangeSetToAgreementSearch" Multiplicity="*"/>
+                <End Role="Agreement" Type="AgreementService.Agreement" Multiplicity="0..1"/>
+            </Association>
+            <Association Name="ChangeSetToAgreementSearch_changeSet">
+                <End Role="ChangeSetToAgreementSearch" Type="AgreementService.ChangeSetToAgreementSearch" Multiplicity="*"/>
+                <End Role="ChangeSet" Type="AgreementService.ChangeSet" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="ChangeSet">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="ChangeSetToAgreementSearch">
+                        <PropertyRef Name="changeSet_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="AgreementItem_agreement">
+                <End Role="AgreementItem" Type="AgreementService.AgreementItem" Multiplicity="*"/>
+                <End Role="Agreement" Type="AgreementService.Agreement" Multiplicity="1">
+                    <OnDelete Action="Cascade"/>
+                </End>
+            </Association>
+            <Association Name="AgreementItem_DraftAdministrativeData">
+                <End Role="AgreementItem" Type="AgreementService.AgreementItem" Multiplicity="*"/>
+                <End Role="DraftAdministrativeData" Type="AgreementService.DraftAdministrativeData" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="DraftAdministrativeData">
+                        <PropertyRef Name="DraftUUID"/>
+                    </Principal>
+                    <Dependent Role="AgreementItem">
+                        <PropertyRef Name="DraftAdministrativeData_DraftUUID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="AgreementItem_SiblingEntity">
+                <End Role="AgreementItem" Type="AgreementService.AgreementItem" Multiplicity="*"/>
+                <End Role="AgreementItem1" Type="AgreementService.AgreementItem" Multiplicity="0..1"/>
+            </Association>
+            <Association Name="ChangeSet_agreementItemPricings">
+                <End Role="ChangeSet" Type="AgreementService.ChangeSet" Multiplicity="*"/>
+                <End Role="AgreementItemPricing" Type="AgreementService.AgreementItemPricing" Multiplicity="*"/>
+            </Association>
+            <Association Name="Status_texts_1">
+                <End Role="Status" Type="AgreementService.Status" Multiplicity="1">
+                    <OnDelete Action="Cascade"/>
+                </End>
+                <End Role="Status_texts" Type="AgreementService.Status_texts" Multiplicity="*"/>
+            </Association>
+            <Association Name="Status_localized">
+                <End Role="Status" Type="AgreementService.Status" Multiplicity="*"/>
+                <End Role="Status_texts" Type="AgreementService.Status_texts" Multiplicity="0..1"/>
+            </Association>
+            <Association Name="ChangeSetToAgreement_agreement">
+                <End Role="ChangeSetToAgreement" Type="AgreementService.ChangeSetToAgreement" Multiplicity="*"/>
+                <End Role="Agreement" Type="AgreementService.Agreement" Multiplicity="0..1"/>
+            </Association>
+            <Association Name="ChangeSetToAgreement_changeSet">
+                <End Role="ChangeSetToAgreement" Type="AgreementService.ChangeSetToAgreement" Multiplicity="*"/>
+                <End Role="ChangeSet" Type="AgreementService.ChangeSet" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="ChangeSet">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="ChangeSetToAgreement">
+                        <PropertyRef Name="changeSet_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="AgreementItemPricingForKeyDateParameters_Set">
+                <End Role="AgreementItemPricingForKeyDateParameters" Type="AgreementService.AgreementItemPricingForKeyDateParameters" Multiplicity="0..1"/>
+                <End Role="AgreementItemPricingForKeyDateType" Type="AgreementService.AgreementItemPricingForKeyDateType" Multiplicity="*"/>
+            </Association>
+            <Annotations Target="AgreementService.EntityContainer/Agreement" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="AgreementService.EntityContainer/Agreement_draftActivate"/>
+                        <PropertyValue Property="EditAction" String="AgreementService.EntityContainer/Agreement_draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="AgreementService.EntityContainer/Agreement_draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="AgreementService.Agreement/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="AgreementService.Agreement/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="AgreementService.Agreement/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="AgreementService.Agreement/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="AgreementService.Agreement/IsActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.Agreement/HasActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.Agreement/HasDraftEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.Agreement/DraftAdministrativeData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.Agreement/DraftAdministrativeData_DraftUUID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItemPricing" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>ID</PropertyPath>
+                        <PropertyPath>validFrom</PropertyPath>
+                        <PropertyPath>validTo</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ID"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="item/ID"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="validFrom"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="validTo"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="AgreementService.EntityContainer/AgreementItemPricing" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.DraftNode">
+                    <Record Type="Common.DraftNodeType">
+                        <PropertyValue Property="PreparationAction" String="AgreementService.EntityContainer/AgreementItemPricing_draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItemPricing/validFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Valid From"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItemPricing/validTo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Valid To"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItemPricing/status_code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="Label" String="Status"/>
+                        <PropertyValue Property="CollectionPath" String="Status"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="status_code"/>
+                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItemPricing/IsActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItemPricing/HasActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItemPricing/HasDraftEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItemPricing/DraftAdministrativeData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItemPricing/DraftAdministrativeData_DraftUUID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.ChangeSetSearch/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="AgreementService.ChangeSetSearch/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="AgreementService.ChangeSetSearch/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="AgreementService.ChangeSetSearch/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="AgreementService.ChangeSetSearch/status" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.ChangeSetSearch/noOfChanges" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.ChangeSetSearch/pricingIds" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.ChangeSetSearch/isFinalized" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementChangesAndStatus/noOfChanges" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementChangesAndStatus/status" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementChangesAndStatus/pricingIds" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.ChangeSetToAgreementSearch/status" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.ChangeSetToAgreementSearch/noOfChanges" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.EntityContainer/AgreementItem" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.DraftNode">
+                    <Record Type="Common.DraftNodeType">
+                        <PropertyValue Property="PreparationAction" String="AgreementService.EntityContainer/AgreementItem_draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItem/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItem/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItem/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItem/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItem/IsActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItem/HasActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItem/HasDraftEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItem/DraftAdministrativeData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItem/DraftAdministrativeData_DraftUUID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.ChangeSet/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="AgreementService.ChangeSet/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="AgreementService.ChangeSet/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="AgreementService.ChangeSet/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="AgreementService.Status" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="AgreementService.Status/name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="AgreementService.Status/descr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="AgreementService.ChangeSetToAgreement/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="AgreementService.ChangeSetToAgreement/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="AgreementService.ChangeSetToAgreement/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="AgreementService.ChangeSetToAgreement/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="AgreementService.DraftAdministrativeData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Administrative Data"/>
+            </Annotations>
+            <Annotations Target="AgreementService.DraftAdministrativeData/DraftUUID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="Common.Label" String="Draft (Technical ID)"/>
+            </Annotations>
+            <Annotations Target="AgreementService.DraftAdministrativeData/CreationDateTime" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Created On"/>
+            </Annotations>
+            <Annotations Target="AgreementService.DraftAdministrativeData/CreatedByUser" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Created By"/>
+            </Annotations>
+            <Annotations Target="AgreementService.DraftAdministrativeData/DraftIsCreatedByMe" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="Common.Label" String="Draft Created By Me"/>
+            </Annotations>
+            <Annotations Target="AgreementService.DraftAdministrativeData/LastChangeDateTime" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Last Changed On"/>
+            </Annotations>
+            <Annotations Target="AgreementService.DraftAdministrativeData/LastChangedByUser" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Last Changed By"/>
+            </Annotations>
+            <Annotations Target="AgreementService.DraftAdministrativeData/InProcessByUser" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft In Process By"/>
+            </Annotations>
+            <Annotations Target="AgreementService.DraftAdministrativeData/DraftIsProcessedByMe" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="Common.Label" String="Draft In Process By Me"/>
+            </Annotations>
+            <Annotations Target="AgreementService.Status_texts/name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="AgreementService.Status_texts/descr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItemPricingForKeyDateType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Aggregation.ApplySupported">
+                    <Record Type="Aggregation.ApplySupportedType">
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="None"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>keyDate</PropertyPath>
+                        <PropertyPath>ID</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ID"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Item"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="validFrom"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="validTo"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="AgreementService.EntityContainer/AgreementItemPricingForKeyDateSet" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Aggregation.ApplySupported">
+                    <Record Type="Aggregation.ApplySupportedType">
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="None"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record Type="Capabilities.FilterRestrictionsType">
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>keyDate</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.NavigationRestrictions">
+                    <Record Type="Capabilities.NavigationRestrictionsType">
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record Type="Capabilities.NavigationPropertyRestriction">
+                                    <PropertyValue Property="NavigationProperty">
+                                        <Record/>
+                                    </PropertyValue>
+                                </Record>
+                                <Record Type="Capabilities.NavigationPropertyRestriction">
+                                    <PropertyValue Property="FilterRestrictions">
+                                        <Record Type="Capabilities.FilterRestrictionsType">
+                                            <PropertyValue Property="Filterable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record Type="Capabilities.SortRestrictionsType">
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>keyDate</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record Type="Capabilities.DeleteRestrictionsType">
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record Type="Capabilities.InsertRestrictionsType">
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record Type="Capabilities.UpdateRestrictionsType">
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItemPricingForKeyDateType/keyDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItemPricingForKeyDateType/validFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Valid From"/>
+            </Annotations>
+            <Annotations Target="AgreementService.AgreementItemPricingForKeyDateType/validTo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Valid To"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
