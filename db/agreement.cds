@@ -25,8 +25,8 @@ entity AgreementItem : cuid, managed {
 entity AgreementItemPricing : cuid {
   item      : Association to one AgreementItem not null;
   changeSet : Association to one ChangeSet not null;
-  validFrom : Date;
-  validTo   : Date;
+  validFrom : Date @title : '{i18n>validFrom}';
+  validTo   : Date @title : '{i18n>validTo}';
   status    : Association to one Status not null;
 }
 
@@ -102,14 +102,14 @@ view AgreementChangesAndStatus as
     on  pai.ID = paip.item.ID
     and c.ID   = paip.changeSet.ID
   {
-    pa.ID  as agreementId,
-    c.ID   as changeSetId,
-    count(
-      paip.ID
-    )      as noOfChanges : String,
-    // Quick fix to be HANA Compatible
-    1      as status      : Integer,
-    'Test' as pricingIds  : String
+    key pa.ID  as agreementId,
+    key c.ID   as changeSetId,
+        count(
+          paip.ID
+        )      as noOfChanges : String,
+        // Quick fix to be HANA Compatible
+        1      as status      : Integer,
+        'Test' as pricingIds  : String
   /*
   group_concat(
     distinct(
@@ -137,22 +137,22 @@ view ChangeSetToFinalized as
       and fp.status.code  in ('CLOSED')
     )
   {
-    c.ID as changeSetId,
-    case
-      when
-        COUNT(
-          distinct ap.ID
-        ) = COUNT(
-          distinct fp.ID
-        )
-        and COUNT(
-          distinct ap.ID
-        ) > 0
-      then
-        TRUE
-      else
-        FALSE
-    end  as isFinalized : Boolean
+    key c.ID as changeSetId,
+        case
+          when
+            COUNT(
+              distinct ap.ID
+            ) = COUNT(
+              distinct fp.ID
+            )
+            and COUNT(
+              distinct ap.ID
+            ) > 0
+          then
+            TRUE
+          else
+            FALSE
+        end  as isFinalized : Boolean
   }
   group by
     c.ID;
