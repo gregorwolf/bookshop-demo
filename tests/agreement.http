@@ -43,3 +43,19 @@ GET http://localhost:4004/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/$metadata
 GET http://localhost:4004/v2/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/$metadata
 ###
 GET http://localhost:4004/v2/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/Z_C_AItemPricingForKeyDate(keyDate=2021-10-15)/Set
+###
+GET http://vhcala4hci:50000/sap/opu/odata/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/Z_C_AItemPricingForKeyDate(keyDate=datetime%272022-06-17T00%3a00%3a00%27)/Set
+  ?sap-client=001
+#  &$expand=Parameters
+Authorization: Basic {{$dotenv abap_username}}:{{$dotenv abap_password}}
+Accept: application/json
+###
+GET http://vhcala4hci:50000/sap/opu/odata/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/Z_C_AItemPricingForKeyDateSet(keyDate=datetime'2022-06-17T00%3A00%3A00',ID='90db54bc-383b-4267-bca3-1252aafe1168')
+  ?sap-client=001
+Authorization: Basic {{$dotenv abap_username}}:{{$dotenv abap_password}}
+Accept: application/json
+###
+GET http://vhcala4hci:50000/sap/opu/odata/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS/Z_C_AItemPricingForKeyDateSet(keyDate=datetime'2022-06-17T00%3A00%3A00',ID='90db54bc-383b-4267-bca3-1252aafe1168')/Parameters
+  ?sap-client=001
+Authorization: Basic {{$dotenv abap_username}}:{{$dotenv abap_password}}
+Accept: application/json
