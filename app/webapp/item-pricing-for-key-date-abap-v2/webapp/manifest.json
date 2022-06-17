@@ -1,5 +1,5 @@
 {
-  "_version": "1.32.0",
+  "_version": "1.29.0",
   "sap.app": {
     "id": "itempricingforkeydataabapv2",
     "type": "application",
@@ -115,6 +115,7 @@
         "dataSource": "mainService",
         "preload": true,
         "settings": {
+          "useBatch": false,
           "defaultBindingMode": "TwoWay",
           "defaultCountMode": "Inline",
           "refreshAfterChange": false,

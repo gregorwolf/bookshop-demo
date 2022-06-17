@@ -107,6 +107,7 @@
                 "dataSource": "mainService",
                 "preload": true,
                 "settings": {
+                    "useBatch": false,
                     "defaultBindingMode": "TwoWay",
                     "defaultCountMode": "Inline",
                     "refreshAfterChange": false,
