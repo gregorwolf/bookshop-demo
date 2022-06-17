@@ -1,4 +1,4 @@
-specVersion: "2.4"
+specVersion: "2.2"
 metadata:
   name: "item-pricing-for-key-date-abap-v2"
 type: application
