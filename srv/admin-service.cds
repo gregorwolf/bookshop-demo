@@ -13,7 +13,7 @@ service AdminService @(
   @odata.draft.enabled
   entity Approval               as projection on db.Approval actions {
     action approve();
-    action reject();
+    action rejection();
   };
 
   entity Books @(

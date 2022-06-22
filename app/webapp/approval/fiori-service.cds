@@ -28,7 +28,7 @@ annotate AdminService.Approval with @(
     {
       $Type  : 'UI.DataFieldForAction',
       Label  : '{i18n>reject}',
-      Action : 'AdminService.Approval/Approval_reject',
+      Action : 'AdminService.Approval/Approval_rejection',
       Inline : true
     }
   ],

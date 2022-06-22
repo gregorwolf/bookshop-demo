@@ -77,8 +77,8 @@ module.exports = async function (srv) {
     }
   });
 
-  srv.on(["reject"], Approval, async (req) => {
-    console.log("Approval - reject");
+  srv.on(["rejection"], Approval, async (req) => {
+    console.log("Approval - rejection");
     let approval = await cds
       .tx(req)
       .read(Approval)
