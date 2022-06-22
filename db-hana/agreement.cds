@@ -19,13 +19,9 @@ extend service AgreementService with {
   @Capabilities.SortRestrictions       : {NonSortableProperties : [keyDate]}
   entity AgreementItemPricingForKeyDate(keyDate : Date not null) as
     select
-      key : keyDate                      as keyDate,
+      key : keyDate                    as keyDate,
       key AgreementItemPricing.ID,
-          AgreementItemPricing.item.ID   as Item,
-          @title : '{i18n>validFromString}'
-          AgreementItemPricing.validFrom as validFromString : String,
-          @title : '{i18n>validToString}'
-          AgreementItemPricing.validTo   as validToString   : String,
+          AgreementItemPricing.item.ID as Item,
           @title : '{i18n>validFrom}'
           AgreementItemPricing.validFrom,
           @title : '{i18n>validTo}'
@@ -55,8 +51,6 @@ annotate AgreementService.AgreementItemPricingForKeyDate with @(UI : {
   LineItem        : [
     {Value : ID, },
     {Value : Item, },
-    {Value : validFromString, },
-    {Value : validToString, },
     {Value : validFrom, },
     {Value : validTo, },
   ]

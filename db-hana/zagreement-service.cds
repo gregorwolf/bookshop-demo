@@ -18,13 +18,9 @@ service ZAgreementService @(path : '/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS') {
   @Capabilities.SortRestrictions       : {NonSortableProperties : [keyDate]}
   entity Z_C_AItemPricingForKeyDate(keyDate : Date not null) as
     select
-      key : keyDate                      as keyDate         : Date,
+      key : keyDate                    as keyDate : Date,
       key AgreementItemPricing.ID,
-          AgreementItemPricing.item.ID   as Item,
-          @title : '{i18n>validFromString}'
-          AgreementItemPricing.validFrom as validFromString : String,
-          @title : '{i18n>validToString}'
-          AgreementItemPricing.validTo   as validToString   : String,
+          AgreementItemPricing.item.ID as Item,
           @title : '{i18n>validFrom}'
           AgreementItemPricing.validFrom,
           @title : '{i18n>validTo}'
@@ -52,8 +48,6 @@ annotate ZAgreementService.Z_C_AItemPricingForKeyDate with @(UI : {
   LineItem        : [
     {Value : ID, },
     {Value : Item, },
-    {Value : validFromString, },
-    {Value : validToString, },
     {Value : validFrom, },
     {Value : validTo, },
   ]
