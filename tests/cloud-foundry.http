@@ -8,6 +8,12 @@ Content-Type: application/x-www-form-urlencoded
 grant_type=password
 &username={{$dotenv username}}
 &password={{$dotenv password}}
+# According to SAP Note https://launchpad.support.sap.com/#/notes/3140806
+# currently only supported in Feature Set A
+# According to the Roadmap Item "Customer ability to control users and their account access"
+# https://roadmaps.sap.com/board?q=idp&range=CURRENT-LAST#;INNO=000D3AAADBCE1EDB9EEDE92DF8DF3E21
+# the usage of IAS in Feature Set B should be possible beginning of July 2022
+#&login_hint={"origin":"{{$dotenv origin}}"}
 
 ###
 @accToken = {{access_token_request.response.body.access_token}}
