@@ -22,7 +22,8 @@
                             showRowCount="true"
                             enableAutoBinding="true"
                             enableAutoColumnWidth="true"
-                            requestAtLeastFields="ID,title">
+                            requestAtLeastFields="ID,title"
+                            editable="true">
                         </smartTable:SmartTable>
                         <smartTable:SmartTable id="TableID" 
                             entitySet="Books"
@@ -34,7 +35,8 @@
                             showRowCount="true"
                             enableAutoBinding="true"
                             enableAutoColumnWidth="true"
-                            requestAtLeastFields="ID,title">
+                            requestAtLeastFields="ID,title"
+                            editable="true">
                             <Table id="BooksTable">
                                 <columns>
                                     <Column id="BookIDcolumn" sorted="true" sortOrder="Descending">
