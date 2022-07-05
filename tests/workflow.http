@@ -1,0 +1,17 @@
+### Request Access Token
+# @name requestAccessToken
+POST {{$dotenv workflow_url}}/oauth/token
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{$dotenv workflow_clientid}}
+&client_secret={{$dotenv workflow_clientsecret}}
+&grant_type=client_credentials
+&response_type=token
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+###
+GET {{$dotenv workflow_rest}}/v1/task-instances
+Authorization: Bearer {{access_token}}
+### Returns []
