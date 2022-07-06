@@ -15,7 +15,7 @@
     "@sap-cloud-sdk/core": "^1.54.2",
     "@sap/cds": "5.9.8",
     "@sap/cds-dk": "4.9.7",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.8.21",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.9.0",
     "@sap/jobs-client": "^1.7.30",
     "@sap/logging": "^6.1.2",
     "@sap/xsenv": "^3.3.2",
@@ -29,21 +29,21 @@
     "helmet": "^5.1.0",
     "mqtt": "^4.3.7",
     "mysql": "^2.18.1",
-    "passport": "^0.5.3",
+    "passport": "^0.6.0",
     "sap-cf-mailer": "^0.0.5"
   },
   "devDependencies": {
     "@openui5/ts-types": "^1.103.0",
-    "@sap/cds-lsp": "^5.5.7",
+    "@sap/cds-lsp": "^6.0.0",
     "cds-swagger-ui-express": "^0.5.0",
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
     "chai-subset": "^1.6.0",
     "copyfiles": "2.4.1",
-    "jest": "^28.1.1",
+    "jest": "^28.1.2",
     "npm-run-all": "^4.1.5",
     "sqlite3": "^5.0.8",
-    "supertest": "^6.2.3"
+    "supertest": "^6.2.4"
   },
   "scripts": {
     "setup": "run-s deploy build start",
