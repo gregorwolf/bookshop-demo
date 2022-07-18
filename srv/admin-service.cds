@@ -135,23 +135,23 @@ service AdminService @(
   @readonly
   entity MeteringAnalytics      as projection on db.MeteringAnalytics;
 
-  function readCdsEnv()                                                                                  returns String;
+  function readCdsEnv()                                                                                                                     returns String;
   // XSUAA API
 
-  function readUsers()                                                                                   returns array of db.XSUAAUsers;
-  function readUsersSDK()                                                                                returns array of db.XSUAAUsers;
-  action   updateUsers()                                                                                 returns Boolean;
+  function readUsers()                                                                                                                      returns array of db.XSUAAUsers;
+  function readUsersSDK()                                                                                                                   returns array of db.XSUAAUsers;
+  action   updateUsers()                                                                                                                    returns Boolean;
   // job-scheduler
-  function readJobs()                                                                                    returns array of db.Jobs;
-  function readJobDetails(jobId : Integer)                                                               returns db.Jobs;
-  function readJobSchedules(jobId : Integer)                                                             returns array of db.Schedules;
-  function readJobActionLogs(jobId : Integer)                                                            returns String; // array of db.ActionLogs;
-  function readJobRunLogs(jobId : Integer, scheduleId : String, page_size : Integer, offset : Integer)   returns array of db.RunLogs;
-  action   createJob(url : String, cron : String)                                                        returns Integer;
-  action   updateJob(jobId : Integer, active : Boolean)                                                  returns String;
-  action   deleteJob(jobId : Integer)                                                                    returns String;
-  action   sendmail(sender : String, to : String, subject : String, body : String, destination : String) returns String;
+  function readJobs()                                                                                                                       returns array of db.Jobs;
+  function readJobDetails(jobId : Integer)                                                                                                  returns db.Jobs;
+  function readJobSchedules(jobId : Integer)                                                                                                returns array of db.Schedules;
+  function readJobActionLogs(jobId : Integer)                                                                                               returns String; // array of db.ActionLogs;
+  function readJobRunLogs(jobId : Integer, scheduleId : String, page_size : Integer, offset : Integer)                                      returns array of db.RunLogs;
+  action   createJob(url : String, cron : String)                                                                                           returns Integer;
+  action   updateJob(jobId : Integer, active : Boolean)                                                                                     returns String;
+  action   deleteJob(jobId : Integer)                                                                                                       returns String;
+  action   sendmail(sender : String, to : String, @UI.ParameterDefaultValue : 'Test' subject : String, body : String, destination : String) returns String;
   // Cloud Foundry
-  function readOrganizations()                                                                           returns array of db.Organization;
+  function readOrganizations()                                                                                                              returns array of db.Organization;
 
 }

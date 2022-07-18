@@ -115,8 +115,19 @@ annotate AdminService.Orders with @(
       {Value : deliverystatus.name},
       {
         $Type  : 'UI.DataFieldForAction',
+        Action : 'AdminService.EntityContainer/sendmail',
+        Label  : '{i18n>sendmail}'
+      },
+      {
+        $Type  : 'UI.DataFieldForAction',
         Label  : '{i18n>checkConsistency}',
         Action : 'AdminService.EntityContainer/Orders_checkConsistency',
+        Inline : false
+      },
+      {
+        $Type  : 'UI.DataFieldForAction',
+        Label  : '{i18n>setOrderParameters}',
+        Action : 'AdminService.EntityContainer/Orders_setOrderParameters',
         Inline : false
       },
       {
@@ -127,7 +138,7 @@ annotate AdminService.Orders with @(
       },
       {
         $Type  : 'UI.DataFieldForAction',
-        Label  : '{i18n>setOrderParameters}',
+        Label  : '{i18n>setOrderParametersV4}',
         Action : 'AdminService.setOrderParameters',
         Inline : false
       },

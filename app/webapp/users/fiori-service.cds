@@ -5,7 +5,7 @@ annotate AdminService.Users with @(UI : {
 
   LineItem                : [
     {Value : username},
-    {Value : role_ID}
+    {Value : employee.email},
   ],
   HeaderInfo              : {
     TypeName       : 'User',
