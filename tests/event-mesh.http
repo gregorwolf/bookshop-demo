@@ -1,0 +1,21 @@
+### Request Access Token
+# @name requestAccessToken
+POST {{$dotenv eventmesh_tokenendpoint}}
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{$dotenv eventmesh_clientid}}
+&client_secret={{$dotenv eventmesh_clientsecret}}
+&grant_type={{$dotenv eventmesh_granttype}}
+&response_type=token
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+###
+POST {{$dotenv eventmesh_rest}}/messagingrest/v1/topics/{{$dotenv eventmesh_topic}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+Content-Type: application/json
+### Returns []
+
+{}
