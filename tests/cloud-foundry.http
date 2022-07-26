@@ -44,6 +44,15 @@ Authorization: Bearer {{accToken}}
 GET {{$dotenv cf_url}}/v3/domains
 Authorization: Bearer {{accToken}}
 
+###
+# Documentation at:
+# https://help.sap.com/docs/TRANSPORT_MANAGEMENT_SERVICE/7f7160ec0d8546c6b3eab72fb5ad6fd8/c9905c142cf14aea86fe2451434faed9.html?locale=en-US
+GET {{$dotenv cf_deploy}}{{$dotenv cf_deploy_path}}
+Authorization: Bearer {{accToken}}
+
+###
+GET {{$dotenv cf_deploy}}/public/ping
+
 ### CAP
 ### Read Metadata OData V4
 GET http://localhost:4004/admin/readOrganizations()
