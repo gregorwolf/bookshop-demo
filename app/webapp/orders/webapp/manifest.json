@@ -1,11 +1,20 @@
 {
-    "_version": "1.8.0",
+    "_version": "1.37.0",
     "sap.app": {
         "id": "orders",
         "type": "application",
-        "title": "Manage Orders",
-        "description": "Sample Application",
         "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:lrop",
+            "version": "1.6.7",
+            "toolsId": "b0e13a96-fa7f-4101-89a1-874d0fde00ba"
+        },
         "dataSources": {
             "mainService": {
                 "uri": "/admin/",
@@ -16,161 +25,151 @@
             }
         }
     },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
     "sap.ui5": {
+        "flexEnabled": true,
         "dependencies": {
+            "minUI5Version": "1.96.11",
             "libs": {
-                "sap.fe": {}
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.fe.templates": {}
             }
         },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
         "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "ordersnew.i18n.i18n"
+                }
+            },
             "": {
                 "dataSource": "mainService",
+                "preload": true,
                 "settings": {
                     "synchronizationMode": "None",
                     "operationMode": "Server",
                     "autoExpandSelect": true,
-                    "earlyRequests": true,
-                    "groupProperties": {
-                        "default": {
-                            "submit": "Auto"
-                        }
-                    }
+                    "earlyRequests": true
                 }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
             }
         },
+        "resources": {
+            "css": []
+        },
         "routing": {
+            "config": {},
             "routes": [
                 {
-                    "name": "OrdersListRoute",
-                    "target": "OrdersListTarget",
-                    "pattern": ":?query:"
+                    "pattern": ":?query:",
+                    "name": "OrdersList",
+                    "target": "OrdersList"
                 },
                 {
-                    "name": "OrdersDetailsRoute",
-                    "target": "OrdersDetailsTarget",
-                    "pattern": "Orders({key}):?query:"
+                    "pattern": "Orders({key}):?query:",
+                    "name": "OrdersObjectPage",
+                    "target": "OrdersObjectPage"
                 },
                 {
-                    "name": "ItemsRoute",
-                    "target": "ItemsTarget",
-                    "pattern": "Orders({key}/Items({key2}):?query:"
-                },
-                {
-                    "name": "ShippingAddressRoute",
-                    "target": "ShippingAddressTarget",
-                    "pattern": "Orders({key}/ShippingAddress({key2}):?query:"
-                },
-                {
-                    "name": "currencyRoute",
-                    "target": "currencyTarget",
-                    "pattern": "Orders({key}/currency({key2}):?query:"
+                    "pattern": "Orders({key})/Items({key2}):?query:",
+                    "name": "OrderItemsObjectPage",
+                    "target": "OrderItemsObjectPage"
                 }
             ],
             "targets": {
-                "OrdersListTarget": {
+                "OrdersList": {
                     "type": "Component",
-                    "id": "OrdersListTarget",
+                    "id": "OrdersList",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
                         "settings": {
                             "entitySet": "Orders",
+                            "variantManagement": "Page",
                             "navigation": {
                                 "Orders": {
                                     "detail": {
-                                        "route": "OrdersDetailsRoute"
+                                        "route": "OrdersObjectPage"
                                     }
                                 }
                             },
                             "quickVariantSelection": {
-                                    "variants": {
-                                            "0": {
-                                                    "key": "New",
-                                                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#New"
-                                            },
-                                            "1": {
-                                                    "key": "InProcess",
-                                                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#InProcess"
-                                            },
-                                            "2": {
-                                                    "key": "Completed",
-                                                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Completed"
-                                            },
-                                            "3": {
-                                                    "key": "Empty",
-                                                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Empty"
-                                            }
-                                    }
-                            }
-                        }
-                    }
-                },
-                "OrdersDetailsTarget": {
-                    "type": "Component",
-                    "id": "OrdersDetailsTarget",
-                    "name": "sap.fe.templates.ObjectPage",
-                    "options": {
-                        "settings": {
-                            "entitySet": "Orders",
-                            "navigation": {
-                                "Items": {
-                                    "detail": {
-                                        "route": "ItemsRoute"
-                                    }
-                                },
-                                "ShippingAddress": {
-                                    "detail": {
-                                        "route": "ShippingAddressRoute"
-                                    }
-                                },
-                                "currency": {
-                                    "detail": {
-                                        "route": "currencyRoute"
+                                "variants": {
+                                    "0": {
+                                        "key": "New",
+                                        "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#New"
+                                    },
+                                    "1": {
+                                        "key": "InProcess",
+                                        "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#InProcess"
+                                    },
+                                    "2": {
+                                        "key": "Completed",
+                                        "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Completed"
+                                    },
+                                    "3": {
+                                        "key": "Empty",
+                                        "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Empty"
                                     }
                                 }
                             }
                         }
                     }
                 },
-                "ItemsTarget": {
+                "OrdersObjectPage": {
                     "type": "Component",
-                    "id": "ItemsTarget",
+                    "id": "OrdersObjectPage",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
+                            "editableHeaderContent": false,
+                            "entitySet": "Orders",
+                            "navigation": {
+                                "Items": {
+                                    "detail": {
+                                        "route": "OrderItemsObjectPage"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "OrderItemsObjectPage": {
+                    "type": "Component",
+                    "id": "OrderItemsObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
                             "entitySet": "OrderItems"
-                        }
-                    }
-                },
-                "ShippingAddressTarget": {
-                    "type": "Component",
-                    "id": "ShippingAddressTarget",
-                    "name": "sap.fe.templates.ObjectPage",
-                    "options": {
-                        "settings": {
-                            "entitySet": "OrderShippingAddress"
-                        }
-                    }
-                },
-                "currencyTarget": {
-                    "type": "Component",
-                    "id": "currencyTarget",
-                    "name": "sap.fe.templates.ObjectPage",
-                    "options": {
-                        "settings": {
-                            "entitySet": "Currencies"
                         }
                     }
                 }
             }
         }
-    },
-    "contentDensities": {
-        "compact": true,
-        "cozy": true
-    },
-    "sap.ui": {
-        "technology": "UI5",
-        "fullWidth": true
     },
     "sap.fiori": {
         "registrationIds": [],
