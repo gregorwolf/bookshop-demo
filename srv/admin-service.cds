@@ -74,6 +74,7 @@ service AdminService @(
   }
 
   entity A_SalesOrganizationText as projection on db.A_SalesOrganizationText;
+  annotate A_SalesOrganizationText with @cds.odata.valuelist;
 
   //------- auto-exposed --------
   entity OrderItems              as projection on db.OrderItems {
@@ -133,6 +134,8 @@ service AdminService @(
     CreationDateTime,
     LastChangedDateTime
   };
+
+  annotate SEPMRA_I_Product_E with @cds.odata.valuelist;
 
   @readonly
   entity MeteringAnalytics       as projection on db.MeteringAnalytics;
