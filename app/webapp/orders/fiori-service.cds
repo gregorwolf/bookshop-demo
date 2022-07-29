@@ -23,7 +23,9 @@ annotate AdminService.Orders with @(
       createdBy,
       deliverystatus_code,
       deliverystatus.name,
-      orderstatus_code
+      orderstatus_code,
+      Items.product,
+      salesOrganization
     ],
     PresentationVariant         : {
       $Type     : 'UI.PresentationVariantType',
@@ -52,6 +54,7 @@ annotate AdminService.Orders with @(
     // According to
     // https://sapui5.hana.ondemand.com/#/topic/0d390fed360c4c58a0f0619338938de1
     // The FilterExpression of the SelectionVariantType is not supported.
+    /*
     SelectionVariant #InProcess : {
       $Type         : 'UI.SelectionVariantType',
       ID            : 'InProcess',
@@ -60,6 +63,23 @@ annotate AdminService.Orders with @(
         $Type            : 'UI.SelectOptionType',
         PropertyName     : orderstatus_code,
         FilterExpression : ![orderstatus_code eq 'I']
+      }, ],
+    },
+    */
+    SelectionVariant #InProcess : {
+      $Type         : 'UI.SelectionVariantType',
+      ID            : 'InProcess',
+      Text          : 'In Process',
+      SelectOptions : [{
+        $Type        : 'UI.SelectOptionType',
+        PropertyName : orderstatus_code,
+        Ranges       : [{
+          $Type  : 'UI.SelectionRangeType',
+          Sign   : #I,
+          Option : #EQ,
+          Low    : 'I',
+        }, ],
+
       }, ],
     },
     SelectionVariant #Completed : {
@@ -111,8 +131,14 @@ annotate AdminService.Orders with @(
         Value : createdAt,
         Label : 'Date'
       },
-      {Value : orderstatus.name},
-      {Value : deliverystatus.name},
+      {
+        Value : orderstatus.name,
+        Label : '{i18n>Orderstatus}'
+      },
+      {
+        Value : deliverystatus.name,
+        Label : '{i18n>Deliverystatus}'
+      },
       {
         $Type  : 'UI.DataFieldForAction',
         Action : 'AdminService.EntityContainer/sendmail',
@@ -246,13 +272,17 @@ annotate AdminService.Orders with @(
     TargetProperties : [total]
   }}
 ) {
-  @UI.HiddenFilter      : false
+  @UI.HiddenFilter                 : false
   createdAt;
-  @UI.HiddenFilter      : false
+  @UI.HiddenFilter                 : false
   createdBy;
-  @Common.FieldControl  : #ReadOnly
-  @Measures.ISOCurrency : currency.code
+  @Common.FieldControl             : #ReadOnly
+  @Measures.ISOCurrency            : currency.code
   total; //Bind the currency field to the amount field
+  @(ValueList.entity : 'A_SalesOrganizationText')
+  @Common.ValueListWithFixedValues : true
+  @mandatory
+  salesOrganization;
 //In all services we always find currency as the code and not as an object that contains a property code
 //it seems to work but at least to me this is unconventional modeling.
 };
@@ -269,6 +299,9 @@ annotate AdminService.OrderItems with {
     ValueList.entity : 'Books',
   );
   amount @(Common.FieldControl : #Mandatory);
+  @(ValueList.entity : 'SEPMRA_I_Product_E')
+  @mandatory
+  product;
 }
 
 annotate AdminService.OrderItems with @(

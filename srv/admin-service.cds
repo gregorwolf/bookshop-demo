@@ -11,7 +11,7 @@ service AdminService @(
   ]
 ) {
   @odata.draft.enabled
-  entity Approval               as projection on db.Approval actions {
+  entity Approval                as projection on db.Approval actions {
     action approve();
     action rejection();
   };
@@ -32,10 +32,10 @@ service AdminService @(
       UpdateRestrictions : {Updatable : true},
       DeleteRestrictions : {Deletable : true}
     },
-  )                             as projection on db.Books;
+  )                              as projection on db.Books;
 
   @readonly
-  entity BooksAnalytics         as projection on db.BooksAnalytics;
+  entity BooksAnalytics          as projection on db.BooksAnalytics;
   /*
   @readonly
   entity BooksViewWOkey      as projection on db.BooksViewWOkey;
@@ -45,9 +45,9 @@ service AdminService @(
   */
 
   @odata.draft.enabled
-  entity Documents              as projection on db.Documents;
+  entity Documents               as projection on db.Documents;
 
-  entity BooksAuthorsAssignment as projection on db.BooksAuthorsAssignment {
+  entity BooksAuthorsAssignment  as projection on db.BooksAuthorsAssignment {
     *,
     ASSOC_Book : redirected to Books
   };
@@ -56,48 +56,50 @@ service AdminService @(
   entity Authors @(restrict : [{
     grant : 'READ',
     to    : 'admin'
-  }, ])                         as projection on db.Authors {
+  }, ])                          as projection on db.Authors {
     *
   };
 
   @odata.draft.enabled
-  entity Orders                 as select from db.Orders actions {
-                                     action checkConsistency();
-                                     action checkConsistencyInline();
-                                     action setOrderParameters(vipOrder : db.Orders:vipOrder not null @UI.ParameterDefaultValue : false,
-                                            employeeOrder : db.Orders:employeeOrder not null @UI.ParameterDefaultValue :          true);
-                                     action NewAction(OrderNo : db.Orders:OrderNo not null, CustomerOrderNo : db.Orders:CustomerOrderNo);
-                                   };
+  entity Orders                  as select from db.Orders actions {
+                                      action checkConsistency();
+                                      action checkConsistencyInline();
+                                      action setOrderParameters(vipOrder : db.Orders:vipOrder not null @UI.ParameterDefaultValue : false,
+                                             employeeOrder : db.Orders:employeeOrder not null @UI.ParameterDefaultValue :          true);
+                                      action NewAction(OrderNo : db.Orders:OrderNo not null, CustomerOrderNo : db.Orders:CustomerOrderNo);
+                                    };
 
   annotate Orders with {
     ID @Core.Computed;
   }
 
+  entity A_SalesOrganizationText as projection on db.A_SalesOrganizationText;
+
   //------- auto-exposed --------
-  entity OrderItems             as projection on db.OrderItems {
+  entity OrderItems              as projection on db.OrderItems {
     *,
     book : redirected to Books
   };
 
-  entity OrderShippingAddress   as projection on db.OrderShippingAddress;
+  entity OrderShippingAddress    as projection on db.OrderShippingAddress;
   //> these shall be removed but this would break the Fiori UI
-  entity Languages              as projection on sap.common.Languages;
+  entity Languages               as projection on sap.common.Languages;
 
   @odata.draft.enabled
   entity Roles @(restrict : [{
     grant : ['*'],
     to    : 'roleadmin'
-  }, ])                         as projection on db.Roles;
+  }, ])                          as projection on db.Roles;
 
   //------- auto-exposed --------
-  entity Role_BusinessObject    as projection on db.Role_BusinessObject;
-  entity Role_User              as projection on db.Role_User;
+  entity Role_BusinessObject     as projection on db.Role_BusinessObject;
+  entity Role_User               as projection on db.Role_User;
 
   //> these shall be removed but this would break the Fiori UI
   entity BusinessObjects @(restrict : [{
     grant : ['READ'],
     to    : 'admin'
-  }, ])                         as projection on db.BusinessObjects;
+  }, ])                          as projection on db.BusinessObjects;
 
   @odata.draft.enabled
   @Common.SideEffects #responsibleChange : {
@@ -111,12 +113,12 @@ service AdminService @(
   entity Users @(restrict : [{
     grant : ['*'],
     to    : 'admin'
-  }, ])                         as projection on db.Users;
+  }, ])                          as projection on db.Users;
 
   @readonly
-  entity Employees              as projection on db.Employees;
+  entity Employees               as projection on db.Employees;
 
-  entity Address                as projection on db.Address;
+  entity Address                 as projection on db.Address;
 
   @readonly
   entity UserScopes {
@@ -127,13 +129,13 @@ service AdminService @(
   };
 
   @readonly
-  entity SEPMRA_I_Product_E     as projection on external.SEPMRA_I_Product_E excluding {
+  entity SEPMRA_I_Product_E      as projection on external.SEPMRA_I_Product_E excluding {
     CreationDateTime,
     LastChangedDateTime
   };
 
   @readonly
-  entity MeteringAnalytics      as projection on db.MeteringAnalytics;
+  entity MeteringAnalytics       as projection on db.MeteringAnalytics;
 
   function readCdsEnv()                                                                                                                     returns String;
   // XSUAA API

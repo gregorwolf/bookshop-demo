@@ -14,6 +14,9 @@ annotate BusinessObject with @(
   description : '{i18n>BusinessObject.Description}'
 );
 
+using {ZPDCDS_SRV.SEPMRA_I_Product_E} from '../srv/external/ZPDCDS_SRV.csn';
+
+
 /**
  * Entity to store change requests for entities JSON
  * serialized.
@@ -167,28 +170,38 @@ entity Deliverystatuses : sap.common.CodeList {
 type Deliverystatus : Association to Deliverystatuses;
 annotate Deliverystatus with @title : '{i18n>Deliverystatus}';
 annotate Deliverystatuses.name with @title : '{i18n>Deliverystatus}'  @description : '{i18n>Deliverystatus}';
+type SalesOrganizationCode : String(4) @(title : '{i18n>salesOrganization}');
+
+entity A_SalesOrganizationText {
+  key SalesOrganization     : SalesOrganizationCode;
+      SalesOrganizationName : String;
+}
 
 entity Orders : cuid, managed {
-  OrderNo         : String     @title : 'Order Number'; //> readable key
-  CustomerOrderNo : String(80) @title : 'Customer Order Number';
-  Items           : Composition of many OrderItems
-                      on Items.parent = $self;
-  ShippingAddress : Composition of one OrderShippingAddress
-                      on ShippingAddress.parent = $self;
+  OrderNo           : String     @title : 'Order Number'; //> readable key
+  salesOrganization : SalesOrganizationCode not null;
+  CustomerOrderNo   : String(80) @title : 'Customer Order Number';
+  Items             : Composition of many OrderItems
+                        on Items.parent = $self;
+  ShippingAddress   : Composition of one OrderShippingAddress
+                        on ShippingAddress.parent = $self;
   @readonly
-  total           : DecimalFloat;
-  totalTax        : Decimal(15, 2);
-  totalWithTax    : Double;
-  vipOrder        : Boolean    @title : '{i18n>vipOrder}';
-  employeeOrder   : Boolean    @title : '{i18n>employeeOrder}';
-  orderstatus     : Orderstatus;
-  deliverystatus  : Deliverystatus;
-  currency        : Currency;
+  total             : DecimalFloat;
+  totalTax          : Decimal(15, 2);
+  totalWithTax      : Double;
+  vipOrder          : Boolean    @title : '{i18n>vipOrder}';
+  employeeOrder     : Boolean    @title : '{i18n>employeeOrder}';
+  @Common.ValueListWithFixedValues :      true
+  orderstatus       : Orderstatus;
+  @Common.ValueListWithFixedValues :      true
+  deliverystatus    : Deliverystatus;
+  currency          : Currency;
 }
 
 entity OrderItems : cuid {
   parent    : Association to Orders not null;
   book      : Association to Books;
+  product   : SEPMRA_I_Product_E:Product;
   amount    : Integer;
   netAmount : Decimal(9, 2);
 }

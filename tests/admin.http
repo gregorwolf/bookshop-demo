@@ -106,3 +106,7 @@ Content-Type: application/json
 ### Read Users Expanded to via OData V4 - 
 GET http://localhost:4004/admin/readCdsEnv()
 Authorization: Basic admin:
+
+### 
+GET http://localhost:4004/admin/A_SalesOrganizationText
+Authorization: Basic admin:
