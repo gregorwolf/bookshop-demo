@@ -55,8 +55,8 @@ entity Users {
 
 entity Address : cuid, managed {
   parent : Association to Users;
-  street : String(60)@(title : 'Street', );
-  city   : String(60)@(title : 'City', );
+  street : String(60) @(title : 'Street', );
+  city   : String(60) @(title : 'City', );
 };
 
 type XSUAAUsers {
