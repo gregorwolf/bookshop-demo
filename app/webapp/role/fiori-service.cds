@@ -12,6 +12,7 @@ annotate AdminService.Roles with {
 
 annotate AdminService.Roles with {
   ID @Core.Computed;
+// rolename @Core.ComputedDefaultValue;
 }
 
 annotate AdminService.Roles with {
