@@ -467,10 +467,19 @@ module.exports = async function (srv) {
   });
 
   srv.before("NEW", "Roles", (req) => {
+    // allows to set defaults
     req.data.read = true;
     return req.data;
   });
 
+  // Is triggered when annotated as described in:
+  // https://cap.cloud.sap/docs/java/fiori-drafts#fioridraftnew
+  // But doesn't navigate to the detail screen
+  /*
+  srv.on(["createDraftRoles"], async (req) => {
+    return req.data;
+  });
+  */
   srv.on(
     ["checkConsistency", "checkConsistencyInline"],
     Orders,

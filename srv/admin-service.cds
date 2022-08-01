@@ -87,10 +87,18 @@ service AdminService @(
   entity Languages               as projection on sap.common.Languages;
 
   @odata.draft.enabled
+  // @Common.DraftRoot.NewAction : 'AdminService.createDraftRoles'
   entity Roles @(restrict : [{
     grant : ['*'],
     to    : 'roleadmin'
-  }, ])                          as projection on db.Roles;
+  }, ])                          as projection on db.Roles
+                                                          /*
+                                                          actions {
+                                                            @cds.odata.bindingparameter.collection
+                                                            action createDraftRoles(rolename : String) returns Roles;
+                                                          }
+                                                          */
+                                 ;
 
   //------- auto-exposed --------
   entity Role_BusinessObject     as projection on db.Role_BusinessObject;
