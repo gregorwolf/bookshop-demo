@@ -466,6 +466,11 @@ module.exports = async function (srv) {
     }
   });
 
+  srv.before("NEW", "Roles", (req) => {
+    req.data.read = true;
+    return req.data;
+  });
+
   srv.on(
     ["checkConsistency", "checkConsistencyInline"],
     Orders,
