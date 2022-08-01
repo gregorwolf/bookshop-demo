@@ -12,11 +12,12 @@ Authorization: Basic admin:
 ### Read Roles Expanded to  via OData V2
 GET http://localhost:4004/v2/admin/Roles?$expand=BusinessObjects,Users
 Authorization: Basic admin:
-
+###
+GET http://localhost:4004/admin/
+Authorization: Basic admin:
 ### Read Roles via OData V4
 GET http://localhost:4004/admin/Roles
 Authorization: Basic admin:
-
 ### Read Roles Expanded to  via OData V4
 GET http://localhost:4004/admin/Roles?$expand=BusinessObjects,Users
 Authorization: Basic admin:
