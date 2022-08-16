@@ -81,6 +81,7 @@
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
     "start": "cds run",
     "start:hana": "NODE_ENV=dev-hana cds run",
+    "start:uaa": "NODE_ENV=dev-uaa cds run",
     "start:forExcel": "node srv/index.js",
     "build:deploy:start": "run-s build deploy start",
     "watch": "cds run --with-mocks --in-memory --watch",
@@ -195,13 +196,8 @@
     },
     "[dev-uaa]": {
       "requires": {
-        "uaa": {
+        "auth": {
           "kind": "xsuaa"
-        }
-      },
-      "auth": {
-        "passport": {
-          "strategy": "JWT"
         }
       }
     },
@@ -219,11 +215,6 @@
         },
         "uaa": {
           "kind": "xsuaa"
-        }
-      },
-      "auth": {
-        "passport": {
-          "strategy": "JWT"
         }
       }
     },
