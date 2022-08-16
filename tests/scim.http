@@ -1,0 +1,6 @@
+### Read Users
+GET {{$dotenv ias_scim_endpoint}}/Users
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+###
+GET {{$dotenv ias_scim_endpoint}}/Groups
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
