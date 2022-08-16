@@ -134,6 +134,7 @@ modules:
     build-parameters:
       ignore: ["node_modules/"]
     requires:
+      - name: bookshop-demo-ui5-flexibility-keyuser
       - name: bookshop-demo-destination-service
       - name: bookshop-demo-connectivity-service
       - name: bookshop-demo-uaa
@@ -220,3 +221,8 @@ resources:
     parameters:
        service: autoscaler
        service-plan: standard
+  - name: bookshop-demo-ui5-flexibility-keyuser
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: ui5-flexibility-keyuser
+      service-plan: free

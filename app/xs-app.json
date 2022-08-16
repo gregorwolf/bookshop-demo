@@ -6,6 +6,17 @@
   },
   "routes": [
     {
+      "source": "^/user-api(.*)",
+      "target": "$1",
+      "service": "sap-approuter-userapi"
+    },
+    {
+      "source": "^/keyuser/(.*)$",
+      "target": "$1",
+      "service": "com.sap.ui.flex.cf.keyuser",
+      "endpoint": "keyuser"
+    },
+    {
       "source": "/api/(.*)$",
       "target": "/api/$1",
       "authenticationType": "xsuaa",
