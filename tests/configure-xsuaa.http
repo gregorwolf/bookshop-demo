@@ -1,6 +1,6 @@
 ### Request Access Token
 # @name requestAccessToken
-POST {{$dotenv url}}/oauth/token
+POST {{$dotenv tokenendpoint}}/oauth/token
 Accept: application/json
 Content-Type: application/x-www-form-urlencoded
 

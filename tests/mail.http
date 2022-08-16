@@ -15,15 +15,15 @@ Content-Type: application/json
 ### Get Access Token (HANA) or Cloud Foundry using Password Grant
 # https://blogs.sap.com/2020/03/02/using-postman-for-api-testing-with-xsuaa/
 # @name requestUserAccessToken
-POST {{$dotenv url}}/oauth/token
+POST {{$dotenv tokenendpoint}}/oauth/token
 Accept: application/json;charset=utf8
-Authorization: Basic {{$dotenv client_id}}:{{$dotenv client_secret}}
+Authorization: Basic {{$dotenv clientid}}:{{$dotenv clientsecret}}
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=password
 &username={{$dotenv username}}
 &password={{$dotenv password}}
-&client_id={{$dotenv client_id}}
+&client_id={{$dotenv clientid}}
 &response_type=token
 #&login_hint=sap.default
 

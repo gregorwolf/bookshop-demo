@@ -2,7 +2,7 @@
 # Documentation:
 # https://help.sap.com/viewer/8c8e1958338140699bd4811b37b82ece/Cloud/en-US/d5429a2a5d9a4425a461aa06c4ee84e4.html
 # @name requestNotificationsAccessToken
-POST {{$dotenv url}}/oauth/token
+POST {{$dotenv tokenendpoint}}/oauth/token
 Authorization: Basic {{$dotenv notification_clientid}}:{{$dotenv notification_clientsecret}}
 Content-Type: application/x-www-form-urlencoded
 

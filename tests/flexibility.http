@@ -1,18 +1,28 @@
-### Request Access Token
-# @name requestAccessToken
-POST {{$dotenv keyuser_tokenendpoint}}/oauth/token
-Accept: application/json
+### Get Access Token (HANA) or Cloud Foundry using Password Grant
+# https://blogs.sap.com/2020/03/02/using-postman-for-api-testing-with-xsuaa/
+# @name requestUserAccessToken
+POST {{$dotenv tokenendpoint}}/oauth/token
+Accept: application/json;charset=utf8
+Authorization: Basic {{$dotenv clientid}}:{{$dotenv clientsecret}}
 Content-Type: application/x-www-form-urlencoded
 
-client_id={{$dotenv keyuser_clientid}}
-&client_secret={{$dotenv keyuser_clientsecret}}
-&grant_type=client_credentials
+grant_type=password
+&username={{$dotenv username}}
+&password={{$dotenv password}}
+&client_id={{$dotenv clientid}}
 &response_type=token
+#&login_hint={"origin":"ldap"}
+#&scope=HTML5UserAPIforCF!t55630.Display
 
 ### Fill Variables from Response
-@access_token = {{requestAccessToken.response.body.$.access_token}}
+@user_access_token = {{requestUserAccessToken.response.body.$.access_token}}
 
 ###
-GET {{$dotenv keyuser_url}}/keyuser
-Authorization: Bearer {{access_token}}
+GET {{$dotenv approuter}}/keyuser/flex/keyuser/v1/settings
+x-approuter-authorization: Bearer {{user_access_token}}
+Accept: application/json
+
+###
+GET {{$dotenv approuter}}/keyuser/flex/keyuser/v1/data/bookshopUI5latest.Component?sap-language=en-GB
+x-approuter-authorization: Bearer {{user_access_token}}
 Accept: application/json
