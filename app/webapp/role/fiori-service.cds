@@ -76,6 +76,11 @@ annotate AdminService.Roles with @(UI : {
     },
     {
       $Type  : 'UI.ReferenceFacet',
+      Label  : 'Validity',
+      Target : '@UI.FieldGroup#Validity'
+    },
+    {
+      $Type  : 'UI.ReferenceFacet',
       Label  : 'Assigned Business Objects',
       Target : 'BusinessObjects/@UI.LineItem'
     },
@@ -103,6 +108,10 @@ annotate AdminService.Roles with @(UI : {
     {Value : authcreate},
     {Value : authupdate},
     {Value : approve},
+  ]},
+  FieldGroup #Validity       : {Data : [
+    {Value : validFrom},
+    {Value : validTo},
   ]},
 }
 

@@ -110,7 +110,6 @@ service AdminService @(
     to    : 'admin'
   }, ])                          as projection on db.BusinessObjects;
 
-  @odata.draft.enabled
   @Common.SideEffects #responsibleChange : {
     SourceProperties : [responsible_ID],
     TargetEntities   : [responsible]

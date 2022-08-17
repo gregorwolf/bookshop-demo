@@ -42,7 +42,11 @@ annotate AdminService.Users with @(UI : {
     },
   ],
 
-  FieldGroup #General     : {Data : [{Value : username}, ]},
+  FieldGroup #General     : {Data : [
+    {Value : username},
+    {Value : validFrom},
+    {Value : validTo},
+  ]},
   FieldGroup #Employee    : {Data : [
     {
       Value : employee_ID,

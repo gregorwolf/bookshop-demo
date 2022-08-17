@@ -427,6 +427,71 @@ module.exports = async function (srv) {
     });
     return response.data;
   }
+  async function fillMissingValidityFrom(req) {
+    if (req?.data?.validFrom === null) {
+      // Assumption: User is willing to reset validity
+      req.data.validFrom = new Date().toISOString();
+    } else if (req?.data?.validFrom === undefined) {
+      // Assumption: User does not want to change the validity
+      let current = {};
+      if (req.entity === "AdminService.Users") {
+        current = await SELECT.from(req.entity).where({
+          username: req.params[0].username,
+        });
+      } else {
+        current = await SELECT.from(req.entity).where({
+          ID: req.params[0],
+        });
+        req.data.validFrom = current[0].validFrom;
+      }
+    }
+    return req;
+  }
+  async function fillMissingValidityTo(req) {
+    if (req?.data?.validTo === null) {
+      req.data.validTo = new Date("9999-12-31").toISOString();
+    } else if (req?.data?.validTo === undefined) {
+      let current = {};
+      if (req.entity === "AdminService.Users") {
+        current = await SELECT.from(req.entity).where({
+          username: req.params[0].username,
+        });
+      } else {
+        current = await SELECT.from(req.entity).where({
+          ID: req.params[0],
+        });
+      }
+      req.data.validTo = current[0].validTo;
+    }
+    return req;
+  }
+  function smallerGreaterConstraint(req, validFrom, toValidityTimestamp) {
+    if (
+      new Date(validFrom).getTime() > new Date(toValidityTimestamp).getTime()
+    ) {
+      req.reject({
+        code: "400",
+        message:
+          'Please make sure, that the "Valid from" date is greater than the "Valid to" date.',
+      });
+    }
+  }
+  async function validateValidityUpdate(req) {
+    // For Patches from the UI
+    req = await fillMissingValidityFrom(req);
+    req = await fillMissingValidityTo(req);
+    // to-value must be greater than from-value
+    smallerGreaterConstraint(req, req.data.validFrom, req.data.validTo);
+    return req;
+  }
+  async function validateValidityCreate(req) {
+    req.data.validFrom = req?.data?.validFrom || new Date().toISOString();
+    req.data.validTo =
+      req?.data?.validTo || new Date("9999-12-31").toISOString();
+    // to-value must be greater than from-value
+    smallerGreaterConstraint(req, req.data.validFrom, req.data.validTo);
+    return req;
+  }
 
   srv.on(["readOrganizations"], async (req) => {
     console.log("readOrganizations");
@@ -472,6 +537,21 @@ module.exports = async function (srv) {
     return req.data;
   });
 
+  srv.before("CREATE", "Roles", (req) => {
+    return validateValidityCreate(req);
+  });
+
+  srv.before("UPDATE", "Roles", (req) => {
+    return validateValidityUpdate(req);
+  });
+
+  srv.before("CREATE", "Users", (req) => {
+    return validateValidityCreate(req);
+  });
+
+  srv.before("UPDATE", "Users", (req) => {
+    return validateValidityUpdate(req);
+  });
   // Is triggered when annotated as described in:
   // https://cap.cloud.sap/docs/java/fiori-drafts#fioridraftnew
   // But doesn't navigate to the detail screen

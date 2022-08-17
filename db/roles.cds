@@ -10,12 +10,14 @@ type BusinessObject : String(255);
 
 entity Roles : cuid, managed {
   @mandatory
-  rolename        : localized String(255) not null @(title : 'Role Name', );
-  description     : localized String not null      @(title : 'Description', );
-  read            : Boolean                        @(title : 'Read', );
-  authcreate      : Boolean                        @(title : 'Create', );
-  authupdate      : Boolean                        @(title : 'Update', );
-  approve         : Boolean                        @(title : 'Approve', );
+  rolename        : localized String(255) not null @(title : '{i18n>RoleName}', );
+  description     : localized String not null      @(title : '{i18n>Description}', );
+  read            : Boolean                        @(title : '{i18n>Read}', );
+  authcreate      : Boolean                        @(title : '{i18n>Create}', );
+  authupdate      : Boolean                        @(title : '{i18n>Update}', );
+  approve         : Boolean                        @(title : '{i18n>Approve}', );
+  validFrom       : Timestamp                      @(title : '{i18n>validFrom}', );
+  validTo         : Timestamp                      @(title : '{i18n>validTo}', );
   BusinessObjects : Composition of many Role_BusinessObject
                       on BusinessObjects.parent = $self;
   Users           : Composition of many Role_User
@@ -39,14 +41,16 @@ entity Role_BusinessObject : cuid {
 entity Role_User : cuid {
   parent    : Association to Roles;
   user      : User;
-  @(title : 'requester', )
+  @(title : '{i18n>requester', )
   requester : Employee;
 };
 
 entity Users {
-  key username    : String @(title : 'Username', );
+  key username    : String    @(title : '{i18n>Username}', );
       employee    : Employee;
       responsible : Employee;
+      validFrom   : Timestamp @(title : '{i18n>validFrom}', );
+      validTo     : Timestamp @(title : '{i18n>validTo}', );
       address     : Composition of Address
                       on address.parent = $self;
       roles       : Association to many Role_User
@@ -55,8 +59,8 @@ entity Users {
 
 entity Address : cuid, managed {
   parent : Association to Users;
-  street : String(60) @(title : 'Street', );
-  city   : String(60) @(title : 'City', );
+  street : String(60) @(title : '{i18n>Street}', );
+  city   : String(60) @(title : '{i18n>City}', );
 };
 
 type XSUAAUsers {
