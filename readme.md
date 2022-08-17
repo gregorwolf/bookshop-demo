@@ -85,6 +85,25 @@ then you can deploy with:
 npm run deploy:cf
 ```
 
+If you need to redirect destinations according to your configuration you can achieve this by setting the environment variable `CDS_CONFIG` to this value:
+
+```JSON
+{
+  "requires": {
+    "GWSAMPLE_BASIC": {
+      "credentials": {
+        "destination": "S4HANA"
+      }
+    },
+    "API_CV_ATTACHMENT_SRV": {
+      "credentials": {
+        "destination": "S4HANA"
+      }
+    }
+  }
+}
+```
+
 ## Deploy to SAP HANA XSA on Premise
 
 We're using the mbt build to create a mtar that can be deployed to the SAP HANA. The xs commandline must be installed and you have to be logged on to the space you want to deploy to. The build ist started with:
@@ -141,7 +160,7 @@ url="https://<your-trial-account>trial.authentication.eu10.hana.ondemand.com"
 srvurl="https://<your-trial-account>trial-dev-bookshop-demo-srv.cfapps.us10.hana.ondemand.com"
 ```
 
-Then open the REST Client script *tests/api-access.http* in VS Code and run the script with the comment *Get Access Token (Cloud Foundry)*. It should return a valid access_token. Now execute the requests *Read Orders* and *Read Books*. You should see a valid result.
+Then open the REST Client script _tests/api-access.http_ in VS Code and run the script with the comment _Get Access Token (Cloud Foundry)_. It should return a valid access*token. Now execute the requests \_Read Orders* and _Read Books_. You should see a valid result.
 
 ## Authentication and Authorization
 
@@ -157,16 +176,15 @@ due to the POC character of this project_
 
 If you run the application in a local environment the users you can use are
 defined in the field `.cdsrc`.  
-Currently in this file the following users are defined  
+Currently in this file the following users are defined
 
 _Please have a look at this file to see the current users and roles
 cause they can change due to the POC character of this project_
 
-| Username        | Scopes          |
-|-----------------|-----------------|
-| requester       | admin           |
-| booksadmin      | booksadmin      |
-| admin           | admin, roleadmin, booksadmin |
-| littleadmin     | admin           |
-| bob             | authenticated-user, openid |
-
+| Username    | Scopes                       |
+| ----------- | ---------------------------- |
+| requester   | admin                        |
+| booksadmin  | booksadmin                   |
+| admin       | admin, roleadmin, booksadmin |
+| littleadmin | admin                        |
+| bob         | authenticated-user, openid   |
