@@ -45,7 +45,7 @@ entity Role_User : cuid {
   requester : Employee;
 };
 
-entity Users {
+entity Users : managed {
   key username    : String    @(title : '{i18n>Username}', );
       employee    : Employee;
       responsible : Employee;

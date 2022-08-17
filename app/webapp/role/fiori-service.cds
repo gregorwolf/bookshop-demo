@@ -84,11 +84,13 @@ annotate AdminService.Roles with @(UI : {
       Label  : 'Assigned Business Objects',
       Target : 'BusinessObjects/@UI.LineItem'
     },
-    {
-      $Type  : 'UI.ReferenceFacet',
-      Label  : 'Assigned Users',
-      Target : 'Users/@UI.LineItem'
-    },
+  /*
+  {
+    $Type  : 'UI.ReferenceFacet',
+    Label  : 'Assigned Users',
+    Target : 'Users/@UI.LineItem'
+  },
+  */
   ],
 
   FieldGroup #Created        : {Data : [

@@ -19,6 +19,19 @@ annotate AdminService.Users with @(UI : {
 
   Identification          : [{Value : username}, ],
 
+  HeaderFacets            : [
+    {
+      $Type  : 'UI.ReferenceFacet',
+      Label  : '{i18n>Created}',
+      Target : '@UI.FieldGroup#Created'
+    },
+    {
+      $Type  : 'UI.ReferenceFacet',
+      Label  : '{i18n>Modified}',
+      Target : '@UI.FieldGroup#Modified'
+    },
+  ],
+
   Facets                  : [
     {
       $Type  : 'UI.ReferenceFacet',
@@ -46,6 +59,14 @@ annotate AdminService.Users with @(UI : {
     {Value : username},
     {Value : validFrom},
     {Value : validTo},
+  ]},
+  FieldGroup #Created     : {Data : [
+    {Value : createdBy},
+    {Value : createdAt},
+  ]},
+  FieldGroup #Modified    : {Data : [
+    {Value : modifiedBy},
+    {Value : modifiedAt},
   ]},
   FieldGroup #Employee    : {Data : [
     {
