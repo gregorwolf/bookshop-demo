@@ -214,7 +214,7 @@
         "db": {
           "kind": "hana"
         },
-        "uaa": {
+        "auth": {
           "kind": "xsuaa"
         }
       }
