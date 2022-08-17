@@ -31,4 +31,8 @@ module.exports = async function (srv) {
       }
     }
   });
+  srv.on("READ", "ContactSet", async (req) => {
+    const external = await cds.connect.to("GWSAMPLE_BASIC");
+    return await external.run(req.query);
+  });
 };

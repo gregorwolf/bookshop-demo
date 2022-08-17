@@ -8,7 +8,11 @@ GET http://localhost:4004/GWSAMPLE_BASIC/BusinessPartnerSet
   &$select=BusinessPartnerID,CompanyName,WebAddress,EmailAddress,PhoneNumber,FaxNumber,LegalForm,CurrencyCode,BusinessPartnerRole,CreatedAt,ChangedAt
 Authorization: Basic admin:
 Accept: application/json
-
+### 
+GET http://localhost:4004/GWSAMPLE_BASIC/ContactSet
+  ?$top=1
+Authorization: Basic admin:
+Accept: application/json
 ###
 GET {{$dotenv saperp}}/sap/opu/odata/iwbep/GWSAMPLE_BASIC/BusinessPartnerSet
   ?$top=1
