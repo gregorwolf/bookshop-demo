@@ -14,6 +14,7 @@
   "dependencies": {
     "@sap-cloud-sdk/core": "^1.54.2",
     "@sap-cloud-sdk/util": "^2.7.1",
+    "@sap-cloud-sdk/http-client": "^2.7.1",
     "@sap/cds": "6.1.0",
     "@sap/cds-dk": "6.1.1",
     "@sap/cds-odata-v2-adapter-proxy": "^1.9.4",
