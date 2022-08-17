@@ -24,29 +24,15 @@
       "csrfProtection": true
     },
     {
-      "source": "/v2standalone/admin/(.*)$",
-      "target": "/v2/admin/$1",
+      "source": "/v2standalone/(.*)$",
+      "target": "/v2/$1",
       "authenticationType": "xsuaa",
       "destination": "srv_api_v2",
       "csrfProtection": true
     },
     {
-      "source": "/v2standalone/catalog/(.*)$",
-      "target": "/v2/catalog/$1",
-      "authenticationType": "xsuaa",
-      "destination": "srv_api_v2",
-      "csrfProtection": true
-    },
-    {
-      "source": "/v2/admin/(.*)$",
-      "target": "/v2/admin/$1",
-      "authenticationType": "xsuaa",
-      "destination": "srv_api",
-      "csrfProtection": true
-    },
-    {
-      "source": "/v2/catalog/(.*)$",
-      "target": "/v2/catalog/$1",
+      "source": "/v2/(.*)$",
+      "target": "/v2/$1",
       "authenticationType": "xsuaa",
       "destination": "srv_api",
       "csrfProtection": true
