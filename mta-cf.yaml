@@ -138,6 +138,7 @@ modules:
       - name: bookshop-demo-destination-service
       - name: bookshop-demo-connectivity-service
       - name: bookshop-demo-uaa
+      - name: bookshop-demo-logging
       - name: bookshop-demo-repo-runtime
       - name: srv_api
         group: destinations
