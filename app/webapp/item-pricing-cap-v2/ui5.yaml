@@ -6,8 +6,14 @@ metadata:
 type: application
 server:
   customMiddleware:
-    - name: fiori-tools-proxy
+    - name: ui5-middleware-onelogin
       afterMiddleware: compression
+      configuration:
+        path: https://60714212trial.launchpad.cfapps.us10.hana.ondemand.com/site/trial
+        useCertificate: true
+        debug: true
+    - name: fiori-tools-proxy
+      afterMiddleware: ui5-middleware-onelogin
       configuration:
         ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
         ui5:
@@ -18,6 +24,8 @@ server:
         backend:
           - path: /v2
             url: http://localhost:4004
+          - path: /comsapperso
+            url: https://60714212trial.launchpad.cfapps.us10.hana.ondemand.com
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
