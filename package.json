@@ -5,7 +5,7 @@
   "repository": "https://github.com/gregorwolf/bookshop-demo.git",
   "license": "ISC",
   "engines": {
-    "node": "^14"
+    "node": "^14 ^16"
   },
   "files": [
     "db",
