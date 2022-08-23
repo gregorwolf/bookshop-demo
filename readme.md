@@ -65,6 +65,22 @@ If you want to test the used SAP Business Technology Platform - Cloud Foundry se
 }
 ```
 
+## Run local with SAP HANA Cloud (Hybrid Testing)
+
+When you have deployed the application to BTP Cloud Foundry you can run:
+
+```
+cds bind -2 bookshop-demo-db-service --profile dev-hana
+```
+
+then you can use:
+
+```
+npm run test:hana
+```
+
+to start the test.
+
 ## Test
 
 Open these links in your browser:

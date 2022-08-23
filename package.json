@@ -88,6 +88,7 @@
     "build:deploy:start": "run-s build deploy start",
     "watch": "cds run --with-mocks --in-memory --watch",
     "test": "jest",
+    "test:hana": "cds bind --profile dev-hana --exec npm run test",
     "cf:uaa:update": "cf update-service bookshop-demo-uaa -c xs-security.json",
     "undeploy:xsa": "xs undeploy bookshop-demo --delete-services --delete-service-brokers",
     "undeploy:cf": "cf undeploy bookshop-demo --delete-service-keys --delete-services --delete-service-brokers"
@@ -206,7 +207,8 @@
     "[dev-hana]": {
       "requires": {
         "db": {
-          "kind": "hana"
+          "kind": "hana",
+          "credentials": {}
         }
       }
     },
