@@ -26,11 +26,14 @@ describe("Admin OData Service", () => {
       params: { $select: `title` },
     }}`;
     expect(data.value).to.eql([
-      { title: "Wuthering Heights", ID: 201 },
-      { title: "Jane Eyre", ID: 207 },
-      { title: "The Raven", ID: 251 },
-      { title: "Eleonora", ID: 252 },
-      { title: "Catweazle", ID: 271 },
+      { ID: 1, title: "Moby Dick" },
+      { ID: 2, title: "1" },
+      { ID: 3, title: "true" },
+      { ID: 201, title: "Wuthering Heights" },
+      { ID: 207, title: "Jane Eyre" },
+      { ID: 251, title: "The Raven" },
+      { ID: 252, title: "Eleonora" },
+      { ID: 271, title: "Catweazle" },
     ]);
   });
 });
