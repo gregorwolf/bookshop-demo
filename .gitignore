@@ -36,3 +36,6 @@ cp.project.properties.json
 .env
 HTML5Module-content.zip
 manifest-bundle.zip
+
+# added by cds bind
+.cdsrc-private.json
