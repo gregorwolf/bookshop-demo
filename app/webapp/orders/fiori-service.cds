@@ -52,7 +52,7 @@ annotate AdminService.Orders with @(
       }, ],
     },
     // According to
-    // https://sapui5.hana.ondemand.com/#/topic/0d390fed360c4c58a0f0619338938de1
+    // https://ui5.sap.com/#/topic/0d390fed360c4c58a0f0619338938de1
     // The FilterExpression of the SelectionVariantType is not supported.
     /*
     SelectionVariant #InProcess : {
