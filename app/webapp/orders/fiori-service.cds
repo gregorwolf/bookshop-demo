@@ -141,6 +141,11 @@ annotate AdminService.Orders with @(
       },
       {
         $Type  : 'UI.DataFieldForAction',
+        Action : 'AdminService.EntityContainer/readCdsEnv',
+        Label  : '{i18n>readCdsEnv}'
+      },
+      {
+        $Type  : 'UI.DataFieldForAction',
         Action : 'AdminService.EntityContainer/sendmail',
         Label  : '{i18n>sendmail}'
       },
