@@ -60,7 +60,7 @@
             },
             {
               "id": "ODataV2",
-              "title": "OData V2",
+              "title": "OData V2 - Working with UI5 <= 1.71",
               "isPreset": true,
               "isVisible": true,
               "isGroupLocked": false,
@@ -193,23 +193,11 @@
             },
             {
               "id": "ODataV2ui5latest",
-              "title": "OData V2 - Working with UI5 Latest",
+              "title": "OData V2 - Working with UI5 > 1.71",
               "isPreset": true,
               "isVisible": true,
               "isGroupLocked": false,
               "tiles": [
-                {
-                  "id": "Approvals",
-                  "title": "Approvals",
-                  "size": "1×1",
-                  "tileType": "sap.ushell.ui.tile.StaticTile",
-                  "properties": {
-                    "chipId": "V2catalogTile_ApprovalsUI5latest",
-                    "title": "Approvals",
-                    "info": "Manage",
-                    "targetURL": "#Approvals-manageUI5latest"
-                  }
-                },
                 {
                   "id": "Orders",
                   "title": "Orders",
@@ -244,6 +232,18 @@
                     "title": "Users",
                     "info": "Management",
                     "targetURL": "#UsersUI5latest-manage"
+                  }
+                },
+                {
+                  "id": "Approvals",
+                  "title": "Approvals",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V2catalogTile_ApprovalsUI5latest",
+                    "title": "Approvals",
+                    "info": "Manage",
+                    "targetURL": "#Approvals-manageUI5latest"
                   }
                 },
                 {
@@ -294,7 +294,7 @@
             },
             {
               "id": "DataV4",
-              "title": "OData V4",
+              "title": "OData V4 - Working with UI5 <= 1.71",
               "isPreset": true,
               "isVisible": true,
               "isGroupLocked": false,
@@ -399,23 +399,11 @@
             },
             {
               "id": "DataV4UI5latest",
-              "title": "OData V4 - Working with UI5 Latest",
+              "title": "OData V4 - Working with UI5 > 1.71",
               "isPreset": true,
               "isVisible": true,
               "isGroupLocked": false,
               "tiles": [
-                {
-                  "id": "V4ApprovalsUI5latest",
-                  "title": "Approvals",
-                  "size": "1×1",
-                  "tileType": "sap.ushell.ui.tile.StaticTile",
-                  "properties": {
-                    "chipId": "V4catalogTile_Approvals000",
-                    "title": "Approvals",
-                    "info": "Manage",
-                    "targetURL": "#V4Approvals-manageUI5latest"
-                  }
-                },
                 {
                   "id": "OrdersUI5latest",
                   "title": "Orders",
@@ -453,6 +441,30 @@
                   }
                 },
                 {
+                  "id": "WorkAssignmentsUI5latest",
+                  "title": "Work Assignments",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_WorkAssignmentsUI5latest",
+                    "title": "Work Assignments",
+                    "info": "Management",
+                    "targetURL": "#V4WorkAssignmentsUI5latest-manage"
+                  }
+                },
+                {
+                  "id": "V4ApprovalsUI5latest",
+                  "title": "Approvals",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_Approvals000",
+                    "title": "Approvals",
+                    "info": "Manage",
+                    "targetURL": "#V4Approvals-manageUI5latest"
+                  }
+                },
+                {
                   "id": "V4BrowseBooksAppUI5latest",
                   "title": "Browse Books",
                   "size": "1×1",
@@ -473,18 +485,6 @@
                     "chipId": "V4catalogTile_AuthorsUI5latest",
                     "title": "Browse Authors",
                     "targetURL": "#V4Authors-displayUI5latest"
-                  }
-                },
-                {
-                  "id": "WorkAssignmentsUI5latest",
-                  "title": "Work Assignments",
-                  "size": "1×1",
-                  "tileType": "sap.ushell.ui.tile.StaticTile",
-                  "properties": {
-                    "chipId": "V4catalogTile_WorkAssignmentsUI5latest",
-                    "title": "Work Assignments",
-                    "info": "Management",
-                    "targetURL": "#V4WorkAssignmentsUI5latest-manage"
                   }
                 },
                 {
