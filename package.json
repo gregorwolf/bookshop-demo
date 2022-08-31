@@ -61,7 +61,7 @@
     "deploy:cf:app": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext -m bookshop-demo-ui --retries 0",
     "deploy:cf-hana-cloud": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf-hana-cloud.mtaext --retries 0",
     "deploy:cf-hana-cloud-job-standard": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf-hana-cloud-job-standard.mtaext --retries 0",
-    "deploy:hana": "NODE_ENV=dev-hana cds deploy --to hana --vcap-file ./default-env.json --auto-undeploy",
+    "deploy:hana": "NODE_ENV=hybrid cds deploy --to hana --vcap-file ./default-env.json --auto-undeploy",
     "deploy:xsa": "xs deploy mta_archives/bookshop-demo_0.0.1.mtar",
     "create:xsa:uaa": "xs create-service xsuaa space bookshop-demo-uaa -c xs-security.json",
     "create:uaa-service-key": "xs create-service-key bookshop-demo-uaa dev",
@@ -82,13 +82,13 @@
     "build:copycsntoproxy": "copyfiles -f gen/srv/srv/csn.json standalone-v2-proxy/gen/",
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
     "start": "cds run",
-    "start:hana": "NODE_ENV=dev-hana cds run",
+    "start:hana": "NODE_ENV=hybrid cds run",
     "start:uaa": "NODE_ENV=dev-uaa cds run",
     "start:forExcel": "node srv/index.js",
     "build:deploy:start": "run-s build deploy start",
     "watch": "cds run --with-mocks --in-memory --watch",
     "test": "jest",
-    "test:hana": "cds bind --profile dev-hana --exec npm run test",
+    "test:hana": "cds bind --profile hybrid --exec npm run test",
     "cf:uaa:update": "cf update-service bookshop-demo-uaa -c xs-security.json",
     "undeploy:xsa": "xs undeploy bookshop-demo --delete-services --delete-service-brokers",
     "undeploy:cf": "cf undeploy bookshop-demo --delete-service-keys --delete-services --delete-service-brokers"
@@ -189,7 +189,7 @@
         }
       },
       "db-ext": {
-        "[dev-hana]": {
+        "[hybrid]": {
           "model": "db-hana"
         },
         "[production]": {
@@ -204,7 +204,7 @@
         }
       }
     },
-    "[dev-hana]": {
+    "[hybrid]": {
       "requires": {
         "db": {
           "kind": "hana",

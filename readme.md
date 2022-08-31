@@ -70,7 +70,7 @@ If you want to test the used SAP Business Technology Platform - Cloud Foundry se
 When you have deployed the application to BTP Cloud Foundry you can run:
 
 ```
-cds bind -2 bookshop-demo-db-service --profile dev-hana
+cds bind -2 bookshop-demo-db-service --profile hybrid
 ```
 
 then you can use:

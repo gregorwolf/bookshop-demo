@@ -30,9 +30,9 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "cds run dev-hana",
+      "name": "cds run hybrid",
       "args": ["run"],
-      "env": { "NODE_ENV": "dev-hana" },
+      "env": { "NODE_ENV": "hybrid" },
       "cwd": "${workspaceFolder}",
       "program": "${workspaceFolder}/node_modules/@sap/cds/bin/cds.js",
       "skipFiles": [
@@ -48,9 +48,7 @@
       "command": "destinations=`cat default-env.json | jq .destinations` && cds run --with-mocks",
       "request": "launch",
       "type": "node-terminal",
-      "skipFiles": [
-        "<node_internals>/**"
-      ]
+      "skipFiles": ["<node_internals>/**"]
     },
     {
       "name": "cds run in-memory",
