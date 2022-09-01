@@ -16,6 +16,7 @@
     "start": "node node_modules/@sap/approuter/approuter.js",
     "zip": "cd webapp && npx bestzip manifest-bundle.zip manifest.json && npx bestzip ../HTML5Module-content.zip *",
     "clean": "cd webapp && npx rimraf ../HTML5Module-content.zip manifest-bundle.zip",
-    "start-local": "export VCAP_SERVICES=`cat default-env.json | jq .VCAP_SERVICES` && node node_modules/@sap/html5-repo-mock/index.js"
+    "start-repo-mock": "node node_modules/@sap/html5-repo-mock/index.js",
+    "start-local": "export VCAP_SERVICES=`cat default-env.json | jq .VCAP_SERVICES` && npm run start-repo-mock"
   }
 }
