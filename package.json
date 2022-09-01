@@ -65,6 +65,8 @@
     "deploy:xsa:hana": "NODE_ENV=hybrid cds deploy --to hana --vcap-file ./default-env.json --auto-undeploy",
     "deploy:xsa": "xs deploy mta_archives/bookshop-demo_0.0.1.mtar",
     "bind:hana": "cds bind -2 bookshop-demo-db --profile hybrid",
+    "bind:uaa": "cds bind uaa --to bookshop-demo-uaa --kind xsuaa --profile hybrid",
+    "bind:keyuser": "cds bind ukeyuseraa --to bookshop-demo-ui5-flexibility-keyuser --kind ui5-flexibility-keyuser --profile hybrid",
     "create:xsa:uaa": "xs create-service xsuaa space bookshop-demo-uaa -c xs-security.json",
     "create:uaa-service-key": "xs create-service-key bookshop-demo-uaa dev",
     "get:uaa-service-key": "xs service-key bookshop-demo-uaa dev",
@@ -84,6 +86,7 @@
     "build:copycsntoproxy": "copyfiles -f gen/srv/srv/csn.json standalone-v2-proxy/gen/",
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
     "start": "cds run",
+    "start:app": "cds bind --exec -- npm start --prefix app --profile hybrid",
     "start:hana": "NODE_ENV=hybrid cds run",
     "start:uaa": "NODE_ENV=dev-uaa cds run",
     "start:forExcel": "node srv/index.js",
@@ -211,6 +214,9 @@
         "db": {
           "kind": "hana",
           "credentials": {}
+        },
+        "auth": {
+          "kind": "xsuaa"
         }
       }
     },
