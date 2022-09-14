@@ -1,3 +1,7 @@
 ###
 GET http://localhost:4004/catalog/UserScopes
 Authorization: Basic admin:
+
+###
+GET http://localhost:4004/catalog/UserScopes
+Authorization: Basic bob:
