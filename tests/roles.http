@@ -1,6 +1,9 @@
 ###
 GET http://localhost:4004/v2/admin/$metadata
 Authorization: Basic admin:
+###
+GET http://localhost:4004/admin/$metadata
+Authorization: Basic admin:
 ### Read Roles via OData V2
 GET http://localhost:4004/v2/admin/Roles
 Authorization: Basic admin:
@@ -81,10 +84,26 @@ Content-Type: application/json
 
 {}
 
+###
+GET http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=true)
+  ?$expand=DraftAdministrativeData
+  // &$select=description
+Authorization: Basic admin:
+###
+GET http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=true)
+  ?$expand=DraftAdministrativeData
+Authorization: Basic roleadmin:
 ### Edit role using the draft dance
 # @name editRole
 POST http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=true)/AdminService.draftEdit
 Authorization: Basic admin:
+Content-Type: application/json
+
+{"PreserveChanges":true}
+
+### Try to create a draft as another user
+POST http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=true)/AdminService.draftEdit
+Authorization: Basic roleadmin:
 Content-Type: application/json
 
 {"PreserveChanges":true}
@@ -97,6 +116,7 @@ Authorization: Basic admin:
 Content-Type: application/json
 
 {
+  "rolename": "Changes",
   "description": "Add description"
 }
 ###
@@ -113,6 +133,9 @@ Content-Type: application/json
 
 {}
 
+###
+GET http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=false)
+Authorization: Basic roleadmin:
 ###
 GET http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=true)
 Authorization: Basic admin:
