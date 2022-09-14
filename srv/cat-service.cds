@@ -33,11 +33,11 @@ service CatalogService @(impl : './cat-service.js') {
     action updateBook()
   };
 
-  function getBooks() returns array of Books;
+  function getBooks()                       returns array of Books;
   // OData Structure for Dynamic App Launchers
   // https://help.sap.com/viewer/ad4b9f0b14b0458cad9bd27bf435637d/Cloud/en-US/8e7cec3cf6494b09a01d09606119b9dd.html
   function getNumberOfBooksForDynamicTile() returns DynamicAppLauncher;
-  function hello(to : String) returns String;
+  function hello(to : String)               returns String;
 
   @readonly
   entity BooksAuthorsAssignment as projection on db.BooksAuthorsAssignment {
@@ -69,11 +69,13 @@ service CatalogService @(impl : './cat-service.js') {
   ])                            as projection on db.Orders;
 
   @requires_ : 'authenticated-user'
-  action submitOrder(book : Books:ID, amount : Integer);
+  action   submitOrder(book : Books:ID, amount : Integer);
 
-  action multipleOrders(numberOfOrders : Integer);
+  action   multipleOrders(numberOfOrders : Integer);
 
-  @requires_ : 'authenticated-user'
+  @requires : 'authenticated-user'
+  @odata.singleton
+  @cds.persistency.skip
   @readonly
   entity UserScopes {
     key username      : String;

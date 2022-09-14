@@ -55,14 +55,12 @@ module.exports = async function (srv) {
   });
 
   srv.on("READ", "UserScopes", async (req) => {
-    const users = [
-      {
-        username: req.user.id,
-        is_admin: req.user.is("admin"),
-        is_roleadmin: req.user.is("roleadmin"),
-        is_booksadmin: req.user.is("booksadmin"),
-      },
-    ];
+    const users = {
+      username: req.user.id,
+      is_admin: req.user.is("admin"),
+      is_roleadmin: req.user.is("roleadmin"),
+      is_booksadmin: req.user.is("booksadmin"),
+    };
     return users;
   });
 
