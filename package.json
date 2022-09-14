@@ -99,6 +99,9 @@
     "undeploy:cf": "cf undeploy bookshop-demo --delete-service-keys --delete-services --delete-service-brokers"
   },
   "cds": {
+    "drafts": {
+      "cancellationTimeout": 1
+    },
     "features": {
       "assert_integrity": "db"
     },
