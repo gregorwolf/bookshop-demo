@@ -61,6 +61,7 @@ module.exports = async function (srv) {
       is_roleadmin: req.user.is("roleadmin"),
       is_booksadmin: req.user.is("booksadmin"),
     };
+    console.log("User Attributes: ", req.user.attr);
     return users;
   });
 
