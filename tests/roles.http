@@ -47,7 +47,7 @@ Content-Type: application/json
 {
   "ID": "{{roleID}}",
   "rolename": "",
-  "description": ""
+  "description": "Description"
 }
 
 ###
@@ -63,6 +63,7 @@ Authorization: Basic admin:
 Content-Type: application/json
 
 {
+  "rolename": "Test Draft 2",
   "description": ""
 }
 
@@ -79,3 +80,42 @@ Authorization: Basic admin:
 Content-Type: application/json
 
 {}
+
+### Edit role using the draft dance
+# @name editRole
+POST http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=true)/AdminService.draftEdit
+Authorization: Basic admin:
+Content-Type: application/json
+
+{"PreserveChanges":true}
+
+###
+@locationEdit = {{editRole.response.headers.Location}}
+###
+PATCH http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=false)
+Authorization: Basic admin:
+Content-Type: application/json
+
+{
+  "description": "Add description"
+}
+###
+POST http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=false)/AdminService.draftPrepare
+Authorization: Basic admin:
+Content-Type: application/json
+
+{"SideEffectsQualifier":""}
+
+###
+POST http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=false)/AdminService.draftActivate
+Authorization: Basic admin:
+Content-Type: application/json
+
+{}
+
+###
+GET http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=true)
+Authorization: Basic admin:
+### Delete Entity
+DELETE  http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=true)
+Authorization: Basic admin:
