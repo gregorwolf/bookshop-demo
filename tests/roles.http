@@ -99,6 +99,14 @@ POST http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=true)/AdminS
 Authorization: Basic admin:
 Content-Type: application/json
 
+{"PreserveChanges":false}
+
+### Try to create a draft as another user
+# Not Possible with PreserveChanges = true
+POST http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=true)/AdminService.draftEdit
+Authorization: Basic roleadmin:
+Content-Type: application/json
+
 {"PreserveChanges":true}
 
 ### Try to create a draft as another user
@@ -106,8 +114,7 @@ POST http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=true)/AdminS
 Authorization: Basic roleadmin:
 Content-Type: application/json
 
-{"PreserveChanges":true}
-
+{"PreserveChanges":false}
 ###
 @locationEdit = {{editRole.response.headers.Location}}
 ###
