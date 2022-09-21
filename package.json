@@ -87,7 +87,7 @@
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
     "start": "cds run",
     "start:app": "cds bind --exec -- npm run start-repo-mock --prefix app --profile hybrid",
-    "start:hana": "NODE_ENV=hybrid cds run",
+    "start:hana": "cds bind --exec -- cds run --profile hybrid",
     "start:uaa": "NODE_ENV=dev-uaa cds run",
     "start:forExcel": "node srv/index.js",
     "build:deploy:start": "run-s build deploy start",
