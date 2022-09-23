@@ -44,8 +44,10 @@ service AdminService @(
   entity BooksViewWOtype     as projection on db.BooksViewWOtype;
   */
 
-  @odata.draft.enabled
   entity Documents               as projection on db.Documents;
+
+  @odata.draft.enabled
+  entity DocumentsWithDraft      as projection on db.Documents;
 
   entity BooksAuthorsAssignment  as projection on db.BooksAuthorsAssignment {
     *,
