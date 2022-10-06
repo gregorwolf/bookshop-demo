@@ -575,14 +575,16 @@ module.exports = async function (srv) {
       var orderId = req.params[0].ID;
       var msgInfo = {
         code: "SY001",
-        message: `Order ${order.OrderNo} is consistent - Special Character - German Umlauts: öäü ÖÄÜ ß`,
+        message: "ORDER_CONSISTENT",
         numericSeverity: 1,
         persistent: true,
+        args: [order.OrderNo],
       };
       var msgError = {
         code: "SY002",
-        message: `Order ${order.OrderNo} is not consistent`,
+        message: "ORDER_INCONSISTENT",
         numericSeverity: 4,
+        args: [order.OrderNo],
       };
       if (orderId === "7e2f2640-6866-4dcf-8f4d-3027aa831cad") {
         req.error(msgError);
