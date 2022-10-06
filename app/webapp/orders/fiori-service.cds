@@ -168,10 +168,11 @@ annotate AdminService.Orders with @(
         Inline : false
       },
       {
-        $Type  : 'UI.DataFieldForAction',
-        Label  : '{i18n>setOrderParametersV4}',
-        Action : 'AdminService.setOrderParameters',
-        Inline : false
+        $Type   : 'UI.DataFieldForAction',
+        Label   : '{i18n>setOrderParametersV4}',
+        Action  : 'AdminService.setOrderParameters',
+        Inline  : false,
+        IconUrl : 'sap-icon://survey',
       },
       {
         $Type  : 'UI.DataFieldForAction',
@@ -180,10 +181,11 @@ annotate AdminService.Orders with @(
         Inline : true
       },
       {
-        $Type  : 'UI.DataFieldForAction',
-        Label  : '{i18n>checkConsistencyV4}',
-        Action : 'AdminService.checkConsistencyInline',
-        Inline : true
+        $Type   : 'UI.DataFieldForAction',
+        Label   : '{i18n>checkConsistencyV4}',
+        Action  : 'AdminService.checkConsistencyInline',
+        Inline  : true,
+        IconUrl : 'sap-icon://commission-check',
       }
     ],
     ////////////////////////////////////////////////////////////////////////////

@@ -560,6 +560,9 @@ module.exports = async function (srv) {
     return req.data;
   });
   */
+  srv.on(["setOrderParameters"], Orders, async (req) => {
+    console.log("setOrderParameters - Request Parameters:", req.params[0]);
+  });
   srv.on(
     ["checkConsistency", "checkConsistencyInline"],
     Orders,
