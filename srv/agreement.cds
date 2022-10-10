@@ -5,6 +5,7 @@ service AgreementService {
   entity Agreement                  as projection on agreement.Agreement;
 
   @readonly
+  @cds.redirection.target
   entity AgreementItemPricing       as projection on agreement.AgreementItemPricing;
 
   entity ChangeSetSearch            as projection on agreement.ChangeSetSearch;
