@@ -12,7 +12,7 @@ try {
     sdm: { tag: "sdm" },
   });
 } catch (error) {
-  console.error(
+  console.warn(
     "[dms-service] - Please maintain the sdm service in the VCAP_SERVICES"
   );
 }
