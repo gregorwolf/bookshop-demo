@@ -28,9 +28,10 @@ annotate AdminService.Orders with @(
       salesOrganization
     ],
     PresentationVariant         : {
-      $Type     : 'UI.PresentationVariantType',
-      Text      : 'Sort decending',
-      SortOrder : [{
+      $Type          : 'UI.PresentationVariantType',
+      Text           : 'Sort decending',
+      RequestAtLeast : [orderstatus_code],
+      SortOrder      : [{
         $Type      : 'Common.SortOrderType',
         Property   : createdAt,
         Descending : true,
@@ -131,6 +132,7 @@ annotate AdminService.Orders with @(
         Value : createdAt,
         Label : 'Date'
       },
+      {Value : orderstatus_code},
       {
         Value : orderstatus.name,
         Label : '{i18n>Orderstatus}'

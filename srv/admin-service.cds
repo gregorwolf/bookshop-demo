@@ -66,19 +66,17 @@ service AdminService @(
   entity Orders                  as select from db.Orders actions {
                                       action checkConsistency();
                                                                                                        @(
+                                        /*
                                         Core.OperationAvailable             : {$edmJson : {$Eq : [
                                           {$Path : 'in/orderstatus_code'},
                                           'N'
                                         ]}},
-                                        /*
+                                        */
                                         Core.OperationAvailable             : {$edmJson : {$In : [
                                           {$Path : 'in/orderstatus_code'},
-                                          [
-                                            'N',
-                                            'I'
-                                          ]
+                                          'N',
+                                          'I'
                                         ]}},
-                                        */
                                         Common.SideEffects.TargetProperties : ['in/orderstatus_code'],
                                       )
                                       action checkConsistencyInline();
