@@ -81,7 +81,7 @@ service AdminService @(
                                       )
                                       action checkConsistencyInline();
                                       action setOrderParameters(vipOrder : db.Orders:vipOrder not null @UI.ParameterDefaultValue : false,
-                                             employeeOrder : db.Orders:employeeOrder not null @UI.ParameterDefaultValue :          true);
+                                             employeeOrder : db.Orders:employeeOrder not null @UI.ParameterDefaultValue : true );
                                       action NewAction(OrderNo : db.Orders:OrderNo not null, CustomerOrderNo : db.Orders:CustomerOrderNo);
                                     };
 
@@ -181,5 +181,6 @@ service AdminService @(
   action   sendmail(sender : String, to : String, @UI.ParameterDefaultValue : 'Test' subject : String, body : String, destination : String) returns String;
   // Cloud Foundry
   function readOrganizations()                                                                                                              returns array of db.Organization;
-
+  // HANA Cloud
+  function getPool()                                                                                                                        returns String;
 }
