@@ -37,6 +37,7 @@
   "devDependencies": {
     "@openui5/ts-types": "^1.107.1",
     "@sap/cds-lsp": "^6.2.0",
+    "artillery": "^2.0.0-23",
     "cds-swagger-ui-express": "^0.5.0",
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
