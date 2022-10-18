@@ -69,9 +69,10 @@ class PoolService extends cds.ApplicationService {
           },
           fieldValues: { quantity: borrowed },
         };
-
+        await tx.commit();
         return poolStats;
       } else {
+        await tx.rollback();
         return (
           "Connection pool info not supported for db type " +
           cds.env.requires.db.kind
