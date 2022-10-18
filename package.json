@@ -16,7 +16,7 @@
     "@sap-cloud-sdk/http-client": "^2.9.0",
     "@sap-cloud-sdk/util": "^2.9.0",
     "@sap/cds": "^6.2.2",
-    "@sap/cds-dk": "6.1.2",
+    "@sap/cds-dk": "6.2.2",
     "@sap/cds-odata-v2-adapter-proxy": "^1.9.10",
     "@sap/jobs-client": "^1.7.42",
     "@sap/logging": "^6.1.3",
