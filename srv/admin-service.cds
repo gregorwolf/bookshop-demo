@@ -181,6 +181,4 @@ service AdminService @(
   action   sendmail(sender : String, to : String, @UI.ParameterDefaultValue : 'Test' subject : String, body : String, destination : String) returns String;
   // Cloud Foundry
   function readOrganizations()                                                                                                              returns array of db.Organization;
-  // HANA Cloud
-  function getPool()                                                                                                                        returns String;
 }

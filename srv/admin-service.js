@@ -629,19 +629,6 @@ module.exports = async function (srv) {
     });
   });
 
-  srv.on("getPool", async (req) => {
-    console.log("getPool");
-    const { pools } = require("@sap/cds/libx/_runtime/hana/pool");
-    const pool = pools.get();
-    return {
-      size: pool.size,
-      available: pool.available,
-      borrowed: pool.borrowed,
-      pending: pool.pending,
-      spareResourceCapacity: pool.spareResourceCapacity,
-    };
-  });
-
   /*
   srv.on('UPDATE','Books', req => {
     var where = req.query.UPDATE.where;
