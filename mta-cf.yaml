@@ -10,7 +10,8 @@ build-parameters:
      commands:
       - npm install --production
       - cds build --production
-      - npm run build:copycsntoproxy
+      # Standalone OData V2 Proxy is disabled
+      # - npm run build:copycsntoproxy
 
 modules:
   - name: bookshop-demo-db
