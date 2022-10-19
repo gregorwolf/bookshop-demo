@@ -65,10 +65,10 @@ modules:
               ServiceInstanceName: bookshop-demo-uaa-apiaccess
               ServiceKeyName: bookshop-demo-uaa-apiaccess-key
               sap.cloud.service: basic.service
-            - Name: bookshop-demo-docx
-              Authentication: OAuth2ClientCredentials
-              ServiceInstanceName: bookshop-demo-docx
-              ServiceKeyName: bookshop-demo-docx-key
+#            - Name: bookshop-demo-docx
+#              Authentication: OAuth2ClientCredentials
+#              ServiceInstanceName: bookshop-demo-docx
+#              ServiceKeyName: bookshop-demo-docx-key
 # Currently fails with:
 # [ERROR] Destinations to service [destination] are not supported
 #            - Name: bookshop-demo-destination
@@ -87,10 +87,10 @@ modules:
         parameters:
           service-key:
             name: bookshop-demo-uaa-apiaccess-key
-      - name: bookshop-demo-docx
-        parameters:
-          service-key:
-            name: bookshop-demo-docx-key
+#      - name: bookshop-demo-docx
+#        parameters:
+#          service-key:
+#            name: bookshop-demo-docx-key
 #  - name: bookshop-demo-v2-proxy
 #    type: nodejs
 #    path: standalone-v2-proxy
@@ -193,11 +193,11 @@ resources:
     parameters:
       service: xsuaa
       service-plan: apiaccess
-  - name: bookshop-demo-docx
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: document-information-extraction-trial
-      service-plan: default
+#  - name: bookshop-demo-docx
+#    type: org.cloudfoundry.managed-service
+#    parameters:
+#      service: document-information-extraction-trial
+#      service-plan: default
   - name: bookshop-demo-destination-service
     parameters:
       service-plan: lite
