@@ -30,9 +30,9 @@ entity Approval : managed, cuid {
   testDecimal       : Decimal(9, 2) @(title : 'Test Decimal (9,2)');
   status            : String(1)     @(title : 'Status', )
   enum {
-    requested = 'R'         @(title : 'Requested');
-              pending = 'P' @(title : 'Pending');
-              approved = 'A'@(title : 'Approved');
+    requested = 'R'          @(title : 'Requested');
+              pending = 'P'  @(title : 'Pending');
+              approved = 'A' @(title : 'Approved');
               rejected = 'N'        @(title : 'Rejected');
   } default 'R';
 };
@@ -42,12 +42,12 @@ entity Books : managed {
       title                          : localized String(111);
       descr                          : localized String(1111);
       stock                          : Integer;
-      @sap.unit                      :                        'currency_code'
-      @Semantics.amount.currencyCode :                        'currency_code'
-      @Measures.ISOCurrency          :                        currency_code
+      @sap.unit                      : 'currency_code'
+      @Semantics.amount.currencyCode : 'currency_code'
+      @Measures.ISOCurrency          : currency_code
       price                          : DecimalFloat;
       @Common.IsCurrency
-      @sap.semantics                 :                        'currency-code'
+      @sap.semantics                 : 'currency-code'
       @Semantics.currencyCode
       currency                       : Currency;
       virtual semanticURLtoPublisher : String;
@@ -145,10 +145,10 @@ view BooksViewWOtype as
   };
 
 entity Documents : cuid, managed {
-  @Core.MediaType                   :  mediatype
-  @Core.ContentDisposition.Filename :  filename
+  @Core.MediaType                   : mediatype
+  @Core.ContentDisposition.Filename : filename
   content   : LargeBinary     @title : '{i18n>content}';
-  @Core.IsMediaType                 :  true
+  @Core.IsMediaType                 : true
   @mandatory
   mediatype : String not null;
   @mandatory
@@ -161,7 +161,7 @@ entity Orderstatuses : sap.common.CodeList {
 
 type Orderstatus : Association to Orderstatuses;
 annotate Orderstatus with @title : '{i18n>Orderstatus}';
-annotate Orderstatuses.name with @title : '{i18n>Orderstatus}'  @description : '{i18n>Orderstatus}';
+annotate Orderstatuses.name with  @title : '{i18n>Orderstatus}'  @description : '{i18n>Orderstatus}';
 
 entity Deliverystatuses : sap.common.CodeList {
   key code : String(1);
@@ -169,7 +169,7 @@ entity Deliverystatuses : sap.common.CodeList {
 
 type Deliverystatus : Association to Deliverystatuses;
 annotate Deliverystatus with @title : '{i18n>Deliverystatus}';
-annotate Deliverystatuses.name with @title : '{i18n>Deliverystatus}'  @description : '{i18n>Deliverystatus}';
+annotate Deliverystatuses.name with  @title : '{i18n>Deliverystatus}'  @description : '{i18n>Deliverystatus}';
 type SalesOrganizationCode : String(4) @(title : '{i18n>salesOrganization}');
 
 entity A_SalesOrganizationText {
@@ -191,15 +191,21 @@ entity Orders : cuid, managed {
   totalWithTax      : Double;
   vipOrder          : Boolean    @title : '{i18n>vipOrder}';
   employeeOrder     : Boolean    @title : '{i18n>employeeOrder}';
-  @Common.ValueListWithFixedValues :      true
+  @Common.ValueListWithFixedValues : true
   orderstatus       : Orderstatus;
-  @Common.ValueListWithFixedValues :      true
+  @Common.ValueListWithFixedValues : true
   deliverystatus    : Deliverystatus;
   currency          : Currency;
 }
 
+@assert.unique : {item : [
+  parent,
+  itemNo
+]}
 entity OrderItems : cuid {
   parent    : Association to Orders not null;
+  @(title : 'itemNo', )
+  itemNo    : Integer not null;
   book      : Association to Books;
   product   : SEPMRA_I_Product_E:Product;
   amount    : Integer;

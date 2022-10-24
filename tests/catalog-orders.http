@@ -53,6 +53,7 @@ Content-Type: application/json
     "currency_code": "EUR",
     "Items": [
         {
+            "itemNo": 10,
             "book_ID": 201
         }
     ],
@@ -123,6 +124,7 @@ Content-Type: application/json
     "currency_code": "EUR",
     "Items": [
         {
+            "itemNo": 10,
             "book_ID": 201
         }
     ],
@@ -145,6 +147,7 @@ Content-Type: application/json
     "currency_code": "EUR",
     "Items": [
         {
+            "itemNo": 10,
             "book_ID": 1
         }
     ],

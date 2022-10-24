@@ -315,19 +315,30 @@ annotate AdminService.OrderItems with {
 
 annotate AdminService.OrderItems with @(
   UI     : {
-    HeaderInfo      : {
+    HeaderInfo          : {
       TypeName       : 'Order Item',
       TypeNamePlural : '	',
       Title          : {Value : book.title},
       Description    : {Value : book.descr}
     },
     // There is no filterbar for items so the selctionfileds is not needed
-    SelectionFields : [book_ID],
+    SelectionFields     : [book_ID],
+    PresentationVariant : {
+      $Type          : 'UI.PresentationVariantType',
+      Text           : 'Sort ascending',
+      RequestAtLeast : [itemNo],
+      SortOrder      : [{
+        $Type      : 'Common.SortOrderType',
+        Property   : itemNo,
+        Descending : false,
+      }, ],
+    },
     ////////////////////////////////////////////////////////////////////////////
     //
     //	Lists of OrderItems
     //
-    LineItem        : [
+    LineItem            : [
+      {Value : itemNo, },
       {
         Value : book_ID,
         Label : 'Book'
@@ -346,7 +357,7 @@ annotate AdminService.OrderItems with @(
         Label : 'Net amount'
       }
     ],
-    Identification  : [ //Is the main field group
+    Identification      : [ //Is the main field group
       //{Value: ID, Label:'ID'}, //A guid shouldn't be on the UI
       {
         Value : book_ID,
@@ -361,7 +372,7 @@ annotate AdminService.OrderItems with @(
         Label : 'Net amount'
       }
     ],
-    Facets          : [{
+    Facets              : [{
       $Type  : 'UI.ReferenceFacet',
       Label  : '{i18n>OrderItems}',
       Target : '@UI.Identification'
