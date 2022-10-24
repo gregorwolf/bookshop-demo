@@ -50,6 +50,7 @@ entity Books : managed {
       @sap.semantics                 : 'currency-code'
       @Semantics.currencyCode
       currency                       : Currency;
+      virtual virtualFromDB          : String default 'Value from DB';
       virtual semanticURLtoPublisher : String;
       weight                         : DecimalFloat  @title : 'Weight (DecimalFloat)';
       height                         : Double        @title : 'Height (Double)';

@@ -11,6 +11,8 @@ GET http://localhost:4004/v2/catalog/
 GET http://localhost:4004/catalog/
 ###
 GET http://localhost:4004/catalog/Books
+###
+GET http://localhost:4004/catalog/Books
   ?$expand=author
 ### Read Books using function
 GET http://localhost:4004/catalog/getBooks()

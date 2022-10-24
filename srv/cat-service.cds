@@ -26,7 +26,13 @@ service CatalogService @(impl : './cat-service.js') {
     },
     UpdateRestrictions : {Updatable : true},
     DeleteRestrictions : {Deletable : true}
-  }, )                          as projection on db.Books excluding {
+  }, )                          as projection on db.Books {
+    *,
+    virtual 'Value from Srv' as VirtualFromSrv : String,
+  // Element or variable “VirtualFromSrvDefault” has not been foundCDS (compiler)(ref-undefined-var)
+  // Extraneous DEFAULT, expecting ‘,’, ‘.’, ‘:’, ‘(’, ‘}’, ‘@’CDS (compiler)(syntax-extraneous-token)
+  // virtual VirtualFromSrvDefault : String default 'Default value from Srv',
+  } excluding {
     createdBy,
     modifiedBy
   } actions {
