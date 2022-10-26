@@ -1,10 +1,10 @@
 {
   "name": "standalone-v2-proxy",
   "engines": {
-    "node": "^14 || ^16"
+    "node": "^16"
   },
   "dependencies": {
-    "@sap/cds": "^6.2.2",
+    "@sap/cds": "^6.2.3",
     "@sap/cds-odata-v2-adapter-proxy": "^1.9.10"
   },
   "devDependencies": {},
