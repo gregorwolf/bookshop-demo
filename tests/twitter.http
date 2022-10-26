@@ -1,0 +1,29 @@
+###
+GET https://api.twitter.com/2/tweets
+    ?ids=1584114024970452992 
+Authorization: Bearer {{$dotenv TWITTER_BEARER_TOKEN}}
+
+###
+# @name requestAccessToken
+POST https://api.twitter.com/2/oauth2/token
+Authorization: Basic {{$dotenv TWITTER_Access_Token}}:{{$dotenv TWITTER_Access_Token_Secret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&client_id={{$dotenv TWITTER_Access_Token}}
+&client_secret={{$dotenv TWITTER_Access_Token_Secret}}
+&client_type=third_party_app
+&scope=tweet.read tweet.write
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+###
+GET https://api.twitter.com/2/tweets
+    ?ids=1584114024970452992 
+Authorization: Bearer {{access_token}}
+
+###
+POST https://api.twitter.com/2/tweets
+Authorization: Bearer {{access_token}}
+Content-type: application/application/json
+
+{"text":"Hello World"}
