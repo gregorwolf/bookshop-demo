@@ -608,6 +608,8 @@ module.exports = async function (srv) {
             // 4	sap.ui.core.MessageType.Error	Error - action is required
             msgInfo.numericSeverity = 4;
             break;
+          case "d3924131-0870-44bc-b0c1-2ea3808cda5f":
+            req.xx.xx;
         }
         if (msgInfo.numericSeverity === 3) {
           req.warn(msgInfo);
