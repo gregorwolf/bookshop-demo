@@ -1,0 +1,4 @@
+###
+GET http://localhost:4004/role-attribute-test
+###
+GET http://localhost:4004/role-attribute-test/withdot
