@@ -246,43 +246,43 @@ annotate my.Books with @(UI : {
             Label             : '',
             ![@UI.Importance] : #High
         },
-        /*
-        {Value : publisher.name},
-        {
-            $Type: 'UI.DataFieldWithIntentBasedNavigation',
-            Label: '{i18n>ToPublisherIntentBased}',
-            Value: publisher.name,
-            Mapping : [
-                {
-                    $Type : 'Common.SemanticObjectMappingType',
-                    LocalProperty : publisher_ID,
-                    SemanticObjectProperty : 'ID',
-                },
-            ],
-            SemanticObject: 'Publishers',
-            Action: 'display'
-        },
-        {
-            $Type : 'UI.DataFieldForIntentBasedNavigation',
-            SemanticObject : 'Publishers',
-            Action : 'display',
-            Label: '{i18n>ToPublisherForIntentBased}',
-            Mapping : [
-                {
-                    $Type : 'Common.SemanticObjectMappingType',
-                    LocalProperty : publisher_ID,
-                    SemanticObjectProperty : 'ID',
-                },
-            ],
-        },
-        {
-            $Type: 'UI.DataFieldWithUrl',
-            Label: '{i18n>ToPublisherUrl}',
-            Value: '{i18n>WithUrl}',
-            Url: semanticURLtoPublisher,
-        },
-        {Value : semanticURLtoPublisher},
-        */
+    /*
+    {Value : publisher.name},
+    {
+        $Type: 'UI.DataFieldWithIntentBasedNavigation',
+        Label: '{i18n>ToPublisherIntentBased}',
+        Value: publisher.name,
+        Mapping : [
+            {
+                $Type : 'Common.SemanticObjectMappingType',
+                LocalProperty : publisher_ID,
+                SemanticObjectProperty : 'ID',
+            },
+        ],
+        SemanticObject: 'Publishers',
+        Action: 'display'
+    },
+    {
+        $Type : 'UI.DataFieldForIntentBasedNavigation',
+        SemanticObject : 'Publishers',
+        Action : 'display',
+        Label: '{i18n>ToPublisherForIntentBased}',
+        Mapping : [
+            {
+                $Type : 'Common.SemanticObjectMappingType',
+                LocalProperty : publisher_ID,
+                SemanticObjectProperty : 'ID',
+            },
+        ],
+    },
+    {
+        $Type: 'UI.DataFieldWithUrl',
+        Label: '{i18n>ToPublisherUrl}',
+        Value: '{i18n>WithUrl}',
+        Url: semanticURLtoPublisher,
+    },
+    {Value : semanticURLtoPublisher},
+    */
     // {Value: author_ID, Label:'{i18n>AuthorID}'},
     /*
     {
@@ -335,7 +335,13 @@ annotate my.Books with @(UI : {HeaderInfo : {
 //	Books Elements
 //
 annotate my.Books with {
-    ID     @title : '{i18n>ID}';
+    ID     @(
+        title  : '{i18n>ID}',
+        Common : {
+            Text            : title,
+            TextArrangement : #TextFirst
+        }
+    );
     title  @title : '{i18n>Title}';
     author @title : '{i18n>AuthorID}';
     price  @title : '{i18n>Price}';
@@ -349,6 +355,12 @@ annotate my.Books with {
 //	Authors Elements
 //
 annotate my.Authors with {
-    ID   @title : '{i18n>ID}'  @UI.HiddenFilter;
+    ID   @(
+        title  : '{i18n>ID}',
+        Common : {
+            Text            : name,
+            TextArrangement : #TextFirst
+        }
+    )  @UI.HiddenFilter;
     name @title : '{i18n>AuthorName}';
 }
