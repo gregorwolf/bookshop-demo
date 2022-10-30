@@ -1,0 +1,18 @@
+###
+GET http://localhost:4004/job
+Authorization: Basic admin:
+###
+GET http://localhost:4004/job/Status
+Authorization: Basic admin:
+
+###
+POST  http://localhost:4004/job/scheduleJob
+Authorization: Basic admin:
+Content-Type: application/json
+
+{
+  "selection": "Test"
+}
+###
+GET http://localhost:4004/job/Jobs
+Authorization: Basic admin:
