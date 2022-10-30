@@ -59,6 +59,7 @@
     },
     {
       "name": "cds run in-memory",
+      "env": { "DEBUG": "job" },
       "command": "destinations=`cat default-env.json | jq .destinations` && cds run --with-mocks --in-memory",
       "request": "launch",
       "type": "node-terminal",
