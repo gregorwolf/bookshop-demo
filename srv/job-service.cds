@@ -6,4 +6,5 @@ service JobService @(requires : ['admin']) {
   entity Jobs as projection on db.Jobs;
 
   action scheduleJob(selection : db.selection) returns Jobs;
+  action startQueuedJobs();
 }
