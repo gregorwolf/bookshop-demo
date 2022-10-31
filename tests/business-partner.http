@@ -31,3 +31,8 @@ GET https://sapes5.sapdevcenter.com/sap/opu/odata/iwbep/GWSAMPLE_BASIC/BusinessP
   &$orderby=BusinessPartnerID%20asc
 Authorization: Basic {{$dotenv es5username}}:{{$dotenv es5password}}
 Accept: application/json
+
+### Via sap-cf-proxy
+GET http://localhost:5050/sap/opu/odata/iwbep/GWSAMPLE_BASIC/BusinessPartnerSet
+  ?$top=1
+Accept: application/json

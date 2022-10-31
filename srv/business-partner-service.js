@@ -1,4 +1,6 @@
 const cds = require("@sap/cds");
+const LOG = cds.log("business-partner");
+const retry = require("async-retry");
 
 module.exports = async function (srv) {
   const destinations = ["ES5", "ERP"];
@@ -19,20 +21,43 @@ module.exports = async function (srv) {
         subresult.forEach((element) => {
           result.push(element);
         });
-        console.log(
-          `Query to ${destination} returned ${subresult.length} items`
-        );
+        LOG.info(`Query to ${destination} returned ${subresult.length} items`);
       }
       return result;
     } catch (error) {
-      console.error("Error Message: " + error.message);
+      LOG.error("Error Message: " + error.message);
       if (error.request && error.request.path) {
-        console.error("Request path: " + error.request.path);
+        LOG.error("Request path: " + error.request.path);
       }
     }
   });
+
   srv.on("READ", "ContactSet", async (req) => {
     const external = await cds.connect.to("GWSAMPLE_BASIC");
-    return await external.run(req.query);
+    // return await external.run(req.query);
+    return await runWithRetry(external, req.query);
   });
 };
+
+const options = {
+  retries: 3,
+  minTimeout: 1000,
+};
+
+// Create a wrapper passing arguments
+async function runWithRetry(external, query) {
+  // Wrap the retry block around the async function.
+  return retry(async (bail) => {
+    try {
+      const result = await external.run(query);
+      return result;
+    } catch (error) {
+      // Use the bail() method to stop the retries for some cases
+      if (error.statusCode === 401) {
+        logger.warn("Request failed with status 401 - no retry necessary.");
+        bail(error);
+      }
+      throw error;
+    }
+  }, options);
+}
