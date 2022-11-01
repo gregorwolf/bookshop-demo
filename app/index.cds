@@ -11,6 +11,7 @@ using from './webapp/role/fiori-service';
 using from './webapp/users/fiori-service';
 using from './webapp/workAssignments/fiori-service';
 using from './webapp/productUI5latest/fiori-service';
+using from './webapp/genres/fiori-service';
 // 2) fiori annotations common to all apps...
 using my.bookshop as my from '../db/schema';
 using {sap.common} from '../srv/admin-service';

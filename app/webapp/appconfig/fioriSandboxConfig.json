@@ -488,6 +488,17 @@
                   }
                 },
                 {
+                  "id": "genres",
+                  "title": "Browse Genres",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "genres",
+                    "title": "Browse Genres",
+                    "targetURL": "#genres-display"
+                  }
+                },
+                {
                   "id": "ProductsUI5latest",
                   "title": "Products",
                   "size": "1×1",
@@ -558,6 +569,26 @@
               "indicatorDataSource": {
                 "path": "catalog/Books/$count",
                 "refresh": 600
+              }
+            },
+            "actionGenres": {
+              "semanticObject": "genres",
+              "action": "display",
+              "title": "Browse Genres",
+              "signature": {
+                "parameters": {
+                  "parent_ID": {
+                    "defaultValue": {
+                      "value": "0"
+                    }
+                  }
+                },
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=genres",
+                "url": "genres/webapp"
               }
             },
             "actionBooksUI5latest": {
