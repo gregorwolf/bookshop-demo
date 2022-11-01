@@ -10,8 +10,12 @@ annotate CatalogService.Genres with @(UI : {
     parent_ID,
   ],
   LineItem        : [
-    {Value : ID},
+    {
+      $Type : 'UI.DataField',
+      Value : ID,
+    },
     {Value : parent_ID},
     {Value : name},
+    {Value : genreSemanticObject},
   ],
 });

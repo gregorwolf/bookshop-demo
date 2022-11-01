@@ -89,12 +89,14 @@ entity Authors : managed {
  */
 @cds.autoexpose
 entity Genres : sap.common.CodeList {
-      @title : '{i18n>genreID}'
-  key ID       : Integer;
-      @title : '{i18n>parent}'
-      parent   : Association to Genres;
-      children : Composition of many Genres
-                   on children.parent = $self;
+      @title                 : '{i18n>genreID}'
+      @Common.SemanticObject : genreSemanticObject
+  key ID                          : Integer;
+      @title                 : '{i18n>parent}'
+      parent                      : Association to Genres;
+      children                    : Composition of many Genres
+                                      on children.parent = $self;
+      virtual genreSemanticObject : String;
 }
 
 entity Publishers : managed {
