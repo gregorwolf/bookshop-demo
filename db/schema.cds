@@ -41,6 +41,7 @@ entity Books : managed {
   key ID                             : Integer;
       title                          : localized String(111);
       descr                          : localized String(1111);
+      genre                          : Association to Genres;
       stock                          : Integer;
       @sap.unit                      : 'currency_code'
       @Semantics.amount.currencyCode : 'currency_code'
@@ -81,6 +82,19 @@ entity Authors : managed {
       country                              : Country;
       BooksAuthorsAssignment_ASSOC_Authors : Association to many BooksAuthorsAssignment
                                                on BooksAuthorsAssignment_ASSOC_Authors.ASSOC_Author = $self;
+}
+
+/**
+ * Hierarchically organized Code List for Genres
+ */
+@cds.autoexpose
+entity Genres : sap.common.CodeList {
+      @title : '{i18n>genreID}'
+  key ID       : Integer;
+      @title : '{i18n>parent}'
+      parent   : Association to Genres;
+      children : Composition of many Genres
+                   on children.parent = $self;
 }
 
 entity Publishers : managed {
