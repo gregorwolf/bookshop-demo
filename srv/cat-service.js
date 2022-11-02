@@ -49,7 +49,11 @@ module.exports = async function (srv) {
   });
 
   srv.after("READ", "Genres", (each) => {
-    each.genreSemanticObject = "genres";
+    if (each.nodeType === "F") {
+      each.genreSemanticObject = "genres";
+    } else {
+      each.genreSemanticObject = "V4Books";
+    }
     // console.log("After READ Handler for Genres");
   });
 

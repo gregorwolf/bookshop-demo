@@ -581,9 +581,12 @@
                     "defaultValue": {
                       "value": "0"
                     }
+                  },
+                  "ID": {
+                    "renameTo": "parent_ID"
                   }
                 },
-                "additionalParameters": "allowed"
+                "additionalParameters": "ignored"
               },
               "resolutionResult": {
                 "applicationType": "SAPUI5",

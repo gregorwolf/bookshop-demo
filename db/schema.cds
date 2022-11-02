@@ -89,14 +89,20 @@ entity Authors : managed {
  */
 @cds.autoexpose
 entity Genres : sap.common.CodeList {
-      @title                 : '{i18n>genreID}'
-      @Common.SemanticObject : genreSemanticObject
+                        @title                 : '{i18n>genreID}'
+                        @Common.SemanticObject : genreSemanticObject
   key ID                          : Integer;
-      @title                 : '{i18n>parent}'
+                        @title                 : '{i18n>parent}'
       parent                      : Association to Genres;
       children                    : Composition of many Genres
                                       on children.parent = $self;
+                        @title                 : '{i18n>SemanticObject}'
       virtual genreSemanticObject : String;
+      nodeType                    : String(1) @(title : 'nodeType', )
+      enum {
+        requested = 'F' @(title : 'Folder');
+                  pending = 'L'               @(title : 'Leaf');
+  } default 'F';
 }
 
 entity Publishers : managed {

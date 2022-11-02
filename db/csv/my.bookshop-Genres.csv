@@ -1,17 +1,17 @@
-ID;parent_ID;name
-0;;Root
-10;0;Fiction
-11;10;Drama
-12;10;Poetry
-13;10;Fantasy
-14;10;Science Fiction
-15;10;Romance
-16;10;Mystery
-17;10;Thriller
-18;10;Dystopia
-19;10;Fairy Tale
-20;0;Non-Fiction
-21;20;Biography
-22;21;Autobiography
-23;20;Essay
-24;20;Speech
+nodeType;ID;parent_ID;name
+F;0;;Root
+F;10;0;Fiction
+L;11;10;Drama
+L;12;10;Poetry
+L;13;10;Fantasy
+L;14;10;Science Fiction
+L;15;10;Romance
+L;16;10;Mystery
+L;17;10;Thriller
+L;18;10;Dystopia
+L;19;10;Fairy Tale
+F;20;0;Non-Fiction
+F;21;20;Biography
+L;22;21;Autobiography
+L;23;20;Essay
+L;24;20;Speech
