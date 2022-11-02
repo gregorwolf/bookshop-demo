@@ -34,6 +34,9 @@ Authorization: Basic admin:
 GET http://localhost:4004/admin/Books(1)
 Authorization: Basic admin:
 
+###
+GET http://localhost:4004/v2/admin/Books/$count
+Authorization: Basic admin:
 ### Read Books via OData V2 by admin and expand to author
 GET http://localhost:4004/v2/admin/Books?$expand=author
 Authorization: Basic admin:

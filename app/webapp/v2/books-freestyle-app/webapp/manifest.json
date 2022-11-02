@@ -32,7 +32,12 @@
                     "action": "displayUI5latestFreestyleApp",
                     "title": "{{flpTitle}}",
                     "subTitle": "{{flpSubtitle}}",
-                    "icon": ""
+                    "icon": "sap-icon://decision",
+                    "indicatorDataSource": {
+                        "dataSource": "mainService",
+                        "path": "Books/$count",
+                        "refresh": 1800
+                    }
                 }
             }
         }
