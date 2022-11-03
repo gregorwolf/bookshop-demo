@@ -96,13 +96,15 @@ entity Genres : sap.common.CodeList {
       parent                      : Association to Genres;
       children                    : Composition of many Genres
                                       on children.parent = $self;
-                        @title                 : '{i18n>SemanticObject}'
-      virtual genreSemanticObject : String;
       nodeType                    : String(1) @(title : 'nodeType', )
       enum {
         requested = 'F' @(title : 'Folder');
                   pending = 'L'               @(title : 'Leaf');
   } default 'F';
+                        @title                 : '{i18n>nodeType_FC}'
+      virtual nodeType_FC         : Integer;
+                        @title                 : '{i18n>SemanticObject}'
+      virtual genreSemanticObject : String;
 }
 
 entity Publishers : managed {
