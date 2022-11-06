@@ -201,10 +201,16 @@
       },
       "db-ext": {
         "[hybrid]": {
-          "model": "db-hana"
+          "model": [
+            "db-hana",
+            "srv-hana"
+          ]
         },
         "[production]": {
-          "model": "db-hana"
+          "model": [
+            "db-hana",
+            "srv-hana"
+          ]
         }
       }
     },

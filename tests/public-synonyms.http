@@ -1,0 +1,14 @@
+###
+GET http://localhost:4004/public-synonyms/
+Authorization: Basic admin:
+###
+GET http://localhost:4004/public-synonyms/Synonyms
+Authorization: Basic admin:
+###
+GET http://localhost:4004/public-synonyms/TableColumns
+  ?$top=10
+Authorization: Basic admin:
+###
+GET http://localhost:4004/public-synonyms/ViewColumns
+  ?$top=10
+Authorization: Basic admin:
