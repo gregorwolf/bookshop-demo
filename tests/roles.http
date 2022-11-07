@@ -26,6 +26,10 @@ GET http://localhost:4004/admin/Roles?$expand=BusinessObjects,Users
 Authorization: Basic admin:
 
 ### Read Users
+GET http://localhost:4004/admin/UserScopes
+Authorization: Basic admin:
+
+### Read Users
 GET http://localhost:4004/admin/Users
 Authorization: Basic admin:
 
