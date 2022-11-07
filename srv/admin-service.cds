@@ -145,6 +145,7 @@ service AdminService @(
   entity Address                 as projection on db.Address;
 
   @readonly
+  @odata.singleton
   entity UserScopes {
     key username      : String;
         is_admin      : Boolean;
