@@ -9,6 +9,20 @@
     <script>
       window["sap-ushell-config"] = {
         defaultRenderer: "fiori2",
+        renderers: {
+          fiori2: {
+            componentData: {
+              config: {
+                enableNotificationsUI: false,
+                enableNotifications: false,
+                enableSearch: false,
+                enablePersonalization: false,
+                enableSetTheme: true,
+                enableSetLanguage: true,
+              },
+            },
+          },
+        },
         bootstrapPlugins: {
           RuntimeAuthoringPlugin: {
             component: "sap.ushell.plugins.rta",
