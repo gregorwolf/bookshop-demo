@@ -1,0 +1,12 @@
+### 
+GET http://localhost:4004/admin/Genres
+Authorization: Basic admin:
+### 
+DELETE http://localhost:4004/admin/Genres(0)
+Authorization: Basic admin:
+### 
+DELETE http://localhost:4004/admin/Genres(10)
+Authorization: Basic admin:
+### 
+DELETE http://localhost:4004/admin/Genres(14)
+Authorization: Basic admin:

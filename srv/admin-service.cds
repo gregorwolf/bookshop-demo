@@ -62,6 +62,22 @@ service AdminService @(
     *
   };
 
+  @(restrict : [
+    {
+      grant : [
+        'READ',
+        'CREATE',
+        'UPDATE'
+      ],
+      to    : 'admin'
+    },
+    {
+      grant : 'DELETE',
+      where : `parent_ID <> ''`
+    }
+  ])
+  entity Genres                  as projection on db.Genres;
+
   @odata.draft.enabled
   entity Orders                  as select from db.Orders actions {
                                       action checkConsistency();
