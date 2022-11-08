@@ -88,6 +88,10 @@ entity Authors : managed {
  * Hierarchically organized Code List for Genres
  */
 @cds.autoexpose
+@Common : {
+  SemanticKey    : [ID],
+  SemanticObject : 'genres',
+}
 entity Genres : sap.common.CodeList {
                         @title                 : '{i18n>genreID}'
                         @Common.SemanticObject : genreSemanticObject
@@ -184,7 +188,7 @@ entity Orderstatuses : sap.common.CodeList {
   key code : String(1);
 }
 
-type Orderstatus : Association to Orderstatuses;
+type Orderstatus           : Association to Orderstatuses;
 annotate Orderstatus with @title : '{i18n>Orderstatus}';
 annotate Orderstatuses.name with  @title : '{i18n>Orderstatus}'  @description : '{i18n>Orderstatus}';
 
@@ -192,7 +196,7 @@ entity Deliverystatuses : sap.common.CodeList {
   key code : String(1);
 }
 
-type Deliverystatus : Association to Deliverystatuses;
+type Deliverystatus        : Association to Deliverystatuses;
 annotate Deliverystatus with @title : '{i18n>Deliverystatus}';
 annotate Deliverystatuses.name with  @title : '{i18n>Deliverystatus}'  @description : '{i18n>Deliverystatus}';
 type SalesOrganizationCode : String(4) @(title : '{i18n>salesOrganization}');
