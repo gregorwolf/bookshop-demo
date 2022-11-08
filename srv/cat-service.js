@@ -50,8 +50,8 @@ module.exports = async function (srv) {
 
   srv.after("READ", "Genres", (each) => {
     if (each.nodeType === "F") {
-      //each.genreSemanticObject = "genres";
-      each.genreSemanticObject = "V4Authors";
+      each.genreSemanticObject = "genres";
+      //each.genreSemanticObject = "V4Authors";
       each.nodeType_FC = 0;
     } else {
       each.genreSemanticObject = "V4Books";
