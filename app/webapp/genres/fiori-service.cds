@@ -15,7 +15,7 @@ annotate CatalogService.Genres with @(UI : {
       $Type : 'UI.DataField',
       Value : ID,
     },
-        */
+    */
 
     {
       $Type          : 'UI.DataFieldWithIntentBasedNavigation',
@@ -24,7 +24,6 @@ annotate CatalogService.Genres with @(UI : {
       //SemanticObject : 'V4Authors',
       Action         : 'display',
     },
-
     {Value : parent_ID},
     {Value : name},
     {Value : genreSemanticObject},
