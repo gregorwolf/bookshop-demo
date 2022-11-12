@@ -94,7 +94,7 @@
     "start:uaa": "NODE_ENV=dev-uaa cds run",
     "start:forExcel": "node srv/index.js",
     "build:deploy:start": "run-s build deploy start",
-    "watch": "cds run --with-mocks --in-memory --watch",
+    "watch": "cds watch --with-mocks --in-memory",
     "test": "jest",
     "test:hana": "CDS_ENV=hybrid cds bind --exec npm run test",
     "cf:uaa:update": "cf update-service bookshop-demo-uaa -c xs-security.json",
