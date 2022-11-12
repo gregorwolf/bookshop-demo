@@ -1,9 +1,7 @@
 const cds = require("@sap/cds");
-LOG = cds.log("job");
+const LOG = cds.log("job");
 
 const QUEUED = "Q";
-const FINISHED = "F";
-const ERROR = "E";
 const RUNNING = "R";
 class JobService extends cds.ApplicationService {
   async init() {
@@ -52,11 +50,6 @@ class JobService extends cds.ApplicationService {
       cds.spawn({}, start);
     });
 
-    this.on("triggerExecution", async (req) => {
-      LOG.debug(`triggerExecution`);
-      execute(req.data.ID);
-    });
-
     this.on("setJobStatus", async (req) => {
       LOG.debug(`setJobStatus`);
       const ID = req.data.ID;
@@ -101,8 +94,8 @@ async function start(tx) {
             .where({ ID: job.ID })
         );
         await tx.commit();
-        const jobService = await cds.connect.to("JobService");
-        await jobService.triggerExecution(job.ID);
+        const jobExecutionService = await cds.connect.to("JobExecutionService");
+        await jobExecutionService.triggerExecution(job.ID);
         // execute(job.ID);
       } catch (error) {
         tx.rollback();
@@ -114,36 +107,6 @@ async function start(tx) {
       );
     }
   }
-}
-
-async function execute(ID) {
-  const db = await cds.connect.to("db");
-  const jobService = await cds.connect.to("JobService");
-  const { Jobs } = db.entities("my.job");
-  LOG.info(`Execution of ${ID} started`);
-  const job = await jobService.run(
-    SELECT.one.from(Jobs).where({
-      ID,
-    })
-  );
-  LOG.debug("Content in DB for job:", job);
-  await sleep(10000);
-  LOG.info(`Execution of ${ID} finished`);
-  try {
-    jobService.setJobStatus(ID, FINISHED);
-    /*
-    const updateRes = await tx.run(
-      UPDATE(Jobs).set({ status_code: FINISHED, end: Date.now() }).where({ ID })
-    );
-    */
-  } catch (error) {
-    tx.rollback();
-    LOG.error("Transaction needed to be rolled back", error);
-  }
-}
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 module.exports = { JobService };

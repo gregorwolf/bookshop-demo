@@ -95,6 +95,9 @@
     "start:forExcel": "node srv/index.js",
     "build:deploy:start": "run-s build deploy start",
     "watch": "cds watch --with-mocks --in-memory",
+    "watch:instance1": "cds watch --profile instance1",
+    "watch:instance2": "cds watch --profile instance2 --port 4005",
+    "watchboth": "run-p watch:**",
     "test": "jest",
     "test:hana": "CDS_ENV=hybrid cds bind --exec npm run test",
     "cf:uaa:update": "cf update-service bookshop-demo-uaa -c xs-security.json",
@@ -194,10 +197,7 @@
         "model": [
           "db",
           "srv"
-        ],
-        "credentials": {
-          "database": "db/bookshop.db"
-        }
+        ]
       },
       "db-ext": {
         "[hybrid]": {

@@ -1,13 +1,13 @@
 ###
 GET http://localhost:4004/job
-Authorization: Basic admin:
+Authorization: Basic job:Secret1
 ###
 GET http://localhost:4004/job/Status
-Authorization: Basic admin:
+Authorization: Basic job:Secret1
 
 ###
 POST  http://localhost:4004/job/scheduleJob
-Authorization: Basic admin:
+Authorization: Basic job:Secret1
 Content-Type: application/json
 
 {
@@ -15,10 +15,29 @@ Content-Type: application/json
 }
 ###
 POST  http://localhost:4004/job/startQueuedJobs
-Authorization: Basic admin:
+Authorization: Basic job:Secret1
 Content-Type: application/json
 
 {}
 ###
+# @name jobs
 GET http://localhost:4004/job/Jobs
-Authorization: Basic admin:
+Authorization: Basic job:Secret1
+### Fill Variables from Response
+@jobID = {{jobs.response.body.value[0].ID}}
+###
+GET http://localhost:4004/job/Jobs
+  ?$top=1
+  &$filter=ID eq {{jobID}}
+Authorization: Basic job:Secret1
+### Job Execution
+GET http://localhost:4005/job-execution/$metadata
+Authorization: Basic job-execution:Secret2
+###
+POST http://localhost:4005/job-execution/triggerExecution
+Authorization: Basic job-execution:Secret2
+Content-Type: application/json
+
+{
+  "ID": "{{jobID}}"
+}
