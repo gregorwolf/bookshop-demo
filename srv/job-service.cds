@@ -1,5 +1,4 @@
 using my.job as db from '../db/job';
-using {sap} from '@sap/cds/common';
 
 service JobService @(requires : ['admin']) {
   @readonly
@@ -7,4 +6,6 @@ service JobService @(requires : ['admin']) {
 
   action scheduleJob(selection : db.selection) returns Jobs;
   action startQueuedJobs();
+  action triggerExecution(ID : UUID);
+  action setJobStatus(ID : UUID, status : db.StatusCode)
 }

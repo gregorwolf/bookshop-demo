@@ -6,7 +6,8 @@ using {
   sap.common.CodeList
 } from '@sap/cds/common';
 
-type selection : String;
+type selection  : String;
+type StatusCode : String(1);
 
 entity Jobs : cuid, managed {
   selection : selection;
@@ -16,5 +17,5 @@ entity Jobs : cuid, managed {
 }
 
 entity Status : CodeList {
-  key code : String(1);
+  key code : StatusCode;
 }

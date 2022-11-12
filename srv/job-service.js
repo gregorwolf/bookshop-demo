@@ -10,7 +10,21 @@ class JobService extends cds.ApplicationService {
     const db = await cds.connect.to("db");
     const { Jobs } = db.entities("my.job");
 
+    this.before("READ", Jobs, (req) => {
+      LOG.info(`before READ Jobs`);
+    });
+
+    this.on("READ", Jobs, async (req) => {
+      LOG.info(`on READ Jobs`);
+      const tx = db.transaction({});
+      await tx.begin();
+      const jobs = await tx.run(req.query);
+      await tx.commit();
+      return jobs;
+    });
+
     this.on("scheduleJob", async (req) => {
+      LOG.debug(`scheduleJob`);
       const tx = db.tx({});
       const { selection } = req.data;
       try {
@@ -34,7 +48,23 @@ class JobService extends cds.ApplicationService {
     });
 
     this.on("startQueuedJobs", async (req) => {
+      LOG.debug(`startQueuedJobs`);
       cds.spawn({}, start);
+    });
+
+    this.on("triggerExecution", async (req) => {
+      LOG.debug(`triggerExecution`);
+      execute(req.data.ID);
+    });
+
+    this.on("setJobStatus", async (req) => {
+      LOG.debug(`setJobStatus`);
+      const ID = req.data.ID;
+      const updateRes = await db.run(
+        UPDATE(Jobs)
+          .set({ status_code: req.data.status, end: Date.now() })
+          .where({ ID })
+      );
     });
 
     cds.spawn({ every: 5000 }, start);
@@ -71,7 +101,9 @@ async function start(tx) {
             .where({ ID: job.ID })
         );
         await tx.commit();
-        execute(tx, job.ID);
+        const jobService = await cds.connect.to("JobService");
+        await jobService.triggerExecution(job.ID);
+        // execute(job.ID);
       } catch (error) {
         tx.rollback();
         LOG.error("Transaction needed to be rolled back", error);
@@ -84,11 +116,12 @@ async function start(tx) {
   }
 }
 
-async function execute(tx, ID) {
+async function execute(ID) {
   const db = await cds.connect.to("db");
+  const jobService = await cds.connect.to("JobService");
   const { Jobs } = db.entities("my.job");
   LOG.info(`Execution of ${ID} started`);
-  const job = await db.run(
+  const job = await jobService.run(
     SELECT.one.from(Jobs).where({
       ID,
     })
@@ -97,11 +130,12 @@ async function execute(tx, ID) {
   await sleep(10000);
   LOG.info(`Execution of ${ID} finished`);
   try {
-    await tx.begin();
+    jobService.setJobStatus(ID, FINISHED);
+    /*
     const updateRes = await tx.run(
       UPDATE(Jobs).set({ status_code: FINISHED, end: Date.now() }).where({ ID })
     );
-    await tx.commit();
+    */
   } catch (error) {
     tx.rollback();
     LOG.error("Transaction needed to be rolled back", error);
