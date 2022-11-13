@@ -66,6 +66,13 @@
       "skipFiles": ["<node_internals>/**"]
     },
     {
+      "name": "npm run watchboth",
+      "command": "npm run watchboth",
+      "request": "launch",
+      "type": "node-terminal",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
       "type": "node",
       "request": "launch",
       "name": "excel",
