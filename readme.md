@@ -47,6 +47,18 @@ If you want to try also the external service calls, then you need to create a _d
       "url": "https://saperp.example.com",
       "username": "<your-ERP-username>",
       "password": "<your-ERP-password>"
+    },
+    {
+      "name": "job-execution-service",
+      "url": "http://localhost:4005",
+      "username": "job-execution",
+      "password": "Secret2"
+    },
+    {
+      "name": "job-service",
+      "url": "http://localhost:4004",
+      "username": "job",
+      "password": "Secret1"
     }
   ]
 }
