@@ -98,22 +98,41 @@
                                     }
                                 }
                             },
+                            "initialLoad": true,
+                            "views": {
+                                "paths": [
+                                    {
+                                        "key": "tab1",
+                                        "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#New"
+                                    },
+                                    {
+                                        "key": "tab2",
+                                        "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#InProcess"
+                                    },
+                                    {
+                                        "key": "tab3",
+                                        "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#Completed"
+                                    },
+                                    {
+                                        "key": "tab4",
+                                        "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#Empty"
+                                    }
+                                ],
+                                "showCounts": false
+                            },
                             "controlConfiguration": {
                                 "@com.sap.vocabularies.UI.v1.LineItem": {
                                     "tableSettings": {
                                         "quickVariantSelection": {
                                             "paths": [
                                                 {
-                                                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#New"
+                                                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#DeliveryNew"
                                                 },
                                                 {
-                                                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#InProcess"
+                                                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#DeliveryInProcess"
                                                 },
                                                 {
-                                                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Completed"
-                                                },
-                                                {
-                                                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Empty"
+                                                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#DeliveryCompleted"
                                                 }
                                             ]
                                         }

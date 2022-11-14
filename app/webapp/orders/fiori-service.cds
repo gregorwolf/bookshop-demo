@@ -18,7 +18,7 @@ annotate AdminService.Orders with @(
     //
     //	Lists of Orders
     //
-    SelectionFields             : [
+    SelectionFields                         : [
       createdAt,
       createdBy,
       deliverystatus_code,
@@ -27,17 +27,42 @@ annotate AdminService.Orders with @(
       Items.product,
       salesOrganization
     ],
-    PresentationVariant         : {
-      $Type          : 'UI.PresentationVariantType',
+    SelectionPresentationVariant #New       : {
+      $Type               : 'UI.SelectionPresentationVariantType',
+      Text                : 'New',
+      SelectionVariant    : ![@UI.SelectionVariant#New],
+      PresentationVariant : ![@UI.PresentationVariant#Default]
+    },
+    SelectionPresentationVariant #InProcess : {
+      $Type               : 'UI.SelectionPresentationVariantType',
+      Text                : 'InProcess',
+      SelectionVariant    : ![@UI.SelectionVariant#InProcess],
+      PresentationVariant : ![@UI.PresentationVariant#Default]
+    },
+    SelectionPresentationVariant #Completed : {
+      $Type               : 'UI.SelectionPresentationVariantType',
+      Text                : 'Completed',
+      SelectionVariant    : ![@UI.SelectionVariant#Completed],
+      PresentationVariant : ![@UI.PresentationVariant#Default]
+    },
+    SelectionPresentationVariant #Empty     : {
+      $Type               : 'UI.SelectionPresentationVariantType',
+      Text                : 'Empty',
+      SelectionVariant    : ![@UI.SelectionVariant#Empty],
+      PresentationVariant : ![@UI.PresentationVariant#Default]
+    },
+    PresentationVariant #Default            : {
       Text           : 'Sort decending',
-      RequestAtLeast : [orderstatus_code],
+      RequestAtLeast : [
+        orderstatus_code,
+        createdAt
+      ],
       SortOrder      : [{
-        $Type      : 'Common.SortOrderType',
         Property   : createdAt,
         Descending : true,
       }, ],
     },
-    SelectionVariant #New       : {
+    SelectionVariant #New                   : {
       $Type         : 'UI.SelectionVariantType',
       ID            : 'New',
       Text          : 'New',
@@ -67,7 +92,7 @@ annotate AdminService.Orders with @(
       }, ],
     },
     */
-    SelectionVariant #InProcess : {
+    SelectionVariant #InProcess             : {
       $Type         : 'UI.SelectionVariantType',
       ID            : 'InProcess',
       Text          : 'In Process',
@@ -83,7 +108,7 @@ annotate AdminService.Orders with @(
 
       }, ],
     },
-    SelectionVariant #Completed : {
+    SelectionVariant #Completed             : {
       $Type         : 'UI.SelectionVariantType',
       ID            : 'Completed',
       Text          : 'Completed',
@@ -99,7 +124,7 @@ annotate AdminService.Orders with @(
 
       }, ],
     },
-    SelectionVariant #Empty     : {
+    SelectionVariant #Empty                 : {
       $Type         : 'UI.SelectionVariantType',
       ID            : 'Empty',
       Text          : 'Empty',
@@ -115,7 +140,55 @@ annotate AdminService.Orders with @(
 
       }, ],
     },
-    LineItem                    : [
+    SelectionVariant #DeliveryNew           : {
+      $Type         : 'UI.SelectionVariantType',
+      ID            : 'DeliveryNew',
+      Text          : 'Delivery New',
+      SelectOptions : [{
+        $Type        : 'UI.SelectOptionType',
+        PropertyName : deliverystatus_code,
+        Ranges       : [{
+          $Type  : 'UI.SelectionRangeType',
+          Sign   : #I,
+          Option : #EQ,
+          Low    : 'N',
+        }, ],
+
+      }, ],
+    },
+    SelectionVariant #DeliveryInProcess     : {
+      $Type         : 'UI.SelectionVariantType',
+      ID            : 'DeliveryInProcess',
+      Text          : 'Delivery In Process',
+      SelectOptions : [{
+        $Type        : 'UI.SelectOptionType',
+        PropertyName : deliverystatus_code,
+        Ranges       : [{
+          $Type  : 'UI.SelectionRangeType',
+          Sign   : #I,
+          Option : #EQ,
+          Low    : 'I',
+        }, ],
+
+      }, ],
+    },
+    SelectionVariant #DeliveryCompleted     : {
+      $Type         : 'UI.SelectionVariantType',
+      ID            : 'DeliveryCompleted',
+      Text          : 'Delivery Completed',
+      SelectOptions : [{
+        $Type        : 'UI.SelectOptionType',
+        PropertyName : deliverystatus_code,
+        Ranges       : [{
+          $Type  : 'UI.SelectionRangeType',
+          Sign   : #I,
+          Option : #EQ,
+          Low    : 'C',
+        }, ],
+
+      }, ],
+    },
+    LineItem                                : [
       {
         Value : OrderNo,
         Label : 'Order Number'
@@ -130,7 +203,7 @@ annotate AdminService.Orders with @(
       },
       {
         Value : createdAt,
-        Label : 'Date'
+        Label : 'Creation Date'
       },
       {Value : orderstatus_code},
       {
@@ -194,7 +267,7 @@ annotate AdminService.Orders with @(
     //
     //	Order Details
     //
-    HeaderInfo                  : {
+    HeaderInfo                              : {
       TypeName       : 'Order',
       TypeNamePlural : 'Orders',
       Title          : {
@@ -203,7 +276,7 @@ annotate AdminService.Orders with @(
       },
       Description    : {Value : createdBy}
     },
-    Identification              : [ //Is the main field group
+    Identification                          : [ //Is the main field group
       {
         Value : createdBy,
         Label : 'Customer'
@@ -220,7 +293,7 @@ annotate AdminService.Orders with @(
         Inline : true
       },
     ],
-    HeaderFacets                : [
+    HeaderFacets                            : [
       {
         $Type  : 'UI.ReferenceFacet',
         Label  : '{i18n>Created}',
@@ -232,7 +305,7 @@ annotate AdminService.Orders with @(
         Target : '@UI.FieldGroup#Modified'
       },
     ],
-    Facets                      : [
+    Facets                                  : [
       {
         $Type  : 'UI.ReferenceFacet',
         Label  : '{i18n>Details}',
@@ -249,7 +322,7 @@ annotate AdminService.Orders with @(
         Target : 'ShippingAddress/@UI.Identification'
       },
     ],
-    FieldGroup #Details         : {Data : [
+    FieldGroup #Details                     : {Data : [
       {
         Value : total,
         Label : 'Total'
@@ -267,11 +340,11 @@ annotate AdminService.Orders with @(
       },
 
     ]},
-    FieldGroup #Created         : {Data : [
+    FieldGroup #Created                     : {Data : [
       {Value : createdBy},
       {Value : createdAt},
     ]},
-    FieldGroup #Modified        : {Data : [
+    FieldGroup #Modified                    : {Data : [
       {Value : modifiedBy},
       {Value : modifiedAt},
     ]},
