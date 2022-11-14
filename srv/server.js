@@ -146,7 +146,15 @@ cds.on("bootstrap", async (app) => {
 // Swagger / OpenAPI
 if (process.env.NODE_ENV !== "production") {
   const cds_swagger = require("cds-swagger-ui-express");
-  cds.on("bootstrap", (app) => app.use(cds_swagger()));
+  const responseTime = require("response-time");
+  const statusMonitor = require("express-status-monitor");
+  const expressLogMemory = require("./express-log-memory");
+  cds.on("bootstrap", (app) => {
+    app.use(cds_swagger());
+    app.use(responseTime());
+    app.use(statusMonitor());
+    app.use(expressLogMemory());
+  });
 }
 
 module.exports = cds.server; // > delegate to default server.js
