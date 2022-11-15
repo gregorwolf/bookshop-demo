@@ -118,7 +118,7 @@
                                         "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#Empty"
                                     }
                                 ],
-                                "showCounts": false
+                                "showCounts": true
                             },
                             "controlConfiguration": {
                                 "@com.sap.vocabularies.UI.v1.LineItem": {
@@ -134,7 +134,8 @@
                                                 {
                                                     "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#DeliveryCompleted"
                                                 }
-                                            ]
+                                            ],
+                                            "showCounts": true
                                         }
                                     }
                                 }
