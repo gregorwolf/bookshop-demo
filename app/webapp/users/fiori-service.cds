@@ -1,13 +1,30 @@
 using AdminService from '../../../srv/admin-service';
 
 annotate AdminService.Users with @(UI : {
-  SelectionFields         : [username],
 
-  LineItem                : [
+  SelectionPresentationVariant : {
+    $Type               : 'UI.SelectionPresentationVariantType',
+    Text                : 'Default',
+    SelectionVariant    : {
+      $Type : 'UI.SelectionVariantType',
+      Text  : 'Default',
+    },
+    PresentationVariant : {
+      $Type          : 'UI.PresentationVariantType',
+      SortOrder      : [{
+        Property   : username,
+        Descending : true,
+      }, ],
+      Visualizations : ['@UI.LineItem']
+    },
+  },
+  SelectionFields              : [username],
+
+  LineItem                     : [
     {Value : username},
     {Value : employee.email},
   ],
-  HeaderInfo              : {
+  HeaderInfo                   : {
     TypeName       : 'User',
     TypeNamePlural : 'Users',
     Title          : {
@@ -17,9 +34,9 @@ annotate AdminService.Users with @(UI : {
     Description    : {Value : username}
   },
 
-  Identification          : [{Value : username}, ],
+  Identification               : [{Value : username}, ],
 
-  HeaderFacets            : [
+  HeaderFacets                 : [
     {
       $Type  : 'UI.ReferenceFacet',
       Label  : '{i18n>Created}',
@@ -32,7 +49,7 @@ annotate AdminService.Users with @(UI : {
     },
   ],
 
-  Facets                  : [
+  Facets                       : [
     {
       $Type  : 'UI.ReferenceFacet',
       Label  : '{i18n>General}',
@@ -55,20 +72,20 @@ annotate AdminService.Users with @(UI : {
     },
   ],
 
-  FieldGroup #General     : {Data : [
+  FieldGroup #General          : {Data : [
     {Value : username},
     {Value : validFrom},
     {Value : validTo},
   ]},
-  FieldGroup #Created     : {Data : [
+  FieldGroup #Created          : {Data : [
     {Value : createdBy},
     {Value : createdAt},
   ]},
-  FieldGroup #Modified    : {Data : [
+  FieldGroup #Modified         : {Data : [
     {Value : modifiedBy},
     {Value : modifiedAt},
   ]},
-  FieldGroup #Employee    : {Data : [
+  FieldGroup #Employee         : {Data : [
     {
       Value : employee_ID,
       Label : '{i18n>EmployeeID}'
@@ -79,7 +96,7 @@ annotate AdminService.Users with @(UI : {
     {Value : employee.department},
     {Value : employee.email},
   ]},
-  FieldGroup #Responsible : {Data : [
+  FieldGroup #Responsible      : {Data : [
     {Value : responsible_ID},
     {Value : responsible.firstName},
     {Value : responsible.lastName},
