@@ -563,6 +563,13 @@ module.exports = async function (srv) {
   srv.on(["setOrderParameters"], Orders, async (req) => {
     console.log("setOrderParameters - Request Parameters:", req.params[0]);
   });
+  srv.on(["deleteOrder"], Orders, async (req) => {
+    console.log("delete Orders - Request Parameters:", req.params[0]);
+    return DELETE.from(Orders).where({
+      ID: req.params[0].ID,
+    });
+  });
+
   srv.on(
     ["checkConsistency", "checkConsistencyInline"],
     Orders,

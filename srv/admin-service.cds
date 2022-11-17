@@ -80,6 +80,7 @@ service AdminService @(
 
   @odata.draft.enabled
   entity Orders                  as select from db.Orders actions {
+                                      action deleteOrder();
                                       action checkConsistency();
                                                                                                        @(
                                         /*
