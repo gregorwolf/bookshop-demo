@@ -1,0 +1,65 @@
+### Read Orders via OData
+# @name orders
+GET http://localhost:4004/admin/Orders
+  ?$top=1
+  &$expand=Items,ShippingAddress
+Authorization: Basic admin:
+### Fill Variables from Response
+@orderID = {{orders.response.body.$.value[0].ID}}
+###
+GET http://localhost:4004/admin/Orders(ID={{orderID}},IsActiveEntity=true)
+Authorization: Basic admin:
+###
+GET http://localhost:4004/admin/OrderItems
+  ?$filter=parent_ID eq {{orderID}}
+Authorization: Basic admin:
+###
+GET http://localhost:4004/admin/OrderShippingAddress
+  ?$filter=parent_ID eq {{orderID}}
+Authorization: Basic admin:
+###
+DELETE http://localhost:4004/admin/Orders(ID={{orderID}},IsActiveEntity=true)
+Authorization: Basic admin:
+### Delete using an action
+POST http://localhost:4004/admin/Orders(ID={{orderID}},IsActiveEntity=true)/deleteOrder
+Authorization: Basic admin:
+Content-Type: application/json
+
+{}
+### Read Orders via OData V4
+GET http://localhost:4004/admin/Orders
+Authorization: Basic admin:
+
+### Read Orders via OData V2
+GET http://localhost:4004/v2/admin/Orders
+Authorization: Basic admin:
+
+### Read Order Items via OData V2
+GET http://localhost:4004/v2/admin/Orders(ID=guid'7e2f2640-6866-4dcf-8f4d-3027aa831cad',IsActiveEntity=true)/Items
+Authorization: Basic admin:
+
+### Order Consistency Check via OData V4
+POST http://localhost:4004/admin/Orders(ID=64e718c9-ff99-47f1-8ca3-950c850777d4,IsActiveEntity=true)/AdminService.checkConsistencyInline
+Authorization: Basic admin:
+Accept: application/json
+Content-Type: application/json
+x-sap-job-id: 5
+
+{}
+
+### Order Consistency Check via OData V2
+POST http://localhost:4004/v2/admin/Orders_checkConsistencyInline?ID=guid'64e718c9-ff99-47f1-8ca3-950c850777d4'&IsActiveEntity=true
+Authorization: Basic admin:
+Accept: application/json
+Content-Type: application/json
+x-sap-job-id: 5
+
+{}
+
+### Order Consistency Check via OData V2
+POST {{$dotenv url}}/v2/admin/Orders_checkConsistencyInline?ID=guid'64e718c9-ff99-47f1-8ca3-950c850777d4'&IsActiveEntity=true
+Authorization: Bearer {{$dotenv bearer}}
+Accept: application/json
+Content-Type: application/json
+
+{}
