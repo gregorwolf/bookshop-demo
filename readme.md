@@ -10,7 +10,7 @@ If you don't have Docker installed **you can of course develop within you local 
 
 ## Preliminaries
 
-- get [_Node.js_](https://nodejs.org/en/) v14 or higher
+- get [_Node.js_](https://nodejs.org/en/) v16 or higher
 - get [_sqlite_](https://www.sqlite.org/download.html) (Windows only; pre-installed on Mac/Linux)
 - As SAP has deprecated their own NPM registry please remove the setting in your npm config with the following command
 
@@ -31,7 +31,7 @@ npm run setup
 
 ## Run local
 
-If you want to try also the external service calls, then you need to create a _default-env.json_ file in the project root folder and add the following content:
+If you want to try also the external service calls, then you need to create a `default-env.json` file in the project root folder and add the following content:
 
 ```json
 {
@@ -47,18 +47,6 @@ If you want to try also the external service calls, then you need to create a _d
       "url": "https://saperp.example.com",
       "username": "<your-ERP-username>",
       "password": "<your-ERP-password>"
-    },
-    {
-      "name": "job-execution-service",
-      "url": "http://localhost:4005",
-      "username": "job-execution",
-      "password": "Secret2"
-    },
-    {
-      "name": "job-service",
-      "url": "http://localhost:4004",
-      "username": "job",
-      "password": "Secret1"
     }
   ]
 }
@@ -69,7 +57,7 @@ npm run build
 npm start
 ```
 
-If you want to test the used SAP Business Technology Platform - Cloud Foundry services you need also to add the VCAP*SERVICES variable to \_default-env.json*. I.e.:
+If you want to test the used SAP Business Technology Platform - Cloud Foundry services you need also to add the VCAP\*SERVICES variable to `default-env.json`. I.e.:
 
 ```json
 {
@@ -79,25 +67,149 @@ If you want to test the used SAP Business Technology Platform - Cloud Foundry se
 
 ## Run local with SAP HANA Cloud (Hybrid Testing)
 
-When you have deployed the application to BTP Cloud Foundry you can run:
+Before you can run the following commands you need to connect to the BTP Cloud Foundry environment using:
+
+```
+cf login -a <CF-API-Endpoint> -o <CF-Organization> -s <CF-Space> --sso
+```
+
+Then you can create or update an existing HDI using:
+
+```
+npm run deploy:hana
+```
+
+This should write the needed information to `.cdsrc-private.json`. When you have deployed the application already to BTP Cloud Foundry you can run:
 
 ```
 cds bind -2 bookshop-demo-db-service --profile hybrid
 ```
 
-then you can use:
+to reuse the existing HDI container. Then you can use:
 
 ```
 npm run test:hana
 ```
 
-to start the test.
+to start the test or you run
+
+```
+npm run start:hana
+```
+
+to start the app with SAP HANA Cloud as the database.
 
 ## Test
 
 Open these links in your browser:
 
 - <http://localhost:4004/webapp/fiori.html> &ndash; Fiori Launchpad sandbox
+
+## Late-Cut Microservices
+
+The services:
+
+- JobService
+- JobExecutionService
+
+show a concrete example of the [Late-Cut Microservices](https://cap.cloud.sap/docs/guides/providing-services#late-cut-microservices).
+
+To get the two instances talk to each other you need to add the following entries in `default-env.json`:
+
+```json
+{
+  "destinations": [
+    {
+      "existing": "entries"
+    },
+    {
+      "name": "job-service",
+      "url": "http://localhost:4004",
+      "username": "job",
+      "password": "Secret1"
+    },
+    {
+      "name": "job-execution-service",
+      "url": "http://localhost:4005",
+      "username": "job-execution",
+      "password": "Secret2"
+    }
+  ]
+}
+```
+
+### Run local with sqlite
+
+To run this example locally you can run:
+
+```
+run-s "deploy:sqlite:instance:**"
+```
+
+to deploy two separate sqlite databases. You can start the two instances
+
+```
+npm run watchboth
+```
+
+### Run hybrid with SAP HANA Cloud
+
+First you need to create the HDI Containers using:
+
+```
+run-s "deploy:hana:instance:**"
+```
+
+Due to the issue reported at [cds deploy does not support --profile](https://answers.sap.com/questions/13754675/cds-deploy-does-not-support-profile.html) the resulting configuration isn't written to the profiles defined with --profile. So you need to add this entries manually to your `.cdsrc-private.json`:
+
+```json
+{
+  "requires": {
+    "[hybrid-instance1]": {
+      "db": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "<CF-API-Endpoint>",
+          "org": "<CF-Organization>",
+          "space": "<CF-Space>",
+          "instance": "bookshop-demo-db-instance1",
+          "key": "bookshop-demo-db-instance1-key",
+          "resolved": false
+        },
+        "kind": "hana",
+        "vcap": {
+          "name": "db"
+        }
+      }
+    },
+    "[hybrid-instance2]": {
+      "db": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "<CF-API-Endpoint>",
+          "org": "<CF-Organization>",
+          "space": "<CF-Space>",
+          "instance": "bookshop-demo-db-instance2",
+          "key": "bookshop-demo-db-instance2-key",
+          "resolved": false
+        },
+        "kind": "hana",
+        "vcap": {
+          "name": "db"
+        }
+      }
+    },
+```
+
+Then you can start with:
+
+```
+npm run start:hybridboth
+```
+
+### Testing
+
+Use the REST Client scripts in `tests/job.http`.
 
 ## Deploy to SAP Cloud Platform - Cloud Foundry Environment
 
@@ -188,7 +300,7 @@ url="https://<your-trial-account>trial.authentication.eu10.hana.ondemand.com"
 srvurl="https://<your-trial-account>trial-dev-bookshop-demo-srv.cfapps.us10.hana.ondemand.com"
 ```
 
-Then open the REST Client script _tests/api-access.http_ in VS Code and run the script with the comment _Get Access Token (Cloud Foundry)_. It should return a valid access*token. Now execute the requests \_Read Orders* and _Read Books_. You should see a valid result.
+Then open the REST Client script `tests/api-access.http` in VS Code and run the script with the comment `Get Access Token (Cloud Foundry)`. It should return a valid access\*token. Now execute the requests `Read Orders` and `Read Books`. You should see a valid result.
 
 ## Authentication and Authorization
 
@@ -197,8 +309,7 @@ restrict usage of the functions.
 The scopes of the app are defined in `xs-security.json`.
 They are used in the services files `srv/cat-service.cds` and `srv/admin-service.cds`.
 
-_Please have a look at these files for the restrictions cause they can change
-due to the POC character of this project_
+_Please have a look at these files for the restrictions cause they can change due to the POC character of this project_
 
 ### Authentication and Authorization in local environment
 
@@ -206,8 +317,7 @@ If you run the application in a local environment the users you can use are
 defined in the field `.cdsrc`.  
 Currently in this file the following users are defined
 
-_Please have a look at this file to see the current users and roles
-cause they can change due to the POC character of this project_
+_Please have a look at this file to see the current users and roles cause they can change due to the POC character of this project_
 
 | Username    | Scopes                       |
 | ----------- | ---------------------------- |
