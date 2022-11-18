@@ -22,6 +22,7 @@ Content-Type: application/json
 ###
 # @name jobs
 GET http://localhost:4004/job/Jobs
+  ?$expand=status
 Authorization: Basic job:Secret1
 ### Fill Variables from Response
 @jobID = {{jobs.response.body.value[0].ID}}
