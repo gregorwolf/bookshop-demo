@@ -209,6 +209,18 @@
         ]
       },
       "db-ext": {
+        "[hybrid-instance1]": {
+          "model": [
+            "db-hana",
+            "srv-hana"
+          ]
+        },
+        "[hybrid-instance2]": {
+          "model": [
+            "db-hana",
+            "srv-hana"
+          ]
+        },
         "[hybrid]": {
           "model": [
             "db-hana",

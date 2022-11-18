@@ -30,6 +30,13 @@
       "grant-as-authority-to-apps": [
         "jobscheduler"
       ]
+    },
+    {
+      "name": "$XSAPPNAME.job",
+      "description": "job",
+      "grant-as-authority-to-apps": [
+        "$XSAPPNAME(application, bookshop-demo-instance2)"
+      ]
     }
   ],
   "attributes": [

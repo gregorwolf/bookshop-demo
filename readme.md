@@ -211,6 +211,20 @@ npm run start:hybridboth
 
 Use the REST Client scripts in `tests/job.http`.
 
+### Adding XSUAA Authentication
+
+```sh
+cf create-service xsuaa application bookshop-demo-uaa -c xs-security.json
+cf create-service-key bookshop-demo-uaa bookshop-demo-uaa-key
+cf create-service xsuaa application bookshop-demo-instance2-uaa -c xs-security-instance2.json
+cf create-service-key bookshop-demo-instance2-uaa bookshop-demo-instance2-uaa-key
+```
+
+```
+cds bind -2 bookshop-demo-uaa
+cds bind -2 bookshop-demo-instance2-uaa
+```
+
 ## Deploy to SAP Cloud Platform - Cloud Foundry Environment
 
 We're using the mbt build to create a mtar that can be deployed to the SAP CP Cloud Foundry. The cf commandline must be installed and you have to be logged on to the space you want to deploy to. The build ist started with:

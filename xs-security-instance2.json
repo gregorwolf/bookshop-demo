@@ -1,0 +1,16 @@
+{
+  "xsappname": "bookshop-demo-instance2",
+  "tenant-mode": "dedicated",
+  "authorities": [
+    "$ACCEPT_GRANTED_AUTHORITIES"
+  ],
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.job-execution",
+      "description": "job-execution",
+      "grant-as-authority-to-apps": [
+        "$XSAPPNAME(application, bookshop-demo)"
+      ]
+    }
+  ]
+}
