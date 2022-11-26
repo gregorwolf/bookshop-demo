@@ -69,6 +69,9 @@ type XSUAAUsers {
   userName   : String;
 }
 
+@cds.autoexpose
+@UI.Identification : [{Value : email}]
+@cds.odata.valuelist
 entity Employees {
       @Common.Text : {
         $value              : email,
@@ -89,6 +92,6 @@ entity Employees {
       email      : String not null;
 }
 
-type Employee : Association to Employees;
+type Employee       : Association to Employees;
 annotate Employees with @UI.Identification : [{Value : email}, ];
 annotate Employees with @cds.odata.valuelist;

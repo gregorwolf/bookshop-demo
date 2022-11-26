@@ -1,0 +1,44 @@
+### V4
+GET http://localhost:4004/maintainer-group/
+Authorization: Basic admin:
+### 
+GET http://localhost:4004/maintainer-group/Languages
+  ?$expand=texts
+Authorization: Basic admin:
+###
+GET http://localhost:4004/maintainer-group/MaintainerGroup
+Accept-Language: en
+Authorization: Basic admin:
+###
+GET http://localhost:4004/maintainer-group/MaintainerGroup
+Accept-Language: de
+Authorization: Basic admin:
+###
+GET http://localhost:4004/maintainer-group/MaintainerGroup
+  ?$expand=texts
+Accept-Language: de
+Authorization: Basic admin:
+###
+GET http://localhost:4004/maintainer-group/MaintainerGroup
+  ?$expand=maintainers($expand=employee)
+Authorization: Basic admin:
+###
+# @name readMaintainerGroup
+GET http://localhost:4004/maintainer-group/MaintainerGroup
+  ?$expand=maintainers
+  &$filter=description eq 'Europe'
+Accept-Language: de
+Authorization: Basic admin:
+###
+@maintainerGroupID = {{readMaintainerGroup.response.body.value[0].ID}}
+###
+POST http://localhost:4004/maintainer-group/Maintainer
+Content-Type: application/json
+Authorization: Basic admin:
+
+{
+  "employee_ID": "8497c73f-9606-405c-b00f-8fe84da8c7fa",
+  "group_ID": "{{maintainerGroupID}}"
+}
+
+### TODO: Activate Draft

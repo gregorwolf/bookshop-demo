@@ -441,6 +441,18 @@
                   }
                 },
                 {
+                  "id": "MaintainerGroup",
+                  "title": "Maintainer Group",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "MaintainerGroup",
+                    "title": "Maintainer Group",
+                    "info": "Management",
+                    "targetURL": "#MaintainerGroup-manage"
+                  }
+                },
+                {
                   "id": "WorkAssignmentsUI5latest",
                   "title": "Work Assignments",
                   "size": "1×1",
@@ -811,6 +823,20 @@
                 "applicationType": "SAPUI5",
                 "additionalInformation": "SAPUI5.Component=WorkAssignments",
                 "url": "workAssignments/webapp"
+              }
+            },
+            "MaintainerGroup": {
+              "semanticObject": "MaintainerGroup",
+              "action": "manage",
+              "title": "Maintainer Group",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=maintainerGroups",
+                "url": "maintainer-group/webapp"
               }
             },
             "actionUsersUI5latest": {
