@@ -72,26 +72,29 @@ type XSUAAUsers {
 @cds.autoexpose
 @UI.Identification : [{Value : email}]
 @cds.odata.valuelist
-entity Employees {
-      @Common.Text : {
-        $value              : email,
-        @UI.TextArrangement : #TextOnly
-      }
-      @(title : '{i18n>EmployeeID}')
-  key ID         : UUID;
-      @(title : '{i18n>BusinessPartnerFirstName}')
-      firstName  : String;
-      @(title : '{i18n>BusinessPartnerName}')
-      lastName   : String;
-      @(title : '{i18n>BusinessPartnerCompany}')
-      company    : String;
-      @(title : '{i18n>BusinessPartnerDepartment}')
-      department : String;
-      @(title : '{i18n>BusinessPartnerEmailAddress}')
-      @mandatory
-      email      : String not null;
+entity Employees : cuid {
+  @(title : '{i18n>BusinessPartnerFirstName}')
+  firstName  : String;
+  @(title : '{i18n>BusinessPartnerName}')
+  lastName   : String;
+  @(title : '{i18n>BusinessPartnerCompany}')
+  company    : String;
+  @(title : '{i18n>BusinessPartnerDepartment}')
+  department : String;
+  @(title : '{i18n>BusinessPartnerEmailAddress}')
+  @mandatory
+  email      : String not null;
 }
 
 type Employee       : Association to Employees;
 annotate Employees with @UI.Identification : [{Value : email}, ];
 annotate Employees with @cds.odata.valuelist;
+
+annotate Employees with {
+  @Common.Text : {
+    $value              : email,
+    @UI.TextArrangement : #TextOnly
+  }
+  @(title : '{i18n>EmployeeID}')
+  ID;
+};
