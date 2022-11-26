@@ -76,14 +76,6 @@ annotate my.Maintainer with @(UI : {
         },
         {
           $Type             : 'Common.ValueListParameterDisplayOnly',
-          ValueListProperty : 'company'
-        },
-        {
-          $Type             : 'Common.ValueListParameterDisplayOnly',
-          ValueListProperty : 'department'
-        },
-        {
-          $Type             : 'Common.ValueListParameterDisplayOnly',
           ValueListProperty : 'email'
         }
       ]
