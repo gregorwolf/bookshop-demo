@@ -30,7 +30,13 @@ annotate AdminService.Roles with @(UI : {
 
   LineItem                   : [
     {Value : rolename},
-    {Value : description}
+    {Value : description},
+    {
+      $Type  : 'UI.DataFieldForAction',
+      Label  : '{i18n>createDraftRole}',
+      Action : 'AdminService.createDraftRole',
+      Inline : false
+    }
   ],
   HeaderInfo                 : {
     TypeName       : 'Role',
@@ -137,7 +143,7 @@ annotate AdminService.Roles_texts with @(UI : {
     {
       Value : description,
       Label : 'Description'
-    },
+    }
   ]
 });
 

@@ -26,8 +26,15 @@ function getJobscheduler(req) {
 }
 
 module.exports = async function (srv) {
-  const { Role_BusinessObject, Role_User, Orders, Books, Authors, Approval } =
-    srv.entities;
+  const {
+    Role_BusinessObject,
+    Role_User,
+    Orders,
+    Books,
+    Authors,
+    Approval,
+    Roles,
+  } = srv.entities;
   const external = await cds.connect.to("ZPDCDS_SRV");
   const externalFlow = await cds.connect.to("flow");
   const externalCF = await cds.connect.to("CloudFoundryAPI");
@@ -555,11 +562,17 @@ module.exports = async function (srv) {
   // Is triggered when annotated as described in:
   // https://cap.cloud.sap/docs/java/fiori-drafts#fioridraftnew
   // But doesn't navigate to the detail screen
-  /*
-  srv.on(["createDraftRoles"], async (req) => {
-    return req.data;
+  srv.on(["createDraftRole"], async (req) => {
+    console.log("createDraftRole - Request Parameters:", req.data);
+    return INSERT.into(Roles).entries([
+      {
+        ID: cds.utils.uuid(),
+        rolename: req.data.rolename,
+        description: req.data.description,
+      },
+    ]);
+    // return req.data;
   });
-  */
   srv.on(["setOrderParameters"], Orders, async (req) => {
     console.log("setOrderParameters - Request Parameters:", req.params[0]);
   });
