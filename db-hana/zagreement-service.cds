@@ -8,7 +8,7 @@ service ZAgreementService @(path : '/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS') {
       'groupby',
       'filter'
     ],
-    Rollup          : 'None'
+    Rollup          : #None
   }
   @Capabilities.FilterRestrictions     : {NonFilterableProperties : [keyDate]}
   @Capabilities.NavigationRestrictions : {RestrictedProperties : [

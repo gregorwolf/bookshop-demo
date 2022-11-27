@@ -9,7 +9,7 @@ extend service AgreementService with {
       'groupby',
       'filter'
     ],
-    Rollup          : 'None'
+    Rollup          : #None
   }
   @Capabilities.FilterRestrictions     : {NonFilterableProperties : [keyDate]}
   @Capabilities.NavigationRestrictions : {RestrictedProperties : [
