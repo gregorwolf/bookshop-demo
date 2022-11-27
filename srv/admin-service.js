@@ -570,8 +570,12 @@ module.exports = async function (srv) {
     );
     const keyFields = [...insertRes][0];
     delete keyFields.IsActiveEntity;
-    const role = await cds.run(SELECT.from(Roles).where(keyFields));
-    return role[0];
+    const roles = await cds.run(SELECT.from(Roles).where(keyFields));
+    const role = roles[0];
+    // role.HasDraftEntity = true;
+    // role.HasActiveEntity = true;
+    // role.IsActiveEntity = false;
+    return role;
     // return req.data;
   });
   srv.on(["setOrderParameters"], Orders, async (req) => {
