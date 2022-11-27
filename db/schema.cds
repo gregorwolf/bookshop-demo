@@ -121,21 +121,26 @@ entity Publishers : managed {
                on book.publisher = $self;
 };
 
-@Aggregation.ApplySupported.PropertyRestrictions : true
 view BooksAnalytics as
   select from Books {
-    key ID,
-        /*
-            @Analytics.Dimension : true
-            BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.name,
-            @Analytics.Dimension : true
-            BooksAuthorsAssignment_ASSOC_Books.ASSOC_Author.country.code,
-            */
-        @Analytics.Measure   : true
-        @Aggregation.default : #SUM
-        stock,
-        @Analytics.Dimension : true
-        currency
+    ID,
+    @Analytics.Dimension : true
+    @title               : '{i18n>authorID}'
+    author.ID as authorID,
+    // author.name as authorName,
+    author,
+    @Analytics.Dimension : true
+    genre.ID  as genresID,
+    genre,
+    @Analytics.Dimension : true
+    currency,
+    @Aggregation.default : #SUM
+    @Analytics.Measure   : true
+    stock,
+    @Aggregation.default : #SUM
+    @Analytics.Measure   : true
+    @title               : '{i18n>numberOfBooks}'
+    1         as count : Integer,
   };
 
 @Aggregation.ApplySupported.PropertyRestrictions : true

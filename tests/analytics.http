@@ -1,20 +1,28 @@
 ### Read BooksAnalytics
 http://localhost:4004/admin/BooksAnalytics
+  ?$count=true
 Authorization: Basic admin:
 
 ### Read BooksAnalytics
 http://localhost:4004/v2/admin/BooksAnalytics
 Authorization: Basic admin:
 
-### Read BooksAnalytics - 
-http://localhost:4004/admin/BooksAnalytics?$apply=groupby((code),aggregate(stock with sum as TotalStock))
+### Total Stock
+http://localhost:4004/admin/BooksAnalytics
+  ?$count=true
+  &$apply=groupby((authorID),aggregate(stock with sum as TotalStock))
+Authorization: Basic admin:
+
+### Total Books per Author
+http://localhost:4004/admin/BooksAnalytics
+  ?$apply=groupby((authorID),aggregate(count with sum as TotalBooks))
+  &$orderby=TotalBooks desc
 Authorization: Basic admin:
 
 ### Read BooksAnalytics - 
-http://localhost:4004/v2/admin/BooksAnalytics?$apply=groupby((code),aggregate(stock with sum as TotalStock))
+http://localhost:4004/admin/BooksAnalytics
+  ?$apply=groupby((authorID),aggregate(stock%20with%20sum%20as%20TotalStock))
+  &$select=authorID
+  &$skip=0
+  &$top=100
 Authorization: Basic admin:
-
-### Read BooksAnalytics - 
-http://localhost:4004/admin/BooksAnalytics?$apply=groupby((code),aggregate(stock%20with%20sum%20as%20TotalStock))&$select=ID,code&$skip=0&$top=100
-Authorization: Basic admin:
-
