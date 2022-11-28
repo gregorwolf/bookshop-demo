@@ -636,10 +636,16 @@ module.exports = async function (srv) {
           case "d3924131-0870-44bc-b0c1-2ea3808cda5f":
             req.xx.xx;
         }
-        if (msgInfo.numericSeverity === 3) {
-          req.warn(msgInfo);
-        } else {
-          req.info(msgInfo);
+        switch (msgInfo.numericSeverity) {
+          case 3:
+            req.warn(msgInfo);
+            break;
+          case 1:
+            req.notify(msgInfo);
+            break;
+          default:
+            req.info(msgInfo);
+            break;
         }
       }
       return {};
