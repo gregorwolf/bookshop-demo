@@ -554,29 +554,23 @@ module.exports = async function (srv) {
   });
   // Is triggered when annotated as described in:
   // https://cap.cloud.sap/docs/java/fiori-drafts#fioridraftnew
-  // But doesn't navigate to the detail screen
+  // and navigates to the detail screen in edit mode as described in
+  // https://ui5.sap.com/#/topic/8cd6877568094e9daac480f6171dbafd.html
   srv.on(["createDraftRole"], async (req) => {
     const adminService = await cds.connect.to("AdminService");
     const { Roles } = adminService.entities;
     console.log("createDraftRole - Request Parameters:", req.data);
-    const insertRes = await cds.run(
-      INSERT.into(Roles).entries([
+    const role = await srv.send({
+      query: INSERT.into(Roles).entries([
         {
           ID: cds.utils.uuid(),
           rolename: req.data.rolename,
           description: req.data.description,
         },
-      ])
-    );
-    const keyFields = [...insertRes][0];
-    delete keyFields.IsActiveEntity;
-    const roles = await cds.run(SELECT.from(Roles).where(keyFields));
-    const role = roles[0];
-    // role.HasDraftEntity = true;
-    // role.HasActiveEntity = true;
-    // role.IsActiveEntity = false;
+      ]),
+      event: "NEW",
+    });
     return role;
-    // return req.data;
   });
   srv.on(["setOrderParameters"], Orders, async (req) => {
     console.log("setOrderParameters - Request Parameters:", req.params[0]);
