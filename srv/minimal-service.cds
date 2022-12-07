@@ -13,6 +13,7 @@ entity Books : cuid, managed {
   @title  : 'Description'
   @(UI : {MultiLineText, })
   description      : LargeString;
+  stock            : Integer;
   @Common : {
     Text            : author.name,
     TextArrangement : #TextOnly,
@@ -53,6 +54,7 @@ annotate MinimalService.Books with @(UI : {
   LineItem            : [
     {Value : title},
     {Value : shortDescription},
+    {Value : stock},
   ],
   HeaderInfo          : {
     TypeName       : '{i18n>book}',
