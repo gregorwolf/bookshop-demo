@@ -1,6 +1,7 @@
 ### Read BooksAnalytics
 http://localhost:4004/admin/BooksAnalytics
   ?$count=true
+  &$expand=author,currency
 Authorization: Basic admin:
 
 ### Read BooksAnalytics
@@ -15,7 +16,7 @@ Authorization: Basic admin:
 
 ### Total Books per Author
 http://localhost:4004/admin/BooksAnalytics
-  ?$apply=groupby((authorID),aggregate(count with sum as TotalBooks))
+  ?$apply=groupby((author/name,currency/name),aggregate(count with sum as TotalBooks))
   &$orderby=TotalBooks desc
 Authorization: Basic admin:
 
