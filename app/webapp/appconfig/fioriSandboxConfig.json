@@ -584,8 +584,13 @@
               "action": "display",
               "title": "Browse Books",
               "signature": {
-                "parameters": {},
-                "additionalParameters": "allowed"
+                "parameters": {
+                  "ID": {},
+                  "Orders.Items.book.ID": {
+                    "renameTo": "ID"
+                  }
+                },
+                "additionalParameters": "ignored"
               },
               "resolutionResult": {
                 "applicationType": "SAPUI5",
@@ -624,8 +629,13 @@
               "action": "displayUI5latest",
               "title": "Browse Books",
               "signature": {
-                "parameters": {},
-                "additionalParameters": "allowed"
+                "parameters": {
+                  "ID": {},
+                  "Orders.Items.book.ID": {
+                    "renameTo": "ID"
+                  }
+                },
+                "additionalParameters": "ignored"
               },
               "resolutionResult": {
                 "applicationType": "SAPUI5",

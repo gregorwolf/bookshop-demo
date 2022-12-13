@@ -413,8 +413,15 @@ annotate AdminService.OrderItems with @(
     LineItem            : [
       {Value : itemNo, },
       {
-        Value : book_ID,
-        Label : 'Book'
+        $Type          : 'UI.DataFieldWithIntentBasedNavigation',
+        Value          : book_ID,
+        Label          : 'Book',
+        SemanticObject : 'V4Books',
+        Action         : 'displayUI5latest',
+        Mapping        : [{
+          LocalProperty          : book_ID,
+          SemanticObjectProperty : 'ID',
+        }, ]
       },
       //The following entry is only used to have the assoication followed in the read event
       {
