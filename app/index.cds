@@ -87,7 +87,7 @@ annotate my.Authors with @(UI : {
         {
             $Type  : 'UI.ReferenceFacet',
             Label  : '{i18n>Books}',
-            Target : 'books/@UI.LineItem'
+            Target : 'BooksAuthorsAssignment_ASSOC_Authors/@UI.LineItem'
         },
     ],
     FieldGroup #Details         : {Data : [
@@ -236,9 +236,9 @@ annotate my.Books with @(UI : {
             Action         : 'displayUI5latest',
             Mapping        : [{
                 $Type                  : 'Common.SemanticObjectMappingType',
-                LocalProperty          : author.ID,
+                LocalProperty          : author_ID,
                 SemanticObjectProperty : 'ID',
-            }, ],
+            }, ]
         },
         {
             Value             : price,
