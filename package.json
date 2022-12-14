@@ -119,7 +119,8 @@
       "cancellationTimeout": 1
     },
     "features": {
-      "assert_integrity": "db"
+      "assert_integrity": "db",
+      "odata_new_parser": true
     },
     "cdsc": {
       "variableReplacements": {
