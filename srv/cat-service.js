@@ -64,6 +64,14 @@ module.exports = async function (srv) {
     console.log("After READ Handler for Orders");
   });
 
+  srv.before("COMMIT", "Orders", (req) => {
+    console.log("before COMMIT Handler for Orders");
+  });
+
+  srv.after("COMMIT", "Orders", (req) => {
+    console.log("After COMMIT Handler for Orders");
+  });
+
   srv.on("READ", "UserScopes", async (req) => {
     const users = {
       username: req.user.id,
