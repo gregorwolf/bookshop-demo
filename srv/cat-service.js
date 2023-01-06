@@ -26,7 +26,17 @@ module.exports = async function (srv) {
     return books;
   });
 
-  srv.before("*", "*", (req) => metering.beforeHandler(req));
+  srv.before("*", "*", async (req) => {
+    metering.beforeHandler(req);
+    const db = await cds.connect.to("db");
+    db.before("COMMIT", (req) => {
+      console.log("before COMMIT Handler", req);
+    });
+
+    db.after("COMMIT", (req) => {
+      console.log("After COMMIT Handler"), req;
+    });
+  });
 
   srv.before("READ", "Books", async (req) => {
     console.log("before READ Books: " + JSON.stringify(req.data));
@@ -62,14 +72,15 @@ module.exports = async function (srv) {
 
   srv.after("READ", "Orders", (entity, req) => {
     console.log("After READ Handler for Orders");
-  });
-
-  srv.before("COMMIT", "Orders", (req) => {
-    console.log("before COMMIT Handler for Orders");
-  });
-
-  srv.after("COMMIT", "Orders", (req) => {
-    console.log("After COMMIT Handler for Orders");
+    req.on("succeeded", () => {
+      console.log("request succeeded");
+    });
+    req.on("failed", () => {
+      console.log("request failed");
+    });
+    req.on("done", () => {
+      console.log("request succeeded/failed");
+    });
   });
 
   srv.on("READ", "UserScopes", async (req) => {
