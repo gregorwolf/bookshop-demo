@@ -69,6 +69,15 @@
                 }
             }
         },
+        "extends": {
+            "extensions": {
+                "sap.ui.controllerExtensions": {
+                    "sap.fe.templates.ListReport.ListReportController": {
+                        "controllerName": "ordersUI5latest.ext.ListReportExt"
+                    }
+                }
+            }
+        },
         "routing": {
             "routes": [
                 {
