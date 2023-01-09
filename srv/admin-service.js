@@ -536,8 +536,28 @@ module.exports = async function (srv) {
     req.data.read = true;
     return req.data;
   });
-
+  srv.before("PATCH", "Roles", (req) => {
+    if (req?.data?.description) {
+      if (req.data.description.length <= 2) {
+        req.warn({
+          code: "description_TO_SHORT",
+          message: "description must have more than 2 characters",
+          target: "description",
+        });
+      }
+    }
+  });
   srv.before("CREATE", "Roles", (req) => {
+    if (req?.data?.description) {
+      if (req.data.description.length <= 2) {
+        req.error({
+          code: "description_TO_SHORT",
+          message: "description must have more than 2 characters",
+          target: "description",
+          status: 412,
+        });
+      }
+    }
     return validateValidityCreate(req);
   });
 
