@@ -10,14 +10,15 @@ type BusinessObject : String(255);
 
 entity Roles : cuid, managed {
   @mandatory
-  rolename        : localized String(255) not null @(title : '{i18n>RoleName}', );
-  description     : localized String not null      @(title : '{i18n>Description}', );
-  read            : Boolean                        @(title : '{i18n>Read}', );
-  authcreate      : Boolean                        @(title : '{i18n>Create}', );
-  authupdate      : Boolean                        @(title : '{i18n>Update}', );
-  approve         : Boolean                        @(title : '{i18n>Approve}', );
-  validFrom       : Timestamp                      @(title : '{i18n>validFrom}', );
-  validTo         : Timestamp                      @(title : '{i18n>validTo}', );
+  @assert.format: 'r_[a-z]'
+  rolename        : localized String(255) not null @(title: '{i18n>RoleName}', );
+  description     : localized String not null      @(title: '{i18n>Description}', );
+  read            : Boolean                        @(title: '{i18n>Read}', );
+  authcreate      : Boolean                        @(title: '{i18n>Create}', );
+  authupdate      : Boolean                        @(title: '{i18n>Update}', );
+  approve         : Boolean                        @(title: '{i18n>Approve}', );
+  validFrom       : Timestamp                      @(title: '{i18n>validFrom}', );
+  validTo         : Timestamp                      @(title: '{i18n>validTo}', );
   BusinessObjects : Composition of many Role_BusinessObject
                       on BusinessObjects.parent = $self;
   Users           : Composition of many Role_User
@@ -41,16 +42,17 @@ entity Role_BusinessObject : cuid {
 entity Role_User : cuid {
   parent    : Association to Roles;
   user      : User;
-  @(title : '{i18n>requester', )
+
+  @(title: '{i18n>requester', )
   requester : Employee;
 };
 
 entity Users : managed {
-  key username    : String    @(title : '{i18n>Username}', );
+  key username    : String    @(title: '{i18n>Username}', );
       employee    : Employee;
       responsible : Employee;
-      validFrom   : Timestamp @(title : '{i18n>validFrom}', );
-      validTo     : Timestamp @(title : '{i18n>validTo}', );
+      validFrom   : Timestamp @(title: '{i18n>validFrom}', );
+      validTo     : Timestamp @(title: '{i18n>validTo}', );
       address     : Composition of Address
                       on address.parent = $self;
       roles       : Association to many Role_User
@@ -59,8 +61,8 @@ entity Users : managed {
 
 entity Address : cuid, managed {
   parent : Association to Users;
-  street : String(60) @(title : '{i18n>Street}', );
-  city   : String(60) @(title : '{i18n>City}', );
+  street : String(60) @(title: '{i18n>Street}', );
+  city   : String(60) @(title: '{i18n>City}', );
 };
 
 type XSUAAUsers {
@@ -70,31 +72,35 @@ type XSUAAUsers {
 }
 
 @cds.autoexpose
-@UI.Identification : [{Value : email}]
+@UI.Identification: [{Value: email}]
 @cds.odata.valuelist
 entity Employees : cuid {
-  @(title : '{i18n>BusinessPartnerFirstName}')
+  @(title: '{i18n>BusinessPartnerFirstName}')
   firstName  : String;
-  @(title : '{i18n>BusinessPartnerName}')
+
+  @(title: '{i18n>BusinessPartnerName}')
   lastName   : String;
-  @(title : '{i18n>BusinessPartnerCompany}')
+
+  @(title: '{i18n>BusinessPartnerCompany}')
   company    : String;
-  @(title : '{i18n>BusinessPartnerDepartment}')
+
+  @(title: '{i18n>BusinessPartnerDepartment}')
   department : String;
-  @(title : '{i18n>BusinessPartnerEmailAddress}')
+
+  @(title: '{i18n>BusinessPartnerEmailAddress}')
   @mandatory
   email      : String not null;
 }
 
 type Employee       : Association to Employees;
-annotate Employees with @UI.Identification : [{Value : email}, ];
+annotate Employees with @UI.Identification: [{Value: email}, ];
 annotate Employees with @cds.odata.valuelist;
 
 annotate Employees with {
-  @Common.Text : {
-    $value              : email,
-    @UI.TextArrangement : #TextOnly
+  @Common.Text: {
+    $value             : email,
+    @UI.TextArrangement: #TextOnly
   }
-  @(title : '{i18n>EmployeeID}')
+  @(title: '{i18n>EmployeeID}')
   ID;
 };
