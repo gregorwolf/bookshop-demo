@@ -536,6 +536,7 @@ module.exports = async function (srv) {
     req.data.read = true;
     return req.data;
   });
+  /*
   srv.before("PATCH", "Roles", (req) => {
     if (req?.data?.description) {
       if (req.data.description.length <= 2) {
@@ -547,6 +548,7 @@ module.exports = async function (srv) {
       }
     }
   });
+  */
   srv.before("CREATE", "Roles", (req) => {
     if (req?.data?.description) {
       if (req.data.description.length <= 2) {
@@ -554,7 +556,6 @@ module.exports = async function (srv) {
           code: "description_TO_SHORT",
           message: "description must have more than 2 characters",
           target: "description",
-          status: 412,
         });
       }
     }
