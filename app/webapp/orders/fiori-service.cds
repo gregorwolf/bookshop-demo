@@ -304,11 +304,36 @@ annotate AdminService.Orders with @(UI: {
       Target: '@UI.FieldGroup#Modified'
     },
   ],
+
   Facets                                 : [
     {
-      $Type : 'UI.ReferenceFacet',
+      $Type : 'UI.CollectionFacet',
       Label : '{i18n>Details}',
-      Target: '@UI.FieldGroup#Details'
+      Facets: [
+        {
+          $Type : 'UI.ReferenceFacet',
+          Label : '{i18n>Details}',
+          Target: '@UI.FieldGroup#Details',
+        },
+        {
+          $Type : 'UI.ReferenceFacet',
+          Label : '{i18n>orderstatus}',
+          Target: '@UI.FieldGroup#orderstatus',
+        },
+        {
+          $Type        : 'UI.ReferenceFacet',
+          Label        : '{i18n>deliverystatus}',
+          Target       : '@UI.FieldGroup#deliverystatus',
+          ![@UI.Hidden]: {$edmJson: {$If: [
+            {$Eq: [
+              {$Path: 'orderstatus_code'},
+              'N'
+            ]},
+            true,
+            false
+          ]}, }
+        },
+      ]
     },
     {
       $Type : 'UI.ReferenceFacet',
@@ -321,6 +346,7 @@ annotate AdminService.Orders with @(UI: {
       Target: 'ShippingAddress/@UI.Identification'
     },
   ],
+
   FieldGroup #Details                    : {Data: [
     {
       Value: total,
@@ -346,6 +372,20 @@ annotate AdminService.Orders with @(UI: {
   FieldGroup #Modified                   : {Data: [
     {Value: modifiedBy},
     {Value: modifiedAt},
+  ]},
+  FieldGroup #orderstatus                : {Data: [
+    {Value: orderstatus_code},
+    {
+      Value: orderstatus.name,
+      Label: '{i18n>Orderstatus}'
+    },
+  ]},
+  FieldGroup #deliverystatus             : {Data: [
+    {Value: deliverystatus_code},
+    {
+      Value: deliverystatus.name,
+      Label: '{i18n>Deliverystatus}'
+    },
   ]},
 },
 /*
