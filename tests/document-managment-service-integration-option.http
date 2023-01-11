@@ -73,7 +73,52 @@ cmisAction=createFolder
 &propertyValue[0]=cmis:folder
 &propertyId[1]=cmis:name
 &propertyValue[1]={{folder}}
-###
+
+### Upload Document to folder
+POST {{$dotenv dms_api}}/browser/{{dms_repo}}/root/{{folder}}
+Content-Type: multipart/form-data;boundary="WebKitFormBoundary7MA4YWxkTrZu0gW"
+Authorization: Bearer {{access_token}}
+
+--WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="cmisaction"
+
+createDocument
+--WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="propertyId[0]"
+
+cmis:objectTypeId
+--WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="propertyValue[0]"
+
+cmis:document
+--WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="propertyId[1]"
+
+cmis:name
+--WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="propertyValue[1]"
+Content-Type: text/plain;charset=UTF-8
+
+Testö.png
+--WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename*= UTF-8''Testö.png
+Content-Type: image/png
+
+< ./Test.png
+--WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### read document
+GET {{$dotenv dms_api}}/browser/{{dms_repo}}/root/{{folder}}/Testö.png?cmisselector=content
+Authorization: Bearer {{access_token}}
+
+### read folder
 GET {{$dotenv dms_api}}/browser/{{dms_repo}}/root/{{folder}}
 Accept: application/json
 Authorization: Bearer {{access_token}}
+
+### delete document
+POST {{$dotenv dms_api}}/browser/{{dms_repo}}/root/{{folder}}/Testö.png
+Authorization: Bearer {{access_token}}
+Content-Type: application/x-www-form-urlencoded
+
+cmisAction=delete
