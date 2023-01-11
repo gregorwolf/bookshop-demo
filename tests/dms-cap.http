@@ -10,9 +10,10 @@ Accept: application/json
 ###
 @folder=folder01
 #@folder=folder02
+@objectId=2GC3QQ42vEjGVIebr3nG58Ea1PUwPLFXbmQZgizVZos
 
 ###
-GET http://localhost:4004/document-management/getChildren(folderName='{{folder}}')
+GET http://localhost:4004/document-management/getChildren(folderName='{{objectId}}')
 Accept: application/json
 
 ###
@@ -33,7 +34,7 @@ Content-Type: application/json
 { 
   "ID": "da07ae51-d0d3-41e7-a737-2555a213e5a9",
   "mediatype": "image/png",
-  "filename": "Test.png"
+  "filename": "Testö.png"
 }
 
 ### Upload Binary PNG
