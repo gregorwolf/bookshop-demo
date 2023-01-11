@@ -94,15 +94,19 @@ if (services.sdm) {
       }
     });
     srv.on("getChildren", async (req) => {
+      if (!req.data.folderName) {
+        return req.error("No folderName provided");
+      }
       // Implementation using CmisJS
       const repositories = await session
         .setToken(await getToken())
         .loadRepositories();
       try {
-        const children = await session.getChildren("root");
+        const children = await session.getChildren(req.data.folderName);
         return children;
       } catch (error) {
         console.log(error.message);
+        console.log(error.response.url);
       }
     });
   });
