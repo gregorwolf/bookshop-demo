@@ -168,11 +168,31 @@ if (services.sdm) {
           form.append("propertyId[0]", "cmis:objectTypeId");
           form.append("propertyValue[0]", "cmis:document");
           form.append("propertyId[1]", "cmis:name");
-          form.append("propertyValue[1]", document.filename);
-          form.append("file", document.content, {
-            filename: document.filename,
-            contentType: "image/png",
-          });
+          const CRLF = "\r\n";
+          const options = {
+            header:
+              "--" +
+              form.getBoundary() +
+              CRLF +
+              `Content-Disposition: form-data; name="propertyValue[1]"` +
+              CRLF +
+              `Content-Type: text/plain;charset=UTF-8` +
+              CRLF +
+              CRLF,
+          };
+          form.append("propertyValue[1]", filename, options);
+          const fileOptions = {
+            header:
+              "--" +
+              form.getBoundary() +
+              CRLF +
+              `Content-Disposition: form-data; name="file"; filename*=UTF-8''${filename}` +
+              CRLF +
+              `Content-Type: ${contentType}` +
+              CRLF +
+              CRLF,
+          };
+          form.append("file", contentBuffer, fileOptions);
           const data = form.getBuffer();
           const headers = form.getHeaders();
           // CAP
@@ -223,13 +243,16 @@ if (services.sdm) {
             ID: documentId,
           })
         );
+        const url = `/folder01/${encodeURIComponent(
+          document.filename
+        )}?cmisselector=content`;
         const getResponse = await executeHttpRequest(
           getDestination(
             req,
             cds.env.requires.CMISdocumentRepository.credentials.destination
           ),
           {
-            url: `/folder01/${document.filename}?cmisselector=content`,
+            url,
             method: "GET",
             responseType: "arraybuffer",
           }
