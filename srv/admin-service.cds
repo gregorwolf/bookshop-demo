@@ -3,8 +3,8 @@ using {ZPDCDS_SRV as external} from './external/ZPDCDS_SRV';
 using {sap} from '@sap/cds/common';
 
 service AdminService @(
-  impl     : './admin-service.js',
-  requires : [
+  impl    : './admin-service.js',
+  requires: [
     'admin',
     'booksadmin',
     'jobscheduler'
@@ -17,20 +17,20 @@ service AdminService @(
   };
 
   entity Books @(
-    restrict     : [
+    restrict    : [
       {
-        grant : 'READ',
-        to    : 'admin'
+        grant: 'READ',
+        to   : 'admin'
       },
       {
-        grant : '*',
-        to    : 'booksadmin'
+        grant: '*',
+        to   : 'booksadmin'
       },
     ],
-    Capabilities : {
-      InsertRestrictions : {Permissions : [{Scopes : [{Scope : 'booksadmin'}]}]},
-      UpdateRestrictions : {Updatable : true},
-      DeleteRestrictions : {Deletable : true}
+    Capabilities: {
+      InsertRestrictions: {Permissions: [{Scopes: [{Scope: 'booksadmin'}]}]},
+      UpdateRestrictions: {Updatable: true},
+      DeleteRestrictions: {Deletable: true}
     },
   )                              as projection on db.Books;
 
@@ -55,25 +55,25 @@ service AdminService @(
   };
 
   // view BooksAnalytics as select from db.BooksAnalytics;
-  entity Authors @(restrict : [{
-    grant : 'READ',
-    to    : 'admin'
+  entity Authors @(restrict: [{
+    grant: 'READ',
+    to   : 'admin'
   }, ])                          as projection on db.Authors {
     *
   };
 
-  @(restrict : [
+  @(restrict: [
     {
-      grant : [
+      grant: [
         'READ',
         'CREATE',
         'UPDATE'
       ],
-      to    : 'admin'
+      to   : 'admin'
     },
     {
-      grant : 'DELETE',
-      where : `parent_ID <> ''`
+      grant: 'DELETE',
+      where: `parent_ID <> ''`
     }
   ])
   entity Genres                  as projection on db.Genres;
@@ -89,16 +89,16 @@ service AdminService @(
                                           'N'
                                         ]}},
                                         */
-                                        Core.OperationAvailable             : {$edmJson : {$In : [
-                                          {$Path : 'in/orderstatus_code'},
+                                        Core.OperationAvailable            : {$edmJson: {$In: [
+                                          {$Path: 'in/orderstatus_code'},
                                           'N',
                                           'I'
                                         ]}},
-                                        Common.SideEffects.TargetProperties : ['in/orderstatus_code'],
+                                        Common.SideEffects.TargetProperties: ['in/orderstatus_code'],
                                       )
                                       action checkConsistencyInline();
-                                      action setOrderParameters(vipOrder : db.Orders:vipOrder not null @UI.ParameterDefaultValue : false,
-                                             employeeOrder : db.Orders:employeeOrder not null @UI.ParameterDefaultValue : true );
+                                      action setOrderParameters(vipOrder : db.Orders:vipOrder not null @UI.ParameterDefaultValue: false,
+                                             employeeOrder : db.Orders:employeeOrder not null @UI.ParameterDefaultValue: true );
                                       action NewAction(OrderNo : db.Orders:OrderNo not null, CustomerOrderNo : db.Orders:CustomerOrderNo);
                                     };
 
@@ -121,12 +121,14 @@ service AdminService @(
 
   @odata.draft.enabled
   // @Common.DraftRoot.NewAction : 'AdminService.createDraftRole'
-  entity Roles @(restrict : [{
-    grant : ['*'],
-    to    : 'roleadmin'
+  entity Roles @(restrict: [{
+    grant: ['*'],
+    to   : 'roleadmin'
   }, ])                          as projection on db.Roles actions {
     @cds.odata.bindingparameter.collection
     action createDraftRole(rolename : String not null, description : String not null) returns Roles;
+    action countUp()                                                                  returns Roles;
+    action countDown()                                                                returns Roles;
   };
 
   //------- auto-exposed --------
@@ -134,22 +136,22 @@ service AdminService @(
   entity Role_User               as projection on db.Role_User;
 
   //> these shall be removed but this would break the Fiori UI
-  entity BusinessObjects @(restrict : [{
-    grant : ['READ'],
-    to    : 'admin'
+  entity BusinessObjects @(restrict: [{
+    grant: ['READ'],
+    to   : 'admin'
   }, ])                          as projection on db.BusinessObjects;
 
-  @Common.SideEffects #responsibleChange : {
-    SourceProperties : [responsible_ID],
-    TargetEntities   : [responsible]
+  @Common.SideEffects #responsibleChange: {
+    SourceProperties: [responsible_ID],
+    TargetEntities  : [responsible]
   }
-  @Common.SideEffects #employeeChange    : {
-    SourceProperties : [employee_ID],
-    TargetEntities   : [employee]
+  @Common.SideEffects #employeeChange   : {
+    SourceProperties: [employee_ID],
+    TargetEntities  : [employee]
   }
-  entity Users @(restrict : [{
-    grant : ['*'],
-    to    : 'admin'
+  entity Users @(restrict: [{
+    grant: ['*'],
+    to   : 'admin'
   }, ])                          as projection on db.Users;
 
   @readonly
@@ -177,22 +179,22 @@ service AdminService @(
   @readonly
   entity MeteringAnalytics       as projection on db.MeteringAnalytics;
 
-  function readCdsEnv()                                                                                                                     returns String;
+  function readCdsEnv()                                                                                                                    returns String;
   // XSUAA API
 
-  function readUsers()                                                                                                                      returns array of db.XSUAAUsers;
-  function readUsersSDK()                                                                                                                   returns array of db.XSUAAUsers;
-  action   updateUsers()                                                                                                                    returns Boolean;
+  function readUsers()                                                                                                                     returns array of db.XSUAAUsers;
+  function readUsersSDK()                                                                                                                  returns array of db.XSUAAUsers;
+  action   updateUsers()                                                                                                                   returns Boolean;
   // job-scheduler
-  function readJobs()                                                                                                                       returns array of db.Jobs;
-  function readJobDetails(jobId : Integer)                                                                                                  returns db.Jobs;
-  function readJobSchedules(jobId : Integer)                                                                                                returns array of db.Schedules;
-  function readJobActionLogs(jobId : Integer)                                                                                               returns String; // array of db.ActionLogs;
-  function readJobRunLogs(jobId : Integer, scheduleId : String, page_size : Integer, offset : Integer)                                      returns array of db.RunLogs;
-  action   createJob(url : String, cron : String)                                                                                           returns Integer;
-  action   updateJob(jobId : Integer, active : Boolean)                                                                                     returns String;
-  action   deleteJob(jobId : Integer)                                                                                                       returns String;
-  action   sendmail(sender : String, to : String, @UI.ParameterDefaultValue : 'Test' subject : String, body : String, destination : String) returns String;
+  function readJobs()                                                                                                                      returns array of db.Jobs;
+  function readJobDetails(jobId : Integer)                                                                                                 returns db.Jobs;
+  function readJobSchedules(jobId : Integer)                                                                                               returns array of db.Schedules;
+  function readJobActionLogs(jobId : Integer)                                                                                              returns String; // array of db.ActionLogs;
+  function readJobRunLogs(jobId : Integer, scheduleId : String, page_size : Integer, offset : Integer)                                     returns array of db.RunLogs;
+  action   createJob(url : String, cron : String)                                                                                          returns Integer;
+  action   updateJob(jobId : Integer, active : Boolean)                                                                                    returns String;
+  action   deleteJob(jobId : Integer)                                                                                                      returns String;
+  action   sendmail(sender : String, to : String, @UI.ParameterDefaultValue: 'Test' subject : String, body : String, destination : String) returns String;
   // Cloud Foundry
-  function readOrganizations()                                                                                                              returns array of db.Organization;
+  function readOrganizations()                                                                                                             returns array of db.Organization;
 }

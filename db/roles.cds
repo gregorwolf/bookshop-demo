@@ -13,6 +13,7 @@ entity Roles : cuid, managed {
   @assert.format: 'r_[a-z]'
   rolename        : localized String(255) not null @(title: '{i18n>RoleName}', );
   description     : localized String not null      @(title: '{i18n>Description}', );
+  count           : Integer                        @(title: '{i18n>count}', );
   read            : Boolean                        @(title: '{i18n>Read}', );
   authcreate      : Boolean                        @(title: '{i18n>Create}', );
   authupdate      : Boolean                        @(title: '{i18n>Update}', );

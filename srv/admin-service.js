@@ -26,8 +26,15 @@ function getJobscheduler(req) {
 }
 
 module.exports = async function (srv) {
-  const { Role_BusinessObject, Role_User, Orders, Books, Authors, Approval } =
-    srv.entities;
+  const {
+    Role_BusinessObject,
+    Role_User,
+    Orders,
+    Books,
+    Authors,
+    Approval,
+    Roles,
+  } = srv.entities;
   const external = await cds.connect.to("ZPDCDS_SRV");
   const externalFlow = await cds.connect.to("flow");
   const externalCF = await cds.connect.to("CloudFoundryAPI");
@@ -592,6 +599,18 @@ module.exports = async function (srv) {
       event: "NEW",
     });
     return role;
+  });
+  srv.on(["countUp"], Roles, async (req) => {
+    const update = await cds
+      .tx(req)
+      .run(UPDATE(Roles).where({ ID: req.params[0].ID }).set("count +=", 1));
+    return cds.tx(req).run(SELECT.one(Roles).where({ ID: req.params[0].ID }));
+  });
+  srv.on(["countDown"], Roles, async (req) => {
+    const update = await cds
+      .tx(req)
+      .run(UPDATE(Roles).where({ ID: req.params[0].ID }).set("count -=", 1));
+    return cds.tx(req).run(SELECT.one(Roles).where({ ID: req.params[0].ID }));
   });
   srv.on(["setOrderParameters"], Orders, async (req) => {
     console.log("setOrderParameters - Request Parameters:", req.params[0]);

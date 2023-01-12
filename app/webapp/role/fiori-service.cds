@@ -17,78 +17,91 @@ annotate AdminService.Roles with {
 
 annotate AdminService.Roles with {
   ID @(
-    sap.value.list : 'fixed-values',
-    Common         : {
-      Text            : rolename,
-      TextArrangement : #TextOnly
+    sap.value.list: 'fixed-values',
+    Common        : {
+      Text           : rolename,
+      TextArrangement: #TextOnly
     }
   )
 };
 
-annotate AdminService.Roles with @(UI : {
-  SelectionFields            : [rolename],
+annotate AdminService.Roles with @(UI: {
+  SelectionFields           : [rolename],
 
-  LineItem                   : [
-    {Value : rolename},
-    {Value : description},
+  LineItem                  : [
+    {Value: rolename},
+    {Value: description},
+    {Value: count},
     {
-      $Type  : 'UI.DataFieldForAction',
-      Label  : '{i18n>createDraftRole}',
-      Action : 'AdminService.createDraftRole',
-      Inline : false
+      $Type : 'UI.DataFieldForAction',
+      Label : '{i18n>countUp}',
+      Action: 'AdminService.countUp',
+      Inline: false
+    },
+    {
+      $Type : 'UI.DataFieldForAction',
+      Label : '{i18n>countDown}',
+      Action: 'AdminService.countDown',
+      Inline: false
+    },
+    {
+      $Type : 'UI.DataFieldForAction',
+      Label : '{i18n>createDraftRole}',
+      Action: 'AdminService.createDraftRole',
+      Inline: false
     }
   ],
-  HeaderInfo                 : {
-    TypeName       : 'Role',
-    TypeNamePlural : 'Roles',
-    Title          : {
-      Label : 'Role name ', //A label is possible but it is not considered on the ObjectPage yet
-      Value : rolename
+  HeaderInfo                : {
+    TypeName      : 'Role',
+    TypeNamePlural: 'Roles',
+    Title         : {
+      Label: 'Role name ', //A label is possible but it is not considered on the ObjectPage yet
+      Value: rolename
     },
-    Description    : {Value : description}
+    Description   : {Value: description}
   },
 
-  Identification             : [ //Is the main field group
-  {Value : rolename}, ],
+  Identification            : [ //Is the main field group
+  {Value: rolename}, ],
 
-  HeaderFacets               : [
+  HeaderFacets              : [
     {
-      $Type  : 'UI.ReferenceFacet',
-      Label  : '{i18n>Created}',
-      Target : '@UI.FieldGroup#Created'
+      $Type : 'UI.ReferenceFacet',
+      Label : '{i18n>Created}',
+      Target: '@UI.FieldGroup#Created'
     },
     {
-      $Type  : 'UI.ReferenceFacet',
-      Label  : '{i18n>Modified}',
-      Target : '@UI.FieldGroup#Modified'
+      $Type : 'UI.ReferenceFacet',
+      Label : '{i18n>Modified}',
+      Target: '@UI.FieldGroup#Modified'
     },
   ],
 
-  Facets                     : [
+  Facets                    : [
     {
-      $Type  : 'UI.ReferenceFacet',
-      Label  : 'Description',
-      Target : '@UI.FieldGroup#Description'
+      $Type : 'UI.ReferenceFacet',
+      Label : 'Description',
+      Target: '@UI.FieldGroup#Description'
     },
     {
-      $Type  : 'UI.ReferenceFacet',
-      Label  : 'Translations',
-      Target : 'texts/@UI.LineItem'
+      $Type : 'UI.ReferenceFacet',
+      Label : 'Translations',
+      Target: 'texts/@UI.LineItem'
     },
     {
-      $Type  : 'UI.ReferenceFacet',
-      Label  : 'Authorizations',
-      Target : '@UI.FieldGroup#Authorizations'
+      $Type : 'UI.ReferenceFacet',
+      Label : 'Authorizations',
+      Target: '@UI.FieldGroup#Authorizations'
     },
     {
-      $Type  : 'UI.ReferenceFacet',
-      Label  : 'Validity',
-      Target : '@UI.FieldGroup#Validity'
+      $Type : 'UI.ReferenceFacet',
+      Label : 'Validity',
+      Target: '@UI.FieldGroup#Validity'
     },
     {
-      $Type  : 'UI.ReferenceFacet',
-      Label  : 'Assigned Business Objects',
-      Target : 'BusinessObjects/@UI.LineItem'
+      $Type : 'UI.ReferenceFacet',
+      Label : 'Assigned Business Objects',
+      Target: 'BusinessObjects/@UI.LineItem'
     },
   /*
   {
@@ -99,162 +112,162 @@ annotate AdminService.Roles with @(UI : {
   */
   ],
 
-  FieldGroup #Created        : {Data : [
-    {Value : createdBy},
-    {Value : createdAt},
+  FieldGroup #Created       : {Data: [
+    {Value: createdBy},
+    {Value: createdAt},
   ]},
-  FieldGroup #Modified       : {Data : [
-    {Value : modifiedBy},
-    {Value : modifiedAt},
+  FieldGroup #Modified      : {Data: [
+    {Value: modifiedBy},
+    {Value: modifiedAt},
   ]},
-  FieldGroup #Description    : {Data : [
-    {Value : rolename},
-    {Value : description},
+  FieldGroup #Description   : {Data: [
+    {Value: rolename},
+    {Value: description},
   ]},
-  FieldGroup #Authorizations : {Data : [
-    {Value : read},
-    {Value : authcreate},
-    {Value : authupdate},
-    {Value : approve},
+  FieldGroup #Authorizations: {Data: [
+    {Value: read},
+    {Value: authcreate},
+    {Value: authupdate},
+    {Value: approve},
   ]},
-  FieldGroup #Validity       : {Data : [
-    {Value : validFrom},
-    {Value : validTo},
+  FieldGroup #Validity      : {Data: [
+    {Value: validFrom},
+    {Value: validTo},
   ]},
 }
 
 );
 
-annotate AdminService.Roles_texts with @(UI : {
-  Identification  : [{Value : rolename}],
-  SelectionFields : [
+annotate AdminService.Roles_texts with @(UI: {
+  Identification : [{Value: rolename}],
+  SelectionFields: [
     locale,
     rolename
   ],
-  LineItem        : [
+  LineItem       : [
     {
-      Value : locale,
-      Label : 'Locale'
+      Value: locale,
+      Label: 'Locale'
     },
     {
-      Value : rolename,
-      Label : 'Title'
+      Value: rolename,
+      Label: 'Title'
     },
     {
-      Value : description,
-      Label : 'Description'
+      Value: description,
+      Label: 'Description'
     }
   ]
 });
 
 // Add Value Help for Locales
 annotate AdminService.Roles_texts {
-  locale @ValueList : {
-    entity : 'Languages',
-    type   : #fixed
+  locale @ValueList: {
+    entity: 'Languages',
+    type  : #fixed
   }
 }
 
 annotate AdminService.Role_BusinessObject with {
-  ID             @UI.Hidden : true;
+  ID             @UI.Hidden: true;
   BusinessObject @(
-    Common           : {FieldControl : #Mandatory},
-    ValueList.entity : 'BusinessObjects',
+    Common          : {FieldControl: #Mandatory},
+    ValueList.entity: 'BusinessObjects',
   );
 };
 
 annotate AdminService.Role_BusinessObject with @(
-  UI.SelectionFields : [BusinessObject],
+  UI.SelectionFields: [BusinessObject],
 
-  UI.LineItem        : [
-                        // {$Type: 'UI.DataField', Value: parent_ID },
-                       {Value : BusinessObject}, ],
+  UI.LineItem       : [
+                       // {$Type: 'UI.DataField', Value: parent_ID },
+                      {Value: BusinessObject}, ],
 
-  UI.HeaderInfo      : {
-    Title          : {Value : BusinessObject},
-    TypeName       : 'Business Object',
-    TypeNamePlural : 'Business Objects'
+  UI.HeaderInfo     : {
+    Title         : {Value: BusinessObject},
+    TypeName      : 'Business Object',
+    TypeNamePlural: 'Business Objects'
   }
 );
 
 annotate AdminService.Role_User with {
-  ID   @UI.Hidden : true;
+  ID   @UI.Hidden: true;
   user @(
-    Common           : {FieldControl : #Mandatory},
-    ValueList.entity : 'Users',
+    Common          : {FieldControl: #Mandatory},
+    ValueList.entity: 'Users',
   );
 };
 
-annotate AdminService.Role_User with @(UI : {
-  SelectionFields : [user],
+annotate AdminService.Role_User with @(UI: {
+  SelectionFields: [user],
 
-  LineItem        : [
-    {Value : parent.rolename},
-    {Value : user},
-    {Value : requester_ID},
+  LineItem       : [
+    {Value: parent.rolename},
+    {Value: user},
+    {Value: requester_ID},
   ],
 
-  HeaderInfo      : {
-    Title          : {Value : user},
-    TypeName       : 'User',
-    TypeNamePlural : 'Users'
+  HeaderInfo     : {
+    Title         : {Value: user},
+    TypeName      : 'User',
+    TypeNamePlural: 'Users'
   }
 }) {
-  requester @Common : {
-    Text                     : requester.email,
-    TextArrangement          : #TextOnly,
-    ValueListWithFixedValues : false,
+  requester @Common: {
+    Text                    : requester.email,
+    TextArrangement         : #TextOnly,
+    ValueListWithFixedValues: false,
   };
 };
 
 annotate AdminService.User with {
-  username @Common.FieldControl : #ReadOnly;
+  username @Common.FieldControl: #ReadOnly;
 };
 
 annotate AdminService.User with @(
-  UI.SelectionFields  : [username],
+  UI.SelectionFields : [username],
 
-  UI.LineItem         : [
+  UI.LineItem        : [
     {
-      $Type : 'UI.DataField',
-      Value : username
+      $Type: 'UI.DataField',
+      Value: username
     },
     {
-      $Type : 'UI.DataField',
-      Value : address.street
+      $Type: 'UI.DataField',
+      Value: address.street
     },
     {
-      $Type : 'UI.DataField',
-      Value : address.city
+      $Type: 'UI.DataField',
+      Value: address.city
     }
   ],
 
-  UI.HeaderInfo       : {Title : {Value : username}},
+  UI.HeaderInfo      : {Title: {Value: username}},
 
-  UI.Facets           : [{
-    $Type  : 'UI.CollectionFacet',
-    Label  : 'User',
-    Facets : [{
-      $Type  : 'UI.ReferenceFacet',
-      Label  : 'User',
-      Target : '@UI.FieldGroup#User'
+  UI.Facets          : [{
+    $Type : 'UI.CollectionFacet',
+    Label : 'User',
+    Facets: [{
+      $Type : 'UI.ReferenceFacet',
+      Label : 'User',
+      Target: '@UI.FieldGroup#User'
     }, ]
   }],
 
-  UI.FieldGroup #User : {
-    Label : 'User',
-    Data  : [
+  UI.FieldGroup #User: {
+    Label: 'User',
+    Data : [
       {
-        $Type : 'UI.DataField',
-        Value : username
+        $Type: 'UI.DataField',
+        Value: username
       },
       {
-        $Type : 'UI.DataField',
-        Value : address.street
+        $Type: 'UI.DataField',
+        Value: address.street
       },
       {
-        $Type : 'UI.DataField',
-        Value : address.city
+        $Type: 'UI.DataField',
+        Value: address.city
       }
     ]
   },
