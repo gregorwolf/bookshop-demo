@@ -227,11 +227,12 @@ entity A_SalesOrganizationText {
 }
 
 entity Orders : cuid, managed {
-  OrderNo           : String     @title: 'Order Number'; //> readable key
+  OrderNo           : String     @title                          : 'Order Number'; //> readable key
   salesOrganization : SalesOrganizationCode not null;
-  CustomerOrderNo   : String(80) @title: 'Customer Order Number';
+  CustomerOrderNo   : String(80) @title                          : 'Customer Order Number';
   Items             : Composition of many OrderItems
-                        on Items.parent = $self;
+                        on Items.parent = $self
+                                 @title                          : 'Items';
   ShippingAddress   : Composition of one OrderShippingAddress
                         on ShippingAddress.parent = $self;
 
@@ -239,14 +240,14 @@ entity Orders : cuid, managed {
   total             : DecimalFloat;
   totalTax          : Decimal(15, 2);
   totalWithTax      : Double;
-  vipOrder          : Boolean    @title: '{i18n>vipOrder}';
-  employeeOrder     : Boolean    @title: '{i18n>employeeOrder}';
+  vipOrder          : Boolean    @title                          : '{i18n>vipOrder}';
+  employeeOrder     : Boolean    @title                          : '{i18n>employeeOrder}';
 
   @Common.ValueListWithFixedValues: true
   orderstatus       : Orderstatus;
 
-  @Common.ValueListWithFixedValues: true
-  deliverystatus    : Deliverystatus;
+  deliverystatus    : Deliverystatus
+                                 @Common.ValueListWithFixedValues: true;
   currency          : Currency;
 }
 
