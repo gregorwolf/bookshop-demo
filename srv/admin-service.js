@@ -550,7 +550,7 @@ module.exports = async function (srv) {
         req.warn({
           code: "description_TO_SHORT",
           message: "description must have more than 2 characters",
-          target: "description",
+          target: "in/description",
         });
       }
     }
@@ -562,7 +562,7 @@ module.exports = async function (srv) {
         req.error({
           code: "description_TO_SHORT",
           message: "description must have more than 2 characters",
-          target: "description",
+          target: "in/description",
         });
       }
     }
