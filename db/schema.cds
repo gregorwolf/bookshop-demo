@@ -227,27 +227,21 @@ entity A_SalesOrganizationText {
 }
 
 entity Orders : cuid, managed {
-  OrderNo           : String     @title                          : 'Order Number'; //> readable key
+  OrderNo           : String         @title                          : 'Order Number'; //> readable key
   salesOrganization : SalesOrganizationCode not null;
-  CustomerOrderNo   : String(80) @title                          : 'Customer Order Number';
+  CustomerOrderNo   : String(80)     @title                          : 'Customer Order Number';
   Items             : Composition of many OrderItems
                         on Items.parent = $self
-                                 @title                          : 'Items';
+                                     @title                          : 'Items';
   ShippingAddress   : Composition of one OrderShippingAddress
                         on ShippingAddress.parent = $self;
-
-  @readonly
-  total             : DecimalFloat;
+  total             : DecimalFloat   @readonly;
   totalTax          : Decimal(15, 2);
   totalWithTax      : Double;
-  vipOrder          : Boolean    @title                          : '{i18n>vipOrder}';
-  employeeOrder     : Boolean    @title                          : '{i18n>employeeOrder}';
-
-  @Common.ValueListWithFixedValues: true
-  orderstatus       : Orderstatus;
-
-  deliverystatus    : Deliverystatus
-                                 @Common.ValueListWithFixedValues: true;
+  vipOrder          : Boolean        @title                          : '{i18n>vipOrder}';
+  employeeOrder     : Boolean        @title                          : '{i18n>employeeOrder}';
+  orderstatus       : Orderstatus    @Common.ValueListWithFixedValues: true;
+  deliverystatus    : Deliverystatus @Common.ValueListWithFixedValues: true;
   currency          : Currency;
 }
 
@@ -257,9 +251,7 @@ entity Orders : cuid, managed {
 ]}
 entity OrderItems : cuid {
   parent    : Association to Orders not null;
-
-  @(title: 'itemNo', )
-  itemNo    : Integer not null;
+  itemNo    : Integer not null @(title: 'itemNo', );
   book      : Association to Books;
   product   : SEPMRA_I_Product_E:Product;
   amount    : Integer;
