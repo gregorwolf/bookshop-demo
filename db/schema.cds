@@ -240,7 +240,19 @@ entity Orders : cuid, managed {
   totalWithTax      : Double;
   vipOrder          : Boolean        @title                          : '{i18n>vipOrder}';
   employeeOrder     : Boolean        @title                          : '{i18n>employeeOrder}';
-  orderstatus       : Orderstatus    @Common.ValueListWithFixedValues: true;
+
+  @Common.ValueListWithFixedValues: true
+  @Common.Text                    : orderstatus.descr
+  @Common.TextArrangement         : #TextOnly
+  @UI.Hidden                      : {$edmJson: {$If: [
+    {$Eq: [
+      {$Path: 'orderstatus_code'},
+      'N'
+    ]},
+    false,
+    true
+  ]}}
+  orderstatus       : Orderstatus;
   deliverystatus    : Deliverystatus @Common.ValueListWithFixedValues: true;
   currency          : Currency;
 }
