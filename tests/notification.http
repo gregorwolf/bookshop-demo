@@ -2,7 +2,7 @@
 # Documentation:
 # https://help.sap.com/viewer/8c8e1958338140699bd4811b37b82ece/Cloud/en-US/d5429a2a5d9a4425a461aa06c4ee84e4.html
 # @name requestNotificationsAccessToken
-POST {{$dotenv tokenendpoint}}/oauth/token
+POST {{$dotenv notification_tokenendpoint}}/oauth/token
 Authorization: Basic {{$dotenv notification_clientid}}:{{$dotenv notification_clientsecret}}
 Content-Type: application/x-www-form-urlencoded
 
@@ -68,10 +68,19 @@ X-CSRF-Token: {{csrf}}
     ]
 }
 
-### 
+### Returns "Not implemented"
+GET {{$dotenv notification_uri}}/v2/NotificationType.svc/NotificationTypes/$count
+Authorization: Bearer {{notifications_access_token}}
+Accept: application/json
+###
 # @name readNotificationTypes
 GET {{$dotenv notification_uri}}/v2/NotificationType.svc/NotificationTypes
     ?$expand=Templates,Actions
+Authorization: Bearer {{notifications_access_token}}
+Accept: application/json
+###
+GET {{$dotenv notification_uri}}/v2/NotificationType.svc/NotificationTypes
+    ?$filter=NotificationTypeKey eq '{{$dotenv notification_TypeKey}}'
 Authorization: Bearer {{notifications_access_token}}
 Accept: application/json
 ###
@@ -117,7 +126,7 @@ X-CSRF-Token: {{notificationCSRF}}
     "NotificationTypeVersion": "0.3",
     "NavigationTargetAction": "DisplayMyInbox",
     "NavigationTargetObject": "WorkflowTask",
-    "Priority": "High",
+    "Priority": "{{$dotenv notification_priority}}",
     "ActorId": "NAIRA",
     "ActorType": "",
     "ActorDisplayText": "",
