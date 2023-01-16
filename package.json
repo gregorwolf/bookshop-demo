@@ -16,7 +16,6 @@
     "@sap-cloud-sdk/http-client": "^2.10.0",
     "@sap-cloud-sdk/util": "^2.10.0",
     "@sap/cds": "^6.4.0",
-    "@sap/cds-dk": "6.4.0",
     "@sap/cds-odata-v2-adapter-proxy": "^1.9.15",
     "@sap/jobs-client": "^1.7.42",
     "@sap/logging": "^6.1.3",
@@ -37,6 +36,7 @@
   },
   "devDependencies": {
     "@openui5/ts-types": "^1.108.0",
+    "@sap/cds-dk": "6.4.0",
     "@sap/cds-lsp": "^6.3.0",
     "@sap/graph-toolkit": "^3.0.8",
     "artillery": "^1.5.6",
