@@ -1,0 +1,51 @@
+# @name getTranslationHubAccessToken
+POST {{$dotenv translationHub_tokenendpoint}}/oauth/token
+Authorization: Basic {{$dotenv translationHub_clientid}}:{{$dotenv translationHub_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+
+### Fill Variables from Response
+@translationHubs_access_token = {{getTranslationHubAccessToken.response.body.$.access_token}}
+###
+GET {{$dotenv documenttranslation_url}}/api/v1/languages
+Authorization: Bearer {{translationHubs_access_token}}
+Accept: application/json
+
+###
+POST {{$dotenv documenttranslation_url}}/api/v1/translation
+    ?sourceLanguage=en-US
+    &targetLanguage=de-DE
+    &strictMode=false
+Authorization: Bearer {{translationHubs_access_token}}
+Accept: application/octet-stream
+Content-Type: multipart/form-data;boundary="WebKitFormBoundary7MA4YWxkTrZu0gW"
+
+--WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename*= UTF-8''CombinePowerAutomate.docx
+Content-Type: application/vnd.openxmlformats
+
+< ./CombinePowerAutomate.docx
+--WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+# PGRpdj5FbmNvZGUgdGhlIDxzdHJvbmc+YnVzaW5lc3M8L3N0cm9uZz4gZGF0YSBhcyA8ZW0+SlNPTjwvZW0+PC9kaXY+Cg==
+# contains
+# <div>Encode the <strong>business</strong> data as <em>JSON</em></div>
+POST {{$dotenv documenttranslation_url}}/api/v1/translation
+    ?sourceLanguage=en-US
+    &targetLanguage=de-DE
+    &strictMode=false
+Authorization: Bearer {{translationHubs_access_token}}
+Accept: application/octet-stream
+Content-Type: application/json
+
+{
+  "sourceLanguage": "en-US",
+  "targetLanguage": "de-DE",
+  "contentType": "text/html",
+  "encoding": "base64",
+  "strictMode": false,
+  "data": "PGRpdj5FbmNvZGUgdGhlIDxzdHJvbmc+YnVzaW5lc3M8L3N0cm9uZz4gZGF0YSBhcyA8ZW0+SlNPTjwvZW0+PC9kaXY+Cg=="
+}
