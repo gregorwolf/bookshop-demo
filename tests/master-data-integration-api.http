@@ -1,0 +1,107 @@
+#
+# This example is based on the Example provided by Tobias Nett via the Discussion
+# https://open.sap.com/courses/mdi1/question/41537067-a319-425a-9b49-69c234e08ba0
+# in the OpenSAP Course on SAP Master Data Integration
+# https://open.sap.com/courses/mdi1/
+#
+# DISCLAIMER – API TERMS OF USE
+#
+# Use of the SAP Master Data Integration service APIs is governed by these terms
+# of use.
+#
+# The SAP Master Data Integration service APIs must only be used for the
+# following use cases:
+#
+# 1. The SAP Master Data Integration service APIs may be used for integrations
+#    of the following SAP applications:
+#
+#   - SAP S/4HANA
+#   - SAP S/4HANA Cloud
+#   - SAP SuccessFactors
+#   - SAP Fieldglass
+#   - SAP Concur
+#
+# 2. Administrators and developers may use the SAP Master Data Integration
+#    service APIs for testing and error resolution scenarios.
+#
+# 3. The SAP Master Data Integration service APIs may be used by SAP Integration
+#    Suite for integration of any non-SAP application.
+#
+# Use of SAP Master Data Integration service APIs is not permitted for the
+# direct integration (integration that does not use SAP Integration Suite) of
+# any non-SAP application.
+
+### =======================================================
+# Configuration
+# ---------------------------------------------------------
+# Maintain the variables:
+# mdi_clientid, mdi_clientsecret, mdi_uaaurl, mdi_url
+# in the .env file
+### =======================================================
+# Access Token
+# ---------------------------------------------------------
+# See Week 1, Unit 4 (https://open.sap.com/courses/mdi1/items/4W6Z5Xe4TSpNwlWnoRCv6A)
+# ---------------------------------------------------------
+# @name getMDIAccessToken
+POST {{$dotenv mdi_uaaurl}}/oauth/token
+Authorization: Basic {{$dotenv mdi_clientid}}:{{$dotenv mdi_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{$dotenv mdi_clientid}}
+&grant_type=client_credentials
+### Fill Variables from Response
+@access_token = {{getMDIAccessToken.response.body.$.access_token}}
+
+### =======================================================
+# Poll for change events
+# ---------------------------------------------------------
+
+GET {{$dotenv mdi_url}}/v1/odm/3.0.0/sap.odm.finance.costobject.CostCenter/events
+Authorization: Bearer {{$dotenv access_token}}
+
+### =======================================================
+# Extract the nextLink
+# ---------------------------------------------------------
+
+@next = 
+
+### =======================================================
+# Send a change request to create a record​
+# ---------------------------------------------------------
+
+POST {{$dotenv mdi_url}}/v1/odm/3.0.0/sap.odm.finance.costobject.CostCenter/requests
+Authorization: Bearer {{$dotenv access_token}}
+Content-Type: application/json
+
+{
+  "operation": "create",
+  "changeToken": "{{$guid}}",
+  "instance": {
+    "id": "69b4bb07-bdcb-4a39-b5c9-ba36f7e15a85",
+    "displayName": "Yawning Yorkie CC"
+  }
+}
+
+### =======================================================
+# Poll for change events again (via nextLink)
+# ---------------------------------------------------------
+
+GET {{$dotenv mdi_url}}{{$dotenv next}}
+Authorization: Bearer {{$dotenv access_token}}
+
+### =======================================================
+# Delete the dummy record
+# ---------------------------------------------------------
+
+POST {{$dotenv mdi_url}}/v1/odm/3.0.0/sap.odm.finance.costobject.CostCenter/requests
+Authorization: Bearer {{$dotenv access_token}}
+Content-Type: application/json
+
+{
+  "operation": "delete",
+  "changeToken": "{{$guid}}",
+  "previousVersionId": "e7e90951-8596-40da-8d4a-609fbc183998",
+  "instance": {
+   "id": "69b4bb07-bdcb-4a39-b5c9-ba36f7e15a85"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "businessSystemId": "howling-wolf",
+  "writePermissions": [
+    {
+      "entityType": "sap.odm.finance.costobject.CostCenter"
+    },
+    {
+      "entityType": "sap.odm.procurement.orgunit.PurchasingOrganization"
+    }
+  ],
+  "application": "ariba"
+}
