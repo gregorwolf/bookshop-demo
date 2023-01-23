@@ -270,6 +270,17 @@ entity Orders : cuid, managed {
   currency          : Currency;
 }
 
+view OrdersView as
+  select from Orders {
+    *
+  };
+
+annotate OrdersView with {
+  // @Core.Immutable
+  OrderNo;
+};
+
+
 @assert.unique: {item: [
   parent,
   itemNo

@@ -75,7 +75,7 @@ service CatalogService @(impl: './cat-service.js') {
       grant: 'READ',
       where: 'createdBy = $user AND $user.level > 2'
     },
-  ])                            as projection on db.Orders {
+  ])                            as projection on db.OrdersView {
     ID,
     // @Core.Immutable
     OrderNo,
