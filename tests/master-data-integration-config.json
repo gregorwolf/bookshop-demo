@@ -8,5 +8,5 @@
       "entityType": "sap.odm.procurement.orgunit.PurchasingOrganization"
     }
   ],
-  "application": "ariba"
+  "application": "s4"
 }

@@ -50,15 +50,14 @@ Content-Type: application/x-www-form-urlencoded
 client_id={{$dotenv mdi_clientid}}
 &grant_type=client_credentials
 ### Fill Variables from Response
-@access_token = {{getMDIAccessToken.response.body.$.access_token}}
+@access_token={{getMDIAccessToken.response.body.$.access_token}}
 
 ### =======================================================
 # Poll for change events
 # ---------------------------------------------------------
-
 GET {{$dotenv mdi_url}}/v1/odm/3.0.0/sap.odm.finance.costobject.CostCenter/events
 Authorization: Bearer {{$dotenv access_token}}
-
+Accept: application/json
 ### =======================================================
 # Extract the nextLink
 # ---------------------------------------------------------
@@ -68,7 +67,6 @@ Authorization: Bearer {{$dotenv access_token}}
 ### =======================================================
 # Send a change request to create a record​
 # ---------------------------------------------------------
-
 POST {{$dotenv mdi_url}}/v1/odm/3.0.0/sap.odm.finance.costobject.CostCenter/requests
 Authorization: Bearer {{$dotenv access_token}}
 Content-Type: application/json
@@ -85,14 +83,12 @@ Content-Type: application/json
 ### =======================================================
 # Poll for change events again (via nextLink)
 # ---------------------------------------------------------
-
 GET {{$dotenv mdi_url}}{{$dotenv next}}
 Authorization: Bearer {{$dotenv access_token}}
 
 ### =======================================================
 # Delete the dummy record
 # ---------------------------------------------------------
-
 POST {{$dotenv mdi_url}}/v1/odm/3.0.0/sap.odm.finance.costobject.CostCenter/requests
 Authorization: Bearer {{$dotenv access_token}}
 Content-Type: application/json
