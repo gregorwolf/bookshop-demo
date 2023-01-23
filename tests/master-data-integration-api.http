@@ -55,20 +55,19 @@ client_id={{$dotenv mdi_clientid}}
 ### =======================================================
 # Poll for change events
 # ---------------------------------------------------------
+# @name getChangeEvents
 GET {{$dotenv mdi_url}}/v1/odm/3.0.0/sap.odm.finance.costobject.CostCenter/events
-Authorization: Bearer {{$dotenv access_token}}
+Authorization: Bearer {{access_token}}
 Accept: application/json
 ### =======================================================
 # Extract the nextLink
 # ---------------------------------------------------------
-
-@next = 
-
+@next={{getChangeEvents.response.body.$.['`@odata.deltaLink']}}
 ### =======================================================
 # Send a change request to create a record​
 # ---------------------------------------------------------
 POST {{$dotenv mdi_url}}/v1/odm/3.0.0/sap.odm.finance.costobject.CostCenter/requests
-Authorization: Bearer {{$dotenv access_token}}
+Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
 {
@@ -83,20 +82,20 @@ Content-Type: application/json
 ### =======================================================
 # Poll for change events again (via nextLink)
 # ---------------------------------------------------------
-GET {{$dotenv mdi_url}}{{$dotenv next}}
-Authorization: Bearer {{$dotenv access_token}}
+GET {{$dotenv mdi_url}}{{next}}
+Authorization: Bearer {{access_token}}
 
 ### =======================================================
 # Delete the dummy record
 # ---------------------------------------------------------
 POST {{$dotenv mdi_url}}/v1/odm/3.0.0/sap.odm.finance.costobject.CostCenter/requests
-Authorization: Bearer {{$dotenv access_token}}
+Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
 {
   "operation": "delete",
   "changeToken": "{{$guid}}",
-  "previousVersionId": "e7e90951-8596-40da-8d4a-609fbc183998",
+  "previousVersionId": "cd5e16fb-f0a0-47be-9cda-364f31f43e6d",
   "instance": {
    "id": "69b4bb07-bdcb-4a39-b5c9-ba36f7e15a85"
   }
