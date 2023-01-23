@@ -53,7 +53,8 @@
     "supertest": "^6.3.1"
   },
   "scripts": {
-    "setup": "run-s deploy:sqlite:** build start",
+    "setup": "run-s deploy:sqlite:bookshop build start",
+    "setup:all": "run-s deploy:sqlite:** build start",
     "update": "run-p update:**",
     "update:root": "npm update",
     "update:app": "cd app && npm update",
