@@ -100,6 +100,7 @@
             "settings": {
               "entitySet": "Roles",
               "variantManagement": "Page",
+              "initialLoad": true,
               "navigation": {
                 "Roles": {
                   "detail": {
