@@ -226,20 +226,27 @@ entity A_SalesOrganizationText {
       SalesOrganizationName : String;
 }
 
+@assert.unique: {OrderNo: [OrderNo], }
 entity Orders : cuid, managed {
-  OrderNo           : String         @title                          : 'Order Number'; //> readable key
+  @Core.Immutable
+  OrderNo           : String     @title: 'Order Number'; //> readable key
+
+  @Core.Immutable
   salesOrganization : SalesOrganizationCode not null;
-  CustomerOrderNo   : String(80)     @title                          : 'Customer Order Number';
+  CustomerOrderNo   : String(80) @title: 'Customer Order Number';
   Items             : Composition of many OrderItems
                         on Items.parent = $self
-                                     @title                          : 'Items';
+                                 @title: 'Items';
   ShippingAddress   : Composition of one OrderShippingAddress
                         on ShippingAddress.parent = $self;
-  total             : DecimalFloat   @readonly;
+
+  @readonly
+  total             : DecimalFloat;
+
   totalTax          : Decimal(15, 2);
   totalWithTax      : Double;
-  vipOrder          : Boolean        @title                          : '{i18n>vipOrder}';
-  employeeOrder     : Boolean        @title                          : '{i18n>employeeOrder}';
+  vipOrder          : Boolean    @title: '{i18n>vipOrder}';
+  employeeOrder     : Boolean    @title: '{i18n>employeeOrder}';
 
   @Common.ValueListWithFixedValues: true
   @Common.Text                    : orderstatus.descr
@@ -252,8 +259,14 @@ entity Orders : cuid, managed {
     false,
     true
   ]}}
+  @readonly
   orderstatus       : Orderstatus;
-  deliverystatus    : Deliverystatus @Common.ValueListWithFixedValues: true;
+
+  @readonly
+  @Common.ValueListWithFixedValues: true
+  deliverystatus    : Deliverystatus;
+
+  @Core.Immutable
   currency          : Currency;
 }
 
