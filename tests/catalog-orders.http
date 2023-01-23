@@ -35,7 +35,26 @@ Authorization: Basic bob:
 Content-Type: application/json
 
 {
-    "book_ID": 201
+    "book_ID": 201,
+    "itemNo": 10
+}
+### Try to update the Order
+# Returns Forbidden as the OrderNo is annotated with @Core.Immutable
+PATCH http://localhost:4004/catalog/Orders({{orderID}})
+Authorization: Basic bob:
+Content-Type: application/json
+
+{
+    "OrderNo": "12"
+}
+
+### Returns Forbidden as the OrderNo is annotated with @Core.Immutable
+PATCH http://localhost:4004/catalog/Orders({{orderID}})
+Authorization: Basic bob:
+Content-Type: application/json
+
+{
+    "CustomerOrderNo": "4711"
 }
 
 ### Read Order as john
