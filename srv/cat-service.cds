@@ -1,8 +1,8 @@
 using my.bookshop as db from '../db/schema';
 using {ZPDCDS_SRV as external} from './external/ZPDCDS_SRV.csn';
 
-@cds.query.limit : 100
-service CatalogService @(impl : './cat-service.js') {
+@cds.query.limit: 100
+service CatalogService @(impl: './cat-service.js') {
   type DynamicAppLauncher {
     icon         : String;
     info         : String;
@@ -17,15 +17,15 @@ service CatalogService @(impl : './cat-service.js') {
     title        : String;
   }
 
-  @Capabilities.SearchRestrictions.Searchable : true
+  @Capabilities.SearchRestrictions.Searchable: true
   @readonly
-  entity Books @(Capabilities : {
-    InsertRestrictions : {
-      Insertable  : true,
-      Permissions : [{Scopes : [{Scope : 'admin'}]}]
+  entity Books @(Capabilities: {
+    InsertRestrictions: {
+      Insertable : true,
+      Permissions: [{Scopes: [{Scope: 'admin'}]}]
     },
-    UpdateRestrictions : {Updatable : true},
-    DeleteRestrictions : {Deletable : true}
+    UpdateRestrictions: {Updatable: true},
+    DeleteRestrictions: {Deletable: true}
   }, )                          as projection on db.Books {
     *,
     virtual 'Value from Srv' as VirtualFromSrv : String,
@@ -63,23 +63,41 @@ service CatalogService @(impl : './cat-service.js') {
   };
 
   // @readonly entity BusinessPartner as projection on bp.BusinessPartner;
-  entity Orders @(restrict : [
+  entity Orders @(restrict: [
     {
-      grant : 'CREATE',
-      to    : 'authenticated-user'
+      grant: [
+        'CREATE',
+        'UPDATE'
+      ],
+      to   : 'authenticated-user'
     },
     {
-      grant : 'READ',
-      where : 'createdBy = $user AND $user.level > 2'
+      grant: 'READ',
+      where: 'createdBy = $user AND $user.level > 2'
     },
-  ])                            as projection on db.Orders;
+  ])                            as projection on db.Orders {
+    ID,
+    // @Core.Immutable
+    OrderNo,
+    salesOrganization,
+    CustomerOrderNo,
+    Items,
+    ShippingAddress,
+    total,
+    totalTax,
+    totalWithTax,
+    orderstatus,
+    deliverystatus,
+    currency,
+    createdBy,
+  };
 
-  @requires_ : 'authenticated-user'
+  @requires_: 'authenticated-user'
   action   submitOrder(book : Books:ID, amount : Integer);
 
   action   multipleOrders(numberOfOrders : Integer);
 
-  @requires : 'authenticated-user'
+  @requires: 'authenticated-user'
   @odata.singleton
   @cds.persistency.skip
   @readonly
