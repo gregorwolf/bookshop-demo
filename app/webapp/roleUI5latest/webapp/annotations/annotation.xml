@@ -8,17 +8,17 @@
     <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Communication.xml">
         <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication" />
     </edmx:Reference>
-    <edmx:Reference Uri="AdminService/$metadata">
+    <edmx:Reference Uri="/admin/$metadata">
         <edmx:Include Namespace="AdminService" />
     </edmx:Reference>
     <edmx:DataServices>
         <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
-            <Annotations Target="AdminService.Roles/countUp">
+            <Annotations Target="AdminService.countUp(AdminService.Roles)">
                 <Annotation Term="Common.SideEffects">
                     <Record Type="Common.SideEffectsType">
                         <PropertyValue Property="TargetEntities">
                             <Collection>
-                                <NavigationPropertyPath>AdminService.Roles</NavigationPropertyPath>
+                                <NavigationPropertyPath>/AdminService.EntityContainer/Roles</NavigationPropertyPath>
                             </Collection>
                         </PropertyValue>
                     </Record>
@@ -29,7 +29,7 @@
                     <Record Type="Common.SideEffectsType">
                         <PropertyValue Property="TargetEntities">
                             <Collection>
-                                <NavigationPropertyPath>AdminService.Roles</NavigationPropertyPath>
+                                <NavigationPropertyPath>/AdminService.Container/Roles</NavigationPropertyPath>
                             </Collection>
                         </PropertyValue>
                     </Record>
