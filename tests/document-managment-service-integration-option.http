@@ -28,15 +28,15 @@ Authorization: Bearer {{access_token}}
 
 {
   "repository": {
-    "displayName": "First Test Repository",
-    "description": "Description for the First Test Repository",
+    "displayName": "{{$dotenv dms_displayName}}",
+    "description": "{{$dotenv dms_displayName}}",
     "repositoryType": "internal",
     "isVersionEnabled": "true",
     "isVirusScanEnabled": "true",
     "skipVirusScanForLargeFile": "false",
     "hashAlgorithms": "SHA-256",
-    "isContentBridgeEnabled": "true",
-    "externalId": "test"
+    "isContentBridgeEnabled": "false",
+    "externalId": "{{$dotenv dms_externalId}}"
   }
 }
 
