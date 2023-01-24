@@ -1,4 +1,4 @@
-@folder=folder01
+@folder=folder02
 ### Get Access Token (Cloud Foundry using Client Credentials)
 # @name requestAccessToken
 POST {{$dotenv dms_auth_url}}/oauth/token
@@ -62,6 +62,12 @@ Authorization: Bearer {{access_token}}
 GET {{$dotenv dms_api}}/browser/{{$dotenv dms_externalId}}/root
 Accept: application/json
 Authorization: Bearer {{access_token}}
+
+### does the folder already exist?
+GET {{$dotenv dms_api}}/browser/{{$dotenv dms_externalId}}/root/{{folder}}
+Accept: application/json
+Authorization: Bearer {{access_token}}
+
 ### create folder
 POST {{$dotenv dms_api}}/browser/{{$dotenv dms_externalId}}/root/
 Content-Type: application/x-www-form-urlencoded
