@@ -24,12 +24,12 @@
                     </Record>
                 </Annotation>
             </Annotations>
-            <Annotations Target="AdminService.Roles/countDown">
+            <Annotations Target="AdminService.countDown(AdminService.Roles)">
                 <Annotation Term="Common.SideEffects">
                     <Record Type="Common.SideEffectsType">
                         <PropertyValue Property="TargetEntities">
                             <Collection>
-                                <NavigationPropertyPath>/AdminService.Container/Roles</NavigationPropertyPath>
+                                <NavigationPropertyPath>/AdminService.EntityContainer/Roles</NavigationPropertyPath>
                             </Collection>
                         </PropertyValue>
                     </Record>
