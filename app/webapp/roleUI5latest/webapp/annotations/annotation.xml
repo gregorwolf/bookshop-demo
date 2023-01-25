@@ -13,28 +13,6 @@
     </edmx:Reference>
     <edmx:DataServices>
         <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
-            <Annotations Target="AdminService.countUp(AdminService.Roles)">
-                <Annotation Term="Common.SideEffects">
-                    <Record Type="Common.SideEffectsType">
-                        <PropertyValue Property="TargetEntities">
-                            <Collection>
-                                <NavigationPropertyPath>/AdminService.EntityContainer/Roles</NavigationPropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="AdminService.countDown(AdminService.Roles)">
-                <Annotation Term="Common.SideEffects">
-                    <Record Type="Common.SideEffectsType">
-                        <PropertyValue Property="TargetEntities">
-                            <Collection>
-                                <NavigationPropertyPath>/AdminService.EntityContainer/Roles</NavigationPropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-            </Annotations>
         </Schema>
     </edmx:DataServices>
 </edmx:Edmx>
