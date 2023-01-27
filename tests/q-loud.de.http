@@ -1,3 +1,4 @@
+### Documentation at http://api.q-loud.de/#
 ###
 # @name getSession
 POST https://api.cospace.de/api/session
