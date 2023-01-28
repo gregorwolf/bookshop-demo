@@ -148,12 +148,12 @@ if (process.env.NODE_ENV !== "production") {
   const cds_swagger = require("cds-swagger-ui-express");
   const responseTime = require("response-time");
   const statusMonitor = require("express-status-monitor");
-  const expressLogMemory = require("./express-log-memory");
+  // const expressLogMemory = require("./express-log-memory");
   cds.on("bootstrap", (app) => {
     app.use(cds_swagger());
     app.use(responseTime());
     app.use(statusMonitor());
-    app.use(expressLogMemory());
+    // app.use(expressLogMemory());
   });
 }
 
