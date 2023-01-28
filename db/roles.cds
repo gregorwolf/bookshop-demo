@@ -13,6 +13,11 @@ entity Roles : cuid, managed {
   @assert.format: 'r_[a-z]'
   rolename        : localized String(255) not null @(title: '{i18n>RoleName}', );
   description     : localized String not null      @(title: '{i18n>Description}', );
+
+  // Accepts ABCDxse
+  // @assert.format: '[A-Z,0-9]{4}'
+  @assert.format: '^([A-Z,0-9]{4})$'
+  CompanyCode     : String                         @(title: '{i18n>CompanyCode}', );
   count           : Integer                        @(title: '{i18n>count}', );
   read            : Boolean                        @(title: '{i18n>Read}', );
   authcreate      : Boolean                        @(title: '{i18n>Create}', );
