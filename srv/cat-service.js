@@ -28,6 +28,7 @@ module.exports = async function (srv) {
 
   srv.before("*", "*", async (req) => {
     metering.beforeHandler(req);
+    /*
     const db = await cds.connect.to("db");
     db.before("COMMIT", (req) => {
       console.log("before COMMIT Handler", req);
@@ -36,6 +37,7 @@ module.exports = async function (srv) {
     db.after("COMMIT", (req) => {
       console.log("After COMMIT Handler"), req;
     });
+    */
   });
 
   srv.before("READ", "Books", async (req) => {
