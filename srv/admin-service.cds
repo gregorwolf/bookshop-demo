@@ -127,7 +127,9 @@ service AdminService @(
   }, ])                          as projection on db.Roles actions {
     @cds.odata.bindingparameter.collection
     action createDraftRole(rolename : String not null, description : String not null) returns Roles;
+    @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Roles'])
     action countUp()                                                                  returns Roles;
+    @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Roles'])
     action countDown()                                                                returns Roles;
   };
 

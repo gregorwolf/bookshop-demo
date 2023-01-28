@@ -1,0 +1,52 @@
+### Documentation at http://api.q-loud.de/#
+###
+# @name getSession
+POST https://api.cospace.de/api/session
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username":"{{$dotenv qloud_username}}",
+  "password":"{{$dotenv qloud_password}}"
+}
+
+### Fill Variables from Response
+@sid = {{getSession.response.body.$.sid}}
+@did = {{getSession.response.body.$.did}}
+@server = {{getSession.response.body.$.server}}
+###
+GET {{server}}/api/user
+###
+# @name getUser
+GET {{server}}/api/user
+###
+@tag_all={{getUser.response.body.$.user.tag_all}}
+###
+GET {{server}}/api/tag/{{tag_all}}/object
+###
+@sensor=2aac3590-f583-11e8-a2fb-00259075ae2a
+###
+GET {{server}}/api/sensor/{{sensor}}
+###
+GET {{server}}/api/sensor/{{sensor}}/data
+  ?order=desc&count=10
+### Switch off
+POST {{server}}/api/sensor/{{sensor}}/action
+Accept: application/json
+Content-Type: application/json
+
+{
+  "action": [0,null,null]
+}
+### Switch on
+POST {{server}}/api/sensor/{{sensor}}/action
+Accept: application/json
+Content-Type: application/json
+
+{
+  "action": [1,null,null]
+}
+###
+GET {{server}}/api/event?next=22&timeout=10
+###
+DELETE {{server}}/api/session
