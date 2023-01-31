@@ -34,6 +34,12 @@ annotate AdminService.Roles with @(UI: {
     {Value: count},
     {
       $Type : 'UI.DataFieldForAction',
+      Label : '{i18n>resetCountOfAllRoles}',
+      Action: 'AdminService.EntityContainer/resetCountOfAllRoles',
+      Inline: false
+    },
+    {
+      $Type : 'UI.DataFieldForAction',
       Label : '{i18n>countUp}',
       Action: 'AdminService.countUp',
       Inline: false

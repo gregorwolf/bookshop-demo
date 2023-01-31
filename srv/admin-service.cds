@@ -119,6 +119,10 @@ service AdminService @(
   //> these shall be removed but this would break the Fiori UI
   entity Languages               as projection on sap.common.Languages;
 
+
+  @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Books'])
+  action   resetCountOfAllRoles();
+
   @odata.draft.enabled
   // @Common.DraftRoot.NewAction : 'AdminService.createDraftRole'
   entity Roles @(restrict: [{

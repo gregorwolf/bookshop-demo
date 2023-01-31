@@ -538,6 +538,12 @@ module.exports = async function (srv) {
     }
   });
 
+  srv.on("resetCountOfAllRoles", async (req) => {
+    const db = await cds.connect.to("db");
+    const { Roles } = db.entities;
+    await db.update(Roles).set({ count: 0 });
+  });
+
   srv.before("NEW", "Roles", (req) => {
     // allows to set defaults
     req.data.read = true;
