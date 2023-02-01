@@ -698,7 +698,9 @@
               "action": "manageUI5latest",
               "title": "Orders",
               "signature": {
-                "parameters": {},
+                "parameters": {
+                  "OrderNo": {}
+                },
                 "additionalParameters": "allowed"
               },
               "resolutionResult": {
