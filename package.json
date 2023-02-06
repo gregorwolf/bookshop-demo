@@ -96,7 +96,7 @@
     "build:standalone": "cp mta-standAlone.yaml mta.yaml && mbt build -p=xsa && rm mta.yaml",
     "build:copycsntoproxy": "copyfiles -f gen/srv/srv/csn.json standalone-v2-proxy/gen/",
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
-    "start": "cds run",
+    "start": "node node_modules/@sap/cds/bin/cds.js run",
     "start:app": "cds bind --exec -- npm run start-repo-mock --prefix app --profile hybrid",
     "start:hana": "cds bind --exec -- cds run --profile hybrid",
     "start:hybridboth": "run-p start:hybrid:**",
