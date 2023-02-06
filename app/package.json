@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "description": "",
   "dependencies": {
-    "@sap/approuter": "^13.0.2"
+    "@sap/approuter": "^13"
   },
   "devDependencies": {
-    "@sap/html5-repo-mock": "^2.1.1"
+    "@sap/html5-repo-mock": "^2"
   },
   "engines": {
     "node": "^16"
