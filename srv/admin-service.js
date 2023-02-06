@@ -673,6 +673,9 @@ module.exports = async function (srv) {
             // 4	sap.ui.core.MessageType.Error	Error - action is required
             msgInfo.numericSeverity = 4;
             break;
+          case "d3924131-0870-44bc-b0c1-2ea3808cdaae":
+            msgInfo.numericSeverity = 4;
+            break;
           case "d3924131-0870-44bc-b0c1-2ea3808cda5f":
             req.xx.xx;
         }
@@ -684,7 +687,11 @@ module.exports = async function (srv) {
             req.notify(msgInfo);
             break;
           default:
-            req.info(msgInfo);
+            if (orderId === "d3924131-0870-44bc-b0c1-2ea3808cdaae") {
+              req.error(msgInfo);
+            } else {
+              req.info(msgInfo);
+            }
             break;
         }
       }
