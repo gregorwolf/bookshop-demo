@@ -165,16 +165,22 @@ module.exports = async function (srv) {
     console.log("before UPDATE - req.query.UPDATE.data: " + changedEntityData);
   });
 
-  srv.on("READ", "UserScopes", (req) => {
-    const users = [
-      {
-        username: req.user.id,
-        is_admin: req.user.is("admin"),
-        is_roleadmin: req.user.is("roleadmin"),
-        is_booksadmin: req.user.is("booksadmin"),
-      },
-    ];
-    return users;
+  srv.on("READ", "Userdetails", (req) => {
+    const userdetails = {
+      username: req.user.id,
+    };
+    // check for $expand=authorizations
+    const expandIndex = req.query.SELECT.columns.findIndex(
+      ({ expand, ref }) => expand && ref[0] === "authorizations"
+    );
+    if (expandIndex < 0) return userdetails;
+    userdetails.authorizations = getAuthorizations(req);
+
+    return userdetails;
+  });
+
+  srv.on("READ", "Authorizations", (req) => {
+    return getAuthorizations(req);
   });
 
   srv.on(["readCdsEnv"], (req) => {
@@ -776,3 +782,12 @@ module.exports = async function (srv) {
   }
 */
 };
+
+function getAuthorizations(req) {
+  return {
+    username: req.user.id,
+    is_admin: req.user.is("admin"),
+    is_roleadmin: req.user.is("roleadmin"),
+    is_booksadmin: req.user.is("booksadmin"),
+  };
+}

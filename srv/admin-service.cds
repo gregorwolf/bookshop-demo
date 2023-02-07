@@ -167,7 +167,15 @@ service AdminService @(
 
   @readonly
   @odata.singleton
-  entity UserScopes {
+  entity Userdetails {
+    key username       : String;
+        authorizations : Association to one Authorizations;
+
+  };
+
+  @readonly
+  @odata.singleton
+  entity Authorizations {
     key username      : String;
         is_admin      : Boolean;
         is_roleadmin  : Boolean;

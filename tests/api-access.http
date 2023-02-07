@@ -41,7 +41,7 @@ GET {{$dotenv srvurl}}/admin/
 Accept: application/json
 Authorization: Bearer {{access_token}}
 ###
-GET {{$dotenv srvurl}}/admin/UserScopes
+GET {{$dotenv srvurl}}/admin/Userdetails
 Accept: application/json
 Authorization: Bearer {{access_token}}
 ###
