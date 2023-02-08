@@ -1,0 +1,41 @@
+
+### Authenticate
+# @name requestAccessToken
+POST https://login.microsoftonline.com/{{$dotenv msgraph_mail_tenant}}/oauth2/v2.0/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{$dotenv msgraph_mail_clientid}}
+&scope=https%3A%2F%2Fgraph.microsoft.com%2F.default
+&client_secret={{$dotenv msgraph_mail_clientsecret}}
+&grant_type=client_credentials
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+POST https://graph.microsoft.com/v1.0/users/{{$dotenv msgraph_mail_from}}/sendMail
+Content-type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "message": {
+    "subject": "Meet for lunch?",
+    "body": {
+      "contentType": "Text",
+      "content": "The new cafeteria is open."
+    },
+    "toRecipients": [
+      {
+        "emailAddress": {
+          "address": "{{$dotenv notification_recipient_email}}"
+        }
+      }
+    ],
+    "ccRecipients": [
+      {
+        "emailAddress": {
+          "address": "{{$dotenv msgraph_mail_from}}"
+        }
+      }
+    ]
+  },
+  "saveToSentItems": "false"
+}
