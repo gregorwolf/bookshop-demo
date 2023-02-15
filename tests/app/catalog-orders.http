@@ -8,14 +8,29 @@ GET http://localhost:4004/catalog/Orders
     ?$expand=Items($expand=book($expand=author))
     &$filter=Items/any(item:item/book/currency_code eq 'GBP')
 Authorization: Basic bob:
-### Filter Orders by Country of Author "country_code": "GB"
+# Results in the HANA SQL Statment stored in catalog-orders.sql with this parameters [ 'Value from DB', 'GBP', 'bob' ]
+
+### Filter Orders where the Items contain Books from an Author with country_code = "GB"
 # Returns: Property 'any' does not exist in type 'CatalogService.Books'
+# Using the $filter:
+#    &$filter=Items/book/author/country_code eq 'GB'
+# returns: Expected a uri token of kinds 'COUNT, LAMBDA_ANY, LAMBDA_ALL, QualifiedName' in 'Items/book/author/country_code eq 'GB'' at position 7
+#
+# Now let's try:
+# Filter Orders where the Items contain Books where Genre name = "Drama"
 GET http://localhost:4004/catalog/Orders
-    ?$expand=Items($expand=book($expand=author))
-    &$filter=Items/any(item:item/book/any(book:book/author/country_code eq 'GB'))
+    ?$count=true
+    &$expand=Items($expand=book($expand=author,genre))
+    # Works because item to book to author is always a to one association
+    # &$filter=Items/any(item:item/book/author/country_code eq 'GB')
+    # Works with @sap/cds 6.5
+    &$filter=Items/any(item:item/book/genre/name eq 'Drama')
+#    &$filter=Items/any(item:item/book/any(book:book/author/country_code eq 'GB'))
 Authorization: Basic bob:
 ### Read Order Items via OData
 # Fails with Entity \"CatalogService.OrderItems\" is not explicitly exposed as part of the service
+
+
 GET http://localhost:4004/catalog/OrderItems
 Authorization: Basic bob:
 

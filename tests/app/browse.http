@@ -7,8 +7,9 @@ GET http://localhost:4004/public/
 ###
 GET http://localhost:4004/public/Books
   ?$count=true
-  #&$expand=genre
-#  &$filter=genre/name eq 'Drama'
+  &$expand=genre,author
+  &$filter=genre/name eq 'Drama'
+  #&$filter=genre/any(g:g/name eq 'Drama')
 # Returns:
 # Path expressions in query options are not supported on SQLite
 
