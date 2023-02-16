@@ -6,7 +6,8 @@ using {
   cuid,
   User,
   Country,
-  sap
+  sap,
+  sap.common.CodeList
 } from '@sap/cds/common';
 
 annotate BusinessObject with @(
@@ -69,9 +70,25 @@ entity Books : managed {
       readingTime                    : Time          @title: 'Reading Time (Time)';
       author                         : Association to one Authors;
       publisher                      : Association to one Publishers;
+      plants                         : Association to many BookPlants
+                                         on plants.book = $self;
       to_BooksAuthorsAssignment      : Association to BooksAuthorsAssignment
                                          on to_BooksAuthorsAssignment.ASSOC_Book = $self;
 };
+
+@cds.autoexpose
+entity BookPlants : managed {
+  key book            : Association to one Books;
+  key plant           : Association to one Plant;
+      purchasingGroup : String(3);
+}
+
+@fiori.draft.enabled
+@cds.autoexpose
+@Common: {SemanticKey: [ID], }
+entity Plant : CodeList, managed {
+  key ID : String(4);
+}
 
 entity BooksAuthorsAssignment {
   key Role         : String(50);

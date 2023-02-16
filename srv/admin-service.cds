@@ -16,6 +16,7 @@ service AdminService @(
     action rejection();
   };
 
+  @cds.redirection.target
   entity Books @(
     restrict    : [
       {

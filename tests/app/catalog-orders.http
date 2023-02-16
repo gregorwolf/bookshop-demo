@@ -30,6 +30,12 @@ Authorization: Basic bob:
 ### Read Order Items via OData
 # Fails with Entity \"CatalogService.OrderItems\" is not explicitly exposed as part of the service
 
+### Filter for Plant
+GET http://localhost:4004/catalog/Orders
+    ?$count=true
+    &$expand=Items($expand=book($expand=plants))
+    &$filter=Items/any(item:item/book/plants/any(p:p/purchasingGroup eq 'C01'))
+Authorization: Basic bob:
 
 GET http://localhost:4004/catalog/OrderItems
 Authorization: Basic bob:
