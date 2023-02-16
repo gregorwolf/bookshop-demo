@@ -11,7 +11,7 @@ Authorization: Basic admin:
 ### Total Stock
 http://localhost:4004/admin/BooksAnalytics
   ?$count=true
-  &$apply=groupby((authorID),aggregate(stock with sum as TotalStock))
+  &$apply=groupby((authorID),aggregate($count as childCount,stock with sum as TotalStock))
 Authorization: Basic admin:
 
 ### Total Books per Author
