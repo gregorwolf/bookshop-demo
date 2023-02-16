@@ -49,7 +49,7 @@ GET {{$dotenv srvurl}}/admin/Books
 Accept: application/json
 Authorization: Bearer {{access_token}}
 ###
-GET {{$dotenv srvurl}}/admin/BooksAnalytics
+GET {{$dotenv srvurl}}/analytics/BooksAnalytics
 Accept: application/json
 Authorization: Bearer {{access_token}}
 ###

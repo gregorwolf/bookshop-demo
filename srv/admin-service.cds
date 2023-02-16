@@ -35,8 +35,6 @@ service AdminService @(
     },
   )                              as projection on db.Books;
 
-  @readonly
-  entity BooksAnalytics          as projection on db.BooksAnalytics;
   /*
   @readonly
   entity BooksViewWOkey      as projection on db.BooksViewWOkey;
@@ -55,7 +53,6 @@ service AdminService @(
     ASSOC_Book : redirected to Books
   };
 
-  // view BooksAnalytics as select from db.BooksAnalytics;
   entity Authors @(restrict: [{
     grant: 'READ',
     to   : 'admin'
