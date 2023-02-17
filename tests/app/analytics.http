@@ -13,13 +13,28 @@ Authorization: Basic admin:
 ### Read BooksAnalytics
 http://localhost:4004/v2/analytics/BooksAnalytics
 Authorization: Basic admin:
-
+### $apply on Draft Enabled Entity with $count
+http://localhost:4004/admin/Orders
+  ?$count=true
+  &$apply=groupby((orderstatus_code),aggregate($count as childCount,total with sum as TotalValue))
+Authorization: Basic admin:
 ### Total Stock
 http://localhost:4004/analytics/BooksAnalytics
   ?$count=true
   &$apply=groupby((authorID),aggregate($count as childCount,stock with sum as TotalStock))
 Authorization: Basic admin:
-
+### Total Stock grouped by author/name
+# Results in: invalid column name: AUTHOR: line 1 col 45 (at pos 44)
+# SQL: SELECT count ( 1 ) AS "$count" FROM (SELECT author, count ( 1 ) AS childCount, sum ( stock ) AS TotalStock FROM localized_AnalyticsService_BooksAnalytics ALIAS_1 GROUP BY author.name)
+http://localhost:4004/analytics/BooksAnalytics
+  ?$count=true
+  &$apply=groupby((author/name),aggregate($count as childCount,stock with sum as TotalStock))
+Authorization: Basic admin:
+### Total Stock grouped by author/name without $count
+# Works
+http://localhost:4004/analytics/BooksAnalytics
+  ?$apply=groupby((author/name),aggregate($count as childCount,stock with sum as TotalStock))
+Authorization: Basic admin:
 ### Total Books per Author
 http://localhost:4004/analytics/BooksAnalytics
   ?$apply=groupby((author/name,currency/name),aggregate(count with sum as TotalBooks))
