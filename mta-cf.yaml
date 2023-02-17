@@ -22,6 +22,7 @@ modules:
     parameters:
       memory: 256M
       disk-quota: 256M
+      stack: cflinuxfs4
     requires:
       - name: bookshop-demo-db-service
   - name: bookshop-demo-srv
@@ -34,6 +35,7 @@ modules:
     parameters:
       memory: 256M
       disk-quota: 1024M
+      stack: cflinuxfs4
     provides:
       - name: srv_api
         properties:
@@ -139,6 +141,7 @@ modules:
     parameters:
       memory: 256M
       disk-quota: 1024M
+      stack: cflinuxfs4
     build-parameters:
       ignore: ["node_modules/"]
     requires:
