@@ -38,7 +38,7 @@ Content-Type: application/json
 
 {
   "sender" : "{{$dotenv sender}}", 
-  "to" : "{{$dotenv sender}}", 
+  "to" : "{{$dotenv to}}", 
   "subject" : "{{$dotenv subject}}", 
   "body" : "{{$dotenv body}}", 
   "destination" : "{{$dotenv destination}}"
