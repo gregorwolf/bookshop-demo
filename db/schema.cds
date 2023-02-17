@@ -96,6 +96,7 @@ entity BooksAuthorsAssignment {
   key ASSOC_Author : Association to one Authors;
 }
 
+@cds.autoexpose
 entity Authors : managed {
   key ID                                   : Integer;
       name                                 : String(111);
