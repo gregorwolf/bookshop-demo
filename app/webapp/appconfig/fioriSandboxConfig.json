@@ -607,6 +607,12 @@
               "action": "display",
               "signature": {
                 "parameters": {
+                  "sap-tag": {
+                    "defaultValue": {
+                      "format": "value",
+                      "value": "primaryAction"
+                    }
+                  },
                   "parent_ID": {
                     "defaultValue": {
                       "value": "0"
