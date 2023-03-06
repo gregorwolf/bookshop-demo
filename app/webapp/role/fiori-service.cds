@@ -32,6 +32,8 @@ annotate AdminService.Roles with @(UI: {
     {Value: rolename},
     {Value: description},
     {Value: count},
+    {Value: createdAt},
+    {Value: modifiedAt},
     {
       $Type : 'UI.DataFieldForAction',
       Label : '{i18n>resetCountOfAllRoles}',
