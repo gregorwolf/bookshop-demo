@@ -18,13 +18,11 @@ annotate AdminService.Orders with @(UI: {
   //	Lists of Orders
   //
   SelectionFields                        : [
+    OrderNo,
+    Items.product,
+    salesOrganization,
     createdAt,
     createdBy,
-    deliverystatus_code,
-    deliverystatus.name,
-    orderstatus_code,
-    Items.product,
-    salesOrganization
   ],
   SelectionPresentationVariant #New      : {
     $Type              : 'UI.SelectionPresentationVariantType',
