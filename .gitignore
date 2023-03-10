@@ -39,3 +39,4 @@ manifest-bundle.zip
 
 # added by cds bind
 .cdsrc-private.json
+.cds
