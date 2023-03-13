@@ -21,6 +21,15 @@ Authorization: bearer {{access_token}}
 Content-Type: application/json
 
 {
+  "defaultIdp": "sap.default"
+}
+
+### Set defaultIdp
+PATCH {{$dotenv xsuaa_apiaccess_apiurl}}/sap/rest/authorization/v2/securitySettings
+Authorization: bearer {{access_token}}
+Content-Type: application/json
+
+{
   "defaultIdp": "sap.custom"
 }
 
