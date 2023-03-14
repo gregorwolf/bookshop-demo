@@ -35,6 +35,12 @@ Authorization: Basic admin:
 ### Read User Authorizations directly
 GET http://localhost:4004/admin/Authorizations
 Authorization: Basic admin:
+###
+GET http://localhost:4004/admin/Authorizations
+Authorization: Basic roleadmin:
+###
+GET http://localhost:4004/admin/Authorizations
+Authorization: Basic booksadmin:
 ### Read Users
 GET http://localhost:4004/admin/Users
 Authorization: Basic admin:
