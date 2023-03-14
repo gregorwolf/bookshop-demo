@@ -77,6 +77,7 @@ service AdminService @(
   entity Genres                  as projection on db.Genres;
 
   @odata.draft.enabled
+  @UI.CreateHidden: {$edmJson: {$Path: '/AdminService.EntityContainer/Authorizations.is_admin'}}
   entity Orders                  as select from db.Orders actions {
                                       action deleteOrder();
                                       action checkConsistency();
@@ -95,6 +96,7 @@ service AdminService @(
                                         Common.SideEffects.TargetProperties: ['in/orderstatus_code'],
                                       )
                                       action checkConsistencyInline();
+                                                                                                       @Core.OperationAvailable : {$edmJson: {$Path: '/AdminService.EntityContainer/Authorizations.is_admin'}}
                                       action setOrderParameters(vipOrder : db.Orders:vipOrder not null @UI.ParameterDefaultValue: false,
                                              employeeOrder : db.Orders:employeeOrder not null @UI.ParameterDefaultValue: true );
                                       action NewAction(OrderNo : db.Orders:OrderNo not null, CustomerOrderNo : db.Orders:CustomerOrderNo);
