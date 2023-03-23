@@ -11,6 +11,24 @@ client_id={{$dotenv cloud_alm_clientid}}
 ### Fill Variables from Response
 @access_token = {{requestAccessToken.response.body.$.access_token}}
 
-###
-GET {{$dotenv cloud_alm_api}}/imp-cdm-transport-management-api/v1/actions
+### Cloud TMS
+GET {{$dotenv cloud_alm_api}}/api/imp-cdm-transport-management-api/v1/actions
+Authorization: Bearer {{access_token}}
+
+### SAP Cloud ALM Process Scopes
+GET {{$dotenv cloud_alm_api}}/api/calm-processmanagement/v1/scopes
+Authorization: Bearer {{access_token}}
+### 
+GET {{$dotenv cloud_alm_api}}/api/calm-processmanagement/v1/solutionScenarioVersions
+Authorization: Bearer {{access_token}}
+### 
+GET {{$dotenv cloud_alm_api}}/api/calm-processmanagement/v1/solutionScenarioVersions/815fddf3-b8cd-48cb-bab9-b2c5b2b38835
+Authorization: Bearer {{access_token}}
+### 
+GET {{$dotenv cloud_alm_api}}/api/calm-processmanagement/v1/solutionProcesses
+  ?countries=DE
+Authorization: Bearer {{access_token}}
+### 
+GET {{$dotenv cloud_alm_api}}/api/calm-processmanagement/v1/solutionProcesses/$count
+  ?countries=DE
 Authorization: Bearer {{access_token}}
