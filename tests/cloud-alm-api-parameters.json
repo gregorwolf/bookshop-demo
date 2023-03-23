@@ -1,0 +1,11 @@
+{
+  "xs-security": {
+    "xsappname": "cloud-alm-api-instance",
+    "authorities": [
+      "$XSMASTERAPPNAME.imp-cdm-feature-display-ui",
+      "$XSMASTERAPPNAME.imp-cdm-feature-manage-ui",
+      "$XSMASTERAPPNAME.calm-api.processmanagement.read",
+      "$XSMASTERAPPNAME.calm-api.projects.write"
+    ]
+  }
+}
