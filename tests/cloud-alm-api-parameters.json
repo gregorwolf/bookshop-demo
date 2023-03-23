@@ -5,7 +5,8 @@
       "$XSMASTERAPPNAME.imp-cdm-feature-display-ui",
       "$XSMASTERAPPNAME.imp-cdm-feature-manage-ui",
       "$XSMASTERAPPNAME.calm-api.processmanagement.read",
-      "$XSMASTERAPPNAME.calm-api.projects.read"
+      "$XSMASTERAPPNAME.calm-api.projects.read",
+      "$XSMASTERAPPNAME.calm-api.processauthoring.read"
     ]
   }
 }
