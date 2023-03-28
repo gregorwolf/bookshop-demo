@@ -17,7 +17,15 @@ Authorization: Basic admin:
 http://localhost:4004/admin/Orders
   ?$count=true
   &$apply=groupby((orderstatus_code),aggregate($count as childCount,total with sum as TotalValue))
+  #&$apply=groupby((orderstatus/name),aggregate($count as childCount,total with sum as TotalValue))
 Authorization: Basic admin:
+# Lean Draft:     "message": "invalid column name: ORDERSTATUS: line 1 col 45 (at pos 44)"
+#  SELECT count ( 1 ) AS "$count" FROM (SELECT orderstatus, count ( 1 ) AS childCount, sum ( total ) AS TotalValue 
+# FROM localized_AdminService_Orders ALIAS_1 GROUP BY orderstatus.code)
+# Standard:     "message": "invalid column name: ACTIVE.TOTAL: line 1 col 65 (at pos 64)"
+# SELECT b.code AS "b_code", count ( 1 ) AS "a_childCount", sum ( active.total ) AS "a_TotalValue" 
+# FROM localized_AdminService_Orders a LEFT JOIN localized_AdminService_Orderstatuses b ON ( b.code = a.orderstatus_code ) 
+# GROUP BY a.orderstatus.code ORDER BY a.orderstatus.code ASC LIMIT 1000  with parameters ('LOCALE' = 'en')
 ### Total Stock
 http://localhost:4004/analytics/BooksAnalytics
   ?$count=true
