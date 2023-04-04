@@ -51,10 +51,10 @@ module.exports = async function (srv) {
   });
 
   srv.after("READ", "Books", (each) => {
-    if (typeof each.publisher !== "undefined") {
+    if (typeof each.publisher_ID !== "undefined") {
       if (each.publisher !== null) {
         each.semanticURLtoPublisher =
-          "#Publishers-display?ID=" + each.publisher.ID;
+          "#Publishers-display?ID=" + each.publisher_ID;
       }
       // console.log(each.semanticURLtoPublisher)
     }
