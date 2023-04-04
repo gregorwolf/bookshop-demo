@@ -249,8 +249,17 @@ annotate my.Books with @(UI: {
             Label            : '',
             ![@UI.Importance]: #High
         },
-        {Value: semanticURLtoPublisher},
+        {
+            $Type  : 'UI.DataFieldWithUrl',
+            Label  : '{i18n>ToPublisherUrl}',
+            IconUrl: 'sap-icon://chain-link',
+            Value  : publisher_ID, // Works
+            // Value  : 'Link', // Shows warning that this is not an i18n Text + Dumps in Browser
+            // Value  : '{i18n>ToPublisherUrl}', // Dumps in Browser
+            Url    : semanticURLtoPublisher,
+        },
     /*
+        {Value: semanticURLtoPublisher},
         {Value: '{i18n>WithUrl}'},
         {
             $Type: 'UI.DataFieldWithUrl',
