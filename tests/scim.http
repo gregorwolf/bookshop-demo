@@ -1,6 +1,22 @@
 ### Read Users
-GET {{$dotenv ias_scim_endpoint}}/Users
+GET {{$dotenv ias_scim_endpoint}}/scim/Users
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ###
-GET {{$dotenv ias_scim_endpoint}}/Groups
+GET {{$dotenv ias_scim_endpoint}}/scim/Groups
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+###
+GET {{$dotenv ias_scim_endpoint}}/Applications/v1/
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+### 
+GET {{$dotenv ias_scim_endpoint}}/service/scim/Users/P000000
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+### Works with the client ID and a secret created according to:
+# https://help.sap.com/docs/IDENTITY_AUTHENTICATION/6d6d63354d1242d185ab4830fc04feb1/9ea13fe831e24620bc89affab178ff93.html
+GET {{$dotenv ias_scim_endpoint}}/service/users?name_id=P000000
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+### 
+GET {{$dotenv ias_scim_endpoint}}/service/users/3DA51F61-37CF-49EC-BFC3-4E8531A4BD88
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+### 
+GET {{$dotenv ias_scim_endpoint}}/service/users?email={{$dotenv ias_email}}
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
