@@ -11,12 +11,6 @@
       "service": "sap-approuter-userapi"
     },
     {
-      "source": "^/keyuser/(.*)$",
-      "target": "$1",
-      "service": "com.sap.ui.flex.cf.keyuser",
-      "endpoint": "keyuser"
-    },
-    {
       "source": "/api/(.*)$",
       "target": "/api/$1",
       "authenticationType": "xsuaa",
@@ -42,6 +36,13 @@
       "target": "/admin/$1",
       "authenticationType": "xsuaa",
       "destination": "srv_api",
+      "csrfProtection": true
+    },
+    {
+      "source": "^/basic/(.*)$",
+      "target": "$1",
+      "destination": "srv_api",
+      "authenticationType": "basic",
       "csrfProtection": true
     },
     {

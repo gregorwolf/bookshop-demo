@@ -8,6 +8,6 @@
   },
   "sap.cloud": {
     "public": true,
-    "service": "cloud.service"
+    "service": "bookshop.demo.service"
   }
 }

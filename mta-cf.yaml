@@ -66,7 +66,24 @@ modules:
               Authentication: OAuth2ClientCredentials
               ServiceInstanceName: bookshop-demo-uaa-apiaccess
               ServiceKeyName: bookshop-demo-uaa-apiaccess-key
-              sap.cloud.service: basic.service
+              sap.cloud.service: bookshop.demo.service
+            - Name: bookshop-demo-repo-host
+              ServiceInstanceName:  bookshop-demo-repo-host
+              ServiceKeyName:  bookshop-demo-repo-host-key
+              sap.cloud.service: bookshop.demo.service
+            - Name: bookshop-demo-uaa
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: bookshop-demo-uaa
+              ServiceKeyName: bookshop-demo-uaa-key
+              sap.cloud.service: bookshop.demo.service
+            - Name: bookshop-demo
+              Description: CAP backend service
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: bookshop-demo-uaa
+              ServiceKeyName: bookshop-demo-uaa-key
+              URL: ~{srv_api/url}
+              HTML5.DynamicDestination: true
+              timeout: 600000
 #            - Name: bookshop-demo-docx
 #              Authentication: OAuth2ClientCredentials
 #              ServiceInstanceName: bookshop-demo-docx
@@ -80,6 +97,15 @@ modules:
 #              sap.cloud.service: basic.service
           existing_destinations_policy: update
     requires:
+      - name: bookshop-demo-uaa
+        parameters:
+          service-key:
+            name: bookshop-demo-uaa-key
+      - name:  bookshop-demo-repo-host
+        parameters:
+          service-key:
+            name:  bookshop-demo-repo-host-key
+      - name: srv_api
       - name: bookshop-demo-destination-service
         parameters:
           content-target: true
@@ -145,7 +171,7 @@ modules:
     build-parameters:
       ignore: ["node_modules/"]
     requires:
-      - name: bookshop-demo-ui5-flexibility-keyuser
+#      - name: bookshop-demo-ui5-flexibility-keyuser
       - name: bookshop-demo-destination-service
       - name: bookshop-demo-connectivity-service
       - name: bookshop-demo-uaa
@@ -238,8 +264,8 @@ resources:
     parameters:
        service: autoscaler
        service-plan: standard
-  - name: bookshop-demo-ui5-flexibility-keyuser
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: ui5-flexibility-keyuser
-      service-plan: free
+#  - name: bookshop-demo-ui5-flexibility-keyuser
+#    type: org.cloudfoundry.managed-service
+#    parameters:
+#      service: ui5-flexibility-keyuser
+#      service-plan: free

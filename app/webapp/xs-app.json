@@ -6,6 +6,20 @@
   },
   "routes": [
     {
+      "source": "^/xsuaa/(.*)$",
+      "target": "$1",
+      "destination": "bookshop-demo",
+      "authenticationType": "xsuaa",
+      "csrfProtection": true
+    },
+    {
+      "source": "^/basic/(.*)$",
+      "target": "$1",
+      "destination": "bookshop-demo",
+      "authenticationType": "basic",
+      "csrfProtection": true
+    },
+    {
       "source": "^(.*)$",
       "target": "$1",
       "service": "html5-apps-repo-rt",

@@ -9,6 +9,6 @@ resources:
   - name: bookshop-demo-job-scheduler
     parameters:
        service-plan: standard
-  - name: bookshop-demo-ui5-flexibility-keyuser
-    parameters:
-       service-plan: keyuser
+#  - name: bookshop-demo-ui5-flexibility-keyuser
+#    parameters:
+#        service-plan: keyuser

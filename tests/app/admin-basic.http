@@ -1,0 +1,7 @@
+### Read userInfo
+GET {{$dotenv approuter_url}}/basic/api/userInfo
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+
+### Read Metadata via OData V4
+GET {{$dotenv approuter_url}}/basic/admin/$metadata
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
