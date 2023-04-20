@@ -1,6 +1,6 @@
 # @name requestAccessToken
-POST {{$dotenv tokenendpoint}}/oauth/token
-Authorization: Basic {{$dotenv xsuaa_api_clientId}}:{{$dotenv xsuaa_api_clientSecret}}
+POST {{$dotenv xsuaa_apiaccess_tokenendpoint}}/oauth/token
+Authorization: Basic {{$dotenv xsuaa_apiaccess_clientid}}:{{$dotenv xsuaa_apiaccess_clientsecret}}
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=client_credentials
@@ -11,37 +11,37 @@ grant_type=client_credentials
 
 ### 
 # @name readUsers
-GET {{$dotenv xsuaa_url}}/Users
+GET {{$dotenv xsuaa_apiaccess_apiurl}}/Users
 Authorization: Bearer {{access_token}}
 
 ### 
 # @name readGroups
-GET {{$dotenv xsuaa_url}}/Groups
+GET {{$dotenv xsuaa_apiaccess_apiurl}}/Groups
 Authorization: Bearer {{access_token}}
 
 ### 
 # @name readGroupBookshopAdmin
-GET {{$dotenv xsuaa_url}}/Groups/BookshopAdmin
+GET {{$dotenv xsuaa_apiaccess_apiurl}}/Groups/BookshopAdmin
 Authorization: Bearer {{access_token}}
 
 ### 
 # @name readRoletemplaes
-GET {{$dotenv xsuaa_url}}/sap/rest/authorization/v2/apps/roletemplates
+GET {{$dotenv xsuaa_apiaccess_apiurl}}/sap/rest/authorization/v2/apps/roletemplates
 Authorization: Bearer {{access_token}}
 
 ### 
 # @name readRoleCollection
-GET {{$dotenv xsuaa_url}}/sap/rest/authorization/v2/rolecollections/?showGroups=true&showRoles=true&showUsers=true
+GET {{$dotenv xsuaa_apiaccess_apiurl}}/sap/rest/authorization/v2/rolecollections/?showGroups=true&showRoles=true&showUsers=true
 Authorization: Bearer {{access_token}}
 
 ### 
 # @name readApps
-GET {{$dotenv xsuaa_url}}/sap/rest/authorization/v2/apps/
+GET {{$dotenv xsuaa_apiaccess_apiurl}}/sap/rest/authorization/v2/apps/
 Authorization: Bearer {{access_token}}
 
 ### 
 # @name readApp
-GET {{$dotenv xsuaa_url}}/sap/rest/authorization/v2/apps/bookshop-demo!t73843
+GET {{$dotenv xsuaa_apiaccess_apiurl}}/sap/rest/authorization/v2/apps/bookshop-demo!t73843
 Authorization: Bearer {{access_token}}
 
 ### 
