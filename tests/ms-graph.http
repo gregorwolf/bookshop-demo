@@ -1,4 +1,3 @@
-
 ### Authenticate
 # @name requestAccessToken
 POST https://login.microsoftonline.com/{{$dotenv msgraph_mail_tenant}}/oauth2/v2.0/token
@@ -39,3 +38,7 @@ Authorization: Bearer {{access_token}}
   },
   "saveToSentItems": "false"
 }
+
+### Profile Picture
+GET https://graph.microsoft.com/v1.0/users/{{$dotenv msgraph_mail_from}}/photo/$value
+Authorization: Bearer {{access_token}}
