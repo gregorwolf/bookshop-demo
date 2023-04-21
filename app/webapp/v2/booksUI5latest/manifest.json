@@ -8,7 +8,8 @@
 		"i18n": {
 			"bundleUrl": "i18n/i18n.properties",
 			"supportedLocales": [
-				""
+				"",
+				"de"
 			],
 			"fallbackLocale": ""
 		},
@@ -46,7 +47,9 @@
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
 					"bundleUrl": "i18n/i18n.properties",
-					"supportedLocales": [""],
+					"supportedLocales": [
+						""
+					],
 					"fallbackLocale": ""
 				}
 			},
