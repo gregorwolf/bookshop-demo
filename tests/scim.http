@@ -20,3 +20,18 @@ Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ### 
 GET {{$dotenv ias_scim_endpoint}}/service/users?email={{$dotenv ias_email}}
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+### Invite User to IAS
+POST {{$dotenv ias_scim_endpoint}}/cps/invite/
+Content-Type: application/json
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+
+{
+  "inviteeEmail": "{{$dotenv ias_email}}",
+  "inviteeFirstName": "John",
+  "inviteeLastName": "Doe",
+  "inviterName": "John Doe",
+  "footerText": "Invitation footer sample text",
+  "headerText": "Invitation header sample text",
+  "targetUrl": "http://www.myserviceprovider.com/protected_home_page/",
+  "sourceUrl": "http://www.myserviceprovider.com/public_home_page/"
+}
