@@ -237,11 +237,23 @@ entity Deliverystatuses : sap.common.CodeList {
 type Deliverystatus        : Association to Deliverystatuses;
 annotate Deliverystatus with @title: '{i18n>Deliverystatus}';
 annotate Deliverystatuses.name with  @title: '{i18n>Deliverystatus}'  @description: '{i18n>Deliverystatus}';
-type SalesOrganizationCode : String(4) @(title: '{i18n>salesOrganization}');
+
+@Core.Description    : '{i18n>salesOrganization}'
+@Core.LongDescription: '{i18n>salesOrganizationDescription}'
+type SalesOrganizationCode : String(4) @(
+  title      : '{i18n>salesOrganization}',
+  description: '{i18n>salesOrganizationDescription}'
+);
 
 entity A_SalesOrganizationText {
   key SalesOrganization     : SalesOrganizationCode;
-      SalesOrganizationName : String;
+
+      @Core.Description    : '{i18n>salesOrganization}'
+      @Core.LongDescription: '{i18n>salesOrganizationDescription}'
+      SalesOrganizationName : String @(
+        title      : '{i18n>salesOrganization}',
+        description: '{i18n>salesOrganizationDescription}'
+      );
 }
 
 @assert.unique: {OrderNo: [OrderNo], }
