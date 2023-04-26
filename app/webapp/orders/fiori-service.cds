@@ -350,6 +350,7 @@ annotate AdminService.Orders with @(UI: {
       Value: total,
       Label: 'Total'
     },
+    {Value: salesOrganization},
     {
       Value: currency_code,
       Label: 'Currency'

@@ -240,6 +240,7 @@ annotate Deliverystatuses.name with  @title: '{i18n>Deliverystatus}'  @descripti
 
 @Core.Description    : '{i18n>salesOrganization}'
 @Core.LongDescription: '{i18n>salesOrganizationDescription}'
+@Common              : {QuickInfo: '{i18n>salesOrganizationDescription}'}
 type SalesOrganizationCode : String(4) @(
   title      : '{i18n>salesOrganization}',
   description: '{i18n>salesOrganizationDescription}'
@@ -250,6 +251,7 @@ entity A_SalesOrganizationText {
 
       @Core.Description    : '{i18n>salesOrganization}'
       @Core.LongDescription: '{i18n>salesOrganizationDescription}'
+      @Common              : {QuickInfo: '{i18n>salesOrganizationDescription}'}
       SalesOrganizationName : String @(
         title      : '{i18n>salesOrganization}',
         description: '{i18n>salesOrganizationDescription}'
