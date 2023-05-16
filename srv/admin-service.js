@@ -102,7 +102,10 @@ module.exports = async function (srv) {
     }
   });
 
-  srv.on("READ", "SEPMRA_I_Product_E", (req) => external.run(req.query));
+  srv.on("READ", "SEPMRA_I_Product_E", (req) => {
+    LOG.info("Read request for SEPMRA_I_Product_E");
+    return external.run(req.query);
+  });
 
   srv.before("READ", [Books, Authors], async (req) => {
     var tx = cds.transaction(req);
