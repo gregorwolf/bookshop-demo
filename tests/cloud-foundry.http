@@ -15,8 +15,8 @@ grant_type=password
 # the usage of IAS in Feature Set B should be possible beginning of July 2022
 # Using Origin Key origin=sap.default results in:
 # The origin provided in the login_hint does not match an active Identity Provider, that supports password grant.
-# so if you want to login using the SAP ID Service User you have to comment this line
-&login_hint={"origin":"{{$dotenv origin}}"}
+# If you want to use your own IAS tenant, you have to uncomment the following line and maintain the variable origin in your .env file
+#&login_hint={"origin":"{{$dotenv origin}}"}
 
 ###
 @accToken = {{access_token_request.response.body.access_token}}
