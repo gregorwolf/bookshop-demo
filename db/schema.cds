@@ -10,6 +10,8 @@ using {
   sap.common.CodeList
 } from '@sap/cds/common';
 
+using from '@sap/cds-common-content';
+
 annotate BusinessObject with @(
   title      : '{i18n>BusinessObject}',
   description: '{i18n>BusinessObject.Description}'
