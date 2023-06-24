@@ -1,0 +1,37 @@
+### Request Access Token
+# @name requestAccessToken
+POST {{$dotenv ans_oauth_url}}
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{$dotenv ans_client_id}}
+&client_secret={{$dotenv ans_client_secret}}
+&response_type=token
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+### 
+POST {{$dotenv ans_url}}/cf/producer/v1/resource-events
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+   "eventType": "{{$dotenv ans_eventType}}",
+   "eventTimestamp": 1535618178,
+   "resource": {
+      "resourceName": "{{$dotenv ans_resourceName}}",
+      "resourceType": "app",
+      "tags": {
+         "env": "qa"
+      }
+   },
+   "severity": "FATAL",
+   "category": "ALERT",
+   "subject": "{{$dotenv ans_subject}}",
+   "body": "{{$dotenv ans_body}}",
+   "tags": {
+      "ans:correlationId": "30118",
+      "ans:status": "CREATE_OR_UPDATE",
+      "customTag": "42"
+   }
+}
