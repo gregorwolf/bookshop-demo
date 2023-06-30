@@ -22,7 +22,9 @@ Authorization: Bearer {{destination_access_token}}
 # @name subaccountDestination
 GET {{$dotenv dest_uri}}/destination-configuration/v1/subaccountDestinations/{{firstDestinationName}}
 Authorization: Bearer {{destination_access_token}}
-
+### Read details of one destination
+GET {{$dotenv dest_uri}}/destination-configuration/v1/subaccountDestinations/{{$dotenv dest_name}}
+Authorization: Bearer {{destination_access_token}}
 ### Fill Variables from Response
 @backend_url={{subaccountDestination.response.body.$.URL}}
 
