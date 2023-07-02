@@ -68,4 +68,27 @@ GET http://localhost:4004/admin/readCdsEnv()
 Authorization: Basic admin:
 ### 
 GET http://localhost:4004/admin/A_SalesOrganizationText
+  ?$count=true
 Authorization: Basic admin:
+### 
+POST http://localhost:4004/admin/A_SalesOrganizationText
+Authorization: Basic admin:
+Content-Type: application/json
+
+{
+  "SalesOrganization": "A100",
+  "SalesOrganizationName": "Sales Org. A100"
+}
+### V2
+GET http://localhost:4004/v2/admin/A_SalesOrganizationText
+  ?$inlinecount=allpages
+Authorization: Basic admin:
+### 
+POST http://localhost:4004/v2/admin/A_SalesOrganizationText
+Authorization: Basic admin:
+Content-Type: application/json
+
+{
+  "SalesOrganization": "B100",
+  "SalesOrganizationName": "Sales Org. B100"
+}
