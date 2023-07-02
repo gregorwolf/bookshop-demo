@@ -1,8 +1,7 @@
-specVersion: '1.0'
+specVersion: "2.5"
 metadata:
   name: 'books-freestyle'
 type: application
-ui5Theme: sap_fiori_3
 server:
   customMiddleware:
   - name: fiori-tools-proxy
