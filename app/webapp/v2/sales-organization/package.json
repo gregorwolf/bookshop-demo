@@ -1,0 +1,41 @@
+{
+  "name": "sales-organization",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Sales Organization",
+  "keywords": [
+    "ui5",
+    "openui5",
+    "sapui5"
+  ],
+  "main": "webapp/index.html",
+  "dependencies": {},
+  "devDependencies": {
+    "@ui5/cli": "^3.0.0",
+    "@sap/ux-ui5-tooling": "1",
+    "@sapui5/ts-types-esm": "~1.115.1",
+    "ui5-tooling-transpile": "^0.7.10",
+    "typescript": "^4.6.3",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "@sap-ux/eslint-plugin-fiori-tools": "^0.2.0",
+    "@sap-ux/ui5-middleware-fe-mockserver": "2"
+  },
+  "scripts": {
+    "start": "fiori run --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#v2salesorganization-display\"",
+    "start-local": "fiori run --config ./ui5-local.yaml --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#v2salesorganization-display\"",
+    "build": "ui5 build --config=ui5.yaml --clean-dest --dest dist",
+    "lint": "eslint ./",
+    "ts-typecheck": "tsc --noEmit",
+    "prestart": "npm run ts-typecheck",
+    "prebuild": "npm run ts-typecheck",
+    "deploy": "fiori verify",
+    "deploy-config": "fiori add deploy-config",
+    "start-noflp": "fiori run --open \"index.html?sap-ui-xx-viewCache=false\"",
+    "start-mock": "fiori run --config ./ui5-mock.yaml --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#v2salesorganization-display\"",
+    "start-variants-management": "fiori run --open \"preview.html?sap-ui-xx-viewCache=false&fiori-tools-rta-mode=true&sap-ui-rta-skip-flex-validation=true#preview-app\"",
+    "unit-tests": "fiori run --config ./ui5-mock.yaml --open 'test/unit/unitTests.qunit.html'",
+    "int-tests": "fiori run --config ./ui5-mock.yaml --open 'test/integration/opaTests.qunit.html'"
+  },
+  "sapuxLayer": "CUSTOMER_BASE"
+}
