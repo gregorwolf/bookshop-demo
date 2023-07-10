@@ -1,0 +1,26 @@
+<Dialog id="CreateDialog"
+  xmlns="sap.m"
+  xmlns:f="sap.ui.layout.form"
+  xmlns:core="sap.ui.core"
+  title="Create Sales Organization">
+  <f:SimpleForm id="createForm" layout="ResponsiveGridLayout">
+    <f:content>
+      <Label text="Sales Organization" />
+      <Input value="{SalesOrganization}" />
+      <Label text="Sales Organization Name" />
+      <Input value="{SalesOrganizationName}" />
+    </f:content>
+  </f:SimpleForm>
+  <beginButton>
+    <Button id="AddEntryDialog"
+      type="Emphasized"
+      press="onAddEntryDialog"
+      text="Add"/>
+  </beginButton>
+  <endButton>
+    <Button id="CloseEntryDialog"
+      type="Transparent"
+      press="onCloseEntryDialog"
+      text="Cancel"/>
+  </endButton>
+</Dialog>

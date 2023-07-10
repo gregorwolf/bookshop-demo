@@ -6,6 +6,7 @@ import { ListKeyboardMode } from "sap/m/library";
 import Button from "sap/m/Button";
 import Text from "sap/m/Text";
 import ODataModel from "sap/ui/model/odata/v2/ODataModel";
+import Fragment from 'sap/ui/core/Fragment';
 
 /**
  * @namespace v2.salesorganization.controller
@@ -15,6 +16,7 @@ export default class SalesOrganization extends Controller {
   oEditableTemplate: ColumnListItem;
   oReadOnlyTemplate: ColumnListItem;
   oTable: Table;
+  oFragment: Fragment
   editButton: Button;
   addButton: Button;
   saveButton: Button;
@@ -61,10 +63,6 @@ export default class SalesOrganization extends Controller {
     this.rebindTable(this.oEditableTemplate, ListKeyboardMode.Edit);
   }
 
-  public onAdd(): void {
-    // TODO: Add new Sales Organization via a Popup
-  }
-
   public onSave(): void {
     this.saveButton.setVisible(false);
     this.addButton.setVisible(false);
@@ -97,5 +95,34 @@ export default class SalesOrganization extends Controller {
         key: "SalesOrganization",
       })
       .setKeyboardMode(sKeyboardMode);
+  }
+
+  public onAdd(): void {
+    Fragment.load({
+      name: 'v2.salesorganization.view.CreateDialog',
+      controller: this
+    }).then((oFragment) => {
+      this.oFragment = oFragment as Fragment;
+      this.getView().addDependent(this.oFragment)
+
+      const oListBinding = this.oTable.getBinding('items')
+      const oContext = oListBinding.create({
+        SalesOrganization: null,
+        SalesOrganizationName: null
+      }, true, { inactive: true})
+
+      this.oFragment.setBindingContext(oContext)
+      this.oFragment.open()
+    })
+  }
+
+  public onAddEntryDialog(): void {
+    this.oModel.submitChanges()
+    this.oFragment.destroy()
+  }
+
+  public onCloseEntryDialog(): void {
+    this.oModel.resetChanges()
+    this.oFragment.destroy()
   }
 }
