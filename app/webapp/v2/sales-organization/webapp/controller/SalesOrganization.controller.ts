@@ -6,7 +6,9 @@ import { ListKeyboardMode } from "sap/m/library";
 import Button from "sap/m/Button";
 import Text from "sap/m/Text";
 import ODataModel from "sap/ui/model/odata/v2/ODataModel";
-import Fragment from 'sap/ui/core/Fragment';
+import Fragment from "sap/ui/core/Fragment";
+import Dialog from "sap/m/Dialog";
+import ODataListBinding from "sap/ui/model/odata/v2/ODataListBinding";
 
 /**
  * @namespace v2.salesorganization.controller
@@ -16,7 +18,7 @@ export default class SalesOrganization extends Controller {
   oEditableTemplate: ColumnListItem;
   oReadOnlyTemplate: ColumnListItem;
   oTable: Table;
-  oFragment: Fragment
+  oFragment: Dialog;
   editButton: Button;
   addButton: Button;
   saveButton: Button;
@@ -99,30 +101,34 @@ export default class SalesOrganization extends Controller {
 
   public onAdd(): void {
     Fragment.load({
-      name: 'v2.salesorganization.view.CreateDialog',
-      controller: this
+      name: "v2.salesorganization.view.CreateDialog",
+      controller: this,
     }).then((oFragment) => {
-      this.oFragment = oFragment as Fragment;
-      this.getView().addDependent(this.oFragment)
+      this.oFragment = oFragment as Dialog;
+      this.getView()?.addDependent(this.oFragment);
 
-      const oListBinding = this.oTable.getBinding('items')
-      const oContext = oListBinding.create({
-        SalesOrganization: null,
-        SalesOrganizationName: null
-      }, true, { inactive: true})
+      const oListBinding = this.oTable.getBinding("items") as ODataListBinding;
+      const oContext = oListBinding.create(
+        {
+          SalesOrganization: null,
+          SalesOrganizationName: null,
+        },
+        true,
+        { inactive: true }
+      );
 
-      this.oFragment.setBindingContext(oContext)
-      this.oFragment.open()
-    })
+      this.oFragment.setBindingContext(oContext);
+      this.oFragment.open();
+    });
   }
 
   public onAddEntryDialog(): void {
-    this.oModel.submitChanges()
-    this.oFragment.destroy()
+    // this.oModel.submitChanges();
+    this.oFragment.destroy();
   }
 
   public onCloseEntryDialog(): void {
-    this.oModel.resetChanges()
-    this.oFragment.destroy()
+    this.oModel.resetChanges();
+    this.oFragment.destroy();
   }
 }
