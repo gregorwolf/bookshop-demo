@@ -21,6 +21,7 @@ annotate AdminService.Orders with @(UI: {
     OrderNo,
     Items.product,
     salesOrganization,
+    Items.book_ID,
     createdAt,
     createdBy,
   ],
