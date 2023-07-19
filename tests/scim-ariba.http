@@ -1,0 +1,48 @@
+### Get Access Token 
+# @name requestAccessToken
+POST {{$dotenv ariba_scim_token_endpoint}}?grant_type=openapi_2lo&id={{$dotenv ariba_scim_realm}}
+Authorization: Basic {{$dotenv ariba_scim_clientid}}:{{$dotenv ariba_scim_clientsecret}}
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+#&response_type=token
+
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+### Read Users
+GET {{$dotenv ias_scim_endpoint}}/scim/Users
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+###
+GET {{$dotenv ias_scim_endpoint}}/scim/Groups
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+###
+GET {{$dotenv ias_scim_endpoint}}/Applications/v1/
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+### 
+GET {{$dotenv ias_scim_endpoint}}/service/scim/Users/P000000
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+### Works with the client ID and a secret created according to:
+# https://help.sap.com/docs/IDENTITY_AUTHENTICATION/6d6d63354d1242d185ab4830fc04feb1/9ea13fe831e24620bc89affab178ff93.html
+GET {{$dotenv ias_scim_endpoint}}/service/users?name_id=P000000
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+### 
+GET {{$dotenv ias_scim_endpoint}}/service/users/3DA51F61-37CF-49EC-BFC3-4E8531A4BD88
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+### 
+GET {{$dotenv ias_scim_endpoint}}/service/users?email={{$dotenv ias_email}}
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+### Invite User to IAS
+POST {{$dotenv ias_scim_endpoint}}/cps/invite/
+Content-Type: application/json
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+
+{
+  "inviteeEmail": "{{$dotenv ias_email}}",
+  "inviteeFirstName": "John",
+  "inviteeLastName": "Doe",
+  "inviterName": "John Doe",
+  "footerText": "Invitation footer sample text",
+  "headerText": "Invitation header sample text",
+  "targetUrl": "http://www.myserviceprovider.com/protected_home_page/",
+  "sourceUrl": "http://www.myserviceprovider.com/public_home_page/"
+}
