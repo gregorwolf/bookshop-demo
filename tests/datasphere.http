@@ -1,0 +1,16 @@
+### Get Access Token 
+# @name requestAccessToken
+POST {{$dotenv datasphere_token_endpoint}}
+Authorization: Basic {{$dotenv datasphere_clientid}}:{{$dotenv datasphere_clientsecret}}
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+#&response_type=token
+
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+###
+GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/$metadata
+Authorization: Bearer {{$access_token}}
