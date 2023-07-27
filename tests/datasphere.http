@@ -12,5 +12,26 @@ grant_type=client_credentials
 @access_token = {{requestAccessToken.response.body.$.access_token}}
 
 ###
+GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/
+Authorization: Bearer {{access_token}}
+###
 GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/$metadata
-Authorization: Bearer {{$access_token}}
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/spaces
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv datasphere_endpoint}}/dwaas-core/api/v1/discovery
+Authorization: Bearer {{access_token}}
+
+
+### With Token from @sap/datasphere-cli
+### See https://blogs.sap.com/2022/09/21/sap-dwc-cli-getting-rid-of-passcodes-thanks-to-oauth-client-support/
+GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/
+Authorization: Bearer {{$dotenv datasphere_access_token}}
+###
+GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/$metadata
+Authorization: Bearer {{$dotenv datasphere_access_token}}
+###
+GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/spaces
+Authorization: Bearer {{$dotenv datasphere_access_token}}
