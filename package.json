@@ -42,6 +42,7 @@
   "devDependencies": {
     "@openui5/ts-types": "^1.108.0",
     "@sap/cds-dk": "6",
+    "@sap/datasphere-cli": "^2023.14.0",
     "@sap/graph-toolkit": "^3",
     "artillery": "^1",
     "cds-swagger-ui-express": "^0",
