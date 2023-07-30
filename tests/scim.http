@@ -1,11 +1,24 @@
+### 
+GET {{$dotenv ias_scim_endpoint}}/scim/Schemas
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ### Read Users
 GET {{$dotenv ias_scim_endpoint}}/scim/Users
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+### Read Users
+GET {{$dotenv ias_scim_endpoint}}/scim/Users
+  ?filter=groups.display eq "SAP_BTP_Admin"
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ###
 GET {{$dotenv ias_scim_endpoint}}/scim/Groups
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ###
 GET {{$dotenv ias_scim_endpoint}}/Applications/v1/
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+### 
+GET {{$dotenv ias_scim_endpoint}}/service/scim/Users
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+### Not Provided by IAS
+GET {{$dotenv ias_scim_endpoint}}/service/scim/Schemas
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ### 
 GET {{$dotenv ias_scim_endpoint}}/service/scim/Users/P000000
