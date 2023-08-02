@@ -8,7 +8,7 @@ build-parameters:
   before-all:
    - builder: custom
      commands:
-      - npm install --production
+      - npm install
       - npx -p @sap/cds-dk cds build --profile production
       # Standalone OData V2 Proxy is disabled
       # - npm run build:copycsntoproxy
