@@ -316,6 +316,11 @@ annotate AdminService.Orders with @(UI: {
         },
         {
           $Type : 'UI.ReferenceFacet',
+          Label : '{i18n>OrderValue}',
+          Target: '@UI.FieldGroup#OrderValue',
+        },
+        {
+          $Type : 'UI.ReferenceFacet',
           Label : '{i18n>orderstatus}',
           Target: '@UI.FieldGroup#orderstatus',
         },
@@ -346,11 +351,41 @@ annotate AdminService.Orders with @(UI: {
     },
   ],
 
-  FieldGroup #Details                    : {Data: [
+  FieldGroup #OrderValue                 : {Data: [
     {
       Value: total,
       Label: 'Total'
     },
+    {
+      Value: totalTax,
+      Label: 'Total Tax'
+    },
+    {
+      Value: totalWithTax,
+      Label: 'Total with Tax'
+    },
+    {
+      Value: taxPercentage,
+      Label: 'Tax Percentage'
+    },
+    {
+      Value: ComputedTax,
+      Label: 'Computed Tax'
+    },
+    {
+      Value: ComputedTotalWithTax,
+      Label: 'Computed Total with Tax'
+    },
+  /*
+  // Remove as it leads to an endless loop in the Fiori Elements App
+  {
+    Value: VirtualTotalWithTax,
+    Label: 'Virtual Total with Tax'
+  },
+  */
+  ]},
+
+  FieldGroup #Details                    : {Data: [
     {Value: salesOrganization},
     {
       Value: currency_code,
@@ -363,16 +398,18 @@ annotate AdminService.Orders with @(UI: {
       Value                  : ShippingAddress.city,
       ![@Common.FieldControl]: #ReadOnly,
     },
-
   ]},
+
   FieldGroup #Created                    : {Data: [
     {Value: createdBy},
     {Value: createdAt},
   ]},
+
   FieldGroup #Modified                   : {Data: [
     {Value: modifiedBy},
     {Value: modifiedAt},
   ]},
+
   FieldGroup #orderstatus                : {Data: [
     {Value: orderstatus_code},
     {
@@ -380,6 +417,7 @@ annotate AdminService.Orders with @(UI: {
       Label: '{i18n>Orderstatus}'
     },
   ]},
+
   FieldGroup #deliverystatus             : {Data: [
     {Value: deliverystatus_code},
     {
@@ -400,7 +438,6 @@ Common : {SideEffects #AmountChanges : {
   @UI.HiddenFilter                : false
   createdBy;
   @Common.FieldControl            : #ReadOnly
-  @Measures.ISOCurrency           : currency.code
   total; //Bind the currency field to the amount field
   @(ValueList.entity: 'A_SalesOrganizationText')
   @Common.ValueListWithFixedValues: true
@@ -475,6 +512,10 @@ annotate AdminService.OrderItems with @(UI: {
     {
       Value: netAmount,
       Label: 'Net amount'
+    },
+    {
+      Value: ComputedTotal,
+      Label: 'Computed Total'
     }
   ],
   Identification     : [ //Is the main field group

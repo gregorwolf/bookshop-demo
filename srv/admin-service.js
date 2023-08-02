@@ -1,4 +1,5 @@
-const { resolve } = require("@sap/cds");
+const cds = require("@sap/cds");
+const LOG = cds.log("admin-service");
 const JobSchedulerClient = require("@sap/jobs-client");
 const xsenv = require("@sap/xsenv");
 const SapCfMailer = require("sap-cf-mailer").default;
@@ -51,8 +52,13 @@ module.exports = async function (srv) {
     srv.before("*", "*", (req) => metering.beforeHandler(req));
   }
 
+  this.after("each", Orders, (order) => {
+    order.VirtualTotalWithTax =
+      order.total + (order.total * order.taxPercentage) / 100;
+  });
+
   srv.after("CREATE", Approval, async (req) => {
-    console.log("Approval - after CREATE. ID: " + req.ID);
+    LOG.info("Approval - after CREATE. ID: " + req.ID);
     try {
       const response = await externalFlow.tx(req).post("/", {
         approver: "gregor@computerservice-wolf.com",
@@ -62,12 +68,12 @@ module.exports = async function (srv) {
         ID: `guid'${req.ID}'`,
       });
     } catch (error) {
-      console.error("Error Message: " + error.message);
+      LOG.error("Error Message: " + error.message);
     }
   });
 
   srv.on(["approve"], Approval, async (req) => {
-    console.log("Approval - approve");
+    LOG.info("Approval - approve");
     let approval = await cds
       .tx(req)
       .read(Approval)
@@ -85,7 +91,7 @@ module.exports = async function (srv) {
   });
 
   srv.on(["rejection"], Approval, async (req) => {
-    console.log("Approval - rejection");
+    LOG.info("Approval - rejection");
     let approval = await cds
       .tx(req)
       .read(Approval)
@@ -111,11 +117,11 @@ module.exports = async function (srv) {
     var tx = cds.transaction(req);
     var targetName = req.entity;
     var logonName = req.user.id;
-    console.log("READ - logonName: " + logonName);
-    console.log("READ - req.target.name: " + targetName);
+    LOG.info("READ - logonName: " + logonName);
+    LOG.info("READ - req.target.name: " + targetName);
     var targetNameElements = targetName.split(".");
     var entity = targetNameElements[targetNameElements.length - 1];
-    console.log("READ - entity: " + entity);
+    LOG.info("READ - entity: " + entity);
     // Check if User is assigned to a Role that contains the entity
     // var query = SELECT.from(Role)
     var roleuser = await tx.run(
@@ -125,7 +131,7 @@ module.exports = async function (srv) {
     if (roleuser.length === 0) {
       req.error(409, `user ${logonName} isn't assigned to any role`);
     } else {
-      console.log("READ - roleuser: " + JSON.stringify(roleuser));
+      LOG.info("READ - roleuser: " + JSON.stringify(roleuser));
       var roleBusinessObject = await tx.run(
         SELECT.from(Role_BusinessObject, ["BusinessObject"]).where({
           parent_ID: roleuser[0].parent_ID,
@@ -137,7 +143,7 @@ module.exports = async function (srv) {
           `The role ${roleuser[0].parent_ID} isn't assigned to any business object`
         );
       } else {
-        console.log(
+        LOG.info(
           "READ - roleBusinessObject: " + JSON.stringify(roleBusinessObject)
         );
         var allowed = false;
@@ -162,10 +168,10 @@ module.exports = async function (srv) {
     var changedEntityKey = JSON.stringify(where);
     var changedEntityData = JSON.stringify(req.query.UPDATE.data);
     // Log output to see the data we need to store in the approval table
-    console.log("before UPDATE - Books: " + JSON.stringify(req.data));
-    console.log("before UPDATE - req.query.UPDATE.entity: " + changedEntity);
-    console.log("before UPDATE - req.query.UPDATE.where: " + changedEntityKey);
-    console.log("before UPDATE - req.query.UPDATE.data: " + changedEntityData);
+    LOG.info("before UPDATE - Books: " + JSON.stringify(req.data));
+    LOG.info("before UPDATE - req.query.UPDATE.entity: " + changedEntity);
+    LOG.info("before UPDATE - req.query.UPDATE.where: " + changedEntityKey);
+    LOG.info("before UPDATE - req.query.UPDATE.data: " + changedEntityData);
   });
 
   srv.on("READ", "Userdetails", (req) => {
@@ -261,7 +267,7 @@ module.exports = async function (srv) {
           if (err) {
             reject(req.error("Error retrieving job action logs"));
           } else {
-            console.log(result.results);
+            LOG.info(result.results);
             resolve(JSON.stringify(result.results));
           }
         });
@@ -283,7 +289,7 @@ module.exports = async function (srv) {
           if (err) {
             reject(req.error("Error retrieving job run logs"));
           } else {
-            // console.log(result.results)
+            // LOG.info(result.results)
             resolve(result.results);
           }
         });
@@ -369,18 +375,18 @@ module.exports = async function (srv) {
   });
 
   srv.on(["readUsers"], async (req) => {
-    console.log("readUsers");
+    LOG.info("readUsers");
     try {
       const response = await externalXsuaa.get("/Users");
       return response.resources;
     } catch (error) {
-      console.error("Error Message: " + error.message);
-      console.error(error.stack);
+      LOG.error("Error Message: " + error.message);
+      LOG.error(error.stack);
     }
   });
 
   srv.on(["readUsersSDK"], async (req) => {
-    console.log("readUsersSDK");
+    LOG.info("readUsersSDK");
     try {
       const response = await executeHttpRequest(
         { destinationName: "bookshop-demo-uaa-apiaccess" },
@@ -388,8 +394,8 @@ module.exports = async function (srv) {
       );
       return response.data.resources;
     } catch (error) {
-      console.error("Error Message: " + error.message);
-      console.error(error.stack);
+      LOG.error("Error Message: " + error.message);
+      LOG.error(error.stack);
     }
   });
 
@@ -421,7 +427,7 @@ module.exports = async function (srv) {
       });
       return JSON.stringify(result);
     } catch (error) {
-      console.log(error);
+      LOG.info(error);
       return req.error(error);
     }
   });
@@ -510,7 +516,7 @@ module.exports = async function (srv) {
   }
 
   srv.on(["readOrganizations"], async (req) => {
-    console.log("readOrganizations");
+    LOG.info("readOrganizations");
     try {
       // The destination used "OAuth2Password" as authentication type which is not supported by the SDK.
       // --> https://github.com/SAP/cloud-sdk-js/issues/1399
@@ -539,11 +545,11 @@ module.exports = async function (srv) {
       return response.data.resources;
       */
     } catch (error) {
-      console.error("Error Message: " + error.message);
+      LOG.error("Error Message: " + error.message);
       if (error.rootCause && error.rootCause.message) {
-        console.error("Root Cause Message: " + error.rootCause.message);
+        LOG.error("Root Cause Message: " + error.rootCause.message);
       }
-      console.error(error.stack);
+      LOG.error(error.stack);
     }
   });
 
@@ -602,7 +608,7 @@ module.exports = async function (srv) {
   srv.on(["createDraftRole"], async (req) => {
     const adminService = await cds.connect.to("AdminService");
     const { Roles } = adminService.entities;
-    console.log("createDraftRole - Request Parameters:", req.data);
+    LOG.info("createDraftRole - Request Parameters:", req.data);
     const role = await srv.send({
       query: INSERT.into(Roles).entries([
         {
@@ -628,10 +634,10 @@ module.exports = async function (srv) {
     return cds.tx(req).run(SELECT.one(Roles).where({ ID: req.params[0].ID }));
   });
   srv.on(["setOrderParameters"], Orders, async (req) => {
-    console.log("setOrderParameters - Request Parameters:", req.params[0]);
+    LOG.info("setOrderParameters - Request Parameters:", req.params[0]);
   });
   srv.on(["deleteOrder"], Orders, async (req) => {
-    console.log("delete Orders - Request Parameters:", req.params[0]);
+    LOG.info("delete Orders - Request Parameters:", req.params[0]);
     return DELETE.from(Orders).where({
       ID: req.params[0].ID,
     });
@@ -641,7 +647,7 @@ module.exports = async function (srv) {
     ["checkConsistency", "checkConsistencyInline"],
     Orders,
     async (req) => {
-      console.log("checkConsistency - Request Parameters:", req.params[0]);
+      LOG.info("checkConsistency - Request Parameters:", req.params[0]);
       // 1	sap.ui.core.MessageType.Success	Positive feedback - no action required
       var tx = cds.transaction(req);
       var orders = await tx.run(
@@ -726,10 +732,10 @@ module.exports = async function (srv) {
     var changedEntityData = JSON.stringify(req.query.UPDATE.data)
     var approver = 'SAPPROVER'
     // Log output to see the data we need to store in the approval table
-    console.log("UPDATE - Books: " + JSON.stringify(req.data))
-    console.log("UPDATE - req.query.UPDATE.entity: " + changedEntity)
-    console.log("UPDATE - req.query.UPDATE.where: " + changedEntityKey)
-    console.log("UPDATE - req.query.UPDATE.data: " + changedEntityData)
+    LOG.info("UPDATE - Books: " + JSON.stringify(req.data))
+    LOG.info("UPDATE - req.query.UPDATE.entity: " + changedEntity)
+    LOG.info("UPDATE - req.query.UPDATE.where: " + changedEntityKey)
+    LOG.info("UPDATE - req.query.UPDATE.data: " + changedEntityData)
     // Do not update anything on the original Object
     // req.query.UPDATE.data = {}
     var data = {
@@ -764,7 +770,7 @@ module.exports = async function (srv) {
     // 	uuidv4(), approver, changedEntity, changedEntityKey, changedEntityData, 'R'
     // 	, new Date(), 'SUSER', new Date(), 'SUSER'
     // ))
-    // console.log("UPDATE - result: " + JSON.stringify(res))
+    // LOG.info("UPDATE - result: " + JSON.stringify(res))
   })
 */
   /*
@@ -772,7 +778,7 @@ module.exports = async function (srv) {
     if (!req.data.ID) {
       return next()
     }
-    console.log(req.data.ID)
+    LOG.info(req.data.ID)
 
     return {
       value: _getObjectStream(req.data.ID)
@@ -780,7 +786,7 @@ module.exports = async function (srv) {
   })
 
   function _getObjectStream(objectKey) {
-    console.log(objectKey)
+    LOG.info(objectKey)
     return "Test"
   }
 */

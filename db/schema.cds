@@ -263,24 +263,32 @@ entity A_SalesOrganizationText {
 @assert.unique: {OrderNo: [OrderNo], }
 entity Orders : cuid, managed {
   @Core.Immutable
-  OrderNo           : String     @title: 'Order Number'; //> readable key
+  OrderNo           : String        @title: 'Order Number'; //> readable key
 
   @Core.Immutable
   salesOrganization : SalesOrganizationCode not null;
-  CustomerOrderNo   : String(80) @title: 'Customer Order Number';
+  CustomerOrderNo   : String(80)    @title: 'Customer Order Number';
   Items             : Composition of many OrderItems
                         on Items.parent = $self
-                                 @title: 'Items';
+                                    @title: 'Items';
   ShippingAddress   : Composition of one OrderShippingAddress
                         on ShippingAddress.parent = $self;
 
   @readonly
+  @Measures.ISOCurrency           : currency.code
   total             : DecimalFloat;
 
+  taxPercentage     : Decimal(5, 2) @title: '{i18n>taxPercentage}';
+
+  @readonly
+  @Measures.ISOCurrency           : currency.code
   totalTax          : Decimal(15, 2);
+
+  @readonly
+  @Measures.ISOCurrency           : currency.code
   totalWithTax      : Double;
-  vipOrder          : Boolean    @title: '{i18n>vipOrder}';
-  employeeOrder     : Boolean    @title: '{i18n>employeeOrder}';
+  vipOrder          : Boolean       @title: '{i18n>vipOrder}';
+  employeeOrder     : Boolean       @title: '{i18n>employeeOrder}';
 
   @Common.ValueListWithFixedValues: true
   @Common.Text                    : orderstatus.descr
