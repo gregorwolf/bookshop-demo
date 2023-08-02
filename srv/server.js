@@ -1,5 +1,5 @@
 const cds = require("@sap/cds");
-const proxy = require("@sap/cds-odata-v2-adapter-proxy");
+const cov2ap = require("@cap-js-community/odata-v2-adapter");
 const helmet = require("helmet");
 const passport = require("passport");
 const xsenv = require("@sap/xsenv");
@@ -105,8 +105,7 @@ cds.on("bootstrap", async (app) => {
     })
   );
   */
-  // Bind to express app
-  app.use(proxy());
+
   // app.use(replaceExcelAcceptHeader)
   app.use(sapJobLogger);
 
@@ -153,6 +152,7 @@ if (process.env.NODE_ENV !== "production") {
     app.use(cds_swagger());
     app.use(responseTime());
     app.use(statusMonitor());
+    app.use(cov2ap());
     // app.use(expressLogMemory());
   });
 }
