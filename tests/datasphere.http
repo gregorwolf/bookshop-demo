@@ -1,4 +1,4 @@
-### Get Access Token 
+### Get Access Token using Client Credentials Flow
 # @name requestAccessToken
 POST {{$dotenv datasphere_token_endpoint}}
 Authorization: Basic {{$dotenv datasphere_clientid}}:{{$dotenv datasphere_clientsecret}}
@@ -24,6 +24,29 @@ Authorization: Bearer {{access_token}}
 GET {{$dotenv datasphere_endpoint}}/dwaas-core/api/v1/discovery
 Authorization: Bearer {{access_token}}
 
+### Get Access Token using Authorization Code Flow
+GET {{$dotenv datasphere_authorization_url}}
+    ?response_type=code
+    &client_id={{$dotenv datasphere_clientid}}
+    &redirect_uri={{$dotenv datasphere_redirect_uri}}
+# https://e719db6c-1717-4264-bef3-b78753ac4f79.authentication.eu10.hana.ondemand.com/oauth/authorize?response_type=code&client_id=sb-0b6e07d5-ec37-4903-9cd3-591c405a2bc4!b254070|client!b3650&redirect_uri=https%3A%2F%2Fcswtest.free.beeceptor.com
+### 
+# @name requestAccessTokenAuthCodeFlow
+POST {{$dotenv datasphere_token_endpoint}}
+Authorization: Basic {{$dotenv datasphere_clientid}}:{{$dotenv datasphere_clientsecret}}
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=authorization_code
+&code={{$dotenv datasphere_code}}
+&redirect_uri={{$dotenv datasphere_redirect_uri}}
+
+### Fill Variables from Response
+@access_token_code_flow = {{requestAccessTokenAuthCodeFlow.response.body.$.access_token}}
+
+### Use token from Authorization Code Flow
+GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/spaces
+Authorization: Bearer {{access_token_code_flow}}
 
 ### With Token from @sap/datasphere-cli
 ### See https://blogs.sap.com/2022/09/21/sap-dwc-cli-getting-rid-of-passcodes-thanks-to-oauth-client-support/
