@@ -1,7 +1,7 @@
 ### Get Access Token (Cloud Foundry using Client Credentials)
 # @name requestAccessToken
-POST {{$dotenv tokenendpoint}}/oauth/token
-Authorization: Basic {{$dotenv clientid}}:{{$dotenv clientsecret}}
+POST {{$dotenv api_tokenendpoint}}/oauth/token
+Authorization: Basic {{$dotenv api_clientid}}:{{$dotenv api_clientsecret}}
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=client_credentials
@@ -28,41 +28,42 @@ grant_type=password
 ### Fill Variables from Response
 #@access_token = {{requestAccessTokenHANA.response.body.$.access_token}}
 
-### Read userInfo
-GET {{$dotenv srvurl}}/api/userInfo
+
+### test API endpoint
+GET {{$dotenv api_url}}{{$dotenv api_path}}
 Authorization: Bearer {{access_token}}
 
 ### Read getData
-GET {{$dotenv srvurl}}/api/getData
+GET {{$dotenv api_url}}/api/getData
 Authorization: Bearer {{access_token}}
 
 ### Read Admin Endpoint
-GET {{$dotenv srvurl}}/admin/
+GET {{$dotenv api_url}}/admin/
 Accept: application/json
 Authorization: Bearer {{access_token}}
 ###
-GET {{$dotenv srvurl}}/admin/Userdetails
+GET {{$dotenv api_url}}/admin/Userdetails
 Accept: application/json
 Authorization: Bearer {{access_token}}
 ###
-GET {{$dotenv srvurl}}/admin/Books
+GET {{$dotenv api_url}}/admin/Books
 Accept: application/json
 Authorization: Bearer {{access_token}}
 ###
-GET {{$dotenv srvurl}}/analytics/BooksAnalytics
+GET {{$dotenv api_url}}/analytics/BooksAnalytics
 Accept: application/json
 Authorization: Bearer {{access_token}}
 ###
-GET {{$dotenv srvurl}}/admin/Authors
+GET {{$dotenv api_url}}/admin/Authors
 Accept: application/json
 Authorization: Bearer {{access_token}}
 ### Read Admin Endpoint OData V2
-GET {{$dotenv srvurl}}/v2/admin/
+GET {{$dotenv api_url}}/v2/admin/
 Accept: application/json
 Authorization: Bearer {{access_token}}
 
 ### Read Orders
-GET {{$dotenv srvurl}}/admin/Orders
+GET {{$dotenv api_url}}/admin/Orders
   ?$top=10
 #  &$expand=Items
   &$filter=OrderNo eq '12'
@@ -70,7 +71,7 @@ Accept: application/json
 Authorization: Bearer {{access_token}}
 ### Create Orders in two steps
 # @name createOrder
-POST {{$dotenv srvurl}}/catalog/Orders
+POST {{$dotenv api_url}}/catalog/Orders
 Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
@@ -87,7 +88,7 @@ Content-Type: application/json
     }
 }
 ### Read Books
-GET {{$dotenv srvurl}}/v2/admin/Authors
+GET {{$dotenv api_url}}/v2/admin/Authors
   ?$top=10
 Accept: application/json
 Authorization: Bearer {{access_token}}
@@ -95,7 +96,7 @@ Authorization: Bearer {{access_token}}
 
 ### Read Approval
 # @name approval
-GET {{$dotenv srvurl}}/v2/admin/Approval
+GET {{$dotenv api_url}}/v2/admin/Approval
 Accept: application/json
 Authorization: Bearer {{access_token}}
 
@@ -103,7 +104,7 @@ Authorization: Bearer {{access_token}}
 @ID = {{approval.response.body.d.results[0].ID}}
 
 ### Approve
-POST {{$dotenv srvurl}}/v2/admin/Approval_approve
+POST {{$dotenv api_url}}/v2/admin/Approval_approve
   ?ID=guid'{{ID}}'&IsActiveEntity=true
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
@@ -111,7 +112,7 @@ Authorization: Bearer {{access_token}}
 {}
 
 ### Reject
-POST {{$dotenv srvurl}}/v2/admin/Approval_reject
+POST {{$dotenv api_url}}/v2/admin/Approval_reject
   ?ID=guid'{{ID}}'&IsActiveEntity=true
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
@@ -119,12 +120,12 @@ Authorization: Bearer {{access_token}}
 {}
 
 ###
-GET {{$dotenv srvurl}}/admin/readUsers()
+GET {{$dotenv api_url}}/admin/readUsers()
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 
 ###
-GET {{$dotenv srvurl}}/admin/readUsersSDK()
+GET {{$dotenv api_url}}/admin/readUsersSDK()
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
