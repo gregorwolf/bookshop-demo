@@ -33,5 +33,27 @@ Authorization: Bearer {{$dotenv datasphere_access_token}}
 GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/$metadata
 Authorization: Bearer {{$dotenv datasphere_access_token}}
 ###
+# @name spaces
 GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/spaces
+Authorization: Bearer {{$dotenv datasphere_access_token}}
+###
+@space = {{spaces.response.body.$.value[0].name}}
+###
+GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/spaces('{{space}}')/assets
+Authorization: Bearer {{$dotenv datasphere_access_token}}
+###
+# @name assets
+GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/assets
+    ?$filter=spaceName eq '{{space}}'
+Authorization: Bearer {{$dotenv datasphere_access_token}}
+###
+@assetRelationalDataUrl = {{assets.response.body.$.value[0].assetRelationalDataUrl}}
+###
+# @name assetRelationalData
+GET {{assetRelationalDataUrl}}
+Authorization: Bearer {{$dotenv datasphere_access_token}}
+###
+@entity = {{assetRelationalData.response.body.$.value[0].url}}
+###
+GET {{assetRelationalDataUrl}}{{entity}}
 Authorization: Bearer {{$dotenv datasphere_access_token}}
