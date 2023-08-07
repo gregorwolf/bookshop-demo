@@ -45,7 +45,10 @@ grant_type=authorization_code
 @access_token_code_flow = {{requestAccessTokenAuthCodeFlow.response.body.$.access_token}}
 
 ### Use token from Authorization Code Flow
-GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/spaces
+GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/
+Authorization: Bearer {{access_token_code_flow}}
+###
+GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/$metadata
 Authorization: Bearer {{access_token_code_flow}}
 
 ### With Token from @sap/datasphere-cli
