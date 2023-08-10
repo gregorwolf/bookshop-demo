@@ -90,6 +90,9 @@
     }
   ],
   "oauth2-configuration": {
+    "credential-types": [
+      "binding-secret"
+    ],
     "redirect-uris": [
       "https://global.consent.azure-apim.net/redirect",
       "https://*.hana.ondemand.com/**",
