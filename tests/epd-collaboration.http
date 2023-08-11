@@ -1,0 +1,39 @@
+### Get Access Token using Client Credentials Flow
+# @name requestAccessToken
+POST {{$dotenv epd_collaboration_tokenendpoint}}/oauth/token
+Authorization: Basic {{$dotenv epd_collaboration_clientid}}:{{$dotenv epd_collaboration_clientsecret}}
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+#&response_type=token
+
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+###
+# @name collaborations
+GET {{$dotenv epd_collaboration_url}}/odata/v4/CollaborationService_v1/Collaboration
+from: {{$dotenv epd_collaboration_processor}}
+Authorization: Bearer {{access_token}}
+###
+@docCenterRepositoryId = {{collaborations.response.body.$.value[0].$.docCenterRepositoryId}}
+###
+GET {{$dotenv epd_collaboration_url}}/cmis
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv epd_collaboration_url}}/cmis/{{docCenterRepositoryId}}/root
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv epd_collaboration_url}}/odata/v4/WorkflowService_v1/UserTasks
+  ?processor={{$dotenv epd_collaboration_processor}}
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv epd_collaboration_url}}/odata/v4/BusinessObjectService_v1/CustomBusinessObjects
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv epd_collaboration_url}}/odata/v4/CollaborationService_v1/Comments
+  ?context=
+  &entityId=
+  &entityType=
+Authorization: Bearer {{access_token}}
