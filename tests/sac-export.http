@@ -1,0 +1,50 @@
+### Get Access Token using Client Credentials Flow
+# @name requestAccessToken
+POST {{$dotenv sac_token_endpoint}}
+Authorization: Basic {{$dotenv sac_clientid}}:{{$dotenv sac_clientsecret}}
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+#&response_type=token
+
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+### As /api/v1/csrf does not work we need to get the token from the /api/v1/dataexport/models endpoint
+# @name getCSRF
+HEAD {{$dotenv sac_endpoint}}/api/v1/dataexport/
+Authorization: Bearer {{access_token}}
+x-csrf-token: fetch
+### Read Token to Variable
+@csrf={{getCSRF.response.headers.x-csrf-token}}
+
+###
+GET {{$dotenv sac_endpoint}}/api/v1/dataexport/administration/$metadata
+Authorization: Bearer {{access_token}}
+###
+# @name requestNamespaces
+GET {{$dotenv sac_endpoint}}/api/v1/dataexport/administration/Namespaces
+Authorization: Bearer {{access_token}}
+###
+@namespaceID = {{requestNamespaces.response.body.$.value[0].NamespaceID}}
+###
+# @name requestProviders
+GET {{$dotenv sac_endpoint}}/api/v1/dataexport/administration/Namespaces(NamespaceID='{{namespaceID}}')/Providers
+Authorization: Bearer {{access_token}}
+###
+@serviceURL = {{requestProviders.response.body.$.value[0].ServiceURL}}
+###
+GET {{serviceURL}}
+Authorization: Bearer {{access_token}}
+###
+GET {{serviceURL}}FactData
+  ?$count=true
+Authorization: Bearer {{access_token}}
+###
+GET {{serviceURL}}MasterData
+  ?$count=true
+Authorization: Bearer {{access_token}}
+###
+GET {{serviceURL}}State_66z5a03o60Master
+  ?$count=true
+Authorization: Bearer {{access_token}}
