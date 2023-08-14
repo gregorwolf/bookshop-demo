@@ -190,6 +190,15 @@
           "path": "/sap/opu/odata/sap/ZSOCDS_SRV"
         }
       },
+      "Planned_Events_Sample": {
+        "kind": "odata",
+        "model": "srv/external/Planned_Events_Sample",
+        "credentials": {
+          "destination": "sac",
+          "requestTimeout": 30000,
+          "path": "/api/v1/dataexport/providers/sac/sap.epm.Planned_Events_Sample%3APlanned_Events_Sample"
+        }
+      },
       "xsuaa-api": {
         "kind": "rest",
         "credentials": {

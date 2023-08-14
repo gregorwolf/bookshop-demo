@@ -1,0 +1,739 @@
+{
+  "meta": {
+    "creator": "cds-dk 7.1.0"
+  },
+  "$version": "2.0",
+  "definitions": {
+    "Planned_Events_Sample": {
+      "kind": "service"
+    },
+    "com.sap.cloudDataIntegration.FactData": {
+      "kind": "entity",
+      "@cds.external": true,
+      "@cds.persistence.skip": true,
+      "@DataIntegration.CDataID": "sap.epm.Planned_Events_Sample:Planned_Events_Sample",
+      "elements": {
+        "Account_Planned__66z5a03o60": {
+          "key": true,
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "type": "cds.String",
+          "length": 256
+        },
+        "State_66z5a03o60": {
+          "key": true,
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "type": "cds.String",
+          "length": 256
+        },
+        "City_4t38560363": {
+          "key": true,
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "type": "cds.String",
+          "length": 256
+        },
+        "Event_672z323k1f": {
+          "key": true,
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "type": "cds.String",
+          "length": 256
+        },
+        "Date_5x2a25042z": {
+          "key": true,
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "type": "cds.String",
+          "length": 256
+        },
+        "Version_Planned_66z5a03_V": {
+          "key": true,
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "type": "cds.String",
+          "length": 300
+        },
+        "SignedData": {
+          "@DataIntegration.OriginalDataType": "DECIMAL",
+          "type": "cds.Decimal",
+          "precision": 31,
+          "scale": 7
+        }
+      },
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false,
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.ChangeTracking.Supported": true,
+      "@DataIntegration.Extractable": true,
+      "@Capabilities.FilterRestrictions.Filterable": true,
+      "@Capabilities.FilterRestrictions.FilterExpressionRestrictions": [
+        {
+          "Property": {
+            "$Path": "Account_Planned__66z5a03o60"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "State_66z5a03o60"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "City_4t38560363"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Event_672z323k1f"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Date_5x2a25042z"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Version_Planned_66z5a03_V"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "SignedData"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE"
+          }
+        }
+      ]
+    },
+    "com.sap.cloudDataIntegration.MasterData": {
+      "kind": "entity",
+      "@cds.external": true,
+      "@cds.persistence.skip": true,
+      "@DataIntegration.CDataID": "sap.epm.Planned_Events_Sample:Planned_Events_Sample",
+      "elements": {
+        "Account_Planned__66z5a03o60___ID": {
+          "key": true,
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "ID",
+          "type": "cds.String",
+          "length": 256
+        },
+        "Account_Planned__66z5a03o60___accType": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "ACCOUNT_TYPE",
+          "type": "cds.String",
+          "length": 127
+        },
+        "Account_Planned__66z5a03o60___Description": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "DESCRIPTION",
+          "type": "cds.String",
+          "length": 256
+        },
+        "State_66z5a03o60___ID": {
+          "key": true,
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "ID",
+          "type": "cds.String",
+          "length": 256
+        },
+        "State_66z5a03o60___Description": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "DESCRIPTION",
+          "type": "cds.String",
+          "length": 256
+        },
+        "City_4t38560363___ID": {
+          "key": true,
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "ID",
+          "type": "cds.String",
+          "length": 256
+        },
+        "City_4t38560363___Description": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "DESCRIPTION",
+          "type": "cds.String",
+          "length": 256
+        },
+        "Event_672z323k1f___ID": {
+          "key": true,
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "ID",
+          "type": "cds.String",
+          "length": 256
+        },
+        "Event_672z323k1f___Description": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "DESCRIPTION",
+          "type": "cds.String",
+          "length": 256
+        },
+        "Date_5x2a25042z___ID": {
+          "key": true,
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "ID",
+          "type": "cds.String",
+          "length": 256
+        },
+        "Date_5x2a25042z___Description": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "DESCRIPTION",
+          "type": "cds.String",
+          "length": 256
+        },
+        "Version_Planned_66z5a03_V___ID": {
+          "key": true,
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "ID",
+          "type": "cds.String",
+          "length": 300
+        },
+        "Version_Planned_66z5a03_V___VERSION": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "VERSION",
+          "type": "cds.String",
+          "length": 300
+        },
+        "Version_Planned_66z5a03_V___CATEGORY": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "CATEGORY",
+          "type": "cds.String",
+          "length": 127
+        },
+        "Version_Planned_66z5a03_V___CURRENCY_CONVERSION_CATEGORY": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "CURRENCY_CONVERSION_CATEGORY",
+          "type": "cds.String",
+          "length": 127
+        },
+        "Version_Planned_66z5a03_V___RATE_VERSION": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "RATE_VERSION",
+          "type": "cds.String",
+          "length": 127
+        },
+        "Version_Planned_66z5a03_V___Description": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "DESCRIPTION",
+          "type": "cds.String",
+          "length": 256
+        },
+        "SignedData": {
+          "@DataIntegration.OriginalDataType": "DECIMAL",
+          "type": "cds.Decimal",
+          "precision": 31,
+          "scale": 7
+        }
+      },
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false,
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.ChangeTracking.Supported": false,
+      "@DataIntegration.Extractable": true,
+      "@Capabilities.FilterRestrictions.Filterable": true,
+      "@Capabilities.FilterRestrictions.FilterExpressionRestrictions": [
+        {
+          "Property": {
+            "$Path": "Account_Planned__66z5a03o60___ID"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Account_Planned__66z5a03o60___accType"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Account_Planned__66z5a03o60___Description"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "State_66z5a03o60___ID"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "State_66z5a03o60___Description"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "City_4t38560363___ID"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "City_4t38560363___Description"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Event_672z323k1f___ID"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Event_672z323k1f___Description"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Date_5x2a25042z___ID"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Date_5x2a25042z___Description"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Version_Planned_66z5a03_V___ID"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Version_Planned_66z5a03_V___VERSION"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Version_Planned_66z5a03_V___CATEGORY"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Version_Planned_66z5a03_V___CURRENCY_CONVERSION_CATEGORY"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Version_Planned_66z5a03_V___RATE_VERSION"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Version_Planned_66z5a03_V___Description"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "SignedData"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE"
+          }
+        }
+      ]
+    },
+    "com.sap.cloudDataIntegration.Account_Planned__66z5a03o60Master": {
+      "kind": "entity",
+      "@cds.external": true,
+      "@cds.persistence.skip": true,
+      "@DataIntegration.CDataID": "sap.epm.Planned_Events_Sample:Account_Planned__66z5a03o60",
+      "elements": {
+        "ID": {
+          "key": true,
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "ID",
+          "type": "cds.String",
+          "length": 256
+        },
+        "accType": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "ACCOUNT_TYPE",
+          "type": "cds.String",
+          "length": 127
+        },
+        "Description": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "DESCRIPTION",
+          "type": "cds.String",
+          "length": 256
+        }
+      },
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false,
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.ChangeTracking.Supported": false,
+      "@DataIntegration.Extractable": true,
+      "@Capabilities.FilterRestrictions.Filterable": true,
+      "@Capabilities.FilterRestrictions.FilterExpressionRestrictions": [
+        {
+          "Property": {
+            "$Path": "ID"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "accType"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Description"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        }
+      ]
+    },
+    "com.sap.cloudDataIntegration.State_66z5a03o60Master": {
+      "kind": "entity",
+      "@cds.external": true,
+      "@cds.persistence.skip": true,
+      "@DataIntegration.CDataID": "sap.epm.Planned_Events_Sample:State_66z5a03o60",
+      "elements": {
+        "ID": {
+          "key": true,
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "ID",
+          "type": "cds.String",
+          "length": 256
+        },
+        "Description": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "DESCRIPTION",
+          "type": "cds.String",
+          "length": 256
+        }
+      },
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false,
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.ChangeTracking.Supported": false,
+      "@DataIntegration.Extractable": true,
+      "@Capabilities.FilterRestrictions.Filterable": true,
+      "@Capabilities.FilterRestrictions.FilterExpressionRestrictions": [
+        {
+          "Property": {
+            "$Path": "ID"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Description"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        }
+      ]
+    },
+    "com.sap.cloudDataIntegration.City_4t38560363Master": {
+      "kind": "entity",
+      "@cds.external": true,
+      "@cds.persistence.skip": true,
+      "@DataIntegration.CDataID": "sap.epm.Planned_Events_Sample:City_4t38560363",
+      "elements": {
+        "ID": {
+          "key": true,
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "ID",
+          "type": "cds.String",
+          "length": 256
+        },
+        "Description": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "DESCRIPTION",
+          "type": "cds.String",
+          "length": 256
+        }
+      },
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false,
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.ChangeTracking.Supported": false,
+      "@DataIntegration.Extractable": true,
+      "@Capabilities.FilterRestrictions.Filterable": true,
+      "@Capabilities.FilterRestrictions.FilterExpressionRestrictions": [
+        {
+          "Property": {
+            "$Path": "ID"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Description"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        }
+      ]
+    },
+    "com.sap.cloudDataIntegration.Event_672z323k1fMaster": {
+      "kind": "entity",
+      "@cds.external": true,
+      "@cds.persistence.skip": true,
+      "@DataIntegration.CDataID": "sap.epm.Planned_Events_Sample:Event_672z323k1f",
+      "elements": {
+        "ID": {
+          "key": true,
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "ID",
+          "type": "cds.String",
+          "length": 256
+        },
+        "Description": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "DESCRIPTION",
+          "type": "cds.String",
+          "length": 256
+        }
+      },
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false,
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.ChangeTracking.Supported": false,
+      "@DataIntegration.Extractable": true,
+      "@Capabilities.FilterRestrictions.Filterable": true,
+      "@Capabilities.FilterRestrictions.FilterExpressionRestrictions": [
+        {
+          "Property": {
+            "$Path": "ID"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Description"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        }
+      ]
+    },
+    "com.sap.cloudDataIntegration.Date_5x2a25042zMaster": {
+      "kind": "entity",
+      "@cds.external": true,
+      "@cds.persistence.skip": true,
+      "@DataIntegration.CDataID": "sap.epm.Planned_Events_Sample:Date_5x2a25042z",
+      "elements": {
+        "ID": {
+          "key": true,
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "ID",
+          "type": "cds.String",
+          "length": 256
+        },
+        "Description": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "DESCRIPTION",
+          "type": "cds.String",
+          "length": 256
+        }
+      },
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false,
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.ChangeTracking.Supported": false,
+      "@DataIntegration.Extractable": true,
+      "@Capabilities.FilterRestrictions.Filterable": true,
+      "@Capabilities.FilterRestrictions.FilterExpressionRestrictions": [
+        {
+          "Property": {
+            "$Path": "ID"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Description"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        }
+      ]
+    },
+    "com.sap.cloudDataIntegration.Version_Planned_66z5a03_VMaster": {
+      "kind": "entity",
+      "@cds.external": true,
+      "@cds.persistence.skip": true,
+      "@DataIntegration.CDataID": "sap.epm.Planned_Events_Sample:Version_Planned_66z5a03_V",
+      "elements": {
+        "ID": {
+          "key": true,
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "ID",
+          "type": "cds.String",
+          "length": 300
+        },
+        "VERSION": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "VERSION",
+          "type": "cds.String",
+          "length": 300
+        },
+        "CATEGORY": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "CATEGORY",
+          "type": "cds.String",
+          "length": 127
+        },
+        "CURRENCY_CONVERSION_CATEGORY": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "CURRENCY_CONVERSION_CATEGORY",
+          "type": "cds.String",
+          "length": 127
+        },
+        "RATE_VERSION": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "RATE_VERSION",
+          "type": "cds.String",
+          "length": 127
+        },
+        "Description": {
+          "@DataIntegration.OriginalDataType": "NVARCHAR",
+          "@DataIntegration.PropertyType": "DESCRIPTION",
+          "type": "cds.String",
+          "length": 256
+        }
+      },
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false,
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.ChangeTracking.Supported": false,
+      "@DataIntegration.Extractable": true,
+      "@Capabilities.FilterRestrictions.Filterable": true,
+      "@Capabilities.FilterRestrictions.FilterExpressionRestrictions": [
+        {
+          "Property": {
+            "$Path": "ID"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "VERSION"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "CATEGORY"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "CURRENCY_CONVERSION_CATEGORY"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "RATE_VERSION"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        },
+        {
+          "Property": {
+            "$Path": "Description"
+          },
+          "AllowedExpressions": {
+            "#": "MULTI_RANGE_OR_SEARCH_EXPRESSION"
+          }
+        }
+      ]
+    }
+  }
+}

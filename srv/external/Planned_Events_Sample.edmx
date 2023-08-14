@@ -1,0 +1,1119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:Reference
+    Uri="https://sac-instance.eu10.hcs.cloud.sap/api/v1/dataexport/odata/Org.OData.Core.V1.xml">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="Core"></edmx:Include>
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="https://sac-instance.eu10.hcs.cloud.sap/api/v1/dataexport/odata/Org.OData.Capabilities.V1.xml">
+    <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"></edmx:Include>
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="https://sac-instance.eu10.hcs.cloud.sap/api/v1/dataexport/odata/com.sap.vocabularies.DataIntegration.v1.xml">
+    <edmx:Include Namespace="com.sap.vocabularies.DataIntegration.v1" Alias="Integration"></edmx:Include>
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="com.sap.cloudDataIntegration"
+      Alias="CloudDataIntegration">
+      <EntityType Name="FactData">
+        <Key>
+          <PropertyRef Name="Account_Planned__66z5a03o60" />
+          <PropertyRef Name="State_66z5a03o60" />
+          <PropertyRef Name="City_4t38560363" />
+          <PropertyRef Name="Event_672z323k1f" />
+          <PropertyRef Name="Date_5x2a25042z" />
+          <PropertyRef Name="Version_Planned_66z5a03_V" />
+        </Key>
+        <Property Name="Account_Planned__66z5a03o60" Type="Edm.String" MaxLength="256">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+        </Property>
+        <Property Name="State_66z5a03o60" Type="Edm.String" MaxLength="256">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+        </Property>
+        <Property Name="City_4t38560363" Type="Edm.String" MaxLength="256">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+        </Property>
+        <Property Name="Event_672z323k1f" Type="Edm.String" MaxLength="256">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+        </Property>
+        <Property Name="Date_5x2a25042z" Type="Edm.String" MaxLength="256">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+        </Property>
+        <Property Name="Version_Planned_66z5a03_V" Type="Edm.String" MaxLength="300">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+        </Property>
+        <Property Name="SignedData" Type="Edm.Decimal" MaxLength="32" Precision="31" Scale="7">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>DECIMAL</String>
+          </Annotation>
+        </Property>
+        <Annotation Term="Integration.CDataID">
+          <String>sap.epm.Planned_Events_Sample:Planned_Events_Sample</String>
+        </Annotation>
+      </EntityType>
+      <EntityType Name="MasterData">
+        <Key>
+          <PropertyRef Name="Account_Planned__66z5a03o60___ID" />
+          <PropertyRef Name="State_66z5a03o60___ID" />
+          <PropertyRef Name="City_4t38560363___ID" />
+          <PropertyRef Name="Event_672z323k1f___ID" />
+          <PropertyRef Name="Date_5x2a25042z___ID" />
+          <PropertyRef Name="Version_Planned_66z5a03_V___ID" />
+        </Key>
+        <Property Name="Account_Planned__66z5a03o60___ID" Type="Edm.String" MaxLength="256"
+          Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>ID</String>
+          </Annotation>
+        </Property>
+        <Property Name="Account_Planned__66z5a03o60___accType" Type="Edm.String" MaxLength="127"
+          Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>ACCOUNT_TYPE</String>
+          </Annotation>
+        </Property>
+        <Property Name="Account_Planned__66z5a03o60___Description" Type="Edm.String" MaxLength="256">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>DESCRIPTION</String>
+          </Annotation>
+        </Property>
+        <Property Name="State_66z5a03o60___ID" Type="Edm.String" MaxLength="256" Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>ID</String>
+          </Annotation>
+        </Property>
+        <Property Name="State_66z5a03o60___Description" Type="Edm.String" MaxLength="256">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>DESCRIPTION</String>
+          </Annotation>
+        </Property>
+        <Property Name="City_4t38560363___ID" Type="Edm.String" MaxLength="256" Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>ID</String>
+          </Annotation>
+        </Property>
+        <Property Name="City_4t38560363___Description" Type="Edm.String" MaxLength="256">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>DESCRIPTION</String>
+          </Annotation>
+        </Property>
+        <Property Name="Event_672z323k1f___ID" Type="Edm.String" MaxLength="256" Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>ID</String>
+          </Annotation>
+        </Property>
+        <Property Name="Event_672z323k1f___Description" Type="Edm.String" MaxLength="256">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>DESCRIPTION</String>
+          </Annotation>
+        </Property>
+        <Property Name="Date_5x2a25042z___ID" Type="Edm.String" MaxLength="256" Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>ID</String>
+          </Annotation>
+        </Property>
+        <Property Name="Date_5x2a25042z___Description" Type="Edm.String" MaxLength="256">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>DESCRIPTION</String>
+          </Annotation>
+        </Property>
+        <Property Name="Version_Planned_66z5a03_V___ID" Type="Edm.String" MaxLength="300" Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>ID</String>
+          </Annotation>
+        </Property>
+        <Property Name="Version_Planned_66z5a03_V___VERSION" Type="Edm.String" MaxLength="300"
+          Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>VERSION</String>
+          </Annotation>
+        </Property>
+        <Property Name="Version_Planned_66z5a03_V___CATEGORY" Type="Edm.String" MaxLength="127"
+          Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>CATEGORY</String>
+          </Annotation>
+        </Property>
+        <Property Name="Version_Planned_66z5a03_V___CURRENCY_CONVERSION_CATEGORY" Type="Edm.String"
+          MaxLength="127" Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>CURRENCY_CONVERSION_CATEGORY</String>
+          </Annotation>
+        </Property>
+        <Property Name="Version_Planned_66z5a03_V___RATE_VERSION" Type="Edm.String" MaxLength="127"
+          Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>RATE_VERSION</String>
+          </Annotation>
+        </Property>
+        <Property Name="Version_Planned_66z5a03_V___Description" Type="Edm.String" MaxLength="256">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>DESCRIPTION</String>
+          </Annotation>
+        </Property>
+        <Property Name="SignedData" Type="Edm.Decimal" MaxLength="32" Precision="31" Scale="7">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>DECIMAL</String>
+          </Annotation>
+        </Property>
+        <Annotation Term="Integration.CDataID">
+          <String>sap.epm.Planned_Events_Sample:Planned_Events_Sample</String>
+        </Annotation>
+      </EntityType>
+      <EntityType Name="Account_Planned__66z5a03o60Master">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.String" MaxLength="256" Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>ID</String>
+          </Annotation>
+        </Property>
+        <Property Name="accType" Type="Edm.String" MaxLength="127" Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>ACCOUNT_TYPE</String>
+          </Annotation>
+        </Property>
+        <Property Name="Description" Type="Edm.String" MaxLength="256">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>DESCRIPTION</String>
+          </Annotation>
+        </Property>
+        <Annotation Term="Integration.CDataID">
+          <String>sap.epm.Planned_Events_Sample:Account_Planned__66z5a03o60</String>
+        </Annotation>
+      </EntityType>
+      <EntityType Name="State_66z5a03o60Master">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.String" MaxLength="256" Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>ID</String>
+          </Annotation>
+        </Property>
+        <Property Name="Description" Type="Edm.String" MaxLength="256">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>DESCRIPTION</String>
+          </Annotation>
+        </Property>
+        <Annotation Term="Integration.CDataID">
+          <String>sap.epm.Planned_Events_Sample:State_66z5a03o60</String>
+        </Annotation>
+      </EntityType>
+      <EntityType Name="City_4t38560363Master">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.String" MaxLength="256" Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>ID</String>
+          </Annotation>
+        </Property>
+        <Property Name="Description" Type="Edm.String" MaxLength="256">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>DESCRIPTION</String>
+          </Annotation>
+        </Property>
+        <Annotation Term="Integration.CDataID">
+          <String>sap.epm.Planned_Events_Sample:City_4t38560363</String>
+        </Annotation>
+      </EntityType>
+      <EntityType Name="Event_672z323k1fMaster">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.String" MaxLength="256" Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>ID</String>
+          </Annotation>
+        </Property>
+        <Property Name="Description" Type="Edm.String" MaxLength="256">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>DESCRIPTION</String>
+          </Annotation>
+        </Property>
+        <Annotation Term="Integration.CDataID">
+          <String>sap.epm.Planned_Events_Sample:Event_672z323k1f</String>
+        </Annotation>
+      </EntityType>
+      <EntityType Name="Date_5x2a25042zMaster">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.String" MaxLength="256" Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>ID</String>
+          </Annotation>
+        </Property>
+        <Property Name="Description" Type="Edm.String" MaxLength="256">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>DESCRIPTION</String>
+          </Annotation>
+        </Property>
+        <Annotation Term="Integration.CDataID">
+          <String>sap.epm.Planned_Events_Sample:Date_5x2a25042z</String>
+        </Annotation>
+      </EntityType>
+      <EntityType Name="Version_Planned_66z5a03_VMaster">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.String" MaxLength="300" Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>ID</String>
+          </Annotation>
+        </Property>
+        <Property Name="VERSION" Type="Edm.String" MaxLength="300" Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>VERSION</String>
+          </Annotation>
+        </Property>
+        <Property Name="CATEGORY" Type="Edm.String" MaxLength="127" Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>CATEGORY</String>
+          </Annotation>
+        </Property>
+        <Property Name="CURRENCY_CONVERSION_CATEGORY" Type="Edm.String" MaxLength="127" Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>CURRENCY_CONVERSION_CATEGORY</String>
+          </Annotation>
+        </Property>
+        <Property Name="RATE_VERSION" Type="Edm.String" MaxLength="127" Scale="0">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>RATE_VERSION</String>
+          </Annotation>
+        </Property>
+        <Property Name="Description" Type="Edm.String" MaxLength="256">
+          <Annotation Term="Integration.OriginalDataType">
+            <String>NVARCHAR</String>
+          </Annotation>
+          <Annotation Term="Integration.PropertyType">
+            <String>DESCRIPTION</String>
+          </Annotation>
+        </Property>
+        <Annotation Term="Integration.CDataID">
+          <String>sap.epm.Planned_Events_Sample:Version_Planned_66z5a03_V</String>
+        </Annotation>
+      </EntityType>
+      <EntityContainer Name="sap.epm.Planned_Events_Sample:Planned_Events_Sample">
+        <EntitySet Name="FactData" EntityType="CloudDataIntegration.FactData"></EntitySet>
+        <EntitySet Name="MasterData" EntityType="CloudDataIntegration.MasterData"></EntitySet>
+        <EntitySet Name="Account_Planned__66z5a03o60Master"
+          EntityType="CloudDataIntegration.Account_Planned__66z5a03o60Master"></EntitySet>
+        <EntitySet Name="State_66z5a03o60Master"
+          EntityType="CloudDataIntegration.State_66z5a03o60Master"></EntitySet>
+        <EntitySet Name="City_4t38560363Master"
+          EntityType="CloudDataIntegration.City_4t38560363Master"></EntitySet>
+        <EntitySet Name="Event_672z323k1fMaster"
+          EntityType="CloudDataIntegration.Event_672z323k1fMaster"></EntitySet>
+        <EntitySet Name="Date_5x2a25042zMaster"
+          EntityType="CloudDataIntegration.Date_5x2a25042zMaster"></EntitySet>
+        <EntitySet Name="Version_Planned_66z5a03_VMaster"
+          EntityType="CloudDataIntegration.Version_Planned_66z5a03_VMaster"></EntitySet>
+        <Annotation Term="Integration.SourceSystem">
+          <String>DataService</String>
+        </Annotation>
+      </EntityContainer>
+      <Annotations Target="CloudDataIntegration.FactData">
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record>
+            <PropertyValue Property="Insertable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record>
+            <PropertyValue Property="Updatable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record>
+            <PropertyValue Property="Deletable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.ChangeTracking">
+          <Record>
+            <PropertyValue Property="Supported">
+              <Bool>true</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Integration.Extractable">
+          <Bool>true</Bool>
+        </Annotation>
+        <Annotation Term="Capabilities.FilterRestrictions">
+          <Record>
+            <PropertyValue Property="Filterable">
+              <Bool>true</Bool>
+            </PropertyValue>
+            <PropertyValue Property="FilterExpressionRestrictions">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Account_Planned__66z5a03o60</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>State_66z5a03o60</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>City_4t38560363</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Event_672z323k1f</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Date_5x2a25042z</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Version_Planned_66z5a03_V</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>SignedData</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE</EnumMember>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CloudDataIntegration.MasterData">
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record>
+            <PropertyValue Property="Insertable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record>
+            <PropertyValue Property="Updatable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record>
+            <PropertyValue Property="Deletable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.ChangeTracking">
+          <Record>
+            <PropertyValue Property="Supported">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Integration.Extractable">
+          <Bool>true</Bool>
+        </Annotation>
+        <Annotation Term="Capabilities.FilterRestrictions">
+          <Record>
+            <PropertyValue Property="Filterable">
+              <Bool>true</Bool>
+            </PropertyValue>
+            <PropertyValue Property="FilterExpressionRestrictions">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Account_Planned__66z5a03o60___ID</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Account_Planned__66z5a03o60___accType</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Account_Planned__66z5a03o60___Description</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>State_66z5a03o60___ID</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>State_66z5a03o60___Description</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>City_4t38560363___ID</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>City_4t38560363___Description</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Event_672z323k1f___ID</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Event_672z323k1f___Description</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Date_5x2a25042z___ID</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Date_5x2a25042z___Description</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Version_Planned_66z5a03_V___ID</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Version_Planned_66z5a03_V___VERSION</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Version_Planned_66z5a03_V___CATEGORY</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Version_Planned_66z5a03_V___CURRENCY_CONVERSION_CATEGORY</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Version_Planned_66z5a03_V___RATE_VERSION</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Version_Planned_66z5a03_V___Description</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>SignedData</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE</EnumMember>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CloudDataIntegration.Account_Planned__66z5a03o60Master">
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record>
+            <PropertyValue Property="Insertable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record>
+            <PropertyValue Property="Updatable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record>
+            <PropertyValue Property="Deletable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.ChangeTracking">
+          <Record>
+            <PropertyValue Property="Supported">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Integration.Extractable">
+          <Bool>true</Bool>
+        </Annotation>
+        <Annotation Term="Capabilities.FilterRestrictions">
+          <Record>
+            <PropertyValue Property="Filterable">
+              <Bool>true</Bool>
+            </PropertyValue>
+            <PropertyValue Property="FilterExpressionRestrictions">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>ID</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>accType</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Description</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CloudDataIntegration.State_66z5a03o60Master">
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record>
+            <PropertyValue Property="Insertable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record>
+            <PropertyValue Property="Updatable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record>
+            <PropertyValue Property="Deletable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.ChangeTracking">
+          <Record>
+            <PropertyValue Property="Supported">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Integration.Extractable">
+          <Bool>true</Bool>
+        </Annotation>
+        <Annotation Term="Capabilities.FilterRestrictions">
+          <Record>
+            <PropertyValue Property="Filterable">
+              <Bool>true</Bool>
+            </PropertyValue>
+            <PropertyValue Property="FilterExpressionRestrictions">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>ID</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Description</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CloudDataIntegration.City_4t38560363Master">
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record>
+            <PropertyValue Property="Insertable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record>
+            <PropertyValue Property="Updatable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record>
+            <PropertyValue Property="Deletable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.ChangeTracking">
+          <Record>
+            <PropertyValue Property="Supported">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Integration.Extractable">
+          <Bool>true</Bool>
+        </Annotation>
+        <Annotation Term="Capabilities.FilterRestrictions">
+          <Record>
+            <PropertyValue Property="Filterable">
+              <Bool>true</Bool>
+            </PropertyValue>
+            <PropertyValue Property="FilterExpressionRestrictions">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>ID</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Description</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CloudDataIntegration.Event_672z323k1fMaster">
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record>
+            <PropertyValue Property="Insertable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record>
+            <PropertyValue Property="Updatable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record>
+            <PropertyValue Property="Deletable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.ChangeTracking">
+          <Record>
+            <PropertyValue Property="Supported">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Integration.Extractable">
+          <Bool>true</Bool>
+        </Annotation>
+        <Annotation Term="Capabilities.FilterRestrictions">
+          <Record>
+            <PropertyValue Property="Filterable">
+              <Bool>true</Bool>
+            </PropertyValue>
+            <PropertyValue Property="FilterExpressionRestrictions">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>ID</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Description</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CloudDataIntegration.Date_5x2a25042zMaster">
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record>
+            <PropertyValue Property="Insertable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record>
+            <PropertyValue Property="Updatable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record>
+            <PropertyValue Property="Deletable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.ChangeTracking">
+          <Record>
+            <PropertyValue Property="Supported">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Integration.Extractable">
+          <Bool>true</Bool>
+        </Annotation>
+        <Annotation Term="Capabilities.FilterRestrictions">
+          <Record>
+            <PropertyValue Property="Filterable">
+              <Bool>true</Bool>
+            </PropertyValue>
+            <PropertyValue Property="FilterExpressionRestrictions">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>ID</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Description</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CloudDataIntegration.Version_Planned_66z5a03_VMaster">
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record>
+            <PropertyValue Property="Insertable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record>
+            <PropertyValue Property="Updatable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record>
+            <PropertyValue Property="Deletable">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.ChangeTracking">
+          <Record>
+            <PropertyValue Property="Supported">
+              <Bool>false</Bool>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Integration.Extractable">
+          <Bool>true</Bool>
+        </Annotation>
+        <Annotation Term="Capabilities.FilterRestrictions">
+          <Record>
+            <PropertyValue Property="Filterable">
+              <Bool>true</Bool>
+            </PropertyValue>
+            <PropertyValue Property="FilterExpressionRestrictions">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>ID</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>VERSION</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>CATEGORY</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>CURRENCY_CONVERSION_CATEGORY</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>RATE_VERSION</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property">
+                    <Path>Description</Path>
+                  </PropertyValue>
+                  <PropertyValue Property="AllowedExpressions">
+                    <EnumMember>MULTI_RANGE_OR_SEARCH_EXPRESSION</EnumMember>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
