@@ -29,20 +29,11 @@
       "cwd": "${workspaceFolder}/standalone-v2-proxy"
     },
     {
-      "type": "node",
-      "request": "launch",
       "name": "cds run hybrid",
-      "args": ["run"],
-      "env": { "NODE_ENV": "hybrid" },
-      "cwd": "${workspaceFolder}",
-      "program": "${workspaceFolder}/node_modules/@sap/cds/bin/cds.js",
-      "skipFiles": [
-        "<node_internals>/**/*.js",
-        "**/cds-reflect/lib/index.js",
-        "**/cds/lib/index.js",
-        "**/.vscode/cds.js"
-      ],
-      "console": "internalConsole"
+      "command": "cds watch --profile hybrid",
+      "request": "launch",
+      "type": "node-terminal",
+      "skipFiles": ["<node_internals>/**"]
     },
     {
       "name": "cds run",
