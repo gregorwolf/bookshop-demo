@@ -196,7 +196,7 @@
         "credentials": {
           "destination": "sac",
           "requestTimeout": 30000,
-          "path": "/api/v1/dataexport/providers/sac/sap.epm.Planned_Events_Sample%3APlanned_Events_Sample"
+          "path": "/api/v1/dataexport/providers/sac/sap.epm.Planned_Events_Sample:Planned_Events_Sample"
         }
       },
       "xsuaa-api": {

@@ -17,7 +17,9 @@ Authorization: Bearer {{access_token}}
 x-csrf-token: fetch
 ### Read Token to Variable
 @csrf={{getCSRF.response.headers.x-csrf-token}}
-
+###
+GET {{$dotenv sac_endpoint}}/api/v1/dataexport/administration/
+Authorization: Bearer {{access_token}}
 ###
 GET {{$dotenv sac_endpoint}}/api/v1/dataexport/administration/$metadata
 Authorization: Bearer {{access_token}}
@@ -33,6 +35,9 @@ GET {{$dotenv sac_endpoint}}/api/v1/dataexport/administration/Namespaces(Namespa
 Authorization: Bearer {{access_token}}
 ###
 @serviceURL = {{requestProviders.response.body.$.value[0].ServiceURL}}
+###
+GET {{$dotenv sac_endpoint}}/api/v1/dataexport/providers/sac/sap.epm.Planned_Events_Sample%3APlanned_Events_Sample/
+Authorization: Bearer {{access_token}}
 ###
 GET {{serviceURL}}
 Authorization: Bearer {{access_token}}
@@ -58,6 +63,13 @@ Authorization: Basic admin:
 ### 
 GET http://localhost:4004/sac/
 Authorization: Basic admin:
+getEntities
 ### 
-GET http://localhost:4004/sac/State
+GET http://localhost:4004/sac/getEntities()
+Authorization: Basic admin:
+### 
+GET http://localhost:4004/sac/getStates()
+Authorization: Basic admin:
+### 
+GET http://localhost:4004/sac/States
 Authorization: Basic admin:

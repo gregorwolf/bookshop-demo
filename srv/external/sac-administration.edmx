@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference
+        Uri="https://sac-instance.hcs.cloud.sap/api/v1/dataexport/odata/Org.OData.Core.V1.xml">
+        <edmx:Include Namespace="Org.OData.Core.V1" Alias="Core"></edmx:Include>
+    </edmx:Reference>
+    <edmx:Reference
+        Uri="https://sac-instance.hcs.cloud.sap/api/v1/dataexport/odata/Org.OData.Capabilities.V1.xml">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"></edmx:Include>
+    </edmx:Reference>
+    <edmx:Reference
+        Uri="https://sac-instance.hcs.cloud.sap/api/v1/dataexport/odata/com.sap.vocabularies.DataIntegration.v1.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.DataIntegration.v1" Alias="Integration"></edmx:Include>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm"
+            Namespace="com.sap.cloudDataIntegration">
+            <EntityType Name="Namespace">
+                <Key>
+                    <PropertyRef Name="NamespaceID" />
+                </Key>
+                <Property Name="NamespaceID" Type="Edm.String" MaxLength="256"></Property>
+                <Property Name="Description" Type="Edm.String" MaxLength="512"></Property>
+                <NavigationProperty Name="Providers"
+                    Type="Collection(com.sap.cloudDataIntegration.Provider)">
+                    <ReferentialConstraint Property="NamespaceID" ReferencedProperty="NamespaceID"></ReferentialConstraint>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Provider">
+                <Key>
+                    <PropertyRef Name="ProviderID" />
+                    <PropertyRef Name="NamespaceID" />
+                </Key>
+                <Property Name="ProviderID" Type="Edm.String" MaxLength="256"></Property>
+                <Property Name="ProviderName" Type="Edm.String" MaxLength="256"></Property>
+                <Property Name="NamespaceID" Type="Edm.String" MaxLength="256"></Property>
+                <Property Name="Description" Type="Edm.String" MaxLength="512"></Property>
+                <Property Name="ServiceURL" Type="Edm.String" MaxLength="2048"></Property>
+                <NavigationProperty Name="Namespace" Type="com.sap.cloudDataIntegration.Namespace">
+                    <ReferentialConstraint Property="NamespaceID" ReferencedProperty="NamespaceID"></ReferentialConstraint>
+                </NavigationProperty>
+                <NavigationProperty Name="Subscriptions"
+                    Type="Collection(com.sap.cloudDataIntegration.Subscription)">
+                    <ReferentialConstraint Property="NamespaceID" ReferencedProperty="NamespaceID"></ReferentialConstraint>
+                    <ReferentialConstraint Property="ProviderID" ReferencedProperty="ProviderID"></ReferentialConstraint>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Subscription">
+                <Key>
+                    <PropertyRef Name="NamespaceID" />
+                    <PropertyRef Name="ProviderID" />
+                    <PropertyRef Name="SubscriptionID" />
+                </Key>
+                <Property Name="NamespaceID" Type="Edm.String" MaxLength="256"></Property>
+                <Property Name="ProviderID" Type="Edm.String" MaxLength="256"></Property>
+                <Property Name="EntitySetName" Type="Edm.String" MaxLength="256"></Property>
+                <Property Name="SubscriptionID" Type="Edm.String" MaxLength="256"></Property>
+                <Property Name="ExternalID" Type="Edm.String" MaxLength="256"></Property>
+                <Property Name="ChainID" Type="Edm.String" MaxLength="256"></Property>
+                <Property Name="PreviousSubscriptionID" Type="Edm.String" MaxLength="256"></Property>
+                <Property Name="Filter" Type="Edm.String" MaxLength="100000"></Property>
+                <Property Name="Selection" Type="Edm.String" MaxLength="100000"></Property>
+                <Property Name="Description" Type="Edm.String" MaxLength="512"></Property>
+                <Property Name="StartTime" Type="Edm.DateTimeOffset" MaxLength="256"></Property>
+                <Property Name="EndTime" Type="Edm.DateTimeOffset" MaxLength="256"></Property>
+                <Property Name="LastAccessed" Type="Edm.DateTimeOffset" MaxLength="256"></Property>
+                <Property Name="CurrentDeltaLink" Type="Edm.String" MaxLength="2048"></Property>
+                <Property Name="Timezone" Type="Edm.String" MaxLength="6"></Property>
+                <Property Name="EntityCount" Type="Edm.Int32"></Property>
+                <Property Name="Created_By" Type="Edm.String" MaxLength="256"></Property>
+                <Property Name="Data_Acquisition_User" Type="Edm.String" MaxLength="256"></Property>
+                <NavigationProperty Name="Provider" Type="com.sap.cloudDataIntegration.Provider">
+                    <ReferentialConstraint Property="NamespaceID" ReferencedProperty="NamespaceID"></ReferentialConstraint>
+                    <ReferentialConstraint Property="ProviderID" ReferencedProperty="ProviderID"></ReferentialConstraint>
+                </NavigationProperty>
+            </EntityType>
+            <EntityContainer Name="Administration">
+                <EntitySet Name="Namespaces" EntityType="com.sap.cloudDataIntegration.Namespace">
+                    <NavigationPropertyBinding Path="Providers" Target="Providers" />
+                    <Annotation>
+                        <Record>
+                            <PropertyValue Property="Insertable">
+                                <Bool>false</Bool>
+                            </PropertyValue>
+                        </Record>
+                    </Annotation>
+                    <Annotation>
+                        <Record>
+                            <PropertyValue Property="Updatable">
+                                <Bool>false</Bool>
+                            </PropertyValue>
+                        </Record>
+                    </Annotation>
+                    <Annotation>
+                        <Record>
+                            <PropertyValue Property="Deletable">
+                                <Bool>false</Bool>
+                            </PropertyValue>
+                        </Record>
+                    </Annotation>
+                </EntitySet>
+                <EntitySet Name="Providers" EntityType="com.sap.cloudDataIntegration.Provider">
+                    <NavigationPropertyBinding Path="Namespace" Target="Namespaces" />
+                    <NavigationPropertyBinding Path="Subscriptions" Target="Subscriptions" />
+                    <Annotation>
+                        <Record>
+                            <PropertyValue Property="Insertable">
+                                <Bool>false</Bool>
+                            </PropertyValue>
+                        </Record>
+                    </Annotation>
+                    <Annotation>
+                        <Record>
+                            <PropertyValue Property="Updatable">
+                                <Bool>false</Bool>
+                            </PropertyValue>
+                        </Record>
+                    </Annotation>
+                    <Annotation>
+                        <Record>
+                            <PropertyValue Property="Deletable">
+                                <Bool>false</Bool>
+                            </PropertyValue>
+                        </Record>
+                    </Annotation>
+                </EntitySet>
+                <EntitySet Name="Subscriptions"
+                    EntityType="com.sap.cloudDataIntegration.Subscription">
+                    <NavigationPropertyBinding Path="Provider" Target="Providers" />
+                    <Annotation>
+                        <Record>
+                            <PropertyValue Property="Insertable">
+                                <Bool>true</Bool>
+                            </PropertyValue>
+                        </Record>
+                    </Annotation>
+                    <Annotation>
+                        <Record>
+                            <PropertyValue Property="Updatable">
+                                <Bool>false</Bool>
+                            </PropertyValue>
+                        </Record>
+                    </Annotation>
+                    <Annotation>
+                        <Record>
+                            <PropertyValue Property="Deletable">
+                                <Bool>true</Bool>
+                            </PropertyValue>
+                        </Record>
+                    </Annotation>
+                </EntitySet>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
