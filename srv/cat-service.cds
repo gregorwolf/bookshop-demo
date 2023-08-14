@@ -114,4 +114,21 @@ service CatalogService @(impl: './cat-service.js') {
     LastChangedDateTime
   };
 
+  @readonly
+  @odata.singleton
+  entity Userdetails {
+    key username       : String;
+        authorizations : Association to one Authorizations;
+
+  };
+
+  @readonly
+  @odata.singleton
+  entity Authorizations {
+    key username      : String;
+        is_admin      : Boolean;
+        is_roleadmin  : Boolean;
+        is_booksadmin : Boolean;
+  };
+
 }

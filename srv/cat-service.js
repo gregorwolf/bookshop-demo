@@ -1,6 +1,7 @@
 const { connect } = require("@sap/cds");
 const cds = require("@sap/cds");
 const metering = require("./metering");
+const { getUserdetails, getAuthorizations } = require("./helper/userdetails");
 
 module.exports = async function (srv) {
   const db = await cds.connect.to("db");
@@ -27,8 +28,8 @@ module.exports = async function (srv) {
   });
 
   srv.before("*", "*", async (req) => {
-    metering.beforeHandler(req);
     /*
+    metering.beforeHandler(req);
     const db = await cds.connect.to("db");
     db.before("COMMIT", (req) => {
       console.log("before COMMIT Handler", req);
@@ -94,6 +95,14 @@ module.exports = async function (srv) {
     };
     console.log("User Attributes: ", req.user.attr);
     return users;
+  });
+
+  srv.on("READ", "Userdetails", (req) => {
+    return getUserdetails(req);
+  });
+
+  srv.on("READ", "Authorizations", (req) => {
+    return getAuthorizations(req);
   });
 
   srv.on("getNumberOfBooksForDynamicTile", (req) => {

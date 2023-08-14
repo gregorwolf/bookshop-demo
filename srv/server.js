@@ -127,7 +127,8 @@ cds.on("bootstrap", async (app) => {
   await app.get("/api/getData", function (req, res) {
     console.log("===> Endpoint has been reached. Now checking authorization");
     const MY_SCOPE = xsuaaCredentials.xsappname + ".admin"; // scope name copied from xs-security.json
-    if (req.authInfo.checkScope(MY_SCOPE)) {
+    console.log("===> MY_SCOPE: " + MY_SCOPE);
+    if (req.authInfo?.checkScope(MY_SCOPE)) {
       res.send(
         "The endpoint was properly called, role available, delivering data"
       );

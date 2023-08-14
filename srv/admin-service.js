@@ -8,6 +8,7 @@ const { executeHttpRequest, getDestination } = require("@sap-cloud-sdk/core");
 const qs = require("qs");
 const axios = require("axios");
 const { cf } = require("cf-http-client");
+const { getUserdetails, getAuthorizations } = require("./helper/userdetails");
 
 function getJobscheduler(req) {
   xsenv.loadEnv();
@@ -175,17 +176,7 @@ module.exports = async function (srv) {
   });
 
   srv.on("READ", "Userdetails", (req) => {
-    const userdetails = {
-      username: req.user.id,
-    };
-    // check for $expand=authorizations
-    const expandIndex = req.query.SELECT.columns.findIndex(
-      ({ expand, ref }) => expand && ref[0] === "authorizations"
-    );
-    if (expandIndex < 0) return userdetails;
-    userdetails.authorizations = getAuthorizations(req);
-
-    return userdetails;
+    return getUserdetails(req);
   });
 
   srv.on("READ", "Authorizations", (req) => {
@@ -791,12 +782,3 @@ module.exports = async function (srv) {
   }
 */
 };
-
-function getAuthorizations(req) {
-  return {
-    username: req.user.id,
-    is_admin: req.user.is("admin"),
-    is_roleadmin: req.user.is("roleadmin"),
-    is_booksadmin: req.user.is("booksadmin"),
-  };
-}
