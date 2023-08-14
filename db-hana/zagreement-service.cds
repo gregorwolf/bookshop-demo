@@ -1,29 +1,29 @@
 using {agreement} from '../db/agreement';
 
-service ZAgreementService @(path : '/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS') {
+service ZAgreementService @(path: '/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS') {
   @readonly
-  @Aggregation.ApplySupported          : {
-    Transformations : [
+  @Aggregation.ApplySupported         : {
+    Transformations: [
       'aggregate',
       'groupby',
       'filter'
     ],
-    Rollup          : #None
+    Rollup         : #None
   }
-  @Capabilities.FilterRestrictions     : {NonFilterableProperties : [keyDate]}
-  @Capabilities.NavigationRestrictions : {RestrictedProperties : [
-    {NavigationProperty : {$value : Parameters}},
-    {FilterRestrictions : {Filterable : false}}
+  @Capabilities.FilterRestrictions    : {NonFilterableProperties: [keyDate]}
+  @Capabilities.NavigationRestrictions: {RestrictedProperties: [
+    {NavigationProperty: {$value: Parameters}},
+    {FilterRestrictions: {Filterable: false}}
   ]}
-  @Capabilities.SortRestrictions       : {NonSortableProperties : [keyDate]}
+  @Capabilities.SortRestrictions      : {NonSortableProperties: [keyDate]}
   entity Z_C_AItemPricingForKeyDate(keyDate : Date not null) as
     select
       key : keyDate                    as keyDate : Date,
       key AgreementItemPricing.ID,
           AgreementItemPricing.item.ID as Item,
-          @title : '{i18n>validFrom}'
+          @title: '{i18n>validFrom}'
           AgreementItemPricing.validFrom,
-          @title : '{i18n>validTo}'
+          @title: '{i18n>validTo}'
           AgreementItemPricing.validTo
     from agreement.AgreementItemPricing
     where
@@ -31,24 +31,24 @@ service ZAgreementService @(path : '/sap/Z_C_AITEMPRICINGFORKEYDATE_CDS') {
       and AgreementItemPricing.validTo   >= : keyDate;
 }
 
-annotate ZAgreementService.Z_C_AItemPricingForKeyDate @(UI.SelectionVariant #params : {
-  SelectOptions : [],
-  Parameters    : [{
-    $Type         : 'UI.Parameter',
-    PropertyName  : keyDate,
-    PropertyValue : 'TODAY'
+annotate ZAgreementService.Z_C_AItemPricingForKeyDate @(UI.SelectionVariant #params: {
+  SelectOptions: [],
+  Parameters   : [{
+    $Type        : 'UI.Parameter',
+    PropertyName : keyDate,
+    PropertyValue: 'TODAY'
   }]
 });
 
-annotate ZAgreementService.Z_C_AItemPricingForKeyDate with @(UI : {
-  SelectionFields : [
+annotate ZAgreementService.Z_C_AItemPricingForKeyDate with @(UI: {
+  SelectionFields: [
     keyDate,
     ID,
   ],
-  LineItem        : [
-    {Value : ID, },
-    {Value : Item, },
-    {Value : validFrom, },
-    {Value : validTo, },
+  LineItem       : [
+    {Value: ID, },
+    {Value: Item, },
+    {Value: validFrom, },
+    {Value: validTo, },
   ]
 }) {};
