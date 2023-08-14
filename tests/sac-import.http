@@ -38,6 +38,10 @@ Authorization: Bearer {{access_token}}
 GET {{factData}}
 Authorization: Bearer {{access_token}}
 ###
+# @name requestMasterData
+GET {{masterData}}
+Authorization: Bearer {{access_token}}
+###
 # @name requestMasterFactData
 GET {{masterFactData}}
 Authorization: Bearer {{access_token}}
@@ -46,7 +50,7 @@ Authorization: Bearer {{access_token}}
 GET {{metadataUrl}}
 Authorization: Bearer {{access_token}}
 ###
-# @name requestMasterData
+# @name requestMasterDataJob
 POST {{masterData}}
 Authorization: Bearer {{access_token}}
 x-csrf-token: {{csrf}}
@@ -54,7 +58,7 @@ Content-Type: application/json
 
 {}
 ###
-@jobID = {{requestMasterData.response.body.$.jobID}}
+@jobID = {{requestMasterDataJob.response.body.$.jobID}}
 ###
 DELETE {{$dotenv sac_endpoint}}/api/v1/dataimport/jobs/{{jobID}}
 Authorization: Bearer {{access_token}}
@@ -90,8 +94,8 @@ Content-Type: application/json
    "Data":[ 
       { 
         "Account_Planned_ID":"1", 
-        "State_ID":"2",
-        "State_Description": "Arizona",
+        "State_ID":"3",
+        "State_Description": "Alaska",
         "City_ID":"3",
         "Event_ID":"4",
         "Date_ID":"202001",

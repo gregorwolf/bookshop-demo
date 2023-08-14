@@ -37,6 +37,9 @@ Authorization: Bearer {{access_token}}
 GET {{serviceURL}}
 Authorization: Bearer {{access_token}}
 ###
+GET {{serviceURL}}$metadata
+Authorization: Bearer {{access_token}}
+###
 GET {{serviceURL}}FactData
   ?$count=true
 Authorization: Bearer {{access_token}}
@@ -48,3 +51,13 @@ Authorization: Bearer {{access_token}}
 GET {{serviceURL}}State_66z5a03o60Master
   ?$count=true
 Authorization: Bearer {{access_token}}
+
+### Read via CAP
+GET http://localhost:4004/sac/$metadata
+Authorization: Basic admin:
+### 
+GET http://localhost:4004/sac/
+Authorization: Basic admin:
+### 
+GET http://localhost:4004/sac/State
+Authorization: Basic admin:
