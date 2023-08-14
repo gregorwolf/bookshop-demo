@@ -94,8 +94,8 @@ Content-Type: application/json
    "Data":[ 
       { 
         "Account_Planned_ID":"1", 
-        "State_ID":"3",
-        "State_Description": "Alaska",
+        "State_ID":"4",
+        "State_Description": "Alabama",
         "City_ID":"3",
         "Event_ID":"4",
         "Date_ID":"202001",
@@ -103,7 +103,9 @@ Content-Type: application/json
       } 
    ] 
 } 
-
+###
+GET {{$dotenv sac_endpoint}}/api/v1/dataimport/jobs/{{jobIDfromList}}
+Authorization: Bearer {{access_token}}
 ###
 POST {{$dotenv sac_endpoint}}/api/v1/dataimport/jobs/{{jobIDfromList}}/validate
 Authorization: Bearer {{access_token}}
@@ -124,3 +126,10 @@ Authorization: Bearer {{access_token}}
 ###
 GET {{$dotenv sac_endpoint}}/api/v1/dataimport/jobs/{{jobIDfromList}}/status
 Authorization: Bearer {{access_token}}
+
+### Write via CAP
+POST http://localhost:4004/sac/importData
+Authorization: Basic admin:
+Content-Type: application/json
+
+{}
