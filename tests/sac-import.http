@@ -38,14 +38,85 @@ Authorization: Bearer {{access_token}}
 GET {{factData}}
 Authorization: Bearer {{access_token}}
 ###
-# @name requestMasterData
-GET {{masterData}}
-Authorization: Bearer {{access_token}}
-###
 # @name requestMasterFactData
 GET {{masterFactData}}
 Authorization: Bearer {{access_token}}
 ###
 # @name requestMetadata
 GET {{metadataUrl}}
+Authorization: Bearer {{access_token}}
+###
+# @name requestMasterData
+POST {{masterData}}
+Authorization: Bearer {{access_token}}
+x-csrf-token: {{csrf}}
+Content-Type: application/json
+
+{}
+###
+@jobID = {{requestMasterData.response.body.$.jobID}}
+###
+DELETE {{$dotenv sac_endpoint}}/api/v1/dataimport/jobs/{{jobID}}
+Authorization: Bearer {{access_token}}
+x-csrf-token: {{csrf}}
+###
+# @name requestJobs
+GET {{$dotenv sac_endpoint}}/api/v1/dataimport/jobs
+Authorization: Bearer {{access_token}}
+###
+@jobIDfromList = {{requestJobs.response.body.$[0].jobID}}
+###
+DELETE {{$dotenv sac_endpoint}}/api/v1/dataimport/jobs/{{jobIDfromList}}
+Authorization: Bearer {{access_token}}
+x-csrf-token: {{csrf}}
+###
+POST {{$dotenv sac_endpoint}}/api/v1/dataimport/jobs/{{jobIDfromList}}
+Authorization: Bearer {{access_token}}
+x-csrf-token: {{csrf}}
+Content-Type: application/json
+
+{ 
+   "Mapping":{ 
+      "Account_Planned__66z5a03o60___ID": "Account_Planned_ID",
+      "State_66z5a03o60___ID": "State_ID",
+      "State_66z5a03o60___Description": "State_Description",
+      "City_4t38560363___ID": "City_ID",
+      "Event_672z323k1f___ID": "Event_ID",
+      "Date_5x2a25042z___ID": "Date_ID",
+      "Version_Planned_66z5a03_V___ID": "Version_Planned_ID"
+   }, 
+   "DefaultValues":{ 
+   }, 
+   "Data":[ 
+      { 
+        "Account_Planned_ID":"1", 
+        "State_ID":"2",
+        "State_Description": "Arizona",
+        "City_ID":"3",
+        "Event_ID":"4",
+        "Date_ID":"202001",
+        "Version_Planned_ID":"1" 
+      } 
+   ] 
+} 
+
+###
+POST {{$dotenv sac_endpoint}}/api/v1/dataimport/jobs/{{jobIDfromList}}/validate
+Authorization: Bearer {{access_token}}
+x-csrf-token: {{csrf}}
+Content-Type: application/json
+
+{}
+###
+POST {{$dotenv sac_endpoint}}/api/v1/dataimport/jobs/{{jobIDfromList}}/run
+Authorization: Bearer {{access_token}}
+x-csrf-token: {{csrf}}
+Content-Type: application/json
+
+{}
+###
+GET {{$dotenv sac_endpoint}}/api/v1/dataimport/jobs/{{jobIDfromList}}/invalidRows
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv sac_endpoint}}/api/v1/dataimport/jobs/{{jobIDfromList}}/status
 Authorization: Bearer {{access_token}}
