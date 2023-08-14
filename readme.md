@@ -214,9 +214,9 @@ Use the REST Client scripts in `tests/job.http`.
 ### Adding XSUAA Authentication
 
 ```sh
-cf create-service xsuaa application bookshop-demo-uaa -c xs-security.json
+cf create-service xsuaa broker bookshop-demo-uaa -c xs-security.json
 cf create-service-key bookshop-demo-uaa bookshop-demo-uaa-key
-cf create-service xsuaa application bookshop-demo-instance2-uaa -c xs-security-instance2.json
+cf create-service xsuaa broker bookshop-demo-instance2-uaa -c xs-security-instance2.json
 cf create-service-key bookshop-demo-instance2-uaa bookshop-demo-instance2-uaa-key
 ```
 
@@ -224,6 +224,30 @@ cf create-service-key bookshop-demo-instance2-uaa bookshop-demo-instance2-uaa-ke
 cds bind -2 bookshop-demo-uaa
 cds bind -2 bookshop-demo-instance2-uaa
 ```
+
+## Manual steps needed for Service Broker
+
+### Generate Broker Credentials
+
+1. Navigate into folder `/broker`
+2. Run command `npm i` in terminal
+3. Run command `npm run init` in terminal
+4. Store the generated credentials in a safe place
+
+### Create `.mtaext` file
+
+1. Copy file `cf-service-broker-template.mtaext` to `cf-service-broker-private.mtaext`
+2. Copy the hashed broker credentials from your safe place into the `cf-service-broker-private.mtaext` file
+
+### Register broker
+
+Build and deploy the MTAR as described in the next step. After the deployment you can register the broker with:
+
+```sh
+cf create-service-broker bookshop-demo-broker broker-user <plain-broker-password> <broker-url> --space-scoped
+```
+
+- The `broker-url` can be read from e.g. the SAP BTP cockpit by navigating to the broker application in the space where it was deployed.
 
 ## Deploy to SAP Cloud Platform - Cloud Foundry Environment
 

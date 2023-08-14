@@ -1,0 +1,17 @@
+{
+  "services": [
+    {
+      "name": "bookshop-demo-api",
+      "description": "API for Bookshop",
+      "bindable": true,
+      "plans": [
+        {
+          "name": "default",
+          "description": "Standard Plan",
+          "id": "6a281e08-1e4d-4a67-9272-3aa223afdd4b"
+        }
+      ],
+      "id": "f5613f83-2f6f-455f-80ce-5a6749b8d982"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 ID: bookshop-demo
-_schema-version: "2.1"
+_schema-version: 3.2.0
 version: 0.0.1
 parameters:
   enable-parallel-deployments: true
@@ -55,7 +55,46 @@ modules:
       - name: bookshop-demo-autoscaler
         parameters:
           path: ./autoscaler.json
-
+  - name: bookshop-demo-api-sb
+    # ------------------------------------------------------------
+    type: nodejs
+    path: broker/
+    build-parameters:
+      builder: npm-ci
+      ignore:
+        ["node_modules/", "default-*.json"]
+    parameters:
+      app-name: bookshop-demo-api-sb-${space}
+      memory: 64MB
+      disk-quota: 1024MB
+    properties:
+      SBF_BROKER_CREDENTIALS_HASH: >
+        {
+          "broker-user": "<is replaced by config in mtaext>"
+        }
+    requires:
+      - name: bookshop-demo-uaa
+      - name: srv_api
+        properties:
+          SBF_SERVICE_CONFIG:
+            bookshop-demo-api:
+              extend_credentials:
+                shared:
+                  apiUrl: ~{url}
+              extend_xssecurity:
+                per_plan:
+                  default:
+                    authorities:
+                      - $XSAPPNAME.admin
+              extend_catalog:
+                metadata:
+                  displayName: Bookshop API ${space}
+          SBF_ENABLE_AUDITLOG: false
+    provides:
+      - name: bookshop-demo-api-sb-srv
+        properties:
+          app-name: ${app-name}
+          srv-url: ${default-url}
   - name: bookshop-demo-destination-content-deployer
     type: com.sap.application.content
     build-parameters:
@@ -216,9 +255,11 @@ resources:
     properties:
       hdi-container-name: ${service-name}
   - name: bookshop-demo-uaa
+    type: org.cloudfoundry.managed-service
     parameters:
+      service: xsuaa
+      service-plan: broker 
       path: ./xs-security.json
-    type: com.sap.xs.uaa
   - name: bookshop-demo-uaa-apiaccess
     type: org.cloudfoundry.managed-service
     parameters:

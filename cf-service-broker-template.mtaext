@@ -1,0 +1,12 @@
+ID: bookshop-demo.service-broker
+_schema-version: 3.2.0
+version: 1.0.0
+extends: bookshop-demo
+
+modules:
+  - name: bookshop-demo-api-sb
+    properties:
+      SBF_BROKER_CREDENTIALS_HASH: >
+        {
+          "broker-user": "<replace with your own hash>"
+        }

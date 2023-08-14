@@ -37,6 +37,7 @@
     "mqtt": "^4",
     "mysql": "^2",
     "passport": "^0",
+    "qs": "^6.11.2",
     "sap-cf-mailer": "^0"
   },
   "devDependencies": {
@@ -67,6 +68,7 @@
     "update:root": "npm update",
     "update:app": "cd app && npm update",
     "update:approuter": "cd approuter && npm update",
+    "update:broker": "cd broker && npm update",
     "update:standalone-v2-proxy": "cd standalone-v2-proxy && npm update",
     "deploy:sqlite:bookshop": "cds deploy --to sqlite:db/bookshop.db --no-save",
     "deploy:sqlite:instance:1": "cds deploy --to sqlite:instance1.db --no-save",
@@ -86,7 +88,7 @@
     "bind:hana": "cds bind -2 bookshop-demo-db --profile hybrid",
     "bind:uaa": "cds bind uaa --to bookshop-demo-uaa --kind xsuaa --profile hybrid",
     "bind:keyuser": "cds bind keyuser --to bookshop-demo-ui5-flexibility-keyuser --kind ui5-flexibility-keyuser --profile hybrid",
-    "create:xsa:uaa": "xs create-service xsuaa space bookshop-demo-uaa -c xs-security.json",
+    "create:xsa:uaa": "xs create-service xsuaa broker bookshop-demo-uaa -c xs-security.json",
     "create:uaa-service-key": "xs create-service-key bookshop-demo-uaa dev",
     "get:uaa-service-key": "xs service-key bookshop-demo-uaa dev",
     "create:cf-uaa-service-key": "cf create-service-key bookshop-demo-uaa dev",
@@ -99,7 +101,7 @@
     "build": "run-s build:clean build:copycsntoproxy",
     "build:clean": "cds build/all --clean",
     "build:xs-security": "cds compile srv/ --to xsuaa > xs-security.json",
-    "build:cf": "cp mta-cf.yaml mta.yaml && mbt build -p=cf && rm mta.yaml",
+    "build:cf": "cp mta-cf.yaml mta.yaml && mbt build -p=cf -e cf-service-broker-private.mtaext && rm mta.yaml",
     "build:xsa": "cp mta-xsa.yaml mta.yaml && mbt build -p=xsa && rm mta.yaml",
     "build:standalone": "cp mta-standAlone.yaml mta.yaml && mbt build -p=xsa && rm mta.yaml",
     "build:copycsntoproxy": "copyfiles -f gen/srv/srv/csn.json standalone-v2-proxy/gen/",

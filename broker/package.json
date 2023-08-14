@@ -1,0 +1,14 @@
+{
+  "name": "bookshop-demo-broker",
+  "version": "0.0.1",
+  "description": "Bookshop Service Broker (@sap/sbf)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "start-broker",
+    "init": "npx gen-catalog-ids && npx hash-broker-password -b"
+  },
+  "dependencies": {
+    "@sap/sbf": "^6.5.9"
+  }
+}
