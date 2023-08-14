@@ -33,10 +33,32 @@ grant_type=password
 GET {{$dotenv api_url}}{{$dotenv api_path}}
 Authorization: Bearer {{access_token}}
 
+### Read userInfo
+GET {{$dotenv api_url}}/api/userInfo
+Authorization: Bearer {{access_token}}
 ### Read getData
 GET {{$dotenv api_url}}/api/getData
 Authorization: Bearer {{access_token}}
-
+### Read Catalog Endpoint
+GET {{$dotenv api_url}}/catalog/
+Accept: application/json
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv api_url}}/catalog/Books
+Accept: application/json
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv api_url}}/catalog/UserScopes
+Accept: application/json
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv api_url}}/catalog/Userdetails
+Accept: application/json
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv api_url}}/catalog/Authorizations
+Accept: application/json
+Authorization: Bearer {{access_token}}
 ### Read Admin Endpoint
 GET {{$dotenv api_url}}/admin/
 Accept: application/json
