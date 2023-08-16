@@ -10,12 +10,25 @@ grant_type=client_credentials
 
 ### Fill Variables from Response
 @access_token = {{requestAccessToken.response.body.$.access_token}}
-
-###
+### Read Collaborations for where the Group TECHNICAL-USER is assigned
+GET {{$dotenv epd_collaboration_url}}/odata/v4/CollaborationService_v1/Collaboration
+Authorization: Bearer {{access_token}}
+### Read Collaborations fora specific Processor (E-Mail)
 # @name collaborations
 GET {{$dotenv epd_collaboration_url}}/odata/v4/CollaborationService_v1/Collaboration
 from: {{$dotenv epd_collaboration_processor}}
 Authorization: Bearer {{access_token}}
+### Create a new Collaboration
+POST {{$dotenv epd_collaboration_url}}/odata/v4/CollaborationService_v1/Collaboration
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "name": "Test - Created by REST Client",
+  "description": "Created via API",
+  "status": "Created",
+  "collaborationType": "Y001"
+}
 ###
 @docCenterRepositoryId = {{collaborations.response.body.$.value[0].$.docCenterRepositoryId}}
 ###
