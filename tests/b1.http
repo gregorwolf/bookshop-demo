@@ -1,0 +1,7 @@
+###
+# @name requestEntity
+GET {{$dotenv b1_url}}{{$dotenv b1_entity}}
+Authorization: Basic {{$dotenv b1_username}}:{{$dotenv b1_password}}
+###
+GET {{$dotenv b1_url}}{{$dotenv b1_nextLink}}
+Authorization: Basic {{$dotenv b1_username}}:{{$dotenv b1_password}}
