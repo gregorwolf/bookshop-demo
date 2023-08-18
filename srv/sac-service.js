@@ -16,6 +16,9 @@ module.exports = async function (srv) {
     const job = await sacImport.post(`/models/${modelID}/masterData`, {});
     const jobID = job.jobID;
     LOG.info("created job with ID: ", jobID);
+    const path = `/jobs/${jobID}`;
+    /*
+    // Sample for the upload as JSON
     const data = {
       Mapping: {
         Account_Planned__66z5a03o60___ID: "Account_Planned_ID",
@@ -39,7 +42,16 @@ module.exports = async function (srv) {
         },
       ],
     };
-    const jobData = await sacImport.post(`/jobs/${jobID}`, data);
+    const jobData = await sacImport.post(path, data);
+    */
+    // Sample for the upload as CSV
+    csv =
+      "Account_Planned__66z5a03o60___ID,State_66z5a03o60___ID,State_66z5a03o60___Description,City_4t38560363___ID,Event_672z323k1f___ID,Date_5x2a25042z___ID,Version_Planned_66z5a03_V___ID\n" +
+      "1,8,Georgia,3,4,202001,1";
+    const jobData = sacImport.send("POST", path, csv, {
+      "Content-Type": "text/csv",
+    });
+    LOG.debug("jobData:", jobData);
     LOG.info("Uploaded data for job");
     let jobStatus = {};
     do {

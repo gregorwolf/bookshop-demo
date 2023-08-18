@@ -110,6 +110,15 @@ Content-Type: application/json
       } 
    ] 
 } 
+
+###
+POST {{$dotenv sac_endpoint}}/api/v1/dataimport/jobs/{{jobIDfromList}}
+Authorization: Bearer {{access_token}}
+x-csrf-token: {{csrf}}
+Content-Type: text/csv
+
+Account_Planned__66z5a03o60___ID,State_66z5a03o60___ID,State_66z5a03o60___Description,City_4t38560363___ID,Event_672z323k1f___ID,Date_5x2a25042z___ID,Version_Planned_66z5a03_V___ID
+1,7,Florida,3,4,202001,1
 ###
 GET {{$dotenv sac_endpoint}}/api/v1/dataimport/jobs/{{jobIDfromList}}
 Authorization: Bearer {{access_token}}
