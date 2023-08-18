@@ -1,3 +1,5 @@
+# https://api.sap.com/api/DataExport_API/overview
+# https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/db62fd76514b48f8b71d695360320f4a.html
 ### Get Access Token using Client Credentials Flow
 # @name requestAccessToken
 POST {{$dotenv sac_token_endpoint}}
@@ -10,6 +12,11 @@ grant_type=client_credentials
 
 ### Fill Variables from Response
 @access_token = {{requestAccessToken.response.body.$.access_token}}
+### 
+# @name getCSRFfromCSRFendpoint
+HEAD {{$dotenv sac_endpoint}}/api/v1/csrf
+Authorization: Bearer {{access_token}}
+x-csrf-token: fetch
 ### As /api/v1/csrf does not work we need to get the token from the /api/v1/dataexport/models endpoint
 # @name getCSRF
 HEAD {{$dotenv sac_endpoint}}/api/v1/dataexport/
