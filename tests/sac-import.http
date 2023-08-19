@@ -17,6 +17,7 @@ grant_type=client_credentials
 GET {{$dotenv sac_endpoint}}/api/v1/csrf
 Authorization: Bearer {{access_token}}
 x-csrf-token: fetch
+Accept: application/json
 ### As /api/v1/csrf does not work we need to get the token from the /api/v1/dataimport/models endpoint
 # @name getCSRF
 HEAD {{$dotenv sac_endpoint}}/api/v1/dataimport/models
