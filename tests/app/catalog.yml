@@ -1,3 +1,4 @@
+# artillery test
 config:
   target: "http://localhost:4004/catalog"
   phases:

@@ -46,7 +46,7 @@
     "@sap/cds-dk": "^7",
     "@sap/datasphere-cli": "^2023.14.0",
     "@sap/graph-toolkit": "^3",
-    "artillery": "^1",
+    "artillery": "2.0.0-36",
     "cds-swagger-ui-express": "^0",
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
@@ -121,6 +121,7 @@
     "watchboth": "run-p watch:**",
     "test": "jest --forceExit",
     "test:hana": "CDS_ENV=hybrid cds bind --exec npm run test",
+    "test:load:catalog": "artillery run tests/app/catalog.yml",
     "cf:uaa:update": "cf update-service bookshop-demo-uaa -c xs-security.json",
     "undeploy:xsa": "xs undeploy bookshop-demo --delete-services --delete-service-brokers",
     "undeploy:cf": "cf undeploy bookshop-demo --delete-service-keys --delete-services --delete-service-brokers"
