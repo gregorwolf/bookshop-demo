@@ -1,0 +1,14 @@
+# artillery test
+config:
+  target: "{{ $processEnvironment.count_target }}"
+  http:
+    timeout: 360
+    maxSockets: 20
+
+scenarios:
+  - flow:
+      - parallel:
+          - get:
+              url: "/Fields/$count?sap-language=EN-US"
+              headers:
+                Authorization: "{{ $processEnvironment.count_authorization }}"

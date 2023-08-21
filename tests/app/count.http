@@ -1,0 +1,10 @@
+###
+GET {{$dotenv count_target}}
+Authorization: {{$dotenv count_authorization}}
+###
+GET {{$dotenv count_target}}/Fields/$count?sap-language=EN-US
+Authorization: {{$dotenv count_authorization}}
+###
+GET {{$dotenv count_target}}/Fields/$count?sap-language=EN-US
+x-approuter-authorization: {{$dotenv count_authorization}}
+Cookie: 

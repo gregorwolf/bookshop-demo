@@ -1,0 +1,86 @@
+# artillery test
+config:
+  target: "{{ $processEnvironment.count_target }}"
+  http:
+    timeout: 360
+    maxSockets: 20
+
+scenarios:
+  - flow:
+      - parallel:
+          - get:
+              url: "/Fields/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
+          - get:
+              url: "/Functions/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
+          - get:
+              url: "/Connections/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
+          - get:
+              url: "/ModelEntities/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
+          - get:
+              url: "/ModelHanas/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
+          - get:
+              url: "/ModelReferences/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
+          - get:
+              url: "/ModelJoins/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
+          - get:
+              url: "/ModelViews/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
+          - get:
+              url: "/ModelCalculations/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
+          - get:
+              url: "/Readers/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
+          - get:
+              url: "/Writers/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
+          - get:
+              url: "/Joins/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
+          - get:
+              url: "/Views/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
+          - get:
+              url: "/Calculations/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
+          - get:
+              url: "/CurrencyConversions/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
+          - get:
+              url: "/UnitConversions/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
+          - get:
+              url: "/Derivations/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
+          - get:
+              url: "/Allocations/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
+          - get:
+              url: "/Environments/$count?sap-language=EN-US"
+              headers:
+                x-approuter-authorization: "{{ $processEnvironment.count_x-approuter-authorization }}"
