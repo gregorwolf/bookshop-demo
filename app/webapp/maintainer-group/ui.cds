@@ -63,16 +63,48 @@ annotate my.Maintainer with @(UI: {
   ]
 }, ) {
   employee @Common: {
-    Text                    : employee.email,
-    TextArrangement         : #TextOnly,
-    ValueListWithFixedValues: false,
-    ValueList               : {
+    Text                     : employee.email,
+    TextArrangement          : #TextOnly,
+    ValueListWithFixedValues : false,
+    ValueListMapping #default: {
       CollectionPath: 'Employees',
+      Label         : 'Default',
       Parameters    : [
         {
           $Type            : 'Common.ValueListParameterInOut',
           LocalDataProperty: employee_ID,
           ValueListProperty: 'ID'
+        },
+        {
+          $Type            : 'Common.ValueListParameterDisplayOnly',
+          ValueListProperty: 'firstName'
+        },
+        {
+          $Type            : 'Common.ValueListParameterDisplayOnly',
+          ValueListProperty: 'lastName'
+        },
+        {
+          $Type            : 'Common.ValueListParameterDisplayOnly',
+          ValueListProperty: 'email'
+        }
+      ]
+    },
+    ValueListMapping #byName : {
+      CollectionPath: 'Employees',
+      Label         : 'By Name',
+      Parameters    : [
+        {
+          $Type            : 'Common.ValueListParameterInOut',
+          LocalDataProperty: employee_ID,
+          ValueListProperty: 'ID'
+        },
+        {
+          $Type            : 'Common.ValueListParameterFilterOnly',
+          ValueListProperty: 'firstName'
+        },
+        {
+          $Type            : 'Common.ValueListParameterFilterOnly',
+          ValueListProperty: 'lastName'
         },
         {
           $Type            : 'Common.ValueListParameterDisplayOnly',
