@@ -28,11 +28,15 @@ grant_type=password
 ### Fill Variables from Response
 #@access_token = {{requestAccessTokenHANA.response.body.$.access_token}}
 
-
+### test API root
+GET {{$dotenv api_url}}
+Authorization: Bearer {{access_token}}
 ### test API endpoint
 GET {{$dotenv api_url}}{{$dotenv api_path}}
 Authorization: Bearer {{access_token}}
-
+###
+GET {{$dotenv api_url}}{{$dotenv api_path}}$metadata
+Authorization: Bearer {{access_token}}
 ### Read userInfo
 GET {{$dotenv api_url}}/api/userInfo
 Authorization: Bearer {{access_token}}
