@@ -77,7 +77,8 @@ service AdminService @(
   entity Genres                  as projection on db.Genres;
 
   @odata.draft.enabled
-  @UI.CreateHidden           : {$edmJson: {$Path: '/AdminService.EntityContainer/Authorizations.is_admin'}}
+  @UI.CreateHidden: {$edmJson: {$Path: '/AdminService.EntityContainer/Authorizations.is_admin'}}
+  /*
   @Common.SideEffects #effect: {
     SourceProperties: [taxPercentage],
     TargetProperties: [
@@ -86,6 +87,7 @@ service AdminService @(
       //VirtualTotalWithTax
     ]
   }
+  */
   entity Orders                  as
     select from db.Orders {
                                                                        @Measures.ISOCurrency    : currency.code
