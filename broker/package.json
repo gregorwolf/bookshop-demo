@@ -9,6 +9,6 @@
     "init": "npx gen-catalog-ids && npx hash-broker-password -b"
   },
   "dependencies": {
-    "@sap/sbf": "^6.5.9"
+    "@sap/sbf": "^6"
   }
 }
