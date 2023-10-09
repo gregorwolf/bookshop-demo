@@ -17,6 +17,7 @@ grant_type=client_credentials
 HEAD {{$dotenv sac_endpoint}}/api/v1/csrf
 Authorization: Bearer {{access_token}}
 x-csrf-token: fetch
+x-sap-sac-custom-auth: true
 ### As /api/v1/csrf does not work we need to get the token from the /api/v1/dataexport/models endpoint
 # @name getCSRF
 HEAD {{$dotenv sac_endpoint}}/api/v1/dataexport/
