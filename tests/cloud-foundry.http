@@ -8,6 +8,7 @@ Content-Type: application/x-www-form-urlencoded
 grant_type=password
 &username={{$dotenv username}}
 &password={{$dotenv password}}
+# &login_hint={"origin":"sap.ids"}
 # According to SAP Note https://launchpad.support.sap.com/#/notes/3140806
 # currently only supported in Feature Set A
 # According to the Roadmap Item "Customer ability to control users and their account access"
