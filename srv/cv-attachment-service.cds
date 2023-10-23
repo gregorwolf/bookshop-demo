@@ -18,3 +18,12 @@ service AttachmentContentService @(path: 'API_CV_ATTACHMENT_SRV') {
     function GetAttachmentCount(BusinessObjectTypeName : String, LinkedSAPObjectKey : String, SemanticObject : String) returns external.AttachmentsCount;
     function GetAllOriginals(BusinessObjectTypeName : String, LinkedSAPObjectKey : String, SemanticObject : String)    returns array of AttachmentContentSet;
 };
+
+
+annotate AttachmentContentService.AttachmentContentSet with {
+    // @Core.MediaType  : MimeType
+    @Core.MediaType  : 'image/png'
+    Content;
+    @Core.IsMediaType: true
+    MimeType;
+};

@@ -102,3 +102,5 @@ Accept: application/json
 @CAPArchiveDocumentID={{capGetAllOriginals.response.body.d.results[0].ArchiveDocumentID}}
 @CAPLinkedSAPObjectKey={{capGetAllOriginals.response.body.d.results[0].LinkedSAPObjectKey}}
 @CAPBusinessObjectTypeName={{capGetAllOriginals.response.body.d.results[0].BusinessObjectTypeName}}
+### Read created document
+GET http://localhost:4004/odata/v2/API_CV_ATTACHMENT_SRV/AttachmentContentSet(DocumentInfoRecordDocType='{{CAPDocumentInfoRecordDocType}}',DocumentInfoRecordDocNumber='{{CAPDocumentInfoRecordDocNumber}}',DocumentInfoRecordDocVersion='',DocumentInfoRecordDocPart='',LogicalDocument='{{CAPLogicalDocument}}',ArchiveDocumentID='{{CAPArchiveDocumentID}}',LinkedSAPObjectKey='{{CAPLinkedSAPObjectKey}}',BusinessObjectTypeName='{{CAPBusinessObjectTypeName}}')/$value
