@@ -234,7 +234,12 @@
       },
       "API_CV_ATTACHMENT_SRV": {
         "kind": "odata-v2",
-        "model": "srv/external/API_CV_ATTACHMENT_SRV"
+        "model": "srv/external/API_CV_ATTACHMENT_SRV",
+        "credentials": {
+          "destination": "S4H",
+          "requestTimeout": 30000,
+          "path": "/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV"
+        }
       },
       "db": {
         "kind": "sqlite",
