@@ -15,4 +15,17 @@ module.exports = async function (srv) {
     });
     return { AttachmentCount: response.GetAttachmentCount.AttachmentCount };
   });
+
+  srv.on("GetAllOriginals", async (req) => {
+    console.log(req.data);
+    const response = await external.send({
+      method: "GET",
+      path:
+        `/GetAllOriginals?` +
+        `BusinessObjectTypeName='${req.data.BusinessObjectTypeName}'` +
+        `&LinkedSAPObjectKey='${req.data.LinkedSAPObjectKey}'` +
+        `&SemanticObject='${req.data.SemanticObject}'`,
+    });
+    return response;
+  });
 };

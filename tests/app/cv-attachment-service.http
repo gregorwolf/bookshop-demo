@@ -82,17 +82,23 @@ Accept: application/json
 ### Returns:
 {
   "d": {
-    "AttachmentCount": 2,
-    "__metadata": {}
-  }
-}
-
-### Should be:
-{
-  "d": {
     "GetAttachmentCount": {
       "AttachmentCount": 0
     }
   }
 }
-### According to https://api.sap.com/api/API_CV_ATTACHMENT_SRV/resource -> Service Operations -> /GetAttachmentCount
+### Read GetAllOriginals via V2 endpoint
+# @name capGetAllOriginals
+GET http://localhost:4004/odata/v2/API_CV_ATTACHMENT_SRV/GetAllOriginals
+  ?BusinessObjectTypeName='{{BusinessObjectTypeName}}'
+  &LinkedSAPObjectKey='{{$dotenv material}}'
+  &SemanticObject=''
+Accept: application/json
+
+### Read result to variable
+@CAPDocumentInfoRecordDocType={{capGetAllOriginals.response.body.d.results[0].DocumentInfoRecordDocType}}
+@CAPDocumentInfoRecordDocNumber={{capGetAllOriginals.response.body.d.results[0].DocumentInfoRecordDocNumber}}
+@CAPLogicalDocument={{capGetAllOriginals.response.body.d.results[0].LogicalDocument}}
+@CAPArchiveDocumentID={{capGetAllOriginals.response.body.d.results[0].ArchiveDocumentID}}
+@CAPLinkedSAPObjectKey={{capGetAllOriginals.response.body.d.results[0].LinkedSAPObjectKey}}
+@CAPBusinessObjectTypeName={{capGetAllOriginals.response.body.d.results[0].BusinessObjectTypeName}}

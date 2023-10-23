@@ -16,5 +16,5 @@ service AttachmentContentService @(path: 'API_CV_ATTACHMENT_SRV') {
     }
 
     function GetAttachmentCount(BusinessObjectTypeName : String, LinkedSAPObjectKey : String, SemanticObject : String) returns external.AttachmentsCount;
-// function GetAllOriginals(BusinessObjectTypeName : String, LinkedSAPObjectKey : String, SemanticObject : String)    returns external.AttachmentContentSet;
+    function GetAllOriginals(BusinessObjectTypeName : String, LinkedSAPObjectKey : String, SemanticObject : String)    returns array of AttachmentContentSet;
 };
