@@ -111,4 +111,4 @@ Accept: application/json
 ### Read created document via V2 endpoint
 GET http://localhost:4004/odata/v2/API_CV_ATTACHMENT_SRV/AttachmentContentSet(DocumentInfoRecordDocType='{{CAPDocumentInfoRecordDocType}}',DocumentInfoRecordDocNumber='{{CAPDocumentInfoRecordDocNumber}}',DocumentInfoRecordDocVersion='',DocumentInfoRecordDocPart='',LogicalDocument='{{CAPLogicalDocument}}',ArchiveDocumentID='{{CAPArchiveDocumentID}}',LinkedSAPObjectKey='{{CAPLinkedSAPObjectKey}}',BusinessObjectTypeName='{{CAPBusinessObjectTypeName}}')/$value
 ### Read created document
-GET http://localhost:4004/API_CV_ATTACHMENT_SRV/AttachmentContentSet
+GET http://localhost:4004/API_CV_ATTACHMENT_SRV/AttachmentContentSet(DocumentInfoRecordDocType='{{CAPDocumentInfoRecordDocType}}',DocumentInfoRecordDocNumber='{{CAPDocumentInfoRecordDocNumber}}',DocumentInfoRecordDocVersion='',DocumentInfoRecordDocPart='',LogicalDocument='{{CAPLogicalDocument}}',ArchiveDocumentID='{{CAPArchiveDocumentID}}',LinkedSAPObjectKey='{{CAPLinkedSAPObjectKey}}',BusinessObjectTypeName='{{CAPBusinessObjectTypeName}}')/Content

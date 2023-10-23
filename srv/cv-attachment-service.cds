@@ -21,8 +21,7 @@ service AttachmentContentService @(path: 'API_CV_ATTACHMENT_SRV') {
 
 
 annotate AttachmentContentService.AttachmentContentSet with {
-    // @Core.MediaType  : MimeType
-    @Core.MediaType  : 'image/png'
+    @Core.MediaType  : MimeType
     Content;
     @Core.IsMediaType: true
     MimeType;

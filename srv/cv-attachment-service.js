@@ -20,16 +20,33 @@ module.exports = async function (srv) {
 
   srv.on("GetAllOriginals", async (req) => {
     LOG.info(req.data);
+    return getAllOriginals(req.data);
+  });
+
+  async function getAllOriginals(data) {
+    let path =
+      `/GetAllOriginals?` +
+      `BusinessObjectTypeName='${data.BusinessObjectTypeName}'` +
+      `&LinkedSAPObjectKey='${data.LinkedSAPObjectKey}'` +
+      `&SemanticObject='${data.SemanticObject}'`;
+    if (data.DocumentInfoRecordDocType) {
+      path += `&DocumentInfoRecordDocType='${data.DocumentInfoRecordDocType}'`;
+    }
+    if (data.DocumentInfoRecordDocNumber) {
+      path += `&DocumentInfoRecordDocNumber='${data.DocumentInfoRecordDocNumber}'`;
+    }
+    if (data.LogicalDocument) {
+      path += `&LogicalDocument='${data.LogicalDocument}'`;
+    }
+    if (data.ArchiveDocumentID) {
+      path += `&ArchiveDocumentID='${data.ArchiveDocumentID}'`;
+    }
     const response = await external.send({
       method: "GET",
-      path:
-        `/GetAllOriginals?` +
-        `BusinessObjectTypeName='${req.data.BusinessObjectTypeName}'` +
-        `&LinkedSAPObjectKey='${req.data.LinkedSAPObjectKey}'` +
-        `&SemanticObject='${req.data.SemanticObject}'`,
+      path,
     });
     return response;
-  });
+  }
 
   srv.on("READ", "AttachmentContentSet", async (req) => {
     LOG.info(req.data);
@@ -53,39 +70,11 @@ module.exports = async function (srv) {
         method: "GET",
         responseType: "arraybuffer",
       });
-      return { value: Readable.from(getResponse.data) };
-    } else {
-      return [
-        {
-          DocumentInfoRecordDocType: "GOS",
-          DocumentInfoRecordDocNumber: "EXT48000000001060",
-          DocumentInfoRecordDocVersion: "",
-          DocumentInfoRecordDocPart: "",
-          LogicalDocument: "6BBB5A9E38041EEE9CBAC9EF2DF6A19B",
-          ArchiveDocumentID: "6BBB5A9E38041EEE9CBAC9EF2DF6C19B",
-          LinkedSAPObjectKey: "4711",
-          BusinessObjectTypeName: "BUS1001006",
-          SemanticObject: "",
-          WorkstationApplication: "",
-          FileSize: "3119",
-          FileName: "Test.png",
-          DocumentURL: "",
-          MimeType: "image/png",
-          CreationDateTime: "/Date(1698087576000)/",
-          BusinessObjectType: "BUS1001006",
-          LastChangedByUser: "",
-          LastChangedByUserFullName: "",
-          ChangedDateTime: null,
-          StorageCategory: "",
-          ArchiveLinkRepository: "",
-          SAPObjectType: "",
-          SAPObjectNodeType: "",
-          HarmonizedDocumentType: "GOS",
-          AttachmentDeletionIsAllowed: true,
-          AttachmentRenameIsAllowed: false,
-          Source: "GOS",
-        },
-      ];
+      const metadata = await getAllOriginals(req.data);
+      return {
+        value: Readable.from(getResponse.data),
+        "*@odata.mediaContentType": metadata[0].MimeType,
+      };
     }
   });
 };
