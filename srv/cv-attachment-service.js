@@ -34,7 +34,7 @@ module.exports = async function (srv) {
   srv.on("READ", "AttachmentContentSet", async (req) => {
     LOG.info(req.data);
     const url = req._.req.path;
-    if (url.includes("Content")) {
+    if (url.includes("/Content")) {
       const docInfoRecordDocType = req.data.DocumentInfoRecordDocType;
       const docInfoRecordDocNumber = req.data.DocumentInfoRecordDocNumber;
       const logicalDocument = req.data.LogicalDocument;
@@ -53,7 +53,39 @@ module.exports = async function (srv) {
         method: "GET",
         responseType: "arraybuffer",
       });
-      return { value: Readable.from(getResponse.data), MimeType: "image/png" };
+      return { value: Readable.from(getResponse.data) };
+    } else {
+      return [
+        {
+          DocumentInfoRecordDocType: "GOS",
+          DocumentInfoRecordDocNumber: "EXT48000000001060",
+          DocumentInfoRecordDocVersion: "",
+          DocumentInfoRecordDocPart: "",
+          LogicalDocument: "6BBB5A9E38041EEE9CBAC9EF2DF6A19B",
+          ArchiveDocumentID: "6BBB5A9E38041EEE9CBAC9EF2DF6C19B",
+          LinkedSAPObjectKey: "4711",
+          BusinessObjectTypeName: "BUS1001006",
+          SemanticObject: "",
+          WorkstationApplication: "",
+          FileSize: "3119",
+          FileName: "Test.png",
+          DocumentURL: "",
+          MimeType: "image/png",
+          CreationDateTime: "/Date(1698087576000)/",
+          BusinessObjectType: "BUS1001006",
+          LastChangedByUser: "",
+          LastChangedByUserFullName: "",
+          ChangedDateTime: null,
+          StorageCategory: "",
+          ArchiveLinkRepository: "",
+          SAPObjectType: "",
+          SAPObjectNodeType: "",
+          HarmonizedDocumentType: "GOS",
+          AttachmentDeletionIsAllowed: true,
+          AttachmentRenameIsAllowed: false,
+          Source: "GOS",
+        },
+      ];
     }
   });
 };

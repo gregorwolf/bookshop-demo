@@ -49,7 +49,10 @@ Accept-Language: en
 @DMSLinkedSAPObjectKey={{getAllOriginals.response.body.d.results[0].LinkedSAPObjectKey}}
 @DMSBusinessObjectTypeName={{getAllOriginals.response.body.d.results[0].BusinessObjectTypeName}}
 
-### Read created document
+### Read created document Metadata - is not implemented
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/AttachmentContentSet(DocumentInfoRecordDocType='{{DMSDocumentInfoRecordDocType}}',DocumentInfoRecordDocNumber='{{DMSDocumentInfoRecordDocNumber}}',DocumentInfoRecordDocVersion='',DocumentInfoRecordDocPart='',LogicalDocument='{{DMSLogicalDocument}}',ArchiveDocumentID='{{DMSArchiveDocumentID}}',LinkedSAPObjectKey='{{DMSLinkedSAPObjectKey}}',BusinessObjectTypeName='{{DMSBusinessObjectTypeName}}')
+Accept: application/json
+### Read created document Content
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/AttachmentContentSet(DocumentInfoRecordDocType='{{DMSDocumentInfoRecordDocType}}',DocumentInfoRecordDocNumber='{{DMSDocumentInfoRecordDocNumber}}',DocumentInfoRecordDocVersion='',DocumentInfoRecordDocPart='',LogicalDocument='{{DMSLogicalDocument}}',ArchiveDocumentID='{{DMSArchiveDocumentID}}',LinkedSAPObjectKey='{{DMSLinkedSAPObjectKey}}',BusinessObjectTypeName='{{DMSBusinessObjectTypeName}}')/$value
 ### Delete created document
 # Seems that it only delete the reference
@@ -87,6 +90,9 @@ Accept: application/json
     }
   }
 }
+### Read GetAttachmentCount via V4 endpoint
+GET http://localhost:4004/API_CV_ATTACHMENT_SRV/GetAllOriginals(BusinessObjectTypeName='{{BusinessObjectTypeName}}',LinkedSAPObjectKey='{{$dotenv material}}',SemanticObject='')
+Accept: application/json
 ### Read GetAllOriginals via V2 endpoint
 # @name capGetAllOriginals
 GET http://localhost:4004/odata/v2/API_CV_ATTACHMENT_SRV/GetAllOriginals
@@ -102,5 +108,7 @@ Accept: application/json
 @CAPArchiveDocumentID={{capGetAllOriginals.response.body.d.results[0].ArchiveDocumentID}}
 @CAPLinkedSAPObjectKey={{capGetAllOriginals.response.body.d.results[0].LinkedSAPObjectKey}}
 @CAPBusinessObjectTypeName={{capGetAllOriginals.response.body.d.results[0].BusinessObjectTypeName}}
-### Read created document
+### Read created document via V2 endpoint
 GET http://localhost:4004/odata/v2/API_CV_ATTACHMENT_SRV/AttachmentContentSet(DocumentInfoRecordDocType='{{CAPDocumentInfoRecordDocType}}',DocumentInfoRecordDocNumber='{{CAPDocumentInfoRecordDocNumber}}',DocumentInfoRecordDocVersion='',DocumentInfoRecordDocPart='',LogicalDocument='{{CAPLogicalDocument}}',ArchiveDocumentID='{{CAPArchiveDocumentID}}',LinkedSAPObjectKey='{{CAPLinkedSAPObjectKey}}',BusinessObjectTypeName='{{CAPBusinessObjectTypeName}}')/$value
+### Read created document
+GET http://localhost:4004/API_CV_ATTACHMENT_SRV/AttachmentContentSet
