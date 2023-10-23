@@ -1,6 +1,7 @@
 const { Readable, PassThrough } = require("stream");
 var FormData = require("form-data");
 const { executeHttpRequest, retrieveJwt } = require("@sap-cloud-sdk/core");
+const { getDestination } = require("./connection-helper");
 const cds = require("@sap/cds");
 const axios = require("axios");
 const cmis = require("cmis");
@@ -291,15 +292,4 @@ if (services.sdm) {
       return next();
     });
   });
-}
-
-function getDestination(req, destinationName) {
-  const destination = {
-    destinationName: destinationName,
-  };
-  const jwt = retrieveJwt(req);
-  if (jwt && jwt !== "") {
-    destination.jwt = jwt;
-  }
-  return destination;
 }
