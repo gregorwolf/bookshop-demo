@@ -4,6 +4,8 @@ gen/
 node_modules/
 target/
 *.db
+*.db-shm
+*.db-wal
 .DS_Store
 _out
 
