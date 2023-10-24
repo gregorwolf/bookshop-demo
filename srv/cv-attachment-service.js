@@ -5,7 +5,9 @@ const { getDestination } = require("./connection-helper");
 const { Readable } = require("stream");
 
 module.exports = async function (srv) {
+  // Connect to the external service
   const external = await cds.connect.to("API_CV_ATTACHMENT_SRV");
+
   srv.on("GetAttachmentCount", async (req) => {
     LOG.info(req.data);
     const response = await external.send({
@@ -65,6 +67,7 @@ module.exports = async function (srv) {
         `LogicalDocument='${logicalDocument}',ArchiveDocumentID='${archiveDocumentID}',LinkedSAPObjectKey='${linkedSAPObjectKey}',` +
         `BusinessObjectTypeName='${businessObjectTypeName}')/$value`;
       LOG.debug("URL:", url);
+      // Only SAP Cloud SDK supports setting the responseType to arraybuffer
       const getResponse = await executeHttpRequest(getDestination(req), {
         url,
         method: "GET",
@@ -73,7 +76,8 @@ module.exports = async function (srv) {
       const metadata = await getAllOriginals(req.data);
       return {
         value: Readable.from(getResponse.data),
-        "*@odata.mediaContentType": metadata[0].MimeType,
+        $mediaContentType: metadata[0].MimeType,
+        $mediaContentDispositionFilename: metadata[0].FileName,
       };
     }
   });
