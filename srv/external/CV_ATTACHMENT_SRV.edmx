@@ -1,0 +1,2137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+  xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+  xmlns:sap="http://www.sap.com/Protocols/SAPData">
+  <edmx:Reference
+    Uri="https://host.domain:443/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value"
+    xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="https://host.domain:443/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value"
+    xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="https://host.domain:443/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value"
+    xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="https://host.domain:443/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='')/$value"
+    xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="https://host.domain:443/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value"
+    xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common" />
+    <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="https://host.domain:443/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value"
+    xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="https://host.domain:443/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='')/$value"
+    xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="https://host.domain:443/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='')/$value"
+    xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="https://host.domain:443/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='')/$value"
+    xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="https://host.domain:443/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value"
+    xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="https://host.domain:443/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value"
+    xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="https://host.domain:443/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value"
+    xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="https://host.domain:443/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='SAP__SELF',Version='0001',SAP__Origin='')/$value"
+    xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF" />
+  </edmx:Reference>
+  <edmx:DataServices m:DataServiceVersion="2.0">
+    <Schema Namespace="CV_ATTACHMENT_SRV" xml:lang="en" sap:schema-version="1"
+      xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <Annotation Term="Core.SchemaVersion" String="1.0.0"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm" />
+      <EntityType Name="DocumentHeader" sap:label="Document Header" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="Documenttype" />
+          <PropertyRef Name="Documentnumber" />
+          <PropertyRef Name="Documentversion" />
+          <PropertyRef Name="Documentpart" />
+        </Key>
+        <Property Name="Documenttype" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:unicode="false" sap:label="Document Type" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="Documentnumber" Type="Edm.String" Nullable="false" MaxLength="25"
+          sap:unicode="false" sap:label="Document" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="Documentversion" Type="Edm.String" Nullable="false" MaxLength="2"
+          sap:unicode="false" sap:label="Document Version" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="Documentpart" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:unicode="false" sap:label="Document Part" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="Description" Type="Edm.String" MaxLength="40" sap:unicode="false"
+          sap:label="Description" sap:sortable="false" sap:filterable="false"
+          sap:semantics="description" />
+        <Property Name="Username" Type="Edm.String" Nullable="false" MaxLength="12"
+          sap:unicode="false" sap:label="User" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" sap:semantics="givenname" />
+        <Property Name="Statusextern" Type="Edm.String" MaxLength="2" sap:unicode="false"
+          sap:label="Status" sap:sortable="false" sap:filterable="false" sap:semantics="status" />
+        <Property Name="Statusintern" Type="Edm.String" MaxLength="2" sap:unicode="false"
+          sap:label="Document Status" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Statuslog" Type="Edm.String" MaxLength="20" sap:unicode="false"
+          sap:label="Log Field" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Laboratory" Type="Edm.String" MaxLength="3" sap:unicode="false"
+          sap:label="Lab or Office" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Ecnumber" Type="Edm.String" MaxLength="12" sap:unicode="false"
+          sap:label="Change Number" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Validfromdate" Type="Edm.DateTime" Precision="7" sap:unicode="false"
+          sap:label="Valid From" sap:sortable="false" sap:filterable="false" sap:semantics="dtstart" />
+        <Property Name="Revlevel" Type="Edm.String" MaxLength="2" sap:unicode="false"
+          sap:label="Revision Level" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Deleteindicator" Type="Edm.String" MaxLength="1" sap:unicode="false"
+          sap:label="Deletion Indicator" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Cadindicator" Type="Edm.String" MaxLength="1" sap:unicode="false"
+          sap:label="CAD Indicator" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Structureindicator" Type="Edm.String" MaxLength="1" sap:unicode="false"
+          sap:label="Structure Indicator" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Predocumentnumber" Type="Edm.String" MaxLength="25" sap:unicode="false"
+          sap:label="Document" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Predocumentversion" Type="Edm.String" MaxLength="2" sap:unicode="false"
+          sap:label="Superior Document Version" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Predocumentpart" Type="Edm.String" MaxLength="3" sap:unicode="false"
+          sap:label="Superior Document Part" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Predocumenttype" Type="Edm.String" MaxLength="3" sap:unicode="false"
+          sap:label="Superior Document Type" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Authoritygroup" Type="Edm.String" MaxLength="4" sap:unicode="false"
+          sap:label="Authorization Group" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Createdate" Type="Edm.DateTime" Precision="7" sap:unicode="false"
+          sap:label="Output Date" sap:creatable="false" sap:sortable="false" sap:filterable="false"
+          sap:semantics="dtstart" />
+        <Property Name="Refdocumentnumber" Type="Edm.String" MaxLength="25" sap:unicode="false"
+          sap:label="Source Document Number" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Refdocumentpart" Type="Edm.String" MaxLength="3" sap:unicode="false"
+          sap:label="Source Document Part" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Refdocumentversion" Type="Edm.String" MaxLength="2" sap:unicode="false"
+          sap:label="Source Document Version" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Cmfixed" Type="Edm.String" MaxLength="1" sap:unicode="false"
+          sap:label="Fixed" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Cmrelevance" Type="Edm.String" MaxLength="1" sap:unicode="false"
+          sap:label="CM Relevant" sap:sortable="false" sap:filterable="false" />
+        <NavigationProperty Name="ObjectLinks"
+          Relationship="CV_ATTACHMENT_SRV.DocumentHeader_ObjectLinks"
+          FromRole="FromRole_DocumentHeader_ObjectLinks" ToRole="ToRole_DocumentHeader_ObjectLinks"
+          sap:label="Object Links" />
+        <NavigationProperty Name="Originals"
+          Relationship="CV_ATTACHMENT_SRV.DocumentHeader_Originals"
+          FromRole="FromRole_DocumentHeader_Originals" ToRole="ToRole_DocumentHeader_Originals" />
+      </EntityType>
+      <EntityType Name="ObjectLinks" sap:label="Object Links" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="Objecttype" />
+          <PropertyRef Name="Objectkey" />
+          <PropertyRef Name="Documenttype" />
+          <PropertyRef Name="Documentnumber" />
+          <PropertyRef Name="Documentversion" />
+          <PropertyRef Name="Documentpart" />
+        </Key>
+        <Property Name="Objecttype" Type="Edm.String" Nullable="false" MaxLength="10"
+          sap:unicode="false" sap:label="Object" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Objectkey" Type="Edm.String" Nullable="false" MaxLength="90"
+          sap:unicode="false" sap:label="Object Key" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Documentdirection" Type="Edm.String" MaxLength="1" sap:unicode="false"
+          sap:label="Active" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="Objectdescription" Type="Edm.String" MaxLength="40" sap:unicode="false"
+          sap:label="Object Text" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="Objectlinkid" Type="Edm.String" MaxLength="32" sap:unicode="false"
+          sap:label="DMS: GUID for Allocating Long Text" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="Addobjecttype" Type="Edm.String" MaxLength="30" sap:unicode="false"
+          sap:label="Table" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="Addobjectkey" Type="Edm.String" MaxLength="50" sap:unicode="false"
+          sap:label="Object Key" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="CadPos" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="CAD"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Documenttype" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:unicode="false" sap:label="Document Type" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Documentnumber" Type="Edm.String" Nullable="false" MaxLength="25"
+          sap:unicode="false" sap:label="Document" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Documentversion" Type="Edm.String" Nullable="false" MaxLength="2"
+          sap:unicode="false" sap:label="Document Version" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="Documentpart" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:unicode="false" sap:label="Document Part" sap:sortable="false" sap:filterable="false" />
+        <Property Name="TabIndex" Type="Edm.Int32" sap:unicode="false" sap:label="Table Index"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+      </EntityType>
+      <EntityType Name="Originals" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="Documenttype" />
+          <PropertyRef Name="Documentnumber" />
+          <PropertyRef Name="Documentpart" />
+          <PropertyRef Name="Documentversion" />
+          <PropertyRef Name="ApplicationId" />
+          <PropertyRef Name="FileId" />
+        </Key>
+        <Property Name="Deletevalue" Type="Edm.String" MaxLength="1" sap:unicode="false"
+          sap:label="Deletion Indicator" sap:creatable="false" sap:sortable="false"
+          sap:filterable="false" sap:semantics="parameters" />
+        <Property Name="Documenttype" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:unicode="false" sap:label="Document Type" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="Documentnumber" Type="Edm.String" Nullable="false" MaxLength="25"
+          sap:unicode="false" sap:label="Document Number" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="Documentpart" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:unicode="false" sap:label="Document Part" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="Documentversion" Type="Edm.String" Nullable="false" MaxLength="2"
+          sap:unicode="false" sap:label="Document Version" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="Originaltype" Type="Edm.String" MaxLength="5" sap:unicode="false"
+          sap:label="Original Type" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="Sourcedatacarrier" Type="Edm.String" MaxLength="10" sap:unicode="false"
+          sap:label="Source Data Carrier" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="Storagecategory" Type="Edm.String" Nullable="false" MaxLength="10"
+          sap:unicode="false" sap:label="Storage Category" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="Wsapplication" Type="Edm.String" MaxLength="3" sap:unicode="false"
+          sap:label="Application" sap:updatable="false" sap:filterable="false" />
+        <Property Name="Docpath" Type="Edm.String" MaxLength="255" sap:unicode="false"
+          sap:label="Path" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Docfile" Type="Edm.String" Nullable="false" MaxLength="255"
+          sap:unicode="false" sap:label="Original" />
+        <Property Name="Statuslog" Type="Edm.String" MaxLength="20" sap:unicode="false"
+          sap:label="Log Field" sap:sortable="false" sap:filterable="false" />
+        <Property Name="ApplicationId" Type="Edm.String" Nullable="false" MaxLength="32"
+          sap:unicode="false" sap:label="Application ID" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="FileId" Type="Edm.String" Nullable="false" MaxLength="32"
+          sap:unicode="false" sap:label="File ID" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="Language" Type="Edm.String" MaxLength="1" sap:unicode="false"
+          sap:label="Language" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Description" Type="Edm.String" MaxLength="40" sap:unicode="false"
+          sap:label="Description" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Checkedin" Type="Edm.String" MaxLength="1" sap:unicode="false"
+          sap:label="Checked In" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="ActiveVersion" Type="Edm.String" MaxLength="1" sap:unicode="false"
+          sap:label="Active Version" sap:sortable="false" />
+        <Property Name="CreatedAt" Type="Edm.String" MaxLength="19" sap:display-format="Date"
+          sap:unicode="false" sap:label="Created At" sap:creatable="false" sap:updatable="false"
+          sap:semantics="dtstart" />
+        <Property Name="ChangedAt" Type="Edm.String" MaxLength="19" sap:display-format="Date"
+          sap:unicode="false" sap:label="Changed At" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" sap:semantics="dtstart" />
+        <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12"
+          sap:unicode="false" sap:label="Created By" sap:creatable="false" sap:updatable="false"
+          sap:semantics="name" />
+        <Property Name="ChangedBy" Type="Edm.String" MaxLength="12" sap:unicode="false"
+          sap:label="Changed By" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" sap:semantics="name" />
+        <Property Name="ContentDescription" Type="Edm.String" MaxLength="50" sap:unicode="false"
+          sap:label="Content Description" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Filesize" Type="Edm.String" MaxLength="12" sap:unicode="false"
+          sap:label="File Size of Original" sap:creatable="false" sap:updatable="false" />
+        <Property Name="MarkupExists" Type="Edm.String" MaxLength="1" sap:unicode="false"
+          sap:label="Markup Exists" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="CheckedinImage" Type="Edm.String" sap:unicode="false"
+          sap:label="Checked-in Image" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="CheckoutUser" Type="Edm.String" MaxLength="12" sap:unicode="false"
+          sap:label="Checkout User" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="PhioNewVersion" Type="Edm.String" MaxLength="1" sap:unicode="false"
+          sap:label="True" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="ActiveImage" Type="Edm.String" sap:unicode="false" sap:label="Active Image"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <NavigationProperty Name="OriginalContent"
+          Relationship="CV_ATTACHMENT_SRV.Originals_OriginalContent"
+          FromRole="FromRole_Originals_OriginalContent" ToRole="ToRole_Originals_OriginalContent"
+          sap:label="Original Content" />
+      </EntityType>
+      <EntityType Name="OriginalContent" m:HasStream="true" sap:label="Original Content"
+        sap:content-version="1">
+        <Key>
+          <PropertyRef Name="Documenttype" />
+          <PropertyRef Name="Documentnumber" />
+          <PropertyRef Name="Documentpart" />
+          <PropertyRef Name="Documentversion" />
+          <PropertyRef Name="ApplicationId" />
+          <PropertyRef Name="FileId" />
+        </Key>
+        <Property Name="Documenttype" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:unicode="false" sap:label="Document Type" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="Documentnumber" Type="Edm.String" Nullable="false" MaxLength="25"
+          sap:unicode="false" sap:label="Document" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="Documentpart" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:unicode="false" sap:label="Document Part" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="Documentversion" Type="Edm.String" Nullable="false" MaxLength="2"
+          sap:unicode="false" sap:label="Document Version" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="ApplicationId" Type="Edm.String" Nullable="false" MaxLength="32"
+          sap:unicode="false" sap:label="Application ID" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="FileId" Type="Edm.String" Nullable="false" MaxLength="32"
+          sap:unicode="false" sap:label="File ID" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="Wsapplication" Type="Edm.String" MaxLength="3" sap:unicode="false"
+          sap:label="Application" sap:creatable="false" sap:updatable="false" sap:sortable="false" />
+        <Property Name="MarkForDeletion" Type="Edm.Boolean" sap:unicode="false"
+          sap:label="Mark for Deletion" sap:creatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="Filesize" Type="Edm.String" MaxLength="12" sap:unicode="false"
+          sap:label="File Size" sap:creatable="false" sap:updatable="false" />
+        <Property Name="Filename" Type="Edm.String" MaxLength="255" sap:unicode="false"
+          sap:label="File Name" sap:creatable="false" sap:updatable="false" />
+        <Property Name="ContentSource" Type="Edm.String" MaxLength="4096" sap:unicode="false"
+          sap:label="Media Source URI" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="ContentType" Type="Edm.String" MaxLength="128" sap:unicode="false"
+          sap:label="Content Type" sap:updatable="false" sap:filterable="false" />
+        <Property Name="Content" Type="Edm.Binary" sap:unicode="false"
+          sap:label="Content of Media Source" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="CreatedBy" Type="Edm.String" MaxLength="12" sap:unicode="false"
+          sap:label="Created By" sap:creatable="false" sap:updatable="false" sap:semantics="name" />
+        <Property Name="FirstName" Type="Edm.String" MaxLength="25" sap:unicode="false"
+          sap:label="First Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" sap:semantics="givenname" />
+        <Property Name="LastName" Type="Edm.String" MaxLength="25" sap:unicode="false"
+          sap:label="Last Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" sap:semantics="familyname" />
+        <Property Name="FullName" Type="Edm.String" MaxLength="82" sap:unicode="false"
+          sap:label="Full Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" sap:semantics="name" />
+        <Property Name="Department" Type="Edm.String" MaxLength="40" sap:unicode="false"
+          sap:label="Department" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="CreatedAt" Type="Edm.DateTime" Precision="7" sap:display-format="Date"
+          sap:unicode="false" sap:label="Created At" sap:creatable="false" sap:updatable="false"
+          sap:filterable="false" sap:semantics="dtstart" />
+        <Property Name="Storagecategory" Type="Edm.String" MaxLength="10" sap:unicode="false"
+          sap:label="Storage Category" sap:creatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="ArchiveLinkDocumentType" Type="Edm.String" sap:unicode="false"
+          sap:label="Archive Link Document Type" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="ActionRename" Type="Edm.String" MaxLength="15"
+          sap:field-control="UxFCRename" sap:label="Rename Action" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="ActionDelete" Type="Edm.String" MaxLength="15"
+          sap:field-control="UxFCDelete" sap:label="Delete Action" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="ActionAdd" Type="Edm.String" MaxLength="15" sap:field-control="UxFCAdd"
+          sap:label="Add Action" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="UxFCRename" Type="Edm.Byte" sap:label="Rename Field Control"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="UxFCDelete" Type="Edm.Byte" sap:label="Delete Field Control"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="UxFCAdd" Type="Edm.Byte" sap:label="Add Field Control" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="FileShareId" Type="Edm.String" MaxLength="15" sap:label="File Share ID"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="AttachmentStatus" Type="Edm.String" MaxLength="15"
+          sap:label="AttachmentStatus" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="CheckedInStatus" Type="Edm.Boolean" sap:label="Checked In Status"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="ChangedAt" Type="Edm.DateTime" Precision="7" sap:label="Changed At"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"
+          sap:semantics="dtstart" />
+        <Property Name="ChangedBy" Type="Edm.String" MaxLength="12" sap:label="Changed By"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"
+          sap:semantics="name" />
+        <Property Name="CheckedOutByUser" Type="Edm.String" MaxLength="12"
+          sap:label="Checked Out By User ID" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" sap:semantics="name" />
+        <Property Name="CheckedOutByUserFullName" Type="Edm.String" MaxLength="82"
+          sap:label="Checked Out By User Full Name" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" sap:semantics="name" />
+        <Property Name="ChangedByFullName" Type="Edm.String" MaxLength="82"
+          sap:label="Changed By Full Name" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" sap:semantics="name" />
+        <Property Name="Source" Type="Edm.String" MaxLength="20" sap:label="Source"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="SecureAccessToken" Type="Edm.String" MaxLength="128"
+          sap:label="Secure Access Token" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="AttachmentIsLocked" Type="Edm.Boolean" sap:label="Attachment is Locked"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="AttchHasMultipleReferences" Type="Edm.Boolean"
+          sap:label="Attachment Has Multiple References" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="AttachmentFramework" Type="Edm.String" MaxLength="10"
+          sap:label="Character Field with Length 10" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+      </EntityType>
+      <EntityType Name="SAPObjectTypeCategory" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="SAPObjectType" />
+        </Key>
+        <Property Name="SAPObjectType" Type="Edm.String" Nullable="false" MaxLength="30"
+          sap:unicode="false" sap:label="SAP Object Type" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" />
+        <Property Name="SAPObjectRepresentationType" Type="Edm.String" Nullable="false"
+          MaxLength="4" sap:unicode="false" sap:label="SAP Object Representation Type"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" />
+        <Property Name="SAPObjectRepresentation" Type="Edm.String" Nullable="false" MaxLength="40"
+          sap:unicode="false" sap:label="SAP Object Representation" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" />
+        <Property Name="AttachmentFramework" Type="Edm.String" Nullable="false" MaxLength="10"
+          sap:unicode="false" sap:label="Attachment Framework" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" />
+        <Property Name="SAPObjectNodeType" Type="Edm.String" Nullable="false" MaxLength="30"
+          sap:unicode="false" sap:label="SAP Object Node Type" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" />
+        <Property Name="HDMActive" Type="Edm.Boolean" Nullable="false" sap:unicode="false"
+          sap:label="HDM Active" sap:creatable="false" sap:updatable="false" sap:sortable="false" />
+      </EntityType>
+      <EntityType Name="C_DocInfoRecdAttchDetForBusObjType"
+        sap:label="DocumentInfoRecord file details for BO" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="DocumentInfoRecordDocType" />
+          <PropertyRef Name="DocumentInfoRecordDocNumber" />
+          <PropertyRef Name="DocumentInfoRecordDocVersion" />
+          <PropertyRef Name="DocumentInfoRecordDocPart" />
+          <PropertyRef Name="PhysicalDocument" />
+          <PropertyRef Name="LinkedSAPObject" />
+        </Key>
+        <Property Name="DocumentInfoRecordDocType" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:display-format="UpperCase" sap:text="DocumentInfoRecordDocType_Text"
+          sap:label="Document Type" sap:value-list="standard" />
+        <Property Name="DocumentInfoRecordDocType_Text" Type="Edm.String" MaxLength="20"
+          sap:label="Description" sap:quickinfo="Description of Document Type" sap:creatable="false"
+          sap:updatable="false" />
+        <Property Name="DocumentInfoRecordDocNumber" Type="Edm.String" Nullable="false"
+          MaxLength="25" sap:display-format="UpperCase" sap:label="Document"
+          sap:quickinfo="Document number" sap:value-list="standard" />
+        <Property Name="DocumentInfoRecordDocVersion" Type="Edm.String" Nullable="false"
+          MaxLength="2" sap:display-format="UpperCase" sap:label="Document Version"
+          sap:value-list="standard" />
+        <Property Name="DocumentInfoRecordDocPart" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:display-format="UpperCase" sap:label="Document Part" sap:value-list="standard" />
+        <Property Name="PhysicalDocument" Type="Edm.String" Nullable="false" MaxLength="32"
+          sap:display-format="UpperCase" sap:label="Physical Document"
+          sap:quickinfo="Physical document" />
+        <Property Name="LinkedSAPObject" Type="Edm.String" Nullable="false" MaxLength="10"
+          sap:display-format="UpperCase" sap:label="SAP Object" sap:quickinfo="Linked SAP Object" />
+        <Property Name="DocumentDescription" Type="Edm.String" MaxLength="40"
+          sap:label="Document Description" />
+        <Property Name="FileName" Type="Edm.String" MaxLength="200" sap:label="File Name" />
+        <Property Name="DocumentInfoRecord" Type="Edm.String" MaxLength="70"
+          sap:label="DIR Key Concatenated"
+          sap:quickinfo="Document Info Record key in concatenated form" />
+      </EntityType>
+      <EntityType Name="C_DocInfoRecdObjLinkAttchDetType"
+        sap:label="DocumentInfoRecord ObjLink Attach Detail" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="DocumentInfoRecordDocType" />
+          <PropertyRef Name="DocumentInfoRecordDocNumber" />
+          <PropertyRef Name="DocumentInfoRecordDocVersion" />
+          <PropertyRef Name="DocumentInfoRecordDocPart" />
+          <PropertyRef Name="LinkedSAPObjectKey" />
+          <PropertyRef Name="LinkedSAPObject" />
+          <PropertyRef Name="FileUUID" />
+          <PropertyRef Name="PhysicalDocument" />
+        </Key>
+        <Property Name="DocumentInfoRecordDocType" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:display-format="UpperCase" sap:text="DocumentInfoRecordDocType_Text"
+          sap:label="Document Type" sap:value-list="standard" />
+        <Property Name="DocumentInfoRecordDocType_Text" Type="Edm.String" MaxLength="20"
+          sap:label="Description" sap:quickinfo="Description of Document Type" sap:creatable="false"
+          sap:updatable="false" />
+        <Property Name="DocumentInfoRecordDocNumber" Type="Edm.String" Nullable="false"
+          MaxLength="25" sap:display-format="UpperCase" sap:label="Document"
+          sap:quickinfo="Document number" sap:value-list="standard" />
+        <Property Name="DocumentInfoRecordDocVersion" Type="Edm.String" Nullable="false"
+          MaxLength="2" sap:display-format="UpperCase" sap:label="Document Version"
+          sap:value-list="standard" />
+        <Property Name="DocumentInfoRecordDocPart" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:display-format="UpperCase" sap:label="Document Part" sap:value-list="standard" />
+        <Property Name="LinkedSAPObjectKey" Type="Edm.String" Nullable="false" MaxLength="90"
+          sap:display-format="UpperCase" sap:label="Object Key"
+          sap:quickinfo="Document Management Object Key" />
+        <Property Name="LinkedSAPObject" Type="Edm.String" Nullable="false" MaxLength="10"
+          sap:display-format="UpperCase" sap:label="SAP Object" sap:quickinfo="Linked SAP Object" />
+        <Property Name="FileUUID" Type="Edm.String" Nullable="false" MaxLength="32"
+          sap:display-format="UpperCase" sap:label="DMS: GUID for allocation PHIO - file name"
+          sap:heading="" />
+        <Property Name="PhysicalDocument" Type="Edm.String" Nullable="false" MaxLength="32"
+          sap:display-format="UpperCase" sap:label="Physical Document"
+          sap:quickinfo="Physical document" />
+        <Property Name="DocumentDescription" Type="Edm.String" MaxLength="40"
+          sap:label="Document Description" />
+        <Property Name="FileName" Type="Edm.String" MaxLength="200" sap:label="File Name" />
+        <Property Name="DocumentInfoRecord" Type="Edm.String" MaxLength="70"
+          sap:label="DIR Key Concatenated"
+          sap:quickinfo="Document Info Record key in concatenated form" />
+      </EntityType>
+      <EntityType Name="I_DocInfoRecdObjTypeToDocTypeType"
+        sap:label="Document types associated to object type" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="DocumentInfoRecordDocType" />
+          <PropertyRef Name="LinkedSAPObject" />
+        </Key>
+        <Property Name="DocumentInfoRecordDocType" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:display-format="UpperCase" sap:text="DocumentInfoRecordDocType_Text"
+          sap:label="Document Type" />
+        <Property Name="DocumentInfoRecordDocType_Text" Type="Edm.String" MaxLength="20"
+          sap:label="Description" sap:quickinfo="Description of Document Type" sap:creatable="false"
+          sap:updatable="false" />
+        <Property Name="LinkedSAPObject" Type="Edm.String" Nullable="false" MaxLength="10"
+          sap:display-format="UpperCase" sap:label="SAP Object" sap:quickinfo="Linked SAP Object" />
+        <NavigationProperty Name="to_Text"
+          Relationship="CV_ATTACHMENT_SRV.assoc_F7F398A8C49E4C23C229FE1DBB21ECD3"
+          FromRole="FromRole_assoc_F7F398A8C49E4C23C229FE1DBB21ECD3"
+          ToRole="ToRole_assoc_F7F398A8C49E4C23C229FE1DBB21ECD3" />
+      </EntityType>
+      <EntityType Name="I_DocumentInfoRecordDocPrtVHType"
+        sap:label="Document Info Record Document Part VH" sap:value-list="true"
+        sap:content-version="1">
+        <Key>
+          <PropertyRef Name="DocumentInfoRecordDocType" />
+          <PropertyRef Name="DocumentInfoRecordDocNumber" />
+          <PropertyRef Name="DocumentInfoRecordDocVersion" />
+          <PropertyRef Name="DocumentInfoRecordDocPart" />
+        </Key>
+        <Property Name="DocumentInfoRecordDocType" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:display-format="UpperCase" sap:text="DocumentInfoRecordDocType_Text"
+          sap:label="Document Type" />
+        <Property Name="DocumentInfoRecordDocType_Text" Type="Edm.String" MaxLength="20"
+          sap:label="Description" sap:quickinfo="Description of Document Type" sap:creatable="false"
+          sap:updatable="false" />
+        <Property Name="DocumentInfoRecordDocNumber" Type="Edm.String" Nullable="false"
+          MaxLength="25" sap:display-format="UpperCase" sap:label="Document"
+          sap:quickinfo="Document number" />
+        <Property Name="DocumentInfoRecordDocVersion" Type="Edm.String" Nullable="false"
+          MaxLength="2" sap:display-format="UpperCase" sap:label="Document Version" />
+        <Property Name="DocumentInfoRecordDocPart" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:display-format="UpperCase" sap:label="Document Part" />
+        <Property Name="DocumentDescription" Type="Edm.String" MaxLength="40"
+          sap:label="Document Description" />
+      </EntityType>
+      <EntityType Name="I_DocumentInfoRecordDocTypeType"
+        sap:label="Document Info Record Document Type" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="DocumentInfoRecordDocType" />
+        </Key>
+        <Property Name="DocumentInfoRecordDocType" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:display-format="UpperCase" sap:text="DocumentInfoRecordDocType_Text"
+          sap:label="Document Type" />
+        <Property Name="DocumentInfoRecordDocType_Text" Type="Edm.String" MaxLength="20"
+          sap:label="Description" sap:quickinfo="Description of Document Type" sap:creatable="false"
+          sap:updatable="false" />
+        <NavigationProperty Name="to_Text"
+          Relationship="CV_ATTACHMENT_SRV.assoc_4EFA83EECE77B27D0C7B821307FF718C"
+          FromRole="FromRole_assoc_4EFA83EECE77B27D0C7B821307FF718C"
+          ToRole="ToRole_assoc_4EFA83EECE77B27D0C7B821307FF718C" />
+      </EntityType>
+      <EntityType Name="I_DocumentInfoRecordDocTypeTType"
+        sap:label="Document Info Record Document Type - Txt" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="DocumentInfoRecordDocType" />
+          <PropertyRef Name="Language" />
+        </Key>
+        <Property Name="DocumentInfoRecordDocType" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:display-format="UpperCase" sap:label="Document Type" />
+        <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2"
+          sap:label="Language" />
+        <Property Name="DocumentTypeDescription" Type="Edm.String" MaxLength="20"
+          sap:label="Description" sap:quickinfo="Description of Document Type" />
+        <NavigationProperty Name="to_DocType"
+          Relationship="CV_ATTACHMENT_SRV.assoc_EBEF80228129F16B41488F3B1BB6516A"
+          FromRole="FromRole_assoc_EBEF80228129F16B41488F3B1BB6516A"
+          ToRole="ToRole_assoc_EBEF80228129F16B41488F3B1BB6516A" />
+      </EntityType>
+      <EntityType Name="I_DocumentInfoRecordDocTypeVHType"
+        sap:label="Document Info Record Document Type VH" sap:value-list="true"
+        sap:content-version="1">
+        <Key>
+          <PropertyRef Name="DocumentInfoRecordDocType" />
+        </Key>
+        <Property Name="DocumentInfoRecordDocType" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:display-format="UpperCase" sap:text="DocumentInfoRecordDocType_Text"
+          sap:label="Document Type" />
+        <Property Name="DocumentInfoRecordDocType_Text" Type="Edm.String" MaxLength="20"
+          sap:label="Description" sap:quickinfo="Description of Document Type" sap:creatable="false"
+          sap:updatable="false" />
+        <NavigationProperty Name="to_Text"
+          Relationship="CV_ATTACHMENT_SRV.assoc_A3B840FA7144FDD1BB7999D4D495CC9E"
+          FromRole="FromRole_assoc_A3B840FA7144FDD1BB7999D4D495CC9E"
+          ToRole="ToRole_assoc_A3B840FA7144FDD1BB7999D4D495CC9E" />
+      </EntityType>
+      <EntityType Name="I_DocumentInfoRecordDocVersVHType"
+        sap:label="Document Info Record Document Version VH" sap:value-list="true"
+        sap:content-version="1">
+        <Key>
+          <PropertyRef Name="DocumentInfoRecordDocType" />
+          <PropertyRef Name="DocumentInfoRecordDocNumber" />
+          <PropertyRef Name="DocumentInfoRecordDocVersion" />
+        </Key>
+        <Property Name="DocumentInfoRecordDocType" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:display-format="UpperCase" sap:text="DocumentInfoRecordDocType_Text"
+          sap:label="Document Type" />
+        <Property Name="DocumentInfoRecordDocType_Text" Type="Edm.String" MaxLength="20"
+          sap:label="Description" sap:quickinfo="Description of Document Type" sap:creatable="false"
+          sap:updatable="false" />
+        <Property Name="DocumentInfoRecordDocNumber" Type="Edm.String" Nullable="false"
+          MaxLength="25" sap:display-format="UpperCase" sap:label="Document"
+          sap:quickinfo="Document number" />
+        <Property Name="DocumentInfoRecordDocVersion" Type="Edm.String" Nullable="false"
+          MaxLength="2" sap:display-format="UpperCase" sap:label="Document Version" />
+      </EntityType>
+      <EntityType Name="OriginalContentArchiveLink" m:HasStream="true" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="ArchiveDocumentID" />
+          <PropertyRef Name="ArchiveRepositoryID" />
+        </Key>
+        <Property Name="ArchiveDocumentID" Type="Edm.String" Nullable="false" MaxLength="40"
+          sap:label="Archive Link Document ID" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="ArchiveRepositoryID" Type="Edm.String" Nullable="false" MaxLength="40"
+          sap:label="Archive Repository ID" sap:creatable="false" sap:updatable="false"
+          sap:filterable="false" />
+        <Property Name="CreatedAt" Type="Edm.DateTime" Precision="0" sap:display-format="Date"
+          sap:label="Created At" sap:creatable="false" sap:updatable="false" sap:filterable="false"
+          sap:semantics="dtstart" />
+        <Property Name="Content" Type="Edm.Binary" sap:label="Content of Media Source"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="ContentSource" Type="Edm.String" sap:label="Media Source URI"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="ContentType" Type="Edm.String" MaxLength="128" sap:label="Content Type"
+          sap:updatable="false" sap:filterable="false" />
+        <Property Name="Filename" Type="Edm.String" MaxLength="255" sap:label="File Name"
+          sap:creatable="false" sap:updatable="false" />
+        <Property Name="Filesize" Type="Edm.String" MaxLength="12" sap:label="File Size"
+          sap:creatable="false" sap:updatable="false" />
+        <Property Name="CreatedBy" Type="Edm.String" MaxLength="12" sap:label="Created By"
+          sap:creatable="false" sap:updatable="false" sap:semantics="name" />
+        <Property Name="FirstName" Type="Edm.String" MaxLength="25" sap:label="First Name"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"
+          sap:semantics="givenname" />
+        <Property Name="LastName" Type="Edm.String" MaxLength="25" sap:label="Last Name"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"
+          sap:semantics="familyname" />
+        <Property Name="FullName" Type="Edm.String" MaxLength="82" sap:label="Full Name"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"
+          sap:semantics="name" />
+        <Property Name="Source" Type="Edm.String" MaxLength="20" sap:label="Source"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="AttachmentStatus" Type="Edm.String" MaxLength="10"
+          sap:label="Attachment Status" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="Documenttype" Type="Edm.String" MaxLength="3" sap:label="Document Type"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="ArchiveLinkDocumentType" Type="Edm.String" MaxLength="10"
+          sap:label="Archive Link Document Type" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="ActionDelete" Type="Edm.String" MaxLength="15"
+          sap:field-control="UxFCDelete" sap:label="Delete Action" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="ActionAdd" Type="Edm.String" MaxLength="15" sap:field-control="UxFCAdd"
+          sap:label="Add Action" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="UxFCDelete" Type="Edm.Byte" sap:label="Delete Field Control"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="UxFCAdd" Type="Edm.Byte" sap:label="Add Field Control" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+      </EntityType>
+      <EntityType Name="DocumentHeaderDraft" sap:label="Document Header Draft"
+        sap:content-version="1">
+        <Key>
+          <PropertyRef Name="DraftUUID" />
+          <PropertyRef Name="DocumentInfoRecordDocType" />
+          <PropertyRef Name="DocumentInfoRecordDocNumber" />
+          <PropertyRef Name="DocumentInfoRecordDocVersion" />
+          <PropertyRef Name="DocumentInfoRecordDocPart" />
+        </Key>
+        <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false" sap:label="Draft UUID"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="DocumentInfoRecordDocType" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:label="Document Info Record Doc Type" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="DocumentInfoRecordDocNumber" Type="Edm.String" Nullable="false"
+          MaxLength="25" sap:label="Document Info Record Doc Number" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="DocumentInfoRecordDocVersion" Type="Edm.String" Nullable="false"
+          MaxLength="2" sap:label="Document Info Record Doc Version" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="DocumentInfoRecordDocPart" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:label="Document Info Record Doc Part" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="DocumentDescription" Type="Edm.String" MaxLength="40"
+          sap:label="Document Description" sap:sortable="false" sap:filterable="false"
+          sap:semantics="description" />
+        <Property Name="CreatedByuser" Type="Edm.String" Nullable="false" MaxLength="12"
+          sap:label="Responsible Person Name" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" sap:semantics="givenname" />
+        <Property Name="CreationDateTime" Type="Edm.DateTime" Precision="7"
+          sap:label="Creation Date Time" sap:creatable="false" sap:updatable="false"
+          sap:filterable="false" />
+        <Property Name="DocInfoRecdIsMarkedForDeletion" Type="Edm.Boolean"
+          sap:label="Document Info Record is Marked for Deletion" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="IsDocInfoRecdCreatedFromCAD" Type="Edm.Boolean"
+          sap:label="Is Document Info Record Created from CAD" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="IsDocInfoRecdStructure" Type="Edm.Boolean"
+          sap:label="Is Document Info Record Structure" sap:sortable="false" sap:filterable="false" />
+        <Property Name="InternalDocumentStatus" Type="Edm.String" MaxLength="2"
+          sap:label="Internal Document Status" sap:sortable="false" sap:filterable="false" />
+        <Property Name="AuthorizationGroup" Type="Edm.String" MaxLength="4"
+          sap:label="Authorization Group" sap:sortable="false" sap:filterable="false" />
+        <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="12"
+          sap:label="Last Changed By User" sap:creatable="false" sap:updatable="false"
+          sap:filterable="false" />
+        <Property Name="ChangedDateTime" Type="Edm.DateTime" Precision="7"
+          sap:label="Changed Date Time" sap:creatable="false" sap:updatable="false"
+          sap:filterable="false" />
+        <Property Name="LaboratoryOrDesignOffice" Type="Edm.String" MaxLength="3"
+          sap:label="Laboratory or Design Office" sap:sortable="false" sap:filterable="false" />
+        <Property Name="DocInfoRecdSourceDocNumber" Type="Edm.String" MaxLength="25"
+          sap:label="Document Info Record Source Doc Number" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="DocInfoRecdSourceDocVersion" Type="Edm.String" MaxLength="2"
+          sap:label="Document Info Record Source Doc Version" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="DocInfoRecdSourceDocPart" Type="Edm.String" MaxLength="3"
+          sap:label="Document Info Record Source Doc Part" sap:sortable="false"
+          sap:filterable="false" />
+      </EntityType>
+      <EntityType Name="ObjectLinkDraft" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="LinkedSAPObject" />
+          <PropertyRef Name="LinkedSAPObjectKey" />
+          <PropertyRef Name="DocumentInfoRecordDocType" />
+          <PropertyRef Name="DocumentInfoRecordDocNumber" />
+          <PropertyRef Name="DocumentInfoRecordDocVersion" />
+          <PropertyRef Name="DocumentInfoRecordDocPart" />
+          <PropertyRef Name="DraftUUID" />
+        </Key>
+        <Property Name="DocInfoRecdIsMarkedForDeletion" Type="Edm.Boolean"
+          sap:label="Document Info Recd is Marked for Deletion" sap:creatable="false"
+          sap:sortable="false" sap:filterable="false" sap:semantics="parameters" />
+        <Property Name="LinkedSAPObject" Type="Edm.String" Nullable="false" MaxLength="10"
+          sap:label="Linked SAP Object" sap:sortable="false" sap:filterable="false" />
+        <Property Name="LinkedSAPObjectKey" Type="Edm.String" Nullable="false" MaxLength="90"
+          sap:label="Linked SAP Object Key" sap:sortable="false" sap:filterable="false" />
+        <Property Name="DocLinkDirectionIsActive" Type="Edm.Boolean"
+          sap:label="Doc Link Direction is Active" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="ObjectDescription" Type="Edm.String" MaxLength="40"
+          sap:label="Object Description" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="DocInfoRecdLongTextUUID" Type="Edm.String" MaxLength="32"
+          sap:label="Doc Info Recd Long Text UUID" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" />
+        <Property Name="DocumentInfoRecordDocType" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:label="Document Info Record Doc Type" sap:sortable="false" sap:filterable="false" />
+        <Property Name="DocumentInfoRecordDocNumber" Type="Edm.String" Nullable="false"
+          MaxLength="25" sap:label="Document Info Record Doc Number" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="DocumentInfoRecordDocVersion" Type="Edm.String" Nullable="false"
+          MaxLength="2" sap:label="Document Info Record Doc Version" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="DocumentInfoRecordDocPart" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:label="Document Info Record Doc Part" sap:sortable="false" sap:filterable="false" />
+        <Property Name="DocObjectLinkCounter" Type="Edm.Int32"
+          sap:label="Document Object Link Counter" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false" sap:label="Draft UUID"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+      </EntityType>
+      <EntityType Name="SAP__Currency" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="CurrencyCode" />
+        </Key>
+        <Property Name="CurrencyCode" Type="Edm.String" Nullable="false" MaxLength="5"
+          sap:label="Currency" sap:semantics="currency-code" />
+        <Property Name="ISOCode" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:label="ISO code" />
+        <Property Name="Text" Type="Edm.String" Nullable="false" MaxLength="15"
+          sap:label="Short text" />
+        <Property Name="DecimalPlaces" Type="Edm.Byte" Nullable="false" sap:label="Decimals" />
+      </EntityType>
+      <EntityType Name="SAP__UnitOfMeasure" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="UnitCode" />
+        </Key>
+        <Property Name="UnitCode" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:label="Internal UoM" sap:semantics="unit-of-measure" />
+        <Property Name="ISOCode" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:label="ISO Code" />
+        <Property Name="ExternalCode" Type="Edm.String" Nullable="false" MaxLength="3"
+          sap:label="Commercial" />
+        <Property Name="Text" Type="Edm.String" Nullable="false" MaxLength="30"
+          sap:label="Measurement Unit Txt" />
+        <Property Name="DecimalPlaces" Type="Edm.Int16" sap:label="Decimal Places" />
+      </EntityType>
+      <EntityType Name="SAP__DocumentDescription" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" />
+        <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12" />
+        <Property Name="CreatedAt" Type="Edm.DateTime" Nullable="false" Precision="0"
+          sap:label="Time Stamp" />
+        <Property Name="FileName" Type="Edm.String" Nullable="false" MaxLength="256" />
+        <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="256" />
+        <NavigationProperty Name="Format" Relationship="CV_ATTACHMENT_SRV.to_format"
+          FromRole="FromRole_to_format" ToRole="ToRole_to_format" />
+        <NavigationProperty Name="TableColumns" Relationship="CV_ATTACHMENT_SRV.to_tablecolumns"
+          FromRole="FromRole_to_tablecolumns" ToRole="ToRole_to_tablecolumns" />
+        <NavigationProperty Name="CoverPage" Relationship="CV_ATTACHMENT_SRV.to_coverpage"
+          FromRole="FromRole_to_coverpage" ToRole="ToRole_to_coverpage" />
+        <NavigationProperty Name="Signature" Relationship="CV_ATTACHMENT_SRV.to_signature"
+          FromRole="FromRole_to_signature" ToRole="ToRole_to_signature" />
+        <NavigationProperty Name="PDFStandard" Relationship="CV_ATTACHMENT_SRV.to_pdfstandard"
+          FromRole="FromRole_to_pdfstandard" ToRole="ToRole_to_pdfstandard" />
+      </EntityType>
+      <EntityType Name="SAP__Format" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="FitToPage" Type="CV_ATTACHMENT_SRV.SAP__FitToPage" Nullable="false" />
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="FontSize" Type="Edm.Int32" Nullable="false" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Orientation" Type="Edm.String" Nullable="false" MaxLength="10"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="PaperSize" Type="Edm.String" Nullable="false" MaxLength="10"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="BorderSize" Type="Edm.Int32" Nullable="false" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="MarginSize" Type="Edm.Int32" Nullable="false" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="FontName" Type="Edm.String" Nullable="false" MaxLength="255"
+          sap:label="Font Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+      </EntityType>
+      <EntityType Name="SAP__PDFStandard" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="UsePDFAConformance" Type="Edm.Boolean" Nullable="false"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="DoEnableAccessibility" Type="Edm.Boolean" Nullable="false"
+          sap:label="Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+      </EntityType>
+      <EntityType Name="SAP__TableColumns" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="Id" />
+          <PropertyRef Name="Name" />
+          <PropertyRef Name="Header" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="256"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Header" Type="Edm.String" Nullable="false" MaxLength="256"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="HorizontalAlignment" Type="Edm.String" Nullable="false" MaxLength="10"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+      </EntityType>
+      <EntityType Name="SAP__CoverPage" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="Title" />
+          <PropertyRef Name="Id" />
+          <PropertyRef Name="Name" />
+        </Key>
+        <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="256"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="256"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Value" Type="Edm.String" Nullable="false" MaxLength="256"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+      </EntityType>
+      <EntityType Name="SAP__Signature" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="DoSign" Type="Edm.Boolean" Nullable="false" sap:label="Indicator"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Reason" Type="Edm.String" Nullable="false" MaxLength="256"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+      </EntityType>
+      <EntityType Name="SAP__ValueHelp" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="VALUEHELP" />
+        </Key>
+        <Property Name="VALUEHELP" Type="Edm.String" Nullable="false" />
+        <Property Name="FIELD_VALUE" Type="Edm.String" Nullable="false" MaxLength="10" />
+        <Property Name="DESCRIPTION" Type="Edm.String" />
+      </EntityType>
+      <ComplexType Name="Attachments">
+        <Property Name="TotalCount" Type="Edm.Int16" Nullable="false"
+          sap:label="Total Count of Attachments" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" sap:semantics="parameters" />
+        <Property Name="UnconfirmedCount" Type="Edm.Int16" Nullable="false"
+          sap:label="Count of Unconfirmed Attachments" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" sap:semantics="parameters" />
+        <Property Name="ConfirmedCount" Type="Edm.Int16" Nullable="false"
+          sap:label="Count of Confirmed Attachments" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" sap:semantics="parameters" />
+      </ComplexType>
+      <ComplexType Name="OriginalUploadParams">
+        <Property Name="ApplicationId" Type="Edm.String" Nullable="false" MaxLength="32"
+          sap:label="Application ID" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="FileId" Type="Edm.String" Nullable="false" MaxLength="32"
+          sap:label="File ID" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+          sap:filterable="false" />
+        <Property Name="OriginalUrl" Type="Edm.String" Nullable="false" MaxLength="4096"
+          sap:label="Media Source URI" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" sap:semantics="url" />
+        <Property Name="Storagecategory" Type="Edm.String" Nullable="false" MaxLength="10"
+          sap:label="Storage Category" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="ContentType" Type="Edm.String" Nullable="false" sap:label="Mime Type"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="URLToReadAttachment" Type="Edm.String" MaxLength="4096"
+          sap:label="URL to Read an Attachment" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" sap:semantics="url" />
+        <Property Name="URLToUploadAttachment" Type="Edm.String" MaxLength="4096"
+          sap:label="URL to Upload an Attachment" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" sap:semantics="url" />
+        <Property Name="URLToUpdateAttachment" Type="Edm.String" MaxLength="4096"
+          sap:label="URL to Update an Attachment" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" sap:semantics="url" />
+        <Property Name="SecureAccessToken" Type="Edm.String" Nullable="false" MaxLength="128"
+          sap:label="Secure Access Token" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" sap:semantics="url" />
+        <Property Name="SecureAccessCookie" Type="Edm.String" MaxLength="1024"
+          sap:label="Secure Access Cookie" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" sap:semantics="url" />
+        <Property Name="Filename" Type="Edm.String" MaxLength="255" sap:label="File Name"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"
+          sap:semantics="url" />
+        <Property Name="FileSize" Type="Edm.String" MaxLength="12" sap:label="File Size"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"
+          sap:semantics="url" />
+      </ComplexType>
+      <ComplexType Name="OperationStatus">
+        <Property Name="Success" Type="Edm.Boolean" Nullable="false"
+          sap:label="Success of Operation" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+      </ComplexType>
+      <ComplexType Name="ApplicationState">
+        <Property Name="IsDirty" Type="Edm.Boolean" Nullable="false"
+          sap:label="Does the Application Have Any Unsaved Content?" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false"
+          sap:semantics="parameters" />
+      </ComplexType>
+      <ComplexType Name="DocumentTypes">
+        <Property Name="SAPObjectType" Type="Edm.String" MaxLength="30" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="DocumetType" Type="Edm.String" MaxLength="10" sap:label="Document type"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="Description" Type="Edm.String" MaxLength="40" sap:label="Description"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="DocumentClass" Type="Edm.String" MaxLength="20" sap:label="Document Class"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="MIMEType" Type="Edm.String" MaxLength="128" sap:label="MIME type"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="AttachmentFramework" Type="Edm.String" MaxLength="10" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="DocumentTypeIsDefault" Type="Edm.String" MaxLength="1" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="SAPObjectNodeType" Type="Edm.String" MaxLength="30"
+          sap:label="SAP Object Node Type" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" sap:semantics="url" />
+      </ComplexType>
+      <ComplexType Name="UsageStatus">
+        <Property Name="IsMultiple" Type="Edm.Boolean" Nullable="false"
+          sap:label="Does DIR have more than one active object link?" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+      </ComplexType>
+      <ComplexType Name="HDMProfileSetting">
+        <Property Name="ActiveProfile" Type="Edm.String" Nullable="false" MaxLength="10"
+          sap:label="Active Profile" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="UXFCUpload" Type="Edm.Boolean" Nullable="false" sap:label="Upload"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="UXFCUploadURL" Type="Edm.Boolean" Nullable="false" sap:label="Upload URL"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="UXFCRename" Type="Edm.Boolean" Nullable="false" sap:label="Rename"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="UXFCAssign" Type="Edm.Boolean" Nullable="false" sap:label="Assign/Unassign"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="UXFCCheckin" Type="Edm.Boolean" Nullable="false"
+          sap:label="Check In/Out/Reset" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="UXFCDelete" Type="Edm.Boolean" Nullable="false" sap:label="Delete"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="UXFCDownload" Type="Edm.Boolean" Nullable="false" sap:label="Download"
+          sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+      </ComplexType>
+      <ComplexType Name="SAP__FitToPage">
+        <Property Name="ErrorRecoveryBehavior" Type="Edm.String" Nullable="false" MaxLength="8"
+          sap:label="Error behavior" sap:creatable="false" sap:updatable="false"
+          sap:sortable="false" sap:filterable="false" />
+        <Property Name="IsEnabled" Type="Edm.Boolean" Nullable="false" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+        <Property Name="MinimumFontSize" Type="Edm.Int32" Nullable="false" sap:creatable="false"
+          sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+      </ComplexType>
+      <Association Name="Originals_OriginalContent" sap:content-version="1"
+        sap:label="Original Content">
+        <End Type="CV_ATTACHMENT_SRV.Originals" Multiplicity="1"
+          Role="FromRole_Originals_OriginalContent" />
+        <End Type="CV_ATTACHMENT_SRV.OriginalContent" Multiplicity="1"
+          Role="ToRole_Originals_OriginalContent" />
+      </Association>
+      <Association Name="assoc_A3B840FA7144FDD1BB7999D4D495CC9E" sap:content-version="1">
+        <End Type="CV_ATTACHMENT_SRV.I_DocumentInfoRecordDocTypeVHType" Multiplicity="1"
+          Role="FromRole_assoc_A3B840FA7144FDD1BB7999D4D495CC9E">
+          <OnDelete Action="Cascade" />
+        </End>
+        <End Type="CV_ATTACHMENT_SRV.I_DocumentInfoRecordDocTypeTType" Multiplicity="*"
+          Role="ToRole_assoc_A3B840FA7144FDD1BB7999D4D495CC9E" />
+        <ReferentialConstraint>
+          <Principal Role="FromRole_assoc_A3B840FA7144FDD1BB7999D4D495CC9E">
+            <PropertyRef Name="DocumentInfoRecordDocType" />
+          </Principal>
+          <Dependent Role="ToRole_assoc_A3B840FA7144FDD1BB7999D4D495CC9E">
+            <PropertyRef Name="DocumentInfoRecordDocType" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="to_format" sap:content-version="1">
+        <End Type="CV_ATTACHMENT_SRV.SAP__DocumentDescription" Multiplicity="1"
+          Role="FromRole_to_format" />
+        <End Type="CV_ATTACHMENT_SRV.SAP__Format" Multiplicity="1" Role="ToRole_to_format" />
+        <ReferentialConstraint>
+          <Principal Role="FromRole_to_format">
+            <PropertyRef Name="Id" />
+          </Principal>
+          <Dependent Role="ToRole_to_format">
+            <PropertyRef Name="Id" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="to_tablecolumns" sap:content-version="1">
+        <End Type="CV_ATTACHMENT_SRV.SAP__DocumentDescription" Multiplicity="1"
+          Role="FromRole_to_tablecolumns" />
+        <End Type="CV_ATTACHMENT_SRV.SAP__TableColumns" Multiplicity="*"
+          Role="ToRole_to_tablecolumns" />
+        <ReferentialConstraint>
+          <Principal Role="FromRole_to_tablecolumns">
+            <PropertyRef Name="Id" />
+          </Principal>
+          <Dependent Role="ToRole_to_tablecolumns">
+            <PropertyRef Name="Id" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="to_coverpage" sap:content-version="1">
+        <End Type="CV_ATTACHMENT_SRV.SAP__DocumentDescription" Multiplicity="1"
+          Role="FromRole_to_coverpage" />
+        <End Type="CV_ATTACHMENT_SRV.SAP__CoverPage" Multiplicity="*" Role="ToRole_to_coverpage" />
+        <ReferentialConstraint>
+          <Principal Role="FromRole_to_coverpage">
+            <PropertyRef Name="Id" />
+          </Principal>
+          <Dependent Role="ToRole_to_coverpage">
+            <PropertyRef Name="Id" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="to_signature" sap:content-version="1">
+        <End Type="CV_ATTACHMENT_SRV.SAP__DocumentDescription" Multiplicity="1"
+          Role="FromRole_to_signature" />
+        <End Type="CV_ATTACHMENT_SRV.SAP__Signature" Multiplicity="1" Role="ToRole_to_signature" />
+        <ReferentialConstraint>
+          <Principal Role="FromRole_to_signature">
+            <PropertyRef Name="Id" />
+          </Principal>
+          <Dependent Role="ToRole_to_signature">
+            <PropertyRef Name="Id" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="to_pdfstandard" sap:content-version="1">
+        <End Type="CV_ATTACHMENT_SRV.SAP__DocumentDescription" Multiplicity="1"
+          Role="FromRole_to_pdfstandard" />
+        <End Type="CV_ATTACHMENT_SRV.SAP__PDFStandard" Multiplicity="1" Role="ToRole_to_pdfstandard" />
+        <ReferentialConstraint>
+          <Principal Role="FromRole_to_pdfstandard">
+            <PropertyRef Name="Id" />
+          </Principal>
+          <Dependent Role="ToRole_to_pdfstandard">
+            <PropertyRef Name="Id" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="DocumentHeader_Originals" sap:content-version="1" sap:label="Originals">
+        <End Type="CV_ATTACHMENT_SRV.DocumentHeader" Multiplicity="1"
+          Role="FromRole_DocumentHeader_Originals" />
+        <End Type="CV_ATTACHMENT_SRV.Originals" Multiplicity="*"
+          Role="ToRole_DocumentHeader_Originals" />
+      </Association>
+      <Association Name="DocumentHeader_ObjectLinks" sap:content-version="1"
+        sap:label="Object Links">
+        <End Type="CV_ATTACHMENT_SRV.DocumentHeader" Multiplicity="1"
+          Role="FromRole_DocumentHeader_ObjectLinks" />
+        <End Type="CV_ATTACHMENT_SRV.ObjectLinks" Multiplicity="*"
+          Role="ToRole_DocumentHeader_ObjectLinks" />
+      </Association>
+      <Association Name="assoc_F7F398A8C49E4C23C229FE1DBB21ECD3" sap:content-version="1">
+        <End Type="CV_ATTACHMENT_SRV.I_DocInfoRecdObjTypeToDocTypeType" Multiplicity="1"
+          Role="FromRole_assoc_F7F398A8C49E4C23C229FE1DBB21ECD3">
+          <OnDelete Action="Cascade" />
+        </End>
+        <End Type="CV_ATTACHMENT_SRV.I_DocumentInfoRecordDocTypeTType" Multiplicity="*"
+          Role="ToRole_assoc_F7F398A8C49E4C23C229FE1DBB21ECD3" />
+      </Association>
+      <Association Name="assoc_EBEF80228129F16B41488F3B1BB6516A" sap:content-version="1">
+        <End Type="CV_ATTACHMENT_SRV.I_DocumentInfoRecordDocTypeTType" Multiplicity="1"
+          Role="FromRole_assoc_EBEF80228129F16B41488F3B1BB6516A" />
+        <End Type="CV_ATTACHMENT_SRV.I_DocumentInfoRecordDocTypeType" Multiplicity="0..1"
+          Role="ToRole_assoc_EBEF80228129F16B41488F3B1BB6516A" />
+        <ReferentialConstraint>
+          <Principal Role="ToRole_assoc_EBEF80228129F16B41488F3B1BB6516A">
+            <PropertyRef Name="DocumentInfoRecordDocType" />
+          </Principal>
+          <Dependent Role="FromRole_assoc_EBEF80228129F16B41488F3B1BB6516A">
+            <PropertyRef Name="DocumentInfoRecordDocType" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="assoc_4EFA83EECE77B27D0C7B821307FF718C" sap:content-version="1">
+        <End Type="CV_ATTACHMENT_SRV.I_DocumentInfoRecordDocTypeType" Multiplicity="1"
+          Role="FromRole_assoc_4EFA83EECE77B27D0C7B821307FF718C">
+          <OnDelete Action="Cascade" />
+        </End>
+        <End Type="CV_ATTACHMENT_SRV.I_DocumentInfoRecordDocTypeTType" Multiplicity="*"
+          Role="ToRole_assoc_4EFA83EECE77B27D0C7B821307FF718C" />
+        <ReferentialConstraint>
+          <Principal Role="FromRole_assoc_4EFA83EECE77B27D0C7B821307FF718C">
+            <PropertyRef Name="DocumentInfoRecordDocType" />
+          </Principal>
+          <Dependent Role="ToRole_assoc_4EFA83EECE77B27D0C7B821307FF718C">
+            <PropertyRef Name="DocumentInfoRecordDocType" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <EntityContainer Name="CV_ATTACHMENT_SRV_Entities" m:IsDefaultEntityContainer="true"
+        sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
+        <EntitySet Name="C_DocInfoRecdAttchDetForBusObj"
+          EntityType="CV_ATTACHMENT_SRV.C_DocInfoRecdAttchDetForBusObjType" sap:creatable="false"
+          sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1" />
+        <EntitySet Name="C_DocInfoRecdObjLinkAttchDet"
+          EntityType="CV_ATTACHMENT_SRV.C_DocInfoRecdObjLinkAttchDetType" sap:creatable="false"
+          sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1" />
+        <EntitySet Name="I_DocInfoRecdObjTypeToDocType"
+          EntityType="CV_ATTACHMENT_SRV.I_DocInfoRecdObjTypeToDocTypeType" sap:creatable="false"
+          sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1" />
+        <EntitySet Name="I_DocumentInfoRecordDocPrtVH"
+          EntityType="CV_ATTACHMENT_SRV.I_DocumentInfoRecordDocPrtVHType" sap:creatable="false"
+          sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1" />
+        <EntitySet Name="I_DocumentInfoRecordDocType"
+          EntityType="CV_ATTACHMENT_SRV.I_DocumentInfoRecordDocTypeType" sap:creatable="false"
+          sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1" />
+        <EntitySet Name="I_DocumentInfoRecordDocTypeT"
+          EntityType="CV_ATTACHMENT_SRV.I_DocumentInfoRecordDocTypeTType" sap:creatable="false"
+          sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1" />
+        <EntitySet Name="I_DocumentInfoRecordDocTypeVH"
+          EntityType="CV_ATTACHMENT_SRV.I_DocumentInfoRecordDocTypeVHType" sap:creatable="false"
+          sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1" />
+        <EntitySet Name="I_DocumentInfoRecordDocVersVH"
+          EntityType="CV_ATTACHMENT_SRV.I_DocumentInfoRecordDocVersVHType" sap:creatable="false"
+          sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1" />
+        <EntitySet Name="OriginalContentArchiveLink"
+          EntityType="CV_ATTACHMENT_SRV.OriginalContentArchiveLink"
+          sap:label="Original Content Archive Link" sap:creatable="false" sap:updatable="false"
+          sap:deletable="false" sap:pageable="false" sap:content-version="1" />
+        <EntitySet Name="DocumentHeaderDraftSet" EntityType="CV_ATTACHMENT_SRV.DocumentHeaderDraft"
+          sap:label="Document Header Draft" sap:requires-filter="true" sap:content-version="1" />
+        <EntitySet Name="ObjectLinkDraftSet" EntityType="CV_ATTACHMENT_SRV.ObjectLinkDraft"
+          sap:label="Object Link Draft Set" sap:updatable="false" sap:deletable="false"
+          sap:requires-filter="true" sap:content-version="1" />
+        <EntitySet Name="SAP__Currencies" EntityType="CV_ATTACHMENT_SRV.SAP__Currency"
+          sap:content-version="1" />
+        <EntitySet Name="SAP__UnitsOfMeasure" EntityType="CV_ATTACHMENT_SRV.SAP__UnitOfMeasure"
+          sap:content-version="1" />
+        <EntitySet Name="SAP__MyDocumentDescriptions"
+          EntityType="CV_ATTACHMENT_SRV.SAP__DocumentDescription" sap:content-version="1" />
+        <EntitySet Name="SAP__FormatSet" EntityType="CV_ATTACHMENT_SRV.SAP__Format"
+          sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false"
+          sap:addressable="false" sap:content-version="1" />
+        <EntitySet Name="SAP__PDFStandardSet" EntityType="CV_ATTACHMENT_SRV.SAP__PDFStandard"
+          sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false"
+          sap:addressable="false" sap:content-version="1" />
+        <EntitySet Name="SAP__TableColumnsSet" EntityType="CV_ATTACHMENT_SRV.SAP__TableColumns"
+          sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false"
+          sap:addressable="false" sap:content-version="1" />
+        <EntitySet Name="SAP__CoverPageSet" EntityType="CV_ATTACHMENT_SRV.SAP__CoverPage"
+          sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false"
+          sap:addressable="false" sap:content-version="1" />
+        <EntitySet Name="SAP__SignatureSet" EntityType="CV_ATTACHMENT_SRV.SAP__Signature"
+          sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false"
+          sap:addressable="false" sap:content-version="1" />
+        <EntitySet Name="SAP__ValueHelpSet" EntityType="CV_ATTACHMENT_SRV.SAP__ValueHelp"
+          sap:content-version="1" />
+        <EntitySet Name="DocumentHeaderSet" EntityType="CV_ATTACHMENT_SRV.DocumentHeader"
+          sap:label="Document Header" sap:creatable="false" sap:updatable="false"
+          sap:deletable="false" sap:requires-filter="true" sap:content-version="1" />
+        <EntitySet Name="ObjectLinksSet" EntityType="CV_ATTACHMENT_SRV.ObjectLinks"
+          sap:label="Object Link" sap:updatable="false" sap:deletable="false"
+          sap:requires-filter="true" sap:content-version="1" />
+        <EntitySet Name="OriginalsSet" EntityType="CV_ATTACHMENT_SRV.Originals"
+          sap:label="Originals" sap:updatable="false" sap:content-version="1" />
+        <EntitySet Name="OriginalContentSet" EntityType="CV_ATTACHMENT_SRV.OriginalContent"
+          sap:label="Original Content" sap:pageable="false" sap:content-version="1" />
+        <EntitySet Name="SAPObjectTypeCategorySet"
+          EntityType="CV_ATTACHMENT_SRV.SAPObjectTypeCategory" sap:creatable="false"
+          sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1" />
+        <AssociationSet Name="to_formatSet" Association="CV_ATTACHMENT_SRV.to_format"
+          sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+          <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_format" />
+          <End EntitySet="SAP__FormatSet" Role="ToRole_to_format" />
+        </AssociationSet>
+        <AssociationSet Name="to_pdfstandardSet" Association="CV_ATTACHMENT_SRV.to_pdfstandard"
+          sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+          <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_pdfstandard" />
+          <End EntitySet="SAP__PDFStandardSet" Role="ToRole_to_pdfstandard" />
+        </AssociationSet>
+        <AssociationSet Name="assoc_4EFA83EECE77B27D0C7B821307FF718C"
+          Association="CV_ATTACHMENT_SRV.assoc_4EFA83EECE77B27D0C7B821307FF718C"
+          sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+          <End EntitySet="I_DocumentInfoRecordDocType"
+            Role="FromRole_assoc_4EFA83EECE77B27D0C7B821307FF718C" />
+          <End EntitySet="I_DocumentInfoRecordDocTypeT"
+            Role="ToRole_assoc_4EFA83EECE77B27D0C7B821307FF718C" />
+        </AssociationSet>
+        <AssociationSet Name="assoc_EBEF80228129F16B41488F3B1BB6516A"
+          Association="CV_ATTACHMENT_SRV.assoc_EBEF80228129F16B41488F3B1BB6516A"
+          sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+          <End EntitySet="I_DocumentInfoRecordDocTypeT"
+            Role="FromRole_assoc_EBEF80228129F16B41488F3B1BB6516A" />
+          <End EntitySet="I_DocumentInfoRecordDocType"
+            Role="ToRole_assoc_EBEF80228129F16B41488F3B1BB6516A" />
+        </AssociationSet>
+        <AssociationSet Name="Originals_OriginalContent_AssocSet"
+          Association="CV_ATTACHMENT_SRV.Originals_OriginalContent" sap:creatable="false"
+          sap:updatable="false" sap:deletable="false" sap:content-version="1">
+          <End EntitySet="OriginalsSet" Role="FromRole_Originals_OriginalContent" />
+          <End EntitySet="OriginalContentSet" Role="ToRole_Originals_OriginalContent" />
+        </AssociationSet>
+        <AssociationSet Name="assoc_A3B840FA7144FDD1BB7999D4D495CC9E"
+          Association="CV_ATTACHMENT_SRV.assoc_A3B840FA7144FDD1BB7999D4D495CC9E"
+          sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+          <End EntitySet="I_DocumentInfoRecordDocTypeVH"
+            Role="FromRole_assoc_A3B840FA7144FDD1BB7999D4D495CC9E" />
+          <End EntitySet="I_DocumentInfoRecordDocTypeT"
+            Role="ToRole_assoc_A3B840FA7144FDD1BB7999D4D495CC9E" />
+        </AssociationSet>
+        <AssociationSet Name="to_tablecolumnsSet" Association="CV_ATTACHMENT_SRV.to_tablecolumns"
+          sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+          <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_tablecolumns" />
+          <End EntitySet="SAP__TableColumnsSet" Role="ToRole_to_tablecolumns" />
+        </AssociationSet>
+        <AssociationSet Name="to_signatureSet" Association="CV_ATTACHMENT_SRV.to_signature"
+          sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+          <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_signature" />
+          <End EntitySet="SAP__SignatureSet" Role="ToRole_to_signature" />
+        </AssociationSet>
+        <AssociationSet Name="assoc_F7F398A8C49E4C23C229FE1DBB21ECD3"
+          Association="CV_ATTACHMENT_SRV.assoc_F7F398A8C49E4C23C229FE1DBB21ECD3"
+          sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+          <End EntitySet="I_DocInfoRecdObjTypeToDocType"
+            Role="FromRole_assoc_F7F398A8C49E4C23C229FE1DBB21ECD3" />
+          <End EntitySet="I_DocumentInfoRecordDocTypeT"
+            Role="ToRole_assoc_F7F398A8C49E4C23C229FE1DBB21ECD3" />
+        </AssociationSet>
+        <AssociationSet Name="DocumentHeader_Originals_AssocSet"
+          Association="CV_ATTACHMENT_SRV.DocumentHeader_Originals" sap:creatable="false"
+          sap:updatable="false" sap:deletable="false" sap:content-version="1">
+          <End EntitySet="DocumentHeaderSet" Role="FromRole_DocumentHeader_Originals" />
+          <End EntitySet="OriginalsSet" Role="ToRole_DocumentHeader_Originals" />
+        </AssociationSet>
+        <AssociationSet Name="to_coverpageSet" Association="CV_ATTACHMENT_SRV.to_coverpage"
+          sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+          <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_coverpage" />
+          <End EntitySet="SAP__CoverPageSet" Role="ToRole_to_coverpage" />
+        </AssociationSet>
+        <AssociationSet Name="DocumentHeader_ObjectLinks_AssocSet"
+          Association="CV_ATTACHMENT_SRV.DocumentHeader_ObjectLinks" sap:creatable="false"
+          sap:updatable="false" sap:deletable="false" sap:content-version="1">
+          <End EntitySet="DocumentHeaderSet" Role="FromRole_DocumentHeader_ObjectLinks" />
+          <End EntitySet="ObjectLinksSet" Role="ToRole_DocumentHeader_ObjectLinks" />
+        </AssociationSet>
+        <FunctionImport Name="GetAttachmentCount" ReturnType="CV_ATTACHMENT_SRV.Attachments"
+          m:HttpMethod="GET" sap:label="Returns the Count of Attachments">
+          <Parameter Name="ObjectType" Type="Edm.String" Mode="In" MaxLength="40" Nullable="true"
+            sap:label="Object Type" />
+          <Parameter Name="ObjectKey" Type="Edm.String" Mode="In" MaxLength="90"
+            sap:label="Object Key" />
+          <Parameter Name="SemanticObjectType" Type="Edm.String" Mode="In" MaxLength="40"
+            Nullable="true" sap:label="Semantic Object Type" />
+        </FunctionImport>
+        <FunctionImport Name="CancelAttachment" ReturnType="CV_ATTACHMENT_SRV.OperationStatus"
+          m:HttpMethod="POST" sap:label="Cancel All Changes">
+          <Parameter Name="ObjectType" Type="Edm.String" Mode="In" MaxLength="40" Nullable="true"
+            sap:label="Object Type" />
+          <Parameter Name="ObjectKey" Type="Edm.String" Mode="In" MaxLength="90"
+            sap:label="Object Key" />
+          <Parameter Name="AttachmentFramework" Type="Edm.String" Mode="In" Nullable="true"
+            sap:label="Attachment Framework" />
+          <Parameter Name="SemanticObjectType" Type="Edm.String" Mode="In" MaxLength="40"
+            Nullable="true" sap:label="Semantic Object Type" />
+        </FunctionImport>
+        <FunctionImport Name="GetAllOriginals"
+          ReturnType="Collection(CV_ATTACHMENT_SRV.OriginalContent)" EntitySet="OriginalContentSet"
+          m:HttpMethod="GET" sap:label="Returns All Originals Related to a Parent Object">
+          <Parameter Name="ObjectType" Type="Edm.String" Mode="In" MaxLength="40" Nullable="true"
+            sap:label="Object Type" />
+          <Parameter Name="ObjectKey" Type="Edm.String" Mode="In" MaxLength="90"
+            sap:label="Object Key" />
+          <Parameter Name="SemanticObjectType" Type="Edm.String" Mode="In" MaxLength="40"
+            Nullable="true" sap:label="Semantic Object Type" />
+          <Parameter Name="IsDraft" Type="Edm.Boolean" Mode="In" Nullable="true"
+            sap:label="Is Draft" />
+          <Parameter Name="AttachmentFramework" Type="Edm.String" Mode="In" Nullable="true"
+            sap:label="Attachment Framework" />
+        </FunctionImport>
+        <FunctionImport Name="RenameAttachment" ReturnType="CV_ATTACHMENT_SRV.OriginalContent"
+          EntitySet="OriginalContentSet" m:HttpMethod="POST" sap:label="Rename Attachment"
+          sap:action-for="CV_ATTACHMENT_SRV.OriginalContent">
+          <Parameter Name="ObjectKey" Type="Edm.String" Mode="In" MaxLength="90" Nullable="true"
+            sap:label="Object Key" />
+          <Parameter Name="ObjectType" Type="Edm.String" Mode="In" MaxLength="40" Nullable="true"
+            sap:label="Object Type" />
+          <Parameter Name="Filename" Type="Edm.String" Mode="In" MaxLength="255"
+            sap:label="File Name" />
+          <Parameter Name="FileId" Type="Edm.String" Mode="In" MaxLength="32" sap:label="File ID" />
+          <Parameter Name="Documentversion" Type="Edm.String" Mode="In" MaxLength="2"
+            Nullable="true" sap:label="Document Version" />
+          <Parameter Name="Documenttype" Type="Edm.String" Mode="In" MaxLength="3" Nullable="true"
+            sap:label="Document Type" />
+          <Parameter Name="Documentpart" Type="Edm.String" Mode="In" MaxLength="3" Nullable="true"
+            sap:label="Document Part" />
+          <Parameter Name="Documentnumber" Type="Edm.String" Mode="In" MaxLength="25"
+            Nullable="true" sap:label="Document Number" />
+          <Parameter Name="ApplicationId" Type="Edm.String" Mode="In" MaxLength="32" Nullable="true"
+            sap:label="Application ID" />
+          <Parameter Name="SemanticObjectType" Type="Edm.String" Mode="In" MaxLength="40"
+            Nullable="true" sap:label="Semantic Object Type" />
+          <Parameter Name="IsDraft" Type="Edm.Boolean" Mode="In" Nullable="true"
+            sap:label="Is Draft" />
+        </FunctionImport>
+        <FunctionImport Name="ConfirmAttachment" ReturnType="CV_ATTACHMENT_SRV.OperationStatus"
+          m:HttpMethod="POST" sap:label="Confirm or Save All Attachment Changes">
+          <Parameter Name="ObjectType" Type="Edm.String" Mode="In" MaxLength="40" Nullable="true"
+            sap:label="Object Type" />
+          <Parameter Name="ObjectKey" Type="Edm.String" Mode="In" MaxLength="90"
+            sap:label="Object Key" />
+          <Parameter Name="AttachmentFramework" Type="Edm.String" Mode="In" Nullable="true"
+            sap:label="Attachment Framework" />
+          <Parameter Name="SemanticObjectType" Type="Edm.String" Mode="In" MaxLength="40"
+            Nullable="true" sap:label="Semantic Object Type" />
+        </FunctionImport>
+        <FunctionImport Name="GetApplicationState" ReturnType="CV_ATTACHMENT_SRV.ApplicationState"
+          m:HttpMethod="GET" sap:label="Returns the Application Status">
+          <Parameter Name="ObjectType" Type="Edm.String" Mode="In" MaxLength="40" Nullable="true"
+            sap:label="Object Type" />
+          <Parameter Name="ObjectKey" Type="Edm.String" Mode="In" MaxLength="90"
+            sap:label="Object Key" />
+          <Parameter Name="SemanticObjectType" Type="Edm.String" Mode="In" MaxLength="40"
+            Nullable="true" sap:label="Semantic Object Type" />
+        </FunctionImport>
+        <FunctionImport Name="GetDocumentTypes"
+          ReturnType="Collection(CV_ATTACHMENT_SRV.DocumentTypes)" m:HttpMethod="GET"
+          sap:label="Returns the Document Types">
+          <Parameter Name="SAPObjectType" Type="Edm.String" Mode="In" MaxLength="30" />
+          <Parameter Name="SAPObjectNodeType" Type="Edm.String" Mode="In" MaxLength="30" />
+        </FunctionImport>
+        <FunctionImport Name="AssignUnassignObjectLink"
+          ReturnType="CV_ATTACHMENT_SRV.OperationStatus" m:HttpMethod="POST"
+          sap:label="Assign or Unassing Object Links">
+          <Parameter Name="ObjectType" Type="Edm.String" Mode="In" MaxLength="40"
+            sap:label="Object Type" />
+          <Parameter Name="ObjectKey" Type="Edm.String" Mode="In" MaxLength="90"
+            sap:label="Object Key" />
+          <Parameter Name="DocumentInfoRecordDocVersion" Type="Edm.String" Mode="In" MaxLength="2"
+            sap:label="Document Version" />
+          <Parameter Name="DocumentInfoRecordDocType" Type="Edm.String" Mode="In" MaxLength="3"
+            sap:label="Document Type" />
+          <Parameter Name="DocumentInfoRecordDocPart" Type="Edm.String" Mode="In" MaxLength="3"
+            sap:label="Document Part" />
+          <Parameter Name="DocumentInfoRecordDocNumber" Type="Edm.String" Mode="In" MaxLength="25"
+            sap:label="Document Number" />
+          <Parameter Name="AssignIndicator" Type="Edm.Boolean" Mode="In"
+            sap:label="Assign Indicator" />
+        </FunctionImport>
+        <FunctionImport Name="CheckIfMultipleObjectLinksExist"
+          ReturnType="CV_ATTACHMENT_SRV.UsageStatus" m:HttpMethod="GET"
+          sap:label="Returns true if more than one active object links found">
+          <Parameter Name="DocumentInfoRecordDocVersion" Type="Edm.String" Mode="In" MaxLength="2"
+            sap:label="Document Version" />
+          <Parameter Name="DocumentInfoRecordDocType" Type="Edm.String" Mode="In" MaxLength="3"
+            sap:label="Document Type" />
+          <Parameter Name="DocumentInfoRecordDocPart" Type="Edm.String" Mode="In" MaxLength="3"
+            sap:label="Document Part" />
+          <Parameter Name="DocumentInfoRecordDocNumber" Type="Edm.String" Mode="In" MaxLength="25"
+            sap:label="Document Number" />
+        </FunctionImport>
+        <FunctionImport Name="CreateUrlAsAttachment" ReturnType="CV_ATTACHMENT_SRV.OriginalContent"
+          EntitySet="OriginalContentSet" m:HttpMethod="POST" sap:label="Create Url As Attachment">
+          <Parameter Name="ObjectType" Type="Edm.String" Mode="In" MaxLength="40" Nullable="true"
+            sap:label="Object Type" />
+          <Parameter Name="ObjectKey" Type="Edm.String" Mode="In" MaxLength="90"
+            sap:label="Object Key" />
+          <Parameter Name="SemanticObjectType" Type="Edm.String" Mode="In" MaxLength="40"
+            Nullable="true" sap:label="Semantic Object Type" />
+          <Parameter Name="URL" Type="Edm.String" Mode="In" MaxLength="4096" sap:label="URL" />
+          <Parameter Name="DocumentType" Type="Edm.String" Mode="In" Nullable="true"
+            sap:label="Document Type" />
+          <Parameter Name="UrlDescription" Type="Edm.String" Mode="In" MaxLength="40"
+            Nullable="true" sap:label="URL Description" />
+          <Parameter Name="MIMEType" Type="Edm.String" Mode="In" MaxLength="128"
+            sap:label="MIME Type" />
+          <Parameter Name="IsDraft" Type="Edm.Boolean" Mode="In" Nullable="true"
+            sap:label="Is Draft" />
+        </FunctionImport>
+        <FunctionImport Name="GetAllChildDocuments"
+          ReturnType="Collection(CV_ATTACHMENT_SRV.OriginalContent)" EntitySet="OriginalContentSet"
+          m:HttpMethod="GET" sap:label="Get All Child Documents">
+          <Parameter Name="ObjectType" Type="Edm.String" Mode="In" MaxLength="40" Nullable="true"
+            sap:label="Object Type" />
+          <Parameter Name="ObjectKey" Type="Edm.String" Mode="In" MaxLength="90"
+            sap:label="Object Key" />
+          <Parameter Name="SemanticObjectType" Type="Edm.String" Mode="In" MaxLength="40"
+            Nullable="true" sap:label="Semantic Object Type" />
+        </FunctionImport>
+        <FunctionImport Name="LinkFileShareAttachments"
+          ReturnType="CV_ATTACHMENT_SRV.OriginalContent" EntitySet="OriginalContentSet"
+          m:HttpMethod="POST" sap:label="Link Attachments Via File Share">
+          <Parameter Name="ObjectType" Type="Edm.String" Mode="In" MaxLength="40" Nullable="true"
+            sap:label="Object Type" />
+          <Parameter Name="ObjectKey" Type="Edm.String" Mode="In" MaxLength="90"
+            sap:label="Object Key" />
+          <Parameter Name="HarmonizedDocumentType" Type="Edm.String" Mode="In" Nullable="true"
+            sap:label="Document Type" />
+          <Parameter Name="MimeType" Type="Edm.String" Mode="In" MaxLength="128"
+            sap:label="MIME Type" />
+          <Parameter Name="Filename" Type="Edm.String" Mode="In" MaxLength="255"
+            sap:label="File Name" />
+          <Parameter Name="IsDraft" Type="Edm.Boolean" Mode="In" Nullable="true"
+            sap:label="Is Draft" />
+          <Parameter Name="FileShareId" Type="Edm.String" Mode="In" MaxLength="15"
+            sap:label="File Share ID" />
+          <Parameter Name="FileShareItemId" Type="Edm.String" Mode="In" MaxLength="255"
+            sap:label="File Share Item ID" />
+          <Parameter Name="FileShareItemContentSize" Type="Edm.String" Mode="In" MaxLength="12"
+            Nullable="true" sap:label="File Share Item Content Size" />
+        </FunctionImport>
+        <FunctionImport Name="CheckOut" ReturnType="CV_ATTACHMENT_SRV.OriginalContent"
+          EntitySet="OriginalContentSet" m:HttpMethod="POST" sap:label="Check-Out Attachment">
+          <Parameter Name="ApplicationId" Type="Edm.String" Mode="In" MaxLength="32"
+            Nullable="false" sap:label="Application ID" />
+          <Parameter Name="FileId" Type="Edm.String" Mode="In" MaxLength="32" Nullable="false" />
+          <Parameter Name="DocumentInfoRecordDocType" Type="Edm.String" Mode="In" MaxLength="3"
+            Nullable="true" sap:label="Document Type" />
+          <Parameter Name="DocumentInfoRecordDocNumber" Type="Edm.String" Mode="In" MaxLength="25"
+            Nullable="true" sap:label="Document" />
+          <Parameter Name="DocumentInfoRecordDocVersion" Type="Edm.String" Mode="In" MaxLength="2"
+            Nullable="true" sap:label="Document Version" />
+          <Parameter Name="DocumentInfoRecordDocPart" Type="Edm.String" Mode="In" MaxLength="3"
+            Nullable="true" sap:label="Document Part" />
+        </FunctionImport>
+        <FunctionImport Name="ResetCheckOut" ReturnType="CV_ATTACHMENT_SRV.OriginalContent"
+          EntitySet="OriginalContentSet" m:HttpMethod="POST" sap:label="Reset Check-Out"
+          sap:action-for="CV_ATTACHMENT_SRV.OriginalContent">
+          <Parameter Name="FileId" Type="Edm.String" Mode="In" MaxLength="32" Nullable="false" />
+          <Parameter Name="ApplicationId" Type="Edm.String" Mode="In" MaxLength="32"
+            Nullable="false" sap:label="Application ID" />
+        </FunctionImport>
+        <FunctionImport Name="GetUploadURLWithToken"
+          ReturnType="Collection(CV_ATTACHMENT_SRV.OriginalUploadParams)" m:HttpMethod="GET"
+          sap:label="Get Upload URL and tokens">
+          <Parameter Name="Filename" Type="Edm.String" Mode="In" MaxLength="255"
+            sap:label="File Name" />
+          <Parameter Name="MIMEType" Type="Edm.String" Mode="In" MaxLength="128" Nullable="true"
+            sap:label="MIME Type" />
+          <Parameter Name="ObjectType" Type="Edm.String" Mode="In" MaxLength="40"
+            sap:label="Object Type" />
+          <Parameter Name="ObjectKey" Type="Edm.String" Mode="In" MaxLength="90"
+            sap:label="Object Key" />
+          <Parameter Name="CountOfTokensRequired" Type="Edm.String" Mode="In" MaxLength="11"
+            Nullable="true" sap:label="Count of Tokens Required" />
+        </FunctionImport>
+        <FunctionImport Name="GetAccessURLWithToken"
+          ReturnType="Collection(CV_ATTACHMENT_SRV.OriginalUploadParams)" m:HttpMethod="GET"
+          sap:label="Get Access URL and Tokens">
+          <Parameter Name="RequestURLForPut" Type="Edm.Boolean" Mode="In" Nullable="true"
+            sap:label="URL to Update an Attachment" />
+          <Parameter Name="RequestURLForGet" Type="Edm.Boolean" Mode="In" Nullable="true"
+            sap:label="URL to Read an Attachment" />
+          <Parameter Name="FileId" Type="Edm.String" Mode="In" MaxLength="32" />
+          <Parameter Name="CountOfTokensRequired" Type="Edm.String" Mode="In" MaxLength="11"
+            Nullable="true" sap:label="Count of Tokens Required" />
+          <Parameter Name="ObjectType" Type="Edm.String" Mode="In" MaxLength="40"
+            sap:label="Object Type" />
+          <Parameter Name="ObjectKey" Type="Edm.String" Mode="In" MaxLength="90" Nullable="true"
+            sap:label="Object Key" />
+          <Parameter Name="DocumentInfoRecordDocType" Type="Edm.String" Mode="In" Nullable="true"
+            sap:label="Document Info Record Doc Type" />
+          <Parameter Name="DocumentInfoRecordDocNumber" Type="Edm.String" Mode="In" Nullable="true"
+            sap:label="Document Info Record Doc Number" />
+          <Parameter Name="DocumentInfoRecordDocVersion" Type="Edm.String" Mode="In" Nullable="true"
+            sap:label="Document Info Record Doc Version" />
+          <Parameter Name="DocumentInfoRecordDocPart" Type="Edm.String" Mode="In" Nullable="true"
+            sap:label="Document Info Record Doc Part" />
+        </FunctionImport>
+        <FunctionImport Name="FinalizeMetadata" ReturnType="CV_ATTACHMENT_SRV.OriginalContent"
+          EntitySet="OriginalContentSet" m:HttpMethod="POST"
+          sap:label="Finalize Metadata of the Attachment">
+          <Parameter Name="ObjectType" Type="Edm.String" Mode="In" MaxLength="40" Nullable="true"
+            sap:label="Object Type" />
+          <Parameter Name="SemanticObjectType" Type="Edm.String" Mode="In" MaxLength="40"
+            Nullable="true" sap:label="Semantic Object Type" />
+          <Parameter Name="ObjectKey" Type="Edm.String" Mode="In" MaxLength="90"
+            sap:label="Object Key" />
+          <Parameter Name="Filename" Type="Edm.String" Mode="In" MaxLength="255"
+            sap:label="File Name" />
+          <Parameter Name="MIMEType" Type="Edm.String" Mode="In" MaxLength="128" Nullable="true"
+            sap:label="MIME Type" />
+          <Parameter Name="ApplicationId" Type="Edm.String" Mode="In" MaxLength="32" Nullable="true"
+            sap:label="Application ID" />
+          <Parameter Name="FileId" Type="Edm.String" Mode="In" MaxLength="32" Nullable="true" />
+        </FunctionImport>
+        <FunctionImport Name="GetArchiveLinkAttachments"
+          ReturnType="Collection(CV_ATTACHMENT_SRV.OriginalContentArchiveLink)"
+          EntitySet="OriginalContentArchiveLink" m:HttpMethod="GET"
+          sap:label="Get Archive Link Attachments">
+          <Parameter Name="ArchiveObjectID" Type="Edm.String" Mode="In" MaxLength="50"
+            Nullable="false" sap:label="SAP object ID" />
+          <Parameter Name="ArchiveObjectType" Type="Edm.String" Mode="In" MaxLength="10"
+            Nullable="true" sap:label="Archive Object Type" />
+          <Parameter Name="SemanticObjectType" Type="Edm.String" Mode="In" MaxLength="40"
+            Nullable="true" sap:label="Semantic Object Type" />
+          <Parameter Name="IsDraft" Type="Edm.Boolean" Mode="In" Nullable="true"
+            sap:label="Is Draft" />
+        </FunctionImport>
+        <FunctionImport Name="GetArchiveLinkAttachmentsCount"
+          ReturnType="CV_ATTACHMENT_SRV.Attachments" m:HttpMethod="GET"
+          sap:label="Returns the count of Archive Link Attachments">
+          <Parameter Name="ArchiveObjectID" Type="Edm.String" Mode="In" Nullable="false"
+            sap:label="Archive Link Document ID" />
+          <Parameter Name="ArchiveObjectType" Type="Edm.String" Mode="In" Nullable="true"
+            sap:label="Archive Object Type" />
+          <Parameter Name="SemanticObjectType" Type="Edm.String" Mode="In" MaxLength="40"
+            Nullable="true" sap:label="Semantic Object Type" />
+        </FunctionImport>
+        <FunctionImport Name="GetAttachmentsByAlternateKey"
+          ReturnType="Collection(CV_ATTACHMENT_SRV.OriginalContent)" EntitySet="OriginalContentSet"
+          m:HttpMethod="GET" sap:label="Get Attachments by Alternate Key">
+          <Parameter Name="ObjectType" Type="Edm.String" Mode="In" MaxLength="40" Nullable="true"
+            sap:label="Object Type" />
+          <Parameter Name="ObjectKey" Type="Edm.String" Mode="In" MaxLength="90"
+            sap:label="Object Key" />
+          <Parameter Name="SemanticObjectType" Type="Edm.String" Mode="In" MaxLength="40"
+            Nullable="true" sap:label="Semantic Object Type" />
+        </FunctionImport>
+      </EntityContainer>
+      <Annotations
+        Target="CV_ATTACHMENT_SRV.C_DocInfoRecdAttchDetForBusObjType/DocumentInfoRecordDocType"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="Label" String="Document Info Record Document Type VH" />
+            <PropertyValue Property="CollectionPath" String="I_DocumentInfoRecordDocTypeVH" />
+            <PropertyValue Property="SearchSupported" Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocType" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocType" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="DocumentInfoRecordDocType_Text" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations
+        Target="CV_ATTACHMENT_SRV.C_DocInfoRecdAttchDetForBusObjType/DocumentInfoRecordDocNumber"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="Label" String="Document Info Record Document Part VH" />
+            <PropertyValue Property="CollectionPath" String="I_DocumentInfoRecordDocPrtVH" />
+            <PropertyValue Property="SearchSupported" Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocType" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocType" />
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocNumber" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocNumber" />
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocVersion" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocVersion" />
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocPart" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocPart" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="DocumentInfoRecordDocType_Text" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="DocumentDescription" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations
+        Target="CV_ATTACHMENT_SRV.C_DocInfoRecdAttchDetForBusObjType/DocumentInfoRecordDocVersion"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="Label" String="Document Info Record Document Version VH" />
+            <PropertyValue Property="CollectionPath" String="I_DocumentInfoRecordDocVersVH" />
+            <PropertyValue Property="SearchSupported" Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocType" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocType" />
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocNumber" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocNumber" />
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocVersion" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocVersion" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="DocumentInfoRecordDocType_Text" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations
+        Target="CV_ATTACHMENT_SRV.C_DocInfoRecdAttchDetForBusObjType/DocumentInfoRecordDocPart"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="Label" String="Document Info Record Document Part VH" />
+            <PropertyValue Property="CollectionPath" String="I_DocumentInfoRecordDocPrtVH" />
+            <PropertyValue Property="SearchSupported" Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocType" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocType" />
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocNumber" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocNumber" />
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocVersion" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocVersion" />
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocPart" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocPart" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="DocumentInfoRecordDocType_Text" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="DocumentDescription" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations
+        Target="CV_ATTACHMENT_SRV.C_DocInfoRecdObjLinkAttchDetType/DocumentInfoRecordDocType"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="Label" String="Document Info Record Document Type VH" />
+            <PropertyValue Property="CollectionPath" String="I_DocumentInfoRecordDocTypeVH" />
+            <PropertyValue Property="SearchSupported" Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocType" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocType" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="DocumentInfoRecordDocType_Text" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations
+        Target="CV_ATTACHMENT_SRV.C_DocInfoRecdObjLinkAttchDetType/DocumentInfoRecordDocNumber"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="Label" String="Document Info Record Document Part VH" />
+            <PropertyValue Property="CollectionPath" String="I_DocumentInfoRecordDocPrtVH" />
+            <PropertyValue Property="SearchSupported" Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocType" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocType" />
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocNumber" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocNumber" />
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocVersion" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocVersion" />
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocPart" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocPart" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="DocumentInfoRecordDocType_Text" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="DocumentDescription" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations
+        Target="CV_ATTACHMENT_SRV.C_DocInfoRecdObjLinkAttchDetType/DocumentInfoRecordDocVersion"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="Label" String="Document Info Record Document Version VH" />
+            <PropertyValue Property="CollectionPath" String="I_DocumentInfoRecordDocVersVH" />
+            <PropertyValue Property="SearchSupported" Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocType" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocType" />
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocNumber" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocNumber" />
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocVersion" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocVersion" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="DocumentInfoRecordDocType_Text" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations
+        Target="CV_ATTACHMENT_SRV.C_DocInfoRecdObjLinkAttchDetType/DocumentInfoRecordDocPart"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.ValueList">
+          <Record>
+            <PropertyValue Property="Label" String="Document Info Record Document Part VH" />
+            <PropertyValue Property="CollectionPath" String="I_DocumentInfoRecordDocPrtVH" />
+            <PropertyValue Property="SearchSupported" Bool="true" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocType" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocType" />
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocNumber" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocNumber" />
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocVersion" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocVersion" />
+                </Record>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty"
+                    PropertyPath="DocumentInfoRecordDocPart" />
+                  <PropertyValue Property="ValueListProperty" String="DocumentInfoRecordDocPart" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty"
+                    String="DocumentInfoRecordDocType_Text" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="DocumentDescription" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CV_ATTACHMENT_SRV.CV_ATTACHMENT_SRV_Entities"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true" />
+      </Annotations>
+      <Annotations Target="CV_ATTACHMENT_SRV.I_DocInfoRecdObjTypeToDocTypeType/to_Text"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Composition" />
+      </Annotations>
+      <Annotations Target="CV_ATTACHMENT_SRV.I_DocumentInfoRecordDocTypeType/to_Text"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Composition" />
+      </Annotations>
+      <Annotations Target="CV_ATTACHMENT_SRV.I_DocumentInfoRecordDocTypeVHType/to_Text"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Common.Composition" />
+      </Annotations>
+      <Annotations
+        Target="CV_ATTACHMENT_SRV.CV_ATTACHMENT_SRV_Entities/I_DocInfoRecdObjTypeToDocType"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.NavigationRestrictions">
+          <Record>
+            <PropertyValue Property="RestrictedProperties">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_Text" />
+                  <PropertyValue Property="InsertRestrictions">
+                    <Record>
+                      <PropertyValue Property="Insertable" Bool="false" />
+                    </Record>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CV_ATTACHMENT_SRV.CV_ATTACHMENT_SRV_Entities/I_DocumentInfoRecordDocType"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.NavigationRestrictions">
+          <Record>
+            <PropertyValue Property="RestrictedProperties">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_Text" />
+                  <PropertyValue Property="InsertRestrictions">
+                    <Record>
+                      <PropertyValue Property="Insertable" Bool="false" />
+                    </Record>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations
+        Target="CV_ATTACHMENT_SRV.CV_ATTACHMENT_SRV_Entities/I_DocumentInfoRecordDocTypeT"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.NavigationRestrictions">
+          <Record>
+            <PropertyValue Property="RestrictedProperties">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_DocType" />
+                  <PropertyValue Property="InsertRestrictions">
+                    <Record>
+                      <PropertyValue Property="Insertable" Bool="false" />
+                    </Record>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations
+        Target="CV_ATTACHMENT_SRV.CV_ATTACHMENT_SRV_Entities/I_DocumentInfoRecordDocTypeVH"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Capabilities.NavigationRestrictions">
+          <Record>
+            <PropertyValue Property="RestrictedProperties">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_Text" />
+                  <PropertyValue Property="InsertRestrictions">
+                    <Record>
+                      <PropertyValue Property="Insertable" Bool="false" />
+                    </Record>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CV_ATTACHMENT_SRV.CV_ATTACHMENT_SRV_Entities"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="SAP__CodeList.CurrencyCodes">
+          <Record>
+            <PropertyValue Property="Url" String="./$metadata" />
+            <PropertyValue Property="CollectionPath" String="SAP__Currencies" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__CodeList.UnitsOfMeasure">
+          <Record>
+            <PropertyValue Property="Url" String="./$metadata" />
+            <PropertyValue Property="CollectionPath" String="SAP__UnitsOfMeasure" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__PDF.Features">
+          <Record>
+            <PropertyValue Property="DocumentDescriptionReference" String="./$metadata" />
+            <PropertyValue Property="DocumentDescriptionCollection"
+              String="SAP__MyDocumentDescriptions" />
+            <PropertyValue Property="ArchiveFormat" Bool="true" />
+            <PropertyValue Property="CoverPage" Bool="true" />
+            <PropertyValue Property="Signature" Bool="true" />
+            <PropertyValue Property="FitToPage" Bool="true" />
+            <PropertyValue Property="FontName" Bool="true" />
+            <PropertyValue Property="FontSize" Bool="true" />
+            <PropertyValue Property="Margin" Bool="true" />
+            <PropertyValue Property="Border" Bool="true" />
+            <PropertyValue Property="ResultSizeDefault" Int="20000" />
+            <PropertyValue Property="ResultSizeMaximum" Int="20000" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__CodeList.SAP__DocumentDescription">
+          <Record>
+            <PropertyValue Property="Url" String="./$metadata" />
+            <PropertyValue Property="CollectionPath" String="SAP__MyDocumentDescriptions" />
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CV_ATTACHMENT_SRV.SAP__Currency/CurrencyCode"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="SAP__common.Text" Path="Text" />
+        <Annotation Term="SAP__common.UnitSpecificScale" Path="DecimalPlaces" />
+        <Annotation Term="SAP__CodeList.StandardCode" Path="ISOCode" />
+      </Annotations>
+      <Annotations Target="CV_ATTACHMENT_SRV.SAP__UnitOfMeasure/UnitCode"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="SAP__common.Text" Path="Text" />
+        <Annotation Term="SAP__common.UnitSpecificScale" Path="DecimalPlaces" />
+        <Annotation Term="SAP__CodeList.StandardCode" Path="ISOCode" />
+        <Annotation Term="SAP__CodeList.ExternalCode" Path="ExternalCode" />
+      </Annotations>
+      <Annotations Target="CV_ATTACHMENT_SRV.SAP__UnitOfMeasure"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="SAP__core.AlternateKeys">
+          <Collection>
+            <Record>
+              <PropertyValue Property="Key">
+                <Collection>
+                  <Record>
+                    <PropertyValue Property="Name" Path="ExternalCode" />
+                    <PropertyValue Property="Alias" String="ExternalCode" />
+                  </Record>
+                </Collection>
+              </PropertyValue>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CV_ATTACHMENT_SRV.SAP__DocumentDescription/CreatedBy"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="SAP__core.Computed" />
+      </Annotations>
+      <Annotations Target="CV_ATTACHMENT_SRV.SAP__DocumentDescription/CreatedAt"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="SAP__core.Computed" />
+      </Annotations>
+      <Annotations Target="CV_ATTACHMENT_SRV.SAP__DocumentDescription"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="SAP__capabilties.InsertRestrictions">
+          <Record>
+            <PropertyValue Property="Insertable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilties.UpdateRestrictions">
+          <Record>
+            <PropertyValue Property="Updatable" Bool="false" />
+            <PropertyValue Property="QueryOptions">
+              <Record>
+                <PropertyValue Property="SelectSupported" Bool="true" />
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilties.DeleteRestrictions">
+          <Record>
+            <PropertyValue Property="Deletable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilties.FilterRestrictions">
+          <Record>
+            <PropertyValue Property="FilterExpressionRestrictions">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="Property" PropertyPath="Format/Orientation" />
+                  <PropertyValue Property="AllowedExpressions" String="Multivalue" />
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property" PropertyPath="Format/PaperSize" />
+                  <PropertyValue Property="AllowedExpressions" String="Multivalue" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CV_ATTACHMENT_SRV.SAP__Format/FitToPage/ErrorRecoveryBehavior"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="SAP__common.ValueListReferences">
+          <Record>
+            <PropertyValue Property="Url" String="./$metadata" />
+            <PropertyValue Property="CollectionPath"
+              String="../../../../SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27ErrorRecoveryBehaviour%27" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__common.ValueListWithFixedValues" />
+      </Annotations>
+      <Annotations Target="CV_ATTACHMENT_SRV.SAP__Format/FontName"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="SAP__common.ValueListReferences">
+          <Record>
+            <PropertyValue Property="Url" String="./$metadata" />
+            <PropertyValue Property="CollectionPath"
+              String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27FontName%27" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__common.ValueListWithFixedValues" />
+      </Annotations>
+      <Annotations Target="CV_ATTACHMENT_SRV.SAP__Format/PaperSize"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="SAP__common.ValueListReferences">
+          <Record>
+            <PropertyValue Property="Url" String="./$metadata" />
+            <PropertyValue Property="CollectionPath"
+              String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27PaperSize%27" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__common.ValueListWithFixedValues" />
+      </Annotations>
+      <Annotations Target="CV_ATTACHMENT_SRV.SAP__Format/Orientation"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="SAP__common.ValueListReferences">
+          <Record>
+            <PropertyValue Property="Url" String="./$metadata" />
+            <PropertyValue Property="CollectionPath"
+              String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27FontName%27" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__common.ValueListWithFixedValues" />
+      </Annotations>
+      <Annotations Target="CV_ATTACHMENT_SRV.SAP__TableColumns/HorizontalAlignment"
+        xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="SAP__common.ValueListReferences">
+          <Record>
+            <PropertyValue Property="Url" String="./$metadata" />
+            <PropertyValue Property="CollectionPath"
+              String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27HorizontalAlignment%27" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__common.ValueListWithFixedValues" />
+      </Annotations>
+      <atom:link rel="self"
+        href="https://host.domain:443/sap/opu/odata/sap/CV_ATTACHMENT_SRV/$metadata"
+        xmlns:atom="http://www.w3.org/2005/Atom" />
+      <atom:link rel="latest-version"
+        href="https://host.domain:443/sap/opu/odata/sap/CV_ATTACHMENT_SRV/$metadata"
+        xmlns:atom="http://www.w3.org/2005/Atom" />
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
