@@ -273,6 +273,15 @@
             "srv-hana"
           ]
         }
+      },
+      "CV_ATTACHMENT_SRV": {
+        "kind": "odata-v2",
+        "model": "srv/external/CV_ATTACHMENT_SRV",
+        "credentials": {
+          "destination": "S4H",
+          "requestTimeout": 30000,
+          "path": "/sap/opu/odata/sap/CV_ATTACHMENT_SRV"
+        }
       }
     },
     "[dev-uaa]": {
