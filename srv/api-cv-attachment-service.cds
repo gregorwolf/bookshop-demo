@@ -1,4 +1,4 @@
-using {API_CV_ATTACHMENT_SRV as external} from './external/API_CV_ATTACHMENT_SRV.csn';
+using {API_CV_ATTACHMENT_SRV as external} from './external/API_CV_ATTACHMENT_SRV';
 
 service AttachmentContentService @(path: 'API_CV_ATTACHMENT_SRV') {
     @cds.persistence.skip: false
