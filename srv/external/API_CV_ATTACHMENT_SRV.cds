@@ -284,7 +284,20 @@ entity API_CV_ATTACHMENT_SRV.AttachmentContentSet {
   @Core.MediaType : 'application/octet-stream'
   blob : LargeBinary;
 } actions {
-
+  action RenameAttachment(
+    /** SemanticObject */
+    @sap.label : 'SemanticObject'
+    SemanticObject : String(40),
+    /** FileName */
+    @sap.label : 'FileName'
+    FileName : String(255),
+    /** SAPObjectType */
+    @sap.label : 'SAPObjectType'
+    SAPObjectType : String(30),
+    /** SAPObjectNodeType */
+    @sap.label : 'SAPObjectNodeType'
+    SAPObjectNodeType : String(30)
+  ) returns API_CV_ATTACHMENT_SRV.AttachmentContentSet;
 };
 
 @cds.external : true
