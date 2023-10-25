@@ -836,18 +836,7 @@ entity CV_ATTACHMENT_SRV.OriginalContentSet {
       @Core.MediaType    : 'application/octet-stream'
       blob                       : LargeBinary;
 } actions {
-  action RenameAttachment(
-                          @sap.label:'Object Key'
-                          ObjectKey : String(90),
-                          @sap.label:'Object Type'
-                          ObjectType : String(40),
-                          @sap.label:'File Name'
-                          Filename : String(255),
-                          @sap.label:'Semantic Object Type'
-                          SemanticObjectType : String(40),
-                          @sap.label:'Is Draft'
-                          IsDraft : Boolean) returns CV_ATTACHMENT_SRV.OriginalContentSet;
-  action ResetCheckOut()                     returns CV_ATTACHMENT_SRV.OriginalContentSet;
+
 };
 
 @cds.external        : true
