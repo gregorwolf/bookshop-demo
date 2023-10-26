@@ -70,7 +70,7 @@
     "update:approuter": "cd approuter && npm update",
     "update:broker": "cd broker && npm update",
     "update:standalone-v2-proxy": "cd standalone-v2-proxy && npm update",
-    "deploy:sqlite:bookshop": "cds deploy --to sqlite:db/bookshop.db --no-save",
+    "deploy:sqlite:bookshop": "cds deploy --to sqlite:db/bookshop.db",
     "deploy:sqlite:instance:1": "cds deploy --to sqlite:instance1.db --no-save",
     "deploy:sqlite:instance:2": "cds deploy --to sqlite:instance2.db --no-save",
     "deploy:cf": "cf deploy mta_archives/bookshop-demo_0.0.1.mtar -e cf.mtaext --retries 0",
@@ -133,7 +133,7 @@
       "cancellationTimeout": 1
     },
     "features": {
-      "assert_integrity": "db",
+      "xassert_integrity": "db",
       "serve_on_root": true,
       "odata_new_parser": true
     },
