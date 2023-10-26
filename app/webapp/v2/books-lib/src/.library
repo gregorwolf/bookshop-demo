@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<library xmlns="http://www.sap.com/sap.ui.library.xsd">
+	<name>books-lib</name>
+	<title>Books library</title>
+	<version>${version}</version>
+	<copyright>${copyright}</copyright>
+	<dependencies>
+		<dependency>
+			<libraryName>sap.ui.core</libraryName>
+		</dependency>
+        <dependency>
+            <libraryName>sap.m</libraryName>
+        </dependency>
+	</dependencies>
+</library>

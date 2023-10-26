@@ -1,0 +1,29 @@
+{
+  "version": "0.0.1",
+  "name": "books-lib",
+  "description": "Books library",
+  "private": true,
+  "keywords": [
+    "ui5",
+    "openui5",
+    "sapui5"
+  ],
+  "engines": {
+    "node": "^18"
+  },
+  "scripts": {
+    "test": "npx karma start"
+  },
+  "devDependencies": {
+    "karma": "6.4.2",
+    "karma-coverage": "^2.2.0",
+    "karma-firefox-launcher": "^2.1.2",
+    "karma-serve-static-map": "^3.0.0",
+    "karma-ui5": "3.0.4"
+  },
+  "ui5": {
+    "dependencies": [
+      "@sap/ux-ui5-tooling"
+    ]
+  }
+}
