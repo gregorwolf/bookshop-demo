@@ -5,6 +5,22 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "chrome",
+      "request": "attach",
+      "name": "Attach Karma Chrome",
+      "address": "localhost",
+      "port": 9333,
+      "pathMapping": {
+        "/": "${workspaceRoot}/app/webapp/v2/books-lib"
+      }
+    },
+    {
+      "type": "firefox",
+      "request": "attach",
+      "name": "Karma Firefox",
+      "port": 9333
+    },
+    {
       "type": "node",
       "name": "debug current test file",
       "request": "launch",
