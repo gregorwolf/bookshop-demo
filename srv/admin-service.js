@@ -114,6 +114,7 @@ module.exports = async function (srv) {
     return external.run(req.query);
   });
 
+  /*
   srv.before("READ", [Books, Authors], async (req) => {
     var tx = cds.transaction(req);
     var targetName = req.entity;
@@ -162,6 +163,7 @@ module.exports = async function (srv) {
       }
     }
   });
+  */
 
   srv.before("UPDATE", Books, (req) => {
     var where = req.query.UPDATE.where;
@@ -362,6 +364,34 @@ module.exports = async function (srv) {
           }
         });
       }
+    });
+  });
+
+  srv.on(["insertBookAndAuthor"], async (req) => {
+    const db = await cds.connect.to("db");
+    const { Books, Authors } = db.entities;
+    const dataAuthor = [
+      {
+        ID: 42,
+        name: "Douglas Adams",
+        alive: false,
+      },
+    ];
+    const dataBook = [
+      {
+        ID: 42,
+        title: "Per Anhalter durch die Galaxis",
+        genre_ID: null,
+        stock: 5,
+        price: 41,
+        currency_code: "EUR",
+        author_ID: 42,
+      },
+    ];
+
+    cds.tx(async () => {
+      await db.run(INSERT.into(Books).entries(dataBook));
+      await db.run(INSERT.into(Authors).entries(dataAuthor));
     });
   });
 

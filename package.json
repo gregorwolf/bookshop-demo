@@ -133,7 +133,7 @@
       "cancellationTimeout": 1
     },
     "features": {
-      "xassert_integrity": "db",
+      "assert_integrity": "db",
       "serve_on_root": true,
       "odata_new_parser": true
     },

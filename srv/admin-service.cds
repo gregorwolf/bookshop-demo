@@ -54,8 +54,11 @@ service AdminService @(
   };
 
   entity Authors @(restrict: [{
-    grant: 'READ',
-    to   : 'admin'
+    grant: '*',
+    to   : [
+      'admin',
+      'booksadmin'
+    ]
   }, ])                          as projection on db.Authors {
     *
   };
@@ -240,6 +243,7 @@ service AdminService @(
   action   updateJob(jobId : Integer, active : Boolean)                                                                                   returns String;
   action   deleteJob(jobId : Integer)                                                                                                     returns String;
   action   sendmail(sender : String, to : String, @UI.ParameterDefaultValue:'Test' subject : String, body : String, destination : String) returns String;
+  action   insertBookAndAuthor()                                                                                                          returns String;
   // Cloud Foundry
   function readOrganizations()                                                                                                            returns array of db.Organization;
 }
