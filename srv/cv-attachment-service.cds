@@ -4,6 +4,11 @@ service CvAttachmentService @(path: 'CV_ATTACHMENT_SRV') {
     @cds.persistence.skip: false
     @cds.persistence.table
     entity OriginalContentSet : external.OriginalContentSet {} actions {
+        // Without this definition the errors:
+        // “CV_ATTACHMENT_SRV.OriginalContentSet” of kind ‘entity’ is defined outside a service and can't be used in “CvAttachmentService” (in entity:“CvAttachmentService.OriginalContentSet”/action:“RenameAttachment”/returns)
+        // “CV_ATTACHMENT_SRV.OriginalContentSet” of kind ‘entity’ is defined outside a service and can't be used in “CvAttachmentService” (in entity:“CvAttachmentService.OriginalContentSet”/action:“ResetCheckOut”/returns)
+        // occur. According to the response in case 947262 / 2023 the redefinition of the action must be made explicitly.
+        // Also parameters of actions can't be referenced from the external service definition.
         action RenameAttachment(ObjectKey : String(90),
                                 ObjectType : String(40),
                                 Filename : String(255),
