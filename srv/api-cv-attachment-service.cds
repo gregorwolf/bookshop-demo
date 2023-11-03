@@ -3,7 +3,12 @@ using {API_CV_ATTACHMENT_SRV as external} from './external/API_CV_ATTACHMENT_SRV
 service AttachmentContentService @(path: 'API_CV_ATTACHMENT_SRV') {
     @cds.persistence.skip: false
     @cds.persistence.table
-    entity AttachmentContentSet : external.AttachmentContentSet {}
+    entity AttachmentContentSet : external.AttachmentContentSet {} actions {
+        action RenameAttachment(SemanticObject : external.AttachmentContentSet:SemanticObject,
+                                FileName : external.AttachmentContentSet:FileName,
+                                SAPObjectType : external.AttachmentContentSet:SAPObjectType,
+                                SAPObjectNodeType : external.AttachmentContentSet:SAPObjectNodeType) returns AttachmentContentSet;
+    }
 
     @cds.persistence.skip: false
     @cds.persistence.table
