@@ -5,13 +5,13 @@
 			"version": "1.0.0"
 		},
 		"dataSources": {
-				"AdminService": {
-						"uri": "/admin/",
-						"type": "OData",
-						"settings": {
-								"odataVersion": "4.0"
-						}
+			"AdminService": {
+				"uri": "/odata/v4/admin/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0"
 				}
+			}
 		}
 	},
 	"sap.ui5": {
@@ -28,20 +28,20 @@
 			}
 		},
 		"models": {
-				"": {
-						"dataSource": "AdminService",
-						"settings": {
-								"synchronizationMode": "None",
-								"operationMode": "Server",
-								"autoExpandSelect" : true,
-								"earlyRequests": true,
-								"groupProperties": {
-										"default": {
-												"submit": "Auto"
-										}
-								}
+			"": {
+				"dataSource": "AdminService",
+				"settings": {
+					"synchronizationMode": "None",
+					"operationMode": "Server",
+					"autoExpandSelect": true,
+					"earlyRequests": true,
+					"groupProperties": {
+						"default": {
+							"submit": "Auto"
 						}
+					}
 				}
+			}
 		},
 		"config": {
 			"sample": {

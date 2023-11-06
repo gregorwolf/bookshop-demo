@@ -8,7 +8,7 @@
         "i18n": "i18n/i18n.properties",
         "dataSources": {
             "TemporalService": {
-                "uri": "/temporal/",
+                "uri": "/odata/v4/temporal/",
                 "type": "OData",
                 "settings": {
                     "odataVersion": "4.0"

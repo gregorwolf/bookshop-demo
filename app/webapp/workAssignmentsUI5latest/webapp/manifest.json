@@ -12,7 +12,7 @@
         "ach": "CA-UI5-FE",
         "dataSources": {
             "mainService": {
-                "uri": "/temporal/",
+                "uri": "/odata/v4/temporal/",
                 "type": "OData",
                 "settings": {
                     "odataVersion": "4.0"

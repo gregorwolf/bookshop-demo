@@ -12,7 +12,7 @@
     "ach": "CA-UI5-FE",
     "dataSources": {
       "mainService": {
-        "uri": "/catalog/",
+        "uri": "/odata/v4/catalog/",
         "type": "OData",
         "settings": {
           "odataVersion": "4.0"

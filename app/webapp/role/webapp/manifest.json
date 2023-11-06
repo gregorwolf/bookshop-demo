@@ -8,7 +8,7 @@
         "i18n": "i18n/i18n.properties",
         "dataSources": {
             "AdminService": {
-                "uri": "/admin/",
+                "uri": "/odata/v4/admin/",
                 "type": "OData",
                 "settings": {
                     "odataVersion": "4.0"
@@ -26,7 +26,7 @@
         "tags": {
             "keywords": []
         },
-        "offline": false        
+        "offline": false
     },
     "sap.ui5": {
         "dependencies": {
@@ -44,11 +44,11 @@
                 "settings": {
                     "synchronizationMode": "None",
                     "operationMode": "Server",
-                    "autoExpandSelect" : true,
+                    "autoExpandSelect": true,
                     "earlyRequests": true,
                     "groupProperties": {
                         "default": {
-                          "submit": "Auto"
+                            "submit": "Auto"
                         }
                     }
                 }
@@ -83,13 +83,13 @@
                     "id": "RolesList",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
-                        "settings" : {
-                            "entitySet" : "Roles",
-                            "navigation" : {
-                                "Roles" : {
-                                    "detail" : {
-                                        "route" : "RolesDetails"
-                                        }
+                        "settings": {
+                            "entitySet": "Roles",
+                            "navigation": {
+                                "Roles": {
+                                    "detail": {
+                                        "route": "RolesDetails"
+                                    }
                                 }
                             }
                         }
@@ -100,9 +100,9 @@
                     "id": "RolesDetails",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
-                        "settings" : {
+                        "settings": {
                             "entitySet": "Roles",
-                            "navigation" : {
+                            "navigation": {
                                 "BusinessObjects": {
                                     "detail": {
                                         "route": "RolesBusinessObjectsDetails"
@@ -122,7 +122,7 @@
                     "id": "RolesBusinessObjectsDetails",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
-                        "settings" : {
+                        "settings": {
                             "entitySet": "Roles_BusinessObject"
                         }
                     }
@@ -132,7 +132,7 @@
                     "id": "RolesUsersDetails",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
-                        "settings" : {
+                        "settings": {
                             "entitySet": "Roles_User"
                         }
                     }

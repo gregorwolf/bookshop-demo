@@ -12,10 +12,12 @@
     "ach": "CA-UI5-FE",
     "dataSources": {
       "mainService": {
-        "uri": "/admin/",
+        "uri": "/odata/v4/admin/",
         "type": "OData",
         "settings": {
-          "annotations": ["annotation"],
+          "annotations": [
+            "annotation"
+          ],
           "localUri": "localService/metadata.xml",
           "odataVersion": "4.0"
         }

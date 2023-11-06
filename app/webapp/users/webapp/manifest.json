@@ -8,7 +8,7 @@
         "i18n": "i18n/i18n.properties",
         "dataSources": {
             "AdminService": {
-                "uri": "/admin/",
+                "uri": "/odata/v4/admin/",
                 "type": "OData",
                 "settings": {
                     "odataVersion": "4.0"
@@ -26,7 +26,7 @@
         "tags": {
             "keywords": []
         },
-        "offline": false        
+        "offline": false
     },
     "sap.ui5": {
         "dependencies": {
@@ -44,11 +44,11 @@
                 "settings": {
                     "synchronizationMode": "None",
                     "operationMode": "Server",
-                    "autoExpandSelect" : true,
+                    "autoExpandSelect": true,
                     "earlyRequests": true,
                     "groupProperties": {
                         "default": {
-                          "submit": "Auto"
+                            "submit": "Auto"
                         }
                     }
                 }
@@ -73,13 +73,13 @@
                     "id": "UsersList",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
-                        "settings" : {
-                            "entitySet" : "Users",
-                            "navigation" : {
-                                "Users" : {
-                                    "detail" : {
-                                        "route" : "UsersDetails"
-                                        }
+                        "settings": {
+                            "entitySet": "Users",
+                            "navigation": {
+                                "Users": {
+                                    "detail": {
+                                        "route": "UsersDetails"
+                                    }
                                 }
                             }
                         }
@@ -90,8 +90,8 @@
                     "id": "UsersDetails",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
-                        "settings" : {
-                            "entitySet" : "Users"
+                        "settings": {
+                            "entitySet": "Users"
                         }
                     }
                 }

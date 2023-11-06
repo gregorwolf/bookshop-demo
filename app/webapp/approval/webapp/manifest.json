@@ -1,59 +1,59 @@
 {
-	"_version": "1.8.0",
-	"sap.app": {
-		"id": "approvals",
-		"type": "application",
+    "_version": "1.8.0",
+    "sap.app": {
+        "id": "approvals",
+        "type": "application",
         "title": "Approvals",
-		"description": "Approve changes",
-		"i18n": "i18n/i18n.properties",
-		"dataSources": {
-			"AdminService": {
-				"uri": "/admin/",
-				"type": "OData",
-				"settings": {
-					"odataVersion": "4.0"
-				}
-			}
-		},
+        "description": "Approve changes",
+        "i18n": "i18n/i18n.properties",
+        "dataSources": {
+            "AdminService": {
+                "uri": "/odata/v4/admin/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "4.0"
+                }
+            }
+        },
         "-sourceTemplate": {
             "id": "ui5template.basicSAPUI5ApplicationProject",
-			"-id": "ui5template.smartTemplate",
-			"-version": "1.40.12"
+            "-id": "ui5template.smartTemplate",
+            "-version": "1.40.12"
         },
-		"applicationVersion": {
-			"version": "1.0.0"
-		},
-		"tags": {
-			"keywords": []
-		},
-		"offline": false        
-	},
-	"sap.ui5": {
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "tags": {
+            "keywords": []
+        },
+        "offline": false
+    },
+    "sap.ui5": {
         "dependencies": {
             "libs": {
                 "sap.fe": {}
             }
         },
-		"models": {
-			"i18n": {
-				"type": "sap.ui.model.resource.ResourceModel",
-				"uri": "i18n/i18n.properties"
-			},
-			"": {
-				"dataSource": "AdminService",
-				"settings": {
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "": {
+                "dataSource": "AdminService",
+                "settings": {
                     "synchronizationMode": "None",
                     "operationMode": "Server",
-                    "autoExpandSelect" : true,
+                    "autoExpandSelect": true,
                     "earlyRequests": true,
                     "groupProperties": {
                         "default": {
-                          "submit": "Auto"
+                            "submit": "Auto"
                         }
                     }
-				}
-			}
-		},
+                }
+            }
+        },
         "routing": {
             "routes": [
                 {
@@ -73,27 +73,27 @@
                     "id": "ApprovalList",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
-						"settings" : {
-							"entitySet" : "Approval",
-							"navigation" : {
-								"Approval" : {
-									"detail" : {
-										"route" : "ApprovalDetails"
-										}
-								}
-							}
-						}
-					}
+                        "settings": {
+                            "entitySet": "Approval",
+                            "navigation": {
+                                "Approval": {
+                                    "detail": {
+                                        "route": "ApprovalDetails"
+                                    }
+                                }
+                            }
+                        }
+                    }
                 },
                 "ApprovalDetails": {
                     "type": "Component",
                     "id": "ApprovalDetails",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
-                        "settings" : {
+                        "settings": {
                             "entitySet": "Approval",
-							"navigation" : {
-								"Items": {
+                            "navigation": {
+                                "Items": {
                                     "detail": {
                                         "route": "OrderItemsDetails"
                                     }
@@ -108,16 +108,16 @@
                                         "route": "BooksDetails"
                                     }
                                 }
-							}
-						}
-					}
+                            }
+                        }
+                    }
                 },
                 "OrderItemsDetails": {
                     "type": "Component",
                     "id": "OrderItemsDetails",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
-                        "settings" : {
+                        "settings": {
                             "entitySet": "OrderItems"
                         }
                     }
@@ -127,7 +127,7 @@
                     "id": "BooksDetails",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
-                        "settings" : {
+                        "settings": {
                             "entitySet": "Books",
                             "navigation": {
                                 "author": {
@@ -137,31 +137,31 @@
                                 }
                             }
                         }
-                    }                    
+                    }
                 },
                 "AuthorsDetails": {
                     "type": "Component",
                     "id": "AuthorsDetails",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
-                        "settings" : {
+                        "settings": {
                             "entitySet": "Authors"
                         }
                     }
                 }
             }
         },
-		"contentDensities": {
-			"compact": true,
-			"cozy": true
-		}
-	},
-	"sap.ui": {
-		"technology": "UI5",
-		"fullWidth": true
-	},
-	"sap.fiori": {
-		"registrationIds": [],
-		"archeType": "transactional"
-	}
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "fullWidth": true
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
 }
