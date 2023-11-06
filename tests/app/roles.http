@@ -2,7 +2,7 @@
 GET http://localhost:4004/v2/admin/$metadata
 Authorization: Basic admin:
 ###
-GET http://localhost:4004/admin/$metadata
+GET http://localhost:4004/odata/v4/admin/$metadata
 Authorization: Basic admin:
 ### Read Roles via OData V2
 GET http://localhost:4004/v2/admin/Roles
@@ -16,37 +16,37 @@ Authorization: Basic admin:
 GET http://localhost:4004/v2/admin/Roles?$expand=BusinessObjects,Users
 Authorization: Basic admin:
 ###
-GET http://localhost:4004/admin/
+GET http://localhost:4004/odata/v4/admin/
 Authorization: Basic admin:
 ### Read Roles via OData V4
-GET http://localhost:4004/admin/Roles
+GET http://localhost:4004/odata/v4/admin/Roles
 Authorization: Basic admin:
 ### Read Roles Expanded to  via OData V4
-GET http://localhost:4004/admin/Roles?$expand=BusinessObjects,Users
+GET http://localhost:4004/odata/v4/admin/Roles?$expand=BusinessObjects,Users
 Authorization: Basic admin:
 
 ### Read User Details & try expand
-GET http://localhost:4004/admin/Userdetails
+GET http://localhost:4004/odata/v4/admin/Userdetails
   ?$expand=authorizations
 Authorization: Basic admin:
 ### Read User Authorizations
-GET http://localhost:4004/admin/Userdetails/authorizations
+GET http://localhost:4004/odata/v4/admin/Userdetails/authorizations
 Authorization: Basic admin:
 ### Read User Authorizations directly
-GET http://localhost:4004/admin/Authorizations
+GET http://localhost:4004/odata/v4/admin/Authorizations
 Authorization: Basic admin:
 ###
-GET http://localhost:4004/admin/Authorizations
+GET http://localhost:4004/odata/v4/admin/Authorizations
 Authorization: Basic roleadmin:
 ###
-GET http://localhost:4004/admin/Authorizations
+GET http://localhost:4004/odata/v4/admin/Authorizations
 Authorization: Basic booksadmin:
 ### Read Users
-GET http://localhost:4004/admin/Users
+GET http://localhost:4004/odata/v4/admin/Users
 Authorization: Basic admin:
 
 ### Read Users Expanded to via OData V4 - 
-GET http://localhost:4004/admin/Users?$expand=roles,address
+GET http://localhost:4004/odata/v4/admin/Users?$expand=roles,address
 Authorization: Basic admin:
 
 ### Read Users Expanded to via OData V2
@@ -59,7 +59,7 @@ Authorization: Basic admin:
 @roleID=009bb7fa-43ef-4e4a-85b1-5a9ea692a5b0
 ### Create new role using the draft dance
 # @name createRole
-POST http://localhost:4004/admin/Roles
+POST http://localhost:4004/odata/v4/admin/Roles
 Authorization: Basic admin:
 Content-Type: application/json
 
@@ -73,11 +73,11 @@ Content-Type: application/json
 @location = {{createRole.response.headers.Location}}
 
 ###
-GET http://localhost:4004/admin/{{location}}
+GET http://localhost:4004/odata/v4/admin/{{location}}
 Authorization: Basic admin:
 
 ###
-PATCH http://localhost:4004/admin/{{location}}
+PATCH http://localhost:4004/odata/v4/admin/{{location}}
 Authorization: Basic admin:
 Content-Type: application/json
 
@@ -87,31 +87,31 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:4004/admin/{{location}}/AdminService.draftPrepare
+POST http://localhost:4004/odata/v4/admin/{{location}}/AdminService.draftPrepare
 Authorization: Basic admin:
 Content-Type: application/json
 
 {"SideEffectsQualifier":""}
 
 ###
-POST http://localhost:4004/admin/{{location}}/AdminService.draftActivate
+POST http://localhost:4004/odata/v4/admin/{{location}}/AdminService.draftActivate
 Authorization: Basic admin:
 Content-Type: application/json
 
 {}
 
 ###
-GET http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=true)
+GET http://localhost:4004/odata/v4/admin/Roles(ID={{roleID}},IsActiveEntity=true)
   ?$expand=DraftAdministrativeData
   // &$select=description
 Authorization: Basic admin:
 ###
-GET http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=true)
+GET http://localhost:4004/odata/v4/admin/Roles(ID={{roleID}},IsActiveEntity=true)
   ?$expand=DraftAdministrativeData
 Authorization: Basic roleadmin:
 ### Edit role using the draft dance
 # @name editRole
-POST http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=true)/AdminService.draftEdit
+POST http://localhost:4004/odata/v4/admin/Roles(ID={{roleID}},IsActiveEntity=true)/AdminService.draftEdit
 Authorization: Basic admin:
 Content-Type: application/json
 
@@ -119,14 +119,14 @@ Content-Type: application/json
 
 ### Try to create a draft as another user
 # Not Possible with PreserveChanges = true
-POST http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=true)/AdminService.draftEdit
+POST http://localhost:4004/odata/v4/admin/Roles(ID={{roleID}},IsActiveEntity=true)/AdminService.draftEdit
 Authorization: Basic roleadmin:
 Content-Type: application/json
 
 {"PreserveChanges":true}
 
 ### Try to create a draft as another user
-POST http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=true)/AdminService.draftEdit
+POST http://localhost:4004/odata/v4/admin/Roles(ID={{roleID}},IsActiveEntity=true)/AdminService.draftEdit
 Authorization: Basic roleadmin:
 Content-Type: application/json
 
@@ -134,7 +134,7 @@ Content-Type: application/json
 ###
 @locationEdit = {{editRole.response.headers.Location}}
 ###
-PATCH http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=false)
+PATCH http://localhost:4004/odata/v4/admin/Roles(ID={{roleID}},IsActiveEntity=false)
 Authorization: Basic admin:
 Content-Type: application/json
 
@@ -143,25 +143,25 @@ Content-Type: application/json
   "description": "Add description"
 }
 ###
-POST http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=false)/AdminService.draftPrepare
+POST http://localhost:4004/odata/v4/admin/Roles(ID={{roleID}},IsActiveEntity=false)/AdminService.draftPrepare
 Authorization: Basic admin:
 Content-Type: application/json
 
 {"SideEffectsQualifier":""}
 
 ###
-POST http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=false)/AdminService.draftActivate
+POST http://localhost:4004/odata/v4/admin/Roles(ID={{roleID}},IsActiveEntity=false)/AdminService.draftActivate
 Authorization: Basic admin:
 Content-Type: application/json
 
 {}
 
 ###
-GET http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=false)
+GET http://localhost:4004/odata/v4/admin/Roles(ID={{roleID}},IsActiveEntity=false)
 Authorization: Basic roleadmin:
 ###
-GET http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=true)
+GET http://localhost:4004/odata/v4/admin/Roles(ID={{roleID}},IsActiveEntity=true)
 Authorization: Basic admin:
 ### Delete Entity
-DELETE  http://localhost:4004/admin/Roles(ID={{roleID}},IsActiveEntity=true)
+DELETE  http://localhost:4004/odata/v4/admin/Roles(ID={{roleID}},IsActiveEntity=true)
 Authorization: Basic admin:

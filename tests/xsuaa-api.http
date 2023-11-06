@@ -46,10 +46,10 @@ Authorization: Bearer {{access_token}}
 
 ### 
 # @name readUsersCAP
-GET http://localhost:4004/admin/readUsers()
+GET http://localhost:4004/odata/v4/admin/readUsers()
 Authorization: Basic admin:
 
 ### 
 # @name readUsersSDK
-GET http://localhost:4004/admin/readUsersSDK()
+GET http://localhost:4004/odata/v4/admin/readUsersSDK()
 Authorization: Basic admin:

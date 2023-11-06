@@ -15,7 +15,7 @@ client_id={{$dotenv jobschedulerclientid}}
 GET {{$dotenv schedulerUrl}}
 ### Read Jobs
 # @name readJobs
-GET http://localhost:4004/admin/readJobs()
+GET http://localhost:4004/odata/v4/admin/readJobs()
 Authorization: Basic admin:
 
 ### Fill Variables from Response
@@ -23,17 +23,17 @@ Authorization: Basic admin:
 
 ### Read Job
 # @name readJobs
-GET http://localhost:4004/admin/readJobDetails(jobId={{jobId}})
+GET http://localhost:4004/odata/v4/admin/readJobDetails(jobId={{jobId}})
 Authorization: Basic admin:
 
 ### Read Job Action Logs
 # @name readJobActionLogs
-GET http://localhost:4004/admin/readJobActionLogs(jobId={{jobId}})
+GET http://localhost:4004/odata/v4/admin/readJobActionLogs(jobId={{jobId}})
 Authorization: Basic admin:
 
 ### Read Job Schedules
 # @name readSchedules
-GET http://localhost:4004/admin/readJobSchedules(jobId={{jobId}})
+GET http://localhost:4004/odata/v4/admin/readJobSchedules(jobId={{jobId}})
 Authorization: Basic admin:
 
 ### Fill Variables from Response
@@ -42,12 +42,12 @@ Authorization: Basic admin:
 
 ### Read Job Run Logs
 # @name readJobRunLogs
-GET http://localhost:4004/admin/readJobRunLogs(jobId={{jobId}},scheduleId='{{scheduleId}}',page_size=200,offset=0)
+GET http://localhost:4004/odata/v4/admin/readJobRunLogs(jobId={{jobId}},scheduleId='{{scheduleId}}',page_size=200,offset=0)
 Authorization: Basic admin:
 
 ### Create Job
 # @name createJob
-POST http://localhost:4004/admin/createJob
+POST http://localhost:4004/odata/v4/admin/createJob
 Authorization: Basic admin:
 Content-Type: application/json
 
@@ -60,7 +60,7 @@ Content-Type: application/json
 #@jobId = {{createJob.response.body.value}}
 @active=true
 ### Update Job
-POST http://localhost:4004/admin/updateJob
+POST http://localhost:4004/odata/v4/admin/updateJob
 Authorization: Basic admin:
 Content-Type: application/json
 
@@ -70,7 +70,7 @@ Content-Type: application/json
 }
 
 ### Delete Job
-POST http://localhost:4004/admin/deleteJob
+POST http://localhost:4004/odata/v4/admin/deleteJob
 Authorization: Basic admin:
 Content-Type: application/json
 

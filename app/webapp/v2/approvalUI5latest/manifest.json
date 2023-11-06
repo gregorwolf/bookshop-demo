@@ -8,7 +8,7 @@
     "i18n": "i18n/i18n.properties",
     "dataSources": {
       "mainService": {
-        "uri": "/v2/admin/",
+        "uri": "/odata/v2/admin/",
         "type": "OData",
         "settings": {
           "localUri": "localService/metadata.xml"
@@ -116,7 +116,10 @@
       "tablet": true,
       "phone": true
     },
-    "supportedThemes": ["sap_hcb", "sap_belize"]
+    "supportedThemes": [
+      "sap_hcb",
+      "sap_belize"
+    ]
   },
   "sap.platform.hcp": {
     "uri": ""

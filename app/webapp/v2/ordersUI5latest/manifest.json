@@ -14,7 +14,7 @@
 		},
 		"dataSources": {
 			"mainService": {
-				"uri": "/v2/admin/",
+				"uri": "/odata/v2/admin/",
 				"type": "OData",
 				"settings": {
 					"localUri": "localService/metadata.xml"
@@ -93,8 +93,7 @@
 				}
 			}
 		},
-		"extends": {
-		},
+		"extends": {},
 		"contentDensities": {
 			"compact": true,
 			"cozy": true
@@ -120,24 +119,24 @@
 						"tableSettings": {
 							"multiSelect": true
 						},
-						"dataLoadSettings":  {
+						"dataLoadSettings": {
 							"loadDataOnAppLaunch": "always"
 						},
 						"quickVariantSelection": {
-								"variants": {
-										"0": {
-												"key": "New",
-												"annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#New"
-										},
-										"1": {
-												"key": "InProcess",
-												"annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#InProcess"
-										},
-										"2": {
-												"key": "Completed",
-												"annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Completed"
-										}
+							"variants": {
+								"0": {
+									"key": "New",
+									"annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#New"
+								},
+								"1": {
+									"key": "InProcess",
+									"annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#InProcess"
+								},
+								"2": {
+									"key": "Completed",
+									"annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Completed"
 								}
+							}
 						}
 					}
 				},

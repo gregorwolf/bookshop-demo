@@ -1,5 +1,5 @@
 ### Read Books via OData V4 by littleadmin
-GET http://localhost:4004/admin/Books?$top=10
+GET http://localhost:4004/odata/v4/admin/Books?$top=10
 Authorization: Basic littleadmin:
 
 ### Read Books via OData V2 by littleadmin

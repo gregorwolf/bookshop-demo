@@ -14,7 +14,7 @@
 		},
 		"dataSources": {
 			"mainService": {
-				"uri": "/v2/admin/",
+				"uri": "/odata/v2/admin/",
 				"type": "OData",
 				"settings": {
 					"localUri": "localService/metadata.xml"
@@ -96,11 +96,11 @@
 		"extends": {
 			"extensions": {
 				"sap.ui.controllerExtensions": {
-					 "sap.suite.ui.generic.template.ListReport.view.ListReport": {
-							"controllerName": "v2.orders.ext.controller.ListReportExtension"
-					 }
+					"sap.suite.ui.generic.template.ListReport.view.ListReport": {
+						"controllerName": "v2.orders.ext.controller.ListReportExtension"
+					}
 				}
-		  }
+			}
 		},
 		"contentDensities": {
 			"compact": true,
@@ -127,28 +127,28 @@
 						"tableSettings": {
 							"multiSelect": true
 						},
-						"dataLoadSettings":  {
+						"dataLoadSettings": {
 							"loadDataOnAppLaunch": "always"
 						},
 						"quickVariantSelection": {
-								"variants": {
-										"0": {
-												"key": "New",
-												"annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#New"
-										},
-										"1": {
-												"key": "InProcess",
-												"annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#InProcess"
-										},
-										"2": {
-												"key": "Completed",
-												"annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Completed"
-										},
-										"3": {
-														"key": "Empty",
-														"annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Empty"
-										}
+							"variants": {
+								"0": {
+									"key": "New",
+									"annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#New"
+								},
+								"1": {
+									"key": "InProcess",
+									"annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#InProcess"
+								},
+								"2": {
+									"key": "Completed",
+									"annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Completed"
+								},
+								"3": {
+									"key": "Empty",
+									"annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Empty"
 								}
+							}
 						}
 					}
 				},

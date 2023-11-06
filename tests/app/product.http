@@ -5,7 +5,7 @@ GET https://sapes5.sapdevcenter.com/sap/opu/odata/sap/ZPDCDS_SRV/$metadata
 GET https://sapes5.sapdevcenter.com/sap/opu/odata/sap/ZPDCDS_SRV/SEPMRA_I_Product_E?$format=json&$top=5
 
 ### 
-GET http://localhost:4004/admin/SEPMRA_I_Product_E?$format=json&$top=1&$select=Product
+GET http://localhost:4004/odata/v4/admin/SEPMRA_I_Product_E?$format=json&$top=1&$select=Product
 Authorization: Basic admin:
 
 ### 
@@ -15,5 +15,5 @@ GET http://localhost:4004/catalog/SEPMRA_I_Product_E?$format=json&$top=5
 ### Returns "@odata.count": 0
 ### As sent request is:
 ### /sap/opu/odata/sap/ZPDCDS_SRV/SEPMRA_I_Product_E?$select=Product&$top=30&$orderby=Product%20asc
-GET http://localhost:4004/admin/SEPMRA_I_Product_E?$count=true&$select=Product&$skip=0&$top=2
+GET http://localhost:4004/odata/v4/admin/SEPMRA_I_Product_E?$count=true&$select=Product&$skip=0&$top=2
 Authorization: Basic admin:

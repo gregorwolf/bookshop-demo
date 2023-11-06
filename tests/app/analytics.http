@@ -14,7 +14,7 @@ Authorization: Basic admin:
 http://localhost:4004/v2/analytics/BooksAnalytics
 Authorization: Basic admin:
 ### $apply on Draft Enabled Entity with $count
-http://localhost:4004/admin/Orders
+http://localhost:4004/odata/v4/admin/Orders
   ?$count=true
   &$apply=groupby((orderstatus_code),aggregate($count as childCount,total with sum as TotalValue))
   #&$apply=groupby((orderstatus/name),aggregate($count as childCount,total with sum as TotalValue))

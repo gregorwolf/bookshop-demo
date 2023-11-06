@@ -1,33 +1,32 @@
 ### Read Orders via OData
 # @name orders
-GET http://localhost:4004/admin/Orders
-  ?$top=1
-  &$expand=Items,ShippingAddress
+GET http://localhost:4004/odata/v4/admin/Orders
+  ?$expand=Items,ShippingAddress
 Authorization: Basic admin:
 ### Fill Variables from Response
 @orderID = {{orders.response.body.$.value[0].ID}}
 ###
-GET http://localhost:4004/admin/Orders(ID={{orderID}},IsActiveEntity=true)
+GET http://localhost:4004/odata/v4/admin/Orders(ID={{orderID}},IsActiveEntity=true)
 Authorization: Basic admin:
 ###
-GET http://localhost:4004/admin/OrderItems
+GET http://localhost:4004/odata/v4/admin/OrderItems
   ?$filter=parent_ID eq {{orderID}}
 Authorization: Basic admin:
 ###
-GET http://localhost:4004/admin/OrderShippingAddress
-  ?$filter=parent_ID eq {{orderID}}
+GET http://localhost:4004/odata/v4/admin/OrderShippingAddress
+#  ?$filter=parent_ID eq {{orderID}}
 Authorization: Basic admin:
 ###
-DELETE http://localhost:4004/admin/Orders(ID={{orderID}},IsActiveEntity=true)
+DELETE http://localhost:4004/odata/v4/admin/Orders(ID={{orderID}},IsActiveEntity=true)
 Authorization: Basic admin:
 ### Delete using an action
-POST http://localhost:4004/admin/Orders(ID={{orderID}},IsActiveEntity=true)/deleteOrder
+POST http://localhost:4004/odata/v4/admin/Orders(ID={{orderID}},IsActiveEntity=true)/deleteOrder
 Authorization: Basic admin:
 Content-Type: application/json
 
 {}
 ### Read Orders via OData V4
-GET http://localhost:4004/admin/Orders
+GET http://localhost:4004/odata/v4/admin/Orders
 Authorization: Basic admin:
 
 ### Read Orders via OData V2
@@ -39,7 +38,7 @@ GET http://localhost:4004/v2/admin/Orders(ID=guid'7e2f2640-6866-4dcf-8f4d-3027aa
 Authorization: Basic admin:
 
 ### Order Consistency Check via OData V4
-POST http://localhost:4004/admin/Orders(ID=64e718c9-ff99-47f1-8ca3-950c850777d4,IsActiveEntity=true)/AdminService.checkConsistencyInline
+POST http://localhost:4004/odata/v4/admin/Orders(ID=64e718c9-ff99-47f1-8ca3-950c850777d4,IsActiveEntity=true)/AdminService.checkConsistencyInline
 Authorization: Basic admin:
 Accept: application/json
 Content-Type: application/json

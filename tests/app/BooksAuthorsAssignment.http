@@ -1,18 +1,18 @@
 ### Read BooksAuthorsAssignment
-GET http://localhost:4004/admin/BooksAuthorsAssignment
+GET http://localhost:4004/odata/v4/admin/BooksAuthorsAssignment
 Authorization: Basic admin:
 
 ### Read BooksAuthorsAssignment expand to Book and Author 
-GET http://localhost:4004/admin/BooksAuthorsAssignment
+GET http://localhost:4004/odata/v4/admin/BooksAuthorsAssignment
   ?$expand=ASSOC_Book,ASSOC_Author
 Authorization: Basic admin:
 
 ### Read specific BooksAuthorsAssignment
-GET http://localhost:4004/admin/BooksAuthorsAssignment(Role='Author',ASSOC_Book_ID=201,ASSOC_Author_ID=1)
+GET http://localhost:4004/odata/v4/admin/BooksAuthorsAssignment(Role='Author',ASSOC_Book_ID=201,ASSOC_Author_ID=1)
 Authorization: Basic admin:
 
 ### Update relation of specific BooksAuthorsAssignment
-PATCH http://localhost:4004/admin/BooksAuthorsAssignment(Role='Author',ASSOC_Book_ID=201,ASSOC_Author_ID=1)
+PATCH http://localhost:4004/odata/v4/admin/BooksAuthorsAssignment(Role='Author',ASSOC_Book_ID=201,ASSOC_Author_ID=1)
 Authorization: Basic admin:
 Content-Type: application/json
 
@@ -25,11 +25,11 @@ Content-Type: application/json
 
 ### Workaround
 ### Delete specific BooksAuthorsAssignment
-DELETE http://localhost:4004/admin/BooksAuthorsAssignment(Role='Author',ASSOC_Book_ID=201,ASSOC_Author_ID=1)
+DELETE http://localhost:4004/odata/v4/admin/BooksAuthorsAssignment(Role='Author',ASSOC_Book_ID=201,ASSOC_Author_ID=1)
 Authorization: Basic admin:
 
 ### Create new relation of specific BooksAuthorsAssignment
-POST http://localhost:4004/admin/BooksAuthorsAssignment
+POST http://localhost:4004/odata/v4/admin/BooksAuthorsAssignment
 Authorization: Basic admin:
 Content-Type: application/json
 

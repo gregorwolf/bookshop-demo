@@ -8,7 +8,7 @@
 		"i18n": "i18n/i18n.properties",
 		"dataSources": {
 			"mainService": {
-				"uri": "/v2/admin/",
+				"uri": "/odata/v2/admin/",
 				"type": "OData",
 				"settings": {
 					"localUri": "localService/metadata.xml"
@@ -57,11 +57,11 @@
 		"extends": {
 			"extensions": {
 				"sap.ui.controllerExtensions": {
-					 "sap.suite.ui.generic.template.ListReport.view.ListReport": {
-							"controllerName": "v2.books.admin.ext.controller.ListReportExtension"
-					 }
+					"sap.suite.ui.generic.template.ListReport.view.ListReport": {
+						"controllerName": "v2.books.admin.ext.controller.ListReportExtension"
+					}
 				}
-		  }
+			}
 		},
 		"resources": {
 			"js": [],
@@ -126,7 +126,7 @@
 			"sap_hcb",
 			"sap_belize"
 		]
-	},	
+	},
 	"sap.platform.hcp": {
 		"uri": ""
 	}

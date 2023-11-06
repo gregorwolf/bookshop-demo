@@ -29,7 +29,7 @@ Authorization: Bearer {{destination_access_token}}
 @backend_url={{subaccountDestination.response.body.$.URL}}
 
 ### Read Destination via CAP 
-GET http://localhost:4004/admin/Destination
+GET http://localhost:4004/odata/v4/admin/Destination
 Authorization: Basic admin:
 ### Get Access Token for Connectivity Service
 # Documentation:
