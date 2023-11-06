@@ -1,0 +1,9 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:macros="sap.fe.macros">
+	<VBox>
+		<macros:RichTextEditorWithMetadata metaPath="headerText" id="myRichTextEditor">
+			<macros:buttonGroups>
+				<macros:buttonGroup name="font-style" visible="true" priority="10" customPriority="10" buttons="bold,italic,underline" />
+			</macros:buttonGroups>
+		</macros:RichTextEditorWithMetadata>
+	</VBox>
+</core:FragmentDefinition>

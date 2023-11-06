@@ -74,6 +74,9 @@
                 "sap.ui.controllerExtensions": {
                     "sap.fe.templates.ListReport.ListReportController": {
                         "controllerName": "ordersUI5latest.ext.ListReportExt"
+                    },
+                    "sap.fe.templates.ObjectPage.ObjectPageController": {
+                        "controllerName": "ordersUI5latest.ext.ObjectPageExt"
                     }
                 }
             }
@@ -158,7 +161,31 @@
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
-                            "entitySet": "Orders"
+                            "entitySet": "Orders",
+                            "content": {
+								"body": {
+									"sections": {
+										"customSection": {
+											"type": "XMLFragment",
+											"template": "ordersUI5latest.ext.fragment.RichTextEditorMacros",
+											"title": "{i18n>richTextEditor}",
+											"position": {
+												"placement": "After",
+												"anchor": "SalesOrderItems"
+											}
+										},
+                                        "customSection2": {
+											"type": "XMLFragment",
+											"template": "ordersUI5latest.ext.fragment.RichTextEditor",
+											"title": "{i18n>richTextEditor}",
+											"position": {
+												"placement": "After",
+												"anchor": "SalesOrderItem"
+											}
+										}
+									}
+								}
+							}
                         }
                     }
                 }
