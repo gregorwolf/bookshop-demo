@@ -273,6 +273,7 @@ entity Orders : cuid, managed {
                                     @title: 'Items';
   ShippingAddress   : Composition of one OrderShippingAddress
                         on ShippingAddress.parent = $self;
+  headerText        : LargeString   @title: 'Order Header Text';
 
   @readonly
   @Measures.ISOCurrency           : currency.code
