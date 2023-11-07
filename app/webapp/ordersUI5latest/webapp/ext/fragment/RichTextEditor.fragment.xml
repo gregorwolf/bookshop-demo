@@ -1,7 +1,0 @@
-<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" 	xmlns:l="sap.ui.layout">
-	<l:VerticalLayout id="idVerticalLayout" class="sapUiContentPadding" width="100%">
-		<HBox alignItems="Center">
-			<Label text="Select TinyMCE version:" labelFor="idSelect" class="sapUiSmallMarginEnd"/>
-		</HBox>
-	</l:VerticalLayout>
-</core:FragmentDefinition>

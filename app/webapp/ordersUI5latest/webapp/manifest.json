@@ -173,15 +173,6 @@
 												"placement": "After",
 												"anchor": "SalesOrderItems"
 											}
-										},
-                                        "customSection2": {
-											"type": "XMLFragment",
-											"template": "ordersUI5latest.ext.fragment.RichTextEditor",
-											"title": "{i18n>richTextEditor}",
-											"position": {
-												"placement": "After",
-												"anchor": "SalesOrderItem"
-											}
 										}
 									}
 								}
