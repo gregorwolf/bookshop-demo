@@ -10,8 +10,12 @@ sap.ui.define(
           },
           onAfterBinding: function (oBindingContext, mParameters) {
             console.log('onAfterBinding: Data received');
+            this.getView().byId("myRichTextEditor").attachReady(this.RTELoaded, this);
           },
         },
+      },
+      RTELoaded: function (oEvent) {
+        this.getView().byId("myRichTextEditor").addPlugin("autoresize");
       },
       initRichTextEditor: function (bIsTinyMCE5) {
         var that = this,
