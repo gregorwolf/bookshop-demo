@@ -3,26 +3,20 @@ sap.ui.define(
   function (ControllerExtension) {
     'use strict';
     return ControllerExtension.extend('ordersUI5latest.ext.ObjectPageExt', {
-
       override: {
         onInit: function () {
-          console.log('onAfterRendering');
+          var oBinding = this.getView()
+            .getModel('ui')
+            .bindProperty('/isEditable');
+          oBinding.attachChange(this.isEditablePropertyChanged, this);
         },
-        editFlow: {
-          onAfterEdit: function (oBindingContext, mParameters) {
-            this.getView().byId("myRichTextEditor").attachReady(this.RTELoaded, this);
-          },
-
-        },
-        pageReady:{
-          onPageReady: function (oBindingContext, mParameters) {
-            console.log('onPageReady');
+        isEditablePropertyChanged: function (event) {
+          console.log('isEditable changed');
+          if (this.getView().getModel('ui').getProperty('/isEditable')) {
+            this.getView().byId('myRichTextEditor').addPlugin('autoresize');
           }
-        }
+        },
       },
-      RTELoaded: function (oEvent) {
-        this.getView().byId("myRichTextEditor").addPlugin("autoresize");
-      }
     });
   }
 );
