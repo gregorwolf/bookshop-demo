@@ -7,7 +7,7 @@ GET http://localhost:4004/odata/v4/admin/$metadata
 Authorization: Basic admin:
 
 ### Read Metadata via OData V2
-GET http://localhost:4004/v2/admin/$metadata
+GET http://localhost:4004/odata/v2/admin/$metadata
 Authorization: Basic admin:
 
 ### Read Entitysets via OData V4
@@ -15,7 +15,7 @@ GET http://localhost:4004/odata/v4/admin/
 Authorization: Basic admin:
 
 ### Read Entitysets via OData V2
-GET http://localhost:4004/v2/admin/
+GET http://localhost:4004/odata/v2/admin/
 Authorization: Basic admin:
 
 ### Read Authors via OData V4
@@ -23,7 +23,7 @@ GET http://localhost:4004/odata/v4/admin/Authors
 Authorization: Basic admin:
 
 ### Read Authors via OData V2
-GET http://localhost:4004/v2/admin/Authors
+GET http://localhost:4004/odata/v2/admin/Authors
 Authorization: Basic admin:
 
 ### Read Books via OData V4
@@ -36,14 +36,14 @@ GET http://localhost:4004/odata/v4/admin/Books(1)
 Authorization: Basic admin:
 
 ###
-GET http://localhost:4004/v2/admin/Books/$count
+GET http://localhost:4004/odata/v2/admin/Books/$count
 Authorization: Basic admin:
 ### Read Books via OData V2 by admin and expand to author
-GET http://localhost:4004/v2/admin/Books?$expand=author
+GET http://localhost:4004/odata/v2/admin/Books?$expand=author
 Authorization: Basic admin:
 
 ### Update Book via OData V2 by admin
-PUT http://localhost:4004/v2/admin/Books(ID=1)
+PUT http://localhost:4004/odata/v2/admin/Books(ID=1)
 Authorization: Basic littleadmin:
 Content-Type: application/json
 
@@ -62,7 +62,7 @@ Content-Type: application/json
   "createdAt": "2020-10-13T13:30:41.500Z"
 }
 ### Read Approval via OData V2 by admin
-GET http://localhost:4004/v2/admin/Approval
+GET http://localhost:4004/odata/v2/admin/Approval
 Authorization: Basic admin:
 ### Read Users Expanded to via OData V4 - 
 GET http://localhost:4004/odata/v4/admin/readCdsEnv()
@@ -81,11 +81,11 @@ Content-Type: application/json
   "SalesOrganizationName": "Sales Org. A100"
 }
 ### V2
-GET http://localhost:4004/v2/admin/A_SalesOrganizationText
+GET http://localhost:4004/odata/v2/admin/A_SalesOrganizationText
   ?$inlinecount=allpages
 Authorization: Basic admin:
 ### 
-POST http://localhost:4004/v2/admin/A_SalesOrganizationText
+POST http://localhost:4004/odata/v2/admin/A_SalesOrganizationText
 Authorization: Basic admin:
 Content-Type: application/json
 
@@ -93,3 +93,19 @@ Content-Type: application/json
   "SalesOrganization": "B100",
   "SalesOrganizationName": "Sales Org. B100"
 }
+
+###
+POST http://localhost:4004/admin/insertBookAndAuthor
+Authorization: Basic admin:
+Content-Type: application/json
+
+{}
+###
+GET http://localhost:4004/admin/Books(42)?$expand=author
+Authorization: Basic admin:
+###
+DELETE http://localhost:4004/admin/Authors(42)
+Authorization: Basic admin:
+###
+DELETE http://localhost:4004/admin/Books(42)
+Authorization: Basic admin:

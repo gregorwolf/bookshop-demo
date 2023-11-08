@@ -5,7 +5,9 @@ Authorization: Basic booksadmin:
 ### Read Countries via OData V2 as booksadmin
 GET http://localhost:4004/odata/v4/admin/Countries
 Authorization: Basic booksadmin:
-
+### Read Authors via OData V4 as booksadmin
+GET http://localhost:4004/admin/Authors
+Authorization: Basic booksadmin:
 ### Read Books via OData V4 as booksadmin
 GET http://localhost:4004/odata/v4/admin/Books
 Authorization: Basic booksadmin:
