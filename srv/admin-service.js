@@ -177,6 +177,28 @@ module.exports = async function (srv) {
     LOG.info("before UPDATE - req.query.UPDATE.data: " + changedEntityData);
   });
 
+  srv.after("PATCH", Books, (req) => {
+    console.log("After PATCH Books");
+  });
+
+  srv.after("UPDATE", Books, async (req) => {
+    const db = await cds.connect.to("db");
+    const { Books: dbBooks } = db.entities;
+
+    console.log("After request update triggered");
+    await cds.tx(async (tx) => {
+      const data = {
+        title: "haha",
+        stock: 0,
+      };
+      // Expectation: Throws an error if entity can not be locked because it was updated in the standard handler
+      let exists = await SELECT(1).from(dbBooks, 11).forUpdate();
+      console.log("before updating book in separate tx");
+      const result = await tx.update(dbBooks, 11).with(data);
+      console.log("after updating book in separate tx");
+    });
+  });
+
   srv.on("READ", "Userdetails", (req) => {
     return getUserdetails(req);
   });

@@ -25,7 +25,10 @@ service AdminService @(
       },
       {
         grant: '*',
-        to   : 'booksadmin'
+        to   : [
+          'admin',
+          'booksadmin'
+        ]
       },
     ],
     Capabilities: {

@@ -5,5 +5,6 @@ ID;title;author_ID;genre_ID;descr;stock;price;currency_code;publisher_ID
 252;Eleonora;150;15;"""Eleonora"" is a short story by Edgar Allan Poe, first published in 1842 in Philadelphia in the literary annual The Gift. It is often regarded as somewhat autobiographical and has a relatively ""happy"" ending.";555;14;USD;2
 271;Catweazle;170;13;Catweazle is a British fantasy television series, starring Geoffrey Bayldon in the title role, and created by Richard Carpenter for London Weekend Television. The first series, produced and directed by Quentin Lawrence, was screened in the UK on ITV in 1970. The second series, directed by David Reid and David Lane, was shown in 1971. Each series had thirteen episodes, most but not all written by Carpenter, who also published two books based on the scripts.;22;15;EUR;1
 1;Moby Dick;1;;Stephenie Meyer;5;188;JPY;2
+11;2001: Odyssee im Weltraum;1;;false;5;55;HUF;2
 2;true;1;;false;5;188;JPY;2
 3;"true";1;;"false";5;188;JPY;2

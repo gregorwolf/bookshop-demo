@@ -109,3 +109,15 @@ Authorization: Basic admin:
 ###
 DELETE http://localhost:4004/admin/Books(42)
 Authorization: Basic admin:
+###
+GET http://localhost:4004/admin/Books
+Authorization: Basic admin:
+###
+PUT http://localhost:4004/admin/Books(11)
+Authorization: Basic admin:
+Content-Type: application/json
+
+{
+    "title": "test",
+    "stock":12
+}
