@@ -74,9 +74,6 @@
                 "sap.ui.controllerExtensions": {
                     "sap.fe.templates.ListReport.ListReportController": {
                         "controllerName": "ordersUI5latest.ext.ListReportExt"
-                    },
-                    "sap.fe.templates.ObjectPage.ObjectPageController": {
-                        "controllerName": "ordersUI5latest.ext.ObjectPageExt"
                     }
                 }
             }
