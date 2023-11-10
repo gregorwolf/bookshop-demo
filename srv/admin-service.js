@@ -109,9 +109,10 @@ module.exports = async function (srv) {
     }
   });
 
-  srv.on("READ", "SEPMRA_I_Product_E", (req) => {
+  srv.on("READ", "SEPMRA_I_Product_E", async (req) => {
     LOG.info("Read request for SEPMRA_I_Product_E");
-    return external.run(req.query);
+    const result = await external.run(req.query);
+    return result;
   });
 
   /*
