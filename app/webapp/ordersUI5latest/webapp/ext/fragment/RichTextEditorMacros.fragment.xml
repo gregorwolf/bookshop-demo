@@ -2,10 +2,11 @@
 	<VBox>
 		<notmacros:RichTextEditorWithMetadata metaPath="headerText" id="myRichTextEditor">
 			<notmacros:buttonGroups>
-				<notmacros:buttonGroup name="font-style" visible="true" priority="10" customPriority="10" buttons="bold,italic,underline" />
+				<notmacros:buttonGroup name="font-style" visible="true" priority="10" customPriority="10"
+					buttons="bold,italic,underline" />
 			</notmacros:buttonGroups>
 			<notmacros:plugins>
-				<notmacros:plugin name="autoresize"/>
+				<notmacros:plugin name="autoresize" />
 			</notmacros:plugins>
 		</notmacros:RichTextEditorWithMetadata>
 	</VBox>
