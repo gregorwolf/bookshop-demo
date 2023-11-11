@@ -1,5 +1,6 @@
 const { connect } = require("@sap/cds");
 const cds = require("@sap/cds");
+const LOG = cds.log("cat-service");
 const metering = require("./metering");
 const { getUserdetails, getAuthorizations } = require("./helper/userdetails");
 
@@ -14,9 +15,9 @@ module.exports = async function (srv) {
       // result.forEach(cleanObject);
       return result;
     } catch (error) {
-      console.error("Error Message: " + error.message);
+      LOG.error("Error Message: " + error.message);
       if (error.request && error.request.path) {
-        console.error("Request Path: " + error.request.path);
+        LOG.error("Request Path: " + error.request.path);
       }
     }
   });
@@ -32,17 +33,17 @@ module.exports = async function (srv) {
     metering.beforeHandler(req);
     const db = await cds.connect.to("db");
     db.before("COMMIT", (req) => {
-      console.log("before COMMIT Handler", req);
+      LOG.info("before COMMIT Handler", req);
     });
 
     db.after("COMMIT", (req) => {
-      console.log("After COMMIT Handler"), req;
+      LOG.info("After COMMIT Handler"), req;
     });
     */
   });
 
   srv.before("READ", "Books", async (req) => {
-    console.log("before READ Books: " + JSON.stringify(req.data));
+    LOG.info("before READ Books: " + JSON.stringify(req.data));
     var logonName = req.user.id;
     if (logonName === "error@example.com") {
       req.error(403, `user ${logonName} isn't assigned to any role`);
@@ -57,7 +58,7 @@ module.exports = async function (srv) {
         each.semanticURLtoPublisher =
           "#Publishers-display?ID=" + each.publisher_ID;
       }
-      // console.log(each.semanticURLtoPublisher)
+      // LOG.info(each.semanticURLtoPublisher)
     }
   });
 
@@ -70,19 +71,19 @@ module.exports = async function (srv) {
       each.genreSemanticObject = "V4Books";
       each.nodeType_FC = 7;
     }
-    // console.log("After READ Handler for Genres");
+    // LOG.info("After READ Handler for Genres");
   });
 
   srv.after("READ", "Orders", (entity, req) => {
-    console.log("After READ Handler for Orders");
+    LOG.info("After READ Handler for Orders");
     req.on("succeeded", () => {
-      console.log("request succeeded");
+      LOG.info("request succeeded");
     });
     req.on("failed", () => {
-      console.log("request failed");
+      LOG.info("request failed");
     });
     req.on("done", () => {
-      console.log("request succeeded/failed");
+      LOG.info("request succeeded/failed");
     });
   });
 
@@ -93,7 +94,7 @@ module.exports = async function (srv) {
       is_roleadmin: req.user.is("roleadmin"),
       is_booksadmin: req.user.is("booksadmin"),
     };
-    console.log("User Attributes: ", req.user.attr);
+    LOG.info("User Attributes: ", req.user.attr);
     return users;
   });
 
@@ -106,7 +107,7 @@ module.exports = async function (srv) {
   });
 
   srv.on("getNumberOfBooksForDynamicTile", (req) => {
-    console.log("getNumberOfBooksForDynamicTile: " + JSON.stringify(req.data));
+    LOG.info("getNumberOfBooksForDynamicTile: " + JSON.stringify(req.data));
     return {
       icon: "sap-icon://travel-expense",
       info: "Quarter Ends!",
@@ -125,12 +126,12 @@ module.exports = async function (srv) {
   // Sample based on
   // https://blogs.sap.com/2019/04/15/annotated-links-episode-15-of-hands-on-sap-dev-with-qmacro/
   srv.on("hello", (req) => {
-    console.log("hello: " + JSON.stringify(req.data));
+    LOG.info("hello: " + JSON.stringify(req.data));
     return "Hello " + req.data.to;
   });
 
   srv.on(["updateBook"], "Orders", async (req) => {
-    console.log("updateBook - Request Parameters:", req.params[0]);
+    LOG.info("updateBook - Request Parameters:", req.params[0]);
     const bookOld = await cds.run(
       SELECT.one.from("Books").where("ID", "=", req.params[0])
     );
@@ -139,9 +140,9 @@ module.exports = async function (srv) {
     );
     book.stock = book.stock + 1;
     book.semanticURLtoPublisher = "Test";
-    console.log(book);
+    LOG.info(book);
     const update = await UPDATE("Books").set(book).where(bookOld);
-    console.log(update);
+    LOG.info(update);
   });
 
   // Reduce stock of ordered books if available stock suffices
@@ -154,7 +155,7 @@ module.exports = async function (srv) {
   });
 
   this.on("multipleOrders", async (req) => {
-    console.log(
+    LOG.info(
       "on INSERT multipleOrders: " + JSON.stringify(req.data.numberOfOrders)
     );
     const service = await cds.connect.to("CatalogService");
@@ -170,7 +171,7 @@ module.exports = async function (srv) {
   });
 
   srv.on("INSERT", "Orders", async (req, next) => {
-    console.log("on INSERT Orders: " + JSON.stringify(req.data));
+    LOG.info("on INSERT Orders: " + JSON.stringify(req.data));
     return next();
   });
 };
