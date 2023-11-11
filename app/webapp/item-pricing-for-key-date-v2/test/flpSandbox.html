@@ -1,10 +1,10 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<!-- Copyright (c) 2015 SAP AG, All Rights Reserved -->
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Copyright (c) 2015 SAP AG, All Rights Reserved -->
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{appTitle}}</title>
 
     <!-- Bootstrap the unified shell in sandbox mode for standalone usage.
@@ -23,58 +23,64 @@
          for productive scenarios.
     -->
     <script type="text/javascript">
-        window["sap-ushell-config"] = {
-            defaultRenderer: "fiori2",
-            bootstrapPlugins: {
-                "RuntimeAuthoringPlugin": {
-                    component: "sap.ushell.plugins.rta",
-                    config: {
-                        validateAppVersion: false
-                    }
-                }
+      window["sap-ushell-config"] = {
+        defaultRenderer: "fiori2",
+        bootstrapPlugins: {
+          RuntimeAuthoringPlugin: {
+            component: "sap.ushell.plugins.rta",
+            config: {
+              validateAppVersion: false,
             },
-            renderers: {
-                fiori2: {
-                    componentData: {
-                        config: {
-                            search: "hidden"
-                        }
-                    }
-                }
+          },
+        },
+        renderers: {
+          fiori2: {
+            componentData: {
+              config: {
+                search: "hidden",
+              },
             },
-            applications: {
-                "itempricingforkeydate-tile": {
-                    title: "Item Pricing for Key Date",
-                    description: "A Fiori application.",
-                    additionalInformation: "SAPUI5.Component=itempricingforkeydate",
-                    applicationType: "URL",
-                    url: "../"
-                }
-            }
-        };
+          },
+        },
+        applications: {
+          "itempricingforkeydate-tile": {
+            title: "Item Pricing for Key Date",
+            description: "A Fiori application.",
+            additionalInformation: "SAPUI5.Component=itempricingforkeydate",
+            applicationType: "URL",
+            url: "../",
+          },
+        },
+      };
     </script>
 
-    <script src="../test-resources/sap/ushell/bootstrap/sandbox.js" id="sap-ushell-bootstrap"></script>
+    <script
+      src="../test-resources/sap/ushell/bootstrap/sandbox.js"
+      id="sap-ushell-bootstrap"
+    ></script>
     <!-- Bootstrap the UI5 core library. 'data-sap-ui-frameOptions="allow"'' is a NON-SECURE setting for test environments -->
-    <script id="sap-ui-bootstrap"
-        src="../resources/sap-ui-core.js"
-        data-sap-ui-libs="sap.m,sap.ui.core,sap.ushell,sap.f,sap.ui.comp,sap.ui.generic.app,sap.suite.ui.generic.template"
-        data-sap-ui-async="true"
-        data-sap-ui-preload="async"
-        data-sap-ui-theme="sap_fiori_3"
-        data-sap-ui-compatVersion="edge"
-        data-sap-ui-language="en"
-        data-sap-ui-resourceroots='{"itempricingforkeydate": "../"}'
-        data-sap-ui-frameOptions="allow"
-        data-sap-ui-flexibilityServices='[{"applyConnector":"itempricingforkeydate/test/changes_loader", "custom":true}]'>
-        </script>
-        <script id="locate-reuse-libs" src="../utils/locate-reuse-libs.js" data-sap-ui-manifest-uri="../manifest.json">
-        </script>
-</head>
+    <script
+      id="sap-ui-bootstrap"
+      src="../resources/sap-ui-core.js"
+      data-sap-ui-libs="sap.m,sap.ui.core,sap.ushell,sap.f,sap.ui.comp,sap.ui.generic.app,sap.suite.ui.generic.template"
+      data-sap-ui-async="true"
+      data-sap-ui-preload="async"
+      data-sap-ui-theme="sap_fiori_3"
+      data-sap-ui-compatVersion="edge"
+      data-sap-ui-language="en"
+      data-sap-ui-resourceroots='{"itempricingforkeydate": "../"}'
+      data-sap-ui-frameOptions="allow"
+      data-sap-ui-xx-viewCache="false"
+      data-sap-ui-flexibilityServices='[{"applyConnector":"itempricingforkeydate/test/changes_loader", "custom":true}]'
+    ></script>
+    <script
+      id="locate-reuse-libs"
+      src="../utils/locate-reuse-libs.js"
+      data-sap-ui-manifest-uri="../manifest.json"
+    ></script>
+  </head>
 
-<!-- UI Content -->
+  <!-- UI Content -->
 
-<body class="sapUiBody" id="content">
-</body>
-
+  <body class="sapUiBody" id="content"></body>
 </html>
