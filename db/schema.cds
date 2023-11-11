@@ -271,8 +271,7 @@ entity Orders : cuid, managed {
   Items             : Composition of many OrderItems
                         on Items.parent = $self
                                     @title: 'Items';
-  ShippingAddress   : Composition of one OrderShippingAddress
-                        on ShippingAddress.parent = $self;
+  ShippingAddress   : Composition of one OrderShippingAddress;
   headerText        : LargeString   @title: 'Order Header Text';
 
   @readonly
@@ -338,8 +337,6 @@ entity OrderItems : cuid {
 }
 
 entity OrderShippingAddress : cuid, managed {
-  parent : Association to Orders not null;
-
   @(UI: {Placeholder: '{i18n>placeholderStreet}'})
   @(title: 'Street', )
   street : String(60);

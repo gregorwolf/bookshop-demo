@@ -1,7 +1,8 @@
 ### Read Orders via OData
 # @name orders
 GET http://localhost:4004/odata/v4/admin/Orders
-  ?$expand=Items,ShippingAddress
+  ?$expand=ShippingAddress,Items
+  &$orderby=OrderNo
 Authorization: Basic admin:
 ### Fill Variables from Response
 @orderID = {{orders.response.body.$.value[0].ID}}
