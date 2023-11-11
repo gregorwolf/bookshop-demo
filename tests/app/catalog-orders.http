@@ -2,6 +2,9 @@
 GET http://localhost:4004/catalog/Orders
     ?$expand=Items($expand=book($expand=author))
 Authorization: Basic bob:
+### Read non existing Order to trigger failed
+GET http://localhost:4004/catalog/Orders(64e718c9-ff99-47f1-8ca3-950c850777d3)
+Authorization: Basic bob:
 ### Filter Orders by Currency of Book "currency_code": "GBP"
 # works only with HANA
 GET http://localhost:4004/catalog/Orders
