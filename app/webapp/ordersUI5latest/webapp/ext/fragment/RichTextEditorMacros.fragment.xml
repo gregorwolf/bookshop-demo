@@ -1,0 +1,12 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:notmacros="sap.notfe.macros">
+	<VBox>
+		<notmacros:RichTextEditorWithMetadata metaPath="headerText" id="myRichTextEditor">
+			<notmacros:buttonGroups>
+				<notmacros:buttonGroup name="font-style" visible="true" priority="10" customPriority="10" buttons="bold,italic,underline" />
+			</notmacros:buttonGroups>
+			<notmacros:plugins>
+				<notmacros:plugin name="autoresize"/>
+			</notmacros:plugins>
+		</notmacros:RichTextEditorWithMetadata>
+	</VBox>
+</core:FragmentDefinition>

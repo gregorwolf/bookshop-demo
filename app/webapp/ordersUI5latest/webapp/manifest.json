@@ -158,7 +158,22 @@
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
-                            "entitySet": "Orders"
+                            "entitySet": "Orders",
+                            "content": {
+								"body": {
+									"sections": {
+										"customSection": {
+											"type": "XMLFragment",
+											"template": "ordersUI5latest.ext.fragment.RichTextEditorMacros",
+											"title": "{i18n>richTextEditor}",
+											"position": {
+												"placement": "After",
+												"anchor": "SalesOrderItems"
+											}
+										}
+									}
+								}
+							}
                         }
                     }
                 }
