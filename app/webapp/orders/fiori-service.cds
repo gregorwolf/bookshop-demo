@@ -449,6 +449,9 @@ Common : {SideEffects #AmountChanges : {
 
 //The enity types name is AdminService.my_bookshop_OrderItems
 //The annotations below are not generated in edmx WHY?
+annotate AdminService.OrderItems with @Capabilities : {
+UpdateRestrictions : {Updatable : false}
+};
 
 annotate AdminService.OrderItems with {
   book   @(
