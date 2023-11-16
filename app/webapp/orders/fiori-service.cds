@@ -28,25 +28,25 @@ annotate AdminService.Orders with @(UI: {
   SelectionPresentationVariant #New      : {
     $Type              : 'UI.SelectionPresentationVariantType',
     Text               : 'New',
-    SelectionVariant   : ![@UI.SelectionVariant#New],
+    SelectionVariant   : ![@UI.SelectionVariant#New] ,
     PresentationVariant: ![@UI.PresentationVariant#Default]
   },
   SelectionPresentationVariant #InProcess: {
     $Type              : 'UI.SelectionPresentationVariantType',
     Text               : 'InProcess',
-    SelectionVariant   : ![@UI.SelectionVariant#InProcess],
+    SelectionVariant   : ![@UI.SelectionVariant#InProcess] ,
     PresentationVariant: ![@UI.PresentationVariant#Default]
   },
   SelectionPresentationVariant #Completed: {
     $Type              : 'UI.SelectionPresentationVariantType',
     Text               : 'Completed',
-    SelectionVariant   : ![@UI.SelectionVariant#Completed],
+    SelectionVariant   : ![@UI.SelectionVariant#Completed] ,
     PresentationVariant: ![@UI.PresentationVariant#Default]
   },
   SelectionPresentationVariant #Empty    : {
     $Type              : 'UI.SelectionPresentationVariantType',
     Text               : 'Empty',
-    SelectionVariant   : ![@UI.SelectionVariant#Empty],
+    SelectionVariant   : ![@UI.SelectionVariant#Empty] ,
     PresentationVariant: ![@UI.PresentationVariant#Default]
   },
   PresentationVariant #Default           : {
@@ -325,10 +325,10 @@ annotate AdminService.Orders with @(UI: {
           Target: '@UI.FieldGroup#orderstatus',
         },
         {
-          $Type        : 'UI.ReferenceFacet',
-          Label        : '{i18n>deliverystatus}',
-          Target       : '@UI.FieldGroup#deliverystatus',
-          ![@UI.Hidden]: {$edmJson: {$If: [
+          $Type         : 'UI.ReferenceFacet',
+          Label         : '{i18n>deliverystatus}',
+          Target        : '@UI.FieldGroup#deliverystatus',
+          ![@UI.Hidden] : {$edmJson: {$If: [
             {$Eq: [
               {$Path: 'orderstatus_code'},
               'N'
@@ -395,8 +395,8 @@ annotate AdminService.Orders with @(UI: {
     {Value: vipOrder},
     {Value: ShippingAddress.street},
     {
-      Value                  : ShippingAddress.city,
-      ![@Common.FieldControl]: #ReadOnly,
+      Value                   : ShippingAddress.city,
+      ![@Common.FieldControl] : #ReadOnly,
     },
   ]},
 
@@ -449,9 +449,14 @@ Common : {SideEffects #AmountChanges : {
 
 //The enity types name is AdminService.my_bookshop_OrderItems
 //The annotations below are not generated in edmx WHY?
-annotate AdminService.OrderItems with @Capabilities : {
-UpdateRestrictions : {Updatable : false}
+// Make Field Readonly
+/*
+annotate AdminService.OrderItems with @Capabilities: {
+  InsertRestrictions: {Insertable: false},
+  UpdateRestrictions: {Updatable: false},
+  DeleteRestrictions: {Deletable: false}
 };
+*/
 
 annotate AdminService.OrderItems with {
   book   @(
