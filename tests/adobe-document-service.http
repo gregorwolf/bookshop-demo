@@ -1,0 +1,17 @@
+### Request Access Token
+# @name requestAccessToken
+POST {{$dotenv ads_oauth_url}}/oauth/token
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{$dotenv ads_client_id}}
+&client_secret={{$dotenv ads_client_secret}}
+&response_type=token
+&grant_type=client_credentials
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+### Read Forms
+GET {{$dotenv ads_uri}}/v1/forms
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
