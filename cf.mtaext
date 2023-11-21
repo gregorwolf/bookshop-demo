@@ -5,4 +5,4 @@ extends: bookshop-demo
 resources:
   - name: bookshop-demo-db-service
     parameters:
-      service: hanatrial
+      service: hana # or 'hanatrial' on trial landscapes
