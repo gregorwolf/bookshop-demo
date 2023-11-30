@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@cap-js-community/odata-v2-adapter": "^1",
+    "@cap-js/notifications": "^0.1.0",
     "@sap-cloud-sdk/core": "^1",
     "@sap-cloud-sdk/http-client": "^3",
     "@sap-cloud-sdk/util": "^3",
