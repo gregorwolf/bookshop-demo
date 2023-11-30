@@ -1,0 +1,16 @@
+  [
+    {
+      "NotificationTypeKey": "IncidentResolved",
+      "NotificationTypeVersion": "1",
+      "Templates": [
+        {
+          "Language": "en",
+          "TemplatePublic": "Incident Resolved",
+          "TemplateSensitive": "Incident '{{title}}' Resolved",
+          "TemplateGrouped": "Incident Status Update",
+          "TemplateLanguage": "mustache",
+          "Subtitle": "Incident from '{{customer}}' resolved by {{user}}."
+        }
+      ]
+    }
+  ]

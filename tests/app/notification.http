@@ -1,0 +1,6 @@
+###
+http://localhost:4004/odata/v4/notification/$metadata
+###
+http://localhost:4004/odata/v4/notification/send()
+###
+http://localhost:4004/odata/v4/notification/sendIncidentResolved()
