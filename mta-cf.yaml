@@ -3,17 +3,17 @@ _schema-version: 3.2.0
 version: 0.0.1
 parameters:
   enable-parallel-deployments: true
-   
+
 build-parameters:
   before-all:
-   - builder: custom
-     commands:
-      - npm install
-      - npx -p @sap/cds-dk cds build --profile production
-      # Delete node_modules to avoid maximum file length exceeded
-      - rm -rf app/node_modules
-      # Standalone OData V2 Proxy is disabled
-      # - npm run build:copycsntoproxy
+    - builder: custom
+      commands:
+        - npm install
+        - npx -p @sap/cds-dk cds build --profile production
+        # Delete node_modules to avoid maximum file length exceeded
+        - rm -rf app/node_modules
+        # Standalone OData V2 Proxy is disabled
+        # - npm run build:copycsntoproxy
 
 modules:
   - name: bookshop-demo-db
@@ -61,8 +61,7 @@ modules:
     path: broker/
     build-parameters:
       builder: npm-ci
-      ignore:
-        ["node_modules/", "default-*.json"]
+      ignore: ["node_modules/", "default-*.json"]
     parameters:
       app-name: bookshop-demo-api-sb-${space}
       memory: 64MB
@@ -109,8 +108,8 @@ modules:
               ServiceKeyName: bookshop-demo-uaa-apiaccess-key
               sap.cloud.service: bookshop.demo.service
             - Name: bookshop-demo-repo-host
-              ServiceInstanceName:  bookshop-demo-repo-host
-              ServiceKeyName:  bookshop-demo-repo-host-key
+              ServiceInstanceName: bookshop-demo-repo-host
+              ServiceKeyName: bookshop-demo-repo-host-key
               sap.cloud.service: bookshop.demo.service
             - Name: bookshop-demo-uaa
               Authentication: OAuth2UserTokenExchange
@@ -125,57 +124,57 @@ modules:
               URL: ~{srv_api/url}
               HTML5.DynamicDestination: true
               timeout: 600000
-#            - Name: bookshop-demo-docx
-#              Authentication: OAuth2ClientCredentials
-#              ServiceInstanceName: bookshop-demo-docx
-#              ServiceKeyName: bookshop-demo-docx-key
-# Currently fails with:
-# [ERROR] Destinations to service [destination] are not supported
-#            - Name: bookshop-demo-destination
-#              Authentication: OAuth2ClientCredentials
-#              ServiceInstanceName: bookshop-demo-destination-service
-#              ServiceKeyName: bookshop-demo-destination-service-key
-#              sap.cloud.service: basic.service
+          #            - Name: bookshop-demo-docx
+          #              Authentication: OAuth2ClientCredentials
+          #              ServiceInstanceName: bookshop-demo-docx
+          #              ServiceKeyName: bookshop-demo-docx-key
+          # Currently fails with:
+          # [ERROR] Destinations to service [destination] are not supported
+          #            - Name: bookshop-demo-destination
+          #              Authentication: OAuth2ClientCredentials
+          #              ServiceInstanceName: bookshop-demo-destination-service
+          #              ServiceKeyName: bookshop-demo-destination-service-key
+          #              sap.cloud.service: basic.service
           existing_destinations_policy: update
     requires:
       - name: bookshop-demo-uaa
         parameters:
           service-key:
             name: bookshop-demo-uaa-key
-      - name:  bookshop-demo-repo-host
+      - name: bookshop-demo-repo-host
         parameters:
           service-key:
-            name:  bookshop-demo-repo-host-key
+            name: bookshop-demo-repo-host-key
       - name: srv_api
       - name: bookshop-demo-destination-service
         parameters:
           content-target: true
-#          service-key:
-#            name: bookshop-demo-destination-service-key
+      #          service-key:
+      #            name: bookshop-demo-destination-service-key
       - name: bookshop-demo-uaa-apiaccess
         parameters:
           service-key:
             name: bookshop-demo-uaa-apiaccess-key
-#      - name: bookshop-demo-docx
-#        parameters:
-#          service-key:
-#            name: bookshop-demo-docx-key
-#  - name: bookshop-demo-v2-proxy
-#    type: nodejs
-#    path: standalone-v2-proxy
-#    build-parameters:
-#      ignore: ["node_modules/"]
-#    parameters:
-#      memory: 128M
-#      disk-quota: 1024M
-#    provides:
-#      - name: srv_api_v2
-#        properties:
-#          url: '${default-url}'
-#    requires:
-#      - name: srv_api
-#        properties:
-#          srv_api_url: ~{url}
+  #      - name: bookshop-demo-docx
+  #        parameters:
+  #          service-key:
+  #            name: bookshop-demo-docx-key
+  #  - name: bookshop-demo-v2-proxy
+  #    type: nodejs
+  #    path: standalone-v2-proxy
+  #    build-parameters:
+  #      ignore: ["node_modules/"]
+  #    parameters:
+  #      memory: 128M
+  #      disk-quota: 1024M
+  #    provides:
+  #      - name: srv_api_v2
+  #        properties:
+  #          url: '${default-url}'
+  #    requires:
+  #      - name: srv_api
+  #        properties:
+  #          srv_api_url: ~{url}
 
   # - name: bookshop-demo-app
   #   type: nodejs
@@ -212,7 +211,7 @@ modules:
     build-parameters:
       ignore: ["node_modules/"]
     requires:
-#      - name: bookshop-demo-ui5-flexibility-keyuser
+      #      - name: bookshop-demo-ui5-flexibility-keyuser
       - name: bookshop-demo-destination-service
       - name: bookshop-demo-connectivity-service
       - name: bookshop-demo-uaa
@@ -221,10 +220,10 @@ modules:
       - name: srv_api
         group: destinations
         properties:
-            forwardAuthToken: true
-            strictSSL: false
-            name: srv_api
-            url: ~{url}
+          forwardAuthToken: true
+          strictSSL: false
+          name: srv_api
+          url: ~{url}
   - name: bookshop-demo-deployer
     type: com.sap.application.content
     path: .
@@ -258,18 +257,18 @@ resources:
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
-      service-plan: broker 
+      service-plan: broker
       path: ./xs-security.json
   - name: bookshop-demo-uaa-apiaccess
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
       service-plan: apiaccess
-#  - name: bookshop-demo-docx
-#    type: org.cloudfoundry.managed-service
-#    parameters:
-#      service: document-information-extraction-trial
-#      service-plan: default
+  #  - name: bookshop-demo-docx
+  #    type: org.cloudfoundry.managed-service
+  #    parameters:
+  #      service: document-information-extraction-trial
+  #      service-plan: default
   - name: bookshop-demo-destination-service
     parameters:
       service-plan: lite
@@ -293,20 +292,20 @@ resources:
   - name: bookshop-demo-job-scheduler
     type: org.cloudfoundry.managed-service
     parameters:
-       service: jobscheduler
-       service-plan: lite
-       config:
-          enable-xsuaa-support: true
+      service: jobscheduler
+      service-plan: lite
+      config:
+        enable-xsuaa-support: true
   - name: bookshop-demo-logging
     type: org.cloudfoundry.managed-service
     parameters:
-       service: application-logs
-       service-plan: lite
+      service: application-logs
+      service-plan: lite
   - name: bookshop-demo-autoscaler
     type: org.cloudfoundry.managed-service
     parameters:
-       service: autoscaler
-       service-plan: standard
+      service: autoscaler
+      service-plan: standard
 #  - name: bookshop-demo-ui5-flexibility-keyuser
 #    type: org.cloudfoundry.managed-service
 #    parameters:
