@@ -9,7 +9,8 @@ build-parameters:
     - builder: custom
       commands:
         - npm install
-        - npx -p @sap/cds-dk cds build --profile production
+        # Use CDS Build as generated with cds add mta
+        - npx cds build --production
         # Delete node_modules to avoid maximum file length exceeded
         - rm -rf app/node_modules
         # Standalone OData V2 Proxy is disabled
@@ -31,9 +32,14 @@ modules:
     type: nodejs
     path: gen/srv
     build-parameters:
-      ignore: ["node_modules/"]
+    # When using the SAP Cloud ALM intrumentation the node_modules folder must be contained in the build result (mtar)
+    #      ignore:
+    #        - "node_modules/"
     properties:
       SAP_JWT_TRUST_ACL: '[{"clientid":"*","identityzone":"*"}]'
+      SAP_CALM_SERVICE_NAME: bookshop-demo
+      SAP_CALM_SERVICE_TYPE: SAP_CP_CF
+      NODE_ARGS: -r @sap/xotel-agent-ext-js/dist/common/tracer
     parameters:
       memory: 256M
       disk-quota: 1024M

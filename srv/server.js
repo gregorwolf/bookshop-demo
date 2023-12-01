@@ -1,4 +1,5 @@
 const cds = require("@sap/cds");
+const fesr = require("@sap/fesr-to-otel-js");
 const cov2ap = require("@cap-js-community/odata-v2-adapter");
 const helmet = require("helmet");
 const passport = require("passport");
@@ -92,6 +93,8 @@ cds.on("bootstrap", async (app) => {
   // SDKUtil.setGlobalLogLevel("info");
   const cdsenv = cds.env;
   app.use("/appconfig", express.static("./app/webapp/appconfig/"));
+  // SAP Cloud ALM - Frontend Statistics Records (FESR)
+  fesr.registerFesrEndpoint(app);
   /*
   // TODO: Implement helmet following the best practice
   app.use(

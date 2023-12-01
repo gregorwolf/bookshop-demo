@@ -11,6 +11,13 @@
       "service": "sap-approuter-userapi"
     },
     {
+      "source": "^/fesr$",
+      "target": "/fesr",
+      "destination": "srv_api",
+      "csrfProtection": false,
+      "authenticationType": "xsuaa"
+    },
+    {
       "source": "/api/(.*)$",
       "target": "/api/$1",
       "authenticationType": "xsuaa",
