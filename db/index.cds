@@ -19,6 +19,8 @@ using from './temporal';
 using from './agreement';
 // $session example
 using from './directory';
+// UOM mapping
+using from './uom-mapping';
 // 2) In addition, generic service providers need views for exposed entities
 using from '../srv/admin-service';
 using from '../srv/cat-service';
