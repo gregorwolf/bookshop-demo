@@ -124,6 +124,7 @@
           "options": {
             "settings": {
               "contextPath": "/XRechnungUOMs",
+              "initialLoad": "Enabled",
               "variantManagement": "Page",
               "navigation": {
                 "XRechnungUOMs": {
@@ -143,10 +144,14 @@
             "settings": {
               "editableHeaderContent": false,
               "contextPath": "/XRechnungUOMs",
-              "navigation": {
-                "MappingUOM": {
-                  "detail": {
-                    "route": "XRechnungToB1UOMMappingsObjectPage"
+              "navigation": {},
+              "controlConfiguration": {
+                "MappingUOM/@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "creationMode": {
+                      "name": "Inline",
+                      "createAtEnd": false
+                    }
                   }
                 }
               }

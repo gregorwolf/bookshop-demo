@@ -143,6 +143,18 @@
                     "info": "Analyze",
                     "targetURL": "#Books-analyze"
                   }
+                },
+                {
+                  "id": "UOMMapping-manage",
+                  "title": "UOM Mapping",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "UOMMapping-manage",
+                    "title": "UOM Mapping",
+                    "info": "",
+                    "targetURL": "#UOMMapping-manage"
+                  }
                 }
               ]
             },
@@ -839,6 +851,20 @@
                 "applicationType": "SAPUI5",
                 "additionalInformation": "SAPUI5.Component=books-analytics",
                 "url": "books-analytics/webapp"
+              }
+            },
+            "actionUOMMapping-manage": {
+              "semanticObject": "UOMMapping",
+              "action": "manage",
+              "title": "UOM Mapping",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=uommapping",
+                "url": "uom-mapping/webapp"
               }
             },
             "actionProductsUI5latest": {

@@ -10,7 +10,7 @@ namespace my.bookshop;
 entity XRechnungUOMs : cuid, managed, CodeList {
   //Name : String;
   UOM        : String;
-  MappingUOM : Association to many XRechnungToB1UOMMappings
+  MappingUOM : Composition of many XRechnungToB1UOMMappings
                  on MappingUOM.UOMxRechnung = $self;
 }
 
