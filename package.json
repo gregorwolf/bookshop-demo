@@ -47,6 +47,7 @@
     "@sap/cds-dk": "^7",
     "@sap/datasphere-cli": "^2023.14.0",
     "@sap/graph-toolkit": "^3",
+    "@sap/ux-specification": "^1.120.0",
     "artillery": "2.0.3",
     "cds-swagger-ui-express": "^0",
     "chai": "^4.3.7",
@@ -127,7 +128,8 @@
     "test:load:count-all": "artillery run --dotenv tests/app/.env tests/app/count-all.yml",
     "cf:uaa:update": "cf update-service bookshop-demo-uaa -c xs-security.json",
     "undeploy:xsa": "xs undeploy bookshop-demo --delete-services --delete-service-brokers",
-    "undeploy:cf": "cf undeploy bookshop-demo --delete-service-keys --delete-services --delete-service-brokers"
+    "undeploy:cf": "cf undeploy bookshop-demo --delete-service-keys --delete-services --delete-service-brokers",
+    "watch-uom-mapping": "cds watch --open uom-mapping/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "drafts": {
@@ -312,5 +314,8 @@
     "odata": {
       "version": "v4"
     }
-  }
+  },
+  "sapux": [
+    "app/webapp/uom-mapping"
+  ]
 }

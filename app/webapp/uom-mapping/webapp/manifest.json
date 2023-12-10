@@ -1,0 +1,174 @@
+{
+  "_version": "1.58.0",
+  "sap.app": {
+    "id": "uommapping",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.11.2",
+      "toolsId": "3307ee4b-26b1-4e11-8984-df694ba7f1f0"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/uom-mappings/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "UOMMapping-manage": {
+          "semanticObject": "UOMMapping",
+          "action": "manage",
+          "title": "UOM Mapping",
+          "subTitle": "",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.120.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "uommapping.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "XRechnungUOMsList",
+          "target": "XRechnungUOMsList"
+        },
+        {
+          "pattern": "XRechnungUOMs({key}):?query:",
+          "name": "XRechnungUOMsObjectPage",
+          "target": "XRechnungUOMsObjectPage"
+        },
+        {
+          "pattern": "XRechnungUOMs({key})/MappingUOM({key2}):?query:",
+          "name": "XRechnungToB1UOMMappingsObjectPage",
+          "target": "XRechnungToB1UOMMappingsObjectPage"
+        }
+      ],
+      "targets": {
+        "XRechnungUOMsList": {
+          "type": "Component",
+          "id": "XRechnungUOMsList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/XRechnungUOMs",
+              "variantManagement": "Page",
+              "navigation": {
+                "XRechnungUOMs": {
+                  "detail": {
+                    "route": "XRechnungUOMsObjectPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "XRechnungUOMsObjectPage": {
+          "type": "Component",
+          "id": "XRechnungUOMsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/XRechnungUOMs",
+              "navigation": {
+                "MappingUOM": {
+                  "detail": {
+                    "route": "XRechnungToB1UOMMappingsObjectPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "XRechnungToB1UOMMappingsObjectPage": {
+          "type": "Component",
+          "id": "XRechnungToB1UOMMappingsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/XRechnungUOMs/MappingUOM"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}
