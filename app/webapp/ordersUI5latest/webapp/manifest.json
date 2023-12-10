@@ -107,7 +107,7 @@
                                     }
                                 }
                             },
-                            "initialLoad": true,
+                            "initialLoad": "Enabled",
                             "views": {
                                 "paths": [
                                     {
@@ -160,20 +160,20 @@
                         "settings": {
                             "entitySet": "Orders",
                             "content": {
-								"body": {
-									"sections": {
-										"customSection": {
-											"type": "XMLFragment",
-											"template": "ordersUI5latest.ext.fragment.RichTextEditorMacros",
-											"title": "{i18n>richTextEditor}",
-											"position": {
-												"placement": "After",
-												"anchor": "SalesOrderItems"
-											}
-										}
-									}
-								}
-							}
+                                "body": {
+                                    "sections": {
+                                        "customSection": {
+                                            "type": "XMLFragment",
+                                            "template": "ordersUI5latest.ext.fragment.RichTextEditorMacros",
+                                            "title": "{i18n>richTextEditor}",
+                                            "position": {
+                                                "placement": "After",
+                                                "anchor": "SalesOrderItems"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }

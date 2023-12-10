@@ -118,7 +118,7 @@
             "settings": {
               "entitySet": "MaintainerGroup",
               "variantManagement": "Page",
-              "initialLoad": true,
+              "initialLoad": "Enabled",
               "navigation": {
                 "MaintainerGroup": {
                   "detail": {

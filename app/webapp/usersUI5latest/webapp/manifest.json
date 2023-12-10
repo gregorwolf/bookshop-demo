@@ -92,7 +92,7 @@
                             "entitySet": "Users",
                             "defaultTemplateAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant",
                             "variantManagement": "Page",
-                            "initialLoad": true,
+                            "initialLoad": "Enabled",
                             "navigation": {
                                 "Users": {
                                     "detail": {

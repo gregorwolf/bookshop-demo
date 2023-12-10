@@ -98,7 +98,7 @@
                                     }
                                 }
                             },
-                            "initialLoad": true,
+                            "initialLoad": "Enabled",
                             "controlConfiguration": {
                                 "@com.sap.vocabularies.UI.v1.LineItem": {
                                     "tableSettings": {
