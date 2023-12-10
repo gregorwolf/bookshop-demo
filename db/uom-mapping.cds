@@ -6,19 +6,20 @@ using {
 
 namespace my.bookshop;
 
-@assert.unique: {mapping: [
-  UOMxRechnung,
-  UOMB1
-], }
-entity XRechnungToB1UOMMappings : cuid, managed {
-  UOMxRechnung : Association to XRechnungUOM;
-  UOMB1        : String;
-}
-
 @assert.unique: {uom: [UOM, ], }
-entity XRechnungUOM : cuid, managed, CodeList {
+entity XRechnungUOMs : cuid, managed, CodeList {
   //Name : String;
   UOM        : String;
   MappingUOM : Association to many XRechnungToB1UOMMappings
                  on MappingUOM.UOMxRechnung = $self;
+}
+
+@assert.unique: {mapping: [
+  UOMxRechnung,
+  UOMB1
+], }
+@cds.autoexpose
+entity XRechnungToB1UOMMappings : cuid, managed {
+  UOMxRechnung : Association to XRechnungUOMs;
+  UOMB1        : String;
 }

@@ -1,0 +1,5 @@
+###
+GET http://localhost:4004/uom-mappings/
+###
+GET http://localhost:4004/uom-mappings/XRechnungUOMs
+  ?$expand=MappingUOM
