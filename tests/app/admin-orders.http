@@ -1,3 +1,6 @@
+### Read Metadata via OData V4
+GET http://localhost:4004/odata/v4/admin/$metadata
+Authorization: Basic admin:
 ### Read Orders via OData
 # @name orders
 GET http://localhost:4004/odata/v4/admin/Orders
@@ -16,6 +19,22 @@ Authorization: Basic admin:
 ###
 GET http://localhost:4004/odata/v4/admin/OrderShippingAddress
 #  ?$filter=parent_ID eq {{orderID}}
+Authorization: Basic admin:
+### Create Order
+# @name order
+POST http://localhost:4004/odata/v4/admin/Orders
+Authorization: Basic admin:
+Content-Type: application/json
+
+{
+  "OrderNo": "4711",
+  "ShippingAddress": {}
+}
+###
+@newOrderID = {{order.response.body.ID}}
+###
+GET http://localhost:4004/odata/v4/admin/Orders(ID={{newOrderID}},IsActiveEntity=false)
+  ?$expand=ShippingAddress
 Authorization: Basic admin:
 ###
 DELETE http://localhost:4004/odata/v4/admin/Orders(ID={{orderID}},IsActiveEntity=true)

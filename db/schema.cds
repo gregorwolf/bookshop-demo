@@ -339,9 +339,11 @@ entity OrderItems : cuid {
 entity OrderShippingAddress : cuid, managed {
   @(UI: {Placeholder: '{i18n>placeholderStreet}'})
   @(title: 'Street', )
+  @mandatory
   street : String(60);
 
   @(title: 'City', )
+  @mandatory
   city   : String(60);
 };
 

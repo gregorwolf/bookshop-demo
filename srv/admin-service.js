@@ -55,9 +55,11 @@ module.exports = async function (srv) {
 
   // As suggested in:
   // https://answers.sap.com/questions/14004696/fiori-elements-odata-v2-and-v4-composition-of-one.html
+  /*
   srv.before("NEW", Orders.drafts, async (req) => {
     req.data.ShippingAddress ??= {};
   });
+  */
 
   this.after("each", Orders, (order) => {
     order.VirtualTotalWithTax =
