@@ -52,6 +52,7 @@ modules:
           config:
             xsuaa_instance_name: bookshop-demo-uaa
       - name: bookshop-demo-logging
+#      - name: bookshop-demo-cloud-logging
       - name: bookshop-demo-autoscaler
         parameters:
           path: ./autoscaler.json
@@ -216,6 +217,7 @@ modules:
       - name: bookshop-demo-connectivity-service
       - name: bookshop-demo-uaa
       - name: bookshop-demo-logging
+#      - name: bookshop-demo-cloud-logging
       - name: bookshop-demo-repo-runtime
       - name: srv_api
         group: destinations
@@ -301,6 +303,11 @@ resources:
     parameters:
       service: application-logs
       service-plan: lite
+#  - name: bookshop-demo-cloud-logging
+#    type: org.cloudfoundry.managed-service
+#    parameters:
+#      service: cloud-logging
+#      service-plan: dev
   - name: bookshop-demo-autoscaler
     type: org.cloudfoundry.managed-service
     parameters:
