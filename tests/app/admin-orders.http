@@ -28,6 +28,7 @@ Content-Type: application/json
 
 {
   "OrderNo": "4711",
+  "IsActiveEntity": true,
   "ShippingAddress": {}
 }
 ###

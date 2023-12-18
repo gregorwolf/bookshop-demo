@@ -135,6 +135,10 @@
     "drafts": {
       "cancellationTimeout": 1
     },
+    "fiori": {
+      "lean_draft": true,
+      "bypass_draft": true
+    },
     "features": {
       "xassert_integrity": "db",
       "serve_on_root": true,
