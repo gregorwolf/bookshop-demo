@@ -214,7 +214,10 @@ annotate my.Books with @(UI: {
         {Value: stock},
         {Value: title},
         {Value: author_ID},
-        {Value: author.name},
+        {
+            Value               : author.name,
+            ![@HTML5.LinkTarget]: '_blank',
+        },
         /*
         {
             $Type          : 'UI.DataFieldWithIntentBasedNavigation',
@@ -230,12 +233,13 @@ annotate my.Books with @(UI: {
         },
         */
         {
-            $Type         : 'UI.DataFieldWithIntentBasedNavigation',
-            Value         : author.ID,
-            Label         : 'V2 Action for Navigation to Author',
-            SemanticObject: 'Authors',
-            Action        : 'displayUI5latest',
-            Mapping       : [{
+            $Type               : 'UI.DataFieldWithIntentBasedNavigation',
+            Value               : author.ID,
+            Label               : 'V2 Action for Navigation to Author',
+            SemanticObject      : 'Authors',
+            Action              : 'displayUI5latest',
+            ![@HTML5.LinkTarget]: '_blank',
+            Mapping             : [{
                 $Type                 : 'Common.SemanticObjectMappingType',
                 LocalProperty         : author_ID,
                 SemanticObjectProperty: 'ID',
@@ -251,13 +255,14 @@ annotate my.Books with @(UI: {
             ![@UI.Importance]: #High
         },
         {
-            $Type  : 'UI.DataFieldWithUrl',
-            Label  : '{i18n>ToPublisherUrl}',
-            IconUrl: 'sap-icon://chain-link',
-            Value  : publisher_ID, // Works
+            $Type               : 'UI.DataFieldWithUrl',
+            Label               : '{i18n>ToPublisherUrl}',
+            IconUrl             : 'sap-icon://chain-link',
+            Value               : publisher_ID, // Works
             // Value  : 'Link', // Shows warning that this is not an i18n Text + Dumps in Browser
             // Value  : '{i18n>ToPublisherUrl}', // Dumps in Browser
-            Url    : semanticURLtoPublisher,
+            ![@HTML5.LinkTarget]: '_blank',
+            Url                 : semanticURLtoPublisher,
         },
     /*
         {Value: semanticURLtoPublisher},
