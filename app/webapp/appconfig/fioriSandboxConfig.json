@@ -304,19 +304,6 @@
                   }
                 },
                 {
-                  "id": "BrowsePublishersApp",
-                  "title": "Browse Publishers",
-                  "size": "1×1",
-                  "tileType": "sap.ushell.ui.tile.StaticTile",
-                  "serviceRefreshInterval": 5,
-                  "properties": {
-                    "chipId": "catalogTile_002",
-                    "title": "Browse Publishers",
-                    "info": "The list of Publishers",
-                    "targetURL": "#Publishers-display"
-                  }
-                },
-                {
                   "id": "BrowseAuthorsApp",
                   "title": "Browse Authors",
                   "size": "1×1",
@@ -441,6 +428,19 @@
                     "title": "Browse Authors",
                     "info": "The latest books",
                     "targetURL": "#Authors-displayUI5latest"
+                  }
+                },
+                {
+                  "id": "BrowsePublishersApp",
+                  "title": "Browse Publishers",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "serviceRefreshInterval": 5,
+                  "properties": {
+                    "chipId": "catalogTile_002",
+                    "title": "Browse Publishers",
+                    "info": "The list of Publishers",
+                    "targetURL": "#Publishers-display"
                   }
                 }
               ]

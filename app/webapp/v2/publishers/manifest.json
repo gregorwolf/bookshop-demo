@@ -1,11 +1,18 @@
 {
-	"_version": "1.8.0",
+	"_version": "1.21.0",
 	"sap.app": {
 		"id": "v2.publishers",
 		"type": "application",
 		"title": "{{appTitle}}",
 		"description": "{{appDescription}}",
-		"i18n": "i18n/i18n.properties",
+		"i18n": {
+			"bundleUrl": "i18n/i18n.properties",
+			"supportedLocales": [
+				"",
+				"de"
+			],
+			"fallbackLocale": ""
+		},
 		"dataSources": {
 			"mainService": {
 				"uri": "/odata/v2/catalog/",
@@ -31,14 +38,20 @@
 		"dependencies": {
 			"minUI5Version": "1.38.34",
 			"libs": {
-				"sap.fe": {}
+				"sap.fe.templates": {}
 			},
 			"components": {}
 		},
 		"models": {
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
-				"uri": "i18n/i18n.properties"
+				"settings": {
+					"bundleUrl": "i18n/i18n.properties",
+					"supportedLocales": [
+						""
+					],
+					"fallbackLocale": ""
+				}
 			},
 			"": {
 				"dataSource": "mainService",
