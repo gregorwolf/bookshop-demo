@@ -18,7 +18,7 @@
 		"resources": "resources.json",
 		"dataSources": {
 			"mainService": {
-				"uri": "/v2/catalog/",
+				"uri": "/odata/v2/catalog/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0"

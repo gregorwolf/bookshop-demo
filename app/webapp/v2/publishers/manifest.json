@@ -8,7 +8,7 @@
 		"i18n": "i18n/i18n.properties",
 		"dataSources": {
 			"mainService": {
-				"uri": "/v2/catalog/",
+				"uri": "/odata/v2/catalog/",
 				"type": "OData",
 				"settings": {
 					"localUri": "localService/metadata.xml"
@@ -120,7 +120,7 @@
 			"sap_hcb",
 			"sap_belize"
 		]
-	},	
+	},
 	"sap.platform.hcp": {
 		"uri": ""
 	}

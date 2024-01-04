@@ -19,14 +19,14 @@
     },
     {
       "source": "/v2standalone/(.*)$",
-      "target": "/v2/$1",
+      "target": "/odata/v2/$1",
       "authenticationType": "xsuaa",
       "destination": "srv_api_v2",
       "csrfProtection": true
     },
     {
-      "source": "/v2/(.*)$",
-      "target": "/v2/$1",
+      "source": "/odata/v2/(.*)$",
+      "target": "/odata/v2/$1",
       "authenticationType": "xsuaa",
       "destination": "srv_api",
       "csrfProtection": true
