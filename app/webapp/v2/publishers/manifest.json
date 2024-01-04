@@ -99,7 +99,10 @@
 					"settings": {
 						"condensedTableLayout": true,
 						"smartVariantManagement": true,
-						"enableTableFilterInPageVariant": true
+						"enableTableFilterInPageVariant": true,
+						"dataLoadSettings": {
+							"loadDataOnAppLaunch": "always"
+						}
 					}
 				},
 				"pages": {

@@ -97,7 +97,8 @@
                                         "route": "BooksObjectPage"
                                     }
                                 }
-                            }
+                            },
+                            "initialLoad": "Enabled"
                         }
                     }
                 },
