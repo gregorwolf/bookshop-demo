@@ -1,7 +1,7 @@
 {
   "name": "deploy",
   "engines": {
-    "node": "^18"
+    "node": "^20"
   },
   "dependencies": {
     "@sap/hdi-deploy": "^4"
