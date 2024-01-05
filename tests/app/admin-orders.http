@@ -29,10 +29,49 @@ Content-Type: application/json
 {
   "OrderNo": "4711",
   "IsActiveEntity": true,
-  "ShippingAddress": {}
+  "ShippingAddress": {
+    "city": "Walldorf"
+  }
 }
 ###
+@location = {{order.response.headers.Location}}
 @newOrderID = {{order.response.body.ID}}
+@ShippingAddressID = {{order.response.body.ShippingAddress_ID}}
+###
+GET http://localhost:4004/odata/v4/admin/{{location}}
+Authorization: Basic admin:
+###
+POST http://localhost:4004/odata/v4/admin/{{location}}/AdminService.draftPrepare
+Authorization: Basic admin:
+Content-Type: application/json
+
+{"SideEffectsQualifier":""}
+
+###
+POST http://localhost:4004/odata/v4/admin/{{location}}/AdminService.draftActivate
+Authorization: Basic admin:
+Content-Type: application/json
+
+{}
+
+###
+PATCH http://localhost:4004/odata/v4/admin/{{location}}
+Authorization: Basic admin:
+Content-Type: application/json
+
+{
+  "salesOrganization": "1000",
+  "orderstatus_code": "N",
+  "deliverystatus_code": "N"
+}
+###
+PATCH http://localhost:4004/odata/v4/admin/OrderShippingAddress(ID={{ShippingAddressID}},IsActiveEntity=false)
+Authorization: Basic admin:
+Content-Type: application/json
+
+{
+  "street": "Hasso-Plattner-Ring 1"
+}
 ###
 GET http://localhost:4004/odata/v4/admin/Orders(ID={{newOrderID}},IsActiveEntity=false)
   ?$expand=ShippingAddress
