@@ -51,7 +51,8 @@ entity Books : managed {
       title                          : localized String(111);
       descr                          : localized String(1111);
       genre                          : Association to Genres;
-      stock                          : Integer;
+      stock                          : Integer       @title: 'Stock';
+      stockTarget                    : Integer       @title: 'Stock Target';
 
       @sap.unit                     : 'currency_code'
       @Semantics.amount.currencyCode: 'currency_code'

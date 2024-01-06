@@ -193,7 +193,7 @@ annotate my.Publishers with @(UI: {
 //	Books Lists
 //
 annotate my.Books with @(UI: {
-    PresentationVariant: {
+    PresentationVariant                : {
         $Type    : 'UI.PresentationVariantType',
         MaxItems : 10,
         SortOrder: [{
@@ -202,16 +202,43 @@ annotate my.Books with @(UI: {
             Descending: true
         }]
     },
-    Identification     : [{Value: title}],
-    SelectionFields    : [
+    Identification                     : [{Value: title}],
+    SelectionFields                    : [
         ID,
         title,
         author.name,
         stock
     ],
-    LineItem           : [
+    DataPoint #bulletChartStockVsTarget: {
+        //Search-Terms: #MicroChart, #microChartBullet
+        Value       : stock,
+        TargetValue : stockTarget,
+        MinimumValue: 0,
+    },
+    Chart #bulletChartStockVsTarget    : {
+        //Search-Terms: #MicroChart, #microChartBullet
+        Title            : '{i18n>bulletChartStockVsTarget}',
+        Description      : '{i18n>bulletChartStockVsTargetDescription}',
+        ChartType        : #Bullet,
+        Measures         : [stock],
+        MeasureAttributes: [{
+            $Type    : 'UI.ChartMeasureAttributeType',
+            Measure  : stock,
+            Role     : #Axis1,
+            DataPoint: '@UI.DataPoint#bulletChartStockVsTarget',
+        }, ],
+    },
+    LineItem                           : [
         {Value: ID},
         {Value: stock},
+        {
+            //Search-Term: #MicroChart
+            $Type            : 'UI.DataFieldForAnnotation',
+            Label            : '{i18n>bulletChartStockVsTarget}',
+            Target           : '@UI.Chart#bulletChartStockVsTarget',
+            ![@UI.Importance]: #High,
+        },
+        {Value: stockTarget},
         {Value: title},
         {Value: author_ID},
         {
