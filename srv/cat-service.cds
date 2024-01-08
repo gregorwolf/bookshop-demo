@@ -26,18 +26,20 @@ service CatalogService @(impl: './cat-service.js') {
     },
     UpdateRestrictions: {Updatable: true},
     DeleteRestrictions: {Deletable: true}
-  }, )                          as projection on db.Books {
-    *,
-    virtual 'Value from Srv' as VirtualFromSrv : String,
-  // Element or variable “VirtualFromSrvDefault” has not been foundCDS (compiler)(ref-undefined-var)
-  // Extraneous DEFAULT, expecting ‘,’, ‘.’, ‘:’, ‘(’, ‘}’, ‘@’CDS (compiler)(syntax-extraneous-token)
-  // virtual VirtualFromSrvDefault : String default 'Default value from Srv',
-  } excluding {
-    createdBy,
-    modifiedBy
-  } actions {
-    action updateBook()
-  };
+  }, )                          as
+    projection on db.Books {
+      *,
+      virtual 'Value from Srv' as VirtualFromSrv : String,
+    // Element or variable “VirtualFromSrvDefault” has not been foundCDS (compiler)(ref-undefined-var)
+    // Extraneous DEFAULT, expecting ‘,’, ‘.’, ‘:’, ‘(’, ‘}’, ‘@’CDS (compiler)(syntax-extraneous-token)
+    // virtual VirtualFromSrvDefault : String default 'Default value from Srv',
+    }
+    excluding {
+      createdBy,
+      modifiedBy
+    } actions {
+      action updateBook()
+    };
 
   function getBooks()                       returns array of Books;
   // OData Structure for Dynamic App Launchers
@@ -46,21 +48,26 @@ service CatalogService @(impl: './cat-service.js') {
   function hello(to : String)               returns String;
 
   @readonly
-  entity BooksAuthorsAssignment as projection on db.BooksAuthorsAssignment {
-    *
-  };
+  entity BooksAuthorsAssignment as
+    projection on db.BooksAuthorsAssignment {
+      *
+    };
 
   @readonly
-  entity Authors                as projection on db.Authors excluding {
-    createdBy,
-    modifiedBy
-  };
+  entity Authors                as
+    projection on db.Authors
+    excluding {
+      createdBy,
+      modifiedBy
+    };
 
   @readonly
-  entity Publishers             as projection on db.Publishers excluding {
-    createdBy,
-    modifiedBy
-  };
+  entity Publishers             as
+    projection on db.Publishers
+    excluding {
+      createdBy,
+      modifiedBy
+    };
 
   // @readonly entity BusinessPartner as projection on bp.BusinessPartner;
   entity Orders @(restrict: [
@@ -75,22 +82,23 @@ service CatalogService @(impl: './cat-service.js') {
       grant: 'READ',
       where: 'createdBy = $user AND $user.level > 2'
     },
-  ])                            as projection on db.OrdersView {
-    ID,
-    // @Core.Immutable
-    OrderNo,
-    salesOrganization,
-    CustomerOrderNo,
-    Items,
-    ShippingAddress,
-    total,
-    totalTax,
-    totalWithTax,
-    orderstatus,
-    deliverystatus,
-    currency,
-    createdBy,
-  };
+  ])                            as
+    projection on db.OrdersView {
+      ID,
+      // @Core.Immutable
+      OrderNo,
+      salesOrganization,
+      CustomerOrderNo,
+      Items,
+      ShippingAddress,
+      total,
+      totalTax,
+      totalWithTax,
+      orderstatus,
+      deliverystatus,
+      currency,
+      createdBy,
+    };
 
   @requires_: 'authenticated-user'
   action   submitOrder(book : Books:ID, amount : Integer);
@@ -109,10 +117,12 @@ service CatalogService @(impl: './cat-service.js') {
   };
 
   @readonly
-  entity SEPMRA_I_Product_E     as projection on external.SEPMRA_I_Product_E excluding {
-    CreationDateTime,
-    LastChangedDateTime
-  };
+  entity SEPMRA_I_Product_E     as
+    projection on external.SEPMRA_I_Product_E
+    excluding {
+      CreationDateTime,
+      LastChangedDateTime
+    };
 
   @readonly
   @odata.singleton
