@@ -1,2 +1,4 @@
-book_ID;plant_ID;purchasingGroup
-252;1000;C01
+book_ID;plant_ID;purchasingGroup;stock
+252;1000;C01;100
+252;1001;C02;220
+252;1002;C01;300

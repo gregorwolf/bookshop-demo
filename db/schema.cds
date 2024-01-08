@@ -51,8 +51,8 @@ entity Books : managed {
       title                          : localized String(111);
       descr                          : localized String(1111);
       genre                          : Association to Genres;
-      stock                          : Integer       @title: 'Stock';
-      stockTarget                    : Integer       @title: 'Stock Target';
+      stock                          : Integer;
+      stockTarget                    : Integer;
 
       @sap.unit                     : 'currency_code'
       @Semantics.amount.currencyCode: 'currency_code'
@@ -84,6 +84,7 @@ entity BookPlants : managed {
   key book            : Association to one Books;
   key plant           : Association to one Plant;
       purchasingGroup : String(3);
+      stock           : Integer;
 }
 
 @fiori.draft.enabled
