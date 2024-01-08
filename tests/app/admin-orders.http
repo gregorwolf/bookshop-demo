@@ -39,6 +39,7 @@ Content-Type: application/json
 @ShippingAddressID = {{order.response.body.ShippingAddress_ID}}
 ###
 GET http://localhost:4004/odata/v4/admin/{{location}}
+  ?$expand=ShippingAddress
 Authorization: Basic admin:
 ###
 POST http://localhost:4004/odata/v4/admin/{{location}}/AdminService.draftPrepare
