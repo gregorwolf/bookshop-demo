@@ -209,6 +209,14 @@ annotate my.Books with @(UI: {
         author.name,
         stock
     ],
+    DataPoint #weight                  : {
+        Value      : weight,
+        ValueFormat: {
+            $Type                   : 'UI.NumberFormat',
+            ScaleFactor             : 1,
+            NumberOfFractionalDigits: 2,
+        },
+    },
     DataPoint #bulletChartStockVsTarget: {
         //Search-Terms: #MicroChart, #microChartBullet
         Value       : stock,
@@ -230,7 +238,7 @@ annotate my.Books with @(UI: {
     },
     LineItem                           : [
         {Value: ID},
-        {Value: stock},
+        {Value: stock, },
         {
             //Search-Term: #MicroChart
             $Type            : 'UI.DataFieldForAnnotation',
@@ -239,6 +247,10 @@ annotate my.Books with @(UI: {
             ![@UI.Importance]: #High,
         },
         {Value: stockTarget},
+        {
+            $Type : 'UI.DataFieldForAnnotation',
+            Target: '@UI.DataPoint#weight',
+        },
         {Value: title},
         {Value: author_ID},
         {
@@ -371,7 +383,7 @@ annotate my.Books with @(UI: {HeaderInfo: {
     TypeName      : '{i18n>Book}',
     TypeNamePlural: '{i18n>Books}',
     Title         : {Value: title},
-    ImageUrl      : 'https://raw.githubusercontent.com/gregorwolf/bookshop-demo/master/tests/Test.png',
+    ImageUrl      : 'https://raw.githubusercontent.com/gregorwolf/bookshop-demo/master/tests/app/Test.png',
     Description   : {Value: author.name}
 }, });
 
@@ -381,20 +393,20 @@ annotate my.Books with @(UI: {HeaderInfo: {
 //	Books Elements
 //
 annotate my.Books with {
-    ID     @(
+    ID          @(
         title : '{i18n>ID}',
         Common: {
             Text           : title,
             TextArrangement: #TextFirst
         }
     );
-    title  @title: '{i18n>Title}';
-    author @title: '{i18n>AuthorID}';
-    price  @title: '{i18n>Price}';
-    stock  @title: '{i18n>Stock}';
-    descr  @UI.MultiLineText;
+    title       @title: '{i18n>Title}';
+    author      @title: '{i18n>AuthorID}';
+    price       @title: '{i18n>Price}';
+    stock       @title: '{i18n>Stock}';
+    stockTarget @title: '{i18n>StockTarget}';
+    descr       @UI.MultiLineText;
 }
-
 
 ////////////////////////////////////////////////////////////////////////////
 //

@@ -21,8 +21,9 @@ GET http://localhost:4004/public/Books
 ###
 GET http://localhost:4004/public/Books
   ?$count=true
-  &$expand=genre
+  &$expand=genre,plants
 #  &$filter=genre/all(g:g/name eq 'Drama')
+  &$filter=ID eq 252
 Accept: application/json;IEEE754Compatible=true
 # Returns:
 # Property 'all' does not exist in type 'CatalogService.Genres'
