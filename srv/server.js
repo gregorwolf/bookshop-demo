@@ -1,4 +1,5 @@
 const cds = require("@sap/cds");
+const LOG = cds.log("server");
 const cov2ap = require("@cap-js-community/odata-v2-adapter");
 const helmet = require("helmet");
 const passport = require("passport");
@@ -17,27 +18,27 @@ if (process.env.NODE_ENV === "production") {
     const jwtStrategy = new JWTStrategy(xsuaaCredentials);
     passport.use(jwtStrategy);
   } catch (error) {
-    console.warn(error.message);
+    LOG.warn(error.message);
   }
 }
 
 // Middleware to read SAP Job Headers sent by client
 function sapJobLogger(req, res, next) {
   if (req.headers["x-sap-job-id"]) {
-    console.log("===> SAP Job Headers");
-    console.log(
+    LOG.info("===> SAP Job Headers");
+    LOG.info(
       "===> SAP Job Headers - x-sap-job-id:         " +
         req.headers["x-sap-job-id"]
     );
-    console.log(
+    LOG.info(
       "===> SAP Job Headers - x-sap-jobschedule-id: " +
         req.headers["x-sap-jobschedule-id"]
     );
-    console.log(
+    LOG.info(
       "===> SAP Job Headers - x-sap-job-run-id:     " +
         req.headers["x-sap-job-run-id"]
     );
-    console.log(
+    LOG.info(
       "===> SAP Job Headers - x-sap-scheduler-host: " +
         req.headers["x-sap-scheduler-host"]
     );
@@ -48,12 +49,12 @@ function sapJobLogger(req, res, next) {
 
 // Middleware to read JWT sent by client
 function jwtLogger(req, res, next) {
-  console.log("===> Decoding auth header");
+  LOG.info("===> Decoding auth header");
   const jwtToken = readJwt(req);
   if (jwtToken) {
-    console.log("===> JWT: scopes: " + jwtToken.scope);
-    console.log("===> JWT: client_id: " + jwtToken.client_id);
-    console.log("===> JWT: user: " + jwtToken.user_name);
+    LOG.info("===> JWT: scopes: " + jwtToken.scope);
+    LOG.info("===> JWT: client_id: " + jwtToken.client_id);
+    LOG.info("===> JWT: user: " + jwtToken.user_name);
   }
 
   next();
@@ -61,8 +62,8 @@ function jwtLogger(req, res, next) {
 
 // Middleware to replace Accept: application/atomsvc+xml,application/atom+xml with Accept: application/json
 function replaceExcelAcceptHeader(req, res, next) {
-  console.log("===> replaceExcelAcceptHeader");
-  console.log(req.headers.accept);
+  LOG.info("===> replaceExcelAcceptHeader");
+  LOG.info(req.headers.accept);
   if (req.headers.accept === "application/atomsvc+xml,application/atom+xml") {
     req.headers.accept = "application/json";
   }
@@ -76,7 +77,7 @@ const readJwt = function (req) {
   if (authHeader) {
     const theJwtToken = authHeader.substring(7);
     if (theJwtToken) {
-      console.log("===> JWT Token: " + theJwtToken);
+      LOG.info("===> JWT Token: " + theJwtToken);
       const jwtBase64Encoded = theJwtToken.split(".")[1];
       if (jwtBase64Encoded) {
         const jwtDecoded = Buffer.from(jwtBase64Encoded, "base64").toString(
@@ -125,9 +126,9 @@ cds.on("bootstrap", async (app) => {
 
   // app endpoint with authorization check does ony work with @sap/xssec > 3.0.0
   await app.get("/api/getData", function (req, res) {
-    console.log("===> Endpoint has been reached. Now checking authorization");
+    LOG.info("===> Endpoint has been reached. Now checking authorization");
     const MY_SCOPE = xsuaaCredentials.xsappname + ".admin"; // scope name copied from xs-security.json
-    console.log("===> MY_SCOPE: " + MY_SCOPE);
+    LOG.info("===> MY_SCOPE: " + MY_SCOPE);
     if (req.authInfo?.checkScope(MY_SCOPE)) {
       res.send(
         "The endpoint was properly called, role available, delivering data"
