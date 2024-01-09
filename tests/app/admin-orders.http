@@ -31,7 +31,14 @@ Content-Type: application/json
   "IsActiveEntity": true,
   "ShippingAddress": {
     "city": "Walldorf"
-  }
+  },
+  "Items": [
+    {
+      "itemNo": 10,
+      "book_ID": 201,
+      "amount": 1
+    }
+  ]
 }
 ###
 @location = {{order.response.headers.Location}}
