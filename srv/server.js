@@ -159,4 +159,21 @@ if (process.env.NODE_ENV !== "production") {
   });
 }
 
+cds.on("served", async (services) => {
+  const db = await cds.connect.to("db");
+  const { ServiceDefinition } = db.entities("dynamic");
+  const serviceDefinitions = await SELECT.from(ServiceDefinition);
+  LOG.debug("serviceDefinitions: ", serviceDefinitions);
+  /*
+  for (const serviceDefinition of serviceDefinitions) {
+    services
+      .from(serviceDefinition.CSN)
+      .to("odata")
+      .at(serviceDefinition.ServicePath)
+      //.with((srv) => serviceDefinition.Implementation)
+      .in(cds.app);
+  }
+  */
+});
+
 module.exports = cds.server; // > delegate to default server.js

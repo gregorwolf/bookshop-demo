@@ -1,0 +1,12 @@
+### 
+GET http://localhost:4004/odata/v4/dynamic/
+Authorization: Basic admin:
+### 
+# @name serviceDefinitions
+GET http://localhost:4004/odata/v4/dynamic/ServiceDefinitions
+Authorization: Basic admin:
+###
+@ID={{serviceDefinitions.response.body.$.value[0].ID}}
+### 
+GET http://localhost:4004/odata/v4/dynamic/ServiceDefinitions({{ID}})/CSN
+Authorization: Basic admin:
