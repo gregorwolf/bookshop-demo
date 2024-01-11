@@ -164,16 +164,16 @@ cds.on("served", async (services) => {
   const { ServiceDefinition } = db.entities("dynamic");
   const serviceDefinitions = await SELECT.from(ServiceDefinition);
   LOG.debug("serviceDefinitions: ", serviceDefinitions);
-  /*
   for (const serviceDefinition of serviceDefinitions) {
-    services
-      .from(serviceDefinition.CSN)
+    const csn = JSON.parse(serviceDefinition.CSN);
+    cds
+      .serve(serviceDefinition.ServiceName)
+      .from(csn)
       .to("odata")
       .at(serviceDefinition.ServicePath)
-      //.with((srv) => serviceDefinition.Implementation)
+      .with(eval(serviceDefinition.Implementation))
       .in(cds.app);
   }
-  */
 });
 
 module.exports = cds.server; // > delegate to default server.js

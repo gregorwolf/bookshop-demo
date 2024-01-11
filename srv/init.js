@@ -8,10 +8,11 @@ module.exports = async (db) => {
   const ServiceDefinitioData = [
     {
       ID: "6a038142-7284-4da0-9046-6bea467b76ef",
-      ServiceName: "HelloWorld",
+      ServiceName: "HelloWorldService",
       CSN: csn,
       ServicePath: "hello-world",
-      Implementation: "{}",
+      Implementation:
+        "module.exports = class HelloWorldService { hello(req) { return `Hello ${req.data.to}!`; } };",
     },
   ];
   const entityToData = new Map([[ServiceDefinition, ServiceDefinitioData]]);
