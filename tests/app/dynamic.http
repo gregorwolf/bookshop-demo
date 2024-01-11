@@ -10,3 +10,11 @@ Authorization: Basic admin:
 ### 
 GET http://localhost:4004/odata/v4/dynamic/ServiceDefinitions({{ID}})/CSN
 Authorization: Basic admin:
+
+
+###
+GET http://localhost:4004/odata/v4/hello-world
+###
+GET http://localhost:4004/odata/v4/hello-world/$metadata
+###
+GET http://localhost:4004/odata/v4/hello-world/hello(to='world')
