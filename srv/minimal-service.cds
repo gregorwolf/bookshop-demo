@@ -6,28 +6,31 @@ using {
 } from '@sap/cds/common';
 
 entity Books : cuid, managed {
-  @title  : '{i18n>title}'
+  @title : '{i18n>title}'
   title            : String(250);
-  @title  : '{i18n>shortDescription}'
+
+  @title : '{i18n>shortDescription}'
   shortDescription : String(500);
-  @title  : 'Description'
-  @(UI : {MultiLineText, })
+
+  @title : 'Description'
+  @(UI: {MultiLineText, })
   description      : LargeString;
   stock            : Integer;
-  @Common : {
-    Text            : author.name,
-    TextArrangement : #TextOnly,
-    ValueList       : {
-      CollectionPath : 'Authors',
-      Parameters     : [
+
+  @Common: {
+    Text           : author.name,
+    TextArrangement: #TextOnly,
+    ValueList      : {
+      CollectionPath: 'Authors',
+      Parameters    : [
         {
-          $Type             : 'Common.ValueListParameterInOut',
-          LocalDataProperty : author_ID,
-          ValueListProperty : 'ID'
+          $Type            : 'Common.ValueListParameterInOut',
+          LocalDataProperty: author_ID,
+          ValueListProperty: 'ID'
         },
         {
-          $Type             : 'Common.ValueListParameterDisplayOnly',
-          ValueListProperty : 'name'
+          $Type            : 'Common.ValueListParameterDisplayOnly',
+          ValueListProperty: 'name'
         }
       ]
     }
@@ -36,7 +39,7 @@ entity Books : cuid, managed {
 }
 
 entity Authors : cuid {
-  @title : '{i18n>name}'
+  @title: '{i18n>name}'
   name  : String(250);
   books : Association to many Books
             on books.author = $self
@@ -45,46 +48,47 @@ entity Authors : cuid {
 service MinimalService {
   entity Books   as projection on minimal.Books;
   entity Authors as projection on minimal.Authors;
+  function hello(to : String) returns String;
 }
 
 annotate MinimalService.Books with @odata.draft.enabled;
 
-annotate MinimalService.Books with @(UI : {
-  SelectionFields     : [title],
-  LineItem            : [
-    {Value : title},
-    {Value : shortDescription},
-    {Value : stock},
+annotate MinimalService.Books with @(UI: {
+  SelectionFields    : [title],
+  LineItem           : [
+    {Value: title},
+    {Value: shortDescription},
+    {Value: stock},
   ],
-  HeaderInfo          : {
-    TypeName       : '{i18n>book}',
-    TypeNamePlural : '{i18n>Books}',
-    Title          : {Value : title},
-    Description    : {Value : shortDescription},
+  HeaderInfo         : {
+    TypeName      : '{i18n>book}',
+    TypeNamePlural: '{i18n>Books}',
+    Title         : {Value: title},
+    Description   : {Value: shortDescription},
   },
-  Facets              : [{
-    $Type  : 'UI.ReferenceFacet',
-    Label  : '{i18n>Details}',
-    Target : '@UI.FieldGroup#Details'
+  Facets             : [{
+    $Type : 'UI.ReferenceFacet',
+    Label : '{i18n>Details}',
+    Target: '@UI.FieldGroup#Details'
   }, ],
-  FieldGroup #Details : {Data : [
-    {Value : description},
-    {Value : author_ID},
+  FieldGroup #Details: {Data: [
+    {Value: description},
+    {Value: author_ID},
   ]},
 });
 
 annotate MinimalService.Authors with @odata.draft.enabled;
 
-annotate MinimalService.Authors with @(UI : {
-  LineItem   : [{Value : name}, ],
-  HeaderInfo : {
-    TypeName       : '{i18n>Author}',
-    TypeNamePlural : '{i18n>Authors}',
-    Title          : {Value : name},
+annotate MinimalService.Authors with @(UI: {
+  LineItem  : [{Value: name}, ],
+  HeaderInfo: {
+    TypeName      : '{i18n>Author}',
+    TypeNamePlural: '{i18n>Authors}',
+    Title         : {Value: name},
   },
-  Facets     : [{
-    $Type  : 'UI.ReferenceFacet',
-    Label  : '{i18n>Books}',
-    Target : 'books/@UI.LineItem'
+  Facets    : [{
+    $Type : 'UI.ReferenceFacet',
+    Label : '{i18n>Books}',
+    Target: 'books/@UI.LineItem'
   }, ],
 });

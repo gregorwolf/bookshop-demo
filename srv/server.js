@@ -166,7 +166,8 @@ cds.on("served", async (services) => {
   LOG.debug("serviceDefinitions: ", serviceDefinitions);
   for (const serviceDefinition of serviceDefinitions) {
     const csn = JSON.parse(serviceDefinition.CSN);
-    cds
+    // services[serviceDefinition.ServiceName] = undefined;
+    await cds
       .serve(serviceDefinition.ServiceName)
       .from(csn)
       .to("odata")
