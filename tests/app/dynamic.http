@@ -18,3 +18,13 @@ GET http://localhost:4004/odata/v4/hello-world
 GET http://localhost:4004/odata/v4/hello-world/$metadata
 ###
 GET http://localhost:4004/odata/v4/hello-world/hello(to='world')
+###
+GET http://localhost:4004/odata/v4/minimal
+###
+GET http://localhost:4004/odata/v4/minimal/$metadata
+###
+GET http://localhost:4004/odata/v4/minimal/Books
+###
+GET http://localhost:4004/odata/v4/minimal/hello(to='world')
+### Results in:
+### Service \"minimal.MinimalService\" has no handler for \"hello\"
