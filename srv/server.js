@@ -166,15 +166,27 @@ cds.on("served", async (services) => {
   LOG.debug("serviceDefinitions: ", serviceDefinitions);
   for (const serviceDefinition of serviceDefinitions) {
     const csn = JSON.parse(serviceDefinition.CSN);
-    // services[serviceDefinition.ServiceName] = undefined;
-    const service = await cds
-      .serve(serviceDefinition.ServiceName)
-      .from(csn)
-      .to("odata")
-      .at(serviceDefinition.ServicePath)
-      .with(eval(serviceDefinition.Implementation))
-      .in(cds.app);
-    LOG.info("created service: ", serviceDefinition.ServiceName);
+    if (services[serviceDefinition.ServiceName] != undefined) {
+      // service already exists
+      services[serviceDefinition.ServiceName] = await cds
+        .serve(serviceDefinition.ServiceName)
+        .from(csn)
+        .to("odata")
+        .at(serviceDefinition.ServicePath)
+        .with(eval(serviceDefinition.Implementation))
+        .in(cds.app);
+      LOG.info("Updated service: ", serviceDefinition.ServiceName);
+    } else {
+      // create service
+      const service = await cds
+        .serve(serviceDefinition.ServiceName)
+        .from(csn)
+        .to("odata")
+        .at(serviceDefinition.ServicePath)
+        .with(eval(serviceDefinition.Implementation))
+        .in(cds.app);
+      LOG.info("Created service: ", serviceDefinition.ServiceName);
+    }
   }
 });
 
