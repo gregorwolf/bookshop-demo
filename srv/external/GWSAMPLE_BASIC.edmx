@@ -811,10 +811,10 @@
         </FunctionImport>
       </EntityContainer>
       <atom:link rel="self"
-        href="https://sapes5.sapdevcenter.com/sap/opu/odata/iwbep/GWSAMPLE_BASIC/$metadata"
+        href="https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwbep/GWSAMPLE_BASIC/$metadata"
         xmlns:atom="http://www.w3.org/2005/Atom" />
       <atom:link rel="latest-version"
-        href="https://sapes5.sapdevcenter.com/sap/opu/odata/iwbep/GWSAMPLE_BASIC/$metadata"
+        href="https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwbep/GWSAMPLE_BASIC/$metadata"
         xmlns:atom="http://www.w3.org/2005/Atom" />
     </Schema>
   </edmx:DataServices>
