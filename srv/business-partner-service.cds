@@ -1,4 +1,4 @@
-using {GWSAMPLE_BASIC as external} from './external/GWSAMPLE_BASIC';
+using {GWSAMPLE_BASIC as external} from './external/GWSAMPLE_BASIC/GWSAMPLE_BASIC';
 
 service BusinessPartnerService @(path: '/GWSAMPLE_BASIC') {
     @cds.persistence.skip: false
@@ -8,4 +8,6 @@ service BusinessPartnerService @(path: '/GWSAMPLE_BASIC') {
     @cds.persistence.skip: false
     @cds.persistence.table
     entity ContactSet : external.ContactSet {}
+
+    function getBusinessPartnerDetails() returns String;
 };

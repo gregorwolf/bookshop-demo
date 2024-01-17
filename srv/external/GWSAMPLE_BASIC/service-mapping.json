@@ -1,0 +1,7 @@
+{
+  "GWSAMPLE_BASIC": {
+    "directoryName": "gwsample-basic-service",
+    "servicePath": "/sap/opu/odata/iwbep/GWSAMPLE_BASIC",
+    "npmPackageName": "gwsample-basic-service"
+  }
+}

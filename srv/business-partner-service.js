@@ -3,8 +3,16 @@ const LOG = cds.log("business-partner");
 const retry = require("async-retry");
 
 module.exports = async function (srv) {
-  const destinations = ["ES5", "ERP"];
+  const destinations = [
+    "ES5",
+    //, "ERP"
+  ];
 
+  srv.on("getBusinessPartnerDetails", async (req) => {
+    const external = await cds.connect.to("GWSAMPLE_BASIC");
+    const result = await external.run(req.query);
+    return result;
+  });
   srv.on("READ", "BusinessPartnerSet", async (req) => {
     try {
       const result = [];

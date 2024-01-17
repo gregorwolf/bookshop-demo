@@ -4,7 +4,7 @@ Authorization: Basic admin:
 
 ### 
 GET http://localhost:4004/GWSAMPLE_BASIC/BusinessPartnerSet
-  ?$top=1
+  ?$top=5
   &$select=BusinessPartnerID,CompanyName,WebAddress,EmailAddress,PhoneNumber,FaxNumber,LegalForm,CurrencyCode,BusinessPartnerRole,CreatedAt,ChangedAt
 Authorization: Basic admin:
 Accept: application/json
@@ -18,6 +18,9 @@ GET {{$dotenv saperp}}/sap/opu/odata/iwbep/GWSAMPLE_BASIC/BusinessPartnerSet
   ?$top=1
 Authorization: Basic {{$dotenv saperpusername}}:{{$dotenv saperppassword}}
 Accept: application/json
+###
+GET https://sapes5.sapdevcenter.com/sap/opu/odata/iwbep/GWSAMPLE_BASIC/$metadata
+Authorization: Basic {{$dotenv es5username}}:{{$dotenv es5password}}
 ###
 GET https://sapes5.sapdevcenter.com/sap/opu/odata/iwbep/GWSAMPLE_BASIC/BusinessPartnerSet
   ?$top=1

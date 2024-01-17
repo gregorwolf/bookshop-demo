@@ -44,6 +44,7 @@
   "devDependencies": {
     "@cap-js/sqlite": "^1",
     "@openui5/ts-types": "^1.108.0",
+    "@sap-cloud-sdk/generator": "^1.54.2",
     "@sap/cds-dk": "^7",
     "@sap/datasphere-cli": "^2023.14.0",
     "@sap/graph-toolkit": "^3",
@@ -104,6 +105,7 @@
     "get:hdi-service-key": "xs service-key bookshop-demo-db-service dev",
     "create:cf-hdi-service-key": "cf create-service-key bookshop-demo-db-service dev",
     "get:cf-hdi-service-key": "cf service-key bookshop-demo-db-service dev",
+    "generate-odata-client:GWSAMPLE_BASIC": "generate-odata-client --inputDir srv/external/GWSAMPLE_BASIC --outputDir srv/cloud-sdk-clients --forceOverwrite",
     "build": "run-s build:clean build:copycsntoproxy",
     "build:clean": "cds build/all --clean",
     "build:xs-security": "cds compile srv/ --to xsuaa > xs-security.json",
