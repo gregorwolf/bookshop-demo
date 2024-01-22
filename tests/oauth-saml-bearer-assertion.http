@@ -33,7 +33,7 @@ grant_type=password
 &client_id={{$dotenv api_clientid}}
 &response_type=token
 ### Fill Variables from Response
-@access_token = {{requestAccessToken.response.body.$.access_token}}
+@user_access_token = {{requestAccessToken.response.body.$.access_token}}
 
 ### Get Access Token for Destination Service
 # @name requestDestinationAccessToken
@@ -52,17 +52,17 @@ grant_type=client_credentials
 ### Read details of one destination
 # @name requestProviderDestination
 GET {{$dotenv dest_uri}}/destination-configuration/v1/destinations/graph-saml
-X-user-token: {{access_token}}
+X-user-token: {{user_access_token}}
 Authorization: Bearer {{destination_access_token}}
 ### Fill Variables from Response
-@provider_access_token = {{requestProviderDestination.response.body.$.authTokens[0].value}}
+@access_token = {{requestProviderDestination.response.body.$.authTokens[0].value}}
 
 ### Call Graph API of Provider Subaccount
 GET {{$dotenv graph_uri}}
-Authorization: Bearer {{provider_access_token}}
+Authorization: Bearer {{access_token}}
 ###
 GET {{$dotenv graph_uri}}/catalog
-Authorization: Bearer {{provider_access_token}}
+Authorization: Bearer {{access_token}}
 ###
 GET {{$dotenv graph_uri}}/catalog/{{$dotenv graph_name}}
-Authorization: Bearer {{provider_access_token}}
+Authorization: Bearer {{access_token}}
