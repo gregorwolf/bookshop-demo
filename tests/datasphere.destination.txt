@@ -1,0 +1,17 @@
+#clientKey=<< Existing password/certificate removed on export >>
+#tokenServicePassword=<< Existing password/certificate removed on export >>
+#
+#Mon Jan 22 17:00:15 UTC 2024
+Type=HTTP
+HTML5.Timeout=30000
+HTML5.DynamicDestination=true
+authnContextClassRef=urn\:oasis\:names\:tc\:SAML\:2.0\:ac\:classes\:PreviousSession
+audience=https\://csw-partner.authentication.eu10.hana.ondemand.com
+Authentication=OAuth2SAMLBearerAssertion
+Name=datasphere
+WebIDEEnabled=true
+tokenServiceURL=https\://csw-partner.authentication.eu10.hana.ondemand.com/oauth/token/alias/csw-partner.aws-live-eu10
+ProxyType=Internet
+URL=https\://csw-partner.eu10.hcs.cloud.sap
+tokenServiceURLType=Dedicated
+tokenServiceUser=sb-83e8e471-3adc-4c65-961b-e589dff8a22c\!b371925|client\!b3650
