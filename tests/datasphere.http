@@ -11,7 +11,7 @@ grant_type=client_credentials
 ### Fill Variables from Response
 #@access_token = {{requestAccessToken.response.body.$.access_token}}
 
-### Get Access Token (HANA) or Cloud Foundry using Password Grant
+### Get Access Token for Cloud Foundry using Password Grant
 # @name requestAccessTokenHANA
 POST {{$dotenv tokenendpoint}}/oauth/token
 Accept: application/json;charset=utf8
@@ -49,7 +49,7 @@ Authorization: Bearer {{destination_access_token}}
 @access_token = {{requestProviderDestination.response.body.$.authTokens[0].value}}
 ###
 # @name requestModels
-GET {{$dotenv sac_endpoint}}/api/v1/dataimport/models
+GET {{$dotenv datasphere_endpoint}}/api/v1/dataimport/models
 Authorization: Bearer {{access_token}}
 ###
 GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/
