@@ -56,6 +56,9 @@ Authorization: Bearer {{access_token}}
 # https://api.sap.com/api/DatasphereCatalog/overview
 GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/
 Authorization: Bearer {{access_token}}
+# Setting this header:
+# x-sap-sac-custom-auth: true
+# results in Internal Server Error
 ###
 GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/$metadata
 Authorization: Bearer {{access_token}}
