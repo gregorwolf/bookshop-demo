@@ -48,10 +48,12 @@ Authorization: Bearer {{destination_access_token}}
 ### Fill Variables from Response
 @access_token = {{requestProviderDestination.response.body.$.authTokens[0].value}}
 ###
+# https://api.sap.com/api/DataImport_API/overview
 # @name requestModels
 GET {{$dotenv datasphere_endpoint}}/api/v1/dataimport/models
 Authorization: Bearer {{access_token}}
 ###
+# https://api.sap.com/api/DatasphereCatalog/overview
 GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/
 Authorization: Bearer {{access_token}}
 ###
