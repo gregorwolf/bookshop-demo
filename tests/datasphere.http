@@ -47,6 +47,27 @@ X-user-token: {{user_access_token}}
 Authorization: Bearer {{destination_access_token}}
 ### Fill Variables from Response
 @access_token = {{requestProviderDestination.response.body.$.authTokens[0].value}}
+### Use Beeceptor to get the SAML Assertion
+GET {{$dotenv dest_uri}}/destination-configuration/v1/destinations/datasphere-beeceptor
+X-user-token: {{user_access_token}}
+Authorization: Bearer {{destination_access_token}}
+
+### Get Access Token from Datasphere
+# @name requestAccessTokenDatasphere
+POST {{$dotenv datasphere_token_endpoint}}/alias/csw-partner.aws-live-eu10
+Authorization: Basic {{$dotenv datasphere_saml_clientid}}:{{$dotenv datasphere_saml_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=urn:ietf:params:oauth:grant-type:saml2-bearer
+&assertion={{$dotenv datasphere_saml_assertion}}
+&client_id={{$dotenv datasphere_saml_clientid}}
+###
+# Results in:
+# "Error decoding incoming SAML message"
+# as the Recipient="https://cswtest.free.beeceptor.com/oauth/token/alias/csw-partner.aws-live-eu10"
+# instead of the correct Datasphere Authentication URL
+### 
+#@access_token = {{requestAccessTokenDatasphere.response.body.$.access_token}}
 ###
 # https://api.sap.com/api/DataImport_API/overview
 # @name requestModels

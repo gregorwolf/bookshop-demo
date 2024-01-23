@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<saml2:Assertion xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion"
+  ID="id836a6bc6-06c6-4b50-86a6-8b0a721a6af7" IssueInstant="2024-01-23T11:43:04.843Z" Version="2.0"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <saml2:Issuer>cfapps.eu10.hana.ondemand.com/2d8bd843-c5fa-480d-9a13-fe7fb4ca0f05</saml2:Issuer>
+  <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+    <ds:SignedInfo>
+      <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+      <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+      <ds:Reference URI="#id836a6bc6-06c6-4b50-86a6-8b0a721a6af7">
+        <ds:Transforms>
+          <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+          <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#">
+            <ec:InclusiveNamespaces xmlns:ec="http://www.w3.org/2001/10/xml-exc-c14n#"
+              PrefixList="xsd" />
+          </ds:Transform>
+        </ds:Transforms>
+        <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+        <ds:DigestValue></ds:DigestValue>
+      </ds:Reference>
+    </ds:SignedInfo>
+    <ds:SignatureValue>
+
+    </ds:SignatureValue>
+  </ds:Signature>
+  <saml2:Subject>
+    <saml2:NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified">
+      gregor@computerservice-wolf.com</saml2:NameID>
+    <saml2:SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:bearer">
+      <saml2:SubjectConfirmationData NotOnOrAfter="2024-01-23T12:43:04.843Z"
+        Recipient="https://cswtest.free.beeceptor.com/oauth/token/alias/csw-partner.aws-live-eu10" />
+    </saml2:SubjectConfirmation>
+  </saml2:Subject>
+  <saml2:Conditions NotBefore="2024-01-23T10:43:04.843Z" NotOnOrAfter="2024-01-23T12:43:04.843Z">
+    <saml2:AudienceRestriction>
+      <saml2:Audience>https://csw-partner.authentication.eu10.hana.ondemand.com</saml2:Audience>
+    </saml2:AudienceRestriction>
+  </saml2:Conditions>
+  <saml2:AuthnStatement AuthnInstant="2024-01-23T11:43:04.843Z">
+    <saml2:AuthnContext>
+      <saml2:AuthnContextClassRef>urn:oasis:names:tc:SAML:2.0:ac:classes:PreviousSession</saml2:AuthnContextClassRef>
+    </saml2:AuthnContext>
+  </saml2:AuthnStatement>
+  <saml2:AttributeStatement>
+    <saml2:Attribute Name="client_id">
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">sb-83e8e471-3adc-4c65-961b-e589dff8a22c!b371925|client!b3650</saml2:AttributeValue>
+    </saml2:Attribute>
+    <saml2:Attribute Name="xs.rolecollections">
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">ProcessParticipant</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">ProcessAutomationDeveloper</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">Business_Application_Studio_Developer</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">SAP Graph key user</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">ailaunchpad_aicore_admin_editor</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">Document_Information_Extraction_UI_Admin_User</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">ProcessAutomationParticipant</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">FeatureFlagAdmin</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">ProcessAutomationAdmin</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">Business_Application_Studio_Extension_Deployer</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">LandscapePortalUserRoleCollection</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">Business_Application_Studio_Administrator</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">Subaccount Administrator</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">MasterDataIntegrationAdmin</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">LandscapePortalAdminRoleCollection</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">MDG_Admin</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">AutomationPilot_Admin</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">CitizenDeveloper</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">ITAdmin</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">ailaunchpad_mloperations_editor</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">ailaunchpad_connections_editor</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">CICD Service Administrator</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">ailaunchpad_functions_explorer_editor</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">Launchpad_Admin</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">Launchpad_Advanced_Theming</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">AutomationPilot_Developer</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">ailaunchpad_allow_all_resourcegroups</saml2:AttributeValue>
+      <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:type="xsd:string">BuildAppsAdministrator</saml2:AttributeValue>
+    </saml2:Attribute>
+  </saml2:AttributeStatement>
+</saml2:Assertion>
