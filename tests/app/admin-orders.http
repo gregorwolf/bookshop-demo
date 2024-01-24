@@ -38,7 +38,30 @@ Content-Type: application/json
 
 {
   "OrderNo": "4711",
-  "IsActiveEntity": true,
+  "salesOrganization": "1000",
+  "orderstatus_code": "N",
+  "deliverystatus_code": "N",
+  "ShippingAddress": {
+    "city": "Walldorf",
+    "street": "Hasso-Plattner-Ring 1"
+  },
+  "Items": [
+    {
+      "itemNo": 10,
+      "book_ID": 201,
+      "amount": 1
+    }
+  ]
+}
+### Create Order with draft
+# @name order
+POST http://localhost:4004/odata/v4/admin/Orders
+Authorization: Basic admin:
+Content-Type: application/json
+
+{
+  "OrderNo": "4711",
+  "IsActiveEntity": false,
   "ShippingAddress": {
     "city": "Walldorf"
   },
