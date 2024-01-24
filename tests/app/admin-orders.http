@@ -13,6 +13,16 @@ Authorization: Basic admin:
 GET http://localhost:4004/odata/v4/admin/Orders(ID={{orderID}},IsActiveEntity=true)
 Authorization: Basic admin:
 ###
+# Test for cds.fiori.bypass_draft = true
+# https://cap.cloud.sap/docs/releases/dec23#sapui5-mass-edit
+PATCH http://localhost:4004/odata/v4/admin/Orders(ID={{orderID}},IsActiveEntity=true)
+Authorization: Basic admin:
+Content-Type: application/json
+
+{
+  "employeeOrder": true
+}
+###
 GET http://localhost:4004/odata/v4/admin/OrderItems
   ?$filter=parent_ID eq {{orderID}}
 Authorization: Basic admin:
