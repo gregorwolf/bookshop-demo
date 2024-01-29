@@ -11,14 +11,27 @@ client_id={{$dotenv sm_clientid}}
 ### Fill Variables from Response
 @access_token = {{requestAccessToken.response.body.$.access_token}}
 
+### Get Platforms - needs different token
+GET {{$dotenv sm_url}}/v1/platforms
+Authorization: Bearer {{access_token}}
 ### Get Service Instances
 # @name serviceInstances
 GET {{$dotenv sm_url}}/v1/service_instances
 Authorization: Bearer {{access_token}}
-
 ###
 @instanceId = {{serviceInstances.response.body.$.items[0].id}}
-
+### Get specific Service Instance
+GET {{$dotenv sm_url}}/v1/service_instances/{{instanceId}}
+Authorization: Bearer {{access_token}}
 ###
 DELETE {{$dotenv sm_url}}/v1/service_instances/{{instanceId}}
+Authorization: Bearer {{access_token}}
+
+### Get all service bindings
+GET {{$dotenv sm_url}}/v1/service_bindings
+Authorization: Bearer {{access_token}}
+
+### Get specific service binding
+GET {{$dotenv sm_url}}/v1/service_bindings
+  ?labelQuery=tenant_id eq 't1'
 Authorization: Bearer {{access_token}}
