@@ -20,6 +20,10 @@ GET {{$dotenv sm_url}}/v1/service_instances
 Authorization: Bearer {{access_token}}
 ###
 @instanceId = {{serviceInstances.response.body.$.items[0].id}}
+###
+GET {{$dotenv sm_url}}/v1/service_instances
+  ?labelQuery=tenant_id eq 't1'
+Authorization: Bearer {{access_token}}
 ### Get specific Service Instance
 GET {{$dotenv sm_url}}/v1/service_instances/{{instanceId}}
 Authorization: Bearer {{access_token}}
