@@ -240,6 +240,18 @@ annotate my.Books with @(UI: {
         {Value: ID},
         {Value: stock, },
         {
+            $Type            : 'UI.DataFieldWithIntentBasedNavigation',
+            ![@UI.Importance]: #High,
+            Value            : relatedBook_ID,
+            SemanticObject   : 'V4Books',
+            Action           : 'displayUI5latest',
+            Mapping          : [{
+                $Type                 : 'Common.SemanticObjectMappingType',
+                LocalProperty         : relatedBook_ID,
+                SemanticObjectProperty: 'ID',
+            }, ]
+        },
+        {
             //Search-Term: #MicroChart
             $Type            : 'UI.DataFieldForAnnotation',
             Label            : '{i18n>bulletChartStockVsTarget}',
@@ -284,14 +296,10 @@ annotate my.Books with @(UI: {
                 SemanticObjectProperty: 'ID',
             }, ]
         },
+        {Value: price, },
         {
-            Value            : price,
-            ![@UI.Importance]: #High
-        },
-        {
-            Value            : currency.symbol,
-            Label            : '',
-            ![@UI.Importance]: #High
+            Value: currency.symbol,
+            Label: '',
         },
         {
             $Type               : 'UI.DataFieldWithUrl',

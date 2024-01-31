@@ -61,5 +61,16 @@ annotate CatalogService.Books with @(UI: {
       Value: currency.symbol,
       Label: '{i18n>Currency}'
     },
+    {
+      $Type         : 'UI.DataFieldWithIntentBasedNavigation',
+      Value         : relatedBook_ID,
+      SemanticObject: 'V4Books',
+      Action        : 'displayUI5latest',
+      Mapping       : [{
+        $Type                 : 'Common.SemanticObjectMappingType',
+        LocalProperty         : relatedBook_ID,
+        SemanticObjectProperty: 'ID',
+      }, ]
+    },
   ]}
 }) {};

@@ -54,6 +54,9 @@ entity Books : managed {
       stock                          : Integer;
       stockTarget                    : Integer;
 
+      @title                        : 'Related Book'
+      relatedBook                    : Association to one Books;
+
       @sap.unit                     : 'currency_code'
       @Semantics.amount.currencyCode: 'currency_code'
       @Measures.ISOCurrency         : currency_code

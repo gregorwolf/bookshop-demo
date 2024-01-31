@@ -649,6 +649,9 @@
               "signature": {
                 "parameters": {
                   "ID": {},
+                  "Books.relatedBook_ID": {
+                    "renameTo": "ID"
+                  },
                   "Orders.Items.book.ID": {
                     "renameTo": "ID"
                   }
