@@ -29,11 +29,16 @@ GET http://localhost:4004/odata/v4/minimal/Books
 # Executed SQL:
 # [sql] - SELECT json_object('stockTotal',stockTotal,'ID',ID) as _json_ FROM (SELECT sum(Books.stock) as stockTotal,Books.ID as ID FROM minimal_MinimalService_Books as Books ORDER BY ID ASC LIMIT 1000) []
 # [sql] - SELECT json_object('ID',ID) as _json_ FROM (SELECT drafts.ID as ID FROM minimal_MinimalService_Books_drafts as drafts WHERE (drafts.ID) in ((?)) ORDER BY ID ASC LIMIT 1000) [ '8539a339-f090-4a09-9b74-8f8602fe5661' ]
-# Returns:
+# With HANA (cds watch --profile hybrid)
+# it returns:
 # invalid column name: The column 'ALIAS_1.ID' is invalid in the select list because the GROUP BY clause or an aggregation function does not contain it: line 1 col 39 (at pos 38)
 # when running with HANA (cds watch --profile hybrid)
 # Executed SQL:
 # SELECT sum ( stock ) AS "stockTotal", ID AS "ID" FROM minimal_MinimalService_Books ALIAS_1 ORDER BY ID ASC LIMIT 1000 []
+# After upgrade to @sap/cds 7.6.1 the executed SQL is:
+# [hana] - SELECT sum ( stock ) AS "stockTotal" FROM minimal_MinimalService_Books ALIAS_1 LIMIT 1000 []
+# [hana] - SELECT ID AS "ID" FROM minimal_MinimalService_Books_drafts ALIAS_1 WHERE ( ID ) IN ( ( ? ) ) ORDER BY ID ASC LIMIT 1000 [ undefine
+# and it works
 GET http://localhost:4004/odata/v4/minimal/Books
   ?$apply=aggregate(stock with sum as stockTotal)
 ###
