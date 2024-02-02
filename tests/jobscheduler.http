@@ -2,17 +2,27 @@
 # @name requestAccessToken
 POST {{$dotenv jobschedulerurl}}/oauth/token
 Accept: application/json
+Authorization: Basic {{$dotenv jobschedulerclientid}}:{{$dotenv jobschedulerclientsecret}}
 Content-Type: application/x-www-form-urlencoded
 
-client_id={{$dotenv jobschedulerclientid}}
-&client_secret={{$dotenv jobschedulerclientsecret}}
-&grant_type=client_credentials
-&response_type=token
+grant_type=client_credentials
 
 ### Fill Variables from Response
-@access_token = {{requestAccessToken.response.body.$.access_token}}
+@access_token={{requestAccessToken.response.body.$.access_token}}
 ###
-GET {{$dotenv schedulerUrl}}
+### Use Job Scheduler REST API
+###
+GET {{$dotenv schedulerUrl}}/scheduler/
+Authorization: Bearer {{access_token}}
+###
+# @name getJobs
+GET {{$dotenv schedulerUrl}}/scheduler/jobs
+Authorization: bearer {{access_token}}
+###
+@jobIdRest = {{getJobs.response.body.results[0].jobId}}
+
+### Use CAP Wrapper 
+
 ### Read Jobs
 # @name readJobs
 GET http://localhost:4004/odata/v4/admin/readJobs()
@@ -22,7 +32,7 @@ Authorization: Basic admin:
 @jobId = {{readJobs.response.body.value[0].jobId}}
 
 ### Read Job
-# @name readJobs
+# @name readJob
 GET http://localhost:4004/odata/v4/admin/readJobDetails(jobId={{jobId}})
 Authorization: Basic admin:
 
