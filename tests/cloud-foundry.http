@@ -87,11 +87,25 @@ Authorization: Bearer {{accToken}}
 GET {{serviceCredentialBinding}}
 Authorization: Bearer {{accToken}}
 ###
+# @name getAppByName
 GET {{$dotenv cf_url}}/v3/apps
   ?organization_guids={{orgId}}
   &space_guids={{spaceId}}
-  &names=bookshop-demo-ui
+  &names={{$dotenv cf_app_name}}
 Authorization: Bearer {{accToken}}
+###
+@appId = {{getAppByName.response.body.resources.0.guid}}
+### Create Task for App
+# @name createTask
+POST {{$dotenv cf_url}}/v3/apps/{{appId}}/tasks
+Authorization: Bearer {{accToken}}
+Content-Type: application/json
+  
+{
+  "command": "{{$dotenv cf_task_command}}",
+  "name": "{{$dotenv cf_task_name}}",
+  "memory_in_mb": 256
+}
 ### Read Service Key by name
 # @name getServiceKeyByName
 GET {{$dotenv cf_url}}/v3/service_credential_bindings
