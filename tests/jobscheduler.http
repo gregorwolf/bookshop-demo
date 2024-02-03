@@ -20,7 +20,23 @@ GET {{$dotenv schedulerUrl}}/scheduler/jobs
 Authorization: bearer {{access_token}}
 ###
 @jobIdRest = {{getJobs.response.body.results[0].jobId}}
+###
+# @name getJobSchedule
+GET {{$dotenv schedulerUrl}}/scheduler/jobs/{{jobIdRest}}/schedules
+Authorization: bearer {{access_token}}
+###
+@scheduleIdRest = {{getJobSchedule.response.body.results[0].scheduleId}}
+###
+GET {{$dotenv schedulerUrl}}/scheduler/jobs/{{jobIdRest}}/schedules/{{scheduleIdRest}}
+Authorization: bearer {{access_token}}
+### Schedule Task
+PUT  {{$dotenv schedulerUrl}}/scheduler/jobs/{{jobIdRest}}/schedules/{{scheduleIdRest}}
+Authorization: bearer {{access_token}}
+Content-Type: application/json
 
+{
+  "active": true
+}
 ### Use CAP Wrapper 
 
 ### Read Jobs
@@ -54,6 +70,20 @@ Authorization: Basic admin:
 # @name readJobRunLogs
 GET http://localhost:4004/odata/v4/admin/readJobRunLogs(jobId={{jobId}},scheduleId='{{scheduleId}}',page_size=200,offset=0)
 Authorization: Basic admin:
+
+### Update Job Schedule
+# @name updateJobSchedule
+POST http://localhost:4004/odata/v4/admin/updateJobSchedule
+Authorization: Basic admin:
+Content-Type: application/json
+
+{
+  "jobId": {{jobId}},
+  "scheduleId": "{{scheduleId}}",
+  "schedule": {
+    "active": true
+  }
+}
 
 ### Create Job
 # @name createJob

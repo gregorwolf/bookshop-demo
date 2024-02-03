@@ -280,6 +280,28 @@ module.exports = async function (srv) {
     });
   });
 
+  srv.on(["updateJobSchedule"], (req) => {
+    return new Promise((resolve, reject) => {
+      const scheduler = getJobscheduler(req);
+      if (scheduler) {
+        var query = {
+          //by Id
+          jobId: req.data.jobId,
+          scheduleId: req.data.scheduleId,
+          schedule: req.data.schedule,
+        };
+        scheduler.updateJobSchedule(query, function (err, result) {
+          if (err) {
+            reject(req.error("Error updating job schedule"));
+          } else {
+            // job was created successfully
+            resolve(result.results);
+          }
+        });
+      }
+    });
+  });
+
   srv.on(["readJobActionLogs"], (req) => {
     return new Promise((resolve, reject) => {
       const scheduler = getJobscheduler(req);

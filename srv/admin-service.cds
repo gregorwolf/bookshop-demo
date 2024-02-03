@@ -12,9 +12,9 @@ service AdminService @(
 ) {
   @odata.draft.enabled
   entity Approval                as projection on db.Approval actions {
-    action approve();
-    action rejection();
-  };
+                                      action approve();
+                                      action rejection();
+                                    };
 
   @cds.redirection.target
   entity Books @(
@@ -51,10 +51,11 @@ service AdminService @(
   @odata.draft.enabled
   entity DocumentsWithDraft      as projection on db.Documents;
 
-  entity BooksAuthorsAssignment  as projection on db.BooksAuthorsAssignment {
-    *,
-    ASSOC_Book : redirected to Books
-  };
+  entity BooksAuthorsAssignment  as
+    projection on db.BooksAuthorsAssignment {
+      *,
+      ASSOC_Book : redirected to Books
+    };
 
   entity Authors @(restrict: [{
     grant: '*',
@@ -62,9 +63,10 @@ service AdminService @(
       'admin',
       'booksadmin'
     ]
-  }, ])                          as projection on db.Authors {
-    *
-  };
+  }, ])                          as
+    projection on db.Authors {
+      *
+    };
 
   @(restrict: [
     {
@@ -141,17 +143,19 @@ service AdminService @(
   annotate A_SalesOrganizationText with @cds.odata.valuelist;
 
   //------- auto-exposed --------
-  entity OrderItems              as projection on db.OrderItems {
-    @Core.Computed
-    amount * book.price as ComputedTotal : Decimal(15, 2),
-    *,
-    book                                 : redirected to Books
-  };
+  entity OrderItems              as
+    projection on db.OrderItems {
+      @Core.Computed
+      amount * book.price as ComputedTotal : Decimal(15, 2),
+      *,
+      book                                 : redirected to Books
+    };
 
-  entity OrderShippingAddress    as projection on db.OrderShippingAddress {
-    *,
-    street || ', ' || city as address : String
-  };
+  entity OrderShippingAddress    as
+    projection on db.OrderShippingAddress {
+      *,
+      street || ', ' || city as address : String
+    };
 
   //> these shall be removed but this would break the Fiori UI
   entity Languages               as projection on sap.common.Languages;
@@ -166,13 +170,13 @@ service AdminService @(
     grant: ['*'],
     to   : 'roleadmin'
   }, ])                          as projection on db.Roles actions {
-    @cds.odata.bindingparameter.collection
-    action createDraftRole(rolename : String not null, description : String not null) returns Roles;
-    @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Roles'])
-    action countUp()                                                                  returns Roles;
-    @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Roles'])
-    action countDown()                                                                returns Roles;
-  };
+                                      @cds.odata.bindingparameter.collection
+                                      action createDraftRole(rolename : String not null, description : String not null) returns Roles;
+                                      @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Roles'])
+                                      action countUp()                                                                  returns Roles;
+                                      @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Roles'])
+                                      action countDown()                                                                returns Roles;
+                                    };
 
   //------- auto-exposed --------
   entity Role_BusinessObject     as projection on db.Role_BusinessObject;
@@ -220,10 +224,12 @@ service AdminService @(
   };
 
   @readonly
-  entity SEPMRA_I_Product_E      as projection on external.SEPMRA_I_Product_E excluding {
-    CreationDateTime,
-    LastChangedDateTime
-  };
+  entity SEPMRA_I_Product_E      as
+    projection on external.SEPMRA_I_Product_E
+    excluding {
+      CreationDateTime,
+      LastChangedDateTime
+    };
 
   annotate SEPMRA_I_Product_E with @cds.odata.valuelist;
 
@@ -240,6 +246,7 @@ service AdminService @(
   function readJobs()                                                                                                                     returns array of db.Jobs;
   function readJobDetails(jobId : Integer)                                                                                                returns db.Jobs;
   function readJobSchedules(jobId : Integer)                                                                                              returns array of db.Schedules;
+  action   updateJobSchedule(jobId : Integer, scheduleId : String, schedule : db.Schedules)                                               returns array of db.Schedules;
   function readJobActionLogs(jobId : Integer)                                                                                             returns String; // array of db.ActionLogs;
   function readJobRunLogs(jobId : Integer, scheduleId : String, page_size : Integer, offset : Integer)                                    returns array of db.RunLogs;
   action   createJob(url : String, cron : String)                                                                                         returns Integer;
