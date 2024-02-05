@@ -27,7 +27,10 @@ GET {{$dotenv dest_uri}}/destination-configuration/v1/subaccountDestinations/{{$
 Authorization: Bearer {{destination_access_token}}
 ### Fill Variables from Response
 @backend_url={{subaccountDestination.response.body.$.URL}}
-
+### Read list of destinations
+# @name instanceDestinations
+GET {{$dotenv dest_uri}}/destination-configuration/v1/instanceDestinations
+Authorization: Bearer {{destination_access_token}}
 ### Read Destination via CAP 
 GET http://localhost:4004/odata/v4/admin/Destination
 Authorization: Basic admin:
