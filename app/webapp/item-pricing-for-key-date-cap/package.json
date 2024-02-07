@@ -13,8 +13,7 @@
   "devDependencies": {
     "@ui5/cli": "^2.14.1",
     "@sap/ux-ui5-tooling": "1",
-    "@sap/ux-specification": "UI5-1.102",
-    "@sap/ux-ui5-fe-mockserver-middleware": "1"
+    "@sap/ux-specification": "UI5-1.102"
   },
   "scripts": {
     "start": "fiori run --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#itempricingforkeydatecap-tile\"",
@@ -29,8 +28,7 @@
   },
   "ui5": {
     "dependencies": [
-      "@sap/ux-ui5-tooling",
-      "@sap/ux-ui5-fe-mockserver-middleware"
+      "@sap/ux-ui5-tooling"
     ]
   },
   "sapux": true,

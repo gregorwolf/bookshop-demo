@@ -17,8 +17,7 @@
     "@sap/eslint-plugin-ui5-jsdocs": "2.0.5",
     "@sapui5/ts-types": "1.92.2",
     "eslint-plugin-fiori-custom": "2.2.1",
-    "@babel/eslint-parser": "7.14.7",
-    "@sap/ux-ui5-fe-mockserver-middleware": "1"
+    "@babel/eslint-parser": "7.14.7"
   },
   "scripts": {
     "start": "fiori run --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#v2booksfreestyleapp-display\"",
@@ -35,8 +34,7 @@
   },
   "ui5": {
     "dependencies": [
-      "@sap/ux-ui5-tooling",
-      "@sap/ux-ui5-fe-mockserver-middleware"
+      "@sap/ux-ui5-tooling"
     ]
   },
   "sapuxLayer": "CUSTOMER_BASE"
