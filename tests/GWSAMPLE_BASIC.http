@@ -1,0 +1,40 @@
+###
+GET http://es5.dest/sap/opu/odata/iwbep/GWSAMPLE_BASIC/?$format=json
+###
+GET http://es5.dest/sap/opu/odata/iwbep/GWSAMPLE_BASIC/$metadata
+###
+# @name getSalesOrders
+GET http://es5.dest/sap/opu/odata/iwbep/GWSAMPLE_BASIC/SalesOrderSet
+    ?$top=10
+    &$filter=LifecycleStatus eq 'N'
+    &$inlinecount=allpages
+Accept: application/json
+###
+@salesOrder={{getSalesOrders.response.body.d.results[0].SalesOrderID}}
+### Get CSRF Token
+# @name getCSRF
+HEAD http://es5.dest/sap/opu/odata/iwbep/GWSAMPLE_BASIC/
+Accept: application/json
+X-CSRF-Token: Fetch
+### Read Token to Variable
+@CSRF={{getCSRF.response.headers.x-csrf-token}}
+###
+POST http://es5.dest/sap/opu/odata/iwbep/GWSAMPLE_BASIC/SalesOrder_GoodsIssueCreated
+    ?SalesOrderID='{{salesOrder}}'
+X-CSRF-Token: {{CSRF}}
+Accept: application/json
+###
+POST http://es5.dest/sap/opu/odata/iwbep/GWSAMPLE_BASIC/SalesOrder_InvoiceCreated
+    ?SalesOrderID='{{salesOrder}}'
+X-CSRF-Token: {{CSRF}}
+Accept: application/json
+###
+POST http://es5.dest/sap/opu/odata/iwbep/GWSAMPLE_BASIC/SalesOrder_Confirm
+    ?SalesOrderID='{{salesOrder}}'
+X-CSRF-Token: {{CSRF}}
+Accept: application/json
+###
+POST http://es5.dest/sap/opu/odata/iwbep/GWSAMPLE_BASIC/SalesOrder_Cancel
+    ?SalesOrderID='{{salesOrder}}'
+X-CSRF-Token: {{CSRF}}
+Accept: application/json
