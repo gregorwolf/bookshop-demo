@@ -8,8 +8,8 @@ build-parameters:
   before-all:
     - builder: custom
       commands:
-        - npm install
-        - npx -p @sap/cds-dk cds build --profile production
+        - npm install --production
+        - npx cds build --production
         # Delete node_modules to avoid maximum file length exceeded
         - rm -rf app/node_modules
         # Standalone OData V2 Proxy is disabled
