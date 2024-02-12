@@ -112,7 +112,7 @@
     "build": "run-s build:clean build:copycsntoproxy",
     "build:clean": "cds build/all --clean",
     "build:xs-security": "cds compile srv/ --to xsuaa > xs-security.json",
-    "build:cf": "cp mta-cf.yaml mta.yaml && mbt build -p=cf -e cf-service-broker-private.mtaext && rm mta.yaml",
+    "build:cf": "cp mta-cf.yaml mta.yaml && mbt build -p=cf -e cf-service-broker-private.mtaext && rm mta.yaml && npm install",
     "build:xsa": "cp mta-xsa.yaml mta.yaml && mbt build -p=xsa && rm mta.yaml",
     "build:standalone": "cp mta-standAlone.yaml mta.yaml && mbt build -p=xsa && rm mta.yaml",
     "build:copycsntoproxy": "copyfiles -f gen/srv/srv/csn.json standalone-v2-proxy/gen/",
