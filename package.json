@@ -16,6 +16,8 @@
     "@sap/fesr-to-otel-js": "https://73555000100200018064.npmsrv.cdn.repositories.cloud.sap/@sap/fesr-to-otel-js/-/fesr-to-otel-js-1.5.3.tgz"
   },
   "dependencies": {
+    "@sap/xotel-agent-ext-js": "https://73555000100200018064.npmsrv.cdn.repositories.cloud.sap/@sap/xotel-agent-ext-js/-/xotel-agent-ext-js-1.5.8.tgz",
+    "@sap/fesr-to-otel-js": "https://73555000100200018064.npmsrv.cdn.repositories.cloud.sap/@sap/fesr-to-otel-js/-/fesr-to-otel-js-1.5.3.tgz",
     "@cap-js-community/odata-v2-adapter": "^1",
     "@cap-js/notifications": "^0.1.0",
     "@sap-cloud-sdk/core": "^1",
@@ -110,7 +112,7 @@
     "build": "run-s build:clean build:copycsntoproxy",
     "build:clean": "cds build/all --clean",
     "build:xs-security": "cds compile srv/ --to xsuaa > xs-security.json",
-    "build:cf": "cp mta-cf.yaml mta.yaml && mbt build -p=cf -e cf-service-broker-private.mtaext && rm mta.yaml",
+    "build:cf": "cp mta-cf.yaml mta.yaml && mbt build -p=cf -e cf-service-broker-private.mtaext && rm mta.yaml && npm install",
     "build:xsa": "cp mta-xsa.yaml mta.yaml && mbt build -p=xsa && rm mta.yaml",
     "build:standalone": "cp mta-standAlone.yaml mta.yaml && mbt build -p=xsa && rm mta.yaml",
     "build:copycsntoproxy": "copyfiles -f gen/srv/srv/csn.json standalone-v2-proxy/gen/",
@@ -119,7 +121,7 @@
     "push:docker": "docker push gregorwolf/bookshop-demo:latest",
     "debug": "node --inspect node_modules/@sap/cds/bin/cds.js run",
     "start:docker": "docker run --name bookshop-demo -d -p 4004:4004 gregorwolf/bookshop-demo:latest",
-    "start": "cds-serve",
+    "start": "node ${NODE_ARGS} ./node_modules/@sap/cds/bin/cds-serve",
     "start:app": "cds bind --exec -- npm run start-repo-mock --prefix app --profile hybrid",
     "start:hana": "cds bind --exec -- cds run --profile hybrid",
     "start:hybridboth": "run-p start:hybrid:**",

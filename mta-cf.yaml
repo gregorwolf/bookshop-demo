@@ -8,8 +8,8 @@ build-parameters:
   before-all:
     - builder: custom
       commands:
-        - npm install
-        - npx -p @sap/cds-dk cds build --profile production
+        - npm install --production
+        - npx cds build --production
         # Delete node_modules to avoid maximum file length exceeded
         - rm -rf app/node_modules
         # Standalone OData V2 Proxy is disabled
@@ -31,9 +31,14 @@ modules:
     type: nodejs
     path: gen/srv
     build-parameters:
-      ignore: ["node_modules/"]
+      # When using OpenTelemetry@SAP the following line is not needed
+      #ignore: ["node_modules/"]
     properties:
       SAP_JWT_TRUST_ACL: '[{"clientid":"*","identityzone":"*"}]'
+      SAP_CALM_SERVICE_NAME: bookshop-demo
+      SAP_CALM_SERVICE_TYPE: SAP_CP_CF
+      OTEL_RESOURCE_ATTRIBUTES: sap.tenancy.tenant_id=85d309ba-f66d-4775-b927-9a95dfc89a1e
+      NODE_ARGS: -r @sap/xotel-agent-ext-js/dist/common/tracer
     parameters:
       memory: 256M
       disk-quota: 1024M
@@ -52,7 +57,7 @@ modules:
           config:
             xsuaa_instance_name: bookshop-demo-uaa
       - name: bookshop-demo-logging
-#      - name: bookshop-demo-cloud-logging
+      #      - name: bookshop-demo-cloud-logging
       - name: bookshop-demo-autoscaler
         parameters:
           path: ./autoscaler.json
@@ -217,7 +222,7 @@ modules:
       - name: bookshop-demo-connectivity-service
       - name: bookshop-demo-uaa
       - name: bookshop-demo-logging
-#      - name: bookshop-demo-cloud-logging
+      #      - name: bookshop-demo-cloud-logging
       - name: bookshop-demo-repo-runtime
       - name: srv_api
         group: destinations
@@ -303,11 +308,11 @@ resources:
     parameters:
       service: application-logs
       service-plan: lite
-#  - name: bookshop-demo-cloud-logging
-#    type: org.cloudfoundry.managed-service
-#    parameters:
-#      service: cloud-logging
-#      service-plan: dev
+  #  - name: bookshop-demo-cloud-logging
+  #    type: org.cloudfoundry.managed-service
+  #    parameters:
+  #      service: cloud-logging
+  #      service-plan: dev
   - name: bookshop-demo-autoscaler
     type: org.cloudfoundry.managed-service
     parameters:
