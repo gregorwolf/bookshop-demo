@@ -23,6 +23,7 @@ grant_type=password
 &password={{$dotenv password}}
 &client_id={{$dotenv clientid}}
 &response_type=token
+&login_hint={"origin":"sap.custom"}
 ### Fill Variables from Response
 @user_access_token = {{requestAccessTokenHANA.response.body.$.access_token}}
 
