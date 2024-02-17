@@ -179,3 +179,42 @@ Authorization: Bearer {{$dotenv datasphere_access_token}}
 ###
 GET {{assetRelationalDataUrl}}{{entity}}
 Authorization: Bearer {{$dotenv datasphere_access_token}}
+### Test with all the Headers that where recorded by beeceptor
+GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/
+Authorization: Bearer {{$dotenv datasphere_access_token}}
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+accept-encoding: gzip, deflate, br
+accept-language: en-GB,en-US;q=0.9,en;q=0.8,de;q=0.7
+b3: fd68b7e7edbf44617207387804ea4f10-7207387804ea4f10
+cache-control: max-age=0
+cookie: notice_preferences=1:; notice_gdpr_prefs=0,1:; cmapi_gtm_bl=ta-asp-bzi-sp-awct-cts-csm-img-flc-fls-mpm-mpr-m6d-tc-tdc; cmapi_cookie_privacy=permit 1,2 functional; AMCV_227AC2D754DCAB340A4C98C6%40AdobeOrg=179643557%7CMCMID%7C49676062306441572314421264909522785251%7CMCAID%7CNONE%7CvVersion%7C5.5.0
+sec-ch-ua: "Not A(Brand";v="99\ "Google Chrome";v="121\ "Chromium";v="121"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+sec-fetch-dest: document
+sec-fetch-mode: navigate
+sec-fetch-site: none
+sec-fetch-user: ?1
+tenant_host_pattern: (^(.*)(?=-sapdelim-([^\\.]*)(\\.m)?\\.launchpad(?:\\.v1)?\\.cfapps\\.eu10\\.hana\\.ondemand\\.com)|^([^\\.]*)(?=(\\.m)?\\.launchpad(?:\\.v1)?\\.cfapps\\.eu10\\.hana\\.ondemand\\.com)|^(.*)(?=-sapdelim-([^\\.]*)(\\.m)?\\.eu10\\.start\\.cloud\\.sap)|^([^\\.]*)(?=(\\.m)?\\.eu10\\.start\\.cloud\\.sap)|^(.*)(?=-sapdelim-([^\\.]*)(\\.m)?\\.eu10\\.workzone\\.cloud\\.sap)|^([^\\.]*)(?=(\\.m)?\\.eu10\\.workzone\\.cloud\\.sap))
+tenantid: sapportalservices!csw-dev
+traceparent: 00-89bceb290ac589313439772237f1425b-6808e796b31e6986-01
+tracestate: 8cc0df6a-69d2b3b0@dt=fw4;5;fb671ce3;465bf;0;0;0;217;c3bc;2h01;3hfb671ce3;4h0465bf;5h01
+upgrade-insecure-requests: 1
+x-b3-spanid: 7207387804ea4f10
+x-b3-traceid: fd68b7e7edbf44617207387804ea4f10
+x-cf-applicationid: a7ce2550-9762-48ba-a0da-8f545a3fe403
+x-cf-instanceid: 8d588e2f-e06e-426c-64c7-dae4
+x-cf-instanceindex: 4
+x-correlationid: fd68b7e7-edbf-4461-7207-387804ea4f10
+x-dynatrace: FW4;1775416240;5;-77128477;288191;0;-1933516950;535;c3bc;2h01;3hfb671ce3;4h0465bf;5h01
+x-dynatrace-application: v=2;appId=ea7c4b59f27d43eb;cookieDomain=ondemand.com;rid=-563121271;rpid=-1373029448;en=fq285rcp
+x-forwarded-for: 3.66.68.127
+#x-forwarded-host: cswtest.free.beeceptor.com
+x-forwarded-host: csw-partner.eu10.hcs.cloud.sap
+x-forwarded-path: /dynamic_dest/datasphere/api/v1/dwc/catalog/
+x-forwarded-proto: https
+x-request-start: 1708182692774
+x-scp-request-id: 02fb9942-1bb1-45cd-a4ab-59bca32d56bb-65D0CCA4-9C8D8FA
+x-sf-correlation-id: fd68b7e7-edbf-4461-7207-387804ea4f10
+x-vcap-request-id: fd68b7e7-edbf-4461-7207-387804ea4f10
