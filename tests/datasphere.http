@@ -107,6 +107,8 @@ Authorization: Bearer {{access_token}}
 ###
 GET {{assetRelationalDataUrlUser}}{{entityUser}}
     ?$top=10
+    &$orderby=SalesOrderDate desc
+    &$count=true
 Authorization: Bearer {{access_token}}
 ###
 GET {{assetRelationalDataUrlUser}}{{entityUser}}
