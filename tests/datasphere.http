@@ -84,8 +84,35 @@ Authorization: Bearer {{access_token}}
 ###
 GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/$metadata
 Authorization: Bearer {{access_token}}
-###
+### 
+# @name spacesUser
 GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/spaces
+    ?$expand=assets
+Authorization: Bearer {{access_token}}
+###
+@spaceUser={{spacesUser.response.body.value[0].name}}
+###
+# @name assetsUser
+GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/assets
+    ?$filter=spaceName eq '{{spaceUser}}'
+Authorization: Bearer {{access_token}}
+###
+@assetRelationalDataUrlUser = {{assetsUser.response.body.$.value[0].assetRelationalDataUrl}}
+###
+# @name assetRelationalData
+GET {{assetRelationalDataUrlUser}}
+Authorization: Bearer {{access_token}}
+###
+@entityUser = {{assetRelationalData.response.body.$.value[0].url}}
+###
+GET {{assetRelationalDataUrlUser}}{{entityUser}}
+    ?$top=10
+Authorization: Bearer {{access_token}}
+###
+GET {{assetRelationalDataUrlUser}}{{entityUser}}
+    ?$apply=groupby((TransactionCurrency,SalesOrderType,YEAR),aggregate(TotalNetAmount with sum as TotalNetAmountTotal))
+    &$filter=TransactionCurrency eq 'EUR'
+    &$orderby=YEAR
 Authorization: Bearer {{access_token}}
 ###
 GET {{$dotenv datasphere_endpoint}}/dwaas-core/api/v1/discovery
