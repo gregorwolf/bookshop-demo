@@ -847,18 +847,38 @@ module.exports = async function (srv) {
     // LOG.info("UPDATE - result: " + JSON.stringify(res))
   })
 */
-  /*
-  srv.on('READ', 'Documents', (req, next) => {
+  srv.on("READ", "Documents", async (req, next) => {
     if (!req.data.ID) {
-      return next()
+      return next();
     }
-    LOG.info(req.data.ID)
-
-    return {
-      value: _getObjectStream(req.data.ID)
+    LOG.info(req.data.ID);
+    if (req.data.ID === "2cac6337-86f2-4613-b71d-e8389b8a4e26") {
+      // read metadata from database
+      const metadata = await SELECT.one
+        .from("my.bookshop.Documents")
+        .where({ ID: req.data.ID });
+      // read pdf from file system
+      const fs = require("fs");
+      const path = require("path");
+      const { Readable } = require("stream");
+      const filePath = path.join("./tests/app/", "test.pdf");
+      const file = fs.readFileSync(filePath);
+      // convert file to base64
+      const base64 = file.toString("base64");
+      // convert base64 to arraybuffer
+      const buffer = Buffer.from(base64, "base64");
+      return {
+        value: Readable.from(buffer),
+        $mediaContentType: metadata.mediatype,
+        // If the file should be downloaded, the following header is needed
+        // $mediaContentDispositionFilename: metadata.filename,
+      };
+    } else {
+      return next();
     }
-  })
+  });
 
+  /*
   function _getObjectStream(objectKey) {
     LOG.info(objectKey)
     return "Test"

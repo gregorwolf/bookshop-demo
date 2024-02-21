@@ -5,7 +5,13 @@
 
 ### Read Pictures
 # curl http://localhost:4004/odata/v4/admin/Documents | jq
+# @name readDocuments
 GET http://localhost:4004/odata/v4/admin/Documents
+Authorization: Basic admin:
+###
+@documentGuid = {{readDocuments.response.body.$.value[0].ID}}
+### Read PDF
+GET http://localhost:4004/odata/v4/admin/Documents({{documentGuid}})/content
 Authorization: Basic admin:
 
 ### Create Picture with mediatype
