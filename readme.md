@@ -316,13 +316,7 @@ Also add a variable for appurl which represents the app you want to enable to be
 
 ## Allow API Access
 
-[Carlos Roggan](https://people.sap.com/carlos.roggan) providedes a great description in his SAP Community blogpost: [How to call protected app from external app as external user with scope](https://blogs.sap.com/2020/06/02/how-to-call-protected-app-from-external-app-as-external-user-with-scope/). For the moment we will not use a separate client app but a REST client script. Follow the next steps to get it working for this project. Start of by creating a separate xsuaa service instance by running:
-
-```sh
-cf create-service xsuaa application xsuaaforclient -c xs-security-client.json
-```
-
-Then create and display a service key for this xsuaa:
+[Carlos Roggan](https://people.sap.com/carlos.roggan) provides a great description in his SAP Community blog post: [How to call protected app from external app as external user with scope](https://blogs.sap.com/2020/06/02/how-to-call-protected-app-from-external-app-as-external-user-with-scope/). For the moment we will not use a separate client app but a REST client script. Follow the next steps to get it working for this project. You have to create and display a service key for the client xsuaa instance:
 
 ```sh
 cf create-service-key xsuaaforclient xsuaaforclient-sk

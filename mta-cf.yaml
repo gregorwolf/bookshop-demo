@@ -266,6 +266,12 @@ resources:
       service: xsuaa
       service-plan: broker
       path: ./xs-security.json
+  - name: bookshop-demo-uaa-client
+    parameters:
+      path: ./xs-security-client.json
+      service-plan: application
+      service: xsuaa
+    type: org.cloudfoundry.managed-service
   - name: bookshop-demo-uaa-apiaccess
     type: org.cloudfoundry.managed-service
     parameters:
