@@ -169,7 +169,16 @@ GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/assets
     ?$filter=spaceName eq '{{space}}'
 Authorization: Bearer {{$dotenv datasphere_access_token}}
 ###
+@assetRelationalMetadataUrl={{assets.response.body.$.value[0].assetRelationalMetadataUrl}}
 @assetRelationalDataUrl = {{assets.response.body.$.value[0].assetRelationalDataUrl}}
+###
+GET {{assetRelationalMetadataUrl}}
+Authorization: Bearer {{$dotenv datasphere_access_token}}
+### Metadata with language parameter
+# results in:
+# Bad request; please refer to documentation
+GET {{assetRelationalMetadataUrl}}?sap-language=EN
+Authorization: Bearer {{$dotenv datasphere_access_token}}
 ###
 # @name assetRelationalData
 GET {{assetRelationalDataUrl}}
