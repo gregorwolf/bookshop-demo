@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:Reference
+    Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+    <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1" />
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1" />
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="StandaloneService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityContainer Name="EntityContainer">
+        <EntitySet Name="I_SALESORDER_View" EntityType="StandaloneService.I_SALESORDER_View" />
+      </EntityContainer>
+      <EntityType Name="I_SALESORDER_View">
+        <Key>
+          <PropertyRef Name="DATETIMESTAMP" />
+          <PropertyRef Name="SalesOrder" />
+        </Key>
+        <Property Name="MONTH" Type="Edm.String" MaxLength="2" />
+        <Property Name="MONTH_INT" Type="Edm.Int32" />
+        <Property Name="MONTH_LAST_DAY" Type="Edm.Int32" />
+        <Property Name="QUARTER" Type="Edm.String" MaxLength="2" />
+        <Property Name="QUARTER_INT" Type="Edm.Int32" />
+        <Property Name="SECOND" Type="Edm.String" MaxLength="2" />
+        <Property Name="SECOND_INT" Type="Edm.Int32" />
+        <Property Name="TZNTSTMPL" Type="Edm.Decimal" Scale="7" Precision="21" />
+        <Property Name="TZNTSTMPS" Type="Edm.Decimal" Scale="0" Precision="15" />
+        <Property Name="WEEK" Type="Edm.String" MaxLength="2" />
+        <Property Name="WEEK_INT" Type="Edm.Int32" />
+        <Property Name="WEEK_YEAR" Type="Edm.String" MaxLength="4" />
+        <Property Name="WEEK_YEAR_INT" Type="Edm.Int32" />
+        <Property Name="YEAR" Type="Edm.String" MaxLength="4" />
+        <Property Name="YEAR_INT" Type="Edm.Int32" />
+        <Property Name="MINUTE_INT" Type="Edm.Int32" />
+        <Property Name="MINUTE" Type="Edm.String" MaxLength="2" />
+        <Property Name="HOUR_INT" Type="Edm.Int32" />
+        <Property Name="HOUR" Type="Edm.String" MaxLength="2" />
+        <Property Name="DAY_OF_WEEK_INT" Type="Edm.Int32" />
+        <Property Name="DAY_OF_WEEK" Type="Edm.String" MaxLength="2" />
+        <Property Name="DAY_INT" Type="Edm.Int32" />
+        <Property Name="DAY" Type="Edm.String" MaxLength="2" />
+        <Property Name="DATE_SQL" Type="Edm.Date" />
+        <Property Name="DATE_SAP" Type="Edm.String" MaxLength="8" />
+        <Property Name="DATETIME_SAP" Type="Edm.String" MaxLength="14" />
+        <Property Name="DATETIMESTAMP" Type="Edm.DateTimeOffset" Precision="7" Nullable="false" />
+        <Property Name="CALWEEK" Type="Edm.String" MaxLength="6" />
+        <Property Name="CALQUARTER" Type="Edm.String" MaxLength="5" />
+        <Property Name="CALMONTH" Type="Edm.String" MaxLength="6" />
+        <Property Name="SalesOrder" Type="Edm.String" MaxLength="10" Nullable="false" />
+        <Property Name="SalesOrderType" Type="Edm.String" MaxLength="4" />
+        <Property Name="SalesOrderProcessingType" Type="Edm.String" MaxLength="1" />
+        <Property Name="CreatedByUser" Type="Edm.String" MaxLength="12" />
+        <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="12" />
+        <Property Name="CreationDate" Type="Edm.String" MaxLength="8" />
+        <Property Name="CreationTime" Type="Edm.String" MaxLength="6" />
+        <Property Name="LastChangeDate" Type="Edm.String" MaxLength="8" />
+        <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="SenderBusinessSystemName" Type="Edm.String" MaxLength="60" />
+        <Property Name="ExternalDocumentID" Type="Edm.String" MaxLength="40" />
+        <Property Name="ExternalDocLastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" />
+        <Property Name="DistributionChannel" Type="Edm.String" MaxLength="2" />
+        <Property Name="OrganizationDivision" Type="Edm.String" MaxLength="2" />
+        <Property Name="SalesGroup" Type="Edm.String" MaxLength="3" />
+        <Property Name="SalesOffice" Type="Edm.String" MaxLength="4" />
+        <Property Name="SoldToParty" Type="Edm.String" MaxLength="10" />
+        <Property Name="CustomerGroup" Type="Edm.String" MaxLength="2" />
+        <Property Name="AdditionalCustomerGroup1" Type="Edm.String" MaxLength="3" />
+        <Property Name="AdditionalCustomerGroup2" Type="Edm.String" MaxLength="3" />
+        <Property Name="AdditionalCustomerGroup3" Type="Edm.String" MaxLength="3" />
+        <Property Name="AdditionalCustomerGroup4" Type="Edm.String" MaxLength="3" />
+        <Property Name="AdditionalCustomerGroup5" Type="Edm.String" MaxLength="3" />
+        <Property Name="SlsDocIsRlvtForProofOfDeliv" Type="Edm.String" MaxLength="1" />
+        <Property Name="CreditControlArea" Type="Edm.String" MaxLength="4" />
+        <Property Name="CustomerRebateAgreement" Type="Edm.String" MaxLength="10" />
+        <Property Name="SalesOrderDate" Type="Edm.String" MaxLength="8" />
+        <Property Name="ServicesRenderedDate" Type="Edm.String" MaxLength="8" />
+        <Property Name="SDDocumentReason" Type="Edm.String" MaxLength="3" />
+        <Property Name="PurchaseOrderByCustomer" Type="Edm.String" MaxLength="35" />
+        <Property Name="PurchaseOrderByShipToParty" Type="Edm.String" MaxLength="35" />
+        <Property Name="SDDocumentCollectiveNumber" Type="Edm.String" MaxLength="10" />
+        <Property Name="CustomerPurchaseOrderType" Type="Edm.String" MaxLength="4" />
+        <Property Name="CustomerPurchaseOrderDate" Type="Edm.String" MaxLength="8" />
+        <Property Name="CustomerPurchaseOrderSuplmnt" Type="Edm.String" MaxLength="4" />
+        <Property Name="SalesDistrict" Type="Edm.String" MaxLength="6" />
+        <Property Name="StatisticsCurrency" Type="Edm.String" MaxLength="5" />
+        <Property Name="ProductCatalog" Type="Edm.String" MaxLength="10" />
+        <Property Name="NextCreditCheckDate" Type="Edm.String" MaxLength="8" />
+        <Property Name="LastCustomerContactDate" Type="Edm.String" MaxLength="8" />
+        <Property Name="TotalNetAmount" Type="Edm.Decimal" Scale="variable" />
+        <Property Name="TransactionCurrency" Type="Edm.String" MaxLength="5" />
+        <Property Name="PricingDate" Type="Edm.String" MaxLength="8" />
+        <Property Name="PriceDetnExchangeRate" Type="Edm.Decimal" Scale="5" Precision="9" />
+        <Property Name="RetailPromotion" Type="Edm.String" MaxLength="10" />
+        <Property Name="SalesOrderCondition" Type="Edm.String" MaxLength="10" />
+        <Property Name="SDPricingProcedure" Type="Edm.String" MaxLength="6" />
+        <Property Name="CustomerPriceGroup" Type="Edm.String" MaxLength="2" />
+        <Property Name="PriceListType" Type="Edm.String" MaxLength="2" />
+        <Property Name="BillingPlan" Type="Edm.String" MaxLength="10" />
+        <Property Name="CustomerTaxClassification1" Type="Edm.String" MaxLength="1" />
+        <Property Name="CustomerTaxClassification2" Type="Edm.String" MaxLength="1" />
+        <Property Name="CustomerTaxClassification3" Type="Edm.String" MaxLength="1" />
+        <Property Name="CustomerTaxClassification4" Type="Edm.String" MaxLength="1" />
+        <Property Name="CustomerTaxClassification5" Type="Edm.String" MaxLength="1" />
+        <Property Name="CustomerTaxClassification6" Type="Edm.String" MaxLength="1" />
+        <Property Name="CustomerTaxClassification7" Type="Edm.String" MaxLength="1" />
+        <Property Name="CustomerTaxClassification8" Type="Edm.String" MaxLength="1" />
+        <Property Name="CustomerTaxClassification9" Type="Edm.String" MaxLength="1" />
+        <Property Name="TaxDepartureCountry" Type="Edm.String" MaxLength="3" />
+        <Property Name="VATRegistrationCountry" Type="Edm.String" MaxLength="3" />
+        <Property Name="RequestedDeliveryDate" Type="Edm.String" MaxLength="8" />
+        <Property Name="DeliveryDateTypeRule" Type="Edm.String" MaxLength="1" />
+        <Property Name="ShippingType" Type="Edm.String" MaxLength="2" />
+        <Property Name="ShippingCondition" Type="Edm.String" MaxLength="2" />
+        <Property Name="ReceivingPoint" Type="Edm.String" MaxLength="25" />
+        <Property Name="IncotermsClassification" Type="Edm.String" MaxLength="3" />
+        <Property Name="IncotermsTransferLocation" Type="Edm.String" MaxLength="28" />
+        <Property Name="IncotermsLocation1" Type="Edm.String" MaxLength="70" />
+        <Property Name="IncotermsLocation2" Type="Edm.String" MaxLength="70" />
+        <Property Name="IncotermsVersion" Type="Edm.String" MaxLength="4" />
+        <Property Name="CompleteDeliveryIsDefined" Type="Edm.String" MaxLength="1" />
+        <Property Name="OrderCombinationIsAllowed" Type="Edm.String" MaxLength="1" />
+        <Property Name="DeliveryBlockReason" Type="Edm.String" MaxLength="2" />
+        <Property Name="FashionCancelDate" Type="Edm.String" MaxLength="8" />
+        <Property Name="SalesOrderApprovalReason" Type="Edm.String" MaxLength="4" />
+        <Property Name="BillingDocumentDate" Type="Edm.String" MaxLength="8" />
+        <Property Name="BillingCompanyCode" Type="Edm.String" MaxLength="4" />
+        <Property Name="HeaderBillingBlockReason" Type="Edm.String" MaxLength="2" />
+        <Property Name="CustomerPaymentTerms" Type="Edm.String" MaxLength="4" />
+        <Property Name="PaymentMethod" Type="Edm.String" MaxLength="1" />
+        <Property Name="FixedValueDate" Type="Edm.String" MaxLength="8" />
+        <Property Name="FiscalYear" Type="Edm.String" MaxLength="4" />
+        <Property Name="FiscalPeriod" Type="Edm.String" MaxLength="3" />
+        <Property Name="ExchangeRateDate" Type="Edm.String" MaxLength="8" />
+        <Property Name="ExchangeRateType" Type="Edm.String" MaxLength="4" />
+        <Property Name="AccountingExchangeRate" Type="Edm.Decimal" Scale="5" Precision="9" />
+        <Property Name="BusinessArea" Type="Edm.String" MaxLength="4" />
+        <Property Name="CustomerAccountAssignmentGroup" Type="Edm.String" MaxLength="2" />
+        <Property Name="CostCenterBusinessArea" Type="Edm.String" MaxLength="4" />
+        <Property Name="CostCenter" Type="Edm.String" MaxLength="10" />
+        <Property Name="ControllingArea" Type="Edm.String" MaxLength="4" />
+        <Property Name="OrderID" Type="Edm.String" MaxLength="12" />
+        <Property Name="ControllingObject" Type="Edm.String" MaxLength="22" />
+        <Property Name="AssignmentReference" Type="Edm.String" MaxLength="18" />
+        <Property Name="PaymentPlan" Type="Edm.String" MaxLength="10" />
+        <Property Name="ContractAccount" Type="Edm.String" MaxLength="12" />
+        <Property Name="AdditionalValueDays" Type="Edm.String" MaxLength="2" />
+        <Property Name="CustomerCreditAccount" Type="Edm.String" MaxLength="10" />
+        <Property Name="ReferenceSDDocument" Type="Edm.String" MaxLength="10" />
+        <Property Name="ReferenceSDDocumentCategory" Type="Edm.String" MaxLength="4" />
+        <Property Name="CorrespncExternalReference" Type="Edm.String" MaxLength="12" />
+        <Property Name="AccountingDocExternalReference" Type="Edm.String" MaxLength="16" />
+        <Property Name="BusinessSolutionOrder" Type="Edm.String" MaxLength="10" />
+        <Property Name="OverallSDProcessStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="OverallPurchaseConfStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="OverallSDDocumentRejectionSts" Type="Edm.String" MaxLength="1" />
+        <Property Name="TotalBlockStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="OverallDelivConfStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="OverallTotalDeliveryStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="OverallDeliveryStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="OverallDeliveryBlockStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="OverallOrdReltdBillgStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="OverallBillingBlockStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="OverallTotalSDDocRefStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="OverallSDDocReferenceStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="TotalCreditCheckStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="MaxDocValueCreditCheckStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="PaymentTermCreditCheckStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="FinDocCreditCheckStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="ExprtInsurCreditCheckStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="PaytAuthsnCreditCheckSts" Type="Edm.String" MaxLength="1" />
+        <Property Name="CentralCreditCheckStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="CentralCreditChkTechErrSts" Type="Edm.String" MaxLength="1" />
+        <Property Name="HdrGeneralIncompletionStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="OverallPricingIncompletionSts" Type="Edm.String" MaxLength="1" />
+        <Property Name="HeaderDelivIncompletionStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="HeaderBillgIncompletionStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="OvrlItmGeneralIncompletionSts" Type="Edm.String" MaxLength="1" />
+        <Property Name="OvrlItmBillingIncompletionSts" Type="Edm.String" MaxLength="1" />
+        <Property Name="OvrlItmDelivIncompletionSts" Type="Edm.String" MaxLength="1" />
+        <Property Name="OverallChmlCmplncStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="OverallDangerousGoodsStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="OverallSafetyDataSheetStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="SalesDocApprovalStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="OverallTrdCmplncEmbargoSts" Type="Edm.String" MaxLength="1" />
+        <Property Name="OvrlTrdCmplncSnctndListChkSts" Type="Edm.String" MaxLength="1" />
+        <Property Name="OvrlTrdCmplncLegalCtrlChkSts" Type="Edm.String" MaxLength="1" />
+        <Property Name="SalesOrderDownPaymentStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="OmniChnlSalesPromotionStatus" Type="Edm.String" MaxLength="1" />
+        <Property Name="AlternativePricingDate" Type="Edm.String" MaxLength="8" />
+        <Property Name="IsEUTriangularDeal" Type="Edm.String" MaxLength="1" />
+        <Property Name="RetailAdditionalCustomerGrp6" Type="Edm.String" MaxLength="3" />
+        <Property Name="RetailAdditionalCustomerGrp7" Type="Edm.String" MaxLength="3" />
+        <Property Name="RetailAdditionalCustomerGrp8" Type="Edm.String" MaxLength="3" />
+        <Property Name="RetailAdditionalCustomerGrp9" Type="Edm.String" MaxLength="3" />
+        <Property Name="RetailAdditionalCustomerGrp10" Type="Edm.String" MaxLength="3" />
+      </EntityType>
+      <Annotations Target="StandaloneService.I_SALESORDER_View">
+        <Annotation Term="Common.Label" String="I_SALESORDER_View" />
+      </Annotations>
+      <Annotations Target="StandaloneService.EntityContainer/I_SALESORDER_View">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false" />
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/MONTH">
+        <Annotation Term="Common.Label" String="Month" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/MONTH_INT">
+        <Annotation Term="Common.Label" String="Month (Number)" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/MONTH_LAST_DAY">
+        <Annotation Term="Common.Label" String="Month Last Day" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/QUARTER">
+        <Annotation Term="Common.Label" String="Quarter" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/QUARTER_INT">
+        <Annotation Term="Common.Label" String="Quarter (Number)" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SECOND">
+        <Annotation Term="Common.Label" String="Second" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SECOND_INT">
+        <Annotation Term="Common.Label" String="Second (Number)" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/TZNTSTMPL">
+        <Annotation Term="Common.Label" String="UTC Timestamp (long form)" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/TZNTSTMPS">
+        <Annotation Term="Common.Label" String="UTC Timestamp (short form)" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/WEEK">
+        <Annotation Term="Common.Label" String="Week" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/WEEK_INT">
+        <Annotation Term="Common.Label" String="Week (Number)" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/WEEK_YEAR">
+        <Annotation Term="Common.Label" String="Week Year" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/WEEK_YEAR_INT">
+        <Annotation Term="Common.Label" String="Week Year (Number)" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/YEAR">
+        <Annotation Term="Common.Label" String="Year" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/YEAR_INT">
+        <Annotation Term="Common.Label" String="Year (Number)" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/MINUTE_INT">
+        <Annotation Term="Common.Label" String="Minute (Number)" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/MINUTE">
+        <Annotation Term="Common.Label" String="Minute" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/HOUR_INT">
+        <Annotation Term="Common.Label" String="Hour (Number)" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/HOUR">
+        <Annotation Term="Common.Label" String="Hour" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/DAY_OF_WEEK_INT">
+        <Annotation Term="Common.Label" String="Day of Week (Number)" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/DAY_OF_WEEK">
+        <Annotation Term="Common.Label" String="Day of Week" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/DAY_INT">
+        <Annotation Term="Common.Label" String="Day (Number)" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/DAY">
+        <Annotation Term="Common.Label" String="Day" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/DATE_SQL">
+        <Annotation Term="Common.Label" String="Date" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/DATE_SAP">
+        <Annotation Term="Common.Label" String="Date (String)" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/DATETIME_SAP">
+        <Annotation Term="Common.Label" String="Timestamp (String)" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/DATETIMESTAMP">
+        <Annotation Term="Common.Label" String="Timestamp" />
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CALWEEK">
+        <Annotation Term="Common.Label" String="Calendar Week" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CALQUARTER">
+        <Annotation Term="Common.Label" String="Calendar Quarter" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CALMONTH">
+        <Annotation Term="Common.Label" String="Calendar Month" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SalesOrder">
+        <Annotation Term="Common.Label" String="SalesOrder" />
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SalesOrderType">
+        <Annotation Term="Common.Label" String="SalesOrderType" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SalesOrderProcessingType">
+        <Annotation Term="Common.Label" String="SalesOrderProcessingType" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CreatedByUser">
+        <Annotation Term="Common.Label" String="CreatedByUser" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/LastChangedByUser">
+        <Annotation Term="Common.Label" String="LastChangedByUser" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CreationDate">
+        <Annotation Term="Common.Label" String="CreationDate" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CreationTime">
+        <Annotation Term="Common.Label" String="CreationTime" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/LastChangeDate">
+        <Annotation Term="Common.Label" String="LastChangeDate" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/LastChangeDateTime">
+        <Annotation Term="Common.Label" String="LastChangeDateTime" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SenderBusinessSystemName">
+        <Annotation Term="Common.Label" String="SenderBusinessSystemName" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/ExternalDocumentID">
+        <Annotation Term="Common.Label" String="ExternalDocumentID" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/ExternalDocLastChangeDateTime">
+        <Annotation Term="Common.Label" String="ExternalDocLastChangeDateTime" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SalesOrganization">
+        <Annotation Term="Common.Label" String="SalesOrganization" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/DistributionChannel">
+        <Annotation Term="Common.Label" String="DistributionChannel" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OrganizationDivision">
+        <Annotation Term="Common.Label" String="OrganizationDivision" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SalesGroup">
+        <Annotation Term="Common.Label" String="SalesGroup" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SalesOffice">
+        <Annotation Term="Common.Label" String="SalesOffice" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SoldToParty">
+        <Annotation Term="Common.Label" String="SoldToParty" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CustomerGroup">
+        <Annotation Term="Common.Label" String="CustomerGroup" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/AdditionalCustomerGroup1">
+        <Annotation Term="Common.Label" String="AdditionalCustomerGroup1" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/AdditionalCustomerGroup2">
+        <Annotation Term="Common.Label" String="AdditionalCustomerGroup2" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/AdditionalCustomerGroup3">
+        <Annotation Term="Common.Label" String="AdditionalCustomerGroup3" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/AdditionalCustomerGroup4">
+        <Annotation Term="Common.Label" String="AdditionalCustomerGroup4" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/AdditionalCustomerGroup5">
+        <Annotation Term="Common.Label" String="AdditionalCustomerGroup5" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SlsDocIsRlvtForProofOfDeliv">
+        <Annotation Term="Common.Label" String="SlsDocIsRlvtForProofOfDeliv" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CreditControlArea">
+        <Annotation Term="Common.Label" String="CreditControlArea" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CustomerRebateAgreement">
+        <Annotation Term="Common.Label" String="CustomerRebateAgreement" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SalesOrderDate">
+        <Annotation Term="Common.Label" String="SalesOrderDate" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/ServicesRenderedDate">
+        <Annotation Term="Common.Label" String="ServicesRenderedDate" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SDDocumentReason">
+        <Annotation Term="Common.Label" String="SDDocumentReason" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/PurchaseOrderByCustomer">
+        <Annotation Term="Common.Label" String="PurchaseOrderByCustomer" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/PurchaseOrderByShipToParty">
+        <Annotation Term="Common.Label" String="PurchaseOrderByShipToParty" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SDDocumentCollectiveNumber">
+        <Annotation Term="Common.Label" String="SDDocumentCollectiveNumber" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CustomerPurchaseOrderType">
+        <Annotation Term="Common.Label" String="CustomerPurchaseOrderType" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CustomerPurchaseOrderDate">
+        <Annotation Term="Common.Label" String="CustomerPurchaseOrderDate" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CustomerPurchaseOrderSuplmnt">
+        <Annotation Term="Common.Label" String="CustomerPurchaseOrderSuplmnt" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SalesDistrict">
+        <Annotation Term="Common.Label" String="SalesDistrict" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/StatisticsCurrency">
+        <Annotation Term="Common.Label" String="StatisticsCurrency" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/ProductCatalog">
+        <Annotation Term="Common.Label" String="ProductCatalog" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/NextCreditCheckDate">
+        <Annotation Term="Common.Label" String="NextCreditCheckDate" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/LastCustomerContactDate">
+        <Annotation Term="Common.Label" String="LastCustomerContactDate" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/TotalNetAmount">
+        <Annotation Term="Common.Label" String="TotalNetAmount" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/TransactionCurrency">
+        <Annotation Term="Common.Label" String="TransactionCurrency" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/PricingDate">
+        <Annotation Term="Common.Label" String="PricingDate" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/PriceDetnExchangeRate">
+        <Annotation Term="Common.Label" String="PriceDetnExchangeRate" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/RetailPromotion">
+        <Annotation Term="Common.Label" String="RetailPromotion" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SalesOrderCondition">
+        <Annotation Term="Common.Label" String="SalesOrderCondition" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SDPricingProcedure">
+        <Annotation Term="Common.Label" String="SDPricingProcedure" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CustomerPriceGroup">
+        <Annotation Term="Common.Label" String="CustomerPriceGroup" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/PriceListType">
+        <Annotation Term="Common.Label" String="PriceListType" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/BillingPlan">
+        <Annotation Term="Common.Label" String="BillingPlan" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CustomerTaxClassification1">
+        <Annotation Term="Common.Label" String="CustomerTaxClassification1" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CustomerTaxClassification2">
+        <Annotation Term="Common.Label" String="CustomerTaxClassification2" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CustomerTaxClassification3">
+        <Annotation Term="Common.Label" String="CustomerTaxClassification3" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CustomerTaxClassification4">
+        <Annotation Term="Common.Label" String="CustomerTaxClassification4" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CustomerTaxClassification5">
+        <Annotation Term="Common.Label" String="CustomerTaxClassification5" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CustomerTaxClassification6">
+        <Annotation Term="Common.Label" String="CustomerTaxClassification6" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CustomerTaxClassification7">
+        <Annotation Term="Common.Label" String="CustomerTaxClassification7" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CustomerTaxClassification8">
+        <Annotation Term="Common.Label" String="CustomerTaxClassification8" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CustomerTaxClassification9">
+        <Annotation Term="Common.Label" String="CustomerTaxClassification9" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/TaxDepartureCountry">
+        <Annotation Term="Common.Label" String="TaxDepartureCountry" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/VATRegistrationCountry">
+        <Annotation Term="Common.Label" String="VATRegistrationCountry" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/RequestedDeliveryDate">
+        <Annotation Term="Common.Label" String="RequestedDeliveryDate" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/DeliveryDateTypeRule">
+        <Annotation Term="Common.Label" String="DeliveryDateTypeRule" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/ShippingType">
+        <Annotation Term="Common.Label" String="ShippingType" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/ShippingCondition">
+        <Annotation Term="Common.Label" String="ShippingCondition" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/ReceivingPoint">
+        <Annotation Term="Common.Label" String="ReceivingPoint" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/IncotermsClassification">
+        <Annotation Term="Common.Label" String="IncotermsClassification" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/IncotermsTransferLocation">
+        <Annotation Term="Common.Label" String="IncotermsTransferLocation" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/IncotermsLocation1">
+        <Annotation Term="Common.Label" String="IncotermsLocation1" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/IncotermsLocation2">
+        <Annotation Term="Common.Label" String="IncotermsLocation2" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/IncotermsVersion">
+        <Annotation Term="Common.Label" String="IncotermsVersion" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CompleteDeliveryIsDefined">
+        <Annotation Term="Common.Label" String="CompleteDeliveryIsDefined" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OrderCombinationIsAllowed">
+        <Annotation Term="Common.Label" String="OrderCombinationIsAllowed" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/DeliveryBlockReason">
+        <Annotation Term="Common.Label" String="DeliveryBlockReason" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/FashionCancelDate">
+        <Annotation Term="Common.Label" String="FashionCancelDate" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SalesOrderApprovalReason">
+        <Annotation Term="Common.Label" String="SalesOrderApprovalReason" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/BillingDocumentDate">
+        <Annotation Term="Common.Label" String="BillingDocumentDate" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/BillingCompanyCode">
+        <Annotation Term="Common.Label" String="BillingCompanyCode" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/HeaderBillingBlockReason">
+        <Annotation Term="Common.Label" String="HeaderBillingBlockReason" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CustomerPaymentTerms">
+        <Annotation Term="Common.Label" String="CustomerPaymentTerms" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/PaymentMethod">
+        <Annotation Term="Common.Label" String="PaymentMethod" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/FixedValueDate">
+        <Annotation Term="Common.Label" String="FixedValueDate" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/FiscalYear">
+        <Annotation Term="Common.Label" String="FiscalYear" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/FiscalPeriod">
+        <Annotation Term="Common.Label" String="FiscalPeriod" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/ExchangeRateDate">
+        <Annotation Term="Common.Label" String="ExchangeRateDate" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/ExchangeRateType">
+        <Annotation Term="Common.Label" String="ExchangeRateType" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/AccountingExchangeRate">
+        <Annotation Term="Common.Label" String="AccountingExchangeRate" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/BusinessArea">
+        <Annotation Term="Common.Label" String="BusinessArea" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CustomerAccountAssignmentGroup">
+        <Annotation Term="Common.Label" String="CustomerAccountAssignmentGroup" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CostCenterBusinessArea">
+        <Annotation Term="Common.Label" String="CostCenterBusinessArea" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CostCenter">
+        <Annotation Term="Common.Label" String="CostCenter" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/ControllingArea">
+        <Annotation Term="Common.Label" String="ControllingArea" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OrderID">
+        <Annotation Term="Common.Label" String="OrderID" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/ControllingObject">
+        <Annotation Term="Common.Label" String="ControllingObject" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/AssignmentReference">
+        <Annotation Term="Common.Label" String="AssignmentReference" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/PaymentPlan">
+        <Annotation Term="Common.Label" String="PaymentPlan" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/ContractAccount">
+        <Annotation Term="Common.Label" String="ContractAccount" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/AdditionalValueDays">
+        <Annotation Term="Common.Label" String="AdditionalValueDays" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CustomerCreditAccount">
+        <Annotation Term="Common.Label" String="CustomerCreditAccount" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/ReferenceSDDocument">
+        <Annotation Term="Common.Label" String="ReferenceSDDocument" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/ReferenceSDDocumentCategory">
+        <Annotation Term="Common.Label" String="ReferenceSDDocumentCategory" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CorrespncExternalReference">
+        <Annotation Term="Common.Label" String="CorrespncExternalReference" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/AccountingDocExternalReference">
+        <Annotation Term="Common.Label" String="AccountingDocExternalReference" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/BusinessSolutionOrder">
+        <Annotation Term="Common.Label" String="BusinessSolutionOrder" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OverallSDProcessStatus">
+        <Annotation Term="Common.Label" String="OverallSDProcessStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OverallPurchaseConfStatus">
+        <Annotation Term="Common.Label" String="OverallPurchaseConfStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OverallSDDocumentRejectionSts">
+        <Annotation Term="Common.Label" String="OverallSDDocumentRejectionSts" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/TotalBlockStatus">
+        <Annotation Term="Common.Label" String="TotalBlockStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OverallDelivConfStatus">
+        <Annotation Term="Common.Label" String="OverallDelivConfStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OverallTotalDeliveryStatus">
+        <Annotation Term="Common.Label" String="OverallTotalDeliveryStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OverallDeliveryStatus">
+        <Annotation Term="Common.Label" String="OverallDeliveryStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OverallDeliveryBlockStatus">
+        <Annotation Term="Common.Label" String="OverallDeliveryBlockStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OverallOrdReltdBillgStatus">
+        <Annotation Term="Common.Label" String="OverallOrdReltdBillgStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OverallBillingBlockStatus">
+        <Annotation Term="Common.Label" String="OverallBillingBlockStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OverallTotalSDDocRefStatus">
+        <Annotation Term="Common.Label" String="OverallTotalSDDocRefStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OverallSDDocReferenceStatus">
+        <Annotation Term="Common.Label" String="OverallSDDocReferenceStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/TotalCreditCheckStatus">
+        <Annotation Term="Common.Label" String="TotalCreditCheckStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/MaxDocValueCreditCheckStatus">
+        <Annotation Term="Common.Label" String="MaxDocValueCreditCheckStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/PaymentTermCreditCheckStatus">
+        <Annotation Term="Common.Label" String="PaymentTermCreditCheckStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/FinDocCreditCheckStatus">
+        <Annotation Term="Common.Label" String="FinDocCreditCheckStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/ExprtInsurCreditCheckStatus">
+        <Annotation Term="Common.Label" String="ExprtInsurCreditCheckStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/PaytAuthsnCreditCheckSts">
+        <Annotation Term="Common.Label" String="PaytAuthsnCreditCheckSts" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CentralCreditCheckStatus">
+        <Annotation Term="Common.Label" String="CentralCreditCheckStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/CentralCreditChkTechErrSts">
+        <Annotation Term="Common.Label" String="CentralCreditChkTechErrSts" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/HdrGeneralIncompletionStatus">
+        <Annotation Term="Common.Label" String="HdrGeneralIncompletionStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OverallPricingIncompletionSts">
+        <Annotation Term="Common.Label" String="OverallPricingIncompletionSts" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/HeaderDelivIncompletionStatus">
+        <Annotation Term="Common.Label" String="HeaderDelivIncompletionStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/HeaderBillgIncompletionStatus">
+        <Annotation Term="Common.Label" String="HeaderBillgIncompletionStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OvrlItmGeneralIncompletionSts">
+        <Annotation Term="Common.Label" String="OvrlItmGeneralIncompletionSts" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OvrlItmBillingIncompletionSts">
+        <Annotation Term="Common.Label" String="OvrlItmBillingIncompletionSts" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OvrlItmDelivIncompletionSts">
+        <Annotation Term="Common.Label" String="OvrlItmDelivIncompletionSts" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OverallChmlCmplncStatus">
+        <Annotation Term="Common.Label" String="OverallChmlCmplncStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OverallDangerousGoodsStatus">
+        <Annotation Term="Common.Label" String="OverallDangerousGoodsStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OverallSafetyDataSheetStatus">
+        <Annotation Term="Common.Label" String="OverallSafetyDataSheetStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SalesDocApprovalStatus">
+        <Annotation Term="Common.Label" String="SalesDocApprovalStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OverallTrdCmplncEmbargoSts">
+        <Annotation Term="Common.Label" String="OverallTrdCmplncEmbargoSts" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OvrlTrdCmplncSnctndListChkSts">
+        <Annotation Term="Common.Label" String="OvrlTrdCmplncSnctndListChkSts" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OvrlTrdCmplncLegalCtrlChkSts">
+        <Annotation Term="Common.Label" String="OvrlTrdCmplncLegalCtrlChkSts" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/SalesOrderDownPaymentStatus">
+        <Annotation Term="Common.Label" String="SalesOrderDownPaymentStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/OmniChnlSalesPromotionStatus">
+        <Annotation Term="Common.Label" String="OmniChnlSalesPromotionStatus" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/AlternativePricingDate">
+        <Annotation Term="Common.Label" String="AlternativePricingDate" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/IsEUTriangularDeal">
+        <Annotation Term="Common.Label" String="IsEUTriangularDeal" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/RetailAdditionalCustomerGrp6">
+        <Annotation Term="Common.Label" String="RetailAdditionalCustomerGrp6" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/RetailAdditionalCustomerGrp7">
+        <Annotation Term="Common.Label" String="RetailAdditionalCustomerGrp7" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/RetailAdditionalCustomerGrp8">
+        <Annotation Term="Common.Label" String="RetailAdditionalCustomerGrp8" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/RetailAdditionalCustomerGrp9">
+        <Annotation Term="Common.Label" String="RetailAdditionalCustomerGrp9" />
+      </Annotations>
+      <Annotations Target="StandaloneService.I_SALESORDER_View/RetailAdditionalCustomerGrp10">
+        <Annotation Term="Common.Label" String="RetailAdditionalCustomerGrp10" />
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
