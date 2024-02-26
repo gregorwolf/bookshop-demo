@@ -60,7 +60,7 @@ class JobService extends cds.ApplicationService {
       );
     });
 
-    cds.spawn({ every: 5000 }, start);
+    // cds.spawn({ every: 5000 }, start);
 
     await super.init();
   }
