@@ -109,7 +109,8 @@ service AdminService @(
         total + total * taxPercentage / 100, 2
       )            as ComputedTotalWithTax : Decimal(15, 2),
       virtual null as VirtualTotalWithTax  : Decimal(15, 2),
-      *
+      *,
+      ![OrderItems]                        : Composition of many OrderItemsV on OrderItems.parent = $self
     } actions {
       action deleteOrder();
       action checkConsistency();
@@ -143,7 +144,7 @@ service AdminService @(
   annotate A_SalesOrganizationText with @cds.odata.valuelist;
 
   //------- auto-exposed --------
-  entity OrderItems              as
+  entity OrderItemsV             as
     projection on db.OrderItems {
       @Core.Computed
       amount * book.price as ComputedTotal : Decimal(15, 2),
