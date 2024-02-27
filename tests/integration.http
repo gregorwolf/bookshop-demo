@@ -15,3 +15,6 @@ Content-Type: application/json
 Authorization: Bearer {{access_token}}
 
 {}
+###
+GET {{$dotenv integration_url}}/http/cpi_odata_v4_get_demo
+Authorization: Basic {{$dotenv integration_clientid}}:{{$dotenv integration_clientsecret}}
