@@ -31,11 +31,22 @@ grant_type=password
 ### test API root
 GET {{$dotenv api_url}}
 Authorization: Bearer {{access_token}}
+### get metadata
+GET {{$dotenv api_url}}{{$dotenv api_path}}$metadata
+Authorization: Bearer {{access_token}}
 ### test API endpoint
+# @name getEntities
 GET {{$dotenv api_url}}{{$dotenv api_path}}
 Authorization: Bearer {{access_token}}
-###
-GET {{$dotenv api_url}}{{$dotenv api_path}}$metadata
+Accept: application/json
+### 
+# V4
+@entity = {{getEntities.response.body.value[1].name}}
+# V2
+#@entity = {{getEntities.response.body.d.EntitySets[1]}}
+### read entity
+GET {{$dotenv api_url}}{{$dotenv api_path}}{{entity}}
+  ?$top=10
 Authorization: Bearer {{access_token}}
 ### Read userInfo
 GET {{$dotenv api_url}}/api/userInfo
