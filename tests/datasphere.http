@@ -97,7 +97,17 @@ GET {{$dotenv datasphere_endpoint}}/api/v1/dwc/catalog/assets
     ?$filter=spaceName eq '{{spaceUser}}'
 Authorization: Bearer {{access_token}}
 ###
-@assetRelationalDataUrlUser = {{assetsUser.response.body.$.value[0].assetRelationalDataUrl}}
+@assetRelationalDataUrlUser={{assetsUser.response.body.$.value[0].assetRelationalDataUrl}}
+@assetRelationalMetadataUrlUser={{assetsUser.response.body.$.value[0].assetRelationalMetadataUrl}}
+###
+GET {{assetRelationalMetadataUrlUser}}
+Authorization: Bearer {{access_token}}
+###
+GET {{assetRelationalMetadataUrlUser}}?$sap-language=EN
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv datasphere_endpoint}}/dwaas-core/odata/v4/consumption/relational/S4HANA_CLOUD/I_SALESORDER_View/$metadata?sap-language=EN
+Authorization: Bearer {{access_token}}
 ###
 # @name assetRelationalData
 GET {{assetRelationalDataUrlUser}}
