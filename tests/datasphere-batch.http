@@ -1,0 +1,12 @@
+--batch_id-1709158002284-123
+Content-Type:application/http
+Content-Transfer-Encoding:binary
+
+GET I_SALESORDER_View?$count=true&$select=DATETIMESTAMP,MONTH,MONTH_INT,MONTH_LAST_DAY,SalesOrder&$skip=0&$top=30 HTTP/1.1
+Accept:application/json;odata.metadata=minimal;IEEE754Compatible=true
+Accept-Language:en
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+
+--batch_id-1709158002284-123--
+Group ID: $auto.Workers

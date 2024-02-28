@@ -106,8 +106,24 @@ Authorization: Bearer {{access_token}}
 GET {{assetRelationalMetadataUrlUser}}?$sap-language=EN
 Authorization: Bearer {{access_token}}
 ###
-GET {{$dotenv datasphere_endpoint}}/dwaas-core/odata/v4/consumption/relational/S4HANA_CLOUD/I_SALESORDER_View/$metadata?sap-language=EN
+GET {{$dotenv datasphere_endpoint}}/dwaas-core/odata/v4/consumption/relational/S4HANA_CLOUD/I_SALESORDER_View/$metadata
+    ?sap-language=EN
 Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv datasphere_endpoint}}/dwaas-core/odata/v4/consumption/relational/S4HANA_CLOUD/I_SALESORDER_View/I_SALESORDER_View
+    ?$count=true&$select=DATETIMESTAMP,MONTH,MONTH_INT,MONTH_LAST_DAY,SalesOrder
+    &$skip=0
+    &$top=30
+Authorization: Bearer {{access_token}}
+### Test $batch request
+# returns:
+# HTTP/1.1 404 Not Found
+POST {{$dotenv datasphere_endpoint}}/dwaas-core/odata/v4/consumption/relational/S4HANA_CLOUD/I_SALESORDER_View/$batch
+Content-Type: multipart/mixed;boundary=batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Authorization: Bearer {{access_token}}
+
+< ./datasphere-batch.http
+
 ###
 # @name assetRelationalData
 GET {{assetRelationalDataUrlUser}}
