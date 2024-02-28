@@ -36,3 +36,6 @@ Content-Type: application/json
       "customTag": "42"
    }
 }
+### Read Matched Events
+GET {{$dotenv ans_url}}/cf/consumer/v1/matched-events
+Authorization: Bearer {{access_token}}
