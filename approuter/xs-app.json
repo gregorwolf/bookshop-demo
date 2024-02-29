@@ -25,6 +25,13 @@
       "csrfProtection": true
     },
     {
+      "source": "/user/(.*)$",
+      "target": "/user/$1",
+      "authenticationType": "xsuaa",
+      "destination": "srv_api",
+      "csrfProtection": true
+    },
+    {
       "source": "/v2standalone/(.*)$",
       "target": "/odata/v2/$1",
       "authenticationType": "xsuaa",

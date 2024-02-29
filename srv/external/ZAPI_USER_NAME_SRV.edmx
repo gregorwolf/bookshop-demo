@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZAPI_USER_NAME_SRV" xml:lang="en" sap:schema-version="1"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="UserDetails" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="UserName" />
+                </Key>
+                <Property Name="UserName" Type="Edm.String" Nullable="false" MaxLength="12"
+                    sap:unicode="false" sap:label="User Name" sap:creatable="false"
+                    sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+                <Property Name="Sysid" Type="Edm.String" Nullable="false" MaxLength="8"
+                    sap:unicode="false" sap:label="SAP System ID" sap:creatable="false"
+                    sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+                <Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3"
+                    sap:unicode="false" sap:label="Client ID" sap:creatable="false"
+                    sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+                <Property Name="Logsys" Type="Edm.String" Nullable="false" MaxLength="10"
+                    sap:unicode="false" sap:label="Logical system" sap:creatable="false"
+                    sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+                <Property Name="Sylangu" Type="Edm.String" Nullable="false" MaxLength="2"
+                    sap:unicode="false" sap:label="Language Key" sap:creatable="false"
+                    sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2"
+                    sap:unicode="false" sap:label="Lang. (ISO)" sap:creatable="false"
+                    sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+                <Property Name="FullUserName" Type="Edm.String" Nullable="false" MaxLength="80"
+                    sap:unicode="false" sap:label="Full Name" sap:creatable="false"
+                    sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+                <Property Name="Aliasname" Type="Edm.String" Nullable="false" MaxLength="40"
+                    sap:unicode="false" sap:label="Alias" sap:creatable="false"
+                    sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+            </EntityType>
+            <EntityContainer Name="ZAPI_USER_NAME_SRV_Entities" m:IsDefaultEntityContainer="true"
+                sap:supported-formats="atom json xlsx">
+                <EntitySet Name="UserDetailsSet" EntityType="ZAPI_USER_NAME_SRV.UserDetails"
+                    sap:creatable="false" sap:updatable="false" sap:deletable="false"
+                    sap:pageable="false" sap:content-version="1" />
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm" />
+            <atom:link rel="self"
+                href="https://vhcala4hci:50001/sap/opu/odata/sap/ZAPI_USER_NAME_SRV/$metadata"
+                xmlns:atom="http://www.w3.org/2005/Atom" />
+            <atom:link rel="latest-version"
+                href="https://vhcala4hci:50001/sap/opu/odata/sap/ZAPI_USER_NAME_SRV/$metadata"
+                xmlns:atom="http://www.w3.org/2005/Atom" />
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

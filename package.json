@@ -301,6 +301,15 @@
           "requestTimeout": 30000,
           "path": "/sap/opu/odata/sap/CV_ATTACHMENT_SRV"
         }
+      },
+      "ZAPI_USER_NAME_SRV": {
+        "kind": "odata-v2",
+        "model": "srv/external/ZAPI_USER_NAME_SRV",
+        "credentials": {
+          "destination": "SAP_ABAP_BACKEND",
+          "requestTimeout": 30000,
+          "path": "/sap/opu/odata/sap/ZAPI_USER_NAME_SRV"
+        }
       }
     },
     "[dev-uaa]": {

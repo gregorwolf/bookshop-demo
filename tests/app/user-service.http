@@ -1,0 +1,6 @@
+###
+GET http://localhost:4004/user/
+Authorization: Basic admin:
+###
+GET http://localhost:4004/user/UserDetails
+Authorization: Basic admin:
