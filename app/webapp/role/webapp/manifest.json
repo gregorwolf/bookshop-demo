@@ -46,9 +46,10 @@
                     "operationMode": "Server",
                     "autoExpandSelect": true,
                     "earlyRequests": true,
+                    "groupId": "$direct",
                     "groupProperties": {
                         "default": {
-                            "submit": "Auto"
+                            "submit": "Direct"
                         }
                     }
                 }

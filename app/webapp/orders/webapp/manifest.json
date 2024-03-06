@@ -70,7 +70,8 @@
                     "synchronizationMode": "None",
                     "operationMode": "Server",
                     "autoExpandSelect": true,
-                    "earlyRequests": true
+                    "earlyRequests": true,
+                    "groupId": "$direct"
                 }
             },
             "@i18n": {
