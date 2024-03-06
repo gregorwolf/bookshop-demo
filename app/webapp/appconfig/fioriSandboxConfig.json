@@ -20,8 +20,20 @@
                   "properties": {
                     "chipId": "V4catalogTile_OrdersUI5latest",
                     "title": "Orders",
-                    "info": "Management",
+                    "info": "Latest",
                     "targetURL": "#V4Orders-manageUI5latest"
+                  }
+                },
+                {
+                  "id": "OrdersV4",
+                  "title": "Orders",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "V4catalogTile_OrdersV4",
+                    "title": "Orders",
+                    "info": "",
+                    "targetURL": "#V4Orders-manage"
                   }
                 },
                 {
