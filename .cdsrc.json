@@ -1,114 +1,91 @@
 {
-    "requires": {
-        "[development]": {
-            "db": {
-                "credentials": {
-                    "database": "db/bookshop.db"
-                }
-            }
-        },
-        "[instance1]": {
-            "db": {
-                "kind": "sqlite",
-                "credentials": {
-                    "database": "instance1.db"
-                }
-            },
-            "JobExecutionService": {
-                "kind": "odata-v4",
-                "model": "srv/job-execution-service",
-                "credentials": {
-                    "destination": "job-execution-service",
-                    "requestTimeout": 30000,
-                    "path": "/job-execution"
-                }
-            }
-        },
-        "[instance2]": {
-            "db": {
-                "kind": "sqlite",
-                "credentials": {
-                    "database": "instance2.db"
-                }
-            },
-            "JobService": {
-                "kind": "odata-v4",
-                "model": "srv/job-service",
-                "credentials": {
-                    "destination": "job-service",
-                    "requestTimeout": 30000,
-                    "path": "/job"
-                }
-            }
-        },
-        "auth": {
-            "kind": "basic-auth",
-            "users": {
-                "requester": {
-                    "password": "",
-                    "roles": [
-                        "admin"
-                    ]
-                },
-                "booksadmin": {
-                    "password": "",
-                    "roles": [
-                        "booksadmin"
-                    ]
-                },
-                "job": {
-                    "password": "Secret1",
-                    "roles": [
-                        "job"
-                    ]
-                },
-                "job-execution": {
-                    "password": "Secret2",
-                    "roles": [
-                        "job-execution"
-                    ]
-                },
-                "admin": {
-                    "password": "",
-                    "roles": [
-                        "admin",
-                        "roleadmin",
-                        "booksadmin"
-                    ]
-                },
-                "roleadmin": {
-                    "roles": [
-                        "admin",
-                        "roleadmin"
-                    ]
-                },
-                "littleadmin": {
-                    "password": "",
-                    "roles": [
-                        "admin"
-                    ]
-                },
-                "bob": {
-                    "password": "",
-                    "roles": [
-                        "authenticated-user",
-                        "openid"
-                    ],
-                    "userAttributes": {
-                        "level": 5,
-                        "directory": "A",
-                        "version": 2
-                    }
-                },
-                "error": {
-                    "password": "",
-                    "roles": [
-                        "authenticated-user",
-                        "openid"
-                    ]
-                },
-                "*": true
-            }
+  "requires": {
+    "[development]": {
+      "db": {
+        "credentials": {
+          "database": "db/bookshop.db"
         }
+      }
+    },
+    "[instance1]": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "database": "instance1.db"
+        }
+      },
+      "JobExecutionService": {
+        "kind": "odata-v4",
+        "model": "srv/job-execution-service",
+        "credentials": {
+          "destination": "job-execution-service",
+          "requestTimeout": 30000,
+          "path": "/job-execution"
+        }
+      }
+    },
+    "[instance2]": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "database": "instance2.db"
+        }
+      },
+      "JobService": {
+        "kind": "odata-v4",
+        "model": "srv/job-service",
+        "credentials": {
+          "destination": "job-service",
+          "requestTimeout": 30000,
+          "path": "/job"
+        }
+      }
+    },
+    "auth": {
+      "kind": "basic-auth",
+      "users": {
+        "requester": {
+          "password": "",
+          "roles": ["admin"]
+        },
+        "booksadmin": {
+          "password": "",
+          "roles": ["booksadmin"]
+        },
+        "job": {
+          "password": "Secret1",
+          "roles": ["job"]
+        },
+        "job-execution": {
+          "password": "Secret2",
+          "roles": ["job-execution"]
+        },
+        "admin": {
+          "password": "",
+          "roles": ["admin", "roleadmin", "booksadmin", "MODEL_ALL"]
+        },
+        "roleadmin": {
+          "roles": ["admin", "roleadmin"]
+        },
+        "littleadmin": {
+          "password": "",
+          "roles": ["admin"]
+        },
+        "bob": {
+          "password": "",
+          "roles": ["authenticated-user", "openid"],
+          "userAttributes": {
+            "level": 5,
+            "directory": "A",
+            "version": 2
+          }
+        },
+        "error": {
+          "password": "",
+          "roles": ["authenticated-user", "openid"]
+        },
+        "*": true
+      }
     }
+  }
 }
