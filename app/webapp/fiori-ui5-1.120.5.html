@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="sap-ui-fesr" content="/fesr" />
+    <title>Bookshop</title>
+    <script>
+      window["sap-ushell-config"] = {
+        defaultRenderer: "fiori2",
+        bootstrapPlugins: {
+          RuntimeAuthoringPlugin: {
+            component: "sap.ushell.plugins.rta",
+            config: {
+              validateAppVersion: false,
+            },
+          },
+        },
+        applications: {},
+        renderers: {
+          fiori2: {
+            componentData: {
+              config: {
+                enableMergeAppAndShellHeaders: true,
+                search: "hidden",
+              },
+            },
+          },
+        },
+        services: {
+          NavTargetResolution: {
+            config: {
+              runStandaloneAppFolderWhitelist: {
+                "*": true,
+              },
+              allowTestUrlComponentConfig: true,
+              enableClientSideTargetResolution: true,
+            },
+          },
+          EndUserFeedback: {
+            adapter: {
+              config: {
+                enabled: false,
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <script
+      src="https://ui5.sap.com/1.120.5/test-resources/sap/ushell/bootstrap/sandbox.js"
+      id="sap-ushell-bootstrap"
+    ></script>
+    <script
+      id="sap-ui-bootstrap"
+      src="https://ui5.sap.com/1.120.5/resources/sap-ui-core.js"
+      data-sap-ui-flexibilityServices='[{"connector": "LocalStorageConnector"}]'
+      data-sap-ui-libs="sap.m, sap.ushell, sap.collaboration, sap.ui.layout, sap.ui.rta"
+      data-sap-ui-theme="sap_horizon"
+      data-sap-ui-compatVersion="edge"
+      data-sap-ui-frameOptions="allow"
+      data-sap-ui-xx-viewCache="false"
+    ></script>
+    <script>
+      sap.ui.getCore().attachInit(function () {
+        sap.ushell.Container.createRenderer().placeAt("content");
+      });
+    </script>
+  </head>
+  <body class="sapUiBody" id="content"></body>
+</html>
