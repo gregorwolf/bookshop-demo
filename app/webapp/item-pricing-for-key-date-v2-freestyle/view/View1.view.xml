@@ -1,0 +1,33 @@
+<mvc:View controllerName="itempricingforkeydatev2freestyle.controller.View1"
+    xmlns:sfb="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <sfb:SmartFilterBar
+                id="smartFilterBar"
+                entitySet="AgreementItemPricingForKeyDateSet"
+                considerAnalyticalParameters="true"
+                enableBasicSearch="false"
+                showClearOnFB="true"
+                liveMode="false"
+                persistencyKey="AgreementItemPricingForKeyDateSetKey"
+            />
+            <smartTable:SmartTable
+                id="smartTable2"
+                tableType="ResponsiveTable"
+                enableAutoColumnWidth="true"
+                useTablePersonalisation="false"
+                header="{i18n>tableTitle}"
+                showRowCount="true"
+                enableAutoBinding="false"
+                enableExport="false"
+                smartFilterId="smartFilterBar"
+                entitySet="AgreementItemPricingForKeyDateSet"
+                beforeRebindTable="onBeforeRebind"
+            >
+            </smartTable:SmartTable>
+        </content>
+    </Page>
+</mvc:View>
