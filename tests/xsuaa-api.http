@@ -13,7 +13,10 @@ grant_type=client_credentials
 # @name readUsers
 GET {{$dotenv xsuaa_apiaccess_apiurl}}/Users
 Authorization: Bearer {{access_token}}
-
+###
+GET {{$dotenv xsuaa_apiaccess_apiurl}}/Users
+  ?sortBy=userName
+Authorization: Bearer {{access_token}}
 ### 
 # @name readGroups
 GET {{$dotenv xsuaa_apiaccess_apiurl}}/Groups
