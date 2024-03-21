@@ -62,7 +62,8 @@
         },
         "admin": {
           "password": "",
-          "roles": ["admin", "roleadmin", "booksadmin", "MODEL_ALL"]
+          "roles": ["admin", "roleadmin", "booksadmin", "MODEL_ALL"],
+          "policies": ["cap.support"]
         },
         "roleadmin": {
           "roles": ["admin", "roleadmin"]
@@ -74,7 +75,7 @@
         "bob": {
           "password": "",
           "roles": ["authenticated-user", "openid"],
-          "userAttributes": {
+          "attr": {
             "level": 5,
             "directory": "A",
             "version": 2

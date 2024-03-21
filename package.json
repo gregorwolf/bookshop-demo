@@ -16,18 +16,19 @@
     "@sap/fesr-to-otel-js": "https://73555000100200018064.npmsrv.cdn.repositories.cloud.sap/@sap/fesr-to-otel-js/-/fesr-to-otel-js-1.5.3.tgz"
   },
   "dependencies": {
-    "@sap/xotel-agent-ext-js": "https://73555000100200018064.npmsrv.cdn.repositories.cloud.sap/@sap/xotel-agent-ext-js/-/xotel-agent-ext-js-1.5.9.tgz",
-    "@sap/fesr-to-otel-js": "https://73555000100200018064.npmsrv.cdn.repositories.cloud.sap/@sap/fesr-to-otel-js/-/fesr-to-otel-js-1.5.3.tgz",
     "@cap-js-community/odata-v2-adapter": "^1",
     "@cap-js/notifications": "^0.1.0",
     "@sap-cloud-sdk/core": "^1",
     "@sap-cloud-sdk/http-client": "^3",
     "@sap-cloud-sdk/util": "^3",
+    "@sap/ams": "^1.15.1",
     "@sap/cds": "^7",
     "@sap/cds-common-content": "^1",
     "@sap/cds-hana": "^2.0.0",
+    "@sap/fesr-to-otel-js": "https://73555000100200018064.npmsrv.cdn.repositories.cloud.sap/@sap/fesr-to-otel-js/-/fesr-to-otel-js-1.5.3.tgz",
     "@sap/jobs-client": "^1",
     "@sap/logging": "^7",
+    "@sap/xotel-agent-ext-js": "https://73555000100200018064.npmsrv.cdn.repositories.cloud.sap/@sap/xotel-agent-ext-js/-/xotel-agent-ext-js-1.5.9.tgz",
     "@sap/xsenv": "^4",
     "@sap/xssec": "^3",
     "async-retry": "^1",
@@ -48,6 +49,7 @@
     "@cap-js/sqlite": "^1",
     "@openui5/ts-types": "^1.108.0",
     "@sap-cloud-sdk/generator": "^1.54.2",
+    "@sap/ams-dev": "^0.8.4",
     "@sap/cds-dk": "^7",
     "@sap/datasphere-cli": "^2023.14.0",
     "@sap/graph-toolkit": "^3",
@@ -172,6 +174,17 @@
       "deploy-format": "hdbtable"
     },
     "requires": {
+      "[development]": {
+        "auth": {
+          "kind": "mocked",
+          "ams": {
+            "autoCompile": true,
+            "cache": {
+              "TTL": 0
+            }
+          }
+        }
+      },
       "destination": {
         "kind": "rest",
         "credentials": {
@@ -329,7 +342,7 @@
     "[production]": {
       "requires": {
         "auth": {
-          "kind": "xsuaa"
+          "kind": "ias"
         }
       }
     },

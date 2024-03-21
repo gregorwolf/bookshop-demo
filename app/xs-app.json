@@ -15,33 +15,33 @@
       "target": "/fesr",
       "destination": "srv_api",
       "csrfProtection": false,
-      "authenticationType": "xsuaa"
+      "authenticationType": "ias"
     },
     {
       "source": "/api/(.*)$",
       "target": "/api/$1",
-      "authenticationType": "xsuaa",
+      "authenticationType": "ias",
       "destination": "srv_api",
       "csrfProtection": true
     },
     {
       "source": "/odata/v2/admin/(.*)$",
       "target": "/odata/v2/admin/$1",
-      "authenticationType": "xsuaa",
+      "authenticationType": "ias",
       "destination": "srv_api",
       "csrfProtection": true
     },
     {
       "source": "/odata/v2/catalog/(.*)$",
       "target": "/odata/v2/catalog/$1",
-      "authenticationType": "xsuaa",
+      "authenticationType": "ias",
       "destination": "srv_api",
       "csrfProtection": true
     },
     {
       "source": "/admin/(.*)$",
       "target": "/admin/$1",
-      "authenticationType": "xsuaa",
+      "authenticationType": "ias",
       "destination": "srv_api",
       "csrfProtection": true
     },
@@ -55,21 +55,21 @@
     {
       "source": "/catalog/(.*)$",
       "target": "/catalog/$1",
-      "authenticationType": "xsuaa",
+      "authenticationType": "ias",
       "destination": "srv_api",
       "csrfProtection": true
     },
     {
       "source": "/iot/(.*)$",
       "target": "/iot/$1",
-      "authenticationType": "xsuaa",
+      "authenticationType": "ias",
       "destination": "srv_api",
       "csrfProtection": true
     },
     {
       "source": "/public/(.*)$",
       "target": "/public/$1",
-      "authenticationType": "xsuaa",
+      "authenticationType": "ias",
       "destination": "srv_api",
       "csrfProtection": true
     },

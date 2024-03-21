@@ -15,40 +15,40 @@
       "target": "/fesr",
       "destination": "srv_api",
       "csrfProtection": false,
-      "authenticationType": "xsuaa"
+      "authenticationType": "ias"
     },
     {
       "source": "/api/(.*)$",
       "target": "/api/$1",
-      "authenticationType": "xsuaa",
+      "authenticationType": "ias",
       "destination": "srv_api",
       "csrfProtection": true
     },
     {
       "source": "/user/(.*)$",
       "target": "/user/$1",
-      "authenticationType": "xsuaa",
+      "authenticationType": "ias",
       "destination": "srv_api",
       "csrfProtection": true
     },
     {
       "source": "/v2standalone/(.*)$",
       "target": "/odata/v2/$1",
-      "authenticationType": "xsuaa",
+      "authenticationType": "ias",
       "destination": "srv_api_v2",
       "csrfProtection": true
     },
     {
       "source": "/odata/v2/(.*)$",
       "target": "/odata/v2/$1",
-      "authenticationType": "xsuaa",
+      "authenticationType": "ias",
       "destination": "srv_api",
       "csrfProtection": true
     },
     {
       "source": "/admin/(.*)$",
       "target": "/admin/$1",
-      "authenticationType": "xsuaa",
+      "authenticationType": "ias",
       "destination": "srv_api",
       "csrfProtection": true
     },
@@ -62,14 +62,14 @@
     {
       "source": "/catalog/(.*)$",
       "target": "/catalog/$1",
-      "authenticationType": "xsuaa",
+      "authenticationType": "ias",
       "destination": "srv_api",
       "csrfProtection": true
     },
     {
       "source": "/public/(.*)$",
       "target": "/public/$1",
-      "authenticationType": "xsuaa",
+      "authenticationType": "ias",
       "destination": "srv_api",
       "csrfProtection": true
     }

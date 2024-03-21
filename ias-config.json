@@ -1,0 +1,12 @@
+{
+  "authorization": {
+    "enabled": true
+  },
+  "provided-apis": [
+    {
+      "name": "bookshop-demo-api",
+      "description": "api exposed by bookshop-demo app"
+    }
+  ],
+  "display-name": "bookshop-demo"
+}

@@ -9,7 +9,7 @@
       "source": "^/xsuaa/(.*)$",
       "target": "$1",
       "destination": "bookshop-demo",
-      "authenticationType": "xsuaa",
+      "authenticationType": "ias",
       "csrfProtection": true
     },
     {
@@ -23,7 +23,7 @@
       "source": "^(.*)$",
       "target": "$1",
       "service": "html5-apps-repo-rt",
-      "authenticationType": "xsuaa"
+      "authenticationType": "ias"
     }
   ]
 }

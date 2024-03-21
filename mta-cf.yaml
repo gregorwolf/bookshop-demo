@@ -39,10 +39,14 @@ modules:
       SAP_CALM_SERVICE_TYPE: SAP_CP_CF
       OTEL_RESOURCE_ATTRIBUTES: sap.tenancy.tenant_id=85d309ba-f66d-4775-b927-9a95dfc89a1e
       NODE_ARGS: -r @sap/xotel-agent-ext-js/dist/common/tracer
+      AMS_DCL_ROOT: "ams/dcl"
     parameters:
       memory: 256M
       disk-quota: 1024M
       stack: cflinuxfs4
+      buildpacks:
+        - https://github.com/SAP/cloud-authorization-buildpack/releases/latest/download/opa_buildpack.zip
+        - nodejs_buildpack
     provides:
       - name: srv_api
         properties:
@@ -51,11 +55,15 @@ modules:
       - name: bookshop-demo-destination-service
       - name: bookshop-demo-connectivity-service
       - name: bookshop-demo-db-service
-      - name: bookshop-demo-uaa
-      - name: bookshop-demo-job-scheduler
+      - name: bookshop-demo-auth
         parameters:
           config:
-            xsuaa_instance_name: bookshop-demo-uaa
+            credential-type: "X509_GENERATED"
+      # TODO: does Job Scheduler support IAS Authentication?
+      # - name: bookshop-demo-job-scheduler
+      #   parameters:
+      #     config:
+      #       xsuaa_instance_name: bookshop-demo-uaa
       - name: bookshop-demo-logging
       #      - name: bookshop-demo-cloud-logging
       - name: bookshop-demo-autoscaler
@@ -78,7 +86,7 @@ modules:
           "broker-user": "<is replaced by config in mtaext>"
         }
     requires:
-      - name: bookshop-demo-uaa
+      - name: bookshop-demo-auth
       - name: srv_api
         properties:
           SBF_SERVICE_CONFIG:
@@ -117,16 +125,16 @@ modules:
               ServiceInstanceName: bookshop-demo-repo-host
               ServiceKeyName: bookshop-demo-repo-host-key
               sap.cloud.service: bookshop.demo.service
-            - Name: bookshop-demo-uaa
+            - Name: bookshop-demo-auth
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: bookshop-demo-uaa
-              ServiceKeyName: bookshop-demo-uaa-key
+              ServiceInstanceName: bookshop-demo-auth
+              ServiceKeyName: bookshop-demo-auth-key
               sap.cloud.service: bookshop.demo.service
             - Name: bookshop-demo
               Description: CAP backend service
               Authentication: OAuth2UserTokenExchange
-              ServiceInstanceName: bookshop-demo-uaa
-              ServiceKeyName: bookshop-demo-uaa-key
+              ServiceInstanceName: bookshop-demo-auth
+              ServiceKeyName: bookshop-demo-auth-key
               URL: ~{srv_api/url}
               HTML5.DynamicDestination: true
               timeout: 600000
@@ -143,10 +151,10 @@ modules:
           #              sap.cloud.service: basic.service
           existing_destinations_policy: update
     requires:
-      - name: bookshop-demo-uaa
+      - name: bookshop-demo-auth
         parameters:
           service-key:
-            name: bookshop-demo-uaa-key
+            name: bookshop-demo-auth-key
       - name: bookshop-demo-repo-host
         parameters:
           service-key:
@@ -220,7 +228,7 @@ modules:
       #      - name: bookshop-demo-ui5-flexibility-keyuser
       - name: bookshop-demo-destination-service
       - name: bookshop-demo-connectivity-service
-      - name: bookshop-demo-uaa
+      - name: bookshop-demo-auth
       - name: bookshop-demo-logging
       #      - name: bookshop-demo-cloud-logging
       - name: bookshop-demo-repo-runtime
@@ -260,18 +268,24 @@ resources:
     type: com.sap.xs.hdi-container
     properties:
       hdi-container-name: ${service-name}
-  - name: bookshop-demo-uaa
+  - name: bookshop-demo-auth
     type: org.cloudfoundry.managed-service
     parameters:
-      service: xsuaa
-      service-plan: broker
-      path: ./xs-security.json
-  - name: bookshop-demo-uaa-client
-    parameters:
-      path: ./xs-security-client.json
+      service: identity
       service-plan: application
-      service: xsuaa
-    type: org.cloudfoundry.managed-service
+      path: ./ias-config.json
+  # - name: bookshop-demo-uaa
+  #   type: org.cloudfoundry.managed-service
+  #   parameters:
+  #     service: xsuaa
+  #     service-plan: broker
+  #     path: ./xs-security.json
+  # - name: bookshop-demo-uaa-client
+  #   parameters:
+  #     path: ./xs-security-client.json
+  #     service-plan: application
+  #     service: xsuaa
+  #   type: org.cloudfoundry.managed-service
   - name: bookshop-demo-uaa-apiaccess
     type: org.cloudfoundry.managed-service
     parameters:
