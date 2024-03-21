@@ -1,6 +1,6 @@
 ### Request Access Token
 # @name requestAccessToken
-POST {{$dotenv cloud_alm_url}}/oauth/token
+POST {{$dotenv cloud_alm_token_endpoint}}/oauth/token
 Accept: application/json
 Content-Type: application/x-www-form-urlencoded
 

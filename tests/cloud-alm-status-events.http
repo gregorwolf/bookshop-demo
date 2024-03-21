@@ -1,0 +1,27 @@
+### Service instance must be created with the scope "$XSMASTERAPPNAME.calm-api.bsm.read" following:
+### https://help.sap.com/docs/cloud-alm/setup-administration/enabling-sap-cloud-alm-api?locale=en-US
+
+### Request Access Token
+# @name requestAccessToken
+POST {{$dotenv cloud_alm_token_endpoint}}/oauth/token
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{$dotenv cloud_alm_status_events_clientid}}
+&client_secret={{$dotenv cloud_alm_status_events_clientsecret}}
+&grant_type=client_credentials
+&response_type=token
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+### Can be accessed via Client Credentials despite the fact that
+### https://api.sap.com/api/CALM_BSM/overview
+### only  mentions OAuth 2.0 Application Flow
+GET {{$dotenv cloud_alm_api}}/api/bsm-service/v1/
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv cloud_alm_api}}/api/bsm-service/v1/eventsData
+  ?$top=100
+  &$filter=eventType eq 'Degradation' and eventStatus eq 'In Process'
+#  &$count=true
+Authorization: Bearer {{access_token}}
