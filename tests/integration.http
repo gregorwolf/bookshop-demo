@@ -18,3 +18,6 @@ Authorization: Bearer {{access_token}}
 ###
 GET {{$dotenv integration_url}}/http/cpi_odata_v4_get_demo
 Authorization: Basic {{$dotenv integration_clientid}}:{{$dotenv integration_clientsecret}}
+###
+GET {{$dotenv integration_url}}/http/cpi_odata_v2_get_products
+Authorization: Basic {{$dotenv integration_clientid}}:{{$dotenv integration_clientsecret}}
