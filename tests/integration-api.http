@@ -1,0 +1,14 @@
+### Get Access Token (Cloud Foundry using Client Credentials)
+# @name requestAccessToken
+POST {{$dotenv integration_api_tokenendpoint}}
+Authorization: Basic {{$dotenv integration_api_clientid}}:{{$dotenv integration_api_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+###
+GET {{$dotenv integration_api_url}}/api/v1/IntegrationPackages
+#Authorization: Bearer {{$access_token}}
+Authorization: Basic {{$dotenv integration_api_clientid}}:{{$dotenv integration_api_clientsecret}}
