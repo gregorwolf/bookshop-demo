@@ -1,0 +1,57 @@
+### Get Access Token using Client Credentials Flow
+# @name requestAccessToken
+POST {{$dotenv papm_token_endpoint}}/oauth/token
+Authorization: Basic {{$dotenv papm_clientid}}:{{$dotenv papm_clientsecret}}
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+#&response_type=token
+
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+### Get Access Token for Cloud Foundry using Password Grant
+# @name requestAccessTokenHANA
+POST {{$dotenv tokenendpoint}}/oauth/token
+Accept: application/json;charset=utf8
+Authorization: Basic {{$dotenv clientid}}:{{$dotenv clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password
+&username={{$dotenv username}}
+&password={{$dotenv password}}
+&client_id={{$dotenv clientid}}
+&response_type=token
+&login_hint={"origin":"sap.custom"}
+### Fill Variables from Response
+@user_access_token = {{requestAccessTokenHANA.response.body.$.access_token}}
+
+### Get Access Token for Destination Service
+# @name requestDestinationAccessToken
+POST {{$dotenv dest_tokenendpoint}}/oauth/token
+Authorization: Basic {{$dotenv dest_clientid}}:{{$dotenv dest_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+
+### Fill Variables from Response
+@destination_access_token = {{requestDestinationAccessToken.response.body.$.access_token}}
+
+### Get Access token from Destination Service using the OAuth2SAMLBearerAssertion Destination
+# According to https://api.sap.com/api/SAP_CP_CF_Connectivity_Destination/path/get_destinations__name_
+### Read details of one destination
+# @name requestProviderDestination
+GET {{$dotenv dest_uri}}/destination-configuration/v1/destinations/papm
+X-user-token: {{user_access_token}}
+Authorization: Bearer {{destination_access_token}}
+### Fill Variables from Response
+#@access_token = {{requestProviderDestination.response.body.$.authTokens[0].value}}
+
+# @name requestEntities
+GET {{$dotenv papm_endpoint}}/sap/opu/odata4/NXI/P1_PROCESSING/
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv papm_endpoint}}/sap/opu/odata4/NXI/P1_PROCESSING/$metadata
+Authorization: Bearer {{access_token}}
