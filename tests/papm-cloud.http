@@ -9,7 +9,7 @@ grant_type=client_credentials
 #&response_type=token
 
 ### Fill Variables from Response
-@access_token = {{requestAccessToken.response.body.$.access_token}}
+#@access_token = {{requestAccessToken.response.body.$.access_token}}
 
 ### Get Access Token for Cloud Foundry using Password Grant
 # @name requestAccessTokenHANA
@@ -23,7 +23,7 @@ grant_type=password
 &password={{$dotenv password}}
 &client_id={{$dotenv clientid}}
 &response_type=token
-&login_hint={"origin":"sap.custom"}
+#&login_hint={"origin":"sap.custom"}
 ### Fill Variables from Response
 @user_access_token = {{requestAccessTokenHANA.response.body.$.access_token}}
 
@@ -47,11 +47,14 @@ GET {{$dotenv dest_uri}}/destination-configuration/v1/destinations/papm
 X-user-token: {{user_access_token}}
 Authorization: Bearer {{destination_access_token}}
 ### Fill Variables from Response
-#@access_token = {{requestProviderDestination.response.body.$.authTokens[0].value}}
+@access_token = {{requestProviderDestination.response.body.$.authTokens[0].value}}
 
 # @name requestEntities
 GET {{$dotenv papm_endpoint}}/sap/opu/odata4/NXI/P1_PROCESSING/
 Authorization: Bearer {{access_token}}
 ###
 GET {{$dotenv papm_endpoint}}/sap/opu/odata4/NXI/P1_PROCESSING/$metadata
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv papm_endpoint}}/sap/opu/odata4/NXI/P1_PROCESSING/ENV
 Authorization: Bearer {{access_token}}
