@@ -26,6 +26,8 @@ grant_type=password
 #&login_hint={"origin":"sap.custom"}
 ### Fill Variables from Response
 @user_access_token = {{requestAccessTokenHANA.response.body.$.access_token}}
+#@user_access_token = {{requestAccessTokenHANA.response.body.$.id_token}}
+
 
 ### Get Access Token for Destination Service
 # @name requestDestinationAccessToken
