@@ -290,6 +290,12 @@ annotate AdminService.Orders with @(UI: {
       Action: 'AdminService.Orders/Orders_checkConsistency',
       Inline: true
     },
+    {
+      $Type : 'UI.DataFieldForAction',
+      Action: 'AdminService.EntityContainer/sendmail',
+      Label : '{i18n>sendmail}',
+      Inline: true
+    },
   ],
   HeaderFacets                           : [
     {
