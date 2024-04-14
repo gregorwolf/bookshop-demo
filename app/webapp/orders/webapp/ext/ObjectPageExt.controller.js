@@ -1,39 +1,57 @@
 sap.ui.define(
-  ['sap/ui/core/mvc/ControllerExtension'],
-  function (ControllerExtension) {
-    'use strict';
-    return ControllerExtension.extend('orders.ext.ObjectPageExt', {
-      override: {
-        editFlow: {
-            onAfterEdit: function (mParameters) {
-                this.setButtonState();
-            },
-            onAfterSave: function (mParameters) {
-                this.setButtonState();
-            },
-            onAfterCreate: function (mParameters) {
-                this.setButtonState();
-            },
-        },
-        routing: {
-          // override onInit of base controller
-          onAfterBinding: function (bindingContext) {
-            this.setButtonState();
+    ['sap/ui/core/mvc/ControllerExtension'],
+    function (ControllerExtension) {
+      'use strict';
+  
+      return ControllerExtension.extend('orders.ext.ObjectPageExt', {
+        override: {
+          // Object that defines methods to override standard editing flow lifecycle hooks.
+          editFlow: {
+              // Called after the edit action has been performed.
+              onAfterEdit: function (mParameters) {
+                  // Update the button state based on the current data context.
+                  this.setButtonState();
+              },
+              // Called after the save action has been completed.
+              onAfterSave: function (mParameters) {
+                  // Update the button state based on the current data context.
+                  this.setButtonState();
+              },
+              // Called after a new entry has been created.
+              onAfterCreate: function (mParameters) {
+                  // Update the button state based on the current data context.
+                  this.setButtonState();
+              },
           },
+          routing: {
+            // Method to handle the binding context set up after navigation to this view.
+            onAfterBinding: function (bindingContext) {
+              // Update the button state based on the new binding context.
+              this.setButtonState();
+            },
+          }
+        },
+        
+        // Utility function to set the state of a specific button based on the entity's properties.
+        setButtonState: function () {
+          // Retrieve the button control using its ID.
+          const button = this.base.getView().byId('orders::OrdersObjectPage--fe::DataFieldForAction::AdminService.EntityContainer::sendmail');
+          // Get the current binding context of the view.
+          const bindingContext = this.base.getView().getBindingContext();
+          
+          // Request the actual object bound to the context asynchronously.
+          bindingContext.requestObject().then(function(dataObject) {
+              // Check specific properties of the data object to determine the button's enabled state.
+              // Disable the button if both IsActiveEntity and HasActiveEntity are false (indicating a draft record).
+              if (!dataObject.IsActiveEntity && !dataObject.HasActiveEntity) {
+                  button.setEnabled(false);
+              } else {
+                  // Enable the button otherwise.
+                  button.setEnabled(true);
+              }
+          });
         }
-      },
-      setButtonState: function () {
-        const button = this.base.getView().byId('orders::OrdersObjectPage--fe::DataFieldForAction::AdminService.EntityContainer::sendmail');
-        const bindingContext = this.base.getView().getBindingContext();
-        bindingContext.requestObject().then(function(dataObject) {
-            // if IsActiveEntity and HasActiveEntity is false, then the record is draft so deactivate the button
-            if (!dataObject.IsActiveEntity && !dataObject.HasActiveEntity) {
-                button.setEnabled(false);
-            } else {
-                button.setEnabled(true);
-            }
-        });
-      }
-    });
-  } 
-);
+      });
+    } 
+  );
+  
