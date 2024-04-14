@@ -294,7 +294,13 @@ annotate AdminService.Orders with @(UI: {
       $Type : 'UI.DataFieldForAction',
       Action: 'AdminService.EntityContainer/sendmail',
       Label : '{i18n>sendmail}',
-      Inline: true
+    /*
+    // path does not exist
+    ![@UI.Hidden]: {$edmJson: {$Eq: [
+      {$Path: 'in/IsActiveEntity'},
+      true
+    ]}},
+    */
     },
   ],
   HeaderFacets                           : [
