@@ -54,7 +54,7 @@
     "@sap/ux-specification": "^1.120.0",
     "artillery": "2.0.3",
     "cds-swagger-ui-express": "^0",
-    "chai": "^5",
+    "chai": "^4",
     "chai-as-promised": "^7.1.1",
     "chai-subset": "^1.6.0",
     "copyfiles": "2.4.1",
