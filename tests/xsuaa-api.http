@@ -56,3 +56,26 @@ Authorization: Basic admin:
 # @name readUsersSDK
 GET http://localhost:4004/odata/v4/admin/readUsersSDK()
 Authorization: Basic admin:
+
+### https://api.sap.com/api/TrustConfigurationAPI/overview
+### Get the Origin Key
+GET {{$dotenv xsuaa_apiaccess_apiurl}}/sap/rest/identity-providers
+Authorization: Bearer {{access_token}}
+### Read Role Collection Attribute Mappings
+# @name readRoleCollectionAttributeMappings
+GET {{$dotenv xsuaa_apiaccess_apiurl}}/sap/rest/authorization/v2/identity-providers/{{$dotenv xsuaa_apiaccess_originKey}}/attributes/rolecollections
+Authorization: Bearer {{access_token}}
+### Delete Role Collection Attribute Mapping
+DELETE {{$dotenv xsuaa_apiaccess_apiurl}}/sap/rest/authorization/v2/identity-providers/{{$dotenv xsuaa_apiaccess_originKey}}/attributes/{{$dotenv attributeName}}/{{$dotenv comparisonOperator}}/{{$dotenv attributeValue}}/rolecollections/{{$dotenv roleCollectionName}}
+Authorization: Bearer {{access_token}}
+### Create Role Collection Attribute Mapping
+POST {{$dotenv xsuaa_apiaccess_apiurl}}/sap/rest/authorization/v2/identity-providers/{{$dotenv xsuaa_apiaccess_originKey}}/attributes
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+   "attributeName": "{{$dotenv attributeName}}",
+   "attributeValue": "{{$dotenv attributeValue}}",
+   "operator": "{{$dotenv comparisonOperator}}",
+   "roleCollectionName": "{{$dotenv roleCollectionName}}"
+}
