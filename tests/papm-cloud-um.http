@@ -1,0 +1,24 @@
+###
+GET {{$dotenv papm_um_endpoint}}/sap/ace/ProcessService/Activities(ID='37ea6adf-5562-492d-95a0-7f6e5677603c',IsActiveEntity=true)
+Authorization: Basic bob:
+###
+PATCH {{$dotenv papm_um_endpoint}}/sap/ace/ProcessService/Activities(ID='37ea6adf-5562-492d-95a0-7f6e5677603c',IsActiveEntity=true)
+Authorization: Basic bob:
+Content-Type: application/json
+
+{
+  "description": "Manage Companies"
+}
+
+###
+GET {{$dotenv papm_um_endpoint}}/sap/ace/ProcessService/Activities(ID='37ea6adf-5562-492d-95a0-7f6e5677603c',IsActiveEntity=true)/fields(ID='cf941f1b-267b-4bb9-bce6-592d4811b0d8',IsActiveEntity=true)/selections(ID='ddb0cb92-c24d-4c38-9194-8be3ad828ac7',IsActiveEntity=true)
+Authorization: Basic bob:
+###
+PATCH {{$dotenv papm_um_endpoint}}/sap/ace/ProcessService/Activities(ID='37ea6adf-5562-492d-95a0-7f6e5677603c',IsActiveEntity=true)/fields(ID='cf941f1b-267b-4bb9-bce6-592d4811b0d8',IsActiveEntity=true)/selections(ID='ddb0cb92-c24d-4c38-9194-8be3ad828ac7',IsActiveEntity=true)
+Authorization: Basic bob:
+Content-Type: application/json
+
+{
+  "low": "2022",
+  "high": "2024"
+}
