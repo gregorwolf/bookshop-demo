@@ -26,6 +26,10 @@ Content-Type: application/json
    "note": "{{$dotenv ads_formdescription}}"
 }
 ###
+# @name getTemplate
+GET {{$dotenv ads_endpoint}}/v1/forms/{{$dotenv ads_formname}}/templates
+Authorization: Bearer {{access_token}}
+###
 # @name addTemplate
 POST {{$dotenv ads_endpoint}}/v1/forms/{{$dotenv ads_formname}}/templates
 Authorization: Bearer {{access_token}}
