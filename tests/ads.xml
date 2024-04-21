@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record>
+  <id>10897934</id>
+  <slug>ti_pSTTkKVGTCcLCiQ5zDkI1Jw</slug>
+  <name>Gregor Wolf</name>
+  <company_name>CSW</company_name>
+  <first_name>Gregor</first_name>
+  <last_name>Wolf</last_name>
+  <release_title>VIP</release_title>
+  <email>test@dummy.org</email>
+  <reference>LEIW-1</reference>
+  <registration_reference>LEIW</registration_reference>
+  <checked_in>true</checked_in>
+  <checked_in_at>2024-04-16T22:06:46.000Z</checked_in_at>
+  <checkin_list>
+    <slug>chk_pdmHShkOFttHmz7KHYNZ42w</slug>
+    <title>Test Check In</title>
+  </checkin_list>
+  <checkin_uuid>096445b1-b1ca-42cb-aae2-f038a8e7f504</checkin_uuid>
+  <custom />
+  <event>
+    <slug>ticketing-test</slug>
+    <title>Ticketing Test</title>
+  </event>
+  <answers />
+</record>
+ 
