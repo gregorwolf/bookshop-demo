@@ -24,7 +24,7 @@ Authorization: Bearer {{access_token}}
 POST {{$dotenv print_endpoint}}/dm/api/v1/rest/print-documents
 Authorization: Bearer {{access_token}}
 
-< ./app/Test.pdf
+< ./ads.pdf
 ###
 @document={{createDocument.response.body.*}}
 ###
@@ -48,7 +48,7 @@ Content-Type: application/json
    "printContents": [
       {
          "objectKey": "{{document}}",
-         "documentName": "Test.pdf"
+         "documentName": "ads.pdf"
       }
    ]
 }
