@@ -1,0 +1,54 @@
+### Get Access Token using Client Credentials Flow
+# @name requestAccessToken
+POST {{$dotenv print_token_endpoint}}/oauth/token
+Authorization: Basic {{$dotenv print_clientid}}:{{$dotenv print_clientsecret}}
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+#&response_type=token
+
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+###
+# @name getQueues
+GET {{$dotenv print_endpoint}}/qm/api/v1/rest/queues
+Authorization: Bearer {{access_token}}
+###
+@queue={{getQueues.response.body.$[0].qname}}
+@techUserName={{getQueues.response.body.$[0].techUserName}}
+@creator={{getQueues.response.body.$[0].creator}}
+###
+# @name createDocument
+POST {{$dotenv print_endpoint}}/dm/api/v1/rest/print-documents
+Authorization: Bearer {{access_token}}
+
+< ./app/Test.pdf
+###
+@document={{createDocument.response.body.*}}
+###
+PUT {{$dotenv print_endpoint}}/qm/api/v1/rest/print-tasks/{{document}}
+Authorization: Bearer {{access_token}}
+If-None-Match: *
+Content-Type: application/json
+
+{
+   "numberOfCopies": 1,
+   "username": "{{techUserName}}",
+   "qname": "{{queue}}",
+   "profileName": "Defaults",
+   "metadata": {
+      "business_metadata": {
+         "business_user": "{{creator}}",
+         "object_node_type": "object_node_1"
+      },
+      "version": 1.2
+   },
+   "printContents": [
+      {
+         "objectKey": "{{document}}",
+         "documentName": "Test.pdf"
+      }
+   ]
+}
