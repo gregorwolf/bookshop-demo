@@ -1,0 +1,137 @@
+### Get Access Token using Client Credentials Flow
+# @name requestAccessToken
+POST {{$dotenv datasphere_token_endpoint}}
+Authorization: Basic {{$dotenv datasphere_clientid}}:{{$dotenv datasphere_clientsecret}}
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+###
+# @name getUsers
+GET {{$dotenv datasphere_endpoint}}/api/v1/scim/Users?count=1
+Authorization: Bearer {{access_token}}
+X-Sap-Sac-Custom-Auth: true
+x-csrf-token: fetch
+### Read Token to Variable
+@CSRF={{getUsers.response.headers.x-csrf-token}}
+@ID={{getUsers.response.body.Resources[0].userName}}
+###
+# @name getUser
+GET {{$dotenv datasphere_endpoint}}/api/v1/scim/Users/{{ID}}
+Authorization: Bearer {{access_token}}
+X-Sap-Sac-Custom-Auth: true
+### German
+PUT {{$dotenv datasphere_endpoint}}/api/v1/scim/Users/{{ID}}
+Authorization: Bearer {{access_token}}
+X-Sap-Sac-Custom-Auth: true
+x-csrf-token: {{CSRF}}
+Content-Type: application/json
+
+{
+  "schemas": [
+    "urn:ietf:params:scim:schemas:core:2.0:User",
+    "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User",
+    "urn:ietf:params:scim:schemas:extension:sap:user-custom-parameters:1.0"
+  ],
+  "userName": "GWOLF",
+  "id": "GWOLF",
+  "preferredLanguage": "de",
+  "meta": {
+    "created": "2024-04-10T21:59:27.491Z",
+    "location": "/api/v1/scim/Users/GWOLF",
+    "resourceType": "User"
+  },
+  "name": {
+    "givenName": "Gregor",
+    "familyName": "Wolf"
+  },
+  "displayName": "Gregor Wolf (CSW)",
+  "active": true,
+  "emails": [
+    {
+      "value": "{{$dotenv datasphere_email}}",
+      "type": "work",
+      "primary": true
+    }
+  ],
+  "photos": [],
+  "roles": [
+    "PROFILE:sap.epm:System_Owner"
+  ],
+  "groups": [],
+  "urn:ietf:params:scim:schemas:extension:sap:user-custom-parameters:1.0": {
+    "dataAccessLanguage": "de",
+    "dateFormatting": "dd.MM.yyyy",
+    "timeFormatting": "H:mm:ss",
+    "numberFormatting": "1.234,56",
+    "cleanUpNotificationsNumberOfDays": 0,
+    "systemNotificationsEmailOptIn": true,
+    "marketingEmailOptIn": false,
+    "isConcurrent": false,
+    "extensionProperty1": ""
+  },
+  "urn:scim:schemas:extension:enterprise:1.0": {
+    "manager": {
+      "managerId": ""
+    }
+  }
+}
+### English
+PUT {{$dotenv datasphere_endpoint}}/api/v1/scim/Users/{{ID}}
+Authorization: Bearer {{access_token}}
+X-Sap-Sac-Custom-Auth: true
+x-csrf-token: {{CSRF}}
+Content-Type: application/json
+
+{
+  "schemas": [
+    "urn:ietf:params:scim:schemas:core:2.0:User",
+    "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User",
+    "urn:ietf:params:scim:schemas:extension:sap:user-custom-parameters:1.0"
+  ],
+  "userName": "GWOLF",
+  "id": "GWOLF",
+  "preferredLanguage": "en",
+  "meta": {
+    "created": "2024-04-10T21:59:27.491Z",
+    "location": "/api/v1/scim/Users/GWOLF",
+    "resourceType": "User"
+  },
+  "name": {
+    "givenName": "Gregor",
+    "familyName": "Wolf"
+  },
+  "displayName": "Gregor Wolf (CSW)",
+  "active": true,
+  "emails": [
+    {
+      "value": "{{$dotenv datasphere_email}}",
+      "type": "work",
+      "primary": true
+    }
+  ],
+  "photos": [],
+  "roles": [
+    "PROFILE:sap.epm:System_Owner"
+  ],
+  "groups": [],
+  "urn:ietf:params:scim:schemas:extension:sap:user-custom-parameters:1.0": {
+    "dataAccessLanguage": "en",
+    "dateFormatting": "MMM d, yyyy",
+    "timeFormatting": "H:mm:ss",
+    "numberFormatting": "1,234.56",
+    "cleanUpNotificationsNumberOfDays": 0,
+    "systemNotificationsEmailOptIn": true,
+    "marketingEmailOptIn": false,
+    "isConcurrent": false,
+    "extensionProperty1": ""
+  },
+  "urn:scim:schemas:extension:enterprise:1.0": {
+    "manager": {
+      "managerId": ""
+    }
+  }
+}
