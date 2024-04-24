@@ -28,7 +28,16 @@ sap.ui.define(
             onAfterBinding: function (bindingContext) {
               // Update the button state based on the new binding context.
               this.setButtonState();
-            },
+              // Get the current binding context of the view.
+              const bindingContext2 = this.base.getView().getBindingContext();
+              if(bindingContext.getBinding().getPath().startsWith("/Orders")){
+                bindingContext2.requestObject().then(
+                  function (dataObject) {
+                    this.base.editFlow.editDocument(bindingContext2)
+                  }.bind(this)
+                );
+              }
+              },
           }
         },
         
