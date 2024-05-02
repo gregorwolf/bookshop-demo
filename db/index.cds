@@ -26,3 +26,4 @@ using from '../srv/admin-service';
 using from '../srv/cat-service';
 using from '../srv/iot-service';
 using from './maintainer-group';
+using from './attachments';
