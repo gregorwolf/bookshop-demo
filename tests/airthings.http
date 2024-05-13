@@ -1,0 +1,62 @@
+### Get Access Token using Client Credentials Flow
+# @name requestAccessToken
+POST {{$dotenv airthings_token_endpoint}}
+Authorization: Basic {{$dotenv airthings_cc_clientid}}:{{$dotenv airthings_cc_clientsecret}}
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+#&response_type=token
+
+### Fill Variables from Response
+#@access_token={{requestAccessToken.response.body.$.access_token}}
+###
+GET {{$dotenv airthings_endpoint}}/v1/accounts
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv airthings_endpoint}}/v1/devices
+Authorization: Bearer {{access_token}}
+
+
+###
+GET {{$dotenv airthings_authorize_endpoint}}
+  ?client_id={{$dotenv airthings_code_clientid}}
+  &redirect_uri={{$dotenv airthings_redirect_uri}}
+###
+
+
+###
+# @name requestAccessTokenCodeFlow
+POST {{$dotenv airthings_token_endpoint}}
+Authorization: Basic {{$dotenv airthings_code_clientid}}:{{$dotenv airthings_code_clientsecret}}
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+	"grant_type": "authorization_code",
+	"client_id": "{{$dotenv airthings_code_clientid}}",
+	"client_secret": "{{$dotenv airthings_code_clientsecret}}",
+	"code": "{{$dotenv airthings_code}}",
+	"redirect_uri": "{{$dotenv airthings_redirect_uri}}"
+}
+### Fill Variables from Response
+@access_token={{requestAccessTokenCodeFlow.response.body.$.access_token}}
+@refresh_token={{requestAccessTokenCodeFlow.response.body.$.refresh_token}}
+
+# @name requestAccessTokeRefresh
+POST {{$dotenv airthings_token_endpoint}}
+Authorization: Basic {{$dotenv airthings_code_clientid}}:{{$dotenv airthings_code_clientsecret}}
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+	"grant_type": "refresh_token",
+	"client_id": "{{$dotenv airthings_code_clientid}}",
+	"client_secret": "{{$dotenv airthings_code_clientsecret}}",
+	"refresh_token": "{{refresh_token}}"
+}
+### Fill Variables from Response
+@new_access_token={{requestAccessTokeRefresh.response.body.$.access_token}}
+###
+GET {{$dotenv airthings_endpoint}}/v1/devices
+Authorization: Bearer {{new_access_token}}
