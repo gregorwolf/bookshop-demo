@@ -132,6 +132,8 @@ annotate AdminService.Roles with @(UI: {
     {Value: rolename},
     {Value: description},
     {Value: CompanyCode},
+    {Value: count},
+
   ]},
   FieldGroup #Authorizations: {Data: [
     {Value: read},
