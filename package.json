@@ -29,7 +29,7 @@
     "@sap/jobs-client": "^1",
     "@sap/logging": "^8",
     "@sap/xsenv": "^5",
-    "@sap/xssec": "^3",
+    "@sap/xssec": "^4",
     "async-retry": "^1",
     "cf-http-client": "^1",
     "cmis": "^1",
@@ -47,7 +47,7 @@
   "devDependencies": {
     "@cap-js/sqlite": "^1",
     "@openui5/ts-types": "^1.108.0",
-    "@sap-cloud-sdk/generator": "^1.54.2",
+    "@sap-cloud-sdk/generator": "^3",
     "@sap/cds-dk": "^7",
     "@sap/datasphere-cli": "^2024",
     "@sap/graph-toolkit": "^3",
