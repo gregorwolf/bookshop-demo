@@ -32,6 +32,7 @@ annotate AdminService.Roles with @(UI: {
     {Value: rolename},
     {Value: description},
     {Value: count},
+    {Value: priority},
     {Value: createdAt},
     {Value: modifiedAt},
     {
@@ -133,7 +134,7 @@ annotate AdminService.Roles with @(UI: {
     {Value: description},
     {Value: CompanyCode},
     {Value: count},
-
+    {Value: priority},
   ]},
   FieldGroup #Authorizations: {Data: [
     {Value: read},

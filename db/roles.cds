@@ -8,6 +8,13 @@ using {
 
 type BusinessObject : String(255);
 
+type Priority       : Decimal
+@title       : '{i18n>priority}'
+@assert.range: [
+  0,
+  10
+];
+
 entity Roles : cuid, managed {
   @mandatory
   @assert.format: 'r_[a-z]'
@@ -19,6 +26,7 @@ entity Roles : cuid, managed {
   @assert.format: '^([A-Z,0-9]{4})$'
   CompanyCode     : String                         @(title: '{i18n>CompanyCode}', );
   count           : Integer                        @(title: '{i18n>count}', );
+  priority        : Priority;
   read            : Boolean                        @(title: '{i18n>Read}', );
   authcreate      : Boolean                        @(title: '{i18n>Create}', );
   authupdate      : Boolean                        @(title: '{i18n>Update}', );
