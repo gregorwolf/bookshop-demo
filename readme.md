@@ -82,7 +82,7 @@ npm run deploy:hana
 This should write the needed information to `.cdsrc-private.json`. When you have deployed the application already to BTP Cloud Foundry you can run:
 
 ```
-cds bind -2 bookshop-demo-db-service --profile hybrid
+cds bind -2 bookshop-demo-db-service --for hybrid
 ```
 
 to reuse the existing HDI container. Then you can use:
