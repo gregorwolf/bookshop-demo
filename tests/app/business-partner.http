@@ -19,6 +19,9 @@ GET {{$dotenv saperp}}/sap/opu/odata/iwbep/GWSAMPLE_BASIC/BusinessPartnerSet
 Authorization: Basic {{$dotenv saperpusername}}:{{$dotenv saperppassword}}
 Accept: application/json
 ###
+GET https://sapes5.sapdevcenter.com/sap/opu/odata/iwbep/GWSAMPLE_BASIC/
+Accept: application/json
+###
 GET https://sapes5.sapdevcenter.com/sap/opu/odata/iwbep/GWSAMPLE_BASIC/$metadata
 Authorization: Basic {{$dotenv es5username}}:{{$dotenv es5password}}
 ###
