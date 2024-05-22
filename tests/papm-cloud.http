@@ -60,3 +60,6 @@ Authorization: Bearer {{access_token}}
 ###
 GET {{$dotenv papm_endpoint}}/sap/opu/odata4/NXI/P1_PROCESSING/ENV
 Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv papm_endpoint}}/sap/opu/odata4/NXI/P1_PROCESSING/ALMSG
+Authorization: Bearer {{access_token}}
