@@ -7,7 +7,7 @@ const xsenv = require("@sap/xsenv");
 const express = require("express");
 const SDKUtil = require("@sap-cloud-sdk/util");
 // const mqtt = require("./mqtt");
-const fesr = require("@sap/fesr-to-otel-js");
+// const fesr = require("@sap/fesr-to-otel-js");
 
 var xsuaaCredentials = false;
 if (process.env.NODE_ENV === "production") {
@@ -110,7 +110,7 @@ cds.on("bootstrap", async (app) => {
 
   // app.use(replaceExcelAcceptHeader)
   app.use(sapJobLogger);
-  fesr.registerFesrEndpoint(app);
+  // fesr.registerFesrEndpoint(app);
 
   // Authentication using JWT
   if (process.env.NODE_ENV === "production") {
