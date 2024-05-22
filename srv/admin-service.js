@@ -664,9 +664,12 @@ module.exports = async function (srv) {
     return validateValidityCreate(req);
   });
 
+  /*
+  // Deactivate to make mass updates possible
   srv.before("UPDATE", "Roles", (req) => {
     return validateValidityUpdate(req);
   });
+  */
 
   srv.before("CREATE", "Users", (req) => {
     return validateValidityCreate(req);
