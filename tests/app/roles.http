@@ -21,6 +21,17 @@ Authorization: Basic admin:
 ### Read Roles via OData V4
 GET http://localhost:4004/odata/v4/admin/Roles
 Authorization: Basic admin:
+###
+PATCH http://localhost:4004/odata/v4/admin/Roles(ID=009bb7fa-43ef-4e4a-85b1-5a9ea692a5b6,IsActiveEntity=true)
+Authorization: Basic admin:
+Accept: application/json;odata.metadata=minimal;IEEE754Compatible=true
+Accept-Language: en
+Prefer: return=minimal
+Content-Type: application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+  "description":"Role for Orders and Book"
+}
 ### Read Roles Expanded to  via OData V4
 GET http://localhost:4004/odata/v4/admin/Roles?$expand=BusinessObjects,Users
 Authorization: Basic admin:
