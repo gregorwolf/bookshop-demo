@@ -15,9 +15,7 @@
         "uri": "/odata/v4/admin/",
         "type": "OData",
         "settings": {
-          "annotations": [
-            "annotation"
-          ],
+          "annotations": ["annotation"],
           "localUri": "localService/metadata.xml",
           "odataVersion": "4.0"
         }
@@ -107,6 +105,14 @@
                 "Roles": {
                   "detail": {
                     "route": "RolesObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "selectAll": true,
+                    "enableMassEdit": true
                   }
                 }
               }

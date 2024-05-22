@@ -1,4 +1,4 @@
 ID;count;rolename;description
-009bb7fa-43ef-4e4a-85b1-5a9ea692a5b6;1;OrdersAndBooks;Role for Orders and Books
-009bb7fa-43ef-4e4a-85b1-5a9ea692a5b7;2;RoleForLittleadmin;Role for Littleadmin
-009bb7fa-43ef-4e4a-85b1-5a9ea692a5b8;3;RoleForAdmin;Role for Admin
+009bb7fa-43ef-4e4a-85b1-5a9ea692a5b6;1;r_orders_and_books;Role for Orders and Books
+009bb7fa-43ef-4e4a-85b1-5a9ea692a5b7;2;r_for_little_admin;Role for Littleadmin
+009bb7fa-43ef-4e4a-85b1-5a9ea692a5b8;3;r_for_admin;Role for Admin
