@@ -42,3 +42,12 @@ Authorization: Bearer {{access_token}}
 ### Profile Picture
 GET https://graph.microsoft.com/v1.0/users/{{$dotenv msgraph_mail_from}}/photo/$value
 Authorization: Bearer {{access_token}}
+###
+GET https://graph.microsoft.com/v1.0/users?$top=1
+Authorization: Bearer {{access_token}}
+###
+GET https://graph.microsoft.com/v1.0/users/{{$dotenv msgraph_mail_from}}
+Authorization: Bearer {{access_token}}
+###
+GET https://graph.microsoft.com/v1.0/users?$top=1
+Authorization: Bearer {{$dotenv msgraph_mail_token}}
