@@ -104,6 +104,7 @@ entity BooksAuthorsAssignment {
 }
 
 @cds.autoexpose
+// @sql.append: 'partition by HASH(ID) PARTITIONS 4'
 entity Authors : managed {
   key ID                                   : Integer;
       name                                 : String(111);
