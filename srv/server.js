@@ -13,7 +13,7 @@ var xsuaaCredentials = false;
 if (process.env.NODE_ENV === "production") {
   try {
     xsenv.loadEnv();
-    const JWTStrategy = require("@sap/xssec").JWTStrategy;
+    const JWTStrategy = require("@sap/xssec").v3.JWTStrategy;
     const services = xsenv.getServices({ xsuaa: { tags: "xsuaa" } });
     xsuaaCredentials = services.xsuaa;
     const jwtStrategy = new JWTStrategy(xsuaaCredentials);
