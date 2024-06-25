@@ -38,7 +38,7 @@ modules:
       SAP_CALM_SERVICE_NAME: bookshop-demo
       SAP_CALM_SERVICE_TYPE: SAP_CP_CF
       OTEL_RESOURCE_ATTRIBUTES: sap.tenancy.tenant_id=85d309ba-f66d-4775-b927-9a95dfc89a1e
-      NODE_ARGS: -r @sap/xotel-agent-ext-js/dist/common/tracer
+    #  NODE_ARGS: -r @sap/xotel-agent-ext-js/dist/common/tracer
     parameters:
       memory: 256M
       disk-quota: 1024M
