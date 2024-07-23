@@ -1,0 +1,2 @@
+GET {{$dotenv ias_apps_endpoint}}/Applications/v1/
+Authorization: Basic {{$dotenv ias_apps_username}}:{{$dotenv ias_apps_password}}
