@@ -1,0 +1,56 @@
+@BusinessObjectTypeName=BUS1006
+@BusinessPartner=1000000
+### metadata
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+
+### EntitySets
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/A_BusinessPartner
+  ?$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAttachmentCount
+  ?BusinessObjectTypeName='{{BusinessObjectTypeName}}'
+  &LinkedSAPObjectKey='{{BusinessPartner}}'
+  &SemanticObject=''
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### Read all existing attachments
+# @name getAllOriginals
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAllOriginals
+  ?BusinessObjectTypeName='{{BusinessObjectTypeName}}'
+  &LinkedSAPObjectKey='{{BusinessPartner}}'
+  &SemanticObject=''
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+@media_src={{getAllOriginals.response.body.d.results[0].__metadata.media_src}}
+### Read first existing attachment
+GET {{media_src}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Get CSRF Token
+# @name getCSRF
+HEAD {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+X-CSRF-Token: Fetch
+### Read Token to Variable
+@csrf={{getCSRF.response.headers.x-csrf-token}}
+
+### Create Attachment in GOS
+# @name createAttachment
+POST {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/AttachmentContentSet
+X-CSRF-Token: {{csrf}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept-Language: en
+Accept: application/json
+Content-Type: application/pdf
+Slug: Test.pdf
+BusinessObjectTypeName: {{BusinessObjectTypeName}}
+LinkedSAPObjectKey: {{BusinessPartner}}
+
+< ./Test.pdf
