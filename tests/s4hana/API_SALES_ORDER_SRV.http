@@ -11,14 +11,14 @@ GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_SALES_ORDER_SR
 APIKey: {{$dotenv apikey}}
 Accept: application/json
 ### S/4HANA Cloud
-GET {{$dotenv s4hanacloud}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/
-Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
-GET {{$dotenv s4hanacloud}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/$metadata
-Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
-GET {{$dotenv s4hanacloud}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder
   ?$top=10
   &$skip=9
-Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json

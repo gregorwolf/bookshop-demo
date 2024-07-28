@@ -1,0 +1,29 @@
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/APS_IAM_CUSR_SRV/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/APS_IAM_CUSR_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Get CSRF Token
+# @name getCSRF
+HEAD {{$dotenv s4hanahost}}/sap/opu/odata/sap/APS_IAM_CUSR_SRV
+X-CSRF-Token: Fetch
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Read Token to Variable
+@csrf={{getCSRF.response.headers.x-csrf-token}}
+
+###
+POST {{$dotenv s4hanahost}}/sap/opu/odata/sap/APS_IAM_CUSR_SRV/aps_iam_cusr_ddl
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+X-CSRF-Token: {{csrf}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "UserName":"TEST2",
+  "Description":"Test 2",
+  "Secret":"test01",
+  "AddCertificateMapping":"[]",
+  "__metadata":{"type":"APS_IAM_CUSR_SRV.aps_iam_cusr_ddlType"}
+}
