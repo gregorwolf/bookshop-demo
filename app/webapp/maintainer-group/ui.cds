@@ -8,6 +8,27 @@ annotate my.Maintainer with {
   ID @Core.Computed;
 }
 
+annotate my.MaintainerGroup with @(
+  UI.SelectionPresentationVariant #Default: {
+    Text               : 'Default',
+    SelectionVariant   : {
+      Text         : 'Default',
+      SelectOptions: []
+    },
+    PresentationVariant: ![@UI.PresentationVariant]
+  },
+
+  UI.PresentationVariant                  : {
+    MaxItems      : 2,
+    Visualizations: ['@UI.LineItem'],
+    SortOrder     : [{
+      Property  : description,
+      Descending: false,
+    }, ],
+    GroupBy       : [{$value: responsible.ID}]
+  }
+);
+
 annotate my.MaintainerGroup with @(UI: {
   Identification         : [{Value: description}],
   SelectionFields        : [description],
@@ -69,7 +90,7 @@ annotate my.Maintainer with @(UI: {
     ValueListMapping #default: {
       CollectionPath: 'Employees',
       Label         : 'Default',
-      Parameters    : [
+      parameters    : [
         {
           $Type            : 'Common.ValueListParameterInOut',
           LocalDataProperty: employee_ID,
@@ -92,7 +113,7 @@ annotate my.Maintainer with @(UI: {
     ValueListMapping #byName : {
       CollectionPath: 'Employees',
       Label         : 'By Name',
-      Parameters    : [
+      parameters    : [
         {
           $Type            : 'Common.ValueListParameterInOut',
           LocalDataProperty: employee_ID,

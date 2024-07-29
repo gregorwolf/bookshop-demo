@@ -96,17 +96,12 @@
         {
           "pattern": ":?query:",
           "name": "MaintainerGroupList",
-          "target": [
-            "MaintainerGroupList"
-          ]
+          "target": ["MaintainerGroupList"]
         },
         {
           "pattern": "MaintainerGroup({key}):?query:",
           "name": "MaintainerObjectPage",
-          "target": [
-            "MaintainerGroupList",
-            "MaintainerObjectPage"
-          ]
+          "target": ["MaintainerGroupList", "MaintainerObjectPage"]
         }
       ],
       "targets": {
@@ -117,6 +112,7 @@
           "options": {
             "settings": {
               "entitySet": "MaintainerGroup",
+              "defaultTemplateAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#Default",
               "variantManagement": "Page",
               "initialLoad": "Enabled",
               "navigation": {
