@@ -10,4 +10,7 @@ service PublicService {
   @readonly entity Authors as projection on db.Authors excluding {
     createdBy, modifiedBy
   };
+
+  // Funciton to read locale
+  function getLocale() returns String;
 }

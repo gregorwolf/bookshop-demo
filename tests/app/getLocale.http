@@ -1,0 +1,6 @@
+###
+GET http://localhost:4004/public/getLocale()
+Accept-Language: zh-CN
+###
+GET http://localhost:4004/public/getLocale()
+Accept-Language: zh-CN, de;q=0.9, en;q=0.8
