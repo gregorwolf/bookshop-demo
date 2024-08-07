@@ -1,3 +1,6 @@
+### Read Metadata via OData V2
+GET http://localhost:4004/odata/v2/admin/$metadata
+Authorization: Basic admin:
 ### Read Metadata via OData V4
 GET http://localhost:4004/odata/v4/admin/$metadata
 Authorization: Basic admin:
@@ -163,3 +166,15 @@ Accept: application/json
 Content-Type: application/json
 
 {}
+### parameterized view
+GET http://localhost:4004/odata/v4/admin/OrderReport('EUR')/Set
+Authorization: Basic admin:
+### what is the correct path to read a single entity of a parameterized view?
+GET http://localhost:4004/odata/v4/admin/OrderReportSet(currency='EUR')/Set(ID=guid'64e718c9-ff99-47f1-8ca3-950c850777d4')
+Authorization: Basic admin:
+###
+GET http://localhost:4004/odata/v2/admin/OrderReport('EUR')/Set
+Authorization: Basic admin:
+### This path works for OData V2
+GET http://localhost:4004/odata/v2/admin/OrderReportSet(currency='EUR',ID=guid'64e718c9-ff99-47f1-8ca3-950c850777d4')
+Authorization: Basic admin:

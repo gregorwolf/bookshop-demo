@@ -11,10 +11,11 @@ service AdminService @(
   ]
 ) {
   @odata.draft.enabled
-  entity Approval                as projection on db.Approval actions {
-                                      action approve();
-                                      action rejection();
-                                    };
+  entity Approval                as projection on db.Approval
+    actions {
+      action approve();
+      action rejection();
+    };
 
   @cds.redirection.target
   entity Books @(
@@ -85,6 +86,7 @@ service AdminService @(
   entity Genres                  as projection on db.Genres;
 
   @odata.draft.enabled
+  @cds.redirection.target
   @UI.CreateHidden: {$edmJson: {$Path: '/AdminService.EntityContainer/Authorizations.is_admin'}}
   /*
   @Common.SideEffects #effect: {
@@ -110,7 +112,8 @@ service AdminService @(
       )            as ComputedTotalWithTax : Decimal(15, 2),
       virtual null as VirtualTotalWithTax  : Decimal(15, 2),
       *
-    } actions {
+    }
+    actions {
       action deleteOrder();
       action checkConsistency();
       @(
@@ -169,14 +172,15 @@ service AdminService @(
   entity Roles @(restrict: [{
     grant: ['*'],
     to   : 'roleadmin'
-  }, ])                          as projection on db.Roles actions {
-                                      @cds.odata.bindingparameter.collection
-                                      action createDraftRole(rolename : String not null, description : String not null) returns Roles;
-                                      @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Roles'])
-                                      action countUp()                                                                  returns Roles;
-                                      @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Roles'])
-                                      action countDown()                                                                returns Roles;
-                                    };
+  }, ])                          as projection on db.Roles
+    actions {
+      @cds.odata.bindingparameter.collection
+      action createDraftRole(rolename : String not null, description : String not null) returns Roles;
+      @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Roles'])
+      action countUp()                                                                  returns Roles;
+      @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Roles'])
+      action countDown()                                                                returns Roles;
+    };
 
   //------- auto-exposed --------
   entity Role_BusinessObject     as projection on db.Role_BusinessObject;
