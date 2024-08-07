@@ -31,6 +31,7 @@ annotate AdminService.Roles with @(UI: {
   LineItem                  : [
     {Value: rolename},
     {Value: description},
+    {Value: CompanyCode_ID},
     {Value: count},
     {Value: priority},
     {Value: createdAt},
@@ -132,7 +133,7 @@ annotate AdminService.Roles with @(UI: {
   FieldGroup #Description   : {Data: [
     {Value: rolename},
     {Value: description},
-    {Value: CompanyCode},
+    {Value: CompanyCode_ID},
     {Value: count},
     {Value: priority},
   ]},

@@ -1,4 +1,6 @@
-ID;count;priority;rolename;description
-009bb7fa-43ef-4e4a-85b1-5a9ea692a5b6;1;1;r_orders_and_books;Role for Orders and Books
-009bb7fa-43ef-4e4a-85b1-5a9ea692a5b7;2;2;r_for_little_admin;Role for Littleadmin
-009bb7fa-43ef-4e4a-85b1-5a9ea692a5b8;3;3;r_for_admin;Role for Admin
+ID;count;priority;CompanyCode_ID;rolename;description
+009bb7fa-43ef-4e4a-85b1-5a9ea692a5b6;1;1;0001;r_orders_and_books;Role for Orders and Books
+009bb7fa-43ef-4e4a-85b1-5a9ea692a5b7;2;2;0002;r_for_little_admin;Role for Littleadmin
+009bb7fa-43ef-4e4a-85b1-5a9ea692a5b8;3;3;0001;r_for_admin;Role for Admin
+009bb7fa-43ef-4e4a-85b1-5a9ea692a5b9;4;4;;r_for_admin2;Role for Admin
+009bb7fa-43ef-4e4a-85b1-5a9ea692a5b0;5;5;0001;r_for_admin3; 

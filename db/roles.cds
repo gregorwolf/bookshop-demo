@@ -3,7 +3,8 @@ namespace my.bookshop;
 using {
   managed,
   cuid,
-  User
+  User,
+  sap.common.CodeList as CodeList,
 } from '@sap/cds/common';
 
 type BusinessObject : String(255);
@@ -15,16 +16,19 @@ type Priority       : Decimal
   10
 ];
 
+entity CompanyCode : CodeList {
+  // Accepts ABCDxse
+  // @assert.format: '[A-Z,0-9]{4}'
+  @assert.format: '^([A-Z,0-9]{4})$'
+  key ID : String(4) @(title: '{i18n>CompanyCode}', );
+}
+
 entity Roles : cuid, managed {
   @mandatory
   @assert.format: 'r_[a-z]'
   rolename        : localized String(255) not null @(title: '{i18n>RoleName}', );
   description     : localized String not null      @(title: '{i18n>Description}', );
-
-  // Accepts ABCDxse
-  // @assert.format: '[A-Z,0-9]{4}'
-  @assert.format: '^([A-Z,0-9]{4})$'
-  CompanyCode     : String                         @(title: '{i18n>CompanyCode}', );
+  CompanyCode     : Association to CompanyCode @(title: '{i18n>CompanyCode}', );
   count           : Integer                        @(title: '{i18n>count}', );
   priority        : Priority;
   read            : Boolean                        @(title: '{i18n>Read}', );
