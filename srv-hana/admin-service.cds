@@ -12,7 +12,6 @@ extend service AdminService with {
           taxPercentage,
           total * taxPercentage / 100         as tax          : Decimal(15, 2),
           total + total * taxPercentage / 100 as totalWithTax : Decimal(15, 2),
-          currency,
     }
     where
       currency.code = :currency;
@@ -22,9 +21,6 @@ annotate AdminService.OrderReport with @(UI: {
   SelectionFields: [OrderNo, ],
   LineItem       : [
     {Value: OrderNo, },
-    {Value: total, },
     {Value: taxPercentage, },
-    {Value: tax, },
-    {Value: totalWithTax, },
   ],
 }) {};
