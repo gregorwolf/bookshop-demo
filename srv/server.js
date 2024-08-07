@@ -1,6 +1,7 @@
 const cds = require("@sap/cds");
 const LOG = cds.log("server");
 const cov2ap = require("@cap-js-community/odata-v2-adapter");
+// const cov2ap = require("@sap/cds-odata-v2-adapter-proxy");
 const helmet = require("helmet");
 const passport = require("passport");
 const xsenv = require("@sap/xsenv");
