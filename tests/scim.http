@@ -4,6 +4,16 @@ Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ### Read Users
 GET {{$dotenv ias_scim_endpoint}}/scim/Users
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+### Read User
+GET {{$dotenv ias_scim_endpoint}}/scim/Users/{{$dotenv ias_scim_user_guid}}
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+### Read User
+PUT {{$dotenv ias_scim_endpoint}}/scim/Users/{{$dotenv ias_scim_user_guid}}
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+Content-Type: application/scim+json
+
+< ./default-env.json
+
 ### Filter by Group Display Name with equals
 GET {{$dotenv ias_scim_endpoint}}/scim/Users
   ?filter=groups.display eq "SAP_BTP_Admin"
@@ -29,11 +39,18 @@ Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 GET {{$dotenv ias_scim_endpoint}}/service/scim/Schemas
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ### 
-GET {{$dotenv ias_scim_endpoint}}/service/scim/Users/P000000
+GET {{$dotenv ias_scim_endpoint}}/service/scim/Users/{{$dotenv ias_scim_user_to_search}}
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+### 
+PUT {{$dotenv ias_scim_endpoint}}/service/scim/Users/{{$dotenv ias_scim_user_to_search}}
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+Content-Type: application/scim+json
+
+< ./default-env-service.json
 ### Works with the client ID and a secret created according to:
 # https://help.sap.com/docs/IDENTITY_AUTHENTICATION/6d6d63354d1242d185ab4830fc04feb1/9ea13fe831e24620bc89affab178ff93.html
-GET {{$dotenv ias_scim_endpoint}}/service/users?name_id=P000000
+GET {{$dotenv ias_scim_endpoint}}/service/users
+  ?name_id={{$dotenv ias_scim_user_to_search}}
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ### 
 GET {{$dotenv ias_scim_endpoint}}/service/users/3DA51F61-37CF-49EC-BFC3-4E8531A4BD88
