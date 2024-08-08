@@ -170,7 +170,7 @@ Content-Type: application/json
 GET http://localhost:4004/odata/v4/order/OrderReport('EUR')/Set
 Authorization: Basic admin:
 ### what is the correct path to read a single entity of a parameterized view?
-GET http://localhost:4004/odata/v4/order/OrderReportSet(currency='EUR')/Set(ID=guid'64e718c9-ff99-47f1-8ca3-950c850777d4')
+GET http://localhost:4004/odata/v4/order/OrderReport('EUR')/Set(64e718c9-ff99-47f1-8ca3-950c850777d4)
 Authorization: Basic admin:
 ###
 GET http://localhost:4004/odata/v2/order/OrderReport('EUR')/Set
