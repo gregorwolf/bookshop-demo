@@ -171,7 +171,6 @@
         <EntitySet Name="CompanyCode_texts" EntityType="AdminService.CompanyCode_texts" />
         <EntitySet Name="Plant_texts" EntityType="AdminService.Plant_texts" />
         <EntitySet Name="OrderReport" EntityType="AdminService.OrderReportParameters">
-          <NavigationPropertyBinding Path="Set/currency" Target="Currencies" />
           <NavigationPropertyBinding Path="Set/Parameters" Target="OrderReport" />
         </EntitySet>
         <ActionImport Name="resetCountOfAllRoles" Action="AdminService.resetCountOfAllRoles" />
@@ -192,6 +191,20 @@
         <ActionImport Name="insertBookAndAuthor" Action="AdminService.insertBookAndAuthor" />
         <FunctionImport Name="readOrganizations" Function="AdminService.readOrganizations" />
       </EntityContainer>
+      <EntityType Name="OrderReportType">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false" />
+        <Property Name="OrderNo" Type="Edm.String" />
+        <Property Name="CustomerOrderNo" Type="Edm.String" MaxLength="80" />
+        <Property Name="total" Type="Edm.Decimal" Scale="variable" />
+        <Property Name="taxPercentage" Type="Edm.Decimal" Precision="5" Scale="2" />
+        <Property Name="tax" Type="Edm.Decimal" Precision="15" Scale="2" />
+        <Property Name="totalWithTax" Type="Edm.Decimal" Precision="15" Scale="2" />
+        <NavigationProperty Name="Parameters" Type="AdminService.OrderReportParameters"
+          Partner="Set" />
+      </EntityType>
       <EntityType Name="Approval">
         <Key>
           <PropertyRef Name="ID" />
@@ -691,24 +704,6 @@
         <Property Name="Name" Type="Edm.String" Nullable="false" />
         <Property Name="Description" Type="Edm.String" />
       </EntityType>
-      <EntityType Name="OrderReportType">
-        <Key>
-          <PropertyRef Name="ID" />
-        </Key>
-        <Property Name="ID" Type="Edm.Guid" Nullable="false" />
-        <Property Name="OrderNo" Type="Edm.String" />
-        <Property Name="CustomerOrderNo" Type="Edm.String" MaxLength="80" />
-        <Property Name="total" Type="Edm.Decimal" Scale="variable" />
-        <Property Name="taxPercentage" Type="Edm.Decimal" Precision="5" Scale="2" />
-        <Property Name="tax" Type="Edm.Decimal" Precision="15" Scale="2" />
-        <Property Name="totalWithTax" Type="Edm.Decimal" Precision="15" Scale="2" />
-        <NavigationProperty Name="currency" Type="AdminService.Currencies">
-          <ReferentialConstraint Property="currency_code" ReferencedProperty="code" />
-        </NavigationProperty>
-        <Property Name="currency_code" Type="Edm.String" MaxLength="3" />
-        <NavigationProperty Name="Parameters" Type="AdminService.OrderReportParameters"
-          Partner="Set" />
-      </EntityType>
       <EntityType Name="Currencies">
         <Key>
           <PropertyRef Name="code" />
@@ -1190,6 +1185,46 @@
       <Function Name="readOrganizations" IsBound="false" IsComposable="false">
         <ReturnType Type="Collection(AdminService.my_bookshop_Organization)" Nullable="false" />
       </Function>
+      <Annotations Target="AdminService.OrderReportType">
+        <Annotation Term="UI.SelectionFields">
+          <Collection>
+            <PropertyPath>OrderNo</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="OrderNo" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="taxPercentage" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="AdminService.OrderReportType/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true" />
+      </Annotations>
+      <Annotations Target="AdminService.OrderReportType/OrderNo">
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Common.Label" String="Order Number" />
+      </Annotations>
+      <Annotations Target="AdminService.OrderReportType/CustomerOrderNo">
+        <Annotation Term="Common.Label" String="Customer Order Number" />
+      </Annotations>
+      <Annotations Target="AdminService.OrderReportType/total">
+        <Annotation Term="Measures.ISOCurrency" Path="currency/code" />
+        <Annotation Term="Core.Computed" Bool="true" />
+      </Annotations>
+      <Annotations Target="AdminService.OrderReportType/taxPercentage">
+        <Annotation Term="Common.Label" String="taxPercentage" />
+      </Annotations>
+      <Annotations Target="AdminService.OrderReportType/tax">
+        <Annotation Term="Core.Computed" Bool="true" />
+      </Annotations>
+      <Annotations Target="AdminService.OrderReportType/totalWithTax">
+        <Annotation Term="Core.Computed" Bool="true" />
+      </Annotations>
       <Annotations Target="AdminService.Approval">
         <Annotation Term="UI.SelectionFields">
           <Collection>
@@ -4784,81 +4819,6 @@
       <Annotations Target="AdminService.sendmail()/subject">
         <Annotation Term="UI.ParameterDefaultValue" String="Test" />
       </Annotations>
-      <Annotations Target="AdminService.OrderReportType">
-        <Annotation Term="UI.SelectionFields">
-          <Collection>
-            <PropertyPath>OrderNo</PropertyPath>
-          </Collection>
-        </Annotation>
-        <Annotation Term="UI.LineItem">
-          <Collection>
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="OrderNo" />
-            </Record>
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="total" />
-            </Record>
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="taxPercentage" />
-            </Record>
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="tax" />
-            </Record>
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="totalWithTax" />
-            </Record>
-          </Collection>
-        </Annotation>
-      </Annotations>
-      <Annotations Target="AdminService.OrderReportType/ID">
-        <Annotation Term="Core.ComputedDefaultValue" Bool="true" />
-      </Annotations>
-      <Annotations Target="AdminService.OrderReportType/OrderNo">
-        <Annotation Term="Core.Immutable" Bool="true" />
-        <Annotation Term="Common.Label" String="Order Number" />
-      </Annotations>
-      <Annotations Target="AdminService.OrderReportType/CustomerOrderNo">
-        <Annotation Term="Common.Label" String="Customer Order Number" />
-      </Annotations>
-      <Annotations Target="AdminService.OrderReportType/total">
-        <Annotation Term="Measures.ISOCurrency" Path="currency/code" />
-        <Annotation Term="Core.Computed" Bool="true" />
-      </Annotations>
-      <Annotations Target="AdminService.OrderReportType/taxPercentage">
-        <Annotation Term="Common.Label" String="taxPercentage" />
-      </Annotations>
-      <Annotations Target="AdminService.OrderReportType/tax">
-        <Annotation Term="Core.Computed" Bool="true" />
-      </Annotations>
-      <Annotations Target="AdminService.OrderReportType/totalWithTax">
-        <Annotation Term="Core.Computed" Bool="true" />
-      </Annotations>
-      <Annotations Target="AdminService.OrderReportType/currency">
-        <Annotation Term="Core.Description" String="Currency code as specified by ISO 4217" />
-        <Annotation Term="Common.Label" String="Currency" />
-      </Annotations>
-      <Annotations Target="AdminService.OrderReportType/currency_code">
-        <Annotation Term="Core.Immutable" Bool="true" />
-        <Annotation Term="Core.Description" String="Currency code as specified by ISO 4217" />
-        <Annotation Term="Common.Label" String="Currency" />
-        <Annotation Term="Common.ValueList">
-          <Record Type="Common.ValueListType">
-            <PropertyValue Property="Label" String="Currency" />
-            <PropertyValue Property="CollectionPath" String="Currencies" />
-            <PropertyValue Property="Parameters">
-              <Collection>
-                <Record Type="Common.ValueListParameterInOut">
-                  <PropertyValue Property="LocalDataProperty" PropertyPath="currency_code" />
-                  <PropertyValue Property="ValueListProperty" String="code" />
-                </Record>
-                <Record Type="Common.ValueListParameterDisplayOnly">
-                  <PropertyValue Property="ValueListProperty" String="name" />
-                </Record>
-              </Collection>
-            </PropertyValue>
-          </Record>
-        </Annotation>
-      </Annotations>
       <Annotations Target="AdminService.Currencies">
         <Annotation Term="UI.Identification">
           <Collection>
@@ -5216,6 +5176,58 @@
       </Annotations>
       <Annotations Target="AdminService.Plant_texts/descr">
         <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="AdminService.EntityContainer/OrderReport">
+        <Annotation Term="Capabilities.NavigationRestrictions">
+          <Record Type="Capabilities.NavigationRestrictionsType">
+            <PropertyValue Property="RestrictedProperties">
+              <Collection>
+                <Record Type="Capabilities.NavigationPropertyRestriction">
+                  <PropertyValue Property="NavigationProperty" NavigationPropertyPath="Set" />
+                  <PropertyValue Property="FilterRestrictions">
+                    <Record Type="Capabilities.FilterRestrictionsType">
+                      <PropertyValue Property="FilterExpressionRestrictions">
+                        <Collection>
+                          <Record Type="Capabilities.FilterExpressionRestrictionType">
+                            <PropertyValue Property="Property" PropertyPath="Set/currency" />
+                            <PropertyValue Property="AllowedExpressions" String="SingleValue" />
+                          </Record>
+                        </Collection>
+                      </PropertyValue>
+                    </Record>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.FilterRestrictions">
+          <Record Type="Capabilities.FilterRestrictionsType">
+            <PropertyValue Property="FilterExpressionRestrictions">
+              <Collection>
+                <Record Type="Capabilities.FilterExpressionRestrictionType">
+                  <PropertyValue Property="Property" PropertyPath="Set/currency" />
+                  <PropertyValue Property="AllowedExpressions" String="SingleValue" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false" />
+          </Record>
+        </Annotation>
       </Annotations>
       <Annotations Target="AdminService.OrderReportParameters/currency">
         <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory" />

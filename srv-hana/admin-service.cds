@@ -2,7 +2,30 @@ using my.bookshop as db from '../db/';
 using {AdminService} from '../srv/admin-service';
 
 extend service AdminService with {
+  @Capabilities.NavigationRestrictions.RestrictedProperties: [{
+    $Type             : 'Capabilities.NavigationPropertyRestriction',
+    NavigationProperty: 'Set',
+    FilterRestrictions: {
+      $Type                       : 'Capabilities.FilterRestrictionsType',
+      FilterExpressionRestrictions: [{
+        $Type             : 'Capabilities.FilterExpressionRestrictionType',
+        Property          : Set.currency,
+        AllowedExpressions: 'SingleValue'
+      }]
+    }
+  }]
+
   // parameterized view
+
+  @(Capabilities: {FilterRestrictions: {
+    $Type                       : 'Capabilities.FilterRestrictionsType',
+    FilterExpressionRestrictions: [{
+      Property          : 'Set/currency',
+      AllowedExpressions: 'SingleValue'
+    }]
+  }})
+  @readonly
+
   entity OrderReport(currency : String(3)) as
     select from db.Orders {
       key ID,
@@ -15,6 +38,7 @@ extend service AdminService with {
     }
     where
       currency.code = :currency;
+
 }
 
 annotate AdminService.OrderReport with @(UI: {
