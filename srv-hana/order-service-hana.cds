@@ -2,21 +2,8 @@ using my.bookshop as db from '../db/';
 using {OrderService} from '../srv/order-service';
 
 extend service OrderService with {
-  @Capabilities.NavigationRestrictions.RestrictedProperties: [{
-    $Type             : 'Capabilities.NavigationPropertyRestriction',
-    NavigationProperty: 'Set',
-    FilterRestrictions: {
-      $Type                       : 'Capabilities.FilterRestrictionsType',
-      FilterExpressionRestrictions: [{
-        $Type             : 'Capabilities.FilterExpressionRestrictionType',
-        Property          : Set.currency,
-        AllowedExpressions: 'SingleValue'
-      }]
-    }
-  }]
-
   // parameterized view
-
+  @readonly
   @(Capabilities: {FilterRestrictions: {
     $Type                       : 'Capabilities.FilterRestrictionsType',
     FilterExpressionRestrictions: [{
@@ -24,8 +11,6 @@ extend service OrderService with {
       AllowedExpressions: 'SingleValue'
     }]
   }})
-  @readonly
-
   entity OrderReport(currency : String(3)) as
     select from db.Orders {
       key ID,
@@ -48,3 +33,5 @@ annotate OrderService.OrderReport with @(UI: {
     {Value: taxPercentage, },
   ],
 }) {};
+
+annotate OrderService.OrderReportParameters with @Common.ResultContext;
