@@ -1,24 +1,24 @@
 ### Read Metadata via OData V2
-GET http://localhost:4004/odata/v2/admin/$metadata
+GET http://localhost:4004/odata/v2/order/$metadata
 Authorization: Basic admin:
 ### Read Metadata via OData V4
-GET http://localhost:4004/odata/v4/admin/$metadata
+GET http://localhost:4004/odata/v4/order/$metadata
 Authorization: Basic admin:
 ### Read Orders via OData
 # @name orders
-GET http://localhost:4004/odata/v4/admin/Orders
+GET http://localhost:4004/odata/v4/order/Orders
   ?$expand=ShippingAddress,Items
   &$orderby=OrderNo
 Authorization: Basic admin:
 ### Fill Variables from Response
 @orderID = {{orders.response.body.$.value[0].ID}}
 ###
-GET http://localhost:4004/odata/v4/admin/Orders(ID={{orderID}},IsActiveEntity=true)
+GET http://localhost:4004/odata/v4/order/Orders(ID={{orderID}},IsActiveEntity=true)
 Authorization: Basic admin:
 ###
 # Test for cds.fiori.bypass_draft = true
 # https://cap.cloud.sap/docs/releases/dec23#sapui5-mass-edit
-PATCH http://localhost:4004/odata/v4/admin/Orders(ID={{orderID}},IsActiveEntity=true)
+PATCH http://localhost:4004/odata/v4/order/Orders(ID={{orderID}},IsActiveEntity=true)
 Authorization: Basic admin:
 Content-Type: application/json
 
@@ -26,16 +26,16 @@ Content-Type: application/json
   "employeeOrder": true
 }
 ###
-GET http://localhost:4004/odata/v4/admin/OrderItems
+GET http://localhost:4004/odata/v4/order/OrderItems
   ?$filter=parent_ID eq {{orderID}}
 Authorization: Basic admin:
 ###
-GET http://localhost:4004/odata/v4/admin/OrderShippingAddress
+GET http://localhost:4004/odata/v4/order/OrderShippingAddress
 #  ?$filter=parent_ID eq {{orderID}}
 Authorization: Basic admin:
 ### Create Order
 # @name order
-POST http://localhost:4004/odata/v4/admin/Orders
+POST http://localhost:4004/odata/v4/order/Orders
 Authorization: Basic admin:
 Content-Type: application/json
 
@@ -58,7 +58,7 @@ Content-Type: application/json
 }
 ### Create Order with draft
 # @name order
-POST http://localhost:4004/odata/v4/admin/Orders
+POST http://localhost:4004/odata/v4/order/Orders
 Authorization: Basic admin:
 Content-Type: application/json
 
@@ -81,25 +81,25 @@ Content-Type: application/json
 @newOrderID = {{order.response.body.ID}}
 @ShippingAddressID = {{order.response.body.ShippingAddress_ID}}
 ###
-GET http://localhost:4004/odata/v4/admin/{{location}}
+GET http://localhost:4004/odata/v4/order/{{location}}
   ?$expand=ShippingAddress
 Authorization: Basic admin:
 ###
-POST http://localhost:4004/odata/v4/admin/{{location}}/AdminService.draftPrepare
+POST http://localhost:4004/odata/v4/order/{{location}}/AdminService.draftPrepare
 Authorization: Basic admin:
 Content-Type: application/json
 
 {"SideEffectsQualifier":""}
 
 ###
-POST http://localhost:4004/odata/v4/admin/{{location}}/AdminService.draftActivate
+POST http://localhost:4004/odata/v4/order/{{location}}/AdminService.draftActivate
 Authorization: Basic admin:
 Content-Type: application/json
 
 {}
 
 ###
-PATCH http://localhost:4004/odata/v4/admin/{{location}}
+PATCH http://localhost:4004/odata/v4/order/{{location}}
 Authorization: Basic admin:
 Content-Type: application/json
 
@@ -109,7 +109,7 @@ Content-Type: application/json
   "deliverystatus_code": "N"
 }
 ###
-PATCH http://localhost:4004/odata/v4/admin/OrderShippingAddress(ID={{ShippingAddressID}},IsActiveEntity=false)
+PATCH http://localhost:4004/odata/v4/order/OrderShippingAddress(ID={{ShippingAddressID}},IsActiveEntity=false)
 Authorization: Basic admin:
 Content-Type: application/json
 
@@ -117,20 +117,20 @@ Content-Type: application/json
   "street": "Hasso-Plattner-Ring 1"
 }
 ###
-GET http://localhost:4004/odata/v4/admin/Orders(ID={{newOrderID}},IsActiveEntity=false)
+GET http://localhost:4004/odata/v4/order/Orders(ID={{newOrderID}},IsActiveEntity=false)
   ?$expand=ShippingAddress
 Authorization: Basic admin:
 ###
-DELETE http://localhost:4004/odata/v4/admin/Orders(ID={{orderID}},IsActiveEntity=true)
+DELETE http://localhost:4004/odata/v4/order/Orders(ID={{orderID}},IsActiveEntity=true)
 Authorization: Basic admin:
 ### Delete using an action
-POST http://localhost:4004/odata/v4/admin/Orders(ID={{orderID}},IsActiveEntity=true)/deleteOrder
+POST http://localhost:4004/odata/v4/order/Orders(ID={{orderID}},IsActiveEntity=true)/deleteOrder
 Authorization: Basic admin:
 Content-Type: application/json
 
 {}
 ### Read Orders via OData V4
-GET http://localhost:4004/odata/v4/admin/Orders
+GET http://localhost:4004/odata/v4/order/Orders
 Authorization: Basic admin:
 
 ### Read Orders via OData V2
@@ -142,7 +142,7 @@ GET http://localhost:4004/v2/admin/Orders(ID=guid'7e2f2640-6866-4dcf-8f4d-3027aa
 Authorization: Basic admin:
 
 ### Order Consistency Check via OData V4
-POST http://localhost:4004/odata/v4/admin/Orders(ID=64e718c9-ff99-47f1-8ca3-950c850777d4,IsActiveEntity=true)/AdminService.checkConsistencyInline
+POST http://localhost:4004/odata/v4/order/Orders(ID=64e718c9-ff99-47f1-8ca3-950c850777d4,IsActiveEntity=true)/AdminService.checkConsistencyInline
 Authorization: Basic admin:
 Accept: application/json
 Content-Type: application/json
@@ -167,14 +167,14 @@ Content-Type: application/json
 
 {}
 ### parameterized view
-GET http://localhost:4004/odata/v4/admin/OrderReport('EUR')/Set
+GET http://localhost:4004/odata/v4/order/OrderReport('EUR')/Set
 Authorization: Basic admin:
 ### what is the correct path to read a single entity of a parameterized view?
-GET http://localhost:4004/odata/v4/admin/OrderReportSet(currency='EUR')/Set(ID=guid'64e718c9-ff99-47f1-8ca3-950c850777d4')
+GET http://localhost:4004/odata/v4/order/OrderReportSet(currency='EUR')/Set(ID=guid'64e718c9-ff99-47f1-8ca3-950c850777d4')
 Authorization: Basic admin:
 ###
-GET http://localhost:4004/odata/v2/admin/OrderReport('EUR')/Set
+GET http://localhost:4004/odata/v2/order/OrderReport('EUR')/Set
 Authorization: Basic admin:
 ### This path works for OData V2
-GET http://localhost:4004/odata/v2/admin/OrderReportSet(currency='EUR',ID=guid'64e718c9-ff99-47f1-8ca3-950c850777d4')
+GET http://localhost:4004/odata/v2/order/OrderReportSet(currency='EUR',ID=guid'64e718c9-ff99-47f1-8ca3-950c850777d4')
 Authorization: Basic admin:

@@ -1,6 +1,6 @@
-using AdminService from '../../../srv/admin-service';
+using OrderService from '../../../srv/order-service';
 
-annotate AdminService.Books with {
+annotate OrderService.Books with {
   price @Common.FieldControl: #ReadOnly;
 }
 
@@ -8,11 +8,11 @@ annotate AdminService.Books with {
 //
 //	Common
 //
-annotate AdminService.Orders with {
+annotate OrderService.Orders with {
   OrderNo @Common.FieldControl: #ReadOnly;
 }
 
-annotate AdminService.Orders with @(UI: {
+annotate OrderService.Orders with @(UI: {
   ////////////////////////////////////////////////////////////////////////////
   //
   //	Lists of Orders
@@ -214,49 +214,49 @@ annotate AdminService.Orders with @(UI: {
     },
     {
       $Type : 'UI.DataFieldForAction',
-      Action: 'AdminService.EntityContainer/readCdsEnv',
+      Action: 'OrderService.EntityContainer/readCdsEnv',
       Label : '{i18n>readCdsEnv}'
     },
     {
       $Type : 'UI.DataFieldForAction',
-      Action: 'AdminService.EntityContainer/sendmail',
+      Action: 'OrderService.EntityContainer/sendmail',
       Label : '{i18n>sendmail}',
     },
     {
       $Type : 'UI.DataFieldForAction',
       Label : '{i18n>checkConsistency}',
-      Action: 'AdminService.EntityContainer/Orders_checkConsistency',
+      Action: 'OrderService.EntityContainer/Orders_checkConsistency',
       Inline: false
     },
     {
       $Type : 'UI.DataFieldForAction',
       Label : '{i18n>setOrderParameters}',
-      Action: 'AdminService.EntityContainer/Orders_setOrderParameters',
+      Action: 'OrderService.EntityContainer/Orders_setOrderParameters',
       Inline: false
     },
     {
       $Type : 'UI.DataFieldForAction',
       Label : '{i18n>checkConsistencyV4}',
-      Action: 'AdminService.checkConsistency',
+      Action: 'OrderService.checkConsistency',
       Inline: false
     },
     {
       $Type  : 'UI.DataFieldForAction',
       Label  : '{i18n>setOrderParametersV4}',
-      Action : 'AdminService.setOrderParameters',
+      Action : 'OrderService.setOrderParameters',
       Inline : false,
       IconUrl: 'sap-icon://survey',
     },
     {
       $Type : 'UI.DataFieldForAction',
       Label : '{i18n>checkConsistency}',
-      Action: 'AdminService.Orders/Orders_checkConsistencyInline',
+      Action: 'OrderService.Orders/Orders_checkConsistencyInline',
       Inline: true
     },
     {
       $Type  : 'UI.DataFieldForAction',
       Label  : '{i18n>checkConsistencyV4}',
-      Action : 'AdminService.checkConsistencyInline',
+      Action : 'OrderService.checkConsistencyInline',
       Inline : true,
       IconUrl: 'sap-icon://commission-check',
     }
@@ -287,12 +287,12 @@ annotate AdminService.Orders with @(UI: {
     {
       $Type : 'UI.DataFieldForAction',
       Label : '{i18n>checkConsistency}',
-      Action: 'AdminService.Orders/Orders_checkConsistency',
+      Action: 'OrderService.Orders/Orders_checkConsistency',
       Inline: true
     },
     {
       $Type : 'UI.DataFieldForAction',
-      Action: 'AdminService.EntityContainer/sendmail',
+      Action: 'OrderService.EntityContainer/sendmail',
       Label : '{i18n>sendmail}',
     /*
     // path does not exist
@@ -459,18 +459,18 @@ Common : {SideEffects #AmountChanges : {
 //it seems to work but at least to me this is unconventional modeling.
 };
 
-//The enity types name is AdminService.my_bookshop_OrderItems
+//The enity types name is OrderService.my_bookshop_OrderItems
 //The annotations below are not generated in edmx WHY?
 // Make Field Readonly
 /*
-annotate AdminService.OrderItems with @Capabilities: {
+annotate OrderService.OrderItems with @Capabilities: {
   InsertRestrictions: {Insertable: false},
   UpdateRestrictions: {Updatable: false},
   DeleteRestrictions: {Deletable: false}
 };
 */
 
-annotate AdminService.OrderItems with {
+annotate OrderService.OrderItems with {
   book   @(
     Common          : {
       Text        : book.title,
@@ -484,7 +484,7 @@ annotate AdminService.OrderItems with {
   product;
 }
 
-annotate AdminService.OrderItems with @(UI: {
+annotate OrderService.OrderItems with @(UI: {
   HeaderInfo         : {
     TypeName      : 'Order Item',
     TypeNamePlural: '	',
@@ -586,7 +586,7 @@ Common: {
 };
 
 
-annotate AdminService.OrderShippingAddress with @(UI: {
+annotate OrderService.OrderShippingAddress with @(UI: {
   HeaderInfo     : {
     TypeName      : '{i18n>ShippingAddress}',
     TypeNamePlural: ' ',

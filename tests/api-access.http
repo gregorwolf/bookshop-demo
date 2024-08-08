@@ -100,7 +100,7 @@ Accept: application/json
 Authorization: Bearer {{access_token}}
 
 ### Read Orders
-GET {{$dotenv api_url}}/admin/Orders
+GET {{$dotenv api_url}}/odata/v4/order/Orders
   ?$top=10
 #  &$expand=Items
   &$filter=OrderNo eq '12'

@@ -1,7 +1,7 @@
 using my.bookshop as db from '../db/';
-using {AdminService} from '../srv/admin-service';
+using {OrderService} from '../srv/order-service';
 
-extend service AdminService with {
+extend service OrderService with {
   @Capabilities.NavigationRestrictions.RestrictedProperties: [{
     $Type             : 'Capabilities.NavigationPropertyRestriction',
     NavigationProperty: 'Set',
@@ -41,7 +41,7 @@ extend service AdminService with {
 
 }
 
-annotate AdminService.OrderReport with @(UI: {
+annotate OrderService.OrderReport with @(UI: {
   SelectionFields: [OrderNo, ],
   LineItem       : [
     {Value: OrderNo, },
