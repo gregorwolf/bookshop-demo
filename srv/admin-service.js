@@ -673,15 +673,6 @@ module.exports = async function (srv) {
       .run(UPDATE(Roles).where({ ID: req.params[0].ID }).set("count -=", 1));
     return cds.tx(req).run(SELECT.one(Roles).where({ ID: req.params[0].ID }));
   });
-  srv.on(["setOrderParameters"], Orders, async (req) => {
-    LOG.info("setOrderParameters - Request Parameters:", req.params[0]);
-  });
-  srv.on(["deleteOrder"], Orders, async (req) => {
-    LOG.info("delete Orders - Request Parameters:", req.params[0]);
-    return DELETE.from(Orders).where({
-      ID: req.params[0].ID,
-    });
-  });
 
   srv.on("READ", `Destination`, async (req) => {
     const destination = await cds.connect.to("destination");

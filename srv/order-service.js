@@ -81,6 +81,17 @@ module.exports = async function (srv) {
     }
   );
 
+  srv.on(["setOrderParameters"], Orders, async (req) => {
+    LOG.info("setOrderParameters - Request Parameters:", req.params[0]);
+  });
+
+  srv.on(["deleteOrder"], Orders, async (req) => {
+    LOG.info("delete Orders - Request Parameters:", req.params[0]);
+    return DELETE.from(Orders).where({
+      ID: req.params[0].ID,
+    });
+  });
+
   // Based on the blogpost:
   // https://blogs.sap.com/2019/11/28/send-an-email-from-a-nodejs-application/
   // by Joachim Van Praet
