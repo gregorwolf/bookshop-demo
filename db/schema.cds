@@ -129,18 +129,19 @@ entity Authors : managed {
 entity Genres : sap.common.CodeList {
         @title                : '{i18n>genreID}'
         @Common.SemanticObject: genreSemanticObject
-  key ID                          : Integer;
+  key ID                          : Integer               @sap.hierarchy.node.for;
 
         @title                : '{i18n>parent}'
-      parent                      : Association to Genres;
+      parent                      : Association to Genres @sap.hierarchy.parent.node.for;
       children                    : Composition of many Genres
                                       on children.parent = $self;
-      nodeType                    : String(1) @(title: 'nodeType', )
+      drillState                  : String default 'leaf';
+      nodeType                    : String(1)             @(title: 'nodeType', )
       enum {
         requested = 'F'
 
         @(title: 'Folder');
-        pending   = 'L'                       @(title: 'Leaf');
+        pending   = 'L'                                   @(title: 'Leaf');
       } default 'F';
 
         @title                : '{i18n>nodeType_FC}'
@@ -148,6 +149,10 @@ entity Genres : sap.common.CodeList {
 
         @title                : '{i18n>SemanticObject}'
       virtual genreSemanticObject : String;
+      _LimitedDescendantCount     : Integer64             @Core.Computed;
+      _DistanceFromRoot           : Integer64             @Core.Computed;
+      _Matched                    : Boolean               @Core.Computed;
+      _MatchedDescendantCount     : Integer64             @Core.Computed;
 }
 
 entity Publishers : managed {

@@ -29,3 +29,11 @@ Accept: application/json;IEEE754Compatible=true
 # Property 'all' does not exist in type 'CatalogService.Genres'
 ###
 GET http://localhost:4004/public/Genres
+###
+GET http://localhost:4004/public/Genres
+  ?$select=ID,drillState,genreSemanticObject,name,nodeType,nodeType_FC,parent_ID
+  &$count=true&$skip=0&$top=210
+  &$apply=com.sap.vocabularies.Hierarchy.v1.TopLevels(HierarchyNodes=$root/Genres,HierarchyQualifier='GenresHierarchy',NodeProperty='ID',Levels=1)
+# Results in:
+# UriSyntaxError: Expected uri token 'OPEN' could not be found in 
+# 'com.sap.vocabularies.Hierarchy.v1.TopLevels(HierarchyNodes=$root/Genres,HierarchyQualifier='GenresHierarchy',NodeProperty='ID',Levels=1)' at position 72

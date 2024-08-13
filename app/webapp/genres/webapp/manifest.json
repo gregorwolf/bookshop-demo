@@ -92,6 +92,14 @@
               "entitySet": "Genres",
               "initialLoad": "Enabled",
               "variantManagement": "Page",
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "TreeTable",
+                    "hierarchyQualifier": "GenresHierarchy"
+                  }
+                }
+              },
               "navigation": {
                 "Genres": {
                   "detail": {
