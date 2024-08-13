@@ -34,6 +34,7 @@ service OrderService @(
     }
     actions {
       action deleteOrder();
+      action deleteOrderItems();
       action checkConsistency();
       @(
         /*

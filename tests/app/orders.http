@@ -14,6 +14,7 @@ Authorization: Basic admin:
 @orderID = {{orders.response.body.$.value[0].ID}}
 ###
 GET http://localhost:4004/odata/v4/order/Orders(ID={{orderID}},IsActiveEntity=true)
+  ?$expand=ShippingAddress,Items
 Authorization: Basic admin:
 ###
 # Test for cds.fiori.bypass_draft = true
@@ -72,6 +73,7 @@ Content-Type: application/json
     {
       "itemNo": 10,
       "book_ID": 201,
+      "product": "CM-003024",
       "amount": 1
     }
   ]
@@ -82,17 +84,17 @@ Content-Type: application/json
 @ShippingAddressID = {{order.response.body.ShippingAddress_ID}}
 ###
 GET http://localhost:4004/odata/v4/order/{{location}}
-  ?$expand=ShippingAddress
+  ?$expand=ShippingAddress,Items
 Authorization: Basic admin:
 ###
-POST http://localhost:4004/odata/v4/order/{{location}}/AdminService.draftPrepare
+POST http://localhost:4004/odata/v4/order/{{location}}/OrderService.draftPrepare
 Authorization: Basic admin:
 Content-Type: application/json
 
 {"SideEffectsQualifier":""}
 
 ###
-POST http://localhost:4004/odata/v4/order/{{location}}/AdminService.draftActivate
+POST http://localhost:4004/odata/v4/order/{{location}}/OrderService.draftActivate
 Authorization: Basic admin:
 Content-Type: application/json
 
@@ -118,13 +120,19 @@ Content-Type: application/json
 }
 ###
 GET http://localhost:4004/odata/v4/order/Orders(ID={{newOrderID}},IsActiveEntity=false)
-  ?$expand=ShippingAddress
+  ?$expand=ShippingAddress,Items
 Authorization: Basic admin:
 ###
 DELETE http://localhost:4004/odata/v4/order/Orders(ID={{orderID}},IsActiveEntity=true)
 Authorization: Basic admin:
 ### Delete using an action
 POST http://localhost:4004/odata/v4/order/Orders(ID={{orderID}},IsActiveEntity=true)/deleteOrder
+Authorization: Basic admin:
+Content-Type: application/json
+
+{}
+### Delete Items an action
+POST http://localhost:4004/odata/v4/order/Orders(ID={{orderID}},IsActiveEntity=true)/deleteOrderItems
 Authorization: Basic admin:
 Content-Type: application/json
 
@@ -142,7 +150,7 @@ GET http://localhost:4004/v2/admin/Orders(ID=guid'7e2f2640-6866-4dcf-8f4d-3027aa
 Authorization: Basic admin:
 
 ### Order Consistency Check via OData V4
-POST http://localhost:4004/odata/v4/order/Orders(ID=64e718c9-ff99-47f1-8ca3-950c850777d4,IsActiveEntity=true)/AdminService.checkConsistencyInline
+POST http://localhost:4004/odata/v4/order/Orders(ID=64e718c9-ff99-47f1-8ca3-950c850777d4,IsActiveEntity=true)/OrderService.checkConsistencyInline
 Authorization: Basic admin:
 Accept: application/json
 Content-Type: application/json

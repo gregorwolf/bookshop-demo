@@ -3,7 +3,7 @@ const LOG = cds.log("order-service");
 const { getUserdetails, getAuthorizations } = require("./helper/userdetails");
 
 module.exports = async function (srv) {
-  const { Orders } = srv.entities;
+  const { Orders, OrderItems } = srv.entities;
 
   this.after("each", Orders, (order) => {
     order.VirtualTotalWithTax =
@@ -89,6 +89,14 @@ module.exports = async function (srv) {
     LOG.info("delete Orders - Request Parameters:", req.params[0]);
     return DELETE.from(Orders).where({
       ID: req.params[0].ID,
+    });
+  });
+
+  srv.on(["deleteOrderItems"], Orders, async (req) => {
+    LOG.info("delete Order Items");
+    LOG.info("req.params: ", req.params);
+    return DELETE.from(OrderItems).where({
+      parent_ID: req.params[0].ID,
     });
   });
 
