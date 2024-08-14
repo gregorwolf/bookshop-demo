@@ -8,11 +8,14 @@ Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 GET {{$dotenv ias_scim_endpoint}}/scim/Users/{{$dotenv ias_scim_user_guid}}
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ### Create User
+# @name createUser
 POST {{$dotenv ias_scim_endpoint}}/scim/Users
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 Content-Type: application/scim+json
 
-< ./default-env-create.json
+< ./default-env-create-minimal.json
+###
+@userId={{createUser.response.body.id}}
 ### Update User
 PUT {{$dotenv ias_scim_endpoint}}/scim/Users/{{$dotenv ias_scim_user_guid}}
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
@@ -20,7 +23,7 @@ Content-Type: application/scim+json
 
 < ./default-env-update.json
 ###
-DELETE {{$dotenv ias_scim_endpoint}}/scim/Users/10f41fdf-712b-4fa9-85ed-eca47b384b8f
+DELETE {{$dotenv ias_scim_endpoint}}/scim/Users/{{userId}}
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ###
 GET {{$dotenv ias_scim_endpoint}}/scim/Users
