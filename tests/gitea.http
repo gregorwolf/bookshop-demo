@@ -1,0 +1,34 @@
+### Authenticate
+# @name getToken
+POST {{$dotenv gitea_url}}/api/v1/users/{{$dotenv gitea_username}}/tokens
+Authorization: Basic {{$dotenv gitea_username}}:{{$dotenv gitea_password}}
+Content-Type: application/json
+
+{
+    "name": "test"
+}
+###
+@token={{getToken.response.body.sha1}}
+### Create user
+POST {{$dotenv gitea_url}}/api/v1/admin/users
+Authorization: Basic {{$dotenv gitea_username}}:{{$dotenv gitea_password}}
+Content-Type: application/json
+
+{
+    "login": "{{$dotenv gitea_login}}",
+    "login_name": "{{$dotenv gitea_login_name}}",
+    "source_id": 1,
+    "email": "{{$dotenv gitea_email}}",
+    "Username": "{{$dotenv gitea_login_name}}"
+}
+### Read users
+# @name getUsers
+GET {{$dotenv gitea_url}}/api/v1/admin/users
+#    ?login_name={{$dotenv gitea_login_name}}
+Authorization: Basic {{$dotenv gitea_username}}:{{$dotenv gitea_password}}
+Accept: application/json
+###
+@username={{getUsers.response.body.0.username}}
+### Delete user
+DELETE {{$dotenv gitea_url}}/api/v1/admin/users/{{username}}
+Authorization: Basic {{$dotenv gitea_username}}:{{$dotenv gitea_password}}
