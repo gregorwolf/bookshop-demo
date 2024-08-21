@@ -11,6 +11,7 @@ extend service OrderService with {
       AllowedExpressions: 'SingleValue'
     }]
   }})
+  @Common.ResultContext #$parameters
   entity OrderReport(currency : String(3)) as
     select from db.Orders {
       key ID,
