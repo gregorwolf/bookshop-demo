@@ -10,25 +10,25 @@ annotate CatalogService.Genres with @(
     ParentNavigationProperty: parent
   },
   Hierarchy.RecursiveHierarchy #GenresHierarchy  : {
-    LimitedDescendantCount: _LimitedDescendantCount,
-    DistanceFromRoot      : _DistanceFromRoot,
+    LimitedDescendantCount: LimitedDescendantCount,
+    DistanceFromRoot      : DistanceFromRoot,
     DrillState            : drillState,
-    Matched               : _Matched,
-    MatchedDescendantCount: _MatchedDescendantCount
+    Matched               : Matched,
+    MatchedDescendantCount: MatchedDescendantCount
   },
   Capabilities.FilterRestrictions                : {NonFilterableProperties: [
-    _LimitedDescendantCount,
-    _DistanceFromRoot,
+    LimitedDescendantCount,
+    DistanceFromRoot,
     drillState,
-    _Matched,
-    _MatchedDescendantCount
+    Matched,
+    MatchedDescendantCount
   ]},
   Capabilities.SortRestrictions                  : {NonSortableProperties: [
-    _LimitedDescendantCount,
-    _DistanceFromRoot,
+    LimitedDescendantCount,
+    DistanceFromRoot,
     drillState,
-    _Matched,
-    _MatchedDescendantCount
+    Matched,
+    MatchedDescendantCount
   ]},
   UI                                             : {
     SelectionFields    : [
