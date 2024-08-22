@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+  xmlns="http://docs.oasis-open.org/odata/ns/edm">
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="Org.OData.Measures.V1" Alias="SAP__measures" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="SAP__capabilities" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="SAP__aggregation" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="Org.OData.Validation.V1" Alias="SAP__validation" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="SAP__UI" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="SAP__HTML5" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SESSION',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.Session.v1" Alias="SAP__session" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy" />
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="com.sap.gateway.srvd.dmo.ui_employee_hr.v0001" Alias="SAP__self">
+      <Annotation Term="SAP__core.SchemaVersion" String="1.0.0" />
+      <EntityType Name="EmployeeType">
+        <Key>
+          <PropertyRef Name="Employee" />
+        </Key>
+        <Property Name="Employee" Type="Edm.String" Nullable="false" MaxLength="8" />
+        <Property Name="FirstName" Type="Edm.String" Nullable="false" MaxLength="40" />
+        <Property Name="LastName" Type="Edm.String" Nullable="false" MaxLength="40" />
+        <Property Name="Salary" Type="Edm.Decimal" Nullable="false" Precision="21" Scale="variable" />
+        <Property Name="SalaryCurrency" Type="Edm.String" Nullable="false" MaxLength="5" />
+        <Property Name="Manager" Type="Edm.String" Nullable="false" MaxLength="8" />
+        <Property Name="__HierarchyPropertiesForxDMOxI_EmployeeHN_HR"
+          Type="com.sap.gateway.srvd.dmo.ui_employee_hr.v0001.HierarchyPropertiesForxDMOxI_EmployeeHN_HR" />
+        <NavigationProperty Name="_Manager"
+          Type="com.sap.gateway.srvd.dmo.ui_employee_hr.v0001.EmployeeType" />
+      </EntityType>
+      <ComplexType Name="HierarchyPropertiesForxDMOxI_EmployeeHN_HR">
+        <Property Name="NodeId" Type="Edm.String" Nullable="false" />
+        <Property Name="DescendantCount" Type="Edm.Int64" Nullable="false" />
+        <Property Name="LimitedDescendantCount" Type="Edm.Int64" Nullable="false" />
+        <Property Name="DrillState" Type="Edm.String" Nullable="false" />
+        <Property Name="DistanceFromRoot" Type="Edm.Int64" Nullable="false" />
+        <Property Name="LimitedRank" Type="Edm.Int64" Nullable="false" />
+      </ComplexType>
+      <EntityContainer Name="Container">
+        <EntitySet Name="Employee"
+          EntityType="com.sap.gateway.srvd.dmo.ui_employee_hr.v0001.EmployeeType">
+          <NavigationPropertyBinding Path="_Manager" Target="Employee" />
+        </EntitySet>
+      </EntityContainer>
+      <Annotations Target="SAP__self.EmployeeType/Employee">
+        <Annotation Term="SAP__common.IsDigitSequence" />
+        <Annotation Term="SAP__common.Label" String="Employee" />
+        <Annotation Term="SAP__common.QuickInfo" String="Employee ID" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/Salary">
+        <Annotation Term="SAP__measures.ISOCurrency" Path="SalaryCurrency" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/SalaryCurrency">
+        <Annotation Term="SAP__common.IsCurrency" />
+        <Annotation Term="SAP__common.Label" String="Currency Code" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: Currency Code" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/Manager">
+        <Annotation Term="SAP__common.Label" String="Manager" />
+        <Annotation Term="SAP__common.IsDigitSequence" />
+        <Annotation Term="SAP__common.Heading" String="Employee" />
+        <Annotation Term="SAP__common.QuickInfo" String="Employee ID" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/__HierarchyPropertiesForxDMOxI_EmployeeHN_HR">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__UI.HiddenFilter" />
+        <Annotation Term="SAP__UI.Hidden" />
+      </Annotations>
+      <Annotations Target="SAP__self.Container/Employee">
+        <Annotation Term="SAP__capabilities.NavigationRestrictions">
+          <Record>
+            <PropertyValue Property="RestrictedProperties">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Manager" />
+                  <PropertyValue Property="InsertRestrictions">
+                    <Record>
+                      <PropertyValue Property="Insertable" Bool="false" />
+                    </Record>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.SearchRestrictions">
+          <Record>
+            <PropertyValue Property="Searchable" Bool="true" />
+            <PropertyValue Property="UnsupportedExpressions"
+              EnumMember="SAP__capabilities.SearchExpressions/AND SAP__capabilities.SearchExpressions/OR SAP__capabilities.SearchExpressions/NOT SAP__capabilities.SearchExpressions/group SAP__capabilities.SearchExpressions/phrase" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.FilterRestrictions">
+          <Record>
+            <PropertyValue Property="NonFilterableProperties">
+              <Collection>
+                <PropertyPath>__HierarchyPropertiesForxDMOxI_EmployeeHN_HR</PropertyPath>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.SortRestrictions">
+          <Record>
+            <PropertyValue Property="NonSortableProperties">
+              <Collection>
+                <PropertyPath>__HierarchyPropertiesForxDMOxI_EmployeeHN_HR</PropertyPath>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.InsertRestrictions">
+          <Record>
+            <PropertyValue Property="Insertable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.DeleteRestrictions">
+          <Record>
+            <PropertyValue Property="Deletable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.UpdateRestrictions">
+          <Record>
+            <PropertyValue Property="Updatable" Bool="false" />
+            <PropertyValue Property="NonUpdatableNavigationProperties">
+              <Collection>
+                <PropertyPath>_Manager</PropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="QueryOptions">
+              <Record>
+                <PropertyValue Property="SelectSupported" Bool="true" />
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__core.OptimisticConcurrency">
+          <Collection />
+        </Annotation>
+        <Annotation Term="SAP__hierarchy.RecursiveHierarchySupported"
+          Qualifier="xDMOxI_EmployeeHN_HR" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType">
+        <Annotation Term="SAP__common.Label" String="Hierarchy: Read Only: Employee" />
+        <Annotation Term="SAP__UI.Facets">
+          <Collection>
+            <Record Type="SAP__UI.ReferenceFacet">
+              <PropertyValue Property="Label" String="Employee" />
+              <PropertyValue Property="ID" String="Employee" />
+              <PropertyValue Property="Target" AnnotationPath="@SAP__UI.Identification" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__UI.HeaderInfo">
+          <Record>
+            <PropertyValue Property="TypeName" String="Employee" />
+            <PropertyValue Property="TypeNamePlural" String="Employees" />
+            <PropertyValue Property="Title">
+              <Record Type="SAP__UI.DataField">
+                <PropertyValue Property="Value" Path="Employee" />
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__UI.Identification">
+          <Collection>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="Employee" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="FirstName" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="LastName" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="Salary" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="Manager" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__UI.LineItem">
+          <Collection>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="Employee" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="FirstName" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="LastName" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="Salary" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="Manager" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__UI.PresentationVariant">
+          <Record>
+            <PropertyValue Property="SortOrder">
+              <Collection>
+                <Record Type="SAP__common.SortOrderType">
+                  <PropertyValue Property="Property" PropertyPath="Employee" />
+                  <PropertyValue Property="Descending" Bool="false" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Visualizations">
+              <Collection>
+                <AnnotationPath>@SAP__UI.LineItem</AnnotationPath>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__UI.SelectionFields">
+          <Collection>
+            <PropertyPath>LastName</PropertyPath>
+            <PropertyPath>FirstName</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__aggregation.RecursiveHierarchy" Qualifier="xDMOxI_EmployeeHN_HR">
+          <Record>
+            <PropertyValue Property="NodeProperty"
+              PropertyPath="__HierarchyPropertiesForxDMOxI_EmployeeHN_HR/NodeId" />
+            <PropertyValue Property="ParentNavigationProperty" NavigationPropertyPath="_Manager" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__hierarchy.RecursiveHierarchy" Qualifier="xDMOxI_EmployeeHN_HR">
+          <Record>
+            <PropertyValue Property="ChildCount">
+              <Null />
+            </PropertyValue>
+            <PropertyValue Property="DescendantCount"
+              Path="__HierarchyPropertiesForxDMOxI_EmployeeHN_HR/DescendantCount" />
+            <PropertyValue Property="ExternalKey">
+              <Null />
+            </PropertyValue>
+            <PropertyValue Property="LimitedDescendantCount"
+              Path="__HierarchyPropertiesForxDMOxI_EmployeeHN_HR/LimitedDescendantCount" />
+            <PropertyValue Property="DistanceFromRoot"
+              Path="__HierarchyPropertiesForxDMOxI_EmployeeHN_HR/DistanceFromRoot" />
+            <PropertyValue Property="DrillState"
+              Path="__HierarchyPropertiesForxDMOxI_EmployeeHN_HR/DrillState" />
+            <PropertyValue Property="MatchedDescendantCount">
+              <Null />
+            </PropertyValue>
+            <PropertyValue Property="Matched">
+              <Null />
+            </PropertyValue>
+            <PropertyValue Property="NodeType">
+              <Null />
+            </PropertyValue>
+            <PropertyValue Property="SiblingRank">
+              <Null />
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="SAP__self.Container">
+        <Annotation Term="SAP__CodeList.CurrencyCodes">
+          <Record>
+            <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata" />
+            <PropertyValue Property="CollectionPath" String="Currencies" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__aggregation.ApplySupported">
+          <Record>
+            <PropertyValue Property="Transformations">
+              <Collection>
+                <String>aggregate</String>
+                <String>groupby</String>
+                <String>filter</String>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Rollup" EnumMember="SAP__aggregation.RollupType/None" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true" />
+        <Annotation Term="SAP__UI.LeadingEntitySet" String="Employee" />
+        <Annotation Term="SAP__capabilities.FilterFunctions">
+          <Collection>
+            <String>eq</String>
+            <String>ne</String>
+            <String>gt</String>
+            <String>ge</String>
+            <String>lt</String>
+            <String>le</String>
+            <String>and</String>
+            <String>or</String>
+            <String>contains</String>
+            <String>startswith</String>
+            <String>endswith</String>
+            <String>any</String>
+            <String>all</String>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.SupportedFormats">
+          <Collection>
+            <String>application/json</String>
+            <String>application/pdf</String>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__PDF.Features">
+          <Record>
+            <PropertyValue Property="DocumentDescriptionReference"
+              String="../../../../default/iwbep/common/0001/$metadata" />
+            <PropertyValue Property="DocumentDescriptionCollection" String="MyDocumentDescriptions" />
+            <PropertyValue Property="ArchiveFormat" Bool="true" />
+            <PropertyValue Property="Border" Bool="true" />
+            <PropertyValue Property="CoverPage" Bool="true" />
+            <PropertyValue Property="FitToPage" Bool="true" />
+            <PropertyValue Property="FontName" Bool="true" />
+            <PropertyValue Property="FontSize" Bool="true" />
+            <PropertyValue Property="Margin" Bool="true" />
+            <PropertyValue Property="Padding" Bool="true" />
+            <PropertyValue Property="Signature" Bool="true" />
+            <PropertyValue Property="HeaderFooter" Bool="true" />
+            <PropertyValue Property="ResultSizeDefault" Int="20000" />
+            <PropertyValue Property="ResultSizeMaximum" Int="20000" />
+            <PropertyValue Property="IANATimezoneFormat" Bool="true" />
+            <PropertyValue Property="Treeview" Bool="true" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.KeyAsSegmentSupported" />
+        <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/FirstName">
+        <Annotation Term="SAP__common.Label" String="First Name" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: First Name" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/LastName">
+        <Annotation Term="SAP__common.Label" String="Last Name" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: Last Name" />
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
