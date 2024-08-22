@@ -73,50 +73,50 @@
       "routes": [
         {
           "pattern": ":?query:",
-          "name": "GenresList",
-          "target": "GenresList"
+          "name": "GenresHierarchyList",
+          "target": "GenresHierarchyList"
         },
         {
-          "pattern": "Genres({key}):?query:",
-          "name": "GenresObjectPage",
-          "target": "GenresObjectPage"
+          "pattern": "GenresHierarchy({key}):?query:",
+          "name": "GenresHierarchyObjectPage",
+          "target": "GenresHierarchyObjectPage"
         }
       ],
       "targets": {
-        "GenresList": {
+        "GenresHierarchyList": {
           "type": "Component",
-          "id": "GenresList",
+          "id": "GenresHierarchyList",
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-              "entitySet": "Genres",
+              "entitySet": "GenresHierarchy",
               "initialLoad": "Enabled",
               "variantManagement": "Page",
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "type": "TreeTable",
-                    "hierarchyQualifier": "GenresHierarchy"
+                    "hierarchyQualifier": "HierarchyQ"
                   }
                 }
               },
               "navigation": {
-                "Genres": {
+                "GenresHierarchy": {
                   "detail": {
-                    "route": "GenresObjectPage"
+                    "route": "GenresHierarchyObjectPage"
                   }
                 }
               }
             }
           }
         },
-        "GenresObjectPage": {
+        "GenresHierarchyObjectPage": {
           "type": "Component",
-          "id": "GenresObjectPage",
+          "id": "GenresHierarchyObjectPage",
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
-              "entitySet": "Genres"
+              "entitySet": "GenresHierarchy"
             }
           }
         }

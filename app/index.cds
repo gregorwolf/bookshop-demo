@@ -11,7 +11,6 @@ using from './webapp/role/fiori-service';
 using from './webapp/users/fiori-service';
 using from './webapp/workAssignments/fiori-service';
 using from './webapp/productUI5latest/fiori-service';
-using from './webapp/genres/fiori-service';
 using from './webapp/maintainer-group/ui';
 using from './webapp/books-analytics/fiori-service';
 using from './webapp/uom-mapping/annotations';

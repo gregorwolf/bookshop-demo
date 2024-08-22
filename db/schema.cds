@@ -149,10 +149,6 @@ entity Genres : sap.common.CodeList {
 
         @title                : '{i18n>SemanticObject}'
       virtual genreSemanticObject : String;
-      LimitedDescendantCount      : Integer64             @Core.Computed;
-      DistanceFromRoot            : Integer64             @Core.Computed;
-      Matched                     : Boolean               @Core.Computed;
-      MatchedDescendantCount      : Integer64             @Core.Computed;
 }
 
 entity Publishers : managed {

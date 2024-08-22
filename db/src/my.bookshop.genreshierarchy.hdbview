@@ -1,0 +1,6 @@
+VIEW my_bookshop_genreshierarchy AS 
+  SELECT * FROM hierarchy ( 
+    source (SELECT id AS node_id, name, descr, parent_id, id AS id 
+    FROM my_bookshop_genres) sibling ORDER BY parent_id ASC, node_id ASC 
+  )
+  ORDER BY parent_id ASC, node_id ASC

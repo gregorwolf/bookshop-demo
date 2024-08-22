@@ -1,0 +1,69 @@
+using CatalogService from './cat-service-hana';
+
+////////////////////////////////////////////////////////////////////////////
+//
+//	Books Object Page
+//
+annotate CatalogService.GenresHierarchy with @(
+  Aggregation.RecursiveHierarchy #HierarchyQ: {
+    NodeProperty            : ID,
+    ParentNavigationProperty: parent
+  },
+  Hierarchy.RecursiveHierarchy #HierarchyQ  : {
+    DistanceFromRoot      : HierarchyLevel,
+    MatchedDescendantCount: HierarchyTreeSize
+  },
+  Capabilities.FilterRestrictions           : {NonFilterableProperties: [
+    HierarchyTreeSize,
+    HierarchyLevel,
+  ]},
+  Capabilities.SortRestrictions             : {NonSortableProperties: [
+    HierarchyTreeSize,
+    HierarchyLevel,
+  ]},
+  UI                                        : {
+    SelectionFields    : [
+      name,
+      parent_ID,
+    ],
+    LineItem           : [
+      {
+        $Type: 'UI.DataField',
+        Value: ID,
+      },
+      /*
+      {
+        $Type          : 'UI.DataFieldWithIntentBasedNavigation',
+        Value          : ID,
+        SemanticObject : 'genres',
+        //SemanticObject : 'V4Authors',
+        Action         : 'display',
+      },
+      */
+      {Value: parent_ID},
+      {Value: name},
+    /*
+    {Value: genreSemanticObject},
+    {Value: nodeType},
+    {Value: nodeType_FC},
+    */
+    ],
+    Facets             : [{
+      $Type : 'UI.ReferenceFacet',
+      Label : '{i18n>Details}',
+      Target: '@UI.FieldGroup#Details'
+    }],
+    FieldGroup #Details: {Data: [
+      {Value: ID},
+      {Value: name},
+    /*
+    {Value: genreSemanticObject},
+    {Value: nodeType},
+    {Value: nodeType_FC},
+    */
+    ]},
+  }
+) {
+  @Common.FieldControl: nodeType_FC
+  nodeType;
+};

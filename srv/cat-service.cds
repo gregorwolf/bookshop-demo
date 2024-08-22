@@ -37,7 +37,8 @@ service CatalogService @(impl: './cat-service.js') {
     excluding {
       createdBy,
       modifiedBy
-    } actions {
+    }
+    actions {
       action updateBook()
     };
 
