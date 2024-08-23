@@ -23,7 +23,10 @@ extend service OrderService with {
           total + total * taxPercentage / 100 as totalWithTax : Decimal(15, 2),
     }
     where
-      currency.code = :currency;
+      currency.code = :currency
+    actions {
+      action checkConsistencyWithParams();
+    };
 
 }
 
@@ -32,6 +35,12 @@ annotate OrderService.OrderReport with @(UI: {
   LineItem       : [
     {Value: OrderNo, },
     {Value: taxPercentage, },
+    {
+      $Type : 'UI.DataFieldForAction',
+      Label : '{i18n>checkConsistencyWithParams}',
+      Action: 'OrderService.checkConsistencyWithParams',
+      Inline: false
+    },
   ],
 }) {};
 
