@@ -37,6 +37,18 @@
                   }
                 },
                 {
+                  "id": "orderreportv4",
+                  "title": "Orders Report V4",
+                  "size": "1×1",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "chipId": "orderreportv4",
+                    "title": "Orders Report V4",
+                    "info": "",
+                    "targetURL": "#orderreportv4-manage"
+                  }
+                },
+                {
                   "id": "RoleUI5latest",
                   "title": "Role",
                   "size": "1×1",
@@ -740,6 +752,20 @@
                 "applicationType": "SAPUI5",
                 "additionalInformation": "SAPUI5.Component=ordersUI5latest",
                 "url": "ordersUI5latest/webapp"
+              }
+            },
+            "orderreportv4": {
+              "semanticObject": "orderreportv4",
+              "action": "manage",
+              "title": "Orders Report V4",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=orderreportv4",
+                "url": "/order-report-v4/webapp"
               }
             },
             "actionV2OrdersNoExt": {
