@@ -102,7 +102,7 @@
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-              "contextPath": "/OrderReport",
+              "contextPath": "/OrderReport/Set",
               "variantManagement": "Page",
               "navigation": {
                 "OrderReport": {
