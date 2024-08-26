@@ -13,7 +13,12 @@ Authorization: Basic admin:
 ### Read BooksAnalytics
 http://localhost:4004/v2/analytics/BooksAnalytics
 Authorization: Basic admin:
-### $apply on Draft Enabled Entity with $count
+### Group by with navigation attribute
+http://localhost:4004/odata/v4/order/Orders
+  ?$count=true
+  &$apply=groupby((orderstatus_code,orderstatus/name),aggregate($count as childCount,total with sum as TotalValue))
+Authorization: Basic admin:
+### Filter and Group by with navigation attribute
 http://localhost:4004/odata/v4/order/Orders
   ?$count=true
   &$apply=filter(deliverystatus_code eq 'N')/groupby((orderstatus_code,orderstatus/name),aggregate($count as childCount,total with sum as TotalValue))
