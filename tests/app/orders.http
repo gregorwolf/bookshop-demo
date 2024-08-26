@@ -7,7 +7,7 @@ Authorization: Basic admin:
 ### Read Orders via OData
 # @name orders
 GET http://localhost:4004/odata/v4/order/Orders
-  ?$expand=ShippingAddress,Items
+  ?$expand=ShippingAddress,Items,orderstatus
   &$orderby=OrderNo
 Authorization: Basic admin:
 ### Fill Variables from Response

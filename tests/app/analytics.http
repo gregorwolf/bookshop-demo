@@ -16,7 +16,7 @@ Authorization: Basic admin:
 ### $apply on Draft Enabled Entity with $count
 http://localhost:4004/odata/v4/order/Orders
   ?$count=true
-  &$apply=groupby((orderstatus_code),aggregate($count as childCount,total with sum as TotalValue))
+  &$apply=filter(deliverystatus_code eq 'N')/groupby((orderstatus_code,orderstatus/name),aggregate($count as childCount,total with sum as TotalValue))
   #&$apply=groupby((orderstatus/name),aggregate($count as childCount,total with sum as TotalValue))
 Authorization: Basic admin:
 # Lean Draft:     "message": "invalid column name: ORDERSTATUS: line 1 col 45 (at pos 44)"
