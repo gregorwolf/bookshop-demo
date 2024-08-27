@@ -1,0 +1,16 @@
+###
+GET {{$dotenv cloud_connector_url}}/api/v1/configuration/availableCipherSuites
+Authorization: Basic {{$dotenv cloud_connector_username}}:{{$dotenv cloud_connector_password}}
+Accept: application/json
+###
+GET {{$dotenv cloud_connector_url}}/api/v1/configuration/connector/ui/cipherSuites
+Authorization: Basic {{$dotenv cloud_connector_username}}:{{$dotenv cloud_connector_password}}
+Accept: application/json
+###
+POST {{$dotenv cloud_connector_url}}/api/v1/configuration/connector/ui/cipherSuites
+Authorization: Basic {{$dotenv cloud_connector_username}}:{{$dotenv cloud_connector_password}}
+Content-Type: application/json
+
+[
+  "TLS_AES_256_GCM_SHA384"
+]
