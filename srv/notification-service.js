@@ -5,7 +5,7 @@ class NotificationService extends cds.ApplicationService {
   async init() {
     const alert = await cds.connect.to("notifications");
 
-    this.on("send", async (req) => {
+    this.on("sendNotification", async (req) => {
       alert.notify({
         recipients: [recipient],
         priority: "HIGH",

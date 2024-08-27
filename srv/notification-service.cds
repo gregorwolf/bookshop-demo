@@ -1,4 +1,4 @@
 service NotificationService {
-  function send()                 returns String;
+  function sendNotification()     returns String;
   function sendIncidentResolved() returns String;
 }
