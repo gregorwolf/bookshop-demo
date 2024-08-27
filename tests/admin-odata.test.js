@@ -7,7 +7,7 @@ const auth = {
 };
 describe("Admin OData Service", () => {
   it("serves $metadata documents in v4", async () => {
-    const { headers, status, data } = await GET(`/admin/$metadata`, {
+    const { headers, status, data } = await GET(`/odata/v4/admin/$metadata`, {
       auth: auth,
     });
     expect(status).to.equal(200);
@@ -21,7 +21,7 @@ describe("Admin OData Service", () => {
   });
 
   it.skip("supports $search in multiple fields", async () => {
-    const { data } = await GET`/admin/Books ${{
+    const { data } = await GET`/odata/v4/admin/Books ${{
       auth: auth,
       params: { $select: `title` },
     }}`;

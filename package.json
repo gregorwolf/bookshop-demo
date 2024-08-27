@@ -132,7 +132,7 @@
     "watch:instance1": "cds watch --profile instance1",
     "watch:instance2": "cds watch --profile instance2 --port 4005",
     "watchboth": "run-p watch:**",
-    "test": "jest --forceExit",
+    "test": "jest --detectOpenHandles",
     "test:hana": "CDS_ENV=hybrid cds bind --exec npm run test",
     "test:load:catalog": "artillery run tests/app/catalog.yml",
     "test:load:count-one": "artillery run --dotenv tests/app/.env tests/app/count-one.yml",
@@ -143,16 +143,13 @@
     "watch-uom-mapping": "cds watch --open uom-mapping/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
-    "drafts": {
-      "cancellationTimeout": 1
-    },
     "fiori": {
+      "draft_lock_timeout": 1,
       "lean_draft": true,
       "bypass_draft": true
     },
     "features": {
       "xassert_integrity": "db",
-      "serve_on_root": true,
       "odata_new_parser": true
     },
     "cdsc": {

@@ -8,7 +8,7 @@ describe("Orders Entity", () => {
     const db = await cds.connect.to("db");
     const { Orders } = db.entities;
     const result = await SELECT.from(Orders);
-    expect(result.length).to.equal(9);
+    expect(result.length).to.equal(11);
   });
   it("supports query for Orders where the Items contain Books where the Author country_code = 'GB'", async () => {
     const db = await cds.connect.to("db");
