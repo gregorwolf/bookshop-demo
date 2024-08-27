@@ -23,7 +23,7 @@ modules:
       ignore: ["node_modules/"]
     parameters:
       memory: 256M
-      disk-quota: 256M
+      disk-quota: 2G
       stack: cflinuxfs4
     requires:
       - name: bookshop-demo-db-service
@@ -41,7 +41,7 @@ modules:
     #  NODE_ARGS: -r @sap/xotel-agent-ext-js/dist/common/tracer
     parameters:
       memory: 256M
-      disk-quota: 1024M
+      disk-quota: 2G
       stack: cflinuxfs4
     provides:
       - name: srv_api
@@ -71,7 +71,7 @@ modules:
     parameters:
       app-name: bookshop-demo-api-sb-${space}
       memory: 64MB
-      disk-quota: 1024MB
+      disk-quota: 2G
     properties:
       SBF_BROKER_CREDENTIALS_HASH: >
         {
@@ -172,7 +172,7 @@ modules:
   #      ignore: ["node_modules/"]
   #    parameters:
   #      memory: 128M
-  #      disk-quota: 1024M
+  #      disk-quota: 2G
   #    provides:
   #      - name: srv_api_v2
   #        properties:
@@ -189,7 +189,7 @@ modules:
   #     ignore: ["node_modules/"]
   #   parameters:
   #     memory: 256M
-  #     disk-quota: 1024M
+  #     disk-quota: 2G
   #   requires:
   #    - name: bookshop-demo-uaa
   #    - name: srv_api
@@ -212,7 +212,7 @@ modules:
     path: approuter
     parameters:
       memory: 256M
-      disk-quota: 1024M
+      disk-quota: 2G
       stack: cflinuxfs4
     build-parameters:
       ignore: ["node_modules/"]

@@ -3,14 +3,14 @@ _schema-version: "2.1"
 version: 0.0.1
 parameters:
   enable-parallel-deployments: true
-   
+
 build-parameters:
   before-all:
-   - builder: custom
-     commands:
-      - npm install
-      - npx -p @sap/cds-dk cds build --production
-      - npm run build:copycsntoproxy
+    - builder: custom
+      commands:
+        - npm install
+        - npx -p @sap/cds-dk cds build --production
+        - npm run build:copycsntoproxy
 
 modules:
   - name: bookshop-demo-db
@@ -20,7 +20,7 @@ modules:
       ignore: ["node_modules/"]
     parameters:
       memory: 256M
-      disk-quota: 256M
+      disk-quota: 2G
     requires:
       - name: bookshop-demo-db-service
   - name: bookshop-demo-srv
@@ -39,7 +39,7 @@ modules:
         ]
     parameters:
       memory: 256M
-      disk-quota: 1024M
+      disk-quota: 2G
     provides:
       - name: srv_api
         properties:
@@ -49,22 +49,22 @@ modules:
       - name: bookshop-demo-uaa
       - name: bookshop-demo-job-scheduler
       - name: mqtt
-#  - name: bookshop-demo-v2-proxy
-#    type: nodejs
-#    path: standalone-v2-proxy
-#    build-parameters:
-#      ignore: ["node_modules/"]
-#    parameters:
-#      memory: 128M
-#      disk-quota: 1024M
-#    provides:
-#      - name: srv_api_v2
-#        properties:
-#          url: '${default-url}'
-#    requires:
-#      - name: srv_api
-#        properties:
-#          srv_api_url: ~{url}
+  #  - name: bookshop-demo-v2-proxy
+  #    type: nodejs
+  #    path: standalone-v2-proxy
+  #    build-parameters:
+  #      ignore: ["node_modules/"]
+  #    parameters:
+  #      memory: 128M
+  #      disk-quota: 2G
+  #    provides:
+  #      - name: srv_api_v2
+  #        properties:
+  #          url: '${default-url}'
+  #    requires:
+  #      - name: srv_api
+  #        properties:
+  #          srv_api_url: ~{url}
 
   - name: bookshop-demo-app
     type: nodejs
@@ -73,16 +73,16 @@ modules:
       ignore: ["node_modules/"]
     parameters:
       memory: 256M
-      disk-quota: 1024M
+      disk-quota: 2G
     requires:
       - name: bookshop-demo-uaa
       - name: srv_api
         group: destinations
         properties:
-           forwardAuthToken: true
-           strictSSL: false
-           name: srv_api
-           url: ~{url}
+          forwardAuthToken: true
+          strictSSL: false
+          name: srv_api
+          url: ~{url}
 #      - name: srv_api_v2
 #        group: destinations
 #        properties:
@@ -104,9 +104,9 @@ resources:
   - name: bookshop-demo-job-scheduler
     type: org.cloudfoundry.managed-service
     parameters:
-       service: jobscheduler
-       service-plan: default
-       config:
-          enable-xsuaa-support: true
+      service: jobscheduler
+      service-plan: default
+      config:
+        enable-xsuaa-support: true
   - name: mqtt
     type: org.cloudfoundry.existing-service
