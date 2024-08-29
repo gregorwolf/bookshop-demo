@@ -1,13 +1,46 @@
-<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:notmacros="sap.notfe.macros">
+<core:FragmentDefinition
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:macros="sap.fe.macros"
+	xmlns:richtexteditor="sap.fe.macros.richtexteditor"
+>
 	<VBox>
-		<notmacros:RichTextEditorWithMetadata metaPath="headerText" id="myRichTextEditor">
-			<notmacros:buttonGroups>
-				<notmacros:buttonGroup name="font-style" visible="true" priority="10" customPriority="10"
-					buttons="bold,italic,underline" />
-			</notmacros:buttonGroups>
-			<notmacros:plugins>
-				<notmacros:plugin name="autoresize" />
-			</notmacros:plugins>
-		</notmacros:RichTextEditorWithMetadata>
+		<macros:RichTextEditorWithMetadata metaPath="headerText" id="myRichTextEditor">
+			<macros:buttonGroups>
+				<richtexteditor:ButtonGroup name="font-style" visible="true" priority="10"
+					buttons="bold,italic,underline,strikethrough" />
+				<!-- The styleselect does not appear in the UI -->
+				<richtexteditor:ButtonGroup name="styleselect"
+					visible="true" priority="10" customPriority="10"
+					buttons="styleselect" />
+				<richtexteditor:ButtonGroup name="font"
+					visible="true" priority="10" customPriority="10"
+					buttons="fontfamily,fontsize,forecolor,backcolor" />
+				<richtexteditor:ButtonGroup
+					name="clipboard" visible="true" priority="10" customPriority="10"
+					buttons="cut,copy,paste" />
+				<richtexteditor:ButtonGroup
+					name="structure" visible="true" priority="10" customPriority="10"
+					buttons="bullist,numlist,outdent,indent" />
+				<!-- 
+				<richtexteditor:ButtonGroup
+					name="undo" visible="true" priority="10" customPriority="10"
+					buttons="undo,redo" />
+					-->
+				<richtexteditor:ButtonGroup
+					name="insert" visible="true" priority="10" customPriority="10"
+					buttons="image,emoticons" />
+				<richtexteditor:ButtonGroup
+					name="link" visible="true" priority="10" customPriority="10"
+					buttons="link,unlink" />
+				<!-- The table does not appear in the UI -->
+				<richtexteditor:ButtonGroup name="table"
+					visible="true" priority="10" customPriority="10"
+					buttons="table" />
+				<richtexteditor:ButtonGroup
+					name="text-align" visible="true" priority="10" customPriority="10"
+					buttons="alignleft,aligncenter,alignright,alignjustify" />
+			</macros:buttonGroups>
+		</macros:RichTextEditorWithMetadata>
 	</VBox>
 </core:FragmentDefinition>
