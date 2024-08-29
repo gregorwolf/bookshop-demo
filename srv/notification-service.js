@@ -1,3 +1,5 @@
+// Reactivate when https://github.com/cap-js/notifications/issues/57 is fixed
+/*
 const cds = require("@sap/cds");
 const recipient = "gregor@computerservice-wolf.com";
 
@@ -30,3 +32,4 @@ class NotificationService extends cds.ApplicationService {
   }
 }
 module.exports = NotificationService;
+*/
