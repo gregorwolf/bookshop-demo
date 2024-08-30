@@ -1,0 +1,16 @@
+###
+POST https://forms.services.sap.com/api/companies
+Content-Type: application/json
+
+{
+  "companyName":"Apple",
+  "countryCode":"US"
+}
+###
+POST https://forms.services.sap.com/api/companies
+Content-Type: application/json
+
+{
+  "companyName":"Allianz",
+  "countryCode":"DE"
+}
