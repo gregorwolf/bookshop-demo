@@ -108,7 +108,7 @@
     "get:cf-hdi-service-key": "cf service-key bookshop-demo-db-service dev",
     "generate-odata-client:GWSAMPLE_BASIC": "generate-odata-client --inputDir srv/external/GWSAMPLE_BASIC --outputDir srv/cloud-sdk-clients --forceOverwrite",
     "build": "run-s build:clean build:copycsntoproxy",
-    "build:clean": "cds build/all --clean",
+    "build:clean": "cds build --clean",
     "build:xs-security": "cds compile srv/ --to xsuaa > xs-security.json",
     "build:cf": "cp mta-cf.yaml mta.yaml && mbt build -p=cf -e cf-service-broker-private.mtaext && rm mta.yaml && npm install",
     "build:xsa": "cp mta-xsa.yaml mta.yaml && mbt build -p=xsa && rm mta.yaml",
