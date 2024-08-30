@@ -1,0 +1,4 @@
+@EndUserText.label: 'Agreement Item Pricing for Key Date'
+define service Z_AITEMPRICINGFORKEYDATE {
+  expose Z_C_AItemPricingForKeyDate;
+}

@@ -4,6 +4,8 @@
   <asx:values>
    <DEVC>
     <CTEXT>Bookshop Demo</CTEXT>
+    <COMP_POSID>BC-ABA</COMP_POSID>
+    <COMPONENT>HLB0009083</COMPONENT>
    </DEVC>
   </asx:values>
  </asx:abap>
