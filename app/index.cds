@@ -57,20 +57,34 @@ annotate my.Authors with @(UI: {
         alive
     ],
     LineItem                   : [
-        {Value: ID},
+        {
+            $Type         : 'UI.DataFieldWithIntentBasedNavigation',
+            Label         : 'To Books With Intent Based',
+            Value         : ID,
+            SemanticObject: 'Books',
+            Action        : 'displayUI5latest',
+            Mapping       : [{
+                LocalProperty         : ID,
+                SemanticObjectProperty: 'author_ID',
+            }, ],
+        },
+        {
+            $Type         : 'UI.DataFieldForIntentBasedNavigation',
+            SemanticObject: 'Books',
+            Action        : 'displayUI5latest',
+            Label         : 'To Books For Intent Based',
+            Inline        : true,
+            Mapping       : [{
+                LocalProperty         : ID,
+                SemanticObjectProperty: 'author_ID',
+            }, ],
+        },
         {Value: name},
         {Value: dateOfBirth},
         {Value: placeOfBirth},
         {Value: dateOfDeath},
         {Value: placeOfDeath},
         {Value: country.name},
-        {
-            $Type         : 'UI.DataFieldWithIntentBasedNavigation',
-            Label         : 'To Books Intent Based',
-            Value         : ID,
-            SemanticObject: 'Books',
-            Action        : 'displayUI5latest'
-        }
     ],
     HeaderInfo                 : {
         TypeName      : '{i18n>Author}',
