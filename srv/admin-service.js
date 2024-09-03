@@ -81,6 +81,18 @@ module.exports = async function (srv) {
     }
   });
 
+  srv.on("READ", "ApprovalStatusVH", async (req) => {
+    // convert objects of Approval.elements.status.enum to array
+    const statusArray = Object.values(Approval.elements.status.enum);
+    // Loop through the array and move @tilte to name
+    statusArray.forEach((element) => {
+      element.name = element["@title"];
+      delete element["@title"];
+    });
+
+    return statusArray;
+  });
+
   srv.on(["approve"], Approval, async (req) => {
     LOG.info("Approval - approve");
     let approval = await cds

@@ -17,6 +17,11 @@ service AdminService @(
       action rejection();
     };
 
+  @cds.persistence.exists
+  entity ApprovalStatusVH : sap.common.CodeList {
+    key val : String(1);
+  }
+
   @cds.redirection.target
   entity Books @(
     restrict    : [

@@ -1,22 +1,53 @@
-### Read Approval which has @odata.draft.enabled
-GET {{protocol}}://{{host}}:{{port}}/v2/admin/Approval
-Authorization: Basic admin:
+### Read Approval Status Value Help
+GET  http://localhost:4004/odata/v2/admin/ApprovalStatusVH
 Accept: application/json
+Authorization: Basic admin:
 
+### Read Approval
+# @name approval
+GET  http://localhost:4004/odata/v2/admin/Approval
+Accept: application/json
+Authorization: Basic admin:
+
+###
+@ID = {{approval.response.body.d.results[0].ID}}
 ### OData V2 Proxy Issue with Decimal
 # Returns:
 # Error while deserializing payload. An error occurred during deserialization of the entity. A JSON number is not supported as Edm.Decimal value.
-PATCH {{protocol}}://{{host}}:{{port}}/v2/admin/Approval(ID=guid'9f7410bb-b3f3-4809-afea-f75413c7ad0b',IsActiveEntity=false)
+PATCH  http://localhost:4004/odata/v2/admin/Approval(ID=guid'{{ID}}',IsActiveEntity=true)
 Authorization: Basic admin:
 Accept: application/json
 Content-Type: application/json
 
-{"testDecimal":"42.2","__metadata":{"uri":"http://localhost:4004/v2/admin/Approval(ID=guid'98b7fccc-6df7-4deb-b993-080c73fcc920',IsActiveEntity=false)","type":"AdminService.Approval"}}
+{
+  "testDecimal":"42.2",
+  "__metadata": {
+    "uri":"http://localhost:4004/odata/v2/admin/Approval(ID=guid'98b7fccc-6df7-4deb-b993-080c73fcc920',IsActiveEntity=false)",
+    "type":"AdminService.Approval"
+  }
+}
 
 ### OData V4 Works with Decimal
-PATCH {{protocol}}://{{host}}:{{port}}/admin/Approval(ID=9f7410bb-b3f3-4809-afea-f75413c7ad0b,IsActiveEntity=false) HTTP/1.1
+PATCH  http://localhost:4004/odata/v4/admin/Approval(ID={{ID}},IsActiveEntity=true)
 Authorization: Basic admin:
 Accept:application/json;odata.metadata=minimal;IEEE754Compatible=true
 Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
 
 {"testDecimal":"42.42"}
+
+
+### Approve
+POST  http://localhost:4004/odata/v2/admin/Approval_approve
+  ?ID=guid'{{ID}}'&IsActiveEntity=true
+Content-Type: application/json
+Authorization: Basic admin:
+
+{}
+
+### Reject
+POST  http://localhost:4004/odata/v2/admin/Approval_reject
+  ?ID=guid'{{ID}}'&IsActiveEntity=true
+Content-Type: application/json
+Authorization: Basic admin:
+
+{}

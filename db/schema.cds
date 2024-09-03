@@ -19,7 +19,6 @@ annotate BusinessObject with @(
 
 using {ZPDCDS_SRV.SEPMRA_I_Product_E} from '../srv/external/ZPDCDS_SRV.csn';
 
-
 /**
  * Entity to store change requests for entities JSON
  * serialized.
@@ -33,16 +32,18 @@ entity Approval : managed, cuid {
   testDecimal       : Decimal(9, 2) @(title: 'Test Decimal (9,2)');
   status            : String(1)     @(title: 'Status', )
   enum {
-    requested = 'R'
 
-    @(title: 'Requested');
-    pending   = 'P'
+    @(title: 'Requested')
+    requested = 'R';
 
-    @(title: 'Pending');
-    approved  = 'A'
+    @(title: 'Pending')
+    pending   = 'P';
 
-    @(title: 'Approved');
-    rejected  = 'N'                 @(title: 'Rejected');
+    @(title: 'Approved')
+    approved  = 'A';
+
+    @(title: 'Rejected')
+    rejected  = 'N';
   } default 'R';
 };
 
