@@ -1,0 +1,24 @@
+### https://help.openconnectors.ext.hana.ondemand.com/home/work-with-elements-base-url
+### instances
+# @name instances
+GET {{$dotenv open_connectors_base_url}}/elements/api-v2/instances
+Authorization: {{$dotenv open_connectors_auth}}
+Accept: application/json
+###
+@token={{instances.response.body.$.[0].token}}}
+###
+GET {{$dotenv open_connectors_base_url}}/elements/api-v2/authentication/user
+Authorization: {{$dotenv open_connectors_auth}}
+Accept: application/json
+###
+GET {{$dotenv open_connectors_base_url}}/elements/api-v2/preferences/users
+Authorization: {{$dotenv open_connectors_auth}}
+Accept: application/json
+###
+GET {{$dotenv open_connectors_base_url}}/elements/api-v2/ping
+Authorization: {{$dotenv open_connectors_auth}}
+Accept: application/json
+###
+GET {{$dotenv open_connectors_base_url}}/elements/api-v2/folders/contents?path=%2F
+Authorization: {{$dotenv open_connectors_auth}}, Element {{token}}
+Accept: application/json
