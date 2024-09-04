@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download XSA artifact
-        uses: dawidd6/action-download-artifact@v6
-        with:
-          workflow: build-mta-hana.yml
-          workflow_conclusion: success
-          name: mta
+      # - name: Download XSA artifact
+      #   uses: dawidd6/action-download-artifact@v6
+      #   with:
+      #     workflow: build-mta-hana.yml
+      #     workflow_conclusion: success
+      #     name: mta
       - name: Download CF artifact
         uses: dawidd6/action-download-artifact@v6
         with:
@@ -29,6 +29,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: |
-            bookshop-demo-xsa.mtar
-            bookshop-demo-cf.mtar
+          files: bookshop-demo-cf.mtar
+          # files: |
+          #   bookshop-demo-xsa.mtar
+          #   bookshop-demo-cf.mtar
