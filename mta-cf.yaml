@@ -1,6 +1,6 @@
 ID: bookshop-demo
 _schema-version: 3.2.0
-version: 0.0.1
+version: 1.1.0
 parameters:
   enable-parallel-deployments: true
 
