@@ -5,7 +5,7 @@ on:
     branches:
       - build
     paths-ignore:
-      - '.github/**'
+      - ".github/**"
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 14
-          cache: 'npm'
+          cache: "npm"
       - name: Check node version
         run: node --version
       - name: Install MTA Build Tool
@@ -37,20 +37,20 @@ jobs:
       - name: Upload archive file
         uses: actions/upload-artifact@v2
         with:
-           name: mta
-           path: bookshop-demo-xsa.mtar
+          name: mta
+          path: bookshop-demo-xsa.mtar
   deploy:
     needs: build
     runs-on: self-hosted
-    environment: 
+    environment:
       name: dev
-      # url: 
+      # url:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Copy XSA .pipeline/config.yml
         run: cp .pipeline/config-xsa.yml .pipeline/config.yml
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: mta
       - name: Display structure of downloaded files

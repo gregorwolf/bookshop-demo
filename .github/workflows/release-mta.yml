@@ -3,7 +3,7 @@ name: release-mta-hana
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   main:
@@ -12,13 +12,13 @@ jobs:
 
     steps:
       - name: Download XSA artifact
-        uses: dawidd6/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@v6
         with:
           workflow: build-mta-hana.yml
           workflow_conclusion: success
           name: mta
       - name: Download CF artifact
-        uses: dawidd6/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@v6
         with:
           workflow: build-mta-cf.yml
           workflow_conclusion: success
