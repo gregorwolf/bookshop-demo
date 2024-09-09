@@ -685,6 +685,47 @@ module.exports = async function (srv) {
       .run(UPDATE(Roles).where({ ID: req.params[0].ID }).set("count -=", 1));
     return cds.tx(req).run(SELECT.one(Roles).where({ ID: req.params[0].ID }));
   });
+  srv.on(["setCount"], Roles, async (req) => {
+    const { count: newCount } = req.data;
+    const { ID } = req.params[0];
+
+    try {
+      const result = await cds.transaction(async (tx) => {
+        // Get the current count of the role being moved
+        const [currentRole] = await tx.run(SELECT.from(Roles).where({ ID }));
+        const oldCount = currentRole.count;
+
+        if (newCount === oldCount) return currentRole; // No change needed
+
+        // Update counts for affected roles
+        if (newCount < oldCount) {
+          // Moving up: Increment counts for roles between new and old positions
+          await tx.run(`
+            UPDATE my_bookshop_Roles
+            SET count = count + 1
+            WHERE count >= ${newCount} AND count < ${oldCount} AND ID != '${ID}'
+          `);
+        } else {
+          // Moving down: Decrement counts for roles between old and new positions
+          await tx.run(`
+            UPDATE my_bookshop_Roles
+            SET count = count - 1
+            WHERE count > ${oldCount} AND count <= ${newCount} AND ID != '${ID}'
+          `);
+        }
+
+        // Update the count for the moved role
+        await tx.run(UPDATE(Roles).where({ ID }).set({ count: newCount }));
+
+        // Fetch and return the updated role
+        return await tx.run(SELECT.one(Roles).where({ ID }));
+      });
+
+      return result;
+    } catch (error) {
+      req.error(500, `Error updating role: ${error.message}`);
+    }
+  });
 
   srv.on("READ", `Destination`, async (req) => {
     const destination = await cds.connect.to("destination");
