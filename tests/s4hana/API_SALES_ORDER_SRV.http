@@ -20,5 +20,63 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder
   ?$top=10
   &$skip=9
+  &$expand=to_Item,to_Item/to_ScheduleLine
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### Get CSRF Token
+# @name getCSRF
+HEAD {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder
+X-CSRF-Token: Fetch
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Read Token to Variable
+@CSRF={{getCSRF.response.headers.x-csrf-token}}
+###
+# @name createSalesOrder
+POST {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+{
+  "SalesOrderType": "OR",
+  "SalesOrderTypeInternalCode": "TA",
+  "SalesOrganization": "1010",
+  "DistributionChannel": "10",
+  "OrganizationDivision": "00",
+  "SoldToParty": "10100003",
+  "PurchaseOrderByCustomer": "PO-GROUP-88",
+  "SalesOrderDate": "\/Date(1720051200000)\/",
+  "PricingDate": "\/Date(1720051200000)\/",
+  "RequestedDeliveryDate": "\/Date(1720051200000)\/",
+  "ShippingCondition": "01",
+  "CompleteDeliveryIsDefined": true,
+  "to_Item": [
+    {
+      "SalesOrder": "10",
+      "SalesOrderItem": "10",
+      "Material": "TG11",
+      "RequestedQuantity": "100",
+      "RequestedQuantityUnit": "PC",
+      "to_ScheduleLine": [
+        {
+          "SalesOrder": "10",
+          "SalesOrderItem": "10",
+          "ScheduleLine": "1",
+          "RequestedDeliveryDate": "\/Date(1720051200000)\/",
+          "ConfirmedDeliveryDate": null,
+          "OrderQuantityUnit": "PC",
+          "ScheduleLineOrderQuantity": "100"
+        }
+      ]
+    }
+  ]
+}
+###
+@salesOrder={{createSalesOrder.response.body.d.SalesOrder}}
+###
+# Read the created Sales Order
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder('{{salesOrder}}')
+  ?$expand=to_Item,to_Item/to_ScheduleLine
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
