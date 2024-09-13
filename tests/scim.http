@@ -32,6 +32,48 @@ Content-Type: application/scim+json
 DELETE {{$dotenv ias_scim_endpoint}}/scim/Users/{{userId}}
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ###
+POST {{$dotenv ias_scim_endpoint}}/scim/Users
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+Content-Type: application/scim+json
+
+{
+  "schemas": [
+    "urn:ietf:params:scim:schemas:core:2.0:User",
+    "urn:ietf:params:scim:schemas:extension:sap:2.0:User",
+    "urn:sap:cloud:scim:schemas:extension:custom:2.0:Customer"
+  ],
+  "userName": "johny.smith",
+  "name": {
+    "familyName": "Smith",
+    "givenName": "Johny"
+  },
+  "userType": "Partner",
+  "active": true,
+  "emails": [
+    {
+      "type": "work",
+      "value": "{{$dotenv scim_user_email}}",
+      "primary": true
+    }
+  ],
+  "urn:ietf:params:scim:schemas:extension:sap:2.0:User": {
+    "status": "active",
+    "applicationId": "9f3599c7-ff65-42df-a63b-c9dc04930da2",
+    "sendMail": true,
+    "targetUrl": "https://csw-dev-azure.launchpad.cfapps.eu20.hana.ondemand.com/site/csw",
+    "emails": [
+      {
+        "type": "work",
+        "value": "{{$dotenv scim_user_email}}",
+        "primary": true
+      }
+    ]
+  },
+  "urn:sap:cloud:scim:schemas:extension:custom:2.0:Customer": {
+    "customerId": "17100001"
+  }
+}
+###
 GET {{$dotenv ias_scim_endpoint}}/scim/Users
   ?filter=emails.value eq "{{$dotenv ias_scim_user_email}}"
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
