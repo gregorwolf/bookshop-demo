@@ -97,6 +97,18 @@ service AdminService @(
   @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Books'])
   action   resetCountOfAllRoles();
 
+  /*
+
+  action   rolesCountUp(roles : array of Roles)                                                        returns array of Roles;
+
+
+*/
+  @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Roles'])
+  action   rolesCountUp(roles : array of Roles)                                                        returns array of Roles;
+
+  @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Roles'])
+  action   rolesCountDown(roles : array of Roles)                                                      returns array of Roles;
+
   @odata.draft.enabled
   // @Common.DraftRoot.NewAction : 'AdminService.createDraftRole'
   entity Roles @(restrict: [{
