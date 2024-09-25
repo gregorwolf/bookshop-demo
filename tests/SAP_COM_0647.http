@@ -1,0 +1,9 @@
+# Test for ABAP Environment as a Content Provider for SAP Build Work Zone, standard edition
+# https://developers.sap.com/tutorials/abap-environment-lp-service-content-provider..html
+# Communication Arrangement: SAP_COM_0647
+###
+GET {{$dotenv btp_abap_url}}/sap/bc/http/sap/aps_flp_content_exposure
+Authorization: Basic {{$dotenv btp_abap_username}}:{{$dotenv btp_abap_password}}
+###
+GET {{$dotenv btp_abap_url}}/sap/bc/http/sap/aps_flp_content_exposure/entities
+Authorization: Basic {{$dotenv btp_abap_username}}:{{$dotenv btp_abap_password}}
