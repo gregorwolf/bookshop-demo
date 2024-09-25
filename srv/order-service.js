@@ -1,6 +1,7 @@
 const cds = require("@sap/cds");
 const LOG = cds.log("order-service");
 const { getUserdetails, getAuthorizations } = require("./helper/userdetails");
+const { sendMail, MailConfig } = require("@sap-cloud-sdk/mail-client");
 
 module.exports = async function (srv) {
   const { Orders, OrderItems } = srv.entities;
@@ -116,16 +117,18 @@ module.exports = async function (srv) {
     if (!req.data.body) {
       return req.error("You must specify a body");
     }
-    const destination = req.data.destination || "mailtrap";
+    const destination = req.data.destination || "inbucket";
     try {
-      const transporter = new SapCfMailer(destination);
-      // use sendmail as you should use it in nodemailer
-      const result = await transporter.sendMail({
+      const mailConfig = {
         from: req.data.sender,
         to: req.data.to,
         subject: req.data.subject,
         text: req.data.body,
-      });
+      };
+      // use sendmail as you should use it in nodemailer
+      const result = await sendMail({ destinationName: destination }, [
+        mailConfig,
+      ]);
       return JSON.stringify(result);
     } catch (error) {
       LOG.info(error);

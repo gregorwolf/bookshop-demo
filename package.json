@@ -20,6 +20,7 @@
     "@cap-js/notifications": "^0.1.0",
     "@sap-cloud-sdk/core": "^1",
     "@sap-cloud-sdk/http-client": "^3",
+    "@sap-cloud-sdk/mail-client": "^3.21.0",
     "@sap-cloud-sdk/util": "^3",
     "@sap/cds": "^7",
     "@sap/cds-common-content": "^1",
