@@ -78,6 +78,15 @@
         }
       }
     },
+    "extends": {
+      "extensions": {
+          "sap.ui.controllerExtensions": {
+              "sap.fe.templates.ListReport.ListReportController": {
+                  "controllerName": "roleUI5latest.ext.ListReportExt"
+              }
+          }
+      }
+  },
     "routing": {
       "routes": [
         {
@@ -112,7 +121,8 @@
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "selectAll": true,
-                    "enableMassEdit": true
+                    "enableMassEdit": true,
+                    "beforeRebindTable": ".extension.roleUI5latest.ext.ListReportExt.addDragAndDrop"
                   }
                 }
               }

@@ -122,6 +122,8 @@ service AdminService @(
       action countUp()                                                                  returns Roles;
       @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Roles'])
       action countDown()                                                                returns Roles;
+      @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Roles'])
+      action setCount(count : Integer)                                                                returns Roles;
     };
 
   //------- auto-exposed --------
