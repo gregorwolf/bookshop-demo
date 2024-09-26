@@ -1,0 +1,9 @@
+specVersion: "2.2"
+type: module
+metadata:
+  name: ui5-cc-custom.control
+
+resources:
+  configuration:
+    paths:
+      "/resources/custom/control/": "./"
