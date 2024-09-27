@@ -8,11 +8,10 @@ sap.ui.define(
   function (Control, VBox, RichTextEditor, Context) {
     'use strict';
 
-    return Control.extend('custom.control.Control', {
+    return Control.extend('custom.control.RichTextEditorWithMetadata', {
       metadata: {
         properties: {
           metaPath: { type: 'string', defaultValue: '' },
-          // Add a new property to hold the binding path
           contextPath: { type: 'string', defaultValue: '' },
         },
         aggregations: {
@@ -27,7 +26,7 @@ sap.ui.define(
 
       init: function () {
         Control.prototype.init.apply(this, arguments);
-        // Create the VBox
+        // Create the VBox, only worked with VBox, not with RichTextEditor directly :/
         var vbox = new VBox();
         // Set the VBox as the content aggregation
         this.setAggregation('_content', vbox);
@@ -62,14 +61,14 @@ sap.ui.define(
                     // Configuration for various button groups in the editor
                     // https://ui5.sap.com/#/api/sap.fe.macros.richtexteditor.ButtonGroup
                     { name: "font-style", visible: true, priority: 10, buttons: "bold,italic,underline,strikethrough" },
-                    { name: "styleselect", visible: true, priority: 10, customPriority: 10, buttons: "styleselect" },
-                    { name: "font", visible: true, priority: 10, customPriority: 10, buttons: "fontfamily,fontsize,forecolor,backcolor" },
-                    { name: "clipboard", visible: true, priority: 10, customPriority: 10, buttons: "cut,copy,paste" },
-                    { name: "structure", visible: true, priority: 10, customPriority: 10, buttons: "bullist,numlist,outdent,indent" },
-                    { name: "insert", visible: true, priority: 10, customPriority: 10, buttons: "image,emoticons" },
-                    { name: "link", visible: true, priority: 10, customPriority: 10, buttons: "link,unlink" },
-                    { name: "table", visible: true, priority: 10, customPriority: 10, buttons: "table" },
-                    { name: "text-align", visible: true, priority: 10, customPriority: 10, buttons: "alignleft,aligncenter,alignright,alignjustify" }
+                    { name: "styleselect", visible: true, priority: 10, customToolbarPriority: 10, buttons: "styleselect" },
+                    { name: "font", visible: true, priority: 10, customToolbarPriority: 10, buttons: "fontfamily,fontsize,forecolor,backcolor" },
+                    { name: "clipboard", visible: true, priority: 10, customToolbarPriority: 10, buttons: "cut,copy,paste" },
+                    { name: "structure", visible: true, priority: 10, customToolbarPriority: 10, buttons: "bullist,numlist,outdent,indent" },
+                    { name: "insert", visible: true, priority: 10, customToolbarPriority: 10, buttons: "image,emoticons" },
+                    { name: "link", visible: true, priority: 10, customToolbarPriority: 10, buttons: "link,unlink" },
+                    { name: "table", visible: true, priority: 10, customToolbarPriority: 10, buttons: "table" },
+                    { name: "text-align", visible: true, priority: 10, customToolbarPriority: 10, buttons: "alignleft,aligncenter,alignright,alignjustify" }
                   ]
                 });
 

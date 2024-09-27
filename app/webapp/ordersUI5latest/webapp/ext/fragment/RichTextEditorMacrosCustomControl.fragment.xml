@@ -5,11 +5,8 @@
 	xmlns:customcontrol="custom.control"
 >
 	<VBox>
-		<customcontrol:Control metaPath="headerText" 
-		 id="myRichTextEditor">
-		</customcontrol:Control>
-		<!-- <customcontrol:Control metaPath="headerText"  contextPath="/Orders"
-		 id="myRichTextEditor">
-		</customcontrol:Control> -->
+		<customcontrol:RichTextEditorWithMetadata metaPath="headerText" id="myRichTextEditor"/>
+		<customcontrol:RichTextEditorWithMetadata metaPath="headerText"  contextPath="/Orders"
+		 id="myRichTextEditor"/>
 	</VBox>
 </core:FragmentDefinition>
