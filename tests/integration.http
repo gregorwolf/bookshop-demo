@@ -10,6 +10,25 @@ grant_type=client_credentials
 @access_token = {{requestAccessToken.response.body.$.access_token}}
 
 ###
+POST {{$dotenv integration_url}}/http/products/details
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+###
+POST {{$dotenv integration_url}}/http/MailAdapterInternal
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "from" : "{{$dotenv from}}",
+  "to" : "{{$dotenv to}}",
+  "subject" : "{{$dotenv subject}}",
+  "text" : "{{$dotenv text}}"
+}
+###
+  "cc" : "{{$dotenv cc}}",
+  "bcc" : "{{$dotenv bcc}}",
+
+###
 POST {{$dotenv integration_url}}/http/billing
 Content-Type: application/json
 Authorization: Bearer {{access_token}}
