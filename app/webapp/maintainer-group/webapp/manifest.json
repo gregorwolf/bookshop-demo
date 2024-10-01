@@ -11,7 +11,7 @@
     "description": "{{appDescription}}",
     "dataSources": {
       "mainService": {
-        "uri": "/maintainer-group/",
+        "uri": "/odata/v4/maintainer-group/",
         "type": "OData",
         "settings": {
           "odataVersion": "4.0"
