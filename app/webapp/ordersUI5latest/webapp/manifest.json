@@ -79,6 +79,9 @@
                 }
             }
         },
+        "resourceRoots": {
+            "custom.control": "../../controlRichTextEditor"
+        },
         "routing": {
             "routes": [
                 {
@@ -167,6 +170,15 @@
                                             "type": "XMLFragment",
                                             "template": "ordersUI5latest.ext.fragment.RichTextEditorMacros",
                                             "title": "{i18n>richTextEditor}",
+                                            "position": {
+                                                "placement": "After",
+                                                "anchor": "SalesOrderItems"
+                                            }
+                                        },
+                                        "customSection2": {
+                                            "type": "XMLFragment",
+                                            "template": "ordersUI5latest.ext.fragment.RichTextEditorMacrosCustomControl",
+                                            "title": "{i18n>richTextEditorCustomControl}",
                                             "position": {
                                                 "placement": "After",
                                                 "anchor": "SalesOrderItems"

@@ -1,0 +1,12 @@
+<core:FragmentDefinition
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:macros="sap.fe.macros"
+	xmlns:customcontrol="custom.control"
+>
+	<VBox>
+		<customcontrol:RichTextEditorWithMetadata metaPath="headerText" id="myRichTextEditorCC" />
+		<!-- <customcontrol:RichTextEditorWithMetadata metaPath="headerText"  contextPath="/Orders"
+		 id="myRichTextEditor"/> -->
+	</VBox>
+</core:FragmentDefinition>
