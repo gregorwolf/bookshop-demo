@@ -5,7 +5,7 @@
 	xmlns:customcontrol="custom.control"
 >
 	<VBox>
-		<customcontrol:RichTextEditorWithMetadata metaPath="headerText" id="myRichTextEditor"/>
+		<customcontrol:RichTextEditorWithMetadata metaPath="headerText" id="myRichTextEditorCC" />
 		<!-- <customcontrol:RichTextEditorWithMetadata metaPath="headerText"  contextPath="/Orders"
 		 id="myRichTextEditor"/> -->
 	</VBox>
