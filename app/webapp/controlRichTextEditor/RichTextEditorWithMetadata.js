@@ -2,7 +2,8 @@ sap.ui.define(
   [
     'sap/ui/core/Control',
     'sap/m/VBox',
-    'sap/fe/macros/richtexteditor/RichTextEditorWithMetadata.block',
+    'sap/fe/macros/richtexteditor/RichTextEditor.block',
+    // 'sap/fe/macros/richtexteditor/RichTextEditorWithMetadata.block',
     'sap/ui/model/Context',
   ],
   function (Control, VBox, RichTextEditor, Context) {
@@ -34,9 +35,10 @@ sap.ui.define(
         this.attachModelContextChange(this._onContextChange, this);
       },
 
-      _onContextChange: function (oEvent) {
+      _onContextChange: async function (oEvent) {
         var context = this.getBindingContext();
         if (context) {
+          // this.detachModelContextChange(this._onContextChange, this);
             let contextPathWithoutID = '';
             // Check if a custom context path is provided
             if (!this.getContextPath()) {
@@ -52,28 +54,23 @@ sap.ui.define(
             // Create Context objects for the RichTextEditor
             const contextPathRichText = new Context(this.getModel().getMetaModel(), contextPathWithoutID);
             const metaPathRichText = new Context(this.getModel().getMetaModel(), metaPath);
+
+            await RichTextEditor.load()
             // Create a new RichTextEditor instance
             // https://ui5.sap.com/#/api/sap.fe.macros.RichTextEditorWithMetadata
             const oRichTextEditor = new RichTextEditor({
-                contextPath: contextPathRichText,
-                metaPath: metaPathRichText,
-                buttonGroups: [
-                    // Configuration for various button groups in the editor
-                    // https://ui5.sap.com/#/api/sap.fe.macros.richtexteditor.ButtonGroup
-                    { name: "font-style", visible: true, priority: 10, buttons: "bold,italic,underline,strikethrough" },
-                    { name: "styleselect", visible: true, priority: 10, customToolbarPriority: 10, buttons: "styleselect" },
-                    { name: "font", visible: true, priority: 10, customToolbarPriority: 10, buttons: "fontfamily,fontsize,forecolor,backcolor" },
-                    { name: "clipboard", visible: true, priority: 10, customToolbarPriority: 10, buttons: "cut,copy,paste" },
-                    { name: "structure", visible: true, priority: 10, customToolbarPriority: 10, buttons: "bullist,numlist,outdent,indent" },
-                    { name: "insert", visible: true, priority: 10, customToolbarPriority: 10, buttons: "image,emoticons" },
-                    { name: "link", visible: true, priority: 10, customToolbarPriority: 10, buttons: "link,unlink" },
-                    { name: "table", visible: true, priority: 10, customToolbarPriority: 10, buttons: "table" },
-                    { name: "text-align", visible: true, priority: 10, customToolbarPriority: 10, buttons: "alignleft,aligncenter,alignright,alignjustify" }
-                  ]
+                value: "{path: 'headerText', type: 'sap.ui.model.odata.type.String', formatOptions: {parseKeepsEmptyString: true}}",
+                // contextPath: contextPathRichText,
+                // metaPath: metaPathRichText
                 });
-
+            
+            let content;
             // Get the control of the RichTextEditor
-            const content = oRichTextEditor.getContent();
+            if(this.getModel("ui").getProperty("/isEditable")){
+              content = oRichTextEditor.getRTE()
+            } else {
+              content = oRichTextEditor.getContent();
+            }
             // Get the VBox aggregation
             var vbox = this.getAggregation('_content');
             // Clear existing items in the VBox
