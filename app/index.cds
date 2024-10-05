@@ -9,6 +9,7 @@ using from './webapp/browse/fiori-service';
 using from './webapp/orders/fiori-service';
 using from './webapp/role/fiori-service';
 using from './webapp/users/fiori-service';
+using from './webapp/employees/fiori-service';
 using from './webapp/workAssignments/fiori-service';
 using from './webapp/productUI5latest/fiori-service';
 using from './webapp/maintainer-group/ui';
