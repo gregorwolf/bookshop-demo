@@ -93,7 +93,7 @@ type XSUAAUsers {
 @cds.autoexpose
 @UI.Identification: [{Value: email}]
 @cds.odata.valuelist
-entity Employees : cuid {
+entity Employees : cuid, managed {
   @(title: '{i18n>BusinessPartnerFirstName}')
   firstName  : String;
 
