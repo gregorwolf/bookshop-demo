@@ -1,6 +1,6 @@
 const { Readable, PassThrough } = require("stream");
 var FormData = require("form-data");
-const { executeHttpRequest, retrieveJwt } = require("@sap-cloud-sdk/core");
+const { executeHttpRequest } = require("@sap-cloud-sdk/http-client");
 const { getDestination } = require("./connection-helper");
 const cds = require("@sap/cds");
 const axios = require("axios");

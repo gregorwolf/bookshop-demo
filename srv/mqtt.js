@@ -1,7 +1,7 @@
 const cds = require("@sap/cds");
 const xsenv = require("@sap/xsenv");
 var mqtt = require("mqtt");
-const { getDestination } = require("@sap-cloud-sdk/core");
+const { getDestination } = require("@sap-cloud-sdk/connectivity");
 
 xsenv.loadEnv();
 try {

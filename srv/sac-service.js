@@ -1,6 +1,6 @@
 const cds = require("@sap/cds");
 const LOG = cds.log("sac-service");
-const { executeHttpRequest, getDestination } = require("@sap-cloud-sdk/core");
+const { executeHttpRequest } = require("@sap-cloud-sdk/http-client");
 const { exit } = require("@sap/cds/lib");
 
 module.exports = async function (srv) {

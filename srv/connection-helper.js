@@ -1,4 +1,4 @@
-const { retrieveJwt } = require("@sap-cloud-sdk/core");
+const { retrieveJwt } = require("@sap-cloud-sdk/connectivity");
 
 function getDestination(req, destinationName = "S4H") {
   const destination = {
