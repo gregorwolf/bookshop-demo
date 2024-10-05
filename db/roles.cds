@@ -61,7 +61,7 @@ entity Role_User : cuid {
   parent    : Association to Roles;
   user      : User;
 
-  @(title: '{i18n>requester', )
+  @title: '{i18n>requester}'
   requester : Employee;
 };
 
