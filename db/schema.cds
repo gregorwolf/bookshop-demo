@@ -11,12 +11,6 @@ using {
 } from '@sap/cds/common';
 
 using from '@sap/cds-common-content';
-
-annotate BusinessObject with @(
-  title      : '{i18n>BusinessObject}',
-  description: '{i18n>BusinessObject.Description}'
-);
-
 using {ZPDCDS_SRV.SEPMRA_I_Product_E} from '../srv/external/ZPDCDS_SRV.csn';
 
 /**
@@ -238,7 +232,11 @@ entity Orderstatuses : sap.common.CodeList {
 
 type Orderstatus           : Association to Orderstatuses;
 annotate Orderstatus with @title: '{i18n>Orderstatus}';
-annotate Orderstatuses.name with  @title: '{i18n>Orderstatus}'  @description: '{i18n>Orderstatus}';
+
+annotate Orderstatuses {
+  @title: '{i18n>Orderstatus}'  @description: '{i18n>Orderstatus}'
+  name;
+}
 
 entity Deliverystatuses : sap.common.CodeList {
   key code : String(1);
@@ -246,7 +244,11 @@ entity Deliverystatuses : sap.common.CodeList {
 
 type Deliverystatus        : Association to Deliverystatuses;
 annotate Deliverystatus with @title: '{i18n>Deliverystatus}';
-annotate Deliverystatuses.name with  @title: '{i18n>Deliverystatus}'  @description: '{i18n>Deliverystatus}';
+
+annotate Deliverystatuses {
+  @title: '{i18n>Deliverystatus}'  @description: '{i18n>Deliverystatus}'
+  name;
+}
 
 @Core.Description    : '{i18n>salesOrganization}'
 @Core.LongDescription: '{i18n>salesOrganizationDescription}'

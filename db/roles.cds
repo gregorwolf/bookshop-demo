@@ -17,9 +17,9 @@ type Priority       : Decimal
 ];
 
 entity CompanyCode : CodeList {
-  // Accepts ABCDxse
-  // @assert.format: '[A-Z,0-9]{4}'
-  @assert.format: '^([A-Z,0-9]{4})$'
+      // Accepts ABCDxse
+      // @assert.format: '[A-Z,0-9]{4}'
+      @assert.format: '^([A-Z,0-9]{4})$'
   key ID : String(4) @(title: '{i18n>CompanyCode}', );
 }
 
@@ -28,7 +28,7 @@ entity Roles : cuid, managed {
   @assert.format: 'r_[a-z]'
   rolename        : localized String(255) not null @(title: '{i18n>RoleName}', );
   description     : localized String not null      @(title: '{i18n>Description}', );
-  CompanyCode     : Association to CompanyCode @(title: '{i18n>CompanyCode}', );
+  CompanyCode     : Association to CompanyCode     @(title: '{i18n>CompanyCode}', );
   count           : Integer                        @(title: '{i18n>count}', );
   priority        : Priority;
   read            : Boolean                        @(title: '{i18n>Read}', );
@@ -122,3 +122,8 @@ annotate Employees with {
   @(title: '{i18n>EmployeeID}')
   ID;
 };
+
+annotate BusinessObject with @(
+  title      : '{i18n>BusinessObject}',
+  description: '{i18n>BusinessObject.Description}'
+);
