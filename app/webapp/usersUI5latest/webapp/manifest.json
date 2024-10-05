@@ -90,7 +90,6 @@
           "options": {
             "settings": {
               "entitySet": "Users",
-              "defaultTemplateAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant",
               "variantManagement": "Page",
               "initialLoad": "Enabled",
               "navigation": {
@@ -110,7 +109,6 @@
           "options": {
             "settings": {
               "entitySet": "Users",
-              "navigation": {},
               "controlConfiguration": {
                 "Assigned Business Objects": {
                   "tableSettings": {
