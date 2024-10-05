@@ -43,7 +43,7 @@ entity Roles : cuid, managed {
                       on Users.parent = $self;
 };
 
-annotate Roles with @fiori.draft.enabled;
+annotate Roles with @odata.draft.enabled;
 
 entity BusinessObjects {
   key ID       : BusinessObject;
@@ -65,16 +65,17 @@ entity Role_User : cuid {
   requester : Employee;
 };
 
-entity Users : managed {
-  key username    : String    @(title: '{i18n>Username}', );
-      employee    : Employee;
-      responsible : Employee;
-      validFrom   : Timestamp @(title: '{i18n>validFrom}', );
-      validTo     : Timestamp @(title: '{i18n>validTo}', );
-      address     : Composition of Address
-                      on address.parent = $self;
-      roles       : Association to many Role_User
-                      on roles.user = $self.username;
+@assert.unique: {username: [username], }
+entity Users : cuid, managed {
+  username    : String    @(title: '{i18n>Username}', );
+  employee    : Employee;
+  responsible : Employee;
+  validFrom   : Timestamp @(title: '{i18n>validFrom}', );
+  validTo     : Timestamp @(title: '{i18n>validTo}', );
+  address     : Composition of Address
+                  on address.parent = $self;
+  roles       : Association to many Role_User
+                  on roles.user = $self.username;
 };
 
 entity Address : cuid, managed {

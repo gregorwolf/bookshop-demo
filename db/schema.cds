@@ -85,7 +85,7 @@ entity BookPlants : managed {
       stock           : Integer;
 }
 
-@fiori.draft.enabled
+@odata.draft.enabled
 @cds.autoexpose
 @Common: {SemanticKey: [ID], }
 entity Plant : CodeList, managed {

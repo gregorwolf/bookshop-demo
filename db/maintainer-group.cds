@@ -9,7 +9,7 @@ using my.bookshop.Employee from './roles';
 namespace my.bookshop;
 
 @cds.odata.valuelist
-@fiori.draft.enabled
+@odata.draft.enabled
 entity MaintainerGroup : cuid, managed {
   @mandatory
   description : localized String not null @(title: '{i18n>MaintainerGroupDescription}');

@@ -13,16 +13,16 @@ service AgreementService {
   entity ChangeSetToAgreementSearch as projection on agreement.ChangeSetToAgreementSearch;
 }
 
-annotate AgreementService.AgreementItemPricing with @(UI : {
-  SelectionFields : [
+annotate AgreementService.AgreementItemPricing with @(UI: {
+  SelectionFields: [
     ID,
     validFrom,
     validTo,
   ],
-  LineItem        : [
-    {Value : ID, },
-    {Value : item.ID, },
-    {Value : validFrom, },
-    {Value : validTo, },
+  LineItem       : [
+    {Value: ID, },
+    {Value: item.ID, },
+    {Value: validFrom, },
+    {Value: validTo, },
   ]
 }) {};

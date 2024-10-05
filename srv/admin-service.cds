@@ -142,12 +142,13 @@ service AdminService @(
     SourceProperties: [employee_ID],
     TargetEntities  : [employee]
   }
+  @odata.draft.enabled
   entity Users @(restrict: [{
     grant: ['*'],
     to   : 'admin'
   }, ])                         as projection on db.Users;
 
-  @readonly
+  @odata.draft.enabled
   entity Employees              as projection on db.Employees;
 
   entity Address                as projection on db.Address;
