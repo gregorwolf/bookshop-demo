@@ -57,9 +57,11 @@ GET http://localhost:4004/odata/v4/admin/Users
 Authorization: Basic admin:
 
 ### Read Users Expanded to via OData V4 - 
-GET http://localhost:4004/odata/v4/admin/Users?$expand=roles,address
+GET http://localhost:4004/odata/v4/admin/Users?$expand=employee,roles,address
 Authorization: Basic admin:
-
+### Read Employees Expanded to via OData V4 - 
+GET http://localhost:4004/odata/v4/admin/Employees?$expand=users
+Authorization: Basic admin:
 ### Read Users Expanded to via OData V2
 ### Results in:
 ### An error occurred during serialization of the entity collection. An error occurred during serialization of the entity with the following key(s): username: douglas. The provided data does not fit the type of the navigation property: address.

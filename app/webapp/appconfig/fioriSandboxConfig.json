@@ -967,8 +967,15 @@
               "action": "manage",
               "title": "Users",
               "signature": {
-                "parameters": {},
-                "additionalParameters": "allowed"
+                "parameters": {
+                  "Employees.users.ID": {
+                    "renameTo": "ID"
+                  },
+                  "Employees.users.IsActiveEntity": {
+                    "renameTo": "IsActiveEntity"
+                  }
+                },
+                "additionalParameters": "ignored"
               },
               "resolutionResult": {
                 "applicationType": "SAPUI5",
@@ -981,8 +988,15 @@
               "action": "manage",
               "title": "Employees",
               "signature": {
-                "parameters": {},
-                "additionalParameters": "allowed"
+                "parameters": {
+                  "Users.employee.ID": {
+                    "renameTo": "ID"
+                  },
+                  "Users.employee.IsActiveEntity": {
+                    "renameTo": "IsActiveEntity"
+                  }
+                },
+                "additionalParameters": "ignored"
               },
               "resolutionResult": {
                 "applicationType": "SAPUI5",

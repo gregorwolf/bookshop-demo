@@ -53,11 +53,18 @@ annotate AdminService.Employees with @(UI: {
     },
   ],
 
-  Facets                      : [{
-    $Type : 'UI.ReferenceFacet',
-    Label : '{i18n>General}',
-    Target: '@UI.FieldGroup#General'
-  }, ],
+  Facets                      : [
+    {
+      $Type : 'UI.ReferenceFacet',
+      Label : '{i18n>General}',
+      Target: '@UI.FieldGroup#General'
+    },
+    {
+      $Type : 'UI.ReferenceFacet',
+      Label : '{i18n>Users}',
+      Target: 'users/@UI.LineItem'
+    },
+  ],
 
   FieldGroup #General         : {Data: [
     {Value: lastName},

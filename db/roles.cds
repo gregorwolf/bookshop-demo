@@ -67,6 +67,7 @@ entity Role_User : cuid {
 
 @assert.unique: {username: [username], }
 entity Users : cuid, managed {
+  @Core.Immutable
   username    : String    @(title: '{i18n>Username}', );
   employee    : Employee;
   responsible : Employee;
@@ -108,7 +109,10 @@ entity Employees : cuid, managed {
 
   @(title: '{i18n>BusinessPartnerEmailAddress}')
   @mandatory
+  @Core.Immutable
   email      : String not null;
+  users      : Association to many Users
+                 on users.employee = $self;
 }
 
 type Employee       : Association to Employees;
