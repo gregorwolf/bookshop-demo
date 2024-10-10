@@ -47,7 +47,10 @@ X-CSRF-Token: {{csrf}}
             "TemplateSensitive": "{{$dotenv TemplateSensitive}}",
             "TemplateGrouped": "{{$dotenv TemplateGrouped}}",
             "TemplateLanguage": "Mustache",
-            "Subtitle": "Leave Request"
+            "Subtitle": "Leave Request",
+            "EmailSubject": "There is a Leave Request",
+            "EmailText": "This is a Leave Request. It needs your attention",
+            "EmailHtml": "&lt;html&gt;&lt;body&gt;&lt;p&gt;This is a Leave Request. It needs your attention&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"
         }
     ],
     "Actions": [
@@ -65,6 +68,12 @@ X-CSRF-Token: {{csrf}}
             "GroupActionText": "Reject All",
             "Nature": "NEGATIVE"
         }
+    ],
+    "DeliveryChannels": [
+        {
+            "Type": "MAIL",
+            "Enabled": true
+        }
     ]
 }
 
@@ -75,7 +84,7 @@ Accept: application/json
 ###
 # @name readNotificationTypes
 GET {{$dotenv notification_uri}}/v2/NotificationType.svc/NotificationTypes
-    ?$expand=Templates,Actions
+    ?$expand=Templates,Actions,DeliveryChannels
 Authorization: Bearer {{notifications_access_token}}
 Accept: application/json
 ###
@@ -115,6 +124,8 @@ X-CSRF-Token: Fetch
 
 ### 
 POST {{$dotenv notification_uri}}/v2/Notification.svc/Notifications
+# The request dispatcher does not allow the HTTP method used for the request.
+#    ?$expand=Properties,Recipients,TargetParameters
 Authorization: Bearer {{notifications_access_token}}
 Content-Type: application/json
 Accept: application/json
@@ -167,3 +178,20 @@ X-CSRF-Token: {{notificationCSRF}}
         }
     ]
 }
+
+### Not implemented
+GET {{$dotenv notification_uri}}/v2/Notification.svc/Notifications
+Authorization: Bearer {{notifications_access_token}}
+Accept: application/json
+### Not implemented
+GET {{$dotenv notification_uri}}/v2/Notification.svc/Recipients
+Authorization: Bearer {{notifications_access_token}}
+Accept: application/json
+### Not implemented
+GET {{$dotenv notification_uri}}/v2/Notification.svc/NotificationProperties
+Authorization: Bearer {{notifications_access_token}}
+Accept: application/json
+### Not implemented
+GET {{$dotenv notification_uri}}/v2/Notification.svc/NavigationTargetParams
+Authorization: Bearer {{notifications_access_token}}
+Accept: application/json
