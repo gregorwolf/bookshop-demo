@@ -34,7 +34,8 @@ Authorization: Bearer {{access_token}}
 
 ### 
 # @name readRoleCollection
-GET {{$dotenv xsuaa_apiaccess_apiurl}}/sap/rest/authorization/v2/rolecollections/?showGroups=true&showRoles=true&showUsers=true
+GET {{$dotenv xsuaa_apiaccess_apiurl}}/sap/rest/authorization/v2/rolecollections/
+  ?showGroups=true&showRoles=true&showUsers=true
 Authorization: Bearer {{access_token}}
 
 ### 
