@@ -1,0 +1,11 @@
+### Get Access Token using Client Credentials Flow
+# @name requestAccessToken
+POST {{$dotenv generative_ai_token_endpoint}}/oauth/token
+Authorization: Basic {{$dotenv generative_ai_clientid}}:{{$dotenv generative_ai_clientsecret}}
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
