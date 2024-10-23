@@ -1,7 +1,7 @@
 ### Get Access Token using Client Credentials Flow
 # @name requestAccessToken
-POST {{$dotenv ads_token_endpoint}}/oauth/token
-Authorization: Basic {{$dotenv ads_clientid}}:{{$dotenv ads_clientsecret}}
+POST {{$dotenv ads_api_token_endpoint}}/oauth/token
+Authorization: Basic {{$dotenv ads_api_clientid}}:{{$dotenv ads_api_clientsecret}}
 Cache-Control: no-cache
 Content-Type: application/x-www-form-urlencoded
 
@@ -12,43 +12,43 @@ grant_type=client_credentials
 @access_token={{requestAccessToken.response.body.$.access_token}}
 ###
 # @name getForms
-GET {{$dotenv ads_endpoint}}/v1/forms
+GET {{$dotenv ads_api_endpoint}}/v1/forms
 Authorization: Bearer {{access_token}}
 ###
 # @name createForm
-POST {{$dotenv ads_endpoint}}/v1/forms
+POST {{$dotenv ads_api_endpoint}}/v1/forms
 Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
 {
-   "description": "{{$dotenv ads_formdescription}}",
-   "formName": "{{$dotenv ads_formname}}",
-   "note": "{{$dotenv ads_formdescription}}"
+   "description": "{{$dotenv ads_api_formdescription}}",
+   "formName": "{{$dotenv ads_api_formname}}",
+   "note": "{{$dotenv ads_api_formdescription}}"
 }
 ###
 # @name getTemplate
-GET {{$dotenv ads_endpoint}}/v1/forms/{{$dotenv ads_formname}}/templates
+GET {{$dotenv ads_api_endpoint}}/v1/forms/{{$dotenv ads_api_formname}}/templates
 Authorization: Bearer {{access_token}}
 ###
 # @name addTemplate
-POST {{$dotenv ads_endpoint}}/v1/forms/{{$dotenv ads_formname}}/templates
+POST {{$dotenv ads_api_endpoint}}/v1/forms/{{$dotenv ads_api_formname}}/templates
 Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
 {
-   "businessArea": "{{$dotenv ads_formname}}",
-   "businessDepartment": "{{$dotenv ads_formname}}",
-   "description": "{{$dotenv ads_formdescription}}",
+   "businessArea": "{{$dotenv ads_api_formname}}",
+   "businessDepartment": "{{$dotenv ads_api_formname}}",
+   "description": "{{$dotenv ads_api_formdescription}}",
    "language": "EN",
    "locale": "EN_gb",
    "masterLanguage": "EN",
    "note": "",
-   "templateName": "{{$dotenv ads_formname}}",
-   "xdpTemplate": "{{$dotenv ads_form}}"
+   "templateName": "{{$dotenv ads_api_formname}}",
+   "xdpTemplate": "{{$dotenv ads_api_form}}"
 }
 ###
 # @name renderPdf
-POST {{$dotenv ads_endpoint}}/v1/adsRender/pdf
+POST {{$dotenv ads_api_endpoint}}/v1/adsRender/pdf
 Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
@@ -59,6 +59,6 @@ Content-Type: application/json
    "formType": "print",
    "printNotAllowed": false,
    "taggedPdf": 1,
-   "xdpTemplate": "{{$dotenv ads_form}}",
-   "xmlData": "{{$dotenv ads_data}}"
+   "xdpTemplate": "{{$dotenv ads_api_form}}",
+   "xmlData": "{{$dotenv ads_api_data}}"
 }
