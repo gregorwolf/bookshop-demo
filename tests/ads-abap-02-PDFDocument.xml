@@ -1,0 +1,40 @@
+<PDFDocument>
+  <InputPDF>
+    <URI>
+      <Source>Stream</Source>
+      <Name>PDF</Name>
+    </URI>
+  </InputPDF>
+  <Embed>
+    <File>
+      <ID>ZUGFeRD-invoice.xml</ID>
+      <MimeType>text/xml</MimeType>
+      <Description>ZUGFeRD Invoice</Description>
+      <URI>
+        <Source>Stream</Source>
+        <Name>ZUGFeRD-invoice.xml</Name>
+      </URI>
+      <AFRelationship>true</AFRelationship>
+    </File>
+  </Embed>
+  <MetaData>
+    <CustomMetaData>
+      <Source>Stream</Source>
+      <Name>CUSTMETADATA</Name>
+    </CustomMetaData>
+  </MetaData>
+  <ConvertToPdfa>
+    <Version>3b</Version>
+    <OutputIntent>sRGB</OutputIntent>
+    <ExtensionSchema>
+      <Source>Stream</Source>
+      <Name>EXTSCHEMA</Name>
+    </ExtensionSchema>
+  </ConvertToPdfa>
+  <ReturnPDF>
+    <URI>
+      <Type>Stream</Type>
+      <Name>PDFOut</Name>
+    </URI>
+  </ReturnPDF>
+</PDFDocument>

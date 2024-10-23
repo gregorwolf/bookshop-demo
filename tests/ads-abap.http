@@ -1,0 +1,35 @@
+### Get Access Token using Client Credentials Flow
+# @name requestAccessToken
+POST {{$dotenv ads_abap_token_endpoint}}/oauth/token
+Authorization: Basic {{$dotenv ads_abap_clientid}}:{{$dotenv ads_abap_clientsecret}}
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+#&response_type=token
+
+### Fill Variables from Response
+@access_token={{requestAccessToken.response.body.$.access_token}}
+### Test request based on the sample report FP_PDF_TEST_33
+### That requests a conversion to PDF/A
+### PDF/A Standard: PDF/A-3b 
+### Output Intent: sRFB IEC61966-2.1
+### Check ads-abap-01-PDFDocument.xml for the decoded base64 content of PDFDocument
+POST {{$dotenv ads_abap_endpoint}}/AdobeDocumentServicesSec/Config
+Authorization: Bearer {{access_token}}
+Accept: text/xml, text/html
+Content-Type: text/xml; charset=utf-8
+Soapaction: ""
+
+< ./ads-abap-01.xml
+
+### Test request based on the sample report FP_PDF_TEST_33
+### That requests a conversion to ZUGFeRD
+### Check ads-abap-02-*.xml for the decoded base64 content
+POST {{$dotenv ads_abap_endpoint}}/AdobeDocumentServicesSec/Config
+Authorization: Bearer {{access_token}}
+Accept: text/xml, text/html
+Content-Type: text/xml; charset=utf-8
+Soapaction: ""
+
+< ./ads-abap-02.xml

@@ -1,0 +1,29 @@
+<PDFDocument>
+  <InputPDF>
+    <URI>
+      <Source>Stream</Source>
+      <Name>PDF</Name>
+    </URI>
+  </InputPDF>
+  <Embed>
+    <File>
+      <ID>attachment 1</ID>
+      <MimeType>image/png</MimeType>
+      <Description>description 1</Description>
+      <URI>
+        <Source>Stream</Source>
+        <Name>/Users/gwolf/Documents/Projects/cap/bookshop-demo/tests/app/Test.png</Name>
+      </URI>
+    </File>
+  </Embed>
+  <ConvertToPdfa>
+    <Version>3b</Version>
+    <OutputIntent>sRGB</OutputIntent>
+  </ConvertToPdfa>
+  <ReturnPDF>
+    <URI>
+      <Type>Stream</Type>
+      <Name>PDFOut</Name>
+    </URI>
+  </ReturnPDF>
+</PDFDocument>
