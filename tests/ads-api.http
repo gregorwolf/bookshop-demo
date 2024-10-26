@@ -54,7 +54,7 @@ Content-Type: application/json
 
 {
    "changeNotAllowed": false,
-   "embedFont": 0,
+   "embedFont": 1,
    "formLocale": "EN_gb",
    "formType": "print",
    "printNotAllowed": false,

@@ -33,3 +33,14 @@ Content-Type: text/xml; charset=utf-8
 Soapaction: ""
 
 < ./ads-abap-02.xml
+
+### Test request based on the sample report FP_PDF_TEST_33
+### That requests a conversion to ZUGFeRD
+### Check ads-abap-02-*.xml for the decoded base64 content
+POST {{$dotenv ads_abap_endpoint}}/AdobeDocumentServicesSec/Config
+Authorization: Bearer {{access_token}}
+Accept: text/xml, text/html
+Content-Type: text/xml; charset=utf-8
+Soapaction: ""
+
+< ./ads-abap-03.xml
