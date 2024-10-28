@@ -2,7 +2,8 @@
 ### https://marketplace.visualstudio.com/items?itemName=humao.rest-client
 ###
 ### Edit your settings.json and add the configuration from rest-client-config.json for local tests
-
+GET http://localhost:4004/odata/v4/admin/
+Authorization: Basic admin:
 ### Read Pictures
 # curl http://localhost:4004/odata/v4/admin/Documents | jq
 # @name readDocuments
