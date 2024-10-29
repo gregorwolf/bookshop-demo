@@ -44,3 +44,17 @@ Content-Type: text/xml; charset=utf-8
 Soapaction: ""
 
 < ./ads-abap-03.xml
+
+### Test request based on the sample report FP_PDF_TEST_01
+### Locale: de_DE
+### PDF Standard: PDF/A-1
+### PDF tagged: true
+### PDF printable: true
+### No Edit: X
+POST {{$dotenv ads_abap_endpoint}}/AdobeDocumentServicesSec/Config
+Authorization: Bearer {{access_token}}
+Accept: text/xml, text/html
+Content-Type: text/xml; charset=utf-8
+Soapaction: ""
+
+< ./ads-abap-04.xml
