@@ -1,0 +1,27 @@
+### api.sap.com Sandbox
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/
+APIKey: {{$dotenv apikey}}
+Accept: application/json
+###
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/$metadata
+APIKey: {{$dotenv apikey}}
+###
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MaterialStock
+  ?$top=10
+  &$inlinecount=allpages
+  &$expand=to_MatlStkInAcctMod
+APIKey: {{$dotenv apikey}}
+Accept: application/json
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MaterialStock
+  ?$top=10
+  &$expand=to_MatlStkInAcctMod
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
