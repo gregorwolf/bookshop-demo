@@ -230,7 +230,7 @@ entity Orderstatuses : sap.common.CodeList {
   key code : String(1);
 }
 
-type Orderstatus           : Association to Orderstatuses;
+type Orderstatus             : Association to Orderstatuses;
 annotate Orderstatus with @title: '{i18n>Orderstatus}';
 
 annotate Orderstatuses {
@@ -242,7 +242,7 @@ entity Deliverystatuses : sap.common.CodeList {
   key code : String(1);
 }
 
-type Deliverystatus        : Association to Deliverystatuses;
+type Deliverystatus          : Association to Deliverystatuses;
 annotate Deliverystatus with @title: '{i18n>Deliverystatus}';
 
 annotate Deliverystatuses {
@@ -253,7 +253,7 @@ annotate Deliverystatuses {
 @Core.Description    : '{i18n>salesOrganization}'
 @Core.LongDescription: '{i18n>salesOrganizationDescription}'
 @Common              : {QuickInfo: '{i18n>salesOrganizationDescription}'}
-type SalesOrganizationCode : String(4) @(
+type SalesOrganizationCode   : String(4) @(
   title      : '{i18n>salesOrganization}',
   description: '{i18n>salesOrganizationDescription}'
 );
@@ -270,35 +270,59 @@ entity A_SalesOrganizationText {
       );
 }
 
+@Core.Description    : '{i18n>distributionChannel}'
+@Core.LongDescription: '{i18n>distributionChannelDescription}'
+@Common              : {QuickInfo: '{i18n>distributionChannelDescription}'}
+type DistributionChannelCode : String(2) @(
+  title      : '{i18n>distributionChannel}',
+  description: '{i18n>distributionChannelDescription}'
+);
+
+entity A_DistributionChannelText {
+  key SalesOrganization       : SalesOrganizationCode;
+  key DistributionChannel     : DistributionChannelCode;
+
+      @Core.Description    : '{i18n>distributionChannel}'
+      @Core.LongDescription: '{i18n>distributionChannelDescription}'
+      @Common              : {QuickInfo: '{i18n>distributionChannelDescription}'}
+      DistributionChannelName : String @(
+        title      : '{i18n>distributionChannel}',
+        description: '{i18n>distributionChannelDescription}'
+      );
+}
+
 @assert.unique: {OrderNo: [OrderNo], }
 entity Orders : cuid, managed {
   @Core.Immutable
-  OrderNo           : String        @title: 'Order Number'; //> readable key
+  OrderNo             : String        @title: 'Order Number'; //> readable key
 
   @Core.Immutable
-  salesOrganization : SalesOrganizationCode not null;
-  CustomerOrderNo   : String(80)    @title: 'Customer Order Number';
-  Items             : Composition of many OrderItems
-                        on Items.parent = $self
-                                    @title: 'Items';
-  ShippingAddress   : Composition of one OrderShippingAddress;
-  headerText        : LargeString   @title: 'Order Header Text';
+  salesOrganization   : SalesOrganizationCode not null;
+
+  @Core.Immutable
+  distributionChannel : DistributionChannelCode not null;
+  CustomerOrderNo     : String(80)    @title: 'Customer Order Number';
+  Items               : Composition of many OrderItems
+                          on Items.parent = $self
+                                      @title: 'Items';
+  ShippingAddress     : Composition of one OrderShippingAddress;
+  headerText          : LargeString   @title: 'Order Header Text';
 
   @readonly
   @Measures.ISOCurrency           : currency.code
-  total             : DecimalFloat;
+  total               : DecimalFloat;
 
-  taxPercentage     : Decimal(5, 2) @title: '{i18n>taxPercentage}';
-
-  @readonly
-  @Measures.ISOCurrency           : currency.code
-  totalTax          : Decimal(15, 2);
+  taxPercentage       : Decimal(5, 2) @title: '{i18n>taxPercentage}';
 
   @readonly
   @Measures.ISOCurrency           : currency.code
-  totalWithTax      : Double;
-  vipOrder          : Boolean       @title: '{i18n>vipOrder}';
-  employeeOrder     : Boolean       @title: '{i18n>employeeOrder}';
+  totalTax            : Decimal(15, 2);
+
+  @readonly
+  @Measures.ISOCurrency           : currency.code
+  totalWithTax        : Double;
+  vipOrder            : Boolean       @title: '{i18n>vipOrder}';
+  employeeOrder       : Boolean       @title: '{i18n>employeeOrder}';
 
   @Common.ValueListWithFixedValues: true
   @Common.Text                    : orderstatus.descr
@@ -312,14 +336,14 @@ entity Orders : cuid, managed {
     true
   ]}}
   @readonly
-  orderstatus       : Orderstatus;
+  orderstatus         : Orderstatus;
 
   @readonly
   @Common.ValueListWithFixedValues: true
-  deliverystatus    : Deliverystatus;
+  deliverystatus      : Deliverystatus;
 
   @Core.Immutable
-  currency          : Currency;
+  currency            : Currency;
 }
 
 view OrdersView as

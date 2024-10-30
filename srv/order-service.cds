@@ -17,7 +17,7 @@ service OrderService @(
     ]
   }
   */
-  entity Orders                  as
+  entity Orders                    as
     select from db.Orders {
       @Measures.ISOCurrency   : currency.code
       @Core.Computed
@@ -63,7 +63,7 @@ service OrderService @(
   }
 
   //------- auto-exposed --------
-  entity OrderItems              as
+  entity OrderItems                as
     projection on db.OrderItems {
       @Core.Computed
       amount * book.price as ComputedTotal : Decimal(15, 2),
@@ -71,15 +71,17 @@ service OrderService @(
       book                                 : redirected to Books
     };
 
-  entity OrderShippingAddress    as
+  entity OrderShippingAddress      as
     projection on db.OrderShippingAddress {
       *,
       street || ', ' || city as address : String
     };
 
-  entity Books                   as projection on db.Books;
-  entity A_SalesOrganizationText as projection on db.A_SalesOrganizationText;
+  entity Books                     as projection on db.Books;
+  entity A_SalesOrganizationText   as projection on db.A_SalesOrganizationText;
   annotate A_SalesOrganizationText with @cds.odata.valuelist;
+  entity A_DistributionChannelText as projection on db.A_DistributionChannelText;
+  annotate A_DistributionChannelText with @cds.odata.valuelist;
 
   @readonly
   @odata.singleton
