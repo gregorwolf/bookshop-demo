@@ -1,0 +1,138 @@
+### S/4HANA Original
+# BUS1001006 = Material
+@BusinessObjectTypeName=BUS1001006
+@material=FG011
+### metadata
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/
+Accept: application/json
+APIKey: {{$dotenv apikey}}
+### metadata
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/$metadata
+APIKey: {{$dotenv apikey}}
+###
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetSAPObjectDocumentType
+  ?SAPObjectType='CommercialProject'
+APIKey: {{$dotenv apikey}}
+Accept: application/json
+### No results in the Sanbox for the example from the documentation:
+### https://help.sap.com/docs/SAP_S4HANA_CLOUD/7489fa08cede494cbdf08fa3651598af/952ed96feb2a48d6b69a7658c8e56c36.html?locale=en-US
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAttachmentCount
+  ?LinkedSAPObjectKey='000000000000212024'
+  &SAPObjectType='Product'
+Accept: application/json
+APIKey: {{$dotenv apikey}}
+###
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAttachmentCount
+  ?LinkedSAPObjectKey='R-B111'
+  &SAPObjectType='BillOfMaterial'
+  &SAPObjectNodeType='BillOfMaterialItem'
+Accept: application/json
+APIKey: {{$dotenv apikey}}
+###
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAttachmentCount
+  ?BusinessObjectTypeName='EKKO_RFQ'
+  &LinkedSAPObjectKey='TESTEKKO'
+Accept: application/json
+APIKey: {{$dotenv apikey}}
+### Also no results for GetAllOriginals:
+### https://help.sap.com/docs/SAP_S4HANA_CLOUD/7489fa08cede494cbdf08fa3651598af/8b30156db25f4fd1b9b9cf1436dfd16d.html?locale=en-US
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAllOriginals
+  ?LinkedSAPObjectKey='TestEKKO'
+  &BusinessObjectTypeName='EKKO_RFQ'
+Accept: application/json
+APIKey: {{$dotenv apikey}}
+### 
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAllOriginals
+  ?BusinessObjectTypeName=''
+  &LinkedSAPObjectKey='000000000000210706'
+  &SAPObjectType='Product'
+Accept: application/json
+APIKey: {{$dotenv apikey}}
+###
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAttachmentCount
+  ?BusinessObjectTypeName='{{BusinessObjectTypeName}}'
+  &LinkedSAPObjectKey='{{material}}'
+  &SemanticObject=''
+Accept: application/json
+APIKey: {{$dotenv apikey}}
+
+
+### Get CSRF Token
+# @name getCSRF
+HEAD https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV
+X-CSRF-Token: Fetch
+### Read Token to Variable
+@csrf={{getCSRF.response.headers.x-csrf-token}}
+
+### Create Attachment in GOS
+# @name createAttachment
+POST https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/AttachmentContentSet
+X-CSRF-Token: {{csrf}}
+Accept-Language: en
+Accept: application/json
+Content-Type: image/png
+Slug: Test.png
+BusinessObjectTypeName: {{BusinessObjectTypeName}}
+LinkedSAPObjectKey: {{material}}
+
+< ./Test.png
+
+### GetAllOriginals
+# @name getAllOriginals
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAllOriginals
+  ?BusinessObjectTypeName='{{BusinessObjectTypeName}}'
+  &LinkedSAPObjectKey='{{material}}'
+  &SemanticObject=''
+Accept: application/json
+Accept-Language: en
+
+### Read Token to Variable
+@DMSDocumentInfoRecordDocType={{getAllOriginals.response.body.d.results[0].DocumentInfoRecordDocType}}
+@DMSDocumentInfoRecordDocNumber={{getAllOriginals.response.body.d.results[0].DocumentInfoRecordDocNumber}}
+@DMSLogicalDocument={{getAllOriginals.response.body.d.results[0].LogicalDocument}}
+@DMSArchiveDocumentID={{getAllOriginals.response.body.d.results[0].ArchiveDocumentID}}
+@DMSLinkedSAPObjectKey={{getAllOriginals.response.body.d.results[0].LinkedSAPObjectKey}}
+@DMSBusinessObjectTypeName={{getAllOriginals.response.body.d.results[0].BusinessObjectTypeName}}
+
+### Read created document Metadata - is not implemented
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/AttachmentContentSet(DocumentInfoRecordDocType='{{DMSDocumentInfoRecordDocType}}',DocumentInfoRecordDocNumber='{{DMSDocumentInfoRecordDocNumber}}',DocumentInfoRecordDocVersion='',DocumentInfoRecordDocPart='',LogicalDocument='{{DMSLogicalDocument}}',ArchiveDocumentID='{{DMSArchiveDocumentID}}',LinkedSAPObjectKey='{{DMSLinkedSAPObjectKey}}',BusinessObjectTypeName='{{DMSBusinessObjectTypeName}}')
+Accept: application/json
+### Read created document Content
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/AttachmentContentSet(DocumentInfoRecordDocType='{{DMSDocumentInfoRecordDocType}}',DocumentInfoRecordDocNumber='{{DMSDocumentInfoRecordDocNumber}}',DocumentInfoRecordDocVersion='',DocumentInfoRecordDocPart='',LogicalDocument='{{DMSLogicalDocument}}',ArchiveDocumentID='{{DMSArchiveDocumentID}}',LinkedSAPObjectKey='{{DMSLinkedSAPObjectKey}}',BusinessObjectTypeName='{{DMSBusinessObjectTypeName}}')/$value
+### Delete created document
+# Seems that it only delete the reference
+DELETE https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/AttachmentContentSet(DocumentInfoRecordDocType='{{DMSDocumentInfoRecordDocType}}',DocumentInfoRecordDocNumber='{{DMSDocumentInfoRecordDocNumber}}',DocumentInfoRecordDocVersion='',DocumentInfoRecordDocPart='',LogicalDocument='{{DMSLogicalDocument}}',ArchiveDocumentID='{{DMSArchiveDocumentID}}',LinkedSAPObjectKey='{{DMSLinkedSAPObjectKey}}',BusinessObjectTypeName='{{DMSBusinessObjectTypeName}}')
+X-CSRF-Token: {{csrf}}
+Accept: application/json
+
+
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAttachmentCount
+  ?BusinessObjectTypeName='{{BusinessObjectTypeName}}'
+  &LinkedSAPObjectKey='{{material}}'
+  &SemanticObject=''
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### GetAllOriginals
+# @name getAllOriginals
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAllOriginals
+  ?BusinessObjectTypeName='{{BusinessObjectTypeName}}'
+  &LinkedSAPObjectKey='{{material}}'
+  &SemanticObject=''
+Accept: application/json
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept-Language: en
+### Read created document Metadata - is not implemented
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/AttachmentContentSet(DocumentInfoRecordDocType='{{DMSDocumentInfoRecordDocType}}',DocumentInfoRecordDocNumber='{{DMSDocumentInfoRecordDocNumber}}',DocumentInfoRecordDocVersion='',DocumentInfoRecordDocPart='',LogicalDocument='{{DMSLogicalDocument}}',ArchiveDocumentID='{{DMSArchiveDocumentID}}',LinkedSAPObjectKey='{{DMSLinkedSAPObjectKey}}',BusinessObjectTypeName='{{DMSBusinessObjectTypeName}}')
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### Read created document Content
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/AttachmentContentSet(DocumentInfoRecordDocType='{{DMSDocumentInfoRecordDocType}}',DocumentInfoRecordDocNumber='{{DMSDocumentInfoRecordDocNumber}}',DocumentInfoRecordDocVersion='',DocumentInfoRecordDocPart='',LogicalDocument='{{DMSLogicalDocument}}',ArchiveDocumentID='{{DMSArchiveDocumentID}}',LinkedSAPObjectKey='{{DMSLinkedSAPObjectKey}}',BusinessObjectTypeName='{{DMSBusinessObjectTypeName}}')/$value
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
