@@ -39,6 +39,7 @@ Content-Type: application/json
       "Material": "TG11",
       "RequestedQuantity": "100",
       "RequestedQuantityUnit": "PC",
+      "to_PricingElement": [],
       "to_ScheduleLine": [
         {
           "SalesOrder": "10",
