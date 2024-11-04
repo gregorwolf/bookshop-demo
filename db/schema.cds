@@ -279,8 +279,9 @@ type DistributionChannelCode : String(2) @(
 );
 
 entity A_DistributionChannelText {
-  key SalesOrganization       : SalesOrganizationCode;
+
   key DistributionChannel     : DistributionChannelCode;
+      SalesOrganization       : SalesOrganizationCode;
 
       @Core.Description    : '{i18n>distributionChannel}'
       @Core.LongDescription: '{i18n>distributionChannelDescription}'
