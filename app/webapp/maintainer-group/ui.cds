@@ -90,7 +90,7 @@ annotate my.Maintainer with @(UI: {
     ValueListMapping #default: {
       CollectionPath: 'Employees',
       Label         : 'Default',
-      parameters    : [
+      Parameters    : [
         {
           $Type            : 'Common.ValueListParameterInOut',
           LocalDataProperty: employee_ID,
@@ -113,7 +113,7 @@ annotate my.Maintainer with @(UI: {
     ValueListMapping #byName : {
       CollectionPath: 'Employees',
       Label         : 'By Name',
-      parameters    : [
+      Parameters    : [
         {
           $Type            : 'Common.ValueListParameterInOut',
           LocalDataProperty: employee_ID,

@@ -455,9 +455,29 @@ Common : {SideEffects #AmountChanges : {
   @Common.ValueListWithFixedValues: true
   @mandatory
   salesOrganization;
-  @(ValueList.entity: 'A_DistributionChannelText')
-  @Common.ValueListWithFixedValues: true
   @mandatory
+  @Common                         : {
+    ValueListWithFixedValues: false,
+    ValueListMapping        : {
+      CollectionPath: 'A_DistributionChannelText',
+      Parameters    : [
+        {
+          $Type            : 'Common.ValueListParameterInOut',
+          LocalDataProperty: distributionChannel,
+          ValueListProperty: 'DistributionChannel'
+        },
+        {
+          $Type            : 'Common.ValueListParameterIn',
+          LocalDataProperty: salesOrganization,
+          ValueListProperty: 'SalesOrganization'
+        },
+        {
+          $Type            : 'Common.ValueListParameterDisplayOnly',
+          ValueListProperty: 'DistributionChannelName'
+        }
+      ]
+    },
+  }
   distributionChannel;
 //In all services we always find currency as the code and not as an object that contains a property code
 //it seems to work but at least to me this is unconventional modeling.

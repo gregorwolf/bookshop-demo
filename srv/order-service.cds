@@ -81,7 +81,8 @@ service OrderService @(
   entity A_SalesOrganizationText   as projection on db.A_SalesOrganizationText;
   annotate A_SalesOrganizationText with @cds.odata.valuelist;
   entity A_DistributionChannelText as projection on db.A_DistributionChannelText;
-  annotate A_DistributionChannelText with @cds.odata.valuelist;
+  // When we use a ValueListMapping then the @cds.odata.valuelist would conflict
+  // annotate A_DistributionChannelText with @cds.odata.valuelist;
 
   @readonly
   @odata.singleton
