@@ -20,10 +20,18 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/$metadata
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
+# @name readProducts
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product
   ?$top=10
   &$skip=9
   &$expand=to_Description,to_Plant,to_ProductSales
   &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+@product={{readProducts.response.body.d.results[0].Product}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product('{{product}}')
+  ?$expand=to_Description,to_Plant,to_ProductSales
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
