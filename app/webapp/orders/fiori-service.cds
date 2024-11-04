@@ -199,9 +199,10 @@ annotate OrderService.Orders with @(UI: {
       Value: total,
       Label: 'Order Value'
     },
+    {Value: compositionTags.tag, },
     {
-      Value: Items.book_ID,
-      Label: 'Ordered Books'
+      Value: tags.tag.ID,
+      Label: 'Tags'
     },
     {
       Value: createdAt,
@@ -402,9 +403,10 @@ annotate OrderService.Orders with @(UI: {
   ]},
 
   FieldGroup #Details                    : {Data: [
+    {Value: compositionTags.tag, },
     {
-      Value: Items.book_ID,
-      Label: 'Ordered Books'
+      Value: tags.tag.ID,
+      Label: 'Tags'
     },
     {Value: salesOrganization},
     {
@@ -635,3 +637,25 @@ annotate OrderService.OrderShippingAddress with @(UI: {
     Target: '@UI.Identification'
   }, ],
 }) {};
+
+
+annotate OrderService.Tags with {
+  @Common: {
+    ValueListWithFixedValues: false,
+    ValueListMapping        : {
+      CollectionPath: 'Tags',
+      Parameters    : [
+        {
+          $Type            : 'Common.ValueListParameterInOut',
+          LocalDataProperty: ID,
+          ValueListProperty: 'ID'
+        },
+        {
+          $Type            : 'Common.ValueListParameterDisplayOnly',
+          ValueListProperty: 'tag'
+        }
+      ]
+    },
+  }
+  ID;
+};

@@ -306,6 +306,12 @@ entity Orders : cuid, managed {
   Items               : Composition of many OrderItems
                           on Items.parent = $self
                                       @title: 'Items';
+  compositionTags     : Composition of many CompositionTags
+                          on compositionTags.parent = $self
+                                      @title: 'Composition Tags';
+  tags                : Composition of many OrderTags
+                          on tags.parent = $self
+                                      @title: 'Tags';
   ShippingAddress     : Composition of one OrderShippingAddress;
   headerText          : LargeString   @title: 'Order Header Text';
 
@@ -355,6 +361,40 @@ view OrdersView as
 annotate OrdersView with {
   // @Core.Immutable
   OrderNo;
+};
+
+@assert.unique: {tag: [tag, ]}
+entity CompositionTags : cuid {
+  parent : Association to one Orders not null;
+
+  @title: 'Composition Tag'
+  tag    : String;
+}
+
+@assert.unique: {tag: [
+  parent,
+  tag
+]}
+entity OrderTags : cuid {
+  parent : Association to one Orders not null;
+  tag    : Association to one Tags;
+}
+
+@cds.autoexpose
+@assert.unique: {tag: [tag, ]}
+entity Tags : cuid {
+  tag : String;
+}
+
+annotate Tags with {
+  @(
+    title : '{i18n>Tag}',
+    Common: {
+      Text           : tag,
+      TextArrangement: #TextOnly
+    }
+  )
+  ID;
 };
 
 
