@@ -200,6 +200,10 @@ annotate OrderService.Orders with @(UI: {
       Label: 'Order Value'
     },
     {
+      Value: Items.book_ID,
+      Label: 'Ordered Books'
+    },
+    {
       Value: createdAt,
       Label: 'Creation Date'
     },
@@ -398,6 +402,10 @@ annotate OrderService.Orders with @(UI: {
   ]},
 
   FieldGroup #Details                    : {Data: [
+    {
+      Value: Items.book_ID,
+      Label: 'Ordered Books'
+    },
     {Value: salesOrganization},
     {
       Value: currency_code,
@@ -445,18 +453,11 @@ Common : {SideEffects #AmountChanges : {
 }}
 */
 ) {
-  @UI.HiddenFilter                : false
-  createdAt;
-  @UI.HiddenFilter                : false
-  createdBy;
-  @Common.FieldControl            : #ReadOnly
-  total; //Bind the currency field to the amount field
-  @(ValueList.entity: 'A_SalesOrganizationText')
-  @Common.ValueListWithFixedValues: true
-  @mandatory
-  salesOrganization;
-  @mandatory
-  @Common                         : {
+  @UI.HiddenFilter    : false createdAt;
+  @UI.HiddenFilter    : false createdBy;
+  @Common.FieldControl: #ReadOnly total; //Bind the currency field to the amount field
+  @(ValueList.entity: 'A_SalesOrganizationText')  @Common.ValueListWithFixedValues: true  @mandatory  salesOrganization;
+  @mandatory                                      @Common                         : {
     ValueListWithFixedValues: false,
     ValueListMapping        : {
       CollectionPath: 'A_DistributionChannelText',
@@ -477,8 +478,7 @@ Common : {SideEffects #AmountChanges : {
         }
       ]
     },
-  }
-  distributionChannel;
+  }  distributionChannel;
 //In all services we always find currency as the code and not as an object that contains a property code
 //it seems to work but at least to me this is unconventional modeling.
 };
@@ -503,9 +503,7 @@ annotate OrderService.OrderItems with {
     ValueList.entity: 'Books',
   );
   amount @(Common.FieldControl: #Mandatory);
-  @(ValueList.entity: 'SEPMRA_I_Product_E')
-  @mandatory
-  product;
+  @(ValueList.entity: 'SEPMRA_I_Product_E')  @mandatory  product;
 }
 
 annotate OrderService.OrderItems with @(UI: {
@@ -603,8 +601,7 @@ Common: {
 }
 */
 ) {
-  netAmount
-  @Common.FieldControl: #ReadOnly;
+  netAmount @Common.FieldControl: #ReadOnly;
 //ERROR ALERT: The following line refering to the parents currency code will lead to a server error
 //@Measures.ISOCurrency:parent.currency.code; //Bind the currency field to the amount field of the parent
 };
