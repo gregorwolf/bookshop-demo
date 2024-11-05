@@ -27,3 +27,146 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPart
   &$inlinecount=allpages
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartner
+  ?$filter=BusinessPartner eq '10100003'
+  &$inlinecount=allpages
+  &$expand=to_BusinessPartnerTax,to_BusinessPartnerAddress,to_BusinessPartnerAddress/to_AddressUsage,to_BusinessPartnerAlias,to_BusinessPartnerRole,to_Customer,to_Customer/to_CustomerSalesArea,to_Customer/to_CustomerSalesArea/to_PartnerFunction,to_Customer/to_CustomerSalesArea/to_SalesAreaTax,to_Customer/to_CustAddrDepdntExtIdentifier,to_Customer/to_CustomerCompany
+  &top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### Get CSRF Token
+# @name getCSRF
+HEAD {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartner
+X-CSRF-Token: Fetch
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Read Token to Variable
+@CSRF={{getCSRF.response.headers.x-csrf-token}}
+###
+# @name createSalesOrder
+POST {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartner
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+{
+  "BusinessPartnerCategory" : "2",
+  "OrganizationBPName1" : "TEST_ORG1",
+  "OrganizationBPName2" : "name2",
+  "OrganizationBPName3" : "name3",
+  "OrganizationBPName4" : "name4",
+  "SearchTerm1" : "test",
+  "AuthorizationGroup" : "0001",
+  "LegalForm" : "01",
+  "OrganizationFoundationDate" : "\/Date(253402300799000)\/",
+  "OrganizationLiquidationDate" : "\/Date(253402300799000)\/",
+  "BusinessPartnerType" : "0001",
+  "BusinessPartnerIsBlocked" : false,
+  "to_BuPaIndustry" : [
+    {
+      "IndustrySector" : "01",
+      "IndustrySystemType" : "0001",
+      "IsStandardIndustry" : "X"
+
+    }
+  ],
+  "to_BusinessPartnerAddress" : [
+    {
+      "Country" : "IN",
+      "HouseNumber" : "5",
+      "StreetName" : "whitefield",
+      "PostalCode" : "260097",
+      "CityName" : "Bangalore",
+      "Language" : "EN",
+      "to_AddressUsage" : [
+        {
+          "AddressUsage" : "XXDEFAULT",
+          "ValidityEndDate" : "\/Date(253402300799000+0000)\/"
+        }
+      ]
+    }
+  ],
+  "to_BusinessPartnerRole" : [
+    {
+      "BusinessPartnerRole" : "FLCU00",
+      "ValidFrom" : "\/Date(1484092800000+0000)\/",
+      "ValidTo" : "\/Date(253402300799000+0000)\/"
+    },
+    {
+      "BusinessPartnerRole" : "FLCU01",
+      "ValidFrom" : "\/Date(1451606400000+0000)\/",
+      "ValidTo" : "\/Date(253402300799000+0000)\/"
+    }
+  ],
+  "to_Customer" : {
+    "PostingIsBlocked" : false,
+    "to_CustomerSalesArea" : [
+      {
+        "SalesOrganization" : "1010",
+        "DistributionChannel" : "10",
+        "Division" : "00",
+        "SalesDistrict" : "",
+        "Currency" : "EUR",
+        "CustomerABCClassification" : "23",
+        "CustomerAccountAssignmentGroup" : "01",
+        "CustomerGroup" : "01",
+        "CustomerPaymentTerms" : "0001",
+        "CustomerPriceGroup" : "",
+        "CustomerPricingProcedure" : "",
+        "DeliveryPriority" : "01",
+        "ItemOrderProbabilityInPercent" : "50",
+        "ShippingCondition" : "01",
+        "SupplyingPlant" : "1010",
+        "CompleteDeliveryIsDefined" : false,
+        "DeliveryIsBlockedForCustomer" : "",
+        "OrderCombinationIsAllowed" : false,
+        "OrderIsBlockedForCustomer" : "",
+        "PartialDeliveryIsAllowed" : "A",
+        "to_PartnerFunction" : [
+          {
+            "PartnerCounter" : "9",
+            "PartnerFunction" : "SP",
+            "BPCustomerNumber" : "",
+            "CustomerPartnerDescription" : "",
+            "DefaultPartner" : true
+          },
+          {
+            "PartnerCounter" : "",
+            "PartnerFunction" : "BP",
+            "BPCustomerNumber" : "",
+            "CustomerPartnerDescription" : "",
+            "DefaultPartner" : false
+          },
+          {
+            "PartnerCounter" : "",
+            "PartnerFunction" : "PY",
+            "BPCustomerNumber" : "",
+            "CustomerPartnerDescription" : "",
+            "DefaultPartner" : false
+          },
+          {
+            "PartnerCounter" : "",
+            "PartnerFunction" : "SH",
+            "BPCustomerNumber" : "",
+            "CustomerPartnerDescription" : "",
+            "DefaultPartner" : false
+          }
+        ]
+      }
+    ],
+    "to_CustomerCompany" : [
+      {
+        "CompanyCode" : "1010",
+        "CustomerSupplierClearingIsUsed" : false,
+        "IsToBeLocallyProcessed" : false,
+        "ItemIsToBePaidSeparately" : false,
+        "PaymentTerms" : "NT30",
+        "PaytAdviceIsSentbyEDI" : false,
+        "PhysicalInventoryBlockInd" : false,
+        "ReconciliationAccount" : "12100000",
+        "RecordPaymentHistoryIndicator" : false
+      }
+    ]
+  }
+}

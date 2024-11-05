@@ -25,11 +25,11 @@ Content-Type: application/json
   "SalesOrganization": "1010",
   "DistributionChannel": "10",
   "OrganizationDivision": "00",
-  "SoldToParty": "10100003",
+  "SoldToParty": "1000037",
   "PurchaseOrderByCustomer": "PO-GROUP-88",
-  "SalesOrderDate": "\/Date(1720051200000)\/",
-  "PricingDate": "\/Date(1720051200000)\/",
-  "RequestedDeliveryDate": "\/Date(1720051200000)\/",
+  "SalesOrderDate": "\/Date(1731073601000)\/",
+  "PricingDate": "\/Date(1731073601000)\/",
+  "RequestedDeliveryDate": "\/Date(1731073601000)\/",
   "ShippingCondition": "01",
   "CompleteDeliveryIsDefined": true,
   "to_Item": [
@@ -40,17 +40,7 @@ Content-Type: application/json
       "RequestedQuantity": "100",
       "RequestedQuantityUnit": "PC",
       "to_PricingElement": [],
-      "to_ScheduleLine": [
-        {
-          "SalesOrder": "10",
-          "SalesOrderItem": "10",
-          "ScheduleLine": "1",
-          "RequestedDeliveryDate": "\/Date(1720051200000)\/",
-          "ConfirmedDeliveryDate": null,
-          "OrderQuantityUnit": "PC",
-          "ScheduleLineOrderQuantity": "100"
-        }
-      ]
+      "to_ScheduleLine": []
     }
   ]
 }
