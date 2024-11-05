@@ -1,0 +1,45 @@
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_salesprice/srvd_a2x/sap/salesprice/0001/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_salesprice/srvd_a2x/sap/salesprice/0001/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Get CSRF Token
+# @name getCSRF
+HEAD {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_salesprice/srvd_a2x/sap/salesprice/0001/
+X-CSRF-Token: Fetch
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Read Token to Variable
+@CSRF={{getCSRF.response.headers.x-csrf-token}}
+###
+POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_salesprice/srvd_a2x/sap/salesprice/0001/SalesPrice/com.sap.gateway.srvd_a2x.api_salesprice.v0001.RetrieveSalesPrice
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "SALESORGANIZATION": "1010",
+  "DISTRIBUTIONCHANNEL": "10",
+  "DIVISION": "00",
+  "TRANSACTIONCURRENCY": "EUR",
+  "SALESDOCUMENTTYPE": "EOX1",
+  "SALESDOCUMENTITEMCATEGORY": "EDX1",
+  "BILLINGDOCUMENTTYPE": "CIX1",
+  "LANGUAGEISOCODE": "EN",
+  "SALESPRICERETRIEVEUSECASE": " ",
+  "PRICEELEMENTSAREREQUESTED": true,
+  "PRODUCT": [
+  {
+    "PRODUCT": "TG11",
+    "PRODUCTUSEDBYCUSTOMER": " "
+  }
+  ],
+  "SOLDTOPARTY": [
+  {
+    "SOLDTOPARTY": "0010100001"
+  }
+],
+  "PRICINGDATE": "2024-11-05"
+}
