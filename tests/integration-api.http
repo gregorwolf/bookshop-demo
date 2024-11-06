@@ -9,6 +9,17 @@ grant_type=client_credentials
 ### Fill Variables from Response
 @access_token = {{requestAccessToken.response.body.$.access_token}}
 ###
+GET {{$dotenv integration_api_url}}/api/v1/
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+# @name getIntegrationPackages
 GET {{$dotenv integration_api_url}}/api/v1/IntegrationPackages
-#Authorization: Bearer {{$access_token}}
-Authorization: Basic {{$dotenv integration_api_clientid}}:{{$dotenv integration_api_clientsecret}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+@artifacts={{getIntegrationPackages.response.body.d.results[0].IntegrationDesigntimeArtifacts.__deferred.uri}}
+###
+GET {{artifacts}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
