@@ -1,0 +1,195 @@
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap-env:Header>
+        <msgID:messageId xmlns:msgID="http://www.sap.com/webas/640/soap/features/messageId/">
+            uuid:570aed44-c52e-1edf-a791-1525dcc9e1c0</msgID:messageId>
+    </soap-env:Header>
+    <soap-env:Body>
+        <n0:OrderRequest xmlns:n0="http://sap.com/xi/EDI"
+            xmlns:prx="urn:sap.com:proxy:K8M:/1SAI/TAE813A0CAF5E48F72CEACA:912">
+            <MessageHeader>
+                <ID>570AED44C52E1EDFA79113CAC2DF81C0</ID>
+                <CreationDateTime>2024-11-06T21:46:44Z</CreationDateTime>
+                <SenderBusinessSystemID>0M5VALQ</SenderBusinessSystemID>
+                <SenderParty>
+                    <InternalID>1010-LIEF1</InternalID>
+                </SenderParty>
+                <RecipientParty>
+                    <InternalID>10300001</InternalID>
+                </RecipientParty>
+            </MessageHeader>
+            <Order>
+                <ActionCode>01</ActionCode>
+                <PurchaseOrderID>4500000025</PurchaseOrderID>
+                <PurchasingDocumentType>NB</PurchasingDocumentType>
+                <CompanyCode>1010</CompanyCode>
+                <CompanyCodeName>DE Company Code</CompanyCodeName>
+                <BuyerCompanyID>001010</BuyerCompanyID>
+                <PurchasingOrganization>1010</PurchasingOrganization>
+                <PurchasingOrganizationName>DE Purchasing Org</PurchasingOrganizationName>
+                <PurchasingGroup>001</PurchasingGroup>
+                <PurchasingGroupName>Group 001</PurchasingGroupName>
+                <PurchaseOrderCreationDate>2024-11-06</PurchaseOrderCreationDate>
+                <PurchaseOrderDocumentDateTime>2024-11-06T12:00:00+00:00</PurchaseOrderDocumentDateTime>
+                <PurchaseOrderLastChangeDate>2024-11-06</PurchaseOrderLastChangeDate>
+                <TransactionCurrency>USD</TransactionCurrency>
+                <BuyerCompanyCodeCurrency>EUR</BuyerCompanyCodeCurrency>
+                <BuyerExchangeRate>-1.23794</BuyerExchangeRate>
+                <BuyerVATRegistration>DE123456789</BuyerVATRegistration>
+                <Party PartyType="SoldTo">
+                    <BuyerPartyID>10300001</BuyerPartyID>
+                    <SupplierPartyID>1010-LIEF1</SupplierPartyID>
+                    <Address>
+                        <AddressAdditionalName>DE Company Code</AddressAdditionalName>
+                        <StreetName>Dietmar-Hopp-Allee</StreetName>
+                        <HouseNumber>16</HouseNumber>
+                        <StreetAddressName>Dietmar-Hopp-Allee 16</StreetAddressName>
+                        <PostalCode>69190</PostalCode>
+                        <CityName>Walldorf</CityName>
+                        <Country>DE</Country>
+                        <District>Industriegebiet</District>
+                        <Region>BW</Region>
+                        <CorrespondenceLanguage>de</CorrespondenceLanguage>
+                        <ExternalAddressParserCode>B</ExternalAddressParserCode>
+                    </Address>
+                </Party>
+                <Party PartyType="Supplier">
+                    <BuyerPartyID>10300001</BuyerPartyID>
+                    <Address>
+                        <FormOfAddressName>Unternehmen</FormOfAddressName>
+                        <AddressName>Inlandslieferant DE 1</AddressName>
+                        <StreetName>Hullerner Straße</StreetName>
+                        <HouseNumber>23</HouseNumber>
+                        <StreetAddressName>Hullerner Straße 23</StreetAddressName>
+                        <PostalCode>45721</PostalCode>
+                        <CityName>Haltern am See</CityName>
+                        <Country>DE</Country>
+                        <Region>NW</Region>
+                        <PhoneNumber>09990 5232-0</PhoneNumber>
+                        <EmailAddress>info@10300001.com</EmailAddress>
+                        <CorrespondenceLanguage>de</CorrespondenceLanguage>
+                    </Address>
+                </Party>
+                <Party PartyType="InvcgPty">
+                    <BuyerPartyID>10300001</BuyerPartyID>
+                    <Address>
+                        <FormOfAddressName>Unternehmen</FormOfAddressName>
+                        <AddressName>Inlandslieferant DE 1</AddressName>
+                        <StreetName>Hullerner Straße</StreetName>
+                        <HouseNumber>23</HouseNumber>
+                        <StreetAddressName>Hullerner Straße 23</StreetAddressName>
+                        <PostalCode>45721</PostalCode>
+                        <CityName>Haltern am See</CityName>
+                        <Country>DE</Country>
+                        <Region>NW</Region>
+                        <PhoneNumber>09990 5232-0</PhoneNumber>
+                        <EmailAddress>info@10300001.com</EmailAddress>
+                        <CorrespondenceLanguage>de</CorrespondenceLanguage>
+                    </Address>
+                </Party>
+                <Party PartyType="BillTo">
+                    <BuyerPartyID>1010</BuyerPartyID>
+                    <Address>
+                        <AddressAdditionalName>DE Company Code</AddressAdditionalName>
+                        <StreetName>Dietmar-Hopp-Allee</StreetName>
+                        <HouseNumber>16</HouseNumber>
+                        <StreetAddressName>Dietmar-Hopp-Allee 16</StreetAddressName>
+                        <PostalCode>69190</PostalCode>
+                        <CityName>Walldorf</CityName>
+                        <Country>DE</Country>
+                        <District>Industriegebiet</District>
+                        <Region>BW</Region>
+                        <CorrespondenceLanguage>de</CorrespondenceLanguage>
+                    </Address>
+                </Party>
+                <Party PartyType="ShipTo">
+                    <BuyerPartyID>1010</BuyerPartyID>
+                    <Address>
+                        <StreetName>Dietmar-Hopp-Allee</StreetName>
+                        <HouseNumber>16</HouseNumber>
+                        <StreetAddressName>Dietmar-Hopp-Allee 16</StreetAddressName>
+                        <PostalCode>69190</PostalCode>
+                        <CityName>Walldorf</CityName>
+                        <Country>DE</Country>
+                        <Region>BW</Region>
+                        <CorrespondenceLanguage>de</CorrespondenceLanguage>
+                        <AddressTimeZone>CET</AddressTimeZone>
+                    </Address>
+                </Party>
+                <PaymentTerms>
+                    <BuyerPaymentTermsID>0004</BuyerPaymentTermsID>
+                </PaymentTerms>
+                <OrderItem>
+                    <ActionCode>01</ActionCode>
+                    <PurchaseOrderItemID>10</PurchaseOrderItemID>
+                    <PurchaseOrderItemCategory>0</PurchaseOrderItemCategory>
+                    <OrderItemText>screws</OrderItemText>
+                    <IsReturnsItem>false</IsReturnsItem>
+                    <RequestedQuantity unitCode="PCE">40000.0</RequestedQuantity>
+                    <ProductType>1</ProductType>
+                    <GoodsReceiptIsExpected>true</GoodsReceiptIsExpected>
+                    <Product>
+                        <BuyerProductID>NL001</BuyerProductID>
+                    </Product>
+                    <ExpectedNetPrice>
+                        <Amount currencyCode="USD">10.0</Amount>
+                        <BaseQuantity unitCode="PCE">1000.0</BaseQuantity>
+                    </ExpectedNetPrice>
+                    <PurchasingPriceIsEstimated>false</PurchasingPriceIsEstimated>
+                    <PriceIsToBePrinted>true</PriceIsToBePrinted>
+                    <POPriceUnitToPOUnitNumerator>1</POPriceUnitToPOUnitNumerator>
+                    <POPriceUnitToPOUnitDenominator>1</POPriceUnitToPOUnitDenominator>
+                    <ExpectedNetAmount currencyCode="USD">400.0</ExpectedNetAmount>
+                    <ExpectedGrossAmount currencyCode="USD">400.0</ExpectedGrossAmount>
+                    <ScheduleLine>
+                        <PurchaseOrderScheduleLine>0001</PurchaseOrderScheduleLine>
+                        <RequestedDeliveryDate>2024-11-06</RequestedDeliveryDate>
+                        <RequestedDeliveryTimeZone>CET</RequestedDeliveryTimeZone>
+                        <RequestedDeliveryDateTime>2024-11-06T12:00:00+01:00</RequestedDeliveryDateTime>
+                        <ScheduleLineOrderQuantity unitCode="PCE">40000.0</ScheduleLineOrderQuantity>
+                    </ScheduleLine>
+                    <AccountAssignment>
+                        <AccountAssignmentLine>
+                            <AccountAssignmentNumber>01</AccountAssignmentNumber>
+                            <UnloadingPointName> </UnloadingPointName>
+                        </AccountAssignmentLine>
+                    </AccountAssignment>
+                    <OrderAcknowledgementRequired>false</OrderAcknowledgementRequired>
+                    <ConfirmationControlKey> </ConfirmationControlKey>
+                    <IsCompletelyDelivered>true</IsCompletelyDelivered>
+                    <EvaldRcptSettlmtIsAllowed>false</EvaldRcptSettlmtIsAllowed>
+                    <BuyerVATRegistration>DE123456789</BuyerVATRegistration>
+                    <Plant>1010</Plant>
+                    <PlantName>DE Plant 1</PlantName>
+                    <StorageLocation />
+                    <StorageLocationName />
+                    <TaxDetails>
+                        <TaxCode>V1</TaxCode>
+                        <TotalTaxAmount currencyCode="USD">76.0</TotalTaxAmount>
+                        <TaxConditionDetails>
+                            <ConditionType>BASB</ConditionType>
+                            <ConditionTypeName languageCode="EN">Base Amount</ConditionTypeName>
+                            <ConditionStep>100</ConditionStep>
+                            <ConditionFromRefStep>000</ConditionFromRefStep>
+                            <ConditionToRefStep>000</ConditionToRefStep>
+                            <ConditionRateValue>400.0</ConditionRateValue>
+                            <ConditionRateValueUnit>USD</ConditionRateValueUnit>
+                            <ConditionBaseAmount currencyCode="USD">400.0</ConditionBaseAmount>
+                            <ConditionAmount currencyCode="USD">400.0</ConditionAmount>
+                        </TaxConditionDetails>
+                        <TaxConditionDetails>
+                            <ConditionType>MWVS</ConditionType>
+                            <ConditionTypeName languageCode="EN">Input tax</ConditionTypeName>
+                            <ConditionStep>120</ConditionStep>
+                            <ConditionFromRefStep>100</ConditionFromRefStep>
+                            <ConditionToRefStep>000</ConditionToRefStep>
+                            <ConditionRateValue>19.0</ConditionRateValue>
+                            <ConditionRateValueUnit>%</ConditionRateValueUnit>
+                            <ConditionBaseAmount currencyCode="USD">400.0</ConditionBaseAmount>
+                            <ConditionAmount currencyCode="USD">76.0</ConditionAmount>
+                        </TaxConditionDetails>
+                    </TaxDetails>
+                </OrderItem>
+            </Order>
+        </n0:OrderRequest>
+    </soap-env:Body>
+</soap-env:Envelope>

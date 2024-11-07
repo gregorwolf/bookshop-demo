@@ -1,0 +1,11 @@
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/bc/srt/scs_ext/sap/orderrequest_in
+    ?MessageId=570aed44-c52e-1edf-a791-1525dcc9e1c0
+    &QueueId=DB7B16460CC1E9F8
+    &QualityOfService=ExactlyOnce
+Accept: text/xml
+Content-Type: text/xml; charset=utf-8
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+soapaction: "OrderRequest_Out"
+
+< ./orderrequest_in.xml
