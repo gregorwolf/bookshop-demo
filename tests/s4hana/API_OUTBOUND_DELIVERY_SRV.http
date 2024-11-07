@@ -1,0 +1,39 @@
+### api.sap.com Sandbox
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/
+APIKey: {{$dotenv apikey}}
+Accept: application/json
+###
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/$metadata
+#APIKey: {{$dotenv apikey}}
+###
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/A_OutbDeliveryHeader
+  ?$top=10
+  &$filter=CreationDate gt datetime'2024-10-08T00:00:00'
+  &$inlinecount=allpages
+APIKey: {{$dotenv apikey}}
+Accept: application/json
+###
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/A_OutbDeliveryHeader
+  ?$top=10
+# Translated from OData V4 to OData V2 by Gateway:
+#  &$filter=CreationDate%20gt%20datetime'2024-10-08T07%3A16%3A23.000Z'
+# Correct
+  &$filter=CreationDate%20gt%20datetime'2024-10-08T07%3A16%3A23'
+  &$select=DeliveryDocument,ActualDeliveryRoute,Shippinglocationtimezone,ActualGoodsMovementDate,Receivinglocationtimezone,ActualGoodsMovementTime,BillingDocumentDate,BillOfLading,CompleteDeliveryIsDefined,ConfirmationTime,CreatedByUser,CreationDate,CreationTime,CustomerGroup,DeliveryBlockReason,DeliveryDate,DeliveryDocumentBySupplier,DeliveryDocumentType,DeliveryIsInPlant,DeliveryPriority,DeliveryTime,DeliveryVersion,DepreciationPercentage,DistrStatusByDecentralizedWrhs,DocumentDate,ExternalIdentificationType,ExternalTransportSystem,FactoryCalendarByCustomer,GoodsIssueOrReceiptSlipNumber,GoodsIssueTime,HandlingUnitInStock,HdrGeneralIncompletionStatus,HdrGoodsMvtIncompletionStatus,HeaderBillgIncompletionStatus,HeaderBillingBlockReason,HeaderDelivIncompletionStatus,HeaderGrossWeight,HeaderNetWeight,HeaderPackingIncompletionSts,HeaderPickgIncompletionStatus,HeaderVolume,HeaderVolumeUnit,HeaderWeightUnit,IncotermsClassification,IncotermsTransferLocation,IntercompanyBillingDate,InternalFinancialDocument,IsDeliveryForSingleWarehouse,IsExportDelivery,LastChangeDate,LastChangedByUser,LoadingDate,LoadingPoint,LoadingTime,MeansOfTransport,MeansOfTransportRefMaterial,MeansOfTransportType,OrderCombinationIsAllowed,OrderID,OverallDelivConfStatus,OverallDelivReltdBillgStatus,OverallGoodsMovementStatus,OverallIntcoBillingStatus,OverallPackingStatus,OverallPickingConfStatus,OverallPickingStatus,OverallProofOfDeliveryStatus,OverallSDProcessStatus,OverallWarehouseActivityStatus,OvrlItmDelivIncompletionSts,OvrlItmGdsMvtIncompletionSts,OvrlItmGeneralIncompletionSts,OvrlItmPackingIncompletionSts,OvrlItmPickingIncompletionSts,PaymentGuaranteeProcedure,PickedItemsLocation,PickingDate,PickingTime,PlannedGoodsIssueDate,ProofOfDeliveryDate,ProposedDeliveryRoute,ReceivingPlant,RouteSchedule,SalesDistrict,SalesOffice,SalesOrganization,SDDocumentCategory,ShipmentBlockReason,ShippingCondition,ShippingPoint,ShippingType,ShipToParty,SoldToParty,SpecialProcessingCode,StatisticsCurrency,Supplier,TotalBlockStatus,TotalCreditCheckStatus,TotalNumberOfPackage,TransactionCurrency,TransportationGroup,TransportationPlanningDate,TransportationPlanningStatus,TransportationPlanningTime,UnloadingPointName,Warehouse,WarehouseGate,WarehouseStagingArea
+  &$inlinecount=allpages
+APIKey: {{$dotenv apikey}}
+Accept: application/json
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/A_OutbDeliveryHeader
+  ?$top=10
+  &$filter=CreationDate gt datetime'2024-09-08T00:00'
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
