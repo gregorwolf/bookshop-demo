@@ -43,7 +43,8 @@ X-CSRF-Token: {{CSRF}}
 Content-Type: application/json
 
 #< ./default-env-API_SALES_ORDER_SRV-create.json
-< ./API_SALES_ORDER_SRV-create.json
+#< ./API_SALES_ORDER_SRV-create.json
+< ./API_SALES_ORDER_SRV-create-2.json
 ###
 @salesOrder={{createSalesOrder.response.body.d.SalesOrder}}
 ###
