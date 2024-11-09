@@ -1,3 +1,6 @@
+### To use the following requests Setup an Event Mesh client instance
+### With Service: enterprise-messaging, Plan: default using this configuration:
+### https://github.com/gregorwolf/sap-graph-client/blob/main/event-mesh/rest-client.json
 ### Request Access Token
 # @name requestAccessToken
 POST {{$dotenv eventmesh_tokenendpoint}}
@@ -10,12 +13,102 @@ client_id={{$dotenv eventmesh_clientid}}
 &response_type=token
 ### Fill Variables from Response
 @access_token = {{requestAccessToken.response.body.$.access_token}}
-
-###
-POST {{$dotenv eventmesh_rest}}/messagingrest/v1/topics/{{$dotenv eventmesh_topic}}
+### Read Webhook Credentials
+GET {{$dotenv eventmesh_pubsub}}/sap/ems/v1/webhook-credentials
+Authorization: Bearer {{access_token}}
+Accept: application/json
+### Read Queues
+GET {{$dotenv eventmesh_management}}/hub/rest/api/v1/management/messaging/queues
+Authorization: Bearer {{access_token}}
+Accept: application/json
+### Read Subscriptions
+GET {{$dotenv eventmesh_pubsub}}/sap/ems/v1/events/subscriptions
+Authorization: Bearer {{access_token}}
+Accept: application/json
+### Create Subscription for Product Created Event
+POST {{$dotenv eventmesh_pubsub}}/messagingrest/v1/subscriptions
 Authorization: Bearer {{access_token}}
 Accept: application/json
 Content-Type: application/json
-### Returns []
 
-{}
+{
+    "name": "ProductCreated",
+    "address": "queue:sap/rest/client/ProductCreated",
+    "qos": 0,
+    "pushConfig": {
+      "type": "webhook",
+      "endpoint": "https://cswtest.free.beeceptor.com/Product/Created",
+      "exemptHandshake": true,
+      "onPremise": false,
+      "cloudConnectorLocationId": ""
+    }
+}
+### Create Subscription for Product Changed Event
+POST {{$dotenv eventmesh_pubsub}}/messagingrest/v1/subscriptions
+Authorization: Bearer {{access_token}}
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name": "ProductChanged",
+    "address": "queue:sap/rest/client/ProductChanged",
+    "qos": 0,
+    "pushConfig": {
+      "type": "webhook",
+      "endpoint": "https://cswtest.free.beeceptor.com/Product/Changed",
+      "exemptHandshake": true,
+      "onPremise": false,
+      "cloudConnectorLocationId": ""
+    }
+}
+### Read Subscriptions
+# @name readSubscriptions
+GET {{$dotenv eventmesh_pubsub}}/messagingrest/v1/subscriptions
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+@subscriptionName={{readSubscriptions.response.body.$[0].name}}
+###
+DELETE {{$dotenv eventmesh_pubsub}}/messagingrest/v1/subscriptions/{{subscriptionName}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+### Publish Product Created Event
+POST {{$dotenv eventmesh_pubsub}}/messagingrest/v1/messages
+Authorization: Bearer {{access_token}}
+x-address: topic:sap/S4HANAOD/K8M/ce/sap/s4/beh/product/v1/Product/Created/v1
+x-qos: 0
+Content-Type: application/cloudevents+json
+
+{
+  "type": "sap.s4.beh.product.v1.Product.Created.v1",
+  "specversion": "1.0",
+  "source": "sap/S4HANAOD/K8M",
+  "id": "9d8a6fa2-3bc5-1eef-a7d6-96406c453b5c",
+  "time": "2024-11-09T16:07:19Z",
+  "datacontenttype": "application/json",
+  "data": {
+    "Product": "TG11",
+    "ProductType": "HAWA",
+    "ProductCategory": ""
+  }
+}
+### Publish Product Changed Event
+POST {{$dotenv eventmesh_pubsub}}/messagingrest/v1/messages
+Authorization: Bearer {{access_token}}
+x-address: topic:sap/S4HANAOD/K8M/ce/sap/s4/beh/product/v1/Product/Changed/v1
+x-qos: 0
+Content-Type: application/cloudevents+json
+
+{
+  "type": "sap.s4.beh.product.v1.Product.Changed.v1",
+  "specversion": "1.0",
+  "source": "sap/S4HANAOD/K8M",
+  "id": "9d8a6fa2-3bc5-1eef-a7d6-96406c453b5c",
+  "time": "2024-11-09T16:07:19Z",
+  "datacontenttype": "application/json",
+  "data": {
+    "Product": "TG11",
+    "ProductType": "HAWA",
+    "ProductCategory": ""
+  }
+}
