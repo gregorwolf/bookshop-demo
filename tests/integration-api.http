@@ -20,6 +20,27 @@ Accept: application/json
 ###
 @artifacts={{getIntegrationPackages.response.body.d.results[0].IntegrationDesigntimeArtifacts.__deferred.uri}}
 ###
+# @name getArtifacts
 GET {{artifacts}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+@Id={{getArtifacts.response.body.d.results[0].Id}}
+@Version={{getArtifacts.response.body.d.results[0].Version}}
+@designGuidelineExecutionResults={{getArtifacts.response.body.d.results[0].DesignGuidelineExecutionResults.__deferred.uri}}
+###
+# @name getDesignGuidelineExecutionResults
+GET {{designGuidelineExecutionResults}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+@designGuidelineExecutionResultReport={{getDesignGuidelineExecutionResults.response.body.d.results[0].__metadata.media_src}}
+###
+GET {{designGuidelineExecutionResultReport}}
+Authorization: Bearer {{access_token}}
+### Execute Design Guideline
+POST {{$dotenv integration_api_url}}/api/v1/ExecuteIntegrationDesigntimeArtifactsGuidelines
+  ?Id='{{Id}}'
+  &Version='{{Version}}'
 Authorization: Bearer {{access_token}}
 Accept: application/json
