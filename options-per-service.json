@@ -1,0 +1,7 @@
+{
+  "srv/external/PRODUCT_0002/PRODUCT_0002.edmx": {
+    "packageName": "product_0002",
+    "directoryName": "PRODUCT_0002",
+    "basePath": "/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0002/"
+  }
+}
