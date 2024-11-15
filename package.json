@@ -50,7 +50,7 @@
     "@sap/datasphere-cli": "^2024",
     "@sap/graph-toolkit": "^3",
     "@sap/ux-specification": "^1.120.0",
-    "artillery": "2.0.3",
+    "artillery": "^2.0.21",
     "cds-swagger-ui-express": "^0",
     "chai": "^4",
     "chai-as-promised": "^7.1.1",
