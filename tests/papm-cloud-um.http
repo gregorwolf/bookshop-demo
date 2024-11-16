@@ -1,0 +1,121 @@
+### Get Access Token for Cloud Foundry using Password Grant
+# @name requestAccessTokenHANA
+POST {{$dotenv papm_um_tokenendpoint}}/oauth/token
+Accept: application/json;charset=utf8
+Authorization: Basic {{$dotenv papm_um_clientid}}:{{$dotenv papm_um_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password
+&username={{$dotenv username}}
+&password={{$dotenv password}}
+&response_type=token
+#&login_hint={"origin":"sap.custom"}
+### Fill Variables from Response
+@access_token = {{requestAccessTokenHANA.response.body.$.access_token}}
+
+### https://api.sap.com/api/sap_ace_AdministrationService/overview
+GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers
+Authorization: Bearer {{access_token}}
+###
+# @name createContainer
+POST {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "description":"Environment Configuration for Profitability and Cost Management",
+  "filename":"Profitability_and_Cost_Management_SPCM2409_01.zip"
+}
+###
+@containerID={{createContainer.response.body.$.ID}}
+### Upload File
+PUT {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers(ID='{{containerID}}',IsActiveEntity=false)/file
+Authorization: Bearer {{access_token}}
+Content-Type: application/zip
+
+< /Users/gwolf/Downloads/Profitability_and_Cost_Management_SPCM2409_01.zip
+###
+GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers(ID='{{containerID}}',IsActiveEntity=false)
+Authorization: Bearer {{access_token}}
+### Prepare Draft
+POST {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers(ID='{{containerID}}',IsActiveEntity=false)/sap.ace.AdministrationService.draftPrepare
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{"SideEffectsQualifier":""}
+### Activate Draft
+POST {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers(ID='{{containerID}}',IsActiveEntity=false)/sap.ace.AdministrationService.draftActivate
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{}
+### Read Containers after activation (ID changed)
+# @name readContainers
+GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers
+Authorization: Bearer {{access_token}}
+###
+@containerIDafterActivation={{readContainers.response.body.value[0].ID}}
+@container={{readContainers.response.body.value[0].container}}
+### Import Environment
+POST {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers(ID='{{containerIDafterActivation}}',IsActiveEntity=true)/sap.ace.AdministrationService.importEnvironment
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{}
+### Model Service
+### Is the Model Service documented at api.sap.com?
+GET {{$dotenv papm_um_endpoint}}/sap/ace/ModelService/
+Authorization: Bearer {{access_token}}
+### Get Environments
+# @name getEnvironments
+GET {{$dotenv papm_um_endpoint}}/sap/ace/ModelService/Environments
+  ?$filter=environment eq '{{container}}'
+Authorization: Bearer {{access_token}}
+###
+@environmentID={{getEnvironments.response.body.value[0].ID}}
+###
+POST {{$dotenv papm_um_endpoint}}/sap/ace/ModelService/Environments(ID='{{environmentID}}',IsActiveEntity=true)/sap.ace.ModelService.activate
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{"inBackground":true}
+###
+### https://api.sap.com/api/sap_ace_AdministrationService/path/post_Archives
+GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Archives
+Authorization: Bearer {{access_token}}
+###
+# @name createArchive
+POST {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Archives
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "description":"Demo Data for Profitability and Cost Management",
+  "filename":"Profitability_and_Cost_Management_SPCM2409_01_Demo_Data.tar.gz"
+}
+###
+@archiveID={{createArchive.response.body.$.ID}}
+### Upload File
+PUT {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Archives(ID='{{archiveID}}',IsActiveEntity=false)/file
+Authorization: Bearer {{access_token}}
+Content-Type: application/tar+gzip
+
+< /Users/gwolf/Downloads/Profitability_and_Cost_Management_SPCM2409_01_Demo_Data.tar.gz
+###
+GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Archives(ID='{{archiveID}}',IsActiveEntity=false)
+Authorization: Bearer {{access_token}}
+### Prepare Draft
+POST {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Archives(ID='{{archiveID}}',IsActiveEntity=false)/sap.ace.AdministrationService.draftPrepare
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{"SideEffectsQualifier":""}
+### Activate Draft
+POST {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Archives(ID='{{archiveID}}',IsActiveEntity=false)/sap.ace.AdministrationService.draftActivate
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{}
