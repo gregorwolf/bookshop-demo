@@ -19,7 +19,9 @@ Authorization: Bearer {{access_token}}
 ###
 GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers
 Authorization: Bearer {{access_token}}
-###
+### Create Container from File
+### Download the Environment (SAP S-User required) from:
+### https://help.sap.com/docs/SAP_PROFITABILITY_PERFORMANCE_MANAGEMENT_CLOUD/d3a96a3345624f038a7d3ba442e796e7/81ceb91f42764336900cf889f8633315.html
 # @name createContainer
 POST {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers
 Authorization: Bearer {{access_token}}
@@ -82,7 +84,12 @@ Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
 {"inBackground":true}
+### Upload Archive from File
+### Download the Demo Data (SAP S-User required) from:
+### https://help.sap.com/docs/SAP_PROFITABILITY_PERFORMANCE_MANAGEMENT_CLOUD/d3a96a3345624f038a7d3ba442e796e7/81ceb91f42764336900cf889f8633315.html
+### Extract the ZIP file to get Profitability_and_Cost_Management_SPCM2409_Demo_Data.gz as input for the PUT request
 ###
+### API Documentation:
 ### https://api.sap.com/api/sap_ace_AdministrationService/path/post_Archives
 GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Archives
 Authorization: Bearer {{access_token}}
@@ -94,16 +101,16 @@ Content-Type: application/json
 
 {
   "description":"Demo Data for Profitability and Cost Management",
-  "filename":"Profitability_and_Cost_Management_SPCM2409_01_Demo_Data.tar.gz"
+  "filename":"Profitability_and_Cost_Management_SPCM2409_Demo_Data.gz"
 }
 ###
 @archiveID={{createArchive.response.body.$.ID}}
 ### Upload File
 PUT {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Archives(ID='{{archiveID}}',IsActiveEntity=false)/file
 Authorization: Bearer {{access_token}}
-Content-Type: application/tar+gzip
+Content-Type: application/x-gzip
 
-< /Users/gwolf/Downloads/Profitability_and_Cost_Management_SPCM2409_01_Demo_Data.tar.gz
+< /Users/gwolf/Downloads/Profitability_and_Cost_Management_SPCM2409_Demo_Data.gz
 ###
 GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Archives(ID='{{archiveID}}',IsActiveEntity=false)
 Authorization: Bearer {{access_token}}
@@ -119,3 +126,18 @@ Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
 {}
+### Delete Draft
+DELETE {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Archives(ID='{{archiveID}}',IsActiveEntity=false)
+Authorization: Bearer {{access_token}}
+### Restore Demo Data to Environment
+POST {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Archives(ID='{{archiveID}}',IsActiveEntity=true)/sap.ace.AdministrationService.restoreDemoData
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{"targetEnvironment_ID":"{{environmentID}}"}
+###
+GET {{$dotenv papm_um_endpoint}}/ext/
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv papm_um_endpoint}}/ext/SPCM_Customers
+Authorization: Bearer {{access_token}}
