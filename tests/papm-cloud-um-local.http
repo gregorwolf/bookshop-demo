@@ -22,3 +22,48 @@ Content-Type: application/json
   "low": "2022",
   "high": "2024"
 }
+### Upload Archive from File
+### Download the Demo Data (SAP S-User required) from:
+### https://help.sap.com/docs/SAP_PROFITABILITY_PERFORMANCE_MANAGEMENT_CLOUD/d3a96a3345624f038a7d3ba442e796e7/81ceb91f42764336900cf889f8633315.html
+### Extract the ZIP file to get Profitability_and_Cost_Management_SPCM2409_Demo_Data.gz as input for the PUT request
+###
+### API Documentation:
+### https://api.sap.com/api/sap_ace_AdministrationService/path/post_Archives
+GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Archives
+Authorization: Basic bob:
+###
+# @name createArchive
+POST {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Archives
+Authorization: Basic bob:
+Content-Type: application/json
+
+{
+  "description":"Demo Data for Profitability and Cost Management",
+  "filename":"Profitability_and_Cost_Management_SPCM2409_Demo_Data.gz"
+}
+###
+@archiveID={{createArchive.response.body.$.ID}}
+### Upload File
+PUT {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Archives(ID='{{archiveID}}',IsActiveEntity=false)/file
+Authorization: Basic bob:
+Content-Type: application/x-gzip
+
+< /Users/gwolf/Downloads/Profitability_and_Cost_Management_SPCM2409_Demo_Data.gz
+###
+GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Archives(ID='{{archiveID}}',IsActiveEntity=false)
+Authorization: Basic bob:
+### Prepare Draft
+POST {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Archives(ID='{{archiveID}}',IsActiveEntity=false)/sap.ace.AdministrationService.draftPrepare
+Authorization: Basic bob:
+Content-Type: application/json
+
+{"SideEffectsQualifier":""}
+### Activate Draft
+POST {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Archives(ID='{{archiveID}}',IsActiveEntity=false)/sap.ace.AdministrationService.draftActivate
+Authorization: Basic bob:
+Content-Type: application/json
+
+{}
+### Delete Draft
+DELETE {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Archives(ID='{{archiveID}}',IsActiveEntity=false)
+Authorization: Basic bob:
