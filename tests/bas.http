@@ -6,9 +6,9 @@
 GET {{$dotenv bas_base_url}}/ws-manager/api/v1/workspace?all=true
 X-Approuter-Authorization: Bearer {{$dotenv bas_jwt}}
 ###
-@id = {{workspace.response.body.$[3].config.id}}
-@displayname = {{workspace.response.body.$[0].config.labels}}
-@baseUrl = {{workspace.response.body.$[0].runtime.baseUrl}}
+@id={{workspace.response.body.$[1].config.id}}
+@displayname=DEV_SPACE
+@baseUrl={{workspace.response.body.$[1].runtime.baseUrl}}
 
 ### Start Workspace
 PUT {{$dotenv bas_base_url}}/ws-manager/api/v1/workspace/{{id}}?all=true
@@ -16,7 +16,7 @@ X-Approuter-Authorization: Bearer {{$dotenv bas_jwt}}
 
 {
   "suspended":false,
-  "WorkspaceDisplayName": "SAPUI5"
+  "WorkspaceDisplayName": "{{displayname}}"
 }
 ### Stop Workspace
 PUT {{$dotenv bas_base_url}}/ws-manager/api/v1/workspace/{{id}}?all=true
@@ -24,7 +24,7 @@ X-Approuter-Authorization: Bearer {{$dotenv bas_jwt}}
 
 {
   "suspended":true,
-  "WorkspaceDisplayName": "sap_support_msg"
+  "WorkspaceDisplayName": "{{displayname}}"
 }
-### Export Workspace - Just for reference. Needs to be call in the browser
+### Export Workspace - Just for reference. Needs to be call in the browser after the workspace was started
 GET {{$dotenv bas_base_url}}/login?e={{baseUrl}}wsmaintain/export
