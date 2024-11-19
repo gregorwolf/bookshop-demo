@@ -17,6 +17,9 @@ grant_type=password
 GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/
 Authorization: Bearer {{access_token}}
 ###
+GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/$metadata
+Authorization: Bearer {{access_token}}
+###
 GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers
 Authorization: Bearer {{access_token}}
 ### Create Container from File
