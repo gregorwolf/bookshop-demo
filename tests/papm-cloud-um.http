@@ -20,8 +20,15 @@ Authorization: Bearer {{access_token}}
 GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/$metadata
 Authorization: Bearer {{access_token}}
 ###
+# @name getContainers
 GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers
 Authorization: Bearer {{access_token}}
+###
+@containerID={{getContainers.response.body.$.value[0].ID}}
+###
+GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers(ID='{{containerID}}',IsActiveEntity=true)/file
+Authorization: Bearer {{access_token}}
+###
 ### Create Container from File
 ### Download the Environment (SAP S-User required) from:
 ### https://help.sap.com/docs/SAP_PROFITABILITY_PERFORMANCE_MANAGEMENT_CLOUD/d3a96a3345624f038a7d3ba442e796e7/81ceb91f42764336900cf889f8633315.html
@@ -31,7 +38,7 @@ Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
 {
-  "description":"Environment Configuration for Profitability and Cost Management",
+  "description":"T2 Environment Configuration for Profitability and Cost Management",
   "filename":"Profitability_and_Cost_Management_SPCM2409_01.zip"
 }
 ###
@@ -103,7 +110,7 @@ Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
 {
-  "description":"Demo Data for Profitability and Cost Management",
+  "description":"T2 Demo Data for Profitability and Cost Management",
   "filename":"Profitability_and_Cost_Management_SPCM2409_Demo_Data.gz"
 }
 ###
