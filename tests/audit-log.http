@@ -1,0 +1,26 @@
+### Get Access Token (Cloud Foundry using Client Credentials)
+# @name requestAccessToken
+POST {{$dotenv audit_log_tokenendpoint}}/oauth/token
+Authorization: Basic {{$dotenv audit_log_clientid}}:{{$dotenv audit_log_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+### test API root
+GET {{$dotenv audit_log_url}}
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv audit_log_url}}/auditlog/
+Authorization: Bearer {{access_token}}
+### Read the default past 30 days
+GET {{$dotenv audit_log_url}}/auditlog/v2/auditlogrecords
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv audit_log_url}}/auditlog/v2/auditlogrecords
+  ?time_from=2024-09-01T00:00:00.000
+  &time_to=2024-09-30T23:59:59.999
+Authorization: Bearer {{access_token}}
