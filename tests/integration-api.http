@@ -44,3 +44,57 @@ POST {{$dotenv integration_api_url}}/api/v1/ExecuteIntegrationDesigntimeArtifact
   &Version='{{Version}}'
 Authorization: Bearer {{access_token}}
 Accept: application/json
+
+### Read Logs
+# @name getMessageProcessingLogs
+GET {{$dotenv integration_api_url}}/api/v1/MessageProcessingLogs
+  ?$top=10
+  &$inlinecount=allpages
+  &$orderby=LogStart desc
+  &$filter=Status eq 'FAILED' and LogStart gt datetime'2024-11-22T00:00' and LogStart lt datetime'2024-11-23T00:00'
+# and IntegrationFlowName eq 'Replicate_Business_Partner_Relationships_from_SAP_S4HANA_Cloud_to_SAP_Field_Service_Management'
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+@AttachmentsUri={{getMessageProcessingLogs.response.body.d.results[0].Attachments.__deferred.uri}}
+@MessageStoreEntriesUri={{getMessageProcessingLogs.response.body.d.results[0].MessageStoreEntries.__deferred.uri}}
+@ErrorInformationUri={{getMessageProcessingLogs.response.body.d.results[0].ErrorInformation.__deferred.uri}}
+@AdapterAttributesUri={{getMessageProcessingLogs.response.body.d.results[0].AdapterAttributes.__deferred.uri}}
+### Read Attachments
+# @name getAttachments
+GET {{AttachmentsUri}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+@attachment1={{getAttachments.response.body.d.results[0].__metadata.media_src}}
+@attachment2={{getAttachments.response.body.d.results[1].__metadata.media_src}}
+@attachment3={{getAttachments.response.body.d.results[2].__metadata.media_src}}
+@attachment4={{getAttachments.response.body.d.results[3].__metadata.media_src}}
+###
+GET {{attachment1}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+GET {{attachment2}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+GET {{attachment3}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+GET {{attachment4}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+### Read Message Store Entries
+GET {{MessageStoreEntriesUri}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+### Read Error Information
+GET {{ErrorInformationUri}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+### Read Adapter Attributes
+GET {{AdapterAttributesUri}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
