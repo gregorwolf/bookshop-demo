@@ -1,3 +1,5 @@
+### Cloud: https://api.sap.com/api/API_PRODUCT_SRV/overview
+### OnPrem: 
 ### api.sap.com Sandbox
 GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_PRODUCT_SRV/
 APIKey: {{$dotenv apikey}}

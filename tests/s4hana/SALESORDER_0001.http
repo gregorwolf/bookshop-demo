@@ -1,3 +1,5 @@
+### Cloud: https://api.sap.com/api/CE_SALESORDER_0001/overview
+### OnPrem: 
 ### S/4HANA Cloud
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_salesorder/srvd_a2x/sap/salesorder/0001/
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}

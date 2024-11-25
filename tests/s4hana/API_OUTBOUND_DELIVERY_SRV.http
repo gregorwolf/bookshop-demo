@@ -1,3 +1,5 @@
+### Cloud: https://api.sap.com/api/API_OUTBOUND_DELIVERY_SRV_0002/overview
+### OnPrem: 
 ### api.sap.com Sandbox
 GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/
 APIKey: {{$dotenv apikey}}

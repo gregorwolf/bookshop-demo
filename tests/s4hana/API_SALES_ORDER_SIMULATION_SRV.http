@@ -1,3 +1,6 @@
+### Cloud: https://api.sap.com/api/API_SALES_ORDER_SIMULATION_SRV/overview
+### OnPrem: https://api.sap.com/api/OP_API_SALES_ORDER_SIMULATION_SRV_0001/overview
+
 ### S/4HANA Cloud
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}

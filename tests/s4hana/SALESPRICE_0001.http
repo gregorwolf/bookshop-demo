@@ -1,3 +1,5 @@
+### Cloud: https://api.sap.com/api/SALESPRICE_0001/overview
+### OnPrem: 
 ### S/4HANA Cloud
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_salesprice/srvd_a2x/sap/salesprice/0001/
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}

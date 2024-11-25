@@ -1,3 +1,5 @@
+### Cloud: https://api.sap.com/api/API_MATERIAL_STOCK_SRV/overview
+### OnPrem: https://api.sap.com/api/OP_API_MATERIAL_STOCK_SRV/overview
 ### api.sap.com Sandbox
 GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/
 APIKey: {{$dotenv apikey}}

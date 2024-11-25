@@ -1,3 +1,5 @@
+### Cloud: https://api.sap.com/api/CE_PRODUCT_0002/overview
+### OnPrem: 
 ### S/4HANA Cloud
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0002/
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
