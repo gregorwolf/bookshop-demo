@@ -1,5 +1,5 @@
 ### Cloud: https://api.sap.com/api/API_SALES_ORDER_SRV/overview
-### OnPrem: 
+### OnPrem: https://api.sap.com/api/OP_API_SALES_ORDER_SRV_0001/overview
 ### api.sap.com Sandbox
 GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_SALES_ORDER_SRV/
 APIKey: {{$dotenv apikey}}
