@@ -1,2 +1,19 @@
 ### Cloud: https://api.sap.com/api/API_SLSPRICINGCONDITIONRECORD_SRV/overview
 ### OnPrem: https://api.sap.com/api/OP_API_SLSPRCGCONDITIONRECORD_SRV_0001/overview
+### OnPrem Event: https://api.sap.com/event/OP_SALESPRICINGCONDITIONRECORDEVENTS/overview
+
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SLSPRICINGCONDITIONRECORD_SRV/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SLSPRICINGCONDITIONRECORD_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SLSPRICINGCONDITIONRECORD_SRV/A_SlsPrcgCndnRecdValidity
+  ?$top=10
+  &$inlinecount=allpages
+  &$filter=Material ne 'V' and ConditionType eq 'PPR0'
+  &$expand=to_SlsPrcgCndnRecdSuplmnt,to_SlsPrcgConditionRecord,to_SlsPrcgConditionRecord/to_SlsPrcgCndnRecordScale
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
