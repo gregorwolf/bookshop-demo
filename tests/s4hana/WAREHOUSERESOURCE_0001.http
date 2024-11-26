@@ -12,3 +12,58 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_resource_2/srvd_a2x/
   ?$top=10
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+
+### Check the Client ID and Client Secret
+POST {{$dotenv mobile_warehouse_tokenendpoint}}/oauth/token
+Accept: application/json;charset=utf8
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{$dotenv mobile_warehouse_clientid}}
+&client_secret={{$dotenv mobile_warehouse_clientsecret}}
+&grant_type=client_credentials
+&response_type=token
+
+### Get Access Token (HANA) or Cloud Foundry using Password Grant
+# https://blogs.sap.com/2020/03/02/using-postman-for-api-testing-with-xsuaa/
+# @name requestAccessToken
+POST {{$dotenv mobile_warehouse_tokenendpoint}}/oauth/token
+Accept: application/json;charset=utf8
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{$dotenv mobile_warehouse_clientid}}
+&client_secret={{$dotenv mobile_warehouse_clientsecret}}
+&username={{$dotenv mobile_warehouse_username}}
+&password={{$dotenv mobile_warehouse_password}}
+&response_type=token
+&login_hint={"origin":"sap.custom"}
+&grant_type=password
+### Fill Variables from Response
+@access_token={{requestAccessToken.response.body.$.access_token}}
+@id_token={{requestAccessToken.response.body.$.id_token}}
+
+### Get Access Token for Destination Service
+# @name requestDestinationAccessToken
+POST {{$dotenv dest_tokenendpoint}}/oauth/token
+Authorization: Basic {{$dotenv dest_clientid}}:{{$dotenv dest_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+
+### Fill Variables from Response
+@destination_access_token = {{requestDestinationAccessToken.response.body.$.access_token}}
+
+### Get Access token from Destination Service using the OAuth2SAMLBearerAssertion Destination
+# According to https://api.sap.com/api/SAP_CP_CF_Connectivity_Destination/path/get_destinations__name_
+### Read details of one destination
+# @name requestProviderDestination
+GET {{$dotenv dest_uri}}/destination-configuration/v1/destinations/{{$dotenv dest_name}}
+X-user-token: {{access_token}}
+Authorization: Bearer {{destination_access_token}}
+###
+@s4hana_access_token={{requestProviderDestination.response.body.$.authTokens[0].value}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_resource_2/srvd_a2x/sap/warehouseresource/0001/WarehouseResource
+  ?$top=10
+Authorization: Bearer {{s4hana_access_token}}
+Accept: application/json
