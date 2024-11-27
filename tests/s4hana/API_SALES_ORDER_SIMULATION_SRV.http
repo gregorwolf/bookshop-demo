@@ -28,7 +28,7 @@ Content-Type: application/json
   "SalesOrganization": "1010",
   "DistributionChannel": "10",
   "OrganizationDivision": "00",
-  "SoldToParty": "1000037",
+  "SoldToParty": "10100003",
   "PurchaseOrderByCustomer": "PO-GROUP-88",
   "SalesOrderDate": "\/Date(1731073601000)\/",
   "PricingDate": "\/Date(1731073601000)\/",
