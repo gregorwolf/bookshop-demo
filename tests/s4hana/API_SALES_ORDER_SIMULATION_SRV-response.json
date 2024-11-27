@@ -1,0 +1,271 @@
+{
+  "d": {
+    "__metadata": {
+      "id": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderSimulation('')",
+      "uri": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderSimulation('')",
+      "type": "API_SALES_ORDER_SIMULATION_SRV.A_SalesOrderSimulationType"
+    },
+    "SalesOrder": "",
+    "SalesOrderType": "OR",
+    "SalesOrganization": "1010",
+    "DistributionChannel": "10",
+    "OrganizationDivision": "00",
+    "SalesGroup": "",
+    "SalesOffice": "",
+    "SalesDistrict": "",
+    "SoldToParty": "10100003",
+    "CustomerGroup": "01",
+    "AdditionalCustomerGroup1": "",
+    "AdditionalCustomerGroup2": "",
+    "AdditionalCustomerGroup3": "",
+    "AdditionalCustomerGroup4": "",
+    "AdditionalCustomerGroup5": "",
+    "PurchaseOrderByCustomer": "PO-GROUP-88",
+    "CustomerPurchaseOrderType": "",
+    "CustomerPurchaseOrderDate": null,
+    "SalesOrderDate": "/Date(1731024000000)/",
+    "TransactionCurrency": "EUR",
+    "AccountingDocExternalReference": "",
+    "CustomerTaxClassification1": "",
+    "CustomerTaxClassification2": "",
+    "CustomerTaxClassification3": "",
+    "CustomerTaxClassification4": "",
+    "CustomerTaxClassification5": "",
+    "CustomerTaxClassification6": "",
+    "CustomerTaxClassification7": "",
+    "CustomerTaxClassification8": "",
+    "CustomerTaxClassification9": "",
+    "TaxDepartureCountry": "",
+    "VATRegistrationCountry": "",
+    "PriceListType": "",
+    "CustomerPriceGroup": "",
+    "SDDocumentReason": "",
+    "PricingDate": "/Date(1731024000000)/",
+    "SDPricingProcedure": "",
+    "RequestedDeliveryDate": "/Date(1731024000000)/",
+    "ShippingCondition": "01",
+    "CompleteDeliveryIsDefined": true,
+    "ShippingType": "",
+    "IncotermsClassification": "EXW",
+    "IncotermsTransferLocation": "Walldorf",
+    "IncotermsLocation1": "Walldorf",
+    "IncotermsLocation2": "",
+    "IncotermsVersion": "",
+    "ReferenceSDDocument": "",
+    "CustomerPaymentTerms": "0004",
+    "PaymentMethod": "",
+    "to_Credit": {
+      "__deferred": {
+        "uri": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderSimulation('')/to_Credit"
+      }
+    },
+    "to_Item": {
+      "results": [
+        {
+          "__metadata": {
+            "id": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderItemSimulation(SalesOrder='',SalesOrderItem='10')",
+            "uri": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderItemSimulation(SalesOrder='',SalesOrderItem='10')",
+            "type": "API_SALES_ORDER_SIMULATION_SRV.A_SalesOrderItemSimulationType"
+          },
+          "SalesOrder": "",
+          "SalesOrderItem": "10",
+          "HigherLevelItem": "0",
+          "HigherLevelItemUsage": "",
+          "SalesOrderItemCategory": "TAN",
+          "SalesOrderItemText": "Handelsware 11, PD, normaler Handel",
+          "PurchaseOrderByCustomer": "PO-GROUP-88",
+          "Material": "TG11",
+          "MaterialByCustomer": "",
+          "PricingDate": "/Date(1731024000000)/",
+          "PricingReferenceMaterial": "",
+          "RequestedQuantity": "100",
+          "RequestedQuantityUnit": "PC",
+          "RequestedQuantitySAPUnit": "ST",
+          "RequestedQuantityISOUnit": "PCE",
+          "OrderQuantityUnit": "PC",
+          "OrderQuantitySAPUnit": "",
+          "OrderQuantityISOUnit": "",
+          "ConfdDelivQtyInOrderQtyUnit": "100.000",
+          "ItemGrossWeight": "1800.000",
+          "ItemNetWeight": "1620.000",
+          "ItemWeightUnit": "KG",
+          "ItemWeightSAPUnit": "",
+          "ItemWeightISOUnit": "",
+          "ItemVolume": "18.000",
+          "ItemVolumeUnit": "M3",
+          "ItemVolumeSAPUnit": "",
+          "ItemVolumeISOUnit": "",
+          "TransactionCurrency": "EUR",
+          "NetAmount": "0.00",
+          "TaxAmount": "0.00",
+          "CostAmount": "0.00",
+          "Subtotal1Amount": "0.00",
+          "Subtotal2Amount": "0.00",
+          "Subtotal3Amount": "0.00",
+          "Subtotal4Amount": "0.00",
+          "Subtotal5Amount": "0.00",
+          "Subtotal6Amount": "0.00",
+          "MaterialSubstitutionReason": "",
+          "MaterialGroup": "L001",
+          "MaterialPricingGroup": "",
+          "Batch": "",
+          "Plant": "1010",
+          "StorageLocation": "",
+          "DeliveryGroup": "0",
+          "ShippingPoint": "1010",
+          "ShippingType": "",
+          "DeliveryPriority": "2",
+          "IncotermsClassification": "EXW",
+          "IncotermsTransferLocation": "Walldorf",
+          "IncotermsLocation1": "Walldorf",
+          "IncotermsLocation2": "",
+          "ProductTaxClassification1": "1",
+          "ProductTaxClassification2": "",
+          "ProductTaxClassification3": "",
+          "ProductTaxClassification4": "",
+          "ProductTaxClassification5": "",
+          "ProductTaxClassification6": "",
+          "ProductTaxClassification7": "",
+          "ProductTaxClassification8": "",
+          "ProductTaxClassification9": "",
+          "ReferenceSDDocument": "",
+          "ReferenceSDDocumentItem": "0",
+          "CustomerPaymentTerms": "0004",
+          "SalesDocumentRjcnReason": "",
+          "to_Partner": {
+            "__deferred": {
+              "uri": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderItemSimulation(SalesOrder='',SalesOrderItem='10')/to_Partner"
+            }
+          },
+          "to_PricingElement": {
+            "results": [
+              {
+                "__metadata": {
+                  "id": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderItmPrcgElmntSimln(SalesOrder='',SalesOrderItem='10',PricingProcedureStep='0',PricingProcedureCounter='1')",
+                  "uri": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderItmPrcgElmntSimln(SalesOrder='',SalesOrderItem='10',PricingProcedureStep='0',PricingProcedureCounter='1')",
+                  "type": "API_SALES_ORDER_SIMULATION_SRV.A_SalesOrderItmPrcgElmntSimlnType"
+                },
+                "SalesOrder": "",
+                "SalesOrderItem": "10",
+                "PricingProcedureStep": "0",
+                "PricingProcedureCounter": "1",
+                "ConditionType": "",
+                "PriceConditionDeterminationDte": "/Date(1731024000000)/",
+                "ConditionCalculationType": "C",
+                "ConditionBaseValue": "1000.000000000",
+                "ConditionRateValue": "0.000000000",
+                "ConditionCurrency": "EUR",
+                "ConditionQuantity": "1",
+                "ConditionQuantityUnit": "PC",
+                "ConditionQuantitySAPUnit": "ST",
+                "ConditionQuantityISOUnit": "PCE",
+                "ConditionIsForStatistics": false,
+                "ConditionOrigin": "",
+                "IsGroupCondition": "",
+                "ConditionAmount": "0.00",
+                "TransactionCurrency": "EUR",
+                "ConditionInactiveReason": "",
+                "ConditionClass": "",
+                "PricingScaleBasis": "",
+                "ConditionScaleBasisValue": "0.000000000",
+                "ConditionIsManuallyChanged": false,
+                "to_SalesOrder": {
+                  "__deferred": {
+                    "uri": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderItmPrcgElmntSimln(SalesOrder='',SalesOrderItem='10',PricingProcedureStep='0',PricingProcedureCounter='1')/to_SalesOrder"
+                  }
+                },
+                "to_SalesOrderItem": {
+                  "__deferred": {
+                    "uri": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderItmPrcgElmntSimln(SalesOrder='',SalesOrderItem='10',PricingProcedureStep='0',PricingProcedureCounter='1')/to_SalesOrderItem"
+                  }
+                }
+              }
+            ]
+          },
+          "to_SalesOrder": {
+            "__deferred": {
+              "uri": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderItemSimulation(SalesOrder='',SalesOrderItem='10')/to_SalesOrder"
+            }
+          },
+          "to_ScheduleLine": {
+            "results": [
+              {
+                "__metadata": {
+                  "id": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderScheduleLineSimln(SalesOrder='',SalesOrderItem='10',ScheduleLine='1')",
+                  "uri": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderScheduleLineSimln(SalesOrder='',SalesOrderItem='10',ScheduleLine='1')",
+                  "type": "API_SALES_ORDER_SIMULATION_SRV.A_SalesOrderScheduleLineSimlnType"
+                },
+                "SalesOrder": "",
+                "SalesOrderItem": "10",
+                "ScheduleLine": "1",
+                "RequestedDeliveryDate": "/Date(1731024000000)/",
+                "ConfirmedDeliveryDate": null,
+                "OrderQuantityUnit": "PC",
+                "OrderQuantitySAPUnit": "ST",
+                "OrderQuantityISOUnit": "PCE",
+                "ScheduleLineOrderQuantity": "100",
+                "ConfdOrderQtyByMatlAvailCheck": "0",
+                "OpenConfdDelivQtyInOrdQtyUnit": "0",
+                "CorrectedQtyInOrderQtyUnit": "100",
+                "to_SalesOrder": {
+                  "__deferred": {
+                    "uri": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderScheduleLineSimln(SalesOrder='',SalesOrderItem='10',ScheduleLine='1')/to_SalesOrder"
+                  }
+                },
+                "to_SalesOrderItem": {
+                  "__deferred": {
+                    "uri": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderScheduleLineSimln(SalesOrder='',SalesOrderItem='10',ScheduleLine='1')/to_SalesOrderItem"
+                  }
+                }
+              },
+              {
+                "__metadata": {
+                  "id": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderScheduleLineSimln(SalesOrder='',SalesOrderItem='10',ScheduleLine='2')",
+                  "uri": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderScheduleLineSimln(SalesOrder='',SalesOrderItem='10',ScheduleLine='2')",
+                  "type": "API_SALES_ORDER_SIMULATION_SRV.A_SalesOrderScheduleLineSimlnType"
+                },
+                "SalesOrder": "",
+                "SalesOrderItem": "10",
+                "ScheduleLine": "2",
+                "RequestedDeliveryDate": null,
+                "ConfirmedDeliveryDate": "/Date(1733184000000)/",
+                "OrderQuantityUnit": "PC",
+                "OrderQuantitySAPUnit": "ST",
+                "OrderQuantityISOUnit": "PCE",
+                "ScheduleLineOrderQuantity": "0",
+                "ConfdOrderQtyByMatlAvailCheck": "100",
+                "OpenConfdDelivQtyInOrdQtyUnit": "0",
+                "CorrectedQtyInOrderQtyUnit": "0",
+                "to_SalesOrder": {
+                  "__deferred": {
+                    "uri": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderScheduleLineSimln(SalesOrder='',SalesOrderItem='10',ScheduleLine='2')/to_SalesOrder"
+                  }
+                },
+                "to_SalesOrderItem": {
+                  "__deferred": {
+                    "uri": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderScheduleLineSimln(SalesOrder='',SalesOrderItem='10',ScheduleLine='2')/to_SalesOrderItem"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "to_Partner": {
+      "__deferred": {
+        "uri": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderSimulation('')/to_Partner"
+      }
+    },
+    "to_Pricing": {
+      "__deferred": {
+        "uri": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderSimulation('')/to_Pricing"
+      }
+    },
+    "to_PricingElement": {
+      "__deferred": {
+        "uri": "https://my409395-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderSimulation('')/to_PricingElement"
+      }
+    }
+  }
+}
