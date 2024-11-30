@@ -76,9 +76,13 @@ POST {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers(ID='{
 Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
-{}
+{"ignoreWarnings":false,"activateEnvironment":true}
 ### Model Service
 ### Is the Model Service documented at api.sap.com?
+###
+GET {{$dotenv papm_um_endpoint}}/sap/ace/ModelService/$metadata
+Authorization: Bearer {{access_token}}
+###
 GET {{$dotenv papm_um_endpoint}}/sap/ace/ModelService/
 Authorization: Bearer {{access_token}}
 ### Get Environments
@@ -147,6 +151,9 @@ Content-Type: application/json
 {"targetEnvironment_ID":"{{environmentID}}"}
 ###
 GET {{$dotenv papm_um_endpoint}}/ext/
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv papm_um_endpoint}}/ext/$metadata
 Authorization: Bearer {{access_token}}
 ###
 GET {{$dotenv papm_um_endpoint}}/ext/SPCM_Customers
