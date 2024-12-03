@@ -127,6 +127,29 @@ cds.on("bootstrap", async (app) => {
     }
   });
 
+  // You must tell express to handle urlencoded data, using an specific middleware.
+  app.use(
+    express.urlencoded({
+      extended: true,
+    })
+  );
+
+  // Dummy OAuth token endpoint that can be configured in a BTP destination
+  // to return the client_secret an access_token. That way a CAP application
+  // can use a static Bearer Token to authenticate to an external API.
+  await app.post("/oauth/token", function (req, res) {
+    // Read application/x-www-form-urlencoded parameter client_secret
+    const clientSecret = req.body.client_secret;
+    const result = {
+      access_token: clientSecret,
+      token_type: "bearer",
+      expires_in: 43199,
+      scope: "",
+      jti: "",
+    };
+    res.json(result);
+  });
+
   // app endpoint with authorization check does ony work with @sap/xssec > 3.0.0
   await app.get("/api/getData", function (req, res) {
     LOG.info("===> Endpoint has been reached. Now checking authorization");
