@@ -22,6 +22,7 @@ Authorization: Bearer {{access_token}}
 ###
 # @name getContainers
 GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers
+  ?$count=true
 Authorization: Bearer {{access_token}}
 ###
 @containerID={{getContainers.response.body.$.value[0].ID}}
