@@ -107,7 +107,13 @@ Authorization: Bearer {{access_token}}
 GET {{$dotenv papm_um_endpoint}}/sap/ace/ProcessService/RuntimeEnvironments
   ?$filter=environment eq '{{container}}'
 Authorization: Bearer {{access_token}}
-
+###
+GET {{$dotenv papm_um_endpoint}}/sap/ace/ProcessService/EventLogs
+  ?$top=10
+  &$count=true
+  &$filter=event eq 'importEnvironment' or event eq 'restoreDemoData'
+  &$select=environment,event,modifiedAt,state_code,isFinished,inBackground
+Authorization: Bearer {{access_token}}
 ### Upload Archive from File
 ### Download the Demo Data (SAP S-User required) from:
 ### https://help.sap.com/docs/SAP_PROFITABILITY_PERFORMANCE_MANAGEMENT_CLOUD/d3a96a3345624f038a7d3ba442e796e7/81ceb91f42764336900cf889f8633315.html
