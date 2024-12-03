@@ -13,15 +13,14 @@ grant_type=client_credentials
 
 ### Get Access Token for Cloud Foundry using Password Grant
 # @name requestAccessTokenHANA
-POST {{$dotenv tokenendpoint}}/oauth/token
+POST {{$dotenv papm_um_tokenendpoint}}/oauth/token
 Accept: application/json;charset=utf8
-Authorization: Basic {{$dotenv clientid}}:{{$dotenv clientsecret}}
+Authorization: Basic {{$dotenv papm_um_clientid}}:{{$dotenv papm_um_clientsecret}}
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=password
 &username={{$dotenv username}}
 &password={{$dotenv password}}
-&client_id={{$dotenv clientid}}
 &response_type=token
 #&login_hint={"origin":"sap.custom"}
 ### Fill Variables from Response
@@ -40,17 +39,19 @@ grant_type=client_credentials
 
 ### Fill Variables from Response
 @destination_access_token = {{requestDestinationAccessToken.response.body.$.access_token}}
-
 ### Get Access token from Destination Service using the OAuth2SAMLBearerAssertion Destination
 # According to https://api.sap.com/api/SAP_CP_CF_Connectivity_Destination/path/get_destinations__name_
 ### Read details of one destination
 # @name requestProviderDestination
-GET {{$dotenv dest_uri}}/destination-configuration/v1/destinations/papm
+GET {{$dotenv dest_uri}}/destination-configuration/v1/destinations/PAPMUM
 X-user-token: {{user_access_token}}
 Authorization: Bearer {{destination_access_token}}
 ### Fill Variables from Response
-@access_token = {{requestProviderDestination.response.body.$.authTokens[0].value}}
-
+@access_token={{requestProviderDestination.response.body.$.authTokens[0].value}}
+###
+GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers
+Authorization: Bearer {{access_token}}
+###
 # @name requestEntities
 GET {{$dotenv papm_endpoint}}/sap/opu/odata4/NXI/P1_PROCESSING/
 Authorization: Bearer {{access_token}}
