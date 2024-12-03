@@ -49,8 +49,11 @@ Authorization: Bearer {{destination_access_token}}
 ### Fill Variables from Response
 @access_token={{requestProviderDestination.response.body.$.authTokens[0].value}}
 ###
-GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers
-Authorization: Bearer {{access_token}}
+GET {{$dotenv papm_um_endpoint}}/ace/sap/ace/AdministrationService/Containers
+  ?$count=true
+x-approuter-authorization: Bearer {{access_token}}
+#Authorization: Bearer {{access_token}}
+###
 ###
 # @name requestEntities
 GET {{$dotenv papm_endpoint}}/sap/opu/odata4/NXI/P1_PROCESSING/

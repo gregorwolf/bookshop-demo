@@ -25,9 +25,9 @@ GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers
   ?$count=true
 Authorization: Bearer {{access_token}}
 ###
-@containerID={{getContainers.response.body.$.value[0].ID}}
+@containerIDfromList={{getContainers.response.body.value[0].ID}}
 ###
-GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers(ID='{{containerID}}',IsActiveEntity=true)/file
+GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers(ID='{{containerIDfromList}}',IsActiveEntity=true)/file
 Authorization: Bearer {{access_token}}
 ###
 ### Create Container from File
