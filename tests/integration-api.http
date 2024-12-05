@@ -13,8 +13,25 @@ GET {{$dotenv integration_api_url}}/api/v1/
 Authorization: Bearer {{access_token}}
 Accept: application/json
 ###
+GET {{$dotenv integration_api_url}}/api/v1/CustomTagConfigurations('CustomTags')
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+GET {{$dotenv integration_api_url}}/api/v1/ServiceEndpoints
+  ?$expand=EntryPoints
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+GET {{$dotenv integration_api_url}}/api/v1/ArtifactReferences
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
 # @name getIntegrationPackages
 GET {{$dotenv integration_api_url}}/api/v1/IntegrationPackages
+# Not Implemented
+#  ?$expand=CustomTags
 Authorization: Bearer {{access_token}}
 Accept: application/json
 ###
@@ -27,7 +44,19 @@ Accept: application/json
 ###
 @Id={{getArtifacts.response.body.d.results[0].Id}}
 @Version={{getArtifacts.response.body.d.results[0].Version}}
+@Resources={{getArtifacts.response.body.d.results[0].Resources.__deferred.uri}}
+@Configurations={{getArtifacts.response.body.d.results[0].Configurations.__deferred.uri}}
 @designGuidelineExecutionResults={{getArtifacts.response.body.d.results[0].DesignGuidelineExecutionResults.__deferred.uri}}
+###
+# @name getResources
+GET {{Resources}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+# @name getConfigurations
+GET {{Configurations}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
 ###
 # @name getDesignGuidelineExecutionResults
 GET {{designGuidelineExecutionResults}}
