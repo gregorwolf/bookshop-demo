@@ -26,6 +26,7 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product
   ?$top=10
   &$skip=9
+  &$filter=Product eq 'AVC_E2E_L_ARM_30'
 #  &$filter=ProductType eq 'KMAT'
   &$expand=to_Description,to_Plant,to_ProductSales
   &$inlinecount=allpages

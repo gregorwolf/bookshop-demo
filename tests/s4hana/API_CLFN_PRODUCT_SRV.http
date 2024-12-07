@@ -1,0 +1,31 @@
+### Cloud: https://api.sap.com/api/API_CLFN_PRODUCT_SRV/overview
+### OnPrem: https://api.sap.com/api/OP_API_CLFN_PRODUCT_SRV/overview
+### api.sap.com Sandbox
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/
+APIKey: {{$dotenv apikey}}
+Accept: application/json
+###
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/$metadata
+APIKey: {{$dotenv apikey}}
+###
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/A_ProductClass
+  ?$top=10
+  &$inlinecount=allpages
+  &$expand=to_Characteristics,to_Characteristics/to_Valuation,to_ClassDetails
+APIKey: {{$dotenv apikey}}
+Accept: application/json
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+# @name readProducts
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/A_ProductClass
+  ?$top=10
+  &$inlinecount=allpages
+  &$expand=to_Characteristics,to_Characteristics/to_Valuation,to_ClassDetails
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
