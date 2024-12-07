@@ -1,0 +1,57 @@
+### Request Access Token
+# @name requestAccessToken
+POST {{$dotenv hana_cloud_api_oauth_url}}/oauth/token
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{$dotenv hana_cloud_api_client_id}}
+&client_secret={{$dotenv hana_cloud_api_client_secret}}
+&response_type=token
+&grant_type=client_credentials
+### Fill Variables from Response
+@access_token={{requestAccessToken.response.body.$.access_token}}
+### Read Service Instances
+GET {{$dotenv hana_cloud_api_url}}/inventory/v2/serviceInstances
+Authorization: Bearer {{access_token}}
+### Read Service Instance
+GET {{$dotenv hana_cloud_api_url}}/inventory/v2/serviceInstances/
+Authorization: Bearer {{access_token}}
+### Read Service Instance Mappings
+GET {{$dotenv hana_cloud_api_url}}/inventory/v2/serviceInstances/{{$dotenv hana_cloud_api_instance}}/instanceMappings
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv hana_cloud_api_url}}/metrics/v1/definitions
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv hana_cloud_api_url}}/scim/v2/serviceInstances/{{$dotenv hana_cloud_api_instance}}/resourceType/hdb/v2/Users
+#  ?filter=userName eq 'IPS'
+# invalidFilter: error compiling filter
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv hana_cloud_api_url}}/scim/v2/serviceInstances/{{$dotenv hana_cloud_api_instance}}/resourceType/hdb/v2/Users/IPS
+Authorization: Bearer {{access_token}}
+# getting user with specified roles failed with error Retrieving UserInfo for  failed: -10427: Conversion of parameter/column (1) from data type UTF8 to BIGINT failed (invalid number: not a valid number string 'IPS')
+###
+POST {{$dotenv hana_cloud_api_url}}/scim/v2/serviceInstances/{{$dotenv hana_cloud_api_instance}}/resourceType/hdb/v2/Users
+Authorization: Bearer {{access_token}}
+
+< ./hana-cloud-api-create-user-ok.json
+###
+POST {{$dotenv hana_cloud_api_url}}/scim/v2/serviceInstances/{{$dotenv hana_cloud_api_instance}}/resourceType/hdb/v2/Users
+Authorization: Bearer {{access_token}}
+
+< ./hana-cloud-api-create-user-ips-default-mapping.json
+# badRequest: Need all three Parameters providerName, userId(hanaDbUserName), authenticationType, 
+###
+DELETE {{$dotenv hana_cloud_api_url}}/scim/v2/serviceInstances/{{$dotenv hana_cloud_api_instance}}/resourceType/hdb/v2/Users/GWOLF
+Authorization: Bearer {{access_token}}
+# getting user with specified roles failed with error Retrieving UserInfo for  failed: -10427: Conversion of parameter/column (1) from data type UTF8 to BIGINT failed (invalid number: not a valid number string 'GWOLF')
+###
+GET {{$dotenv hana_cloud_api_url}}/scim/v2/serviceInstances/{{$dotenv hana_cloud_api_instance}}/resourceType/hdb/v2/Groups
+  ?count=100
+  # invalidFilter: error compiling filter
+  #&filter=displayName eq 'SECURESTORE_ACCESS_ROLE'
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv hana_cloud_api_url}}/scim/v2/serviceInstances/{{$dotenv hana_cloud_api_instance}}/resourceType/hdb/v2/Groups/131078
+Authorization: Bearer {{access_token}}

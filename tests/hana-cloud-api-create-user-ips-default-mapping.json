@@ -1,0 +1,18 @@
+{
+  "active": true,
+  "schemas": [
+    "urn:ietf:params:scim:schemas:core:2.0:User",
+    "urn:ietf:params:scim:schemas:extension:sap:2.0:User",
+    "urn:ietf:params:scim:schemas:extension:sap.hana.db:2.0:User"
+  ],
+  "urn:ietf:params:scim:schemas:extension:sap.hana.db:2.0:User": {
+    "authenticationDetails": {
+      "authenticationType": "jwt",
+      "providerName": "XSUAA_JWT_PROVIDER_CSW_DEV_AZURE_AUTHENTICATION_EU20_HANA_ONDEMAND_COM_SAP_DEFAULT_D3812A8D_54BB_4995_A452_FDCFFED2FF81"
+    }
+  },
+  "urn:ietf:params:scim:schemas:extension:sap:2.0:User": {
+    "userUuid": "f18b5a6e-6173-4562-991f-850cf3273f2d"
+  },
+  "userName": "GWOLF"
+}

@@ -1,0 +1,88 @@
+{
+  "user": {
+    "mappings": [
+      {
+        "targetPath": "$.id",
+        "sourceVariable": "entityIdTargetSystem"
+      },
+      {
+        "targetPath": "$.schemas",
+        "constant": [
+          "urn:ietf:params:scim:schemas:core:2.0:User",
+          "urn:ietf:params:scim:schemas:extension:sap:2.0:User",
+          "urn:ietf:params:scim:schemas:extension:sap.hana.db:2.0:User"
+        ]
+      },
+      {
+        "sourcePath": "$.userName",
+        "targetPath": "$.userName"
+      },
+      {
+        "sourcePath": "$.active",
+        "targetPath": "$.active",
+        "optional": true
+      },
+      {
+        "sourcePath": "$['urn:ietf:params:scim:schemas:extension:sap:2.0:User']['userUuid']",
+        "targetPath": "$['urn:ietf:params:scim:schemas:extension:sap:2.0:User']['userUuid']",
+        "optional": true
+      },
+      {
+        "sourcePath": "$.userName",
+        "targetPath": "$['urn:ietf:params:scim:schemas:extension:sap:2.0:User']['userId']",
+        "optional": true
+      },
+      {
+        "targetPath": "$['urn:ietf:params:scim:schemas:extension:sap.hana.db:2.0:User']['authenticationDetails']['providerName']",
+        "condition": "'%hana.cloud.db.providerName%' !== 'null'",
+        "constant": "%hana.cloud.db.providerName%"
+      },
+      {
+        "targetPath": "$['urn:ietf:params:scim:schemas:extension:sap.hana.db:2.0:User']['authenticationDetails']['authenticationType']",
+        "condition": "'%hana.cloud.db.authenticationType%' !== 'null'",
+        "constant": "%hana.cloud.db.authenticationType%"
+      },
+      {
+        "targetPath": "$['urn:ietf:params:scim:schemas:extension:sap.hana.db:2.0:User']['userCategory']",
+        "condition": "'%hana.cloud.db.userCategory%' !== 'null'",
+        "constant": "%hana.cloud.db.userCategory%"
+      }
+    ]
+  },
+  "group": {
+    "condition": "('%hana.cloud.db.group.prefix%' === 'null') || ($.displayName =~ /%hana.cloud.db.group.prefix%.*/)",
+    "mappings": [
+      {
+        "targetPath": "$.id",
+        "sourceVariable": "entityIdTargetSystem"
+      },
+      {
+        "targetPath": "$.schemas[0]",
+        "constant": "urn:ietf:params:scim:schemas:core:2.0:Group"
+      },
+      {
+        "sourcePath": "$.displayName",
+        "targetPath": "$.displayName",
+        "functions": [
+          {
+            "function": "replaceFirstString",
+            "condition": "('%hana.cloud.db.group.prefix%' !== 'null') && (@ =~ /%hana.cloud.db.group.prefix%.*/)",
+            "regex": "%hana.cloud.db.group.prefix%",
+            "replacement": ""
+          }
+        ]
+      },
+      {
+        "sourcePath": "$.members[*].value",
+        "targetPath": "$.members[?(@.value)]",
+        "optional": true,
+        "preserveArrayWithSingleElement": true,
+        "functions": [
+          {
+            "function": "resolveEntityIds"
+          }
+        ]
+      }
+    ]
+  }
+}
