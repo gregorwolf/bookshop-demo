@@ -11,18 +11,46 @@ grant_type=client_credentials
 
 ###
 # @name getUsers
-GET {{$dotenv datasphere_endpoint}}/api/v1/scim/Users?count=1
+GET {{$dotenv datasphere_endpoint}}/api/v1/scim/Users
+  ?count=5
+#  &filter=userName eq 'GWOLF'
 Authorization: Bearer {{access_token}}
 X-Sap-Sac-Custom-Auth: true
 x-csrf-token: fetch
 ### Read Token to Variable
 @CSRF={{getUsers.response.headers.x-csrf-token}}
-@ID={{getUsers.response.body.Resources[0].userName}}
+#@ID={{getUsers.response.body.Resources[0].userName}}
+@ID=GWOLF
+#@ID=76201230-a8da-44a2-a0e0-962bf06e60fe
 ###
 # @name getUser
 GET {{$dotenv datasphere_endpoint}}/api/v1/scim/Users/{{ID}}
 Authorization: Bearer {{access_token}}
 X-Sap-Sac-Custom-Auth: true
+###
+PUT {{$dotenv datasphere_endpoint}}/api/v1/scim2/Users/76201230-a8da-44a2-a0e0-962bf06e60fe 
+Authorization: Bearer {{access_token}}
+X-Sap-Sac-Custom-Auth: true
+x-csrf-token: {{CSRF}}
+Content-Type: application/json
+
+{
+  "active": true,
+  "displayName": "Gregor Wolf",
+  "emails": [{ "primary": true, "value": "{{$dotenv datasphere_email}}" }],
+  "id": "76201230-a8da-44a2-a0e0-962bf06e60fe",
+  "name": { "familyName": "Wolf", "givenName": "Gregor" },
+  "schemas": [
+    "urn:ietf:params:scim:schemas:core:2.0:User",
+    "urn:sap:params:scim:schemas:extension:sac:2.0:user-custom-parameters",
+    "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
+  ],
+  "urn:sap:params:scim:schemas:extension:sac:2.0:user-custom-parameters": {
+    "idpUserId": "{{$dotenv datasphere_email}}"
+  },
+  "userName": "GWOLF"
+}
+
 ### German
 PUT {{$dotenv datasphere_endpoint}}/api/v1/scim/Users/{{ID}}
 Authorization: Bearer {{access_token}}
