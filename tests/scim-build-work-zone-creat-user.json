@@ -1,0 +1,10 @@
+{
+  "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
+  "emails": [{ "primary": true, "value": "hans@computerservice-wolf.com" }],
+  "externalId": "a78ff364-02dd-4007-90d0-cfec1ad40f81",
+  "groups": [],
+  "urn:ietf:params:scim:schemas:extension:2.0:mapping": {
+    "providerId": "saas_approuter"
+  },
+  "userName": "HANS"
+}

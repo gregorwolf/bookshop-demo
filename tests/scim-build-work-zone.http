@@ -1,0 +1,27 @@
+### Request Access Token
+# @name requestAccessToken
+POST {{$dotenv scim_wz_auth_url}}/oauth/token
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{$dotenv scim_wz_clientid}}
+&client_secret={{$dotenv scim_wz_clientsecret}}
+&grant_type=client_credentials
+&response_type=token
+
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+###
+POST {{$dotenv scim_wz_endpoint}}/roleMapping/scim/v1/Users
+Authorization: Bearer {{access_token}}
+Content-Type: application/scim+json
+
+< ./scim-build-work-zone-creat-user.json
+
+###
+DELETE {{$dotenv scim_wz_endpoint}}/roleMapping/scim/v1/Groups/5911f4bc-7f6a-4469-9a56-1fc6ae76c093
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv scim_wz_endpoint}}/roleMapping/scim/v1/Groups
+Authorization: Bearer {{access_token}}
