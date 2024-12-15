@@ -18,8 +18,11 @@ grant_type=password
 @user_access_token = {{requestUserAccessToken.response.body.$.access_token}}
 
 ### Read Metadata OData V4
-GET {{$dotenv cap_backend_url}}/service/UserService/$metadata
+GET {{$dotenv cap_backend_url}}/odata/v4/user/$metadata
 Authorization: Bearer {{user_access_token}}
 ###
-GET {{$dotenv cap_backend_url}}/service/UserService/getUsers()
+GET {{$dotenv cap_backend_url}}/odata/v4/user/getUsers()
+Authorization: Bearer {{user_access_token}}
+###
+GET {{$dotenv cap_backend_url}}/odata/v4/user/Users
 Authorization: Bearer {{user_access_token}}
