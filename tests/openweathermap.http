@@ -1,0 +1,29 @@
+###
+# @name stations
+GET http://api.openweathermap.org/data/3.0/stations
+    ?appid={{$dotenv openweathermap_appid}}
+###
+@stationId={{stations.response.body.$[0].id}}
+###
+GET http://api.openweathermap.org/data/3.0/stations/{{stationId}}
+    ?appid={{$dotenv openweathermap_appid}}
+###
+GET http://api.openweathermap.org/data/3.0/measurements
+    ?station_id={{stationId}}
+    &type=h
+    &limit=10
+    &from=1734242917
+    &to=1734250117
+    &appid={{$dotenv openweathermap_appid}}
+###
+POST http://api.openweathermap.org/data/3.0/stations
+    ?appid={{$dotenv openweathermap_appid}}
+Content-Type: application/json
+
+{
+  "external_id": "Wolfsgarten",
+  "name": "Wolfsgarten",
+  "latitude": 48.0597486,
+  "longitude": 12.5646753,
+  "altitude": 482
+}
