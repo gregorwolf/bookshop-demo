@@ -1,0 +1,25 @@
+### BTP ABAP Environment
+### https://help.sap.com/docs/btp/sap-business-technology-platform/inbound-service-business-user
+POST https://29ef5731-7c76-4597-b55c-6d1bda45329f.abap.eu20.hana.ondemand.com/sap/bc/srt/scs_ext/sap/managebusinessuserin
+Authorization: Basic {{$dotenv btp_abap_basic_auth}}:{{$dotenv btp_abap_basic_password}}
+Content-Type: text/xml
+Accept: text/xml
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:aba="http://sap.com/xi/ABA">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <aba:BusinessUserBundleMaintainRequest_sync>
+        <BusinessUser actionCode="02" personalInformationListCompleteTransmissionIndicator="false" userListCompleteTransmissionIndicator="false" userAssignmentListCompleteTransmissionIndicator="false" workplaceInformationListCompleteTransmissionIndicator="false">
+          <PersonID>9980000000</PersonID>
+          <PersonUUID>EA268250-23DD-1EDF-B0DC-D1549E31440C</PersonUUID>
+          <BusinessPartnerRoleCode>BUP003</BusinessPartnerRoleCode>
+          <MarkedForArchivingIndicator>false</MarkedForArchivingIndicator>
+          <PersonalInformation actionCode="02">
+            <FirstName>Gregor</FirstName>
+            <LastName>Wolf</LastName>
+            <PersonFullName>Gregor Wolf</PersonFullName>
+          </PersonalInformation>
+        </BusinessUser>
+      </aba:BusinessUserBundleMaintainRequest_sync>
+   </soapenv:Body>
+</soapenv:Envelope>

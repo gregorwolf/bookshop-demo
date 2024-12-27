@@ -1,0 +1,32 @@
+### BTP ABAP Environment
+### https://help.sap.com/docs/btp/sap-business-technology-platform/inbound-service-business-user-read
+POST https://29ef5731-7c76-4597-b55c-6d1bda45329f.abap.eu20.hana.ondemand.com/sap/bc/srt/scs_ext/sap/querybusinessuserin
+Authorization: Basic {{$dotenv btp_abap_basic_auth}}:{{$dotenv btp_abap_basic_password}}
+Content-Type: text/xml
+Accept: text/xml
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:aba="http://sap.com/xi/ABA">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <aba:BusinessUserSimpleByElementsQuery_sync>
+         <BusinessUser>
+            <UserNameInterval>
+               <IntervalBoundaryTypeCode>1</IntervalBoundaryTypeCode>
+               <!--Optional:-->
+               <LowerBoundaryUserName>HANS</LowerBoundaryUserName>
+               <!--Optional:-->
+            </UserNameInterval>
+            <BusinessPartnerRoleCodeInterval>
+               <IntervalBoundaryTypeCode>1</IntervalBoundaryTypeCode>
+               <!--Optional:-->
+               <LowerBoundaryBusinessPartnerRoleCode>BUP003</LowerBoundaryBusinessPartnerRoleCode>
+            </BusinessPartnerRoleCodeInterval>
+         </BusinessUser>
+         <QueryProcessingConditions>
+            <!--Optional:-->
+            <QueryHitsMaximumNumberValue>1</QueryHitsMaximumNumberValue>
+            <QueryHitsUnlimitedIndicator>false</QueryHitsUnlimitedIndicator>
+         </QueryProcessingConditions>
+      </aba:BusinessUserSimpleByElementsQuery_sync>
+   </soapenv:Body>
+</soapenv:Envelope>
