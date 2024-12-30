@@ -1,0 +1,44 @@
+### Cloud: https://api.sap.com/api/API_CLOUD_PRINT_PULL_SRV/overview
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLOUD_PRINT_PULL_SRV/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLOUD_PRINT_PULL_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLOUD_PRINT_PULL_SRV/Get_PrintQueuesOfUser
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLOUD_PRINT_PULL_SRV/Get_PrintQueuesOfUserExt
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLOUD_PRINT_PULL_SRV/Get_NumberOfQItemsExt
+  ?Qname='DEFAULT'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+# @name RetrieveNextQueueItem
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLOUD_PRINT_PULL_SRV/RetrieveNextQueueItem
+  ?Qname='DEFAULT'
+  &Language='EN'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+@itemId={{RetrieveNextQueueItem.response.body.d.item_id}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLOUD_PRINT_PULL_SRV/Get_PrintOptions
+  ?qname='DEFAULT'
+  &item_id='{{itemId}}'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLOUD_PRINT_PULL_SRV/Get_QItem_Document
+  ?qname='DEFAULT'
+  &item_id='{{itemId}}'
+  &attachments=false
+  &main_doc=false
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
