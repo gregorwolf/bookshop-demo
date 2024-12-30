@@ -1,9 +1,6 @@
 ### Cloud: https://api.sap.com/api/API_CV_ATTACHMENT_SRV/overview
 ### OnPrem: 
 ### S/4HANA Original
-# BUS1001006 = Material
-@BusinessObjectTypeName=BUS1001006
-@material=FG011
 ### metadata
 GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/
 Accept: application/json
@@ -52,13 +49,11 @@ Accept: application/json
 APIKey: {{$dotenv apikey}}
 ###
 GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAttachmentCount
-  ?BusinessObjectTypeName='{{BusinessObjectTypeName}}'
-  &LinkedSAPObjectKey='{{material}}'
+  ?BusinessObjectTypeName='{{$dotenv BusinessObjectTypeName}}'
+  &LinkedSAPObjectKey='{{$dotenv LinkedSAPObjectKey}}'
   &SemanticObject=''
 Accept: application/json
 APIKey: {{$dotenv apikey}}
-
-
 ### Get CSRF Token
 # @name getCSRF
 HEAD https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV
@@ -74,16 +69,16 @@ Accept-Language: en
 Accept: application/json
 Content-Type: image/png
 Slug: Test.png
-BusinessObjectTypeName: {{BusinessObjectTypeName}}
-LinkedSAPObjectKey: {{material}}
+BusinessObjectTypeName: {{$dotenv BusinessObjectTypeName}}
+LinkedSAPObjectKey: {{$dotenv LinkedSAPObjectKey}}
 
 < ./Test.png
 
 ### GetAllOriginals
 # @name getAllOriginals
 GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAllOriginals
-  ?BusinessObjectTypeName='{{BusinessObjectTypeName}}'
-  &LinkedSAPObjectKey='{{material}}'
+  ?BusinessObjectTypeName='{{$dotenv BusinessObjectTypeName}}'
+  &LinkedSAPObjectKey='{{$dotenv LinkedSAPObjectKey}}'
   &SemanticObject=''
 Accept: application/json
 Accept-Language: en
@@ -117,16 +112,16 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/$metadata
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAttachmentCount
-  ?BusinessObjectTypeName='{{BusinessObjectTypeName}}'
-  &LinkedSAPObjectKey='{{material}}'
+  ?BusinessObjectTypeName='{{$dotenv BusinessObjectTypeName}}'
+  &LinkedSAPObjectKey='{{$dotenv LinkedSAPObjectKey}}'
   &SemanticObject=''
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ### GetAllOriginals
 # @name getAllOriginals
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAllOriginals
-  ?BusinessObjectTypeName='{{BusinessObjectTypeName}}'
-  &LinkedSAPObjectKey='{{material}}'
+  ?BusinessObjectTypeName='{{$dotenv BusinessObjectTypeName}}'
+  &LinkedSAPObjectKey='{{$dotenv LinkedSAPObjectKey}}'
   &SemanticObject=''
 Accept: application/json
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}

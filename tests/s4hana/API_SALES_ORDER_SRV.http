@@ -24,8 +24,9 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder
   ?$top=10
 #  &$skip=9
+  &$filter=SoldToParty eq '10100003'
   &$orderby=SalesOrder desc
-  &$expand=to_Item,to_Item/to_ScheduleLine
+  &$expand=to_Item,to_Item/to_ScheduleLine,to_Item/to_SubsequentProcFlowDocItem,to_BillingPlan,to_SubsequentProcFlowDoc,to_PrecedingProcFlowDoc,to_RelatedObject,to_PaymentPlanItemDetails
   &$inlinecount=allpages
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json

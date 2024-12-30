@@ -1,0 +1,57 @@
+### Cloud: https://api.sap.com/api/API_OUTBOUND_DELIVERY_SRV_0002/overview
+### OnPrem: 
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/A_OutbDeliveryHeader
+  ?$top=10
+  &$expand=to_DeliveryDocumentItem,to_DeliveryDocumentItem/to_DocumentFlow
+  &$orderby=DeliveryDocument desc
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/A_OutbDeliveryHeader('{{$dotenv DeliveryDocument}}')
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### Get CSRF Token
+# @name getCSRF
+HEAD {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/A_OutbDeliveryHeader
+X-CSRF-Token: Fetch
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Read Token to Variable
+@CSRF={{getCSRF.response.headers.x-csrf-token}}
+###
+# @name createSalesOrder
+POST {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/A_OutbDeliveryHeader
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+{
+  "to_DeliveryDocumentItem" : {
+    "results": [
+     {
+        "ReferenceSDDocument": "{{$dotenv SalesOrder}}"
+      }
+    ]
+  }
+}
+###
+POST {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/PickAllItems?DeliveryDocument='{{$dotenv DeliveryDocument}}' 
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+If-Match: W/"'0001'"
+###
+POST {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/PostGoodsIssue?DeliveryDocument='{{$dotenv DeliveryDocument}}' 
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+If-Match: W/"'0002'"
