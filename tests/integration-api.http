@@ -80,7 +80,7 @@ GET {{$dotenv integration_api_url}}/api/v1/MessageProcessingLogs
   ?$top=10
   &$inlinecount=allpages
   &$orderby=LogStart desc
-  &$filter=Status eq 'FAILED' and LogStart gt datetime'2024-11-28T00:00' and LogStart lt datetime'2024-11-29T00:00'
+  &$filter=Status eq 'FAILED' and LogStart gt datetime'2025-01-01T00:00' and LogStart lt datetime'2025-01-31T00:00'
 # and IntegrationFlowName eq 'Replicate_Business_Partner_Relationships_from_SAP_S4HANA_Cloud_to_SAP_Field_Service_Management'
 Authorization: Bearer {{access_token}}
 Accept: application/json
