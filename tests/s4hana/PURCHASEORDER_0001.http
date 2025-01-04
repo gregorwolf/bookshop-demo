@@ -11,6 +11,7 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/purchaseorder/0001/PurchaseOrder
   ?$top=1
   &$orderby=PurchaseOrder desc
+  &$filter=PurchaseOrder eq '4500000002'
   &$expand=_PurchaseOrderItem($expand=_DeliveryAddress(),_PurchaseOrder(),_PurchaseOrderInvoicingPlan(),_PurchaseOrderItemNote(),_PurchaseOrderScheduleLineTP(),_PurOrdAccountAssignment(),_PurOrdPricingElement()),_PurchaseOrderNote($expand=*),_PurchaseOrderPartner($expand=*),_SupplierAddress($expand=*)
   #_PurchaseOrderItem,_PurchaseOrderPartner,_SupplierAddress,_PurchaseOrderNote
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
@@ -22,83 +23,19 @@ X-CSRF-Token: Fetch
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ### Read Token to Variable
 @CSRF={{getCSRF.response.headers.x-csrf-token}}
-###
+### Create Purchase Order for Material NL001
 POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/purchaseorder/0001/PurchaseOrder
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 X-CSRF-Token: {{CSRF}}
 Content-Type: application/json
 Accept: application/json
 
-{
-    "PurchaseOrderType": "NB",
-    "PurchasingDocumentOrigin": "9",
-    "PurchaseOrderDate": "2024-11-06",
-    "Language": "DE",
-    "PurgReasonForDocCancellation": "0",
-    "CompanyCode": "1010",
-    "PurchasingOrganization": "1010",
-    "PurchasingGroup": "001",
-    "Supplier": "10300001",
-    "InvoicingParty": "10300001",
-    "ItemNumberIntervalForSubItems": "1",
-    "PaymentTerms": "0004",
-    "PricingDocument": "1000000000",
-    "PricingProcedure": "A10001",
-    "DocumentCurrency": "USD",
-    "ExchangeRate": -1.23794,
-    "TaxReturnCountry": "DE",
-    "VATRegistrationCountry": "DE",
-    "_PurchaseOrderItem": [
-        {
-            "PurchaseOrderItem": "10",
-            "PurchaseOrderCategory": "F",
-            "DocumentCurrency": "USD",
-            "MaterialGroup": "YBMM01",
-            "Material": "NL001",
-            "MaterialType": "NLAG",
-            "ManufacturerMaterial": "NL001",
-            "PurchaseOrderItemText": "screws",
-            "ProductTypeCode": "1",
-            "CompanyCode": "1010",
-            "Plant": "1010",
-            "PurchaseOrderQuantityUnit": "PC",
-            "OrderItemQtyToBaseQtyNmrtr": 1,
-            "OrderItemQtyToBaseQtyDnmntr": 1,
-            "NetPriceQuantity": 1000,
-            "IsCompletelyDelivered": true,
-            "GoodsReceiptIsExpected": true,
-            "InvoiceIsExpected": true,
-            "ConsumptionPosting": "V",
-            "BaseUnit": "PC",
-            "OrderPriceUnit": "PC",
-            "PriceIsToBePrinted": true,
-            "AccountAssignmentCategory": "C",
-            "NetAmount": 400.00,
-            "GrossAmount": 400.00,
-            "EffectiveAmount": 476.00,
-            "Subtotal3Amount": 476.00,
-            "OrderQuantity": 40000,
-            "NetPriceAmount": 10.00,
-            "OrderPriceUnitToOrderUnitNmrtr": 1,
-            "OrdPriceUnitToOrderUnitDnmntr": 1,
-            "TaxCode": "V1",
-            "TaxDeterminationDate": "2024-11-06",
-            "PurgDocPriceDate": "2024-11-06",
-            "_PurOrdAccountAssignment": [
-            {
-              "AccountAssignmentNumber": "1",
-              "OrderQuantityUnit": "PC",
-              "Quantity": 1000,
-              "DocumentCurrency": "USD",
-              "GLAccount": "12540000",
-              "SalesOrder": "640",
-              "SalesOrderItem": "10",
-              "ControllingArea": "A000",
-              "ValidityDate": "2024-11-06",
-              "ChartOfAccounts": "YCOA",
-              "CompanyCode": "1010"
-            }
-          ]
-        }
-    ]
-}
+< ./PURCHASEORDER_0001-NL001.json
+### Create Purchase Order with two items
+POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/purchaseorder/0001/PurchaseOrder
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+Accept: application/json
+
+< ./PURCHASEORDER_0001-two-items.json

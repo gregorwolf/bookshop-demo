@@ -1,0 +1,61 @@
+{
+  "PurchaseOrderType": "NB",
+  "PurchasingDocumentOrigin": "9",
+  "PurchaseOrderDate": "2025-01-06",
+  "Language": "DE",
+  "PurgReasonForDocCancellation": "0",
+  "CompanyCode": "1010",
+  "PurchasingOrganization": "1010",
+  "PurchasingGroup": "001",
+  "Supplier": "10300001",
+  "InvoicingParty": "10300001",
+  "ItemNumberIntervalForSubItems": "1",
+  "PaymentTerms": "0004",
+  "PricingDocument": "1000000000",
+  "PricingProcedure": "A10001",
+  "DocumentCurrency": "EUR",
+  "TaxReturnCountry": "DE",
+  "VATRegistrationCountry": "DE",
+  "_PurchaseOrderItem": [
+    {
+      "PurchaseOrderItem": "10",
+      "PurchaseOrderCategory": "F",
+      "Plant": "1010",
+      "PurchaseOrderQuantityUnit": "PC",
+      "DocumentCurrency": "EUR",
+      "Material": "NSGC_005",
+      "OrderQuantity": 10,
+      "AccountAssignmentCategory": "K",
+      "_PurOrdAccountAssignment": [
+        {
+          "AccountAssignmentNumber": "1",
+          "CostCenter": "10101101",
+          "ControllingArea": "A000",
+          "ProfitCenter": "YB600",
+          "FunctionalArea": "YB40",
+          "ChartOfAccounts": "YCOA"
+        }
+      ]
+    },
+    {
+      "PurchaseOrderItem": "20",
+      "PurchaseOrderCategory": "F",
+      "Plant": "1010",
+      "PurchaseOrderQuantityUnit": "PC",
+      "DocumentCurrency": "EUR",
+      "Material": "NSGC_015",
+      "OrderQuantity": 10,
+      "AccountAssignmentCategory": "K",
+      "_PurOrdAccountAssignment": [
+        {
+          "AccountAssignmentNumber": "1",
+          "CostCenter": "10101101",
+          "ControllingArea": "A000",
+          "ProfitCenter": "YB600",
+          "FunctionalArea": "YB40",
+          "ChartOfAccounts": "YCOA"
+        }
+      ]
+    }
+  ]
+}
