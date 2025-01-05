@@ -33,19 +33,6 @@ Content-Type: application/json
     "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
     "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0164"
 }
-###
-# @name createCommunicationArrangement2
-POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/aps_com_ca_a4c_odata/srvd_a2x/sap/aps_com_ca_a4c_odata/0001/CommunicationArrangements
-Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
-Accept: application/json
-X-CSRF-Token: {{CSRF}}
-Content-Type: application/json
-
-{
-    "CommunicationScenarioID": "SAP_COM_0109",
-    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
-    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0109"
-}
 ### Try with $batch using JSON (https://docs.oasis-open.org/odata/odata-json-format/v4.01/odata-json-format-v4.01.html#sec_BatchRequest)
 # "The server is refusing to process the request because the entity has an unsupported format
 POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/aps_com_ca_a4c_odata/srvd_a2x/sap/aps_com_ca_a4c_odata/0001/$batch
@@ -57,7 +44,7 @@ Content-Type: application/json
 {
   "requests": [
     {
-        "id": "2",
+        "id": "1",
         "atomicityGroup": "group1",
         "method": "post",
         "url": "/CommunicationArrangements",
@@ -70,17 +57,96 @@ Content-Type: application/json
   ]
 }
 ### https://docs.oasis-open.org/odata/odata/v4.01/csprd02/part1-protocol/odata-v4.01-csprd02-part1-protocol.html#sec_BatchRequests
-# Text hidden for information disclosure. See SAP Gateway Error Log, Message Monitoring Fiori App or ADT Feed Reader for details
 POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/aps_com_ca_a4c_odata/srvd_a2x/sap/aps_com_ca_a4c_odata/0001/$batch
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
-Accept: application/json
 X-CSRF-Token: {{CSRF}}
 Content-Type: multipart/mixed; boundary=batch_36522ad7-fc75-4b56-8c71-56071383e77b
 
 --batch_36522ad7-fc75-4b56-8c71-56071383e77b
-Content-Type: application/http
+Content-Type: application/http 
+Content-Transfer-Encoding:binary
 
-POST /CommunicationArrangements
+POST CommunicationArrangements HTTP/1.1
+Content-Type: application/json
+
+{
+    "CommunicationScenarioID": "SAP_COM_0106",
+    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
+    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0106"
+}
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: application/http 
+Content-Transfer-Encoding:binary
+
+POST CommunicationArrangements HTTP/1.1
+Content-Type: application/json
+
+{
+    "CommunicationScenarioID": "SAP_COM_0109",
+    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
+    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0109"
+}
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: application/http 
+Content-Transfer-Encoding:binary
+
+POST CommunicationArrangements HTTP/1.1
+Content-Type: application/json
+
+{
+    "CommunicationScenarioID": "SAP_COM_0353",
+    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
+    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0353"
+}
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: application/http 
+Content-Transfer-Encoding:binary
+
+POST CommunicationArrangements HTTP/1.1
+Content-Type: application/json
+
+{
+    "CommunicationScenarioID": "SAP_COM_0466",
+    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
+    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0466"
+}
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: application/http 
+Content-Transfer-Encoding:binary
+
+POST CommunicationArrangements HTTP/1.1
+Content-Type: application/json
+
+{
+    "CommunicationScenarioID": "SAP_COM_0053",
+    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
+    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0053"
+}
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: application/http 
+Content-Transfer-Encoding:binary
+
+POST CommunicationArrangements HTTP/1.1
+Content-Type: application/json
+
+{
+    "CommunicationScenarioID": "SAP_COM_0A48",
+    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
+    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0A48"
+}
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b--
+###
+# ABAP Runtime error 'BEHAVIOR_ILLEGAL_STATEMENT'
+POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/aps_com_ca_a4c_odata/srvd_a2x/sap/aps_com_ca_a4c_odata/0001/$batch
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+X-CSRF-Token: {{CSRF}}
+Content-Type: multipart/mixed; boundary=batch_36522ad7-fc75-4b56-8c71-56071383e77b
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: application/http 
+Content-Transfer-Encoding:binary
+
+POST CommunicationArrangements HTTP/1.1
 Content-Type: application/json
 
 {
@@ -89,4 +155,44 @@ Content-Type: application/json
     "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0008"
 }
 
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b--
+###
+# ABAP Runtime error 'BEHAVIOR_ILLEGAL_STATEMENT'
+POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/aps_com_ca_a4c_odata/srvd_a2x/sap/aps_com_ca_a4c_odata/0001/$batch
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+X-CSRF-Token: {{CSRF}}
+Content-Type: multipart/mixed; boundary=batch_36522ad7-fc75-4b56-8c71-56071383e77b
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: application/http 
+Content-Transfer-Encoding:binary
+
+POST CommunicationArrangements HTTP/1.1
+Content-Type: application/json
+
+{
+    "CommunicationScenarioID": "SAP_COM_0102",
+    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
+    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0102"
+}
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b--
+###
+# ABAP Runtime error 'BEHAVIOR_ILLEGAL_STATEMENT'
+POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/aps_com_ca_a4c_odata/srvd_a2x/sap/aps_com_ca_a4c_odata/0001/$batch
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+X-CSRF-Token: {{CSRF}}
+Content-Type: multipart/mixed; boundary=batch_36522ad7-fc75-4b56-8c71-56071383e77b
+
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: application/http 
+Content-Transfer-Encoding:binary
+
+POST CommunicationArrangements HTTP/1.1
+Content-Type: application/json
+
+{
+    "CommunicationScenarioID": "SAP_COM_0120",
+    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
+    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0120"
+}
 --batch_36522ad7-fc75-4b56-8c71-56071383e77b--
