@@ -1,0 +1,122 @@
+[
+  {
+    "UUID": "570aed44-c52e-1edf-b1d7-7f358336825b",
+    "CommunicationScenarioID": "SAP_COM_0164",
+    "CommunicationSystemID": "COM_SYS_GROUP_11",
+    "Name": "GRP11_SAP_COM_0164",
+    "Description": "",
+    "CreatedAt": "2024-12-30T14:39:56.817839Z",
+    "CreatedBy": "CB9980005373",
+    "ChangedAt": "2024-12-30T14:40:13.176833Z",
+    "ChangedBy": "CB9980005373",
+    "SAP__Messages": []
+  },
+  {
+    "UUID": "570aed44-c52e-1edf-b1d7-887fb830825b",
+    "CommunicationScenarioID": "SAP_COM_0109",
+    "CommunicationSystemID": "COM_SYS_GROUP_11",
+    "Name": "GRP11_SAP_COM_0109",
+    "Description": "",
+    "CreatedAt": "2024-12-30T14:42:05.461032Z",
+    "CreatedBy": "CB9980005373",
+    "ChangedAt": "2024-12-30T14:42:18.479153Z",
+    "ChangedBy": "CB9980005373",
+    "SAP__Messages": []
+  },
+  {
+    "UUID": "570aed44-c52e-1edf-b1d7-9321317be25b",
+    "CommunicationScenarioID": "SAP_COM_0008",
+    "CommunicationSystemID": "COM_SYS_GROUP_11",
+    "Name": "GRP11_SAP_COM_0008",
+    "Description": "",
+    "CreatedAt": "2024-12-30T14:44:09.60046Z",
+    "CreatedBy": "CB9980005373",
+    "ChangedAt": "2024-12-30T14:44:48.483926Z",
+    "ChangedBy": "CB9980005373",
+    "SAP__Messages": []
+  },
+  {
+    "UUID": "570aed44-c52e-1edf-b1d7-a7a49637e25b",
+    "CommunicationScenarioID": "SAP_COM_0106",
+    "CommunicationSystemID": "COM_SYS_GROUP_11",
+    "Name": "GRP11_SAP_COM_0106",
+    "Description": "",
+    "CreatedAt": "2024-12-30T14:49:04.294308Z",
+    "CreatedBy": "CB9980005373",
+    "ChangedAt": "2024-12-30T14:49:15.818799Z",
+    "ChangedBy": "CB9980005373",
+    "SAP__Messages": []
+  },
+  {
+    "UUID": "570aed44-c52e-1edf-b1d7-e4fb8e71a25b",
+    "CommunicationScenarioID": "SAP_COM_0353",
+    "CommunicationSystemID": "COM_SYS_GROUP_11",
+    "Name": "GRP11_SAP_COM_0353",
+    "Description": "",
+    "CreatedAt": "2024-12-30T15:02:47.365746Z",
+    "CreatedBy": "CB9980005373",
+    "ChangedAt": "2024-12-30T15:02:59.316018Z",
+    "ChangedBy": "CB9980005373",
+    "SAP__Messages": []
+  },
+  {
+    "UUID": "570aed44-c52e-1edf-b1d8-2eb20a97e25b",
+    "CommunicationScenarioID": "SAP_COM_0120",
+    "CommunicationSystemID": "COM_SYS_GROUP_11",
+    "Name": "GRP11_SAP_COM_0120",
+    "Description": "",
+    "CreatedAt": "2024-12-30T15:19:11.659591Z",
+    "CreatedBy": "CB9980005373",
+    "ChangedAt": "2024-12-30T15:19:30.272971Z",
+    "ChangedBy": "CB9980005373",
+    "SAP__Messages": []
+  },
+  {
+    "UUID": "570aed44-c52e-1edf-b1d9-8104373ee25b",
+    "CommunicationScenarioID": "SAP_COM_0466",
+    "CommunicationSystemID": "COM_SYS_GROUP_11",
+    "Name": "GRP11_SAP_COM_0466",
+    "Description": "",
+    "CreatedAt": "2024-12-30T16:34:58.378975Z",
+    "CreatedBy": "CB9980005373",
+    "ChangedAt": "2024-12-30T16:35:09.14966Z",
+    "ChangedBy": "CB9980005373",
+    "SAP__Messages": []
+  },
+  {
+    "UUID": "570aed44-c52e-1edf-b2d8-50a6cada6267",
+    "CommunicationScenarioID": "SAP_COM_0053",
+    "CommunicationSystemID": "COM_SYS_GROUP_11",
+    "Name": "GRP11_SAP_COM_0053",
+    "Description": "",
+    "CreatedAt": "2025-01-04T17:36:54.010345Z",
+    "CreatedBy": "CB9980005373",
+    "ChangedAt": "2025-01-04T17:37:09.062824Z",
+    "ChangedBy": "CB9980005373",
+    "SAP__Messages": []
+  },
+  {
+    "UUID": "570aed44-c52e-1edf-b2dc-8ff724cd2268",
+    "CommunicationScenarioID": "SAP_COM_0102",
+    "CommunicationSystemID": "COM_SYS_GROUP_11",
+    "Name": "GRP11_SAP_COM_0102",
+    "Description": "",
+    "CreatedAt": "2025-01-04T21:40:08.432397Z",
+    "CreatedBy": "CB9980005373",
+    "ChangedAt": "2025-01-04T21:40:22.283106Z",
+    "ChangedBy": "CB9980005373",
+    "SAP__Messages": []
+  },
+  {
+    "UUID": "570aed44-c52e-1edf-b2ed-27a674c26269",
+    "CommunicationScenarioID": "SAP_COM_0A48",
+    "CommunicationSystemID": "COM_SYS_GROUP_11",
+    "Name": "GRP11_SAP_COM_0A48",
+    "Description": "",
+    "CreatedAt": "2025-01-05T13:30:19.69557Z",
+    "CreatedBy": "CB9980005373",
+    "ChangedAt": "2025-01-05T13:30:35.210493Z",
+    "ChangedBy": "CB9980005373",
+    "SAP__Messages": []
+  }
+]
