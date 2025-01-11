@@ -29,9 +29,9 @@ X-CSRF-Token: {{CSRF}}
 Content-Type: application/json
 
 {
-    "CommunicationScenarioID": "SAP_COM_0164",
-    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
-    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0164"
+    "CommunicationScenarioID": "SAP_COM_0A48",
+    "CommunicationSystemID": "{{$dotenv s4hana_CommunicationSystemID}}",
+    "Name": "{{$dotenv s4hana_ComArrNamePrefix}}_SAP_COM_0A48"
 }
 ### Try with $batch using JSON (https://docs.oasis-open.org/odata/odata-json-format/v4.01/odata-json-format-v4.01.html#sec_BatchRequest)
 # "The server is refusing to process the request because the entity has an unsupported format
@@ -50,8 +50,8 @@ Content-Type: application/json
         "url": "/CommunicationArrangements",
         "body": {
             "CommunicationScenarioID": "SAP_COM_0008",
-            "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
-            "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0008"
+            "CommunicationSystemID": "{{$dotenv s4hana_CommunicationSystemID}}",
+            "Name": "{{$dotenv s4hana_ComArrNamePrefix}}_SAP_COM_0008"
         }
     }
   ]
@@ -71,8 +71,8 @@ Content-Type: application/json
 
 {
     "CommunicationScenarioID": "SAP_COM_0106",
-    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
-    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0106"
+    "CommunicationSystemID": "{{$dotenv s4hana_CommunicationSystemID}}",
+    "Name": "{{$dotenv s4hana_ComArrNamePrefix}}_SAP_COM_0106"
 }
 --batch_36522ad7-fc75-4b56-8c71-56071383e77b
 Content-Type: application/http 
@@ -83,8 +83,8 @@ Content-Type: application/json
 
 {
     "CommunicationScenarioID": "SAP_COM_0109",
-    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
-    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0109"
+    "CommunicationSystemID": "{{$dotenv s4hana_CommunicationSystemID}}",
+    "Name": "{{$dotenv s4hana_ComArrNamePrefix}}_SAP_COM_0109"
 }
 --batch_36522ad7-fc75-4b56-8c71-56071383e77b
 Content-Type: application/http 
@@ -95,8 +95,8 @@ Content-Type: application/json
 
 {
     "CommunicationScenarioID": "SAP_COM_0353",
-    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
-    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0353"
+    "CommunicationSystemID": "{{$dotenv s4hana_CommunicationSystemID}}",
+    "Name": "{{$dotenv s4hana_ComArrNamePrefix}}_SAP_COM_0353"
 }
 --batch_36522ad7-fc75-4b56-8c71-56071383e77b
 Content-Type: application/http 
@@ -107,8 +107,8 @@ Content-Type: application/json
 
 {
     "CommunicationScenarioID": "SAP_COM_0466",
-    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
-    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0466"
+    "CommunicationSystemID": "{{$dotenv s4hana_CommunicationSystemID}}",
+    "Name": "{{$dotenv s4hana_ComArrNamePrefix}}_SAP_COM_0466"
 }
 --batch_36522ad7-fc75-4b56-8c71-56071383e77b
 Content-Type: application/http 
@@ -119,8 +119,8 @@ Content-Type: application/json
 
 {
     "CommunicationScenarioID": "SAP_COM_0053",
-    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
-    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0053"
+    "CommunicationSystemID": "{{$dotenv s4hana_CommunicationSystemID}}",
+    "Name": "{{$dotenv s4hana_ComArrNamePrefix}}_SAP_COM_0053"
 }
 --batch_36522ad7-fc75-4b56-8c71-56071383e77b
 Content-Type: application/http 
@@ -130,9 +130,9 @@ POST CommunicationArrangements HTTP/1.1
 Content-Type: application/json
 
 {
-    "CommunicationScenarioID": "SAP_COM_0A48",
-    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
-    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0A48"
+    "CommunicationScenarioID": "SAP_COM_0164",
+    "CommunicationSystemID": "{{$dotenv s4hana_CommunicationSystemID}}",
+    "Name": "{{$dotenv s4hana_ComArrNamePrefix}}_SAP_COM_0164"
 }
 --batch_36522ad7-fc75-4b56-8c71-56071383e77b
 Content-Type: application/http 
@@ -143,8 +143,8 @@ Content-Type: application/json
 
 {
     "CommunicationScenarioID": "SAP_COM_0118",
-    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
-    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0118"
+    "CommunicationSystemID": "{{$dotenv s4hana_CommunicationSystemID}}",
+    "Name": "{{$dotenv s4hana_ComArrNamePrefix}}_SAP_COM_0118"
 }
 --batch_36522ad7-fc75-4b56-8c71-56071383e77b
 Content-Type: application/http 
@@ -155,8 +155,8 @@ Content-Type: application/json
 
 {
     "CommunicationScenarioID": "SAP_COM_0117",
-    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
-    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0117"
+    "CommunicationSystemID": "{{$dotenv s4hana_CommunicationSystemID}}",
+    "Name": "{{$dotenv s4hana_ComArrNamePrefix}}_SAP_COM_0117"
 }
 --batch_36522ad7-fc75-4b56-8c71-56071383e77b--
 ###
@@ -175,8 +175,8 @@ Content-Type: application/json
 
 {
     "CommunicationScenarioID": "SAP_COM_0008",
-    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
-    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0008"
+    "CommunicationSystemID": "{{$dotenv s4hana_CommunicationSystemID}}",
+    "Name": "{{$dotenv s4hana_ComArrNamePrefix}}_SAP_COM_0008"
 }
 
 --batch_36522ad7-fc75-4b56-8c71-56071383e77b--
@@ -196,8 +196,8 @@ Content-Type: application/json
 
 {
     "CommunicationScenarioID": "SAP_COM_0102",
-    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
-    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0102"
+    "CommunicationSystemID": "{{$dotenv s4hana_CommunicationSystemID}}",
+    "Name": "{{$dotenv s4hana_ComArrNamePrefix}}_SAP_COM_0102"
 }
 --batch_36522ad7-fc75-4b56-8c71-56071383e77b--
 ###
@@ -216,8 +216,8 @@ Content-Type: application/json
 
 {
     "CommunicationScenarioID": "SAP_COM_0120",
-    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
-    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0120"
+    "CommunicationSystemID": "{{$dotenv s4hana_CommunicationSystemID}}",
+    "Name": "{{$dotenv s4hana_ComArrNamePrefix}}_SAP_COM_0120"
 }
 --batch_36522ad7-fc75-4b56-8c71-56071383e77b--
 ###
@@ -236,7 +236,7 @@ Content-Type: application/json
 
 {
     "CommunicationScenarioID": "SAP_COM_0113",
-    "CommunicationSystemID": "COM_SYS_GROUP_{{$dotenv s4hana_group_id}}",
-    "Name": "GRP{{$dotenv s4hana_group_id}}_SAP_COM_0113"
+    "CommunicationSystemID": "{{$dotenv s4hana_CommunicationSystemID}}",
+    "Name": "{{$dotenv s4hana_ComArrNamePrefix}}_SAP_COM_0113"
 }
 --batch_36522ad7-fc75-4b56-8c71-56071383e77b--
