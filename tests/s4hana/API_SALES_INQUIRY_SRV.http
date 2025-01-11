@@ -1,0 +1,16 @@
+### Cloud: https://api.sap.com/api/API_SALES_INQUIRY_SRV/overview
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_INQUIRY_SRV/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_INQUIRY_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_INQUIRY_SRV/A_SalesInquiry
+  ?$inlinecount=allpages
+  &$top=10
+  &$expand=to_Item,to_Item/to_Partner,to_Item/to_PricingElement,to_Partner,to_PricingElement
+  &$orderby=LastChangeDateTime desc
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
