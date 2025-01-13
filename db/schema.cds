@@ -278,6 +278,7 @@ type DistributionChannelCode : String(2) @(
   description: '{i18n>distributionChannelDescription}'
 );
 
+@Capabilities.SearchRestrictions: {Searchable: false, }
 entity A_DistributionChannelText {
 
   key DistributionChannel     : DistributionChannelCode;
