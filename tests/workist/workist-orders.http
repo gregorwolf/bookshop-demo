@@ -1,28 +1,16 @@
+### https://api.workist.com/v1/swagger/#/
+GET https://api.workist.com/v1/swagger.json
 ###
 # @name readOrders
 GET {{$dotenv workist_api}}orders
   ?page_size=10
   &finished=true
+  &channel=f721e73a-3f3e-407b-938f-7ce7754c4b19
 Authorization: Bearer {{$dotenv workist_token}}
 ###
 @orderId={{readOrders.response.body.$.items.0.id}}
 ###
 # @name readOrder
 GET {{$dotenv workist_api}}orders/{{orderId}}
+  ?channel=f721e73a-3f3e-407b-938f-7ce7754c4b19
 Authorization:Bearer {{$dotenv workist_token}}
-
-###
-# @name readImports
-GET {{$dotenv workist_api}}master-data/imports
-  ?page_size=10
-Authorization:Bearer {{$dotenv workist_token}}
-###
-@importId={{readImports.response.body.$.items.0.import_id}}
-@input_file_url={{readImports.response.body.$.items.0.input_file_url}}
-###
-# @name readImport
-GET {{$dotenv workist_api}}master-data/imports/{{importId}}
-Authorization:Bearer {{$dotenv workist_token}}
-###
-GET {{input_file_url}}
-#Authorization:Bearer {{$dotenv workist_token}}
