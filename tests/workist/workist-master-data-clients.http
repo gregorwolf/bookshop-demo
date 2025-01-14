@@ -1,6 +1,6 @@
 @tokenFromPostmanCollection=bd5432b022d8c18e4665960da0837bfb3f21f8d8
 ###
-# @name createClientImport
+# @name createClientImportForm
 POST {{$dotenv workist_api}}master-data/clients/imports
   ?replace=True
 #Authorization:Bearer {{$dotenv workist_token}}
@@ -14,10 +14,20 @@ Content-Disposition: form-data; name="lookup_definition_id"
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="data"
 
-< ./workist-master-data-clients.json
+< ./workist-master-data-clients-form.json
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### Also JSON works
+# @name createClientImportJson
+POST {{$dotenv workist_api}}master-data/clients/imports
+  ?replace=True
+#Authorization:Bearer {{$dotenv workist_token}}
+Authorization:Bearer {{tokenFromPostmanCollection}}
+Content-Type: application/json
+
+< ./workist-master-data-clients-json.json
 ###
-@importId={{createClientImport.response.body.$.import_id}}
+@importId={{createClientImportJson.response.body.$.import_id}}
 ###
 # @name readImport
 GET {{$dotenv workist_api}}master-data/imports/{{importId}}

@@ -1,0 +1,23 @@
+{
+  "lookup_definition_id": "9d0c0611-1527-45c8-a722-6edbbe780481",
+  "data": [
+    {
+      "client_id1": "C-001",
+      "company_name": "SAP SE",
+      "address1": "Test street 1",
+      "address2": "Tor 2",
+      "zip_code": "1000",
+      "city": "Testhausen",
+      "country": "DE"
+    },
+    {
+      "client_id1": "C-002",
+      "company_name": "Muster GmbH&Co. KG",
+      "address1": "Muster Straße 2",
+      "address2": "empty",
+      "zip_code": "2000",
+      "city": "Musterstadt",
+      "country": "DE"
+    }
+  ]
+}
