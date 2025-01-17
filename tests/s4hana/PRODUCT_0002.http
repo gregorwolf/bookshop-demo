@@ -1,5 +1,21 @@
 ### Cloud: https://api.sap.com/api/CE_PRODUCT_0002/overview
-### OnPrem: 
+### OnPrem: https://api.sap.com/api/OP_PRODUCT_0002/overview
+# Sandbox
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0002/
+APIKey: {{$dotenv apikey}}
+Accept: application/json
+###
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0002/Product
+  ?$count=true
+  &$top=10
+  &$filter=ProductType eq 'KMAT'
+  &$expand=_ProductDescription(),_ProductSales(),_ProductSalesDelivery($expand=_ProdSalesDeliverySalesTax())
+  # $expand=*
+  #_ProductChangeMaster(),_ProductEWMWarehouse(),_ProductPlant(),_ProductProcurement(),_ProductQualityManagement()
+  #,_ProductStorage(),_ProductUnitOfMeasure(),_ProductValuation()
+# 
+APIKey: {{$dotenv apikey}}
+Accept: application/json
 ### S/4HANA Cloud
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0002/
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
