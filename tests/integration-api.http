@@ -80,7 +80,7 @@ GET {{$dotenv integration_api_url}}/api/v1/MessageProcessingLogs
   ?$top=20
   &$inlinecount=allpages
   &$orderby=LogStart desc
-  &$filter=LogStart gt datetime'2025-01-01T00:00' and LogStart lt datetime'2025-01-31T00:00'
+  &$filter=LogStart gt datetime'2025-01-01T00:00'
   # and Status eq 'FAILED'
   # and Status eq 'COMPLETED'
   # and IntegrationFlowName eq 'Employee_Master_Data_from_SAP_SFSF_EC_to_SAP_S4'
@@ -89,7 +89,7 @@ GET {{$dotenv integration_api_url}}/api/v1/MessageProcessingLogs
 Authorization: Bearer {{access_token}}
 Accept: application/json
 ###
-@AttachmentsUri={{getMessageProcessingLogs.response.body.d.results[1].Attachments.__deferred.uri}}
+@AttachmentsUri={{getMessageProcessingLogs.response.body.d.results[0].Attachments.__deferred.uri}}
 @MessageStoreEntriesUri={{getMessageProcessingLogs.response.body.d.results[0].MessageStoreEntries.__deferred.uri}}
 @ErrorInformationUri={{getMessageProcessingLogs.response.body.d.results[0].ErrorInformation.__deferred.uri}}
 @AdapterAttributesUri={{getMessageProcessingLogs.response.body.d.results[0].AdapterAttributes.__deferred.uri}}
@@ -104,6 +104,8 @@ Accept: application/json
 @attachment3={{getAttachments.response.body.d.results[2].__metadata.media_src}}
 @attachment4={{getAttachments.response.body.d.results[3].__metadata.media_src}}
 @attachment5={{getAttachments.response.body.d.results[4].__metadata.media_src}}
+@attachment6={{getAttachments.response.body.d.results[5].__metadata.media_src}}
+@attachment7={{getAttachments.response.body.d.results[6].__metadata.media_src}}
 ###
 GET {{attachment1}}
 Authorization: Bearer {{access_token}}
@@ -122,6 +124,14 @@ Authorization: Bearer {{access_token}}
 Accept: application/json
 ###
 GET {{attachment5}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+GET {{attachment6}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+GET {{attachment7}}
 Authorization: Bearer {{access_token}}
 Accept: application/json
 ### Read Message Store Entries
