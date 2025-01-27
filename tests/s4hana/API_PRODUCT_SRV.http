@@ -8,6 +8,9 @@ Accept: application/json
 GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_PRODUCT_SRV/$metadata
 APIKey: {{$dotenv apikey}}
 ###
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product/$count
+APIKey: {{$dotenv apikey}}
+###
 GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product
   ?$top=10
   &$filter=CreationDate gt datetime'2018-09-08T00:00'
