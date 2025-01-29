@@ -1,0 +1,19 @@
+### Service instance must be created with the scope "$XSMASTERAPPNAME.calm-api.bsm.read" following:
+### https://help.sap.com/docs/cloud-alm/setup-administration/enabling-sap-cloud-alm-api?locale=en-US
+
+### Request Access Token
+# @name requestAccessToken
+POST {{$dotenv cloud_alm_token_endpoint}}/oauth/token
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{$dotenv cloud_alm_itsm_api_clientid}}
+&client_secret={{$dotenv cloud_alm_itsm_api_clientsecret}}
+&grant_type=client_credentials
+&response_type=token
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+### 
+GET {{$dotenv cloud_alm_api}}/api/calm-itsmapi/v1/supportcases/cases/ids
+Authorization: Bearer {{access_token}}

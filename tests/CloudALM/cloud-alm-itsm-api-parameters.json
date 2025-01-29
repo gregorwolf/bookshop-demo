@@ -1,0 +1,13 @@
+{
+  "xs-security": {
+    "xsappname": "itsm",
+    "authorities": [
+      "$XSMASTERAPPNAME.calm-api.itsm.read",
+      "$XSMASTERAPPNAME.calm-api.itsm.write",
+      "$XSMASTERAPPNAME.calm-api.itsm.personal.read",
+      "$XSMASTERAPPNAME.calm-api.itsm.personal.write",
+      "$XSMASTERAPPNAME.calm-api.itsm.attachments.write",
+      "$XSMASTERAPPNAME.calm-api.itsm.attachments.read"
+    ]
+  }
+}
