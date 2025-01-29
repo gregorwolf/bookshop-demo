@@ -13,7 +13,40 @@ client_id={{$dotenv cloud_alm_itsm_api_clientid}}
 &response_type=token
 ### Fill Variables from Response
 @access_token = {{requestAccessToken.response.body.$.access_token}}
-
-### 
+### Working APIs
+###
+GET {{$dotenv cloud_alm_api}}/api/calm-itsmapi/v1/supportcases/masterdata/components
+    ?offset=0
+    &limit=50
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv cloud_alm_api}}/api/calm-itsmapi/v1/supportcases/masterdata/landscapeObjects
+    ?offset=0
+    &limit=50
+    &reporter={{$dotenv reporter}}
+#    &searchText=
+Authorization: Bearer {{access_token}}
+### It doesn't make any sense to me that reporter and customerNumber are mandatory this API
+### it should be enough to limit by customerNumber or nothing at all as the S-User is 
+### maintained in the destination calm_itsm_support
+GET {{$dotenv cloud_alm_api}}/api/calm-itsmapi/v1/supportcases/masterdata/contacts
+    ?offset=0
+    &limit=50
+    &reporter={{$dotenv reporter}}
+    &customerNumber={{$dotenv customerNumber}}
+Authorization: Bearer {{access_token}}
+### Not working APIs
+###
+### Response is empty but HTTP Status is 200
+### Even with correct installationNumber
 GET {{$dotenv cloud_alm_api}}/api/calm-itsmapi/v1/supportcases/cases/ids
+    ?offset=0
+    &limit=100
+    &installationNumber={{$dotenv installationNumber}}
+    &reporter={{$dotenv reporter}}
+Authorization: Bearer {{access_token}}
+### esponse is empty but HTTP Status is 200
+GET {{$dotenv cloud_alm_api}}/api/calm-itsmapi/v1/supportcases/cases
+    ?id=002075129400000473662025
+    &reporter={{$dotenv reporter}}
 Authorization: Bearer {{access_token}}
