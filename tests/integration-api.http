@@ -35,7 +35,12 @@ GET {{$dotenv integration_api_url}}/api/v1/IntegrationPackages
 Authorization: Bearer {{access_token}}
 Accept: application/json
 ###
+@integrationPackageExport={{getIntegrationPackages.response.body.d.results[0].__metadata.media_src}}
 @artifacts={{getIntegrationPackages.response.body.d.results[0].IntegrationDesigntimeArtifacts.__deferred.uri}}
+###
+# @name getIntegrationPackageExport
+GET {{integrationPackageExport}}
+Authorization: Bearer {{access_token}}
 ###
 # @name getArtifacts
 GET {{artifacts}}
