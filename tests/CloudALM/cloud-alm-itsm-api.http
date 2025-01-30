@@ -1,3 +1,8 @@
+### SAP Cloud ALM ITSM API
+###
+### https://help.sap.com/docs/cloud-alm/apis/itsm-api
+### https://api.sap.com/api/CALM_ITSM/overview
+###
 ### Service instance must be created with the scope "$XSMASTERAPPNAME.calm-api.bsm.read" following:
 ### https://help.sap.com/docs/cloud-alm/setup-administration/enabling-sap-cloud-alm-api?locale=en-US
 
