@@ -1,4 +1,5 @@
 ### Cloud: https://api.sap.com/api/API_BUSINESS_PARTNER/overview
+### Communication Scenario: Business Partner, Customer and Supplier Integration (SAP_COM_0008)
 ### OnPrem: https://api.sap.com/api/OP_API_BUSINESS_PARTNER_SRV/overview
 ### api.sap.com Sandbox
 GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/
