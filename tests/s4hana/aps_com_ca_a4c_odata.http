@@ -2,7 +2,7 @@
 ### Communication Scenario:
 ### Cloud Integration Automation Integration (SAP_COM_0A31)
 ### S/4HANA Cloud
-GET https://my409395-api.s4hana.cloud.sap/sap/opu/odata4/sap/aps_com_ca_a4c_odata/srvd_a2x/sap/aps_com_ca_a4c_odata/0001/
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/aps_com_ca_a4c_odata/srvd_a2x/sap/aps_com_ca_a4c_odata/0001/
 # S/4HANA Public Cloud System provided by SAP Learning Hub does only support certificate based authentication
 # So I use my SAP Passport to access the system. That needs to be configured according to:
 # https://marketplace.visualstudio.com/items?itemName=humao.rest-client --> SSL Client Certificates
