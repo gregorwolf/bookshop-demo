@@ -1,0 +1,22 @@
+{
+  "grant-types": ["client_credentials"],
+  "redirect-uris": [],
+  "roles": [
+    "AccessPoliciesRead",
+    "AuthGroup_ReadOnly",
+    "CatalogPackagesRead",
+    "CredentialsRead",
+    "DataArchivingRead",
+    "DataStorePayloadsRead",
+    "DataStoresAndQueuesRead",
+    "ExternalLoggingActivationRead",
+    "HealthCheckMonitoringDataRead",
+    "MessagePayloadsRead",
+    "MessageProcessingLocksRead",
+    "MonitoringDataRead",
+    "TraceConfigurationRead",
+    "WorkspaceArtifactLocksRead",
+    "WorkspacePackagesRead"
+  ],
+  "token-validity": 43200
+}
