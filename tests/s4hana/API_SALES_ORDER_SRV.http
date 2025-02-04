@@ -38,7 +38,7 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ### Read Token to Variable
 @CSRF={{getCSRF.response.headers.x-csrf-token}}
 ###
-# @name createSalesOrder
+# @name createSalesOrderFromFile
 POST {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
@@ -48,6 +48,46 @@ Content-Type: application/json
 #< ./default-env-API_SALES_ORDER_SRV-create.json
 #< ./API_SALES_ORDER_SRV-create.json
 < ./API_SALES_ORDER_SRV-create-2.json
+###
+@salesOrderFromFile={{createSalesOrderFromFile.response.body.d.SalesOrder}}
+###
+# Read the created Sales Order
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder('{{salesOrderFromFile}}')
+  ?$expand=to_Item,to_Item/to_ScheduleLine
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+###
+# @name createSalesOrder
+POST {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+{
+  "SalesOrderType": "OR",
+  "SalesOrganization": "{{$dotenv SalesOrganization}}",
+  "DistributionChannel": "10",
+  "OrganizationDivision": "00",
+  "SoldToParty": "{{$dotenv SoldToParty}}",
+  "PurchaseOrderByCustomer": "{{$dotenv PurchaseOrderByCustomer}}",
+  "SalesOrderDate": "\/Date(1738678316000)\/",
+  "PricingDate": "\/Date(1738678316000)\/",
+  "RequestedDeliveryDate": "\/Date(1738678316000)\/",
+  "CompleteDeliveryIsDefined": true,
+  "to_Item": [
+    {
+      "SalesOrderItem": "10",
+      "Material": "{{$dotenv Material}}",
+      "RequestedQuantity": "21",
+      "RequestedQuantityUnit": "PC",
+      "to_PricingElement": [],
+      "to_ScheduleLine": []
+    }
+  ]
+}
+
 ###
 @salesOrder={{createSalesOrder.response.body.d.SalesOrder}}
 ###
