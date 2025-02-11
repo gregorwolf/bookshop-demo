@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.101.0/containers/typescript-node-12
 {
-  "name": "Node 14 & TS & SAP CAP",
+  "name": "Node 20 & TS & SAP CAP",
   "dockerFile": "Dockerfile",
 
   // Set *default* container specific settings.json values on container create.
@@ -9,15 +9,15 @@
     "terminal.integrated.defaultProfile.linux": "/bin/bash"
   },
 
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"dbaeumer.vscode-eslint",
-		"esbenp.prettier-vscode",
-		"gruntfuggly.todo-tree",
-		"ms-vscode.js-debug-nightly",
-		"sapse.vscode-cds",
-		"humao.rest-client"
-	],
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "gruntfuggly.todo-tree",
+    "ms-vscode.js-debug-nightly",
+    "sapse.vscode-cds",
+    "humao.rest-client"
+  ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [4004]
