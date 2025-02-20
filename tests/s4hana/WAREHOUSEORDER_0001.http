@@ -12,8 +12,8 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_order_task_2/srvd_a2x/sap/warehouseorder/0001/WarehouseOrder
   ?$top=10
   &$count=true
-#  $select={{$dotenv api_warehouse_order_task_2_select}}
-#  &$filter={{$dotenv api_warehouse_order_task_2_filter}}
+#  $select={{$dotenv WarehouseOrder_select}}
+#  &$filter={{$dotenv WarehouseOrder_filter}}
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
@@ -23,3 +23,50 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_order_task_2/srvd_a2x/sap/warehouseorder/0001/WarehouseOrder(EWMWarehouse='{{warehouse}}',WarehouseOrder='{{warehouseOrder}}')
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+
+###
+# @name readWarehouseTasks
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_order_task_2/srvd_a2x/sap/warehouseorder/0001/WarehouseTask
+  ?$top=10
+  &$count=true
+#  $select={{$dotenv WarehouseOrder_select}}
+  &$filter={{$dotenv WarehouseTask_filter}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+@EWMWarehouse={{readWarehouseTasks.response.body.value[0].EWMWarehouse}}
+@WarehouseTask={{readWarehouseTasks.response.body.value[0].WarehouseTask}}
+@WarehouseTaskItem={{readWarehouseTasks.response.body.value[0].WarehouseTaskItem}}
+###
+# @name readWarehouseTask
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_order_task_2/srvd_a2x/sap/warehouseorder/0001/WarehouseTask(EWMWarehouse='{{EWMWarehouse}}',WarehouseTask='{{WarehouseTask}}',WarehouseTaskItem='{{WarehouseTaskItem}}')
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+@etag={{readWarehouseTask.response.headers.etag}}
+### Get CSRF Token
+# @name getCSRF
+HEAD {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_order_task_2/srvd_a2x/sap/warehouseorder/0001/
+X-CSRF-Token: Fetch
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Read Token to Variable
+@CSRF={{getCSRF.response.headers.x-csrf-token}}
+###
+# @name ConfirmWarehouseTaskProduct
+POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_order_task_2/srvd_a2x/sap/warehouseorder/0001/WarehouseTask(EWMWarehouse='{{EWMWarehouse}}',WarehouseTask='{{WarehouseTask}}',WarehouseTaskItem='{{WarehouseTaskItem}}')/SAP__self.ConfirmWarehouseTaskProduct
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+If-Match: {{etag}}
+Content-Type: application/json
+
+{
+  "AlternativeUnit": "PC",
+  "ActualQuantityInAltvUnit": 1,
+  "DifferenceQuantityInAltvUnit": 0,
+  "WhseTaskExceptionCodeQtyDiff": "",
+  "WhseTaskExCodeDestStorageBin": "CHBD",
+  "SourceHandlingUnit": "",
+  "DestinationHandlingUnit": "",
+  "DestinationStorageBin": "2000147505"
+}
