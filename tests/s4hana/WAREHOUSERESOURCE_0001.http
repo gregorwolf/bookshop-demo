@@ -1,4 +1,5 @@
 ### Cloud: https://api.sap.com/api/WAREHOUSERESOURCE_0001/overview
+### SAP_COM_0353
 ### OnPrem: 
 ### S/4HANA Cloud
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_resource_2/srvd_a2x/sap/warehouseresource/0001/
@@ -10,6 +11,8 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_resource_2/srvd_a2x/sap/warehouseresource/0001/WarehouseResource
   ?$top=10
+  &$count=true
+  &$filter=EWMWarehouse eq '{{$dotenv Warehouse}}' and EWMResource eq '{{$dotenv WHResource}}'
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ### Get CSRF Token
@@ -21,6 +24,11 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 @CSRF={{getCSRF.response.headers.x-csrf-token}}
 ### Logon to Warehouse Resource
 POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_resource_2/srvd_a2x/sap/warehouseresource/0001/WarehouseResource(EWMWarehouse='{{$dotenv Warehouse}}',EWMResource='{{$dotenv WHResource}}')/SAP__self.LogonToWarehouseResource
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+X-CSRF-Token: {{CSRF}}
+Accept: application/json
+### Log Off from Resource
+POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_resource_2/srvd_a2x/sap/warehouseresource/0001/WarehouseResource(EWMWarehouse='{{$dotenv Warehouse}}',EWMResource='{{$dotenv WHResource}}')/SAP__self.LogoffFromWarehouseResource
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 X-CSRF-Token: {{CSRF}}
 Accept: application/json
