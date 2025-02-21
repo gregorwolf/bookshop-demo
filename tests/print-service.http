@@ -1,3 +1,4 @@
+### https://api.sap.com/api/PRINTAPI/overview
 ### Get Access Token using Client Credentials Flow
 # @name requestAccessToken
 POST {{$dotenv print_token_endpoint}}/oauth/token
@@ -16,9 +17,12 @@ grant_type=client_credentials
 GET {{$dotenv print_endpoint}}/qm/api/v1/rest/queues
 Authorization: Bearer {{access_token}}
 ###
-@queue={{getQueues.response.body.$[0].qname}}
-@techUserName={{getQueues.response.body.$[0].techUserName}}
-@creator={{getQueues.response.body.$[0].creator}}
+#@queue={{getQueues.response.body.$[0].qname}}
+#@techUserName={{getQueues.response.body.$[0].techUserName}}
+#@creator={{getQueues.response.body.$[0].creator}}
+@queue={{$dotenv print_queue}}
+@techUserName={{$dotenv print_techUserName}}
+@creator={{$dotenv print_creator}}
 ###
 # @name createDocument
 POST {{$dotenv print_endpoint}}/dm/api/v1/rest/print-documents
