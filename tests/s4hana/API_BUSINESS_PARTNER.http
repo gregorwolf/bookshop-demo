@@ -70,7 +70,8 @@ Content-Type: application/json
 {
   "Language": "DE",
   "LongTextID": "TX01",
-  "LongText": "Test from REST Client"
+  "LongText": "Test from REST Client
+With a line break"
 }
 ### Update A_CustomerSalesAreaText
 PATCH {{toSpecificSalesAreaTextUri}}
