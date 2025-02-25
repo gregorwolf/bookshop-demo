@@ -1,0 +1,7 @@
+### https://api.sap.com/api/product/overview
+GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/ProductCollection
+  ?$top=10
+  &$inlinecount=allpages
+  &$expand=ProductOtherDescriptions,ProductQuantityCharacteristics,ProductTextCollection
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+Accept: application/json
