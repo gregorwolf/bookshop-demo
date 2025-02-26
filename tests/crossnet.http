@@ -1,0 +1,16 @@
+# @name requestCrossnetAccessToken
+POST {{$dotenv crossnet_tokenendpoint}}/oauth/token
+Authorization: Basic {{$dotenv dest_clientid}}:{{$dotenv dest_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&client_id={{$dotenv crossnet_clientid}}
+&client_secret={{$dotenv crossnet_lientsecret}}
+&scope=write
+
+### Fill Variables from Response
+@crossnet_access_token = {{requestCrossnetAccessToken.response.body.$.access_token}}
+
+### Find all inbounds
+GET {{$dotenv crossnet_uri}}/restapi/v1/inbounds
+Authorization: Bearer {{crossnet_access_token}}
