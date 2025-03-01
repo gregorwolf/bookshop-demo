@@ -1,4 +1,5 @@
 ### Cloud: https://api.sap.com/api/API_OUTBOUND_DELIVERY_SRV_0002/overview
+### SAP_COM_0106
 ### OnPrem: 
 ### S/4HANA Cloud
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/
