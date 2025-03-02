@@ -11,6 +11,23 @@ client_id={{$dotenv sm_clientid}}
 ### Fill Variables from Response
 @access_token = {{requestAccessToken.response.body.$.access_token}}
 
+###
+# @name service_offerings
+GET {{$dotenv sm_url}}/v1/service_offerings?fieldQuery=name eq 'service-manager'
+Authorization: Bearer {{access_token}}
+###
+@serviceOfferingID = {{service_offerings.response.body.items[0].id}}
+###
+# @name service_offerings_hana
+GET {{$dotenv sm_url}}/v1/service_offerings?fieldQuery=catalog_name eq 'hana'
+Authorization: Bearer {{access_token}}
+###
+@serviceOfferingHanaID = {{service_offerings_hana.response.body.items[0].id}}
+###
+# @name service_plans
+GET {{$dotenv sm_url}}/v1/service_plans
+  ?fieldQuery=catalog_name eq 'hdi-shared' and service_offering_id eq '{{serviceOfferingHanaID}}'
+Authorization: Bearer {{access_token}}
 ### Get Platforms - needs different token
 GET {{$dotenv sm_url}}/v1/platforms
 Authorization: Bearer {{access_token}}
@@ -37,5 +54,18 @@ Authorization: Bearer {{access_token}}
 
 ### Get specific service binding
 GET {{$dotenv sm_url}}/v1/service_bindings
-  ?labelQuery=tenant_id eq 't1'
+  ?labelQuery=tenant_id eq 't0'
 Authorization: Bearer {{access_token}}
+
+### Get specific service binding
+GET {{$dotenv sm_url}}/v1/service_bindings
+  ?labelQuery=service_plan_id+eq+'c681357b-42f3-44d1-8059-ab5e577c7662'+and+tenant_id+in+('t0')&fieldQuery=ready+eq+'true'
+Authorization: Bearer {{access_token}}
+Accept: application/json
+Content-Type: application/json
+Client-ID: cap-mtx-sidecar
+Client-Version: 2.5.1
+X-CorrelationID: 9bc6ab9a-8a50-48b6-a409-71d8543a742a
+X-Correlation-ID: 9bc6ab9a-8a50-48b6-a409-71d8543a742a
+User-Agent: axios/1.8.1
+Accept-Encoding: gzip, compress, deflate, br
