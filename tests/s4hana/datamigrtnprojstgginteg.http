@@ -1,0 +1,16 @@
+### Scenario ID: SAP_COM_0947
+### Scenario: Migration Cockpit API Integration
+
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_datamigrtnprojstgginteg/srvd_a2x/sap/datamigrtnprojstgginteg/0001/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_datamigrtnprojstgginteg/srvd_a2x/sap/datamigrtnprojstgginteg/0001/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_datamigrtnprojstgginteg/srvd_a2x/sap/datamigrtnprojstgginteg/0001/DataMigrtnProjStggInteg
+    ?$top=50
+    &$count=true
+    &$expand=*
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
