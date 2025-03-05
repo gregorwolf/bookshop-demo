@@ -1,0 +1,60 @@
+### Document Information Extraction
+### https://help.sap.com/docs/document-information-extraction/document-information-extraction/api-reference?locale=en-US
+### Get Access Token
+# @name requestAccessToken
+POST {{$dotenv doc_info_extr_tokenendpoint}}/oauth/token
+Authorization: Basic {{$dotenv doc_info_extr_clientid}}:{{$dotenv doc_info_extr_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+###
+# @name capabilities
+GET {{$dotenv doc_info_extr_base_url}}/document-information-extraction/v1/capabilities
+Authorization: Bearer {{access_token}}
+###
+# @name clients
+GET {{$dotenv doc_info_extr_base_url}}/document-information-extraction/v1/clients
+    ?limit=10
+Authorization: Bearer {{access_token}}
+###
+@clientId={{clients.response.body.$.payload[0].clientId}}
+###
+# @name documentJobs
+POST {{$dotenv doc_info_extr_base_url}}/document-information-extraction/v1/document/jobs
+Authorization: Bearer {{access_token}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="options"
+
+{
+  "schemaName": "SAP_invoice_schema",
+  "clientId": "{{clientId}}",
+  "documentType": "invoice",
+  "receivedDate": "2020-02-17",
+  "enrichment": {
+    "sender": {
+      "top": 5,
+      "type": "businessEntity",
+      "subtype": "supplier"
+    },
+    "employee": {
+      "type": "employee"
+    }
+  }
+}
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="9cf6e1e7-a931-4901-ae00-22be7d4b384c.pdf"
+Content-Type: application/pdf
+
+< /Users/gwolf/Downloads/9cf6e1e7-a931-4901-ae00-22be7d4b384c.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+@jobId={{documentJobs.response.body.$.id}}
+###
+# @name documentJob
+GET {{$dotenv doc_info_extr_base_url}}/document-information-extraction/v1/document/jobs/{{jobId}}
+Authorization: Bearer {{access_token}}
