@@ -1,5 +1,5 @@
-### Get Access Token for Cloud Foundry using Password Grant
-# @name requestAccessTokenHANA
+### Get Access Token for PaPM Cloud using OAuth2 password flow
+# @name requestAccessTokenPassword
 POST {{$dotenv papm_um_tokenendpoint}}/oauth/token
 Accept: application/json;charset=utf8
 Authorization: Basic {{$dotenv papm_um_clientid}}:{{$dotenv papm_um_clientsecret}}
@@ -11,7 +11,19 @@ grant_type=password
 &response_type=token
 #&login_hint={"origin":"sap.custom"}
 ### Fill Variables from Response
-@access_token = {{requestAccessTokenHANA.response.body.$.access_token}}
+#@access_token = {{requestAccessTokenPassword.response.body.$.access_token}}
+
+### Get Access Token for PaPM Cloud using OAuth2 client credential flow
+# @name requestAccessTokenClientCredentials
+POST {{$dotenv papm_um_tokenendpoint}}/oauth/token
+Accept: application/json;charset=utf8
+Authorization: Basic {{$dotenv papm_um_clientid}}:{{$dotenv papm_um_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+### Fill Variables from Response
+@access_token = {{requestAccessTokenClientCredentials.response.body.$.access_token}}
 
 ### https://api.sap.com/api/sap_ace_AdministrationService/overview
 GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/
