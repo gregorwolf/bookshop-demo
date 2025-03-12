@@ -1,0 +1,16 @@
+# https://api.sap.com/api/Story_API/overview
+### Get Access Token using Client Credentials Flow
+# @name requestAccessToken
+POST {{$dotenv sac_token_endpoint}}
+Authorization: Basic {{$dotenv sac_clientid}}:{{$dotenv sac_clientsecret}}
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+#&response_type=token
+
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+###
+GET {{$dotenv sac_endpoint}}/api/v1/stories
+Authorization: Bearer {{access_token}}
