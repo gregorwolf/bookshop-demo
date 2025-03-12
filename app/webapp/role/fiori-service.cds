@@ -84,7 +84,20 @@ annotate AdminService.Roles with @(UI: {
   },
 
   Identification            : [ //Is the main field group
-  {Value: rolename}, ],
+    {Value: rolename},
+    {
+      $Type : 'UI.DataFieldForAction',
+      Label : '{i18n>countUp}',
+      Action: 'AdminService.countUp',
+      Inline: false
+    },
+    {
+      $Type : 'UI.DataFieldForAction',
+      Label : '{i18n>countDown}',
+      Action: 'AdminService.countDown',
+      Inline: false
+    },
+  ],
 
   HeaderFacets              : [
     {
