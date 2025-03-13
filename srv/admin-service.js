@@ -675,15 +675,27 @@ module.exports = async function (srv) {
     return role;
   });
   srv.on(["countUp"], Roles, async (req) => {
-    const update = await cds
-      .tx(req)
-      .run(UPDATE(Roles).where({ ID: req.params[0].ID }).set("count +=", 1));
+    const tx = await cds.tx(req);
+    const updateRole = await tx.run(
+      UPDATE(Roles).where({ ID: req.params[0].ID }).set("count +=", 1)
+    );
+    const updateRoleBO = await tx.run(
+      UPDATE(Role_BusinessObject)
+        .where({ parent_ID: req.params[0].ID })
+        .set("count +=", 1)
+    );
     return cds.tx(req).run(SELECT.one(Roles).where({ ID: req.params[0].ID }));
   });
   srv.on(["countDown"], Roles, async (req) => {
-    const update = await cds
-      .tx(req)
-      .run(UPDATE(Roles).where({ ID: req.params[0].ID }).set("count -=", 1));
+    const tx = await cds.tx(req);
+    const updateRole = await tx.run(
+      UPDATE(Roles).where({ ID: req.params[0].ID }).set("count -=", 1)
+    );
+    const updateRoleBO = await tx.run(
+      UPDATE(Role_BusinessObject)
+        .where({ parent_ID: req.params[0].ID })
+        .set("count -=", 1)
+    );
     return cds.tx(req).run(SELECT.one(Roles).where({ ID: req.params[0].ID }));
   });
 

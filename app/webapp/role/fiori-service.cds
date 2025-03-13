@@ -115,8 +115,13 @@ annotate AdminService.Roles with @(UI: {
   Facets                    : [
     {
       $Type : 'UI.ReferenceFacet',
-      Label : 'Description',
+      Label : 'Details',
       Target: '@UI.FieldGroup#Description'
+    },
+    {
+      $Type : 'UI.ReferenceFacet',
+      Label : 'Assigned Business Objects',
+      Target: 'BusinessObjects/@UI.LineItem'
     },
     {
       $Type : 'UI.ReferenceFacet',
@@ -132,11 +137,6 @@ annotate AdminService.Roles with @(UI: {
       $Type : 'UI.ReferenceFacet',
       Label : 'Validity',
       Target: '@UI.FieldGroup#Validity'
-    },
-    {
-      $Type : 'UI.ReferenceFacet',
-      Label : 'Assigned Business Objects',
-      Target: 'BusinessObjects/@UI.LineItem'
     },
   /*
   {
@@ -218,8 +218,11 @@ annotate AdminService.Role_BusinessObject with @(
   UI.SelectionFields: [BusinessObject],
 
   UI.LineItem       : [
-                       // {$Type: 'UI.DataField', Value: parent_ID },
-                      {Value: BusinessObject}, ],
+    // {$Type: 'UI.DataField', Value: parent_ID },
+    {Value: BusinessObject},
+    {Value: count},
+    {Value: modifiedAt},
+  ],
 
   UI.HeaderInfo     : {
     Title         : {Value: BusinessObject},

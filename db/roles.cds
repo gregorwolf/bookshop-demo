@@ -52,8 +52,9 @@ entity BusinessObjects {
                    on children.parent = $self;
 };
 
-entity Role_BusinessObject : cuid {
+entity Role_BusinessObject : cuid, managed {
   parent         : Association to Roles;
+  count          : Integer;
   BusinessObject : BusinessObject;
 };
 
