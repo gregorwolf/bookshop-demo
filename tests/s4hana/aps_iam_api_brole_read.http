@@ -1,0 +1,39 @@
+### https://api.sap.com/api/CE_BUSINESSROLE_0001/overview
+### SAP_COM_0A04
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/aps_iam_api_brole_read/srvd_a2x/sap/businessrole/0001/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/aps_iam_api_brole_read/srvd_a2x/sap/businessrole/0001/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/aps_iam_api_brole_read/srvd_a2x/sap/businessrole/0001/BusinessRoleBusinessUsers
+  ?$count=true
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/aps_iam_api_brole_read/srvd_a2x/sap/businessrole/0001/BusinessRoleBusinessCatalogs
+  ?$count=true
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/aps_iam_api_brole_read/srvd_a2x/sap/businessrole/0001/BusinessRoleLaunchpadSpaces
+  ?$count=true
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/aps_iam_api_brole_read/srvd_a2x/sap/businessrole/0001/BusinessRoleRestrictionFields
+  ?$count=true
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/aps_iam_api_brole_read/srvd_a2x/sap/businessrole/0001/BusinessRoleRestrictions
+  ?$count=true
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/aps_iam_api_brole_read/srvd_a2x/sap/businessrole/0001/BusinessRoleRestrictionValues
+  ?$count=true
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
