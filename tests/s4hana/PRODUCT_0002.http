@@ -8,7 +8,7 @@ Accept: application/json
 GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0002/Product
   ?$count=true
   &$top=10
-  &$filter=ProductType eq 'KMAT'
+#  &$filter=ProductType eq 'KMAT'
   &$expand=_ProductDescription(),_ProductSales(),_ProductSalesDelivery($expand=_ProdSalesDeliverySalesTax())
   # $expand=*
   #_ProductChangeMaster(),_ProductEWMWarehouse(),_ProductPlant(),_ProductProcurement(),_ProductQualityManagement()
@@ -26,7 +26,8 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0002/Product
   ?$top=10
-  &$filter=LastChangeDateTime gt 2024-10-08T00:00:00Z
+  &$filter=Product eq '{{$dotenv Product}}'
+#  &$filter=LastChangeDateTime gt 2024-10-08T00:00:00Z
   &$count=true
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
@@ -35,3 +36,39 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0002/Product('{{$dotenv product}}')
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+
+### Get CSRF Token
+# @name getCSRF
+HEAD {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0002/
+X-CSRF-Token: Fetch
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Read Token to Variable
+@CSRF={{getCSRF.response.headers.x-csrf-token}}
+###
+# @name createProduct
+POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0002/Product
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+{
+  "Product": "BIKE-GRP01-003",
+  "IndustrySector": "M",
+  "ProductType": "FERT",
+  "GrossWeight": 20.000,
+  "WeightUnit": "KG",
+  "WeightISOUnit": "KGM",
+  "ProductGroup": "L004",
+  "BaseUnit": "ST",
+  "BaseISOUnit": "PCE",
+  "ItemCategoryGroup": "NORM",
+  "NetWeight": 19.500,
+  "_ProductDescription": [
+        {
+            "Product": "TE210921_1",
+            "Language": "EN",
+            "ProductDescription": "BIKE-GRP01-003"
+        }
+  ]
+}

@@ -31,6 +31,7 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product
   ?$top=10
 #  &$skip=9
   &$filter=Product eq '{{$dotenv Product}}'
+#  &$filter=ProductType eq 'FERT'
 #  &$filter=ProductType eq 'KMAT'
   &$expand=to_Description,to_Plant,to_ProductSales
   &$inlinecount=allpages
@@ -58,3 +59,102 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_ProductSalesDeliv
   &$inlinecount=allpages
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_ProductSupplyPlanning
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### Get CSRF Token
+# @name getCSRF
+HEAD {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/
+X-CSRF-Token: Fetch
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Read Token to Variable
+@CSRF={{getCSRF.response.headers.x-csrf-token}}
+###
+# @name createProduct
+POST {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+{
+  "Product": "BIKE-GRP01-003",
+  "ProductType": "FERT"
+}
+###
+@longTextURL={{createProduct.response.body.$.error.innererror.errordetails[0].longtext_url}}
+###
+GET {{$dotenv s4hanahost}}{{longTextURL}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+# @name createProductSupplyPlanning
+POST {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_ProductSupplyPlanning
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+{
+	"Product": "BIKE-GRP01-003",
+	"Plant": "1010",
+	"FixedLotSizeQuantity": "0",
+	"MaximumLotSizeQuantity": "20",
+	"MinimumLotSizeQuantity": "10",
+	"LotSizeRoundingQuantity": "0",
+	"LotSizingProcedure": "EX",
+	"MRPType": "PD",
+	"MRPResponsible": "001",
+	"SafetyStockQuantity": "0",
+	"MinimumSafetyStockQuantity": "0",
+	"PlanningTimeFence": "0",
+	"ABCIndicator": "B",
+	"MaximumStockQuantity": "0",
+	"ReorderThresholdQuantity": "0",
+	"PlannedDeliveryDurationInDays": "0",
+	"SafetyDuration": "0",
+	"PlanningStrategyGroup": "",
+	"TotalReplenishmentLeadTime": "0",
+	"ProcurementType": "X",
+	"ProcurementSubType": "",
+	"AssemblyScrapPercent": "0.00",
+	"AvailabilityCheckType": "SR",
+	"GoodsReceiptDuration": "0",
+	"MRPGroup": "0001",
+	"DfltStorageLocationExtProcmt": "",
+	"ProdRqmtsConsumptionMode": "",
+	"BackwardCnsmpnPeriodInWorkDays": "0",
+	"FwdConsumptionPeriodInWorkDays": "0",
+	"BaseUnit": "EA",
+	"PlanAndOrderDayDetermination": "",
+	"RoundingProfile": "",
+	"LotSizeIndependentCosts": "0.00",
+	"MRPPlanningCalendar": "",
+	"RangeOfCvrgPrflCode": "",
+	"IsSafetyTime": "",
+	"PerdPrflForSftyTme": "",
+	"IsMRPDependentRqmt": "",
+	"InHouseProductionTime": "0",
+	"ProductIsForCrossProject": "",
+	"StorageCostsPercentageCode": "",
+	"SrvcLvl": "0.0",
+	"MRPAvailabilityType": "",
+	"FollowUpProduct": "",
+	"RepetitiveManufacturingIsAllwd": false,
+	"DependentRequirementsType": "",
+	"IsBulkMaterialComponent": false,
+	"RepetitiveManufacturingProfile": "",
+	"RqmtQtyRcptTaktTmeInWrkgDays": "0",
+	"ForecastRequirementsAreSplit": "",
+	"EffectiveOutDate": null,
+	"MRPProfile": "",
+	"ComponentScrapInPercent": "0.00",
+	"ProductIsToBeDiscontinued": "",
+	"ProdRqmtsAreConsolidated": "",
+	"MatlCompIsMarkedForBackflush": "",
+	"ProposedProductSupplyArea": "",
+	"Currency": "EUR",
+	"PlannedOrderActionControl": ""
+}
