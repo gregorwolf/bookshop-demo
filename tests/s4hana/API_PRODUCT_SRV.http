@@ -31,6 +31,7 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product
   ?$top=10
 #  &$skip=9
   &$filter=Product eq '{{$dotenv Product}}'
+#  &$filter=ProductType eq 'MAT'
 #  &$filter=ProductType eq 'FERT'
 #  &$filter=ProductType eq 'KMAT'
   &$expand=to_Description,to_Plant,to_ProductSales
@@ -65,6 +66,17 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_ProductSupplyPlan
   &$inlinecount=allpages
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+###
+# @name readProductDescriptions
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_ProductDescription
+  ?$top=10
+  &$filter=Product eq '{{$dotenv Product}}' and Language eq 'DE'
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+@productDescription={{readProductDescriptions.response.body.d.results[0].ProductDescription}}
+@productDescriptionURI={{readProductDescriptions.response.body.d.results[0].__metadata.uri}}
 ### Get CSRF Token
 # @name getCSRF
 HEAD {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/
@@ -72,6 +84,17 @@ X-CSRF-Token: Fetch
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ### Read Token to Variable
 @CSRF={{getCSRF.response.headers.x-csrf-token}}
+###
+# @name updateProductDescription
+PATCH {{productDescriptionURI}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+{
+	"ProductDescription": "{{$dotenv productDescription}}"
+}
 ###
 # @name createProduct
 POST {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product
@@ -81,8 +104,18 @@ X-CSRF-Token: {{CSRF}}
 Content-Type: application/json
 
 {
-  "Product": "BIKE-GRP01-003",
-  "ProductType": "FERT"
+  "Product": "",
+  "ProductType": "MAT",
+  "BaseUnit": "EA",
+  "to_Description": {
+    "results": [
+      {
+        "Product": "",
+        "Language": "EN",
+        "ProductDescription": "test API"
+      }
+    ]
+  }
 }
 ###
 @longTextURL={{createProduct.response.body.$.error.innererror.errordetails[0].longtext_url}}
