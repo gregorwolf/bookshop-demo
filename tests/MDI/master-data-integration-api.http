@@ -1,3 +1,5 @@
+# Documentation of all SAP Master Data Integration APIs can be found at:
+# https://api.sap.com/package/sap-mdi-masterDataIntegration/rest
 #
 # This example is based on the Example provided by Tobias Nett via the Discussion
 # https://open.sap.com/courses/mdi1/question/41537067-a319-425a-9b49-69c234e08ba0
@@ -61,7 +63,7 @@ Accept: application/json
 ###
 # @name getDeltaTokenBusinessPartner
 GET {{$dotenv mdi_url}}/v1/odm/3.3.0/sap.odm.businesspartner.BusinessPartner/deltaToken
-  ?timestamp=2025-03-25T00:00:00.000Z
+  ?timestamp=2025-03-22T00:00:00.000Z
 Authorization: Bearer {{access_token}}
 Accept: application/json
 ###
