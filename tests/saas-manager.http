@@ -1,0 +1,16 @@
+# Service: SaaS Provisioning Service
+# Service Technical Name: saas-registry, Plan: application
+# API Documentation:
+# https://api.sap.com/api/APISaasManagerService/overview
+###
+# @name access_token_request
+POST {{$dotenv saas_manager_auth_url}}/oauth/token
+  ?grant_type=client_credentials&response_type=token
+Authorization: Basic {{$dotenv saas_manager_clientid}}:{{$dotenv saas_manager_clientsecret}}
+Accept: application/json
+###
+@accToken = {{access_token_request.response.body.access_token}}
+
+###
+GET {{$dotenv saas_manager_url}}/saas-manager/v1/application/subscriptions
+Authorization: Bearer {{accToken}}
