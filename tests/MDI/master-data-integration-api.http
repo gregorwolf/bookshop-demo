@@ -51,18 +51,35 @@ client_id={{$dotenv mdi_clientid}}
 &grant_type=client_credentials
 ### Fill Variables from Response
 @access_token={{getMDIAccessToken.response.body.$.access_token}}
-
 ### =======================================================
 # Poll for change events
 # ---------------------------------------------------------
-# @name getChangeEvents
+# @name getChangeEventsBusinessPartner
+GET {{$dotenv mdi_url}}/v1/odm/3.3.0/sap.odm.businesspartner.BusinessPartner/events
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+# @name getDeltaTokenBusinessPartner
+GET {{$dotenv mdi_url}}/v1/odm/3.3.0/sap.odm.businesspartner.BusinessPartner/deltaToken
+  ?timestamp=2025-03-25T00:00:00.000Z
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+@nextBP={{getDeltaTokenBusinessPartner.response.body.$.['`@odata.nextLink']}}
+###
+# @name getChangeEventsBusinessPartnerNext
+GET {{$dotenv mdi_url}}{{nextBP}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+# @name getChangeEventsCostCenter
 GET {{$dotenv mdi_url}}/v1/odm/3.0.0/sap.odm.finance.costobject.CostCenter/events
 Authorization: Bearer {{access_token}}
 Accept: application/json
 ### =======================================================
 # Extract the nextLink
 # ---------------------------------------------------------
-@next={{getChangeEvents.response.body.$.['`@odata.deltaLink']}}
+@next={{getChangeEventsCostCenter.response.body.$.['`@odata.deltaLink']}}
 ### =======================================================
 # Send a change request to create a record​
 # ---------------------------------------------------------
