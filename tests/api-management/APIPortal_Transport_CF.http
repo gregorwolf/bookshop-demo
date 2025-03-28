@@ -1,0 +1,21 @@
+# https://api.sap.com/api/APIPortal_Transport_CF/overview
+# Authentciation:
+# https://help.sap.com/docs/sap-api-management/sap-api-management/api-access-plan-for-api-portal?version=Cloud
+###
+# @name getAccessToken
+POST {{$dotenv api_management_tokenUrl}}/oauth/token
+Authorization: Basic {{$dotenv api_management_clientId}}:{{$dotenv api_management_clientSecret}}
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{$dotenv api_management_clientId}}
+&grant_type=client_credentials
+### Fill Variables from Response
+@access_token={{getAccessToken.response.body.$.access_token}}
+### =======================================================
+# Poll for change events
+# ---------------------------------------------------------
+# @name getAPIProxies
+GET {{$dotenv api_management_url}}/apiportal/api/1.0/Transport.svc/APIProxies
+  ?name={{$dotenv api_management_proxy_name}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
