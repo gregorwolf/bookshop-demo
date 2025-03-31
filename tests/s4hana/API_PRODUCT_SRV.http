@@ -34,14 +34,15 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product
 #  &$filter=ProductType eq 'MAT'
 #  &$filter=ProductType eq 'FERT'
 #  &$filter=ProductType eq 'KMAT'
-  &$expand=to_Description,to_Plant,to_ProductSales
+  &$expand=to_Description,to_Plant,to_ProductSales,to_ProductBasicText,to_SalesDelivery,to_SalesDelivery/to_SalesText
+	#to_ProductUnitsOfMeasure,
   &$inlinecount=allpages
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
 # @name readProductsViaAPIManagement
-GET {{$dotenv s4hanahost}}/opu/odata/sap/API_PRODUCT_SRV/A_Product
-  ?$top=10
+GET {{$dotenv s4hana_apimgmt_host}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product
+	?$top=10
 #  &$skip=9
   &$filter=Product eq '{{$dotenv Product}}'
 #  &$filter=ProductType eq 'MAT'
@@ -49,7 +50,8 @@ GET {{$dotenv s4hanahost}}/opu/odata/sap/API_PRODUCT_SRV/A_Product
 #  &$filter=ProductType eq 'KMAT'
   &$expand=to_Description,to_Plant,to_ProductSales
   &$inlinecount=allpages
-Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+#  &APIKey={{$dotenv s4hana_apikey}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_apimgmt_password}}
 APIKey: {{$dotenv s4hana_apikey}}
 Accept: application/json
 ###
@@ -133,8 +135,8 @@ Content-Type: application/json
 }
 ###
 # @name createProductViaAPIManagement
-POST {{$dotenv s4hanahost}}/opu/odata/sap/API_PRODUCT_SRV/A_Product
-Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+POST {{$dotenv s4hana_apimgmt_host}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_apimgmt_password}}
 Accept: application/json
 X-CSRF-Token: {{CSRF}}
 APIKey: {{$dotenv s4hana_apikey}}
