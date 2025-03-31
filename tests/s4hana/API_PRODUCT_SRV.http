@@ -39,6 +39,20 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
+# @name readProductsViaAPIManagement
+GET {{$dotenv s4hanahost}}/opu/odata/sap/API_PRODUCT_SRV/A_Product
+  ?$top=10
+#  &$skip=9
+  &$filter=Product eq '{{$dotenv Product}}'
+#  &$filter=ProductType eq 'MAT'
+#  &$filter=ProductType eq 'FERT'
+#  &$filter=ProductType eq 'KMAT'
+  &$expand=to_Description,to_Plant,to_ProductSales
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+APIKey: {{$dotenv s4hana_apikey}}
+Accept: application/json
+###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_ProductPlant
   ?$top=10
   &$filter=Plant eq '{{$dotenv plant}}'
@@ -101,6 +115,29 @@ POST {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+{
+  "Product": "",
+  "ProductType": "MAT",
+  "BaseUnit": "EA",
+  "to_Description": {
+    "results": [
+      {
+        "Product": "",
+        "Language": "EN",
+        "ProductDescription": "test API"
+      }
+    ]
+  }
+}
+###
+# @name createProductViaAPIManagement
+POST {{$dotenv s4hanahost}}/opu/odata/sap/API_PRODUCT_SRV/A_Product
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+APIKey: {{$dotenv s4hana_apikey}}
 Content-Type: application/json
 
 {
