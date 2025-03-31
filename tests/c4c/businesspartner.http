@@ -2,5 +2,7 @@
 GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/CorporateAccountCollection
   ?$top=10
   &$inlinecount=allpages
+  &$filter=AccountID eq '{{$dotenv BuyerPartyID}}'
+  #ChangedOn ge 'Date(1710925885697)'
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 Accept: application/json

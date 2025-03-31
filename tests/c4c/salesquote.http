@@ -2,5 +2,46 @@
 GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/SalesQuoteCollection
   ?$top=10
   &$inlinecount=allpages
+  &$expand=SalesQuoteItem,SalesQuoteReference
+  &$filter=ProcessingTypeCode ne 'ZAG'
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+Accept: application/json
+###
+# @name createSalesQuote
+POST {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/SalesQuoteCollection
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "ProcessingTypeCode": "ZRG",
+  "SalesUnitPartyID": "1010",
+  "DistributionChannelCode": "10",
+  "DivisionCode": "00",
+  "BuyerPartyID": "{{$dotenv BuyerPartyID}}",
+  "SalesQuoteItem": [
+    {
+      "ItemID": "100",
+      "ProductInternalID": "{{$dotenv ProductInternalID}}",
+      "Quantity": "1.00000000000000",
+      "QuantityMeasureUnitCode": "ZPC"
+    }
+  ],
+  "SalesQuoteReference": [
+    {
+      "RelationshipRoleCode": "1",
+      "ID": "{{$dotenv opportunity}}",
+      "TypeCode": "72"
+    }
+  ]
+}
+###
+@salesQuoteID={{createSalesQuote.response.body.d.results.ID}}
+###
+GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/SalesQuoteCollection
+  ?$top=10
+  &$inlinecount=allpages
+  &$expand=SalesQuoteItem,SalesQuoteReference
+  &$filter=ID eq '{{salesQuoteID}}'
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 Accept: application/json
