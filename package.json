@@ -39,6 +39,7 @@
     "mqtt": "^5",
     "mysql": "^2",
     "passport": "^0",
+    "patch-package": "^8.0.0",
     "qs": "^6.11.2",
     "sap-cf-mailer": "^0"
   },
