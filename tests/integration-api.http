@@ -30,8 +30,10 @@ Accept: application/json
 ###
 # @name getIntegrationPackages
 GET {{$dotenv integration_api_url}}/api/v1/IntegrationPackages
-# Not Implemented
-#  ?$expand=CustomTags
+# Not Implemented:
+#  $inlinecount=allpages
+#  $expand=CustomTags
+#  $select=Id,Name
 Authorization: Bearer {{access_token}}
 Accept: application/json
 ###
