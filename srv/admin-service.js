@@ -60,12 +60,12 @@ module.exports = async function (srv) {
   srv.before("NEW", Orders.drafts, async (req) => {
     req.data.ShippingAddress ??= {};
   });
-  */
 
   this.after("each", Orders, (order) => {
     order.VirtualTotalWithTax =
       order.total + (order.total * order.taxPercentage) / 100;
   });
+  */
 
   srv.after("CREATE", Approval, async (req) => {
     LOG.info("Approval - after CREATE. ID: " + req.ID);
