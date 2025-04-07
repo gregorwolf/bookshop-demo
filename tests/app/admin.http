@@ -12,6 +12,7 @@ Authorization: Basic admin:
 
 ### Read Entitysets via OData V4
 GET http://localhost:4004/odata/v4/admin/
+X-Correlation-ID: 123456
 Authorization: Basic admin:
 
 ### Read Entitysets via OData V2
