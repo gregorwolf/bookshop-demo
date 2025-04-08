@@ -39,11 +39,17 @@ Authorization: Bearer {{access_token}}
   "saveToSentItems": "false"
 }
 
+###
+GET https://graph.microsoft.com/v1.0/users/{{$dotenv msgraph_mail_from}}/mailFolders/
+  ?includeHiddenFolders=true
+Authorization: Bearer {{access_token}}
 ### Profile Picture
 GET https://graph.microsoft.com/v1.0/users/{{$dotenv msgraph_mail_from}}/photo/$value
 Authorization: Bearer {{access_token}}
 ###
-GET https://graph.microsoft.com/v1.0/users?$top=1
+GET https://graph.microsoft.com/v1.0/users
+  ?$top=1
+  &$filter=givenName eq 'Gregor'
 Authorization: Bearer {{access_token}}
 ###
 GET https://graph.microsoft.com/v1.0/users/{{$dotenv msgraph_mail_from}}
