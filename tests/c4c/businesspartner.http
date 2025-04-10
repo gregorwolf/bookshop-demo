@@ -1,8 +1,11 @@
-### https://api.sap.com/api/product/overview
+### https://api.sap.com/api/customer/resource/Account
+### https://help.sap.com/doc/d0f9ba822c08405da7d88174b304df84/CLOUD/en-US/index.html#/topic/CorporateAccount
 GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/CorporateAccountCollection
   ?$top=10
   &$inlinecount=allpages
-  &$filter=AccountID eq '{{$dotenv BuyerPartyID}}'
-  #ChangedOn ge 'Date(1710925885697)'
+  &$select=AccountID,BusinessPartnerFormattedName,Street,HouseNumber,StreetPostalCode,CountryCode
+  &$filter=EntityLastChangedOn gt datetimeoffset'2025-01-05T00:00:00Z'
+  #AccountID eq '{{$dotenv BuyerPartyID}}'
+  &$orderby=AccountID
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 Accept: application/json

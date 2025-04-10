@@ -1,7 +1,28 @@
 ### https://api.sap.com/api/product/overview
+### https://help.sap.com/doc/d0f9ba822c08405da7d88174b304df84/CLOUD/en-US/index.html#/topic/Product
+###
 GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/ProductCollection
   ?$top=10
   &$inlinecount=allpages
+#  &$select=ProductID,Description,BaseUOM
   &$expand=ProductOtherDescriptions,ProductQuantityCharacteristics,ProductTextCollection
+  &$filter=EntityLastChangedOn gt datetimeoffset'2025-01-05T00:00:00Z'
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 Accept: application/json
+Accept-Language: en
+###
+# @name readBaseUOMs
+GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/ProductBaseUOMCollection
+  ?$top=100
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+Accept: application/json
+Accept-Language: en
+###
+@uom={{readBaseUOMs.response.body.d.results[0].Code}}
+###
+GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/ProductCollection/$count
+  ?$filter=BaseUOM eq '{{uom}}'
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+Accept: application/json
+Accept-Language: en
