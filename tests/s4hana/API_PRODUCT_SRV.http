@@ -30,15 +30,15 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product
   ?$top=10
 #  &$skip=9
-  &$filter=Product eq '{{$dotenv Product}}'
+#  &$filter=Product eq '{{$dotenv Product}}'
 #  &$filter=ProductType eq 'MAT'
 #  &$filter=ProductType eq 'FERT'
 #  &$filter=ProductType eq 'KMAT'
-  &$expand=to_Description,to_Plant,to_ProductSales,to_ProductBasicText,to_SalesDelivery,to_SalesDelivery/to_SalesText
-	#to_ProductUnitsOfMeasure,
+  &$expand=to_Description,to_Plant,to_ProductSales,to_ProductBasicText,to_SalesDelivery,to_SalesDelivery/to_SalesText,to_ProductUnitsOfMeasure
   &$inlinecount=allpages
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+Accept-Language: en
 ###
 # @name readProductsViaAPIManagement
 GET {{$dotenv s4hana_apimgmt_host}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product
