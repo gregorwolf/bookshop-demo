@@ -1,0 +1,7 @@
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_ORDER_SRV/A_ServiceOrderItem
+  ?$select=ServiceOrder,ServiceOrderItem,ServiceOrderItemIsReleased,to_ReferenceObject/ServiceOrder,to_ReferenceObject/ServiceOrderItem,to_ReferenceObject/ServiceReferenceEquipment,to_ReferenceObject/ServiceRefFunctionalLocation,to_ReferenceObject/SrvcRefObjIsMainObject
+  &$expand=to_ReferenceObject
+  &$filter=ServiceOrder eq '{{$dotenv ServiceOrder}}' and ServiceOrderItem eq '{{$dotenv ServiceOrderItem}}'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
