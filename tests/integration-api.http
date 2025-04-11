@@ -84,15 +84,17 @@ Accept: application/json
 ### Read Logs
 # @name getMessageProcessingLogs
 GET {{$dotenv integration_api_url}}/api/v1/MessageProcessingLogs
-  ?$top=20
+  ?$top=200
   &$inlinecount=allpages
   &$orderby=LogStart desc
-  &$filter=LogStart gt datetime'2025-01-01T00:00'
-  # and Status eq 'FAILED'
+  &$expand=CustomHeaderProperties
+  &$filter=LogStart gt datetime'2025-04-10T00:00' and Status eq 'FAILED' and IntegrationFlowName eq 'Replicate_Service_Order_from_SAP_S4HANA_Cloud_to_SAP_Field_Service_Management'
   # and Status eq 'COMPLETED'
   # and IntegrationFlowName eq 'Employee_Master_Data_from_SAP_SFSF_EC_to_SAP_S4'
   # and IntegrationFlowName eq 'Advance_Shipping_Notification'
   # and IntegrationFlowName eq 'Replicate_Business_Partner_Relationships_from_SAP_S4HANA_Cloud_to_SAP_Field_Service_Management'
+  ### Not implemented:
+  # &$select=IntegrationFlowName,CustomStatus,CustomHeaderProperties/Name,CustomHeaderProperties/Value
 Authorization: Bearer {{access_token}}
 Accept: application/json
 ###
