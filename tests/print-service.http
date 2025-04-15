@@ -23,6 +23,11 @@ Authorization: Bearer {{access_token}}
 @queue={{$dotenv print_queue}}
 @techUserName={{$dotenv print_techUserName}}
 @creator={{$dotenv print_creator}}
+@profileName={{$dotenv print_profileName}}
+###
+# @name getQueueProfiles
+GET {{$dotenv print_endpoint}}/qm/api/v1/rest/queues/{{queue}}/profiles
+Authorization: Bearer {{access_token}}
 ###
 # @name createDocument
 POST {{$dotenv print_endpoint}}/dm/api/v1/rest/print-documents
@@ -38,10 +43,10 @@ If-None-Match: *
 Content-Type: application/json
 
 {
-   "numberOfCopies": 1,
+   "numberOfCopies": 10,
    "username": "{{techUserName}}",
    "qname": "{{queue}}",
-   "profileName": "Defaults",
+   "profileName": "{{profileName}}",
    "metadata": {
       "business_metadata": {
          "business_user": "{{creator}}",
