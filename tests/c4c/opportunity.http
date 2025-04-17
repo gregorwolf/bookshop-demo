@@ -1,13 +1,13 @@
-### https://api.sap.com/api/product/overview
+### https://api.sap.com/api/opportunity/overview
 GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/OpportunityCollection/$count
-  ?$filter=CreationDate gt datetime'2024-07-01T00:00'
+  ?$filter=CreationDate gt datetime'2024-01-01T00:00'
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 ###
 GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/OpportunityCollection
   ?$top=10
   &$inlinecount=allpages
-  #&$filter=CreationDate gt datetime'2024-07-01T00:00'
-  &$filter=ID eq '{{$dotenv opportunity}}'
-  &$expand=OpportunityAttachmentFolder
+  &$filter=CreationDate gt datetime'2024-01-01T00:00' and SalesOrganisationID eq '{{$dotenv SalesOrganisationID}}' and SalesUnitPartyID eq '{{$dotenv SalesUnitPartyID}}' and ExpectedRevenueAmount gt {{$dotenv ExpectedRevenueAmount}}
+  #&$filter=ID eq '{{$dotenv opportunity}}'
+  #&$expand=OpportunityAttachmentFolder
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 Accept: application/json
