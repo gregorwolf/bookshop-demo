@@ -10,16 +10,17 @@ client_id={{$dotenv sm_clientid}}
 &response_type=token
 ### Fill Variables from Response
 @access_token = {{requestAccessToken.response.body.$.access_token}}
-
 ###
 # @name service_offerings
-GET {{$dotenv sm_url}}/v1/service_offerings?fieldQuery=name eq 'service-manager'
+GET {{$dotenv sm_url}}/v1/service_offerings
+  ?fieldQuery=name eq 'service-manager'
 Authorization: Bearer {{access_token}}
 ###
 @serviceOfferingID = {{service_offerings.response.body.items[0].id}}
 ###
 # @name service_offerings_hana
-GET {{$dotenv sm_url}}/v1/service_offerings?fieldQuery=catalog_name eq 'hana'
+GET {{$dotenv sm_url}}/v1/service_offerings
+  ?fieldQuery=catalog_name eq 'hana'
 Authorization: Bearer {{access_token}}
 ###
 @serviceOfferingHanaID = {{service_offerings_hana.response.body.items[0].id}}
