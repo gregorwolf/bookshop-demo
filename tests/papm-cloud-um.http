@@ -122,9 +122,13 @@ GET {{$dotenv papm_um_endpoint}}/sap/ace/ProcessService/RuntimeEnvironments
 Authorization: Bearer {{access_token}}
 ###
 GET {{$dotenv papm_um_endpoint}}/sap/ace/ProcessService/EventLogs
-  ?$top=10
+  ?$top=20
   &$count=true
-  &$filter=event eq 'importEnvironment' or event eq 'restoreDemoData'
+  &$filter=environment eq 'PA' and event eq 'importEnvironment'
+  # Is the environment active or inactive?
+  # and ( event eq 'activate' or event eq 'deactivate' )
+  #event eq 'importEnvironment' or event eq 'restoreDemoData'
+  &$orderby=modifiedAt desc
   &$select=environment,event,modifiedAt,state_code,isFinished,inBackground
 Authorization: Bearer {{access_token}}
 ### Upload Archive from File
