@@ -55,7 +55,7 @@ Authorization: Bearer {{access_token}}
 
 ### Get specific service binding
 GET {{$dotenv sm_url}}/v1/service_bindings
-  ?labelQuery=tenant_id eq 't0'
+  ?labelQuery=tenant_id eq 't1'
 Authorization: Bearer {{access_token}}
 
 ### Get specific service binding
