@@ -13,7 +13,11 @@ client_id={{$dotenv launchpad_clientid}}
 @access_token = {{requestAccessToken.response.body.$.access_token}}
 
 ###
-GET {{$dotenv launchpad_url}}/cdm_import_service/v1/
+GET {{$dotenv launchpad_url}}/cdm_import_service/versions
+Authorization: Bearer {{access_token}}
+Accept: application/json
+###
+GET {{$dotenv launchpad_url}}/cdm_import_service/v2/files/upload
 Authorization: Bearer {{access_token}}
 Accept: application/json
 ###

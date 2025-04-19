@@ -1,0 +1,112 @@
+### Get Access Token for CTMS Service
+# Documentation:
+# https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/7e306250e08340f89d6c103e28840f30.html
+# @name requestCTMSAccessToken
+POST {{$dotenv ctms_tokenendpoint}}/oauth/token
+Authorization: Basic {{$dotenv ctms_clientid}}:{{$dotenv ctms_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+
+### Fill Variables from Response
+@CTMS_access_token = {{requestCTMSAccessToken.response.body.$.access_token}}
+
+###
+GET {{$dotenv ctms_uri}}/v2/nodes/{{$dotenv CTMS_nodeId_dev}}/transportRequests
+  ?status=in,ru,re,su,sk,wa,er,fa,de
+Authorization: Bearer {{CTMS_access_token}}
+Accept: application/json
+### Response:
+#   "message": "Request validation failed. Either a parameter or body format is incorrect",
+#  "errorType": "com.sap.lm.sl.alm.ts.core.exception.service.TsValidationException"
+# when providing the nodeId as PaPM-dev and not 7345
+###
+GET {{$dotenv ctms_uri}}/v2/nodes/{{$dotenv CTMS_nodeId_qas}}/transportRequests
+  ?status=in,ru,re,su,sk,wa,er,fa,de
+Authorization: Bearer {{CTMS_access_token}}
+Accept: application/json
+###
+# @name uploadFile
+POST {{$dotenv ctms_uri}}/v2/files/upload
+Authorization: Bearer {{CTMS_access_token}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="namedUser"
+
+{{$dotenv from}}
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="Profitability_and_Cost_Management_SPCM2409_01.zip"
+Content-Type: application/zip
+
+< /Users/gwolf/Downloads/Profitability_and_Cost_Management_SPCM2409_01.zip
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+@fileId={{uploadFile.response.body.$.fileId}}
+###
+# @name nodeUpload
+POST {{$dotenv ctms_uri}}/v2/nodes/upload
+Authorization: Bearer {{CTMS_access_token}}
+Content-Type: application/json
+
+{
+   "nodeName": "PaPM-dev",
+   "contentType": "APP",
+   "storageType": "FILE",
+   "entries": [
+      {
+         "uri": "{{fileId}}"
+      }
+   ],
+   "description": "Profitability and Cost Management SPCM2409_01",
+   "namedUser": "{{$dotenv from}}"
+}
+###
+@transportRequestId={{nodeUpload.response.body.$.transportRequestId}}
+###
+# @name nodeImportDev
+POST {{$dotenv ctms_uri}}/v2/nodes/{{$dotenv CTMS_nodeId_dev}}/transportRequests/import
+Authorization: Bearer {{CTMS_access_token}}
+Content-Type: application/json
+
+{
+   "namedUser": "{{$dotenv from}}",
+   "transportRequests": [
+      {{transportRequestId}}
+   ]
+}
+###
+@actionIdDev={{nodeImportDev.response.body.$.actionId}}
+###
+GET {{$dotenv ctms_uri}}/v2/actions/{{actionIdDev}}
+Authorization: Bearer {{CTMS_access_token}}
+Accept: application/json
+###
+# @name nodeImportQas
+POST {{$dotenv ctms_uri}}/v2/nodes/{{$dotenv CTMS_nodeId_qas}}/transportRequests/import
+Authorization: Bearer {{CTMS_access_token}}
+Content-Type: application/json
+
+{
+   "namedUser": "{{$dotenv from}}",
+   "transportRequests": [
+      {{transportRequestId}}
+   ]
+}
+
+### Target Destination Endpoint need to provide:
+# /versions
+{
+  "supportedVersions": [
+    {
+      "path": "v2",
+      "version": "2",
+      "features": {
+        "deployAsync": true
+      }
+    }
+  ]
+}
+
+# /v2/files/upload
