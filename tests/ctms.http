@@ -1,4 +1,9 @@
-### Get Access Token for CTMS Service
+###
+### CTMS Service
+###
+### https://api.sap.com/api/TMS_v2/overview
+###
+### Get Access Token
 # Documentation:
 # https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/7e306250e08340f89d6c103e28840f30.html
 # @name requestCTMSAccessToken
