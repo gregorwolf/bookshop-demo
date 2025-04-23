@@ -26,7 +26,7 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MaterialSt
   ?$top=10
   &$expand=to_MatlStkInAcctMod
 #  &$filter=startswith(Material, 'BIKE')
-  &$filter=Material eq 'TG11'
+  &$filter=Material eq '{{$dotenv Product}}'
   &$inlinecount=allpages
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
@@ -34,5 +34,8 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod
   ?$top=10
   &$inlinecount=allpages
+  &$filter=InventoryStockType eq '01' and Plant eq '{{$dotenv plant}}' and StorageLocation eq '{{$dotenv Warehouse}}'
+  # and MaterialBaseUnit eq 'KG'
+  # Material eq '{{$dotenv Product}}' 
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
