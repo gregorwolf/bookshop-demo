@@ -1,3 +1,8 @@
+###
+### Adobe Document Services API
+###
+### https://api.sap.com/api/CF_ADSRestAPI/overview
+### 
 ### Get Access Token using Client Credentials Flow
 # @name requestAccessToken
 POST {{$dotenv ads_api_token_endpoint}}/oauth/token
@@ -13,6 +18,8 @@ grant_type=client_credentials
 ###
 # @name getForms
 GET {{$dotenv ads_api_endpoint}}/v1/forms
+   ?limit=2
+   &offset=2
 Authorization: Bearer {{access_token}}
 ###
 # @name createForm
