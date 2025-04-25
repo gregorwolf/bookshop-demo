@@ -70,29 +70,74 @@ Content-Type: application/json
   "SalesOrganization": "{{$dotenv SalesOrganization}}",
   "DistributionChannel": "10",
   "OrganizationDivision": "00",
+  "SalesOffice": "{{$dotenv SalesOffice}}",
+  "SalesGroup": "{{$dotenv SalesGroup}}",
   "SoldToParty": "{{$dotenv SoldToParty}}",
   "PurchaseOrderByCustomer": "{{$dotenv PurchaseOrderByCustomer}}",
-  "SalesOrderDate": "\/Date(1738678316000)\/",
-  "PricingDate": "\/Date(1738678316000)\/",
-  "RequestedDeliveryDate": "\/Date(1738678316000)\/",
+  "SalesOrderDate": "\/Date(1745588475000)\/",
+  "PricingDate": "\/Date(1745588475000)\/",
+  "RequestedDeliveryDate": "\/Date(1745588475000)\/",
   "CompleteDeliveryIsDefined": true,
   "to_Item": [
     {
-      "SalesOrderItem": "10",
+      "SalesOrderItem": "000010",
       "Material": "{{$dotenv Material}}",
-      "RequestedQuantity": "21",
+      "RequestedQuantity": "1",
       "RequestedQuantityUnit": "PC",
-      "to_PricingElement": [],
+      "to_PricingElement": [
+        {
+           "ConditionType": "PMP0",
+           "ConditionRateValue": "149.50"
+        }
+      ],
       "to_ScheduleLine": []
+    }
+  ],
+  "to_Partner": [
+    {
+      "PartnerFunction": "SP",
+      "Customer": "{{$dotenv SoldToParty}}",
+      "to_Address": [
+        {
+          "OrganizationName1": "First Last",
+          "CityName": "City",
+          "PostalCode": "1234",
+          "StreetName": "Rechnungsgasse",
+          "HouseNumber": "10",
+          "Country": "CH"
+        }
+      ]
+    },
+    {
+      "PartnerFunction": "SH",
+      "Customer": "{{$dotenv SoldToParty}}",
+      "to_Address": [
+        {
+          "OrganizationName1": "First Last",
+          "CityName": "City",
+          "PostalCode": "1234",
+          "StreetName": "Lieferstraße",
+          "HouseNumber": "10",
+          "Country": "CH"
+        }
+      ]
+    }
+  ],
+  "to_Text": [
+    {
+      "Language": "EN",
+      "LongTextID": "TX01",
+      "LongText": "{{$dotenv LongText}}"
     }
   ]
 }
 
 ###
-@salesOrder={{createSalesOrder.response.body.d.SalesOrder}}
+#@salesOrder={{createSalesOrder.response.body.d.SalesOrder}}
+@salesOrder={{$dotenv SalesOrder}}
 ###
 # Read the created Sales Order
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder('{{salesOrder}}')
-  ?$expand=to_Item,to_Item/to_ScheduleLine
+  ?$expand=to_Item,to_Item/to_ScheduleLine,to_Item/to_PricingElement,to_Partner,to_Partner/to_Address,to_PricingElement
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
