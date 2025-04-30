@@ -316,6 +316,10 @@ entity Orders : cuid, managed {
   ShippingAddress     : Composition of one OrderShippingAddress;
   headerText          : LargeString   @title: 'Order Header Text';
 
+  Comments            : Association to many Comments
+                           on Comments.parent = $self
+                                       @title: 'Comments';
+
   @readonly
   @Measures.ISOCurrency           : currency.code
   total               : DecimalFloat;
@@ -422,6 +426,11 @@ entity OrderShippingAddress : cuid, managed {
   @mandatory
   city   : String(60);
 };
+
+entity Comments : cuid, managed {
+  parent  : Association to Orders not null;
+  text    : LargeString;
+}
 
 entity Meterings : cuid {
   tennant     : String(128);
