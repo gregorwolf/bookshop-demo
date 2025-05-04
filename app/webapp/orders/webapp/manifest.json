@@ -166,6 +166,34 @@
                                         "route": "OrderItemsObjectPage"
                                     }
                                 }
+                            },
+                            "controlConfiguration": {
+                                "Comments/@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "columns": {
+                                        "CommentHTML": {
+                                            "header": "Comment",
+                                            "template": "orders.ext.Comment",
+                                            "width": "30%",
+                                            "position": {
+                                                "placement": "Before",
+                                                "anchor": "DataField::createdAt"
+                                            }
+                                        }
+                                    }
+                            }
+                        },
+                            "content": {
+                                "header": {
+                                    "actions": {
+                                        "addComment": {
+                                            "visible": true,
+                                            "enabled": true,
+                                            "requiresSelection": false,
+                                            "text": "Add Comment",
+                                            "press": "orders.ext.ObjectPage.addComment"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

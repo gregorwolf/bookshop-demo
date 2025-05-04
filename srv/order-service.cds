@@ -30,7 +30,8 @@ service OrderService @(
         total + total * taxPercentage / 100, 2
       )            as ComputedTotalWithTax : Decimal(15, 2),
       virtual null as VirtualTotalWithTax  : Decimal(15, 2),
-      *
+      *,
+      Comments
     }
     actions {
       action deleteOrder();
@@ -55,6 +56,7 @@ service OrderService @(
       action setOrderParameters(vipOrder : db.Orders:vipOrder not null @UI.ParameterDefaultValue:false,
                                 employeeOrder : db.Orders:employeeOrder not null @UI.ParameterDefaultValue:true );
       action NewAction(OrderNo : db.Orders:OrderNo not null, CustomerOrderNo : db.Orders:CustomerOrderNo);
+      action addComment(comment : String);
 
     };
 
@@ -76,6 +78,9 @@ service OrderService @(
       *,
       street || ', ' || city as address : String
     };
+
+  entity Comments                  as
+    projection on db.Comments;
 
   entity Books                     as projection on db.Books;
   entity A_SalesOrganizationText   as projection on db.A_SalesOrganizationText;

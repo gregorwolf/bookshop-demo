@@ -366,6 +366,12 @@ annotate OrderService.Orders with @(UI: {
       Label : '{i18n>ShippingAddress}',
       Target: 'ShippingAddress/@UI.Identification'
     },
+    {
+      $Type: 'UI.ReferenceFacet',
+      ID: 'CommentsFacet',
+      Label: '{i18n>Comments}',
+      Target: 'Comments/@UI.LineItem',
+    }
   ],
 
   FieldGroup #OrderValue                 : {Data: [
@@ -659,3 +665,25 @@ annotate OrderService.Tags with {
   }
   ID;
 };
+
+// Add new annotation section for Comments
+annotate OrderService.Comments with @(UI: {
+  LineItem: [
+    {
+      $Type: 'UI.DataField',
+      Value: createdAt,
+      Label: '{i18n>CreatedAt}'
+    },
+    {
+      $Type: 'UI.DataField',
+      Value: createdBy,
+      Label: '{i18n>CreatedBy}'
+    }
+  ],
+  PresentationVariant: {
+    SortOrder: [{
+      Property: createdAt,
+      Descending: true
+    }]
+  }
+});

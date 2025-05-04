@@ -1,0 +1,5 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout">
+	<l:VerticalLayout id="myVL">
+		<FormattedText htmlText="{text}" />
+	</l:VerticalLayout>
+</core:FragmentDefinition>
