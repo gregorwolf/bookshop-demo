@@ -2,14 +2,15 @@
 # @name requestAccessToken
 POST {{$dotenv sm_tokenendpoint}}/oauth/token
 Accept: application/json
+Authorization: Basic {{$dotenv sm_clientid}}:{{$dotenv sm_clientsecret}}
 Content-Type: application/x-www-form-urlencoded
 
 client_id={{$dotenv sm_clientid}}
-&client_secret={{$dotenv sm_clientsecret}}
 &grant_type=client_credentials
-&response_type=token
+#&response_type=token
 ### Fill Variables from Response
 @access_token = {{requestAccessToken.response.body.$.access_token}}
+#@access_token={{$dotenv sm_token}}
 ###
 # @name service_offerings
 GET {{$dotenv sm_url}}/v1/service_offerings
@@ -37,7 +38,7 @@ Authorization: Bearer {{access_token}}
 GET {{$dotenv sm_url}}/v1/service_instances
 Authorization: Bearer {{access_token}}
 ###
-@instanceId = {{serviceInstances.response.body.$.items[0].id}}
+@instanceId={{serviceInstances.response.body.$.items[0].id}}
 ###
 GET {{$dotenv sm_url}}/v1/service_instances
   ?labelQuery=tenant_id eq 't1'
