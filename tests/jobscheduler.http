@@ -1,6 +1,12 @@
 ### Request Access Token
+###
+### Be aware that the OAuth Flow is not supported by the Jobscheduler Plan lite
+### which is available in the SAP BTP Trial Account.
+###
+### The OAuth Flow is only supported by the Jobscheduler Plan standard!
+###
 # @name requestAccessToken
-POST {{$dotenv jobschedulerurl}}/oauth/token
+POST {{$dotenv jobscheduler_tokenendpoint}}/oauth/token
 Accept: application/json
 Authorization: Basic {{$dotenv jobschedulerclientid}}:{{$dotenv jobschedulerclientsecret}}
 Content-Type: application/x-www-form-urlencoded
