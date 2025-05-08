@@ -27,6 +27,37 @@ Authorization: bearer {{access_token}}
 ###
 @jobIdRest = {{getJobs.response.body.results[0].jobId}}
 ###
+DELETE {{$dotenv schedulerUrl}}/scheduler/jobs/{{jobIdRest}}
+Authorization: bearer {{access_token}}
+###
+POST {{$dotenv schedulerUrl}}/scheduler/jobs
+Authorization: bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "name": "getUsers",
+  "description": "cron job that read the users",
+  "action": "{{$dotenv jobscheduler_targeturl}}/odata/v4/catalog/getUsers",
+  "active": true,
+  "httpMethod": "POST",
+  "ansConfig": {
+     "onError": false,
+     "onSuccess": false
+  },
+  "schedules": [
+    {
+      "cron": "* * * * * */5 0",
+      "description": "this schedule runs every 5 minutes",
+      "data": {},
+      "active": true,
+      "startTime": {
+        "date": "2025-05-08 04:30 +0000",
+        "format": "YYYY-MM-DD HH:mm Z"
+      }
+    }
+  ]
+}
+###
 # @name getJobSchedule
 GET {{$dotenv schedulerUrl}}/scheduler/jobs/{{jobIdRest}}/schedules
 Authorization: bearer {{access_token}}
