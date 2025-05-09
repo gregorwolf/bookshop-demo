@@ -11,7 +11,7 @@ grant_type=password
 &response_type=token
 #&login_hint={"origin":"sap.custom"}
 ### Fill Variables from Response
-#@access_token = {{requestAccessTokenPassword.response.body.$.access_token}}
+#@access_token={{requestAccessTokenPassword.response.body.$.access_token}}
 
 ### Get Access Token for PaPM Cloud using OAuth2 client credential flow
 # @name requestAccessTokenClientCredentials
@@ -23,7 +23,9 @@ Content-Type: application/x-www-form-urlencoded
 grant_type=client_credentials
 &response_type=token
 ### Fill Variables from Response
-@access_token = {{requestAccessTokenClientCredentials.response.body.$.access_token}}
+#@access_token={{requestAccessTokenClientCredentials.response.body.$.access_token}}
+@access_token={{$dotenv papm_um_access_token}}
+
 
 ### https://api.sap.com/api/sap_ace_AdministrationService/overview
 GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/
@@ -57,6 +59,7 @@ Content-Type: application/json
 }
 ###
 @containerID={{createContainer.response.body.$.ID}}
+#@containerID={{containerIDfromList}}
 ### Upload File
 PUT {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers(ID='{{containerID}}',IsActiveEntity=false)/file
 Authorization: Bearer {{access_token}}
@@ -84,6 +87,7 @@ GET {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers
 Authorization: Bearer {{access_token}}
 ###
 @containerIDafterActivation={{readContainers.response.body.value[0].ID}}
+#@containerIDafterActivation={{containerIDfromList}}
 @container={{readContainers.response.body.value[0].container}}
 ### Import Environment
 POST {{$dotenv papm_um_endpoint}}/sap/ace/AdministrationService/Containers(ID='{{containerIDafterActivation}}',IsActiveEntity=true)/sap.ace.AdministrationService.importEnvironment
@@ -102,7 +106,10 @@ Authorization: Bearer {{access_token}}
 ### Get Environments
 # @name getEnvironments
 GET {{$dotenv papm_um_endpoint}}/sap/ace/ModelService/Environments
-  ?$filter=environment eq '{{container}}'
+  ?$top=1
+  &$count=true
+  &$filter=environment eq 'PA'
+#  &$filter=environment eq '{{container}}'
 Authorization: Bearer {{access_token}}
 ###
 @environmentID={{getEnvironments.response.body.value[0].ID}}
