@@ -13,6 +13,11 @@ annotate OrderService.Orders with {
 }
 
 annotate OrderService.Orders with @(UI: {
+  // CreateHidden: { $edmJson: { $Path: '/OrderService.EntityContainer/Authorizations/is_admin' } },
+  CreateHidden: { $edmJson: { $Path: '/Authorizations/is_admin' } },
+  // Using $Not doesn't work as no request to /Authorizations is made
+  // CreateHidden : { $edmJson: {$Not: { $Path: '/OrderService.EntityContainer/Authorizations/is_admin'} } },
+  // CreateHidden : { $edmJson: {$Not: { $Path: '/Authorizations/is_admin'} } },
   ////////////////////////////////////////////////////////////////////////////
   //
   //	Lists of Orders

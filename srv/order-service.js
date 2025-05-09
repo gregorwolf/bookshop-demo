@@ -145,23 +145,25 @@ module.exports = async function (srv) {
   });
 
   srv.on("READ", "Authorizations", (req) => {
-    return getAuthorizations(req);
+    const authorizations = getAuthorizations(req);
+    // authorizations.is_admin = false;
+    return authorizations;
   });
 
   srv.on(["addComment"], Orders, async (req) => {
     LOG.info("addComment - Request Parameters:", req.params[0]);
-    
+
     const orderId = req.params[0].ID;
     const commentText = req.data.comment;
     const user = req.user?.id || "Anonymous";
-    
+
     // Create a new comment and associate it with the order
     await INSERT.into("my.bookshop.Comments").entries({
       parent_ID: orderId,
       text: commentText,
-      author: user
+      author: user,
     });
-    
+
     return {}; // Return empty response
   });
 };
