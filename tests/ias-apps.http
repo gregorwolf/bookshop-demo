@@ -1,2 +1,8 @@
+### 
+### Application Configurations API
+### https://api.sap.com/api/SCI_Application_Directory/overview
+###
+### Get all applications
 GET {{$dotenv ias_apps_endpoint}}/Applications/v1/
+#  ?limit=2
 Authorization: Basic {{$dotenv ias_apps_username}}:{{$dotenv ias_apps_password}}
