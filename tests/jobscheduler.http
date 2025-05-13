@@ -5,6 +5,9 @@
 ###
 ### The OAuth Flow is only supported by the Jobscheduler Plan standard!
 ###
+### 
+### For Multitenancy the token endpoint is:
+# jobscheduler_tokenendpoint = https://<subscriber-subdomain>.authentication.<BTP-Region>.hana.ondemand.com/
 # @name requestAccessToken
 POST {{$dotenv jobscheduler_tokenendpoint}}/oauth/token
 Accept: application/json
@@ -30,6 +33,9 @@ Authorization: bearer {{access_token}}
 DELETE {{$dotenv schedulerUrl}}/scheduler/jobs/{{jobIdRest}}
 Authorization: bearer {{access_token}}
 ###
+### jobscheduler_targeturl is filled with the CAP Backend URL. Example:
+### https://dev-azure-dev-mtxs-bookshop-srv.cfapps.eu20.hana.ondemand.com/
+### For debugging https://app.beeceptor.com/ could be used.
 POST {{$dotenv schedulerUrl}}/scheduler/jobs
 Authorization: bearer {{access_token}}
 Content-Type: application/json
