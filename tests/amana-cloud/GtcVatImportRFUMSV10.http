@@ -1,0 +1,46 @@
+###
+GET https://csw-dev-azure.it-cpi023.cfapps.eu20-001.hana.ondemand.com/Operations/com.sap.it.nm.commands.wsdl.WsdlDownloadCommand
+  ?artifactName=GtcVatImportRFUMSV10&servicePath=/GtcVatImportRFUMSV10&includePolicies=true
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+
+
+###
+POST https://csw-dev-azure.it-cpi023-rt.cfapps.eu20-001.hana.ondemand.com/cxf/GtcVatImportRFUMSV10
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+Content-Type: text/xml;charset=UTF-8
+soapaction: "http://com.pwc.webtooltax.interfaces.webservices.gtcvatimportrfumsv10/GtcVatImportRFUMSV10/Import_RFUMSV10"
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:n0="http://amana.de/interfaces/webservices/gtcvatimportrfumsv10/">
+  <soapenv:Header />
+  <soapenv:Body>
+    <n0:EOI_MT_vat_RFUMSV10>
+      <!--1
+      or more repetitions:-->
+      <n0:item>
+        <n0:header>
+          <n0:report_name>RFUMSV10</n0:report_name>
+          <n0:fiscal_year>2013</n0:fiscal_year>
+          <n0:fiscal_month>03</n0:fiscal_month>
+          <n0:period_from>01.03.2013</n0:period_from>
+          <n0:period_to>31.03.2013</n0:period_to>
+          <n0:cim_id>2400</n0:cim_id>
+          <n0:guid></n0:guid>
+          <n0:uname></n0:uname>
+          <n0:date></n0:date>
+          <n0:time></n0:time>
+        </n0:header>
+        <!--1
+        or more repetitions:-->
+        <n0:body>
+          <n0:company_code>1000</n0:company_code>
+          <n0:tax_type>OUTPUT</n0:tax_type>
+          <n0:taxcode>Y9</n0:taxcode>
+          <n0:account>945000</n0:account>
+          <n0:taxbase_amount>3023,67</n0:taxbase_amount>
+          <n0:currency_key>EUR</n0:currency_key>
+        </n0:body>
+      </n0:item>
+    </n0:EOI_MT_vat_RFUMSV10>
+  </soapenv:Body>
+</soapenv:Envelope>
