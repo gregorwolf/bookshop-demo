@@ -1,11 +1,40 @@
 ### https://api.sap.com/api/customer/resource/Account
 ### https://help.sap.com/doc/d0f9ba822c08405da7d88174b304df84/CLOUD/en-US/index.html#/topic/CorporateAccount
+###
+### For Initial Data Load we want to restrict to a specific Sales Office and Distribution Channel
+GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/CorporateAccountSalesDataCollection
+  ?$top=10
+  &$inlinecount=allpages
+  &$select=AccountID
+  &$orderby=EntityLastChangedOn desc
+  &$filter=SalesOfficeID eq '{{$dotenv SalesOfficeID}}' and DistributionChannelCode eq '{{$dotenv DistributionChannelCode}}'
+  # The EntityLastChangedOn for the CorporateAccountSalesDataCollection is not updated when the CorporateAccountCollection is changed
+  # and EntityLastChangedOn gt datetimeoffset'2025-01-05T00:00:00Z'
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+Accept: application/json
+
+### Use the AccountIDs from the previous request to get the CorporateAccountCollection
 GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/CorporateAccountCollection
   ?$top=10
   &$inlinecount=allpages
-  &$select=AccountID,BusinessPartnerFormattedName,Street,HouseNumber,StreetPostalCode,CountryCode
-  &$filter=EntityLastChangedOn gt datetimeoffset'2025-01-05T00:00:00Z'
+  &$select=AccountID,BusinessPartnerFormattedName,Street,HouseNumber,StreetPostalCode,CountryCode,LifeCycleStatusCode,RoleCode
+  &$filter=(AccountID eq '3000370294' or AccountID eq '3000229156') and LifeCycleStatusCode eq '2' and (RoleCode eq 'Z001' or RoleCode eq 'CRM000') 
+  &$expand=CorporateAccountSalesData
+  &$orderby=AccountID
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+Accept: application/json
+### Initial and Delta Load based on client side filter
+GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/CorporateAccountCollection
+  ?$top=10
+  &$inlinecount=allpages
+  &$select=AccountID,BusinessPartnerFormattedName,Street,HouseNumber,StreetPostalCode,CountryCode,LifeCycleStatusCode,CorporateAccountSalesData/SalesOfficeID,CorporateAccountSalesData/DistributionChannelCode
+  &$filter=(RoleCode eq 'Z001' or RoleCode eq 'CRM000') and EntityLastChangedOn gt datetimeoffset'2025-05-05T00:00:00Z'
+  # and LifeCycleStatusCode eq '2'
+  #
+  #&$filter=CorporateAccountSalesData/SalesOfficeID eq '{{$dotenv SalesOfficeID}}'
+  #&$filter=CorporateAccountSalesData/any(g:g/SalesOfficeID eq '{{$dotenv SalesOfficeID}}')
   #AccountID eq '{{$dotenv BuyerPartyID}}'
+  &$expand=CorporateAccountSalesData
   &$orderby=AccountID
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 Accept: application/json
