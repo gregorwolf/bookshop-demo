@@ -3,7 +3,8 @@ GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/SalesQuoteCollection
   ?$top=10
   &$inlinecount=allpages
   &$expand=SalesQuoteItem,SalesQuoteReference
-  &$filter=ProcessingTypeCode ne 'ZAG'
+  &$filter=ID eq '4000003267'
+  #&$filter=ProcessingTypeCode ne 'ZAG'
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 Accept: application/json
 ###
@@ -19,10 +20,15 @@ Content-Type: application/json
   "DistributionChannelCode": "10",
   "DivisionCode": "00",
   "BuyerPartyID": "{{$dotenv BuyerPartyID}}",
+  "RequestedFulfillmentStartDateTime": "2025-05-28T00:00:00Z",
+  "TimeZoneCode": "GMTUK",
+  "ValidToDate": "\/Date(1767139200000)\/",
+  "z_Anfragedatum_KUT": "\/Date(1748217600000)\/",
   "SalesQuoteItem": [
     {
       "ItemID": "100",
       "ProductInternalID": "{{$dotenv ProductInternalID}}",
+      "zk_PositionReference_Quote_KUT": "1.3.4",
       "Quantity": "1.00000000000000",
       "QuantityMeasureUnitCode": "ZPC"
     }
@@ -36,7 +42,13 @@ Content-Type: application/json
   ]
 }
 ###
-@salesQuoteID={{createSalesQuote.response.body.d.results.ID}}
+@salesQuoteLocation={{createSalesQuote.response.headers.Location}}
+@salesQuoteID=4000003302
+#{{createSalesQuote.response.body.d.results.ID}}
+###
+GET {{salesQuoteLocation}}
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+Accept: application/json
 ###
 GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/SalesQuoteCollection
   ?$top=10
