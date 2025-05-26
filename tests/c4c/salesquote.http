@@ -30,6 +30,7 @@ Content-Type: application/json
       "ProductInternalID": "{{$dotenv ProductInternalID}}",
       "zk_PositionReference_Quote_KUT": "1.3.4",
       "Quantity": "1.00000000000000",
+      "InterneNotiz_KUT": "Test Sales Quote Item",
       "QuantityMeasureUnitCode": "ZPC"
     }
   ],
@@ -43,7 +44,7 @@ Content-Type: application/json
 }
 ###
 @salesQuoteLocation={{createSalesQuote.response.headers.Location}}
-@salesQuoteID=4000003302
+@salesQuoteID=4000003285
 #{{createSalesQuote.response.body.d.results.ID}}
 ###
 GET {{salesQuoteLocation}}
@@ -54,6 +55,7 @@ GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/SalesQuoteCollection
   ?$top=10
   &$inlinecount=allpages
   &$expand=SalesQuoteItem,SalesQuoteReference
+  #,SalesQuoteItem/SalesQuoteItemTextCollection,SalesQuoteTextCollection
   &$filter=ID eq '{{salesQuoteID}}'
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 Accept: application/json
