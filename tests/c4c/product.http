@@ -4,12 +4,13 @@
 GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/ProductCollection
   ?$top=10
   &$inlinecount=allpages
-#  &$select=ProductID,Description,BaseUOM
-  &$expand=ProductOtherDescriptions,ProductQuantityCharacteristics,ProductTextCollection
+  #&$select=ProductID,Description,BaseUOM
+  &$expand=ProductOtherDescriptions,ProductQuantityCharacteristics,ProductTextCollection,ProductQuantityConversion,ProductSalesProcessInformation
+  #&$filter=ProductID eq '{{$dotenv ProductID}}'
   &$filter=EntityLastChangedOn gt datetimeoffset'2025-01-05T00:00:00Z'
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 Accept: application/json
-Accept-Language: en
+Accept-Language: de
 ###
 # @name readBaseUOMs
 GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/ProductBaseUOMCollection
