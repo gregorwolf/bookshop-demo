@@ -9,9 +9,27 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata/IWFND/CATALOGSERVICE;v=0002/$metadata
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/IWFND/CATALOGSERVICE;v=0002/ServiceCollection/$count
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+# @name GetServiceCollection
 GET {{$dotenv s4hanahost}}/sap/opu/odata/IWFND/CATALOGSERVICE;v=0002/ServiceCollection
-  ?$top=10
+  ?$top=100
   &$inlinecount=allpages
-#  &$filter=TechnicalServiceName eq 'API_BUSINESS_PARTNER'
+  &$filter=TechnicalServiceName eq '{{$dotenv TechnicalServiceName}}'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+@serviceUrl={{GetServiceCollection.response.body.$.d.results[0].ServiceUrl}}
+###
+# @name entities
+GET {{serviceUrl}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+@entity={{entities.response.body.$.d.EntitySets[0]}}
+###
+GET {{serviceUrl}}/{{entity}}
+  ?$top=10
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
