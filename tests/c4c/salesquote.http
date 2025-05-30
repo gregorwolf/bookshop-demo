@@ -21,7 +21,7 @@ Content-Type: application/json
   "DistributionChannelCode": "10",
   "DivisionCode": "00",
   "BuyerPartyID": "{{$dotenv BuyerPartyID}}",
-  "RequestedFulfillmentStartDateTime": "2025-05-28T00:00:00Z",
+  "RequestedFulfillmentStartDateTime": "2025-06-04T00:00:00Z",
   "TimeZoneCode": "GMTUK",
   "ValidToDate": "\/Date(1767139200000)\/",
   "z_Anfragedatum_KUT": "\/Date(1748217600000)\/",
@@ -51,6 +51,15 @@ Content-Type: application/json
 GET {{salesQuoteLocation}}
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 Accept: application/json
+###
+PATCH {{salesQuoteLocation}}
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "RequestedFulfillmentStartDateTime": "2025-06-05T00:00:00Z"
+}
 ###
 GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/SalesQuoteCollection
   ?$top=10
