@@ -166,7 +166,7 @@ Content-Type: application/json
 }
 --batch_36522ad7-fc75-4b56-8c71-56071383e77b--
 ###
-# ABAP Runtime error 'BEHAVIOR_ILLEGAL_STATEMENT'
+# 
 POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/aps_com_ca_a4c_odata/srvd_a2x/sap/aps_com_ca_a4c_odata/0001/$batch
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 X-CSRF-Token: {{CSRF}}
@@ -227,7 +227,6 @@ Content-Type: application/json
 }
 --batch_36522ad7-fc75-4b56-8c71-56071383e77b--
 ###
-# ABAP Runtime error 'BEHAVIOR_ILLEGAL_STATEMENT'
 POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/aps_com_ca_a4c_odata/srvd_a2x/sap/aps_com_ca_a4c_odata/0001/$batch
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 X-CSRF-Token: {{CSRF}}
