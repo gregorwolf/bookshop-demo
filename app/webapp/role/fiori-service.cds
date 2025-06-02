@@ -46,13 +46,15 @@ annotate AdminService.Roles with @(UI: {
       $Type : 'UI.DataFieldForAction',
       Label : '{i18n>rolesCountUp}',
       Action: 'AdminService.EntityContainer/rolesCountUp',
-      Inline: false
+      Inline: false,
+      InvocationGrouping: #ChangeSet
     },
     {
       $Type : 'UI.DataFieldForAction',
       Label : '{i18n>rolesCountDown}',
       Action: 'AdminService.EntityContainer/rolesCountDown',
-      Inline: false
+      Inline: false,
+      InvocationGrouping: #ChangeSet
     },
     {
       $Type : 'UI.DataFieldForAction',

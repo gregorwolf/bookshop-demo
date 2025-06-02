@@ -330,7 +330,8 @@
       }
     },
     "odata": {
-      "version": "v4"
+      "version": "v4",
+      "batch_limit": 50
     }
   },
   "sapux": [
