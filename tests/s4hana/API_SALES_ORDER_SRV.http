@@ -48,6 +48,10 @@ Content-Type: application/json
 #< ./default-env-API_SALES_ORDER_SRV-create.json
 #< ./API_SALES_ORDER_SRV-create.json
 < ./API_SALES_ORDER_SRV-create-2.json
+#< ./API_SALES_ORDER_SRV-create-with-payment-plan.json
+# Returns:
+# CX_GOAL_EXC - Entity EPAY is not available
+# in S/4HANA Public Cloud Learning Hub System
 ###
 @salesOrderFromFile={{createSalesOrderFromFile.response.body.d.SalesOrder}}
 ###

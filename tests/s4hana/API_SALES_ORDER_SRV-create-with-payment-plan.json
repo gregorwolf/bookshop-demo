@@ -1,0 +1,41 @@
+{
+  "SalesOrderType": "OR",
+  "SalesOrderTypeInternalCode": "TA",
+  "SalesOrganization": "1010",
+  "DistributionChannel": "10",
+  "OrganizationDivision": "00",
+  "SoldToParty": "10100003",
+  "PurchaseOrderByCustomer": "PO-GROUP-88",
+  "SalesOrderDate": "/Date(1749071315000)/",
+  "PricingDate": "/Date(1749071315000)/",
+  "RequestedDeliveryDate": "/Date(1749071315000)/",
+  "ShippingCondition": "01",
+  "CompleteDeliveryIsDefined": true,
+  "to_Item": [
+    {
+      "SalesOrder": "10",
+      "SalesOrderItem": "10",
+      "Material": "TG11",
+      "RequestedQuantity": "100",
+      "RequestedQuantityUnit": "PC",
+      "to_ScheduleLine": [
+        {
+          "SalesOrder": "10",
+          "SalesOrderItem": "10",
+          "ScheduleLine": "1",
+          "RequestedDeliveryDate": "/Date(1749071315000)/",
+          "ConfirmedDeliveryDate": null,
+          "OrderQuantityUnit": "PC",
+          "ScheduleLineOrderQuantity": "100"
+        }
+      ]
+    }
+  ],
+  "to_PaymentPlanItemDetails": [
+    {
+      "ElectronicPaymentType": "DPVI",
+      "AuthorizationByDigitalPaytSrvc": "ILZSGWLACY",
+      "MaximumToBeAuthorizedAmount": "123.45"
+    }
+  ]
+}
