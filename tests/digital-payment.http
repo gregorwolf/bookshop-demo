@@ -1,0 +1,60 @@
+### Template for .env file
+# Copy this to .env file and fill in the values
+dpa_tokenendpoint=
+dpa_clientid=
+dpa_clientsecret=
+dpa_url=
+### Get Access Token for Destination Service
+# Documentation:
+# https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/7e306250e08340f89d6c103e28840f30.html
+# @name requestDestinationAccessToken
+POST {{$dotenv dpa_tokenendpoint}}/oauth/token
+Authorization: Basic {{$dotenv dpa_clientid}}:{{$dotenv dpa_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+### Fill Variables from Response
+@dpa_access_token = {{requestDestinationAccessToken.response.body.$.access_token}}
+### Checks the external payment authorizations supplied at the PSP and provides SAP digital payments add-on tokens for them.
+# @name getforauthorization
+POST {{$dotenv dpa_uri}}/core/v1/tokens/getforauthorization
+Authorization: Bearer {{dpa_access_token}}
+Content-Type: application/json
+
+{
+  "Authorizations": [
+    {
+      "AuthorizationByPaytSrvcPrvdr": "98644GTSV364",
+      "AuthorizationCurrency": "USD",
+      "AuthorizedAmountInAuthznCrcy": "123.45",
+      "DigitalPaymentAuthorizationType": "DP2P",
+      "MerchantAccount": "SHOP_USD",
+      "PaymentServiceProvider": "DPXX"
+    }
+  ]
+}
+### Checks the authorization provided and the related card at the PSP, and provides an SAP digital payments add-on token for the authorization and the related card
+# @name getforauthorization
+POST {{$dotenv dpa_uri}}/core/v1/tokens/getforpaymentcardwithauthorization
+Authorization: Bearer {{dpa_access_token}}
+Content-Type: application/json
+
+{
+  "PaymentCardsWithAuthorization": [
+    {
+      "AuthorizationByPaytSrvcPrvdr": "auth_34874383",
+      "AuthorizationCurrency": "EUR",
+      "AuthorizedAmountInAuthznCrcy": "112.33",
+      "DigitalPaymentCommerceType": "ECOMMERCE",
+      "DigitalPaymentSessionType": "ONLINE",
+      "MerchantAccount": "MerchantUSD",
+      "PaymentCardContext": {
+        "registrationRequest": "9bda25c3-c873-49e9-875f-b0fdd25c05fe"
+      },
+      "PaymentServiceProvider": "DPXX",
+      "PaytCardByPaytServiceProvider": "CR87QHB7JTRSC",
+      "PaytCardRegnLifeCycleType": "01"
+    }
+  ]
+}
