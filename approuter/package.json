@@ -6,7 +6,7 @@
     "@sap/approuter": "^20"
   },
   "engines": {
-    "node": "^20"
+    "node": "^22"
   },
   "scripts": {
     "start": "node node_modules/@sap/approuter/approuter.js"
