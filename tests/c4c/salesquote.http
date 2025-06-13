@@ -5,7 +5,7 @@ GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/SalesQuoteCollection
   &$expand=SalesQuoteItem,SalesQuoteReference,SalesQuoteParty
   &$filter=ID eq '4000003307'
   #&$filter=ProcessingTypeCode ne 'ZAG' and SalesOfficeID eq '{{$dotenv SalesOfficeID}}'
-  &$orderby=CreationDateTime desc
+  #&$orderby=CreationDateTime desc
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 Accept: application/json
 ###
@@ -35,6 +35,11 @@ Content-Type: application/json
       "Quantity": "1.00000000000000",
       "InterneNotiz_KUT": "Test Sales Quote Item",
       "QuantityMeasureUnitCode": "ZPC"
+    },
+    {
+      "ItemID": "200",
+      "ProcessingTypeCode": "AGTX",
+      "Description": "Textposition"
     }
   ],
   "SalesQuoteParty": [
@@ -57,6 +62,7 @@ Content-Type: application/json
 #{{createSalesQuote.response.body.d.results.ID}}
 ###
 GET {{salesQuoteLocation}}
+  ?$expand=SalesQuoteItem,SalesQuoteReference,SalesQuoteParty
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 Accept: application/json
 ###
