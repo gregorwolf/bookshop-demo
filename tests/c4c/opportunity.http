@@ -6,19 +6,19 @@ Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/OpportunityCollection
   ?$top=1
   &$inlinecount=allpages
-  &$filter=CreationDate gt datetime'2023-01-01T00:00' and SalesOrganisationID eq '{{$dotenv SalesOrganisationID}}' and SalesUnitPartyID eq '{{$dotenv SalesUnitPartyID}}' and ExpectedRevenueAmount gt {{$dotenv ExpectedRevenueAmount}}
+#  &$filter=CreationDate gt datetime'2023-01-01T00:00' and SalesOrganisationID eq '{{$dotenv SalesOrganisationID}}' and SalesUnitPartyID eq '{{$dotenv SalesUnitPartyID}}' and ExpectedRevenueAmount gt {{$dotenv ExpectedRevenueAmount}}
   &$orderby=CreationDate
   # and year(CreationDate) eq 2023
   # Error in filter System Query, Operation failed::Function 'year' not supported in ABAP select options
   # CreationDate gt datetime'2023-01-01T00:00' and 
-  #&$filter=ID eq '{{$dotenv opportunity}}'
+  &$filter=ID eq '{{$dotenv opportunity}}'
   # and CreationDate lt datetime'2024-01-01T00:00' 
-  &$expand=OpportunityAttachmentFolder
+  &$expand=OpportunityExternalParty
+  #,OpportunityAttachmentFolder
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 Accept: application/json
 ### 252288
 @ObjectID=0238EB247ACE1EEDA2D4158D38D85CA1
-###
 ###
 POST {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/OpportunityCollection('{{ObjectID}}')/OpportunityAttachmentFolder
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
