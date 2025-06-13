@@ -1,3 +1,7 @@
+# https://api.sap.com/api/API_SERVICE_ORDER_SRV/overview
+# Communication Scenario
+# Service Order OData Integration (SAP_COM_0350)
+# Service - Repair Order Integration (SAP_COM_0742)
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_ORDER_SRV/A_ServiceOrderItem
   ?$select=ServiceOrder,ServiceOrderItem,ServiceOrderItemIsReleased,to_ReferenceObject/ServiceOrder,to_ReferenceObject/ServiceOrderItem,to_ReferenceObject/ServiceReferenceEquipment,to_ReferenceObject/ServiceRefFunctionalLocation,to_ReferenceObject/SrvcRefObjIsMainObject
@@ -5,3 +9,26 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_ORDER_SRV/A_ServiceOrde
   &$filter=ServiceOrder eq '{{$dotenv ServiceOrder}}' and ServiceOrderItem eq '{{$dotenv ServiceOrderItem}}'
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_ORDER_SRV/A_ServiceOrder('{{$dotenv ServiceOrder}}')
+  ?$expand=to_ReferenceObject
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### Get CSRF Token
+# @name getCSRF
+HEAD {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_ORDER_SRV/A_ServiceOrder
+X-CSRF-Token: Fetch
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Read Token to Variable
+@CSRF={{getCSRF.response.headers.x-csrf-token}}
+###
+# @name simulateSalesOrder
+PATCH {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_ORDER_SRV/A_ServiceOrder('{{$dotenv ServiceOrder}}')
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+{
+  "FSMServiceCall": "364"
+}
