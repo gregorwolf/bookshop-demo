@@ -5,7 +5,7 @@
   "repository": "https://github.com/gregorwolf/bookshop-demo.git",
   "license": "ISC",
   "engines": {
-    "node": "^20"
+    "node": "^22"
   },
   "files": [
     "db",
@@ -21,9 +21,9 @@
     "@sap-cloud-sdk/http-client": "^3",
     "@sap-cloud-sdk/mail-client": "^3",
     "@sap-cloud-sdk/util": "^3",
-    "@sap/cds": "^8",
+    "@sap/cds": "^9",
     "@sap/cds-common-content": "^2",
-    "@sap/cds-hana": "^2",
+    "@cap-js/hana": "^2",
     "@sap/jobs-client": "^1",
     "@sap/logging": "^8",
     "@sap/xsenv": "^5",
@@ -43,10 +43,10 @@
     "sap-cf-mailer": "^0"
   },
   "devDependencies": {
-    "@cap-js/sqlite": "^1",
+    "@cap-js/sqlite": "^2",
     "@openui5/ts-types": "^1.108.0",
     "@sap-cloud-sdk/generator": "^3",
-    "@sap/cds-dk": "^8",
+    "@sap/cds-dk": "^9",
     "@sap/datasphere-cli": "^2025",
     "@sap/graph-toolkit": "^3",
     "@sap/ux-specification": "^1.120.0",
