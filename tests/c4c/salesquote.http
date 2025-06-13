@@ -17,6 +17,8 @@ Content-Type: application/json
 
 {
   "ProcessingTypeCode": "ZRG",
+  "SalesOrganisationID": "1010",
+  "SalesOfficeID": "101010",
   "SalesUnitPartyID": "1010",
   "DistributionChannelCode": "10",
   "DivisionCode": "00",
