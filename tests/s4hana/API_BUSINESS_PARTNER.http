@@ -16,6 +16,10 @@ GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTN
   &$inlinecount=allpages
 APIKey: {{$dotenv apikey}}
 Accept: application/json
+###
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BPIntlAddressVersion/$count
+APIKey: {{$dotenv apikey}}
+Accept: application/json
 ### S/4HANA Cloud
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
