@@ -109,7 +109,7 @@
     "generate-odata-client:GWSAMPLE_BASIC": "generate-odata-client -i srv/external/GWSAMPLE_BASIC -o srv/cloud-sdk-clients --overwrite",
     "generate-odata-client:PRODUCT_0002": "generate-odata-client -i srv/external/PRODUCT_0002 -o srv/cloud-sdk-clients --overwrite --verbose --skipValidation --optionsPerService -t",
     "build": "run-s build:clean build:copycsntoproxy",
-    "build:clean": "cds build --clean",
+    "build:clean": "cds build",
     "build:xs-security": "cds compile srv/ --to xsuaa > xs-security.json",
     "build:cf": "cp mta-cf.yaml mta.yaml && mbt build -p=cf -e cf-service-broker-private.mtaext && rm mta.yaml && npm install",
     "build:xsa": "cp mta-xsa.yaml mta.yaml && mbt build -p=xsa && rm mta.yaml",
