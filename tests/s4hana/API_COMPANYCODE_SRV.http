@@ -20,25 +20,6 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CHARTOFACCOUNTS_SRV/A_ChartOfAc
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
-GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_GLACCOUNTINCHARTOFACCOUNTS_SRV/A_GLAccountInChartOfAccounts
-  ?$inlinecount=allpages
-  &$top=10
-Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
-Accept: application/json
-###
-GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_GLACCOUNTINCHARTOFACCOUNTS_SRV/A_GLAccountInChartOfAccounts
-  ?$inlinecount=allpages
-  &$filter=ChartOfAccounts eq 'YCOA'
-  &$top=200
-Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
-Accept: application/json
-###
-GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_GLACCOUNTINCHARTOFACCOUNTS_SRV/A_GLAccountText
-  ?$inlinecount=allpages
-  &$top=10
-Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
-Accept: application/json
-###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_Customer
   ?$inlinecount=allpages
   &$top=10

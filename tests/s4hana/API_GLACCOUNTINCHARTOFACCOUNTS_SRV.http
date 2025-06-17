@@ -1,0 +1,21 @@
+### https://api.sap.com/api/API_GLACCOUNTINCHARTOFACCOUNTS_SRV/overview
+### Communication Scenario SAP_COM_0087
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_GLACCOUNTINCHARTOFACCOUNTS_SRV/A_GLAccountInChartOfAccounts
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_GLACCOUNTINCHARTOFACCOUNTS_SRV/A_GLAccountInChartOfAccounts
+  ?$inlinecount=allpages
+  &$filter=ChartOfAccounts eq 'YCOA'
+  &$top=200
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_GLACCOUNTINCHARTOFACCOUNTS_SRV/A_GLAccountText
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
