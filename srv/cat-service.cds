@@ -102,7 +102,7 @@ service CatalogService @(impl: './cat-service.js') {
     };
 
   @requires_: 'authenticated-user'
-  action   submitOrder(book : Books:ID, amount : Integer);
+  action   submitOrder(book : Books : ID, amount : Integer);
 
   action   multipleOrders(numberOfOrders : Integer);
 
@@ -142,4 +142,44 @@ service CatalogService @(impl: './cat-service.js') {
         is_booksadmin : Boolean;
   };
 
+  @readonly
+  entity Genres                 as projection on db.Genres;
+
 }
+
+
+// Tell Fiori about the structure of the hierarchy
+annotate CatalogService.Genres with @Aggregation.RecursiveHierarchy #GenresHierarchy: {
+  ParentNavigationProperty: parent, // navigates to a node's parent
+  NodeProperty            : ID, // identifies a node, usually the key
+};
+
+// Fiori expects the following to be defined explicitly, even though they're always the same
+extend CatalogService.Genres with @(
+  // The columns expected by Fiori to be present in hierarchy entities
+  Hierarchy.RecursiveHierarchy #GenresHierarchy          : {
+    LimitedDescendantCount: LimitedDescendantCount,
+    DistanceFromRoot      : DistanceFromRoot,
+    DrillState            : DrillState,
+    LimitedRank           : LimitedRank
+  },
+  // Disallow filtering on these properties from Fiori UIs
+  Capabilities.FilterRestrictions.NonFilterableProperties: [
+    'LimitedDescendantCount',
+    'DistanceFromRoot',
+    'DrillState',
+    'LimitedRank'
+  ],
+  // Disallow sorting on these properties from Fiori UIs
+  Capabilities.SortRestrictions.NonSortableProperties    : [
+    'LimitedDescendantCount',
+    'DistanceFromRoot',
+    'DrillState',
+    'LimitedRank'
+  ],
+) columns { // Ensure we can query these fields from database
+  null as LimitedDescendantCount : Int16,
+  null as DistanceFromRoot       : Int16,
+  null as DrillState             : String,
+  null as LimitedRank            : Int16,
+};

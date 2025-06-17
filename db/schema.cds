@@ -18,63 +18,69 @@ using {ZPDCDS_SRV.SEPMRA_I_Product_E} from '../srv/external/ZPDCDS_SRV.csn';
  * serialized.
  */
 entity Approval : managed, cuid {
-  approver          : User          @(title: 'Approver', );
-  changedEntity     : String(255)   @(title: 'Changed Entity', );
-  changedEntityKey  : LargeString   @(title: 'Changed Entity Key', );
-  changedEntityData : LargeString   @(title: 'Changed Entity Data', );
-  testDecimalFloat  : DecimalFloat  @(title: 'Test Decimal Float', );
+  approver          : User          @(title: 'Approver',
+  );
+  changedEntity     : String(255)   @(title: 'Changed Entity',
+  );
+  changedEntityKey  : LargeString   @(title: 'Changed Entity Key',
+  );
+  changedEntityData : LargeString   @(title: 'Changed Entity Data',
+  );
+  testDecimalFloat  : DecimalFloat  @(title: 'Test Decimal Float',
+  );
   testDecimal       : Decimal(9, 2) @(title: 'Test Decimal (9,2)');
-  status            : String(1)     @(title: 'Status', )
+  status            : String(1)     @(title: 'Status',
+  )
   enum {
 
     @(title: 'Requested')
-    requested = 'R';
+  requested = 'R';
 
     @(title: 'Pending')
-    pending   = 'P';
+  pending = 'P';
 
     @(title: 'Approved')
-    approved  = 'A';
+  approved = 'A';
 
     @(title: 'Rejected')
-    rejected  = 'N';
+  rejected = 'N';
   } default 'R';
 };
 
 entity Books : managed {
-  key ID                             : Integer;
-      title                          : localized String(111);
-      descr                          : localized String(1111);
-      genre                          : Association to Genres;
-      stock                          : Integer;
-      stockTarget                    : Integer;
+  key     ID                        : Integer;
+          title                     : localized String(111);
+          descr                     : localized String(1111);
+          genre                     : Association to Genres;
+          stock                     : Integer;
+          stockTarget               : Integer;
 
-      @title                        : 'Related Book'
-      relatedBook                    : Association to one Books;
+          @title: 'Related Book'
+          relatedBook               : Association to one Books;
 
-      @sap.unit                     : 'currency_code'
-      @Semantics.amount.currencyCode: 'currency_code'
-      @Measures.ISOCurrency         : currency_code
-      price                          : DecimalFloat;
+          @sap.unit                     : 'currency_code'
+          @Semantics.amount.currencyCode: 'currency_code'
+          @Measures.ISOCurrency         : currency_code
+          price                     : DecimalFloat;
 
-      @Common.IsCurrency
-      @sap.semantics                : 'currency-code'
-      @Semantics.currencyCode
-      currency                       : Currency;
-      virtual virtualFromDB          : String default 'Value from DB';
-      virtual semanticURLtoPublisher : String;
-      weight                         : DecimalFloat  @title: 'Weight (DecimalFloat)';
-      height                         : Double        @title: 'Height (Double)';
-      width                          : Decimal(9, 2) @title: 'Width (Decimal(9,2))';
-      visible                        : Boolean       @title: 'Visible (Boolean)';
-      releaseDate                    : DateTime      @title: 'Release Date (DateTime)';
-      readingTime                    : Time          @title: 'Reading Time (Time)';
-      author                         : Association to one Authors;
-      publisher                      : Association to one Publishers;
-      plants                         : Association to many BookPlants
-                                         on plants.book = $self;
-      to_BooksAuthorsAssignment      : Association to BooksAuthorsAssignment
-                                         on to_BooksAuthorsAssignment.ASSOC_Book = $self;
+          @Common.IsCurrency
+          @sap.semantics                : 'currency-code'
+          @Semantics.currencyCode
+          currency                  : Currency;
+  virtual virtualFromDB             : String default 'Value from DB';
+  virtual semanticURLtoPublisher    : String;
+          weight                    : DecimalFloat  @title: 'Weight (DecimalFloat)';
+          height                    : Double        @title: 'Height (Double)';
+          width                     : Decimal(9, 2) @title: 'Width (Decimal(9,2))';
+          visible                   : Boolean       @title: 'Visible (Boolean)';
+          releaseDate               : DateTime      @title: 'Release Date (DateTime)';
+          readingTime               : Time          @title: 'Reading Time (Time)';
+          author                    : Association to one Authors;
+          publisher                 : Association to one Publishers;
+          plants                    : Association to many BookPlants
+                                        on plants.book = $self;
+          to_BooksAuthorsAssignment : Association to BooksAuthorsAssignment
+                                        on to_BooksAuthorsAssignment.ASSOC_Book = $self;
 };
 
 @cds.autoexpose
@@ -122,28 +128,15 @@ entity Authors : managed {
   SemanticObject: 'genres',
 }
 entity Genres : sap.common.CodeList {
-        @title                : '{i18n>genreID}'
-        @Common.SemanticObject: genreSemanticObject
-  key ID                          : Integer               @sap.hierarchy.node.for;
+          @title                : '{i18n>genreID}'
+          @Common.SemanticObject: genreSemanticObject
+  key     ID                  : Integer               @sap.hierarchy.node.for;
 
-        @title                : '{i18n>parent}'
-      parent                      : Association to Genres @sap.hierarchy.parent.node.for;
-      children                    : Composition of many Genres
-                                      on children.parent = $self;
-      drillState                  : String default 'leaf';
-      nodeType                    : String(1)             @(title: 'nodeType', )
-      enum {
-        requested = 'F'
+          @title                : '{i18n>parent}'
+          parent              : Association to Genres @sap.hierarchy.parent.node.for;
 
-        @(title: 'Folder');
-        pending   = 'L'                                   @(title: 'Leaf');
-      } default 'F';
-
-        @title                : '{i18n>nodeType_FC}'
-      virtual nodeType_FC         : Integer;
-
-        @title                : '{i18n>SemanticObject}'
-      virtual genreSemanticObject : String;
+          @title: '{i18n>SemanticObject}'
+  virtual genreSemanticObject : String;
 }
 
 entity Publishers : managed {
@@ -317,8 +310,8 @@ entity Orders : cuid, managed {
   headerText          : LargeString   @title: 'Order Header Text';
 
   Comments            : Association to many Comments
-                           on Comments.parent = $self
-                                       @title: 'Comments';
+                          on Comments.parent = $self
+                                      @title: 'Comments';
 
   @readonly
   @Measures.ISOCurrency           : currency.code
@@ -409,27 +402,30 @@ annotate Tags with {
 ]}
 entity OrderItems : cuid {
   parent    : Association to Orders not null;
-  itemNo    : Integer not null @(title: 'itemNo', );
+  itemNo    : Integer not null @(title: 'itemNo',
+  );
   book      : Association to Books;
-  product   : SEPMRA_I_Product_E:Product;
+  product   : SEPMRA_I_Product_E : Product;
   amount    : Integer;
   netAmount : Decimal(9, 2);
 }
 
 entity OrderShippingAddress : cuid, managed {
-  @(UI: {Placeholder: '{i18n>placeholderStreet}'})
-  @(title: 'Street', )
+  @(UI   : {Placeholder: '{i18n>placeholderStreet}'})
+  @(title: 'Street',
+  )
   @mandatory
   street : String(60);
 
-  @(title: 'City', )
+  @(title: 'City',
+  )
   @mandatory
   city   : String(60);
 };
 
 entity Comments : cuid, managed {
-  parent  : Association to Orders not null;
-  text    : LargeString;
+  parent : Association to Orders not null;
+  text   : LargeString;
 }
 
 entity Meterings : cuid {
