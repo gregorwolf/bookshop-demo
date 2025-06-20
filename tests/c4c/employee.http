@@ -1,0 +1,11 @@
+### https://api.sap.com/api/employeeanduser/overview
+### https://help.sap.com/doc/d0f9ba822c08405da7d88174b304df84/CLOUD/en-US/index.html#/topic/Employee
+###
+GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/EmployeeCollection
+  ?$top=10
+  &$inlinecount=allpages
+#  &$filter=FirstName eq '{{$dotenv FirstName}}'
+#  &$filter=UserID eq '{{$dotenv UserID}}'
+  &$filter=Email eq '{{$dotenv email}}'
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+Accept: application/json
