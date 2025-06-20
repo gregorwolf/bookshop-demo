@@ -46,6 +46,10 @@ Content-Type: application/json
     {
       "RoleCode": "{{$dotenv RoleCode}}",
       "PartyID": "{{$dotenv PartyID}}"
+    },
+    {
+      "RoleCode": "{{$dotenv RoleCodeOfferManager}}",
+      "PartyID": "{{$dotenv RoleCodePartyID}}"
     }
   ],
   "SalesQuoteReference": [
