@@ -13,7 +13,7 @@ GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/OpportunityCollection
   # CreationDate gt datetime'2023-01-01T00:00' and 
   &$filter=ID eq '{{$dotenv opportunity}}'
   # and CreationDate lt datetime'2024-01-01T00:00' 
-  &$expand=OpportunityExternalParty
+  &$expand=OpportunityExternalParty,OpportunitySalesTeamParty
   #,OpportunityAttachmentFolder
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 Accept: application/json
