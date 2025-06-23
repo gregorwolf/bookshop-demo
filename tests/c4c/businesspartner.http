@@ -1,6 +1,8 @@
 ### https://api.sap.com/api/customer/resource/Account
 ### https://help.sap.com/doc/d0f9ba822c08405da7d88174b304df84/CLOUD/en-US/index.html#/topic/CorporateAccount
 ###
+GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/$metadata
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 ### For Initial Data Load we want to restrict to a specific Sales Office and Distribution Channel
 GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/CorporateAccountSalesDataCollection
   ?$top=10
