@@ -10,7 +10,12 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_INFORECORD_PROCESS_SRV/A_PurchasingInfoRecord
   ?$top=10
+#  ?$top=1
+#  &$skip=43785
   &$inlinecount=allpages
+#  &$filter=PurchasingInfoRecord eq '{{$dotenv PurchasingInfoRecord}}'
+  &$filter=IsDeleted eq false
+#  &$expand=to_PurgInfoRecdOrgPlantData,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPurOrgText,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPrcgCndnValidity,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPrcgCndnValidity/to_PurInfoRecdPrcgCndn,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPrcgCndnValidity/to_PurInfoRecdPrcgCndn/to_PurgInfoPricingCndnRecdScale,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPrcgCndnValidity/to_PurInfoRecdPrcgCndn/to_PurInfoRecdSuplmntPrcgCndn
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
@@ -22,7 +27,12 @@ Accept: application/json
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_INFORECORD_PROCESS_SRV/A_PurgInfoRecdOrgPOText
   ?$top=10
+  #&$skip=10000
   &$inlinecount=allpages
+  #&$filter=PurchasingInfoRecord eq '{{$dotenv PurchasingInfoRecord}}'
+  &$filter=Language eq 'EN' and (PurchasingOrganization eq '2210' or PurchasingOrganization eq '1020')
+  #PurchasingOrganization eq '0000'
+  #
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
@@ -35,8 +45,11 @@ Accept: application/json
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_INFORECORD_PROCESS_SRV/A_PurInfoRecdPrcgCndn
   ?$top=10
+#  ?$top=2000
+  &$skip=46000
   &$inlinecount=allpages
-  &$expand=to_PurgInfoPricingCndnRecdScale,to_PurInfoRecdSuplmntPrcgCndn
+  &$filter=ConditionIsDeleted eq false
+#  &$expand=to_PurgInfoPricingCndnRecdScale,to_PurInfoRecdSuplmntPrcgCndn
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
