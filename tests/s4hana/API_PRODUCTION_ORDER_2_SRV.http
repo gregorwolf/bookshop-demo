@@ -1,0 +1,74 @@
+# https://api.sap.com/api/API_PRODUCTION_ORDER_2_SRV/overview
+# SAP_COM_0104
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ORDER_2_SRV/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ORDER_2_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ORDER_2_SRV/A_ProductionOrder_2
+  ?$top=1000
+  &$inlinecount=allpages
+  &$select=ManufacturingOrder,to_ProdnOrdHeaderSerialNumber/ManufacturingOrder,to_ProdnOrdHeaderSerialNumber/ManufacturingOrderItem
+  &$expand=to_ProdnOrdHeaderSerialNumber
+  #,to_ProductionOrderComponent,to_ProductionOrderComponentExt,to_ProductionOrderComponentExt4,to_ProductionOrderItem,to_ProductionOrderItem/to_ProdnOrderItemSerialNumber,to_ProductionOrderOperation,to_ProductionOrderStatus,to_ProductionRsceTools
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ORDER_2_SRV/A_ProdnOrderItemSerialNumber
+  ?$top=10
+  &$inlinecount=allpages
+#  &$filter=ManufacturingOrderItem eq ''
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ORDER_2_SRV/A_ProductionOrderComponent_2
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ORDER_2_SRV/A_ProductionOrderComponent_3
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ORDER_2_SRV/A_ProductionOrderComponent_4
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ORDER_2_SRV/A_ProductionOrderItem_2
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ORDER_2_SRV/A_ProductionOrderOperation_2
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ORDER_2_SRV/A_ProductionOrderStatus_2
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ORDER_2_SRV/A_ProductionRsceTools_2
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
