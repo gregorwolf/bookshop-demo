@@ -1,0 +1,15 @@
+# https://api.sap.com/api/C_TRIALBALANCE_CDS/overview
+# SAP_COM_0303
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/C_TRIALBALANCE_CDS/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/C_TRIALBALANCE_CDS/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/C_TRIALBALANCE_CDS/Ledger
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
