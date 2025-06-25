@@ -13,3 +13,11 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/C_TRIALBALANCE_CDS/Ledger
   &$top=10
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/C_TRIALBALANCE_CDS/C_TRIALBALANCE(P_FromPostingDate=datetime'2025-01-01T00%3A00%3A00',P_ToPostingDate=datetime'2025-10-01T00%3A00%3A00')/Results
+  ?$inlinecount=allpages
+  &$top=10
+  &$filter=CompanyCode eq '{{$dotenv CompanyCode}}' and Ledger eq '{{$dotenv Ledger}}'
+#  &$select=CompanyCode,GLAccount,StartingBalanceAmtInCoCodeCrcy_F,DebitAmountInCoCodeCrcy_F,CreditAmountInCoCodeCrcy_F,EndingBalanceAmtInCoCodeCrcy_F
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
