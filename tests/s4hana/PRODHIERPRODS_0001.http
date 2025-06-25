@@ -1,0 +1,17 @@
+# https://api.sap.com/api/PRODHIERPRODS_0001/overview
+# SAP_COM_0009
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_nodes_srv/srvd_a2x/sap/prodhiernodes/0001/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_nodes_srv/srvd_a2x/sap/prodhiernodes/0001/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_nodes_srv/srvd_a2x/sap/prodhiernodes/0001/ProdUniversalHierarchy
+  ?$top=10
+  &$filter=ProdUnivHierarchy eq '{{$dotenv ProdUnivHierarchy}}'
+  &$expand=_ProdUnivHierNodeByHierID,_Text
+  &$count=true
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
