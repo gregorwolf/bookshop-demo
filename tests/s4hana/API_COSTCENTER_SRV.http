@@ -1,3 +1,5 @@
+# https://api.sap.com/api/API_COSTCENTER_SRV/overview
+# SAP_COM_0087
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_COSTCENTER_SRV/$metadata
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
