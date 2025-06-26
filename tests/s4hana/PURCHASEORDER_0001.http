@@ -1,5 +1,18 @@
 ### Cloud: https://api.sap.com/api/CE_PURCHASEORDER_0001/overview
 ### OnPrem: 
+
+###
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/purchaseorder/0001/
+APIKey: {{$dotenv apikey}}
+Accept: application/json
+###
+### Returns:
+### The entity A_PURCHASEORDERPARTNER_2 can only be accessed by navigation or expand
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/purchaseorder/0001/PurchaseOrderPartner
+  ?$top=10
+  &$count=true
+APIKey: {{$dotenv apikey}}
+Accept: application/json
 ### S/4HANA Cloud
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/purchaseorder/0001/
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
@@ -11,7 +24,7 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/purchaseorder/0001/PurchaseOrder
   ?$top=1
   &$orderby=PurchaseOrder desc
-  &$filter=PurchaseOrder eq '4500000002'
+#  &$filter=PurchaseOrder eq '4500000002'
   &$expand=_PurchaseOrderItem($expand=_DeliveryAddress(),_PurchaseOrder(),_PurchaseOrderInvoicingPlan(),_PurchaseOrderItemNote(),_PurchaseOrderScheduleLineTP(),_PurOrdAccountAssignment(),_PurOrdPricingElement()),_PurchaseOrderNote($expand=*),_PurchaseOrderPartner($expand=*),_SupplierAddress($expand=*)
   #_PurchaseOrderItem,_PurchaseOrderPartner,_SupplierAddress,_PurchaseOrderNote
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
