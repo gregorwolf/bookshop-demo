@@ -1,0 +1,35 @@
+# https://api.sap.com/api/API_BILL_OF_MATERIAL_SRV_0002/overview
+# SAP_COM_0105
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/MaterialBOM
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+### Read MaterialBOMSubItem entities
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/MaterialBOMSubItem
+    ?$top=10
+    &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+### Filter MaterialBOM by Plant
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/MaterialBOM
+    ?$filter=Plant eq '1000'
+    &$top=5
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### Filter MaterialBOMItem by Material
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/MaterialBOMItem
+    ?$filter=BillOfMaterialComponent eq 'RM001'
+    &$top=5
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
