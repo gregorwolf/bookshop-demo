@@ -1,0 +1,16 @@
+# https://api.sap.com/api/API_FINPLANNINGENTRYITEM_SRV/overview
+# SAP_COM_0087
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_FINPLANNINGENTRYITEM_SRV/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_FINPLANNINGENTRYITEM_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_FINPLANNINGENTRYITEM_SRV/A_FinPlanningEntryItem
+  ?$inlinecount=allpages
+  &$top=1
+  &$filter=CompanyCode eq '2210' and FiscalYearPeriod eq '001/2025'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
