@@ -8,9 +8,41 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_FINPLANNINGENTRYITEM_SRV/$metadata
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_FINPLANNINGENTRYITEM_SRV/A_CompanyCode
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_FINPLANNINGENTRYITEM_SRV/A_CostCenter
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### A_FinPlanEntryItemVariableFix
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_FINPLANNINGENTRYITEM_SRV/A_FinPlanEntryItemVariableFix
+  ?$inlinecount=allpages
+  &$top=10
+  &$filter=CompanyCode eq '2210' and FiscalYearPeriod eq '001/2025'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### A_FinPlanningEntryItem
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_FINPLANNINGENTRYITEM_SRV/A_FinPlanningEntryItem
   ?$inlinecount=allpages
-  &$top=1
+  &$top=10
   &$filter=CompanyCode eq '2210' and FiscalYearPeriod eq '001/2025'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### A_GLAccountInChartOfAccounts
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_FINPLANNINGENTRYITEM_SRV/A_GLAccountInChartOfAccounts
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### A_ProfitCenter
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_FINPLANNINGENTRYITEM_SRV/A_ProfitCenter
+  ?$inlinecount=allpages
+  &$top=10
+  &$filter=ProfitCenter eq '102000'
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
