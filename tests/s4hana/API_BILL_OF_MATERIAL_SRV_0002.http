@@ -23,13 +23,47 @@ Accept: application/json
 
 ### Filter MaterialBOM by Plant
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/MaterialBOM
-    ?$filter=Plant eq '1000'
+    ?$inlinecount=allpages
+    &$filter=Plant eq '1020' or Plant eq '2210'
     &$top=5
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ### Filter MaterialBOMItem by Material
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/MaterialBOMItem
-    ?$filter=BillOfMaterialComponent eq 'RM001'
+    ?$inlinecount=allpages
+    &$filter=BillOfMaterialComponent eq 'RM001'
+    &$top=5
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/MaterialBOMItemLongText
+    ?$inlinecount=allpages
+    &$filter=Plant eq '1020' or Plant eq '2210'
+    &$top=5
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### MaterialBOMLongText
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/MaterialBOMLongText
+    ?$inlinecount=allpages
+    &$filter=Plant eq '1020' or Plant eq '2210'
+    &$top=5
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### MaterialBOMSubItem
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/MaterialBOMSubItem
+    ?$inlinecount=allpages
+    &$top=5
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### A_BillOfMaterialUsage
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/A_BillOfMaterialUsage
+    ?$inlinecount=allpages
+    &$top=5
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### MBOMItmObjDpnAssignment
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/MBOMItmObjDpnAssignment
+    ?$inlinecount=allpages
     &$top=5
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
