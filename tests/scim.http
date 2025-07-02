@@ -3,6 +3,8 @@ GET {{$dotenv ias_scim_endpoint}}/scim/Schemas
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ### Read Users
 GET {{$dotenv ias_scim_endpoint}}/scim/Users
+# Entra ID Provisioning connection test
+#  ?filter=userName+eq+%22AzureAD_Test-340bd08e-3b52-41f3-bd3a-d3de24759387%22
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ### Read Users with Filter
 GET {{$dotenv ias_scim_endpoint}}/scim/Users
