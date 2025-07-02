@@ -7,6 +7,13 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/$metadata
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
-GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/GetPDF?BillingDocument='{{$dotenv BillingDocument}}'
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/GetPDF
+  ?BillingDocument='{{$dotenv BillingDocument}}'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument
+  ?$filter=BillingDocument eq '{{$dotenv BillingDocument}}'
+  &$expand=to_Item,to_Item/to_ItemText,to_Item/to_Partner,to_Partner,to_PricingElement,to_Text
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
