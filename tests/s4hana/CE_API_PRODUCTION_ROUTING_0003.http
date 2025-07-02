@@ -1,0 +1,22 @@
+# https://api.sap.com/api/sap-s4-CE_API_PRODUCTION_ROUTING_0003-v3/overview
+# SAP_COM_0519
+###
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ROUTING;v=0003/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ROUTING;v=0003/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ROUTING;v=0003/ProductionRoutingHeader
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ROUTING;v=0003/ProductionRouting
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
