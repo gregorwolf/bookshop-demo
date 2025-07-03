@@ -1,0 +1,16 @@
+# https://api.sap.com/api/CE_PRODUCTIONVERSION_0001/overview
+# SAP_COM_0519
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_production_version/srvd_a2x/sap/productionversion/0001/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_production_version/srvd_a2x/sap/productionversion/0001/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_production_version/srvd_a2x/sap/productionversion/0001/ProductionVersion
+  ?$count=true
+  &$top=10
+  &$expand=*
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
