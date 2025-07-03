@@ -1,0 +1,28 @@
+# https://api.sap.com/api/API_PROFITCENTER_SRV/overview
+# SAP_COM_0087
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PROFITCENTER_SRV/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PROFITCENTER_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PROFITCENTER_SRV/A_ProfitCenter
+  ?$inlinecount=allpages
+  &$top=10
+  &$expand=to_PrftCtrCompanyCodeAssignment,to_Text
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PROFITCENTER_SRV/A_ProfitCenterText
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PROFITCENTER_SRV/A_PrftCtrCompanyCodeAssignment
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json

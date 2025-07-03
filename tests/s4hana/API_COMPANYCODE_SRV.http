@@ -32,18 +32,6 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_Supplier
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
-GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PROFITCENTER_SRV/A_PrftCtrCompanyCodeAssignment
-  ?$inlinecount=allpages
-  &$top=10
-Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
-Accept: application/json
-###
-GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PROFITCENTER_SRV/A_ProfitCenterText
-  ?$inlinecount=allpages
-  &$top=10
-Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
-Accept: application/json
-###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESSAREA_SRV/A_BusinessAreaText
   ?$inlinecount=allpages
   &$top=10
