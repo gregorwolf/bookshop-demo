@@ -1,0 +1,29 @@
+# Cloud: https://api.sap.com/api/API_CLFN_CHARACTERISTIC_SRV/overview
+# SAP_COM_0163
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_CHARACTERISTIC_SRV/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_CHARACTERISTIC_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_CHARACTERISTIC_SRV/A_ClfnCharcDescForKeyDate
+    ?$inlinecount=allpages
+    &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_CHARACTERISTIC_SRV/A_ClfnCharacteristicForKeyDate
+    ?$inlinecount=allpages
+    &$top=10
+    &$filter=CharcInternalID eq '{{$dotenv CharcInternalID}}'
+    &$expand=to_CharacteristicDesc,to_CharacteristicReference,to_CharacteristicRestriction,to_CharacteristicValue
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_CHARACTERISTIC_SRV/A_ClfnCharcRefForKeyDate
+    ?$inlinecount=allpages
+    &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
