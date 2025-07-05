@@ -9,12 +9,13 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_GLACCOUNTLINEITEM/GLAccountLineItem/$count
-  ?$filter=(CompanyCode eq '1020' or CompanyCode eq '2210') and (FiscalYear eq '2023' or FiscalYear eq '2024' or FiscalYear eq '2025')
+  ?$filter=(CompanyCode eq '1020' or CompanyCode eq '2210') and (FiscalYear eq '2023' or FiscalYear eq '2024' or FiscalYear eq '2025') and Customer ne ''
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_GLACCOUNTLINEITEM/GLAccountLineItem
   ?$inlinecount=allpages
   &$top=10
   &$filter=(CompanyCode eq '1020' or CompanyCode eq '2210') and (FiscalYear eq '2023' or FiscalYear eq '2024' or FiscalYear eq '2025')
+  # and Customer ne '' and AccountingDocument eq '1800012227'
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
