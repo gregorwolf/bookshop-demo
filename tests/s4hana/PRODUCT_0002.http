@@ -1,5 +1,6 @@
-### Cloud: https://api.sap.com/api/CE_PRODUCT_0002/overview
-### OnPrem: https://api.sap.com/api/OP_PRODUCT_0002/overview
+# Cloud: https://api.sap.com/api/CE_PRODUCT_0002/overview
+# SAP_COM_0009
+# OnPrem: https://api.sap.com/api/OP_PRODUCT_0002/overview
 # Sandbox
 GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0002/
 APIKey: {{$dotenv apikey}}

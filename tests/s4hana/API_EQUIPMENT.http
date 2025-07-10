@@ -1,0 +1,63 @@
+# https://api.sap.com/api/API_EQUIPMENT/overview
+# SAP_COM_0395
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_EQUIPMENT/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_EQUIPMENT/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_EQUIPMENT/Equipment
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_EQUIPMENT/EquipClassCharacteristicValue
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_EQUIPMENT/EquipmentClass
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_EQUIPMENT/EquipmentClassCharacteristic
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_EQUIPMENT/EquipmentLongText
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_EQUIPMENT/EquipmentPartner
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_EQUIPMENT/EquipmentWarranty
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_EQUIPMENT/EquipProductionResourceTool
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
