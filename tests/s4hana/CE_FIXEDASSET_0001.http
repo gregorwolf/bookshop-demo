@@ -1,0 +1,37 @@
+# https://api.sap.com/api/sap-s4-CE_FIXEDASSET_0001-v1/overview
+# SAP_COM_0563
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_fixedasset/srvd_a2x/sap/fixedasset/0001/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_fixedasset/srvd_a2x/sap/fixedasset/0001/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_fixedasset/srvd_a2x/sap/fixedasset/0001/FixedAsset
+  ?$top=10
+  &$count=true
+  &$expand=*
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_fixedasset/srvd_a2x/sap/fixedasset/0001/FixedAssetAssignment
+  ?$top=10
+  &$count=true
+  &$expand=*
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_fixedasset/srvd_a2x/sap/fixedasset/0001/FixedAssetValuation
+  ?$top=10
+  &$count=true
+  &$expand=*
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_fixedasset/srvd_a2x/sap/fixedasset/0001/FixedAssetTimeBasedValuation
+  ?$top=10
+  &$count=true
+  &$expand=*
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
