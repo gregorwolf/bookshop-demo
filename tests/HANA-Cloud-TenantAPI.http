@@ -1,0 +1,35 @@
+# Tenant Management Service
+# https://api.sap.com/api/TenantAPI/overview
+### Request Access Token
+# @name requestAccessToken
+POST {{$dotenv hana_cloud_api_oauth_url}}/oauth/token
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{$dotenv hana_cloud_multitenant_client_id}}
+&client_secret={{$dotenv hana_cloud_multitenant_client_secret}}
+&response_type=token
+&grant_type=client_credentials
+### Fill Variables from Response
+@access_token={{requestAccessToken.response.body.$.access_token}}
+### Read tenants
+# @name readTenants
+GET {{$dotenv hana_cloud_api_url}}/tenants/v2/tenants
+  ?serviceInstanceID={{$dotenv hana_cloud_api_instance}}
+Authorization: Bearer {{access_token}}
+### 
+@tenantId={{readTenants.response.body.$.[0].id}}
+###
+GET {{$dotenv hana_cloud_api_url}}/tenants/v2/operations
+  ?tenantID={{tenantId}}
+Authorization: Bearer {{access_token}}
+###
+# @name readContainers
+GET {{$dotenv hana_cloud_api_url}}/tenants/v2/tenants/{{tenantId}}/containers/
+  Authorization: Bearer {{access_token}}
+###
+@containerId={{readContainers.response.body.$.[0].id}}
+####
+# @name readCredentials
+GET {{$dotenv hana_cloud_api_url}}/tenants/v2/tenants/{{tenantId}}/containers/{{containerId}}/credentials
+Authorization: Bearer {{access_token}}
