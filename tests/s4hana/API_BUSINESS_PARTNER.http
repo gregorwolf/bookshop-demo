@@ -61,6 +61,7 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_CustomerText
   ?$inlinecount=allpages
   &top=10
+#  &$format=xlsx
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
@@ -70,7 +71,7 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPart
   &$inlinecount=allpages
   &$expand=to_BusinessPartnerTax,to_BusinessPartnerAddress,to_BusinessPartnerAddress/to_AddressUsage,to_BusinessPartnerAlias,to_BusinessPartnerRole,to_Customer,to_Customer/to_CustomerSalesArea,to_Customer/to_CustomerSalesArea/to_PartnerFunction,to_Customer/to_CustomerSalesArea/to_SalesAreaTax,to_Customer/to_CustAddrDepdntExtIdentifier,to_Customer/to_CustomerCompany,to_Customer/to_CustomerCompany/to_CompanyText,to_Customer/to_CustomerText
   #,to_Customer/to_CustomerSalesArea/to_SalesAreaText
-  &top=10
+  &$top=10
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
@@ -79,8 +80,9 @@ Accept: application/json
 # @name getSalesAreaText
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_CustomerSalesAreaText
   ?$inlinecount=allpages
-  &$filter=Customer eq '{{$dotenv BusinessPartner}}'
-  &top=10
+#  &$filter=Customer eq '{{$dotenv BusinessPartner}}'
+  &$top=10
+#  &$format=xlsx
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
