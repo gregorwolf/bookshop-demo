@@ -1,6 +1,6 @@
-### Cloud: https://api.sap.com/api/CE_PURCHASEORDER_0001/overview
-### OnPrem: 
-
+# Cloud: https://api.sap.com/api/CE_PURCHASEORDER_0001/overview
+# SAP_COM_0053
+# OnPrem: 
 ###
 GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/purchaseorder/0001/
 APIKey: {{$dotenv apikey}}
