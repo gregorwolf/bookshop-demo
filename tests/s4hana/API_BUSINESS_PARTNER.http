@@ -92,6 +92,11 @@ X-CSRF-Token: Fetch
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ### Read Token to Variable
 @CSRF={{getCSRF.response.headers.x-csrf-token}}
+### Delete A_CustomerSalesAreaText
+DELETE {{toSpecificSalesAreaTextUri}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
 ### Create A_CustomerSalesAreaText
 POST {{toSalesAreaTextUri}}
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
