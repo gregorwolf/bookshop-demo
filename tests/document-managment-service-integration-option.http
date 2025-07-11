@@ -1,3 +1,7 @@
+#
+# Document Management Service Integration Option
+# https://api.sap.com/package/SAPDocumentManagementServiceIntegrationOption/rest
+# 
 @folder=folder02
 ### Get Access Token (Cloud Foundry using Client Credentials)
 # @name requestAccessToken
@@ -18,7 +22,8 @@ Accept: application/json
 Authorization: Bearer {{access_token}}
 
 ###
-@cmisRepositoryId={{repositories.response.body.repoAndConnectionInfos.repository.id}}
+#@cmisRepositoryId={{repositories.response.body.$.repoAndConnectionInfos[1].repository.id}}
+@cmisRepositoryId={{$dotenv dms_cmisRepositoryId}}
 ###
 POST {{$dotenv dms_api}}/rest/v2/repositories
 Accept: application/json
