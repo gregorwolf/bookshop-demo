@@ -6,3 +6,7 @@
 GET {{$dotenv ias_apps_endpoint}}/Applications/v1/
 #  ?limit=2
 Authorization: Basic {{$dotenv ias_apps_username}}:{{$dotenv ias_apps_password}}
+### Get one application by applicationIdentifier
+GET {{$dotenv ias_apps_endpoint}}/Applications/v1/{{$dotenv ias_applicationIdentifier}}
+#  ?limit=2
+Authorization: Basic {{$dotenv ias_apps_username}}:{{$dotenv ias_apps_password}}
