@@ -86,6 +86,16 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_CustomerSale
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
+# @name getBuPaIdentification
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BuPaIdentification
+  ?$inlinecount=allpages
+  &$select=BusinessPartner,BPIdentificationType,BPIdentificationNumber,ValidityEndDate
+  &$filter=BusinessPartner eq '{{$dotenv BusinessPartner}}' and BPIdentificationType eq '{{$dotenv BPIdentificationType}}'
+  &$top=10
+#  &$format=xlsx
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
 @toSpecificSalesAreaTextUri={{getSalesAreaText.response.body.d.results[0].__metadata.uri}}
 ### Get CSRF Token
 # @name getCSRF
