@@ -2,7 +2,6 @@
 # Document Management Service Integration Option
 # https://api.sap.com/package/SAPDocumentManagementServiceIntegrationOption/rest
 # 
-@folder=folder02
 ### Get Access Token (Cloud Foundry using Client Credentials)
 # @name requestAccessToken
 POST {{$dotenv dms_auth_url}}/oauth/token
@@ -53,8 +52,16 @@ Authorization: Bearer {{access_token}}
 GET {{$dotenv dms_api}}/rest/v2/repositories/{{cmisRepositoryId}}
 Accept: application/json
 Authorization: Bearer {{access_token}}
-
-
+###
+# @name repositoriesExport
+POST {{$dotenv dms_api}}/rest/v3/repositories/export/{{cmisRepositoryId}}
+Accept: application/json
+Authorization: Bearer {{access_token}}
+###
+# @name repositoriesExportStatus
+GET {{$dotenv dms_api}}/rest/v3/repositories/export/status/{{cmisRepositoryId}}
+Accept: application/json
+Authorization: Bearer {{access_token}}
 ###
 GET {{$dotenv dms_api}}
 Accept: application/json
@@ -64,10 +71,13 @@ GET {{$dotenv dms_api}}/browser
 Accept: application/json
 Authorization: Bearer {{access_token}}
 ###
+# @name browser
 GET {{$dotenv dms_api}}/browser/{{$dotenv dms_externalId}}/root
 Accept: application/json
 Authorization: Bearer {{access_token}}
-
+###
+#@folder={{$dotenv dms_folder}}
+@folder={{browser.response.body.$.objects[1].object.properties.cmis:name.value}}
 ### does the folder already exist?
 GET {{$dotenv dms_api}}/browser/{{$dotenv dms_externalId}}/root/{{folder}}
 Accept: application/json
