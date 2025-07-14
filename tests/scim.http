@@ -95,6 +95,10 @@ GET {{$dotenv ias_scim_endpoint}}/scim/Groups
   ?filter=displayName co "SAP_BTP_"
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ###
+GET {{$dotenv ias_scim_endpoint}}/scim/Groups
+  ?filter=urn:ietf:params:scim:schemas:extension:sap:2.0:Group:applicationId eq "{{$dotenv ias_applicationIdentifier}}"
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+###
 GET {{$dotenv ias_scim_endpoint}}/Applications/v1/
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ### 
