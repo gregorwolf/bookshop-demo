@@ -12,7 +12,7 @@ APIKey: {{$dotenv apikey}}
 GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartner
   ?$top=10
   &$filter=CreationDate gt datetime'2020-09-08T00:00' and BusinessPartnerCategory eq '1' and Customer ne ''
-  &$expand=to_AddressIndependentEmail,to_BusinessPartnerAddress,to_BusinessPartnerAddress/to_EmailAddress
+  &$expand=to_AddressIndependentEmail,to_BusinessPartnerAddress,to_BusinessPartnerAddress/to_EmailAddress,to_BusinessPartnerRole
   &$inlinecount=allpages
 APIKey: {{$dotenv apikey}}
 Accept: application/json
@@ -91,6 +91,15 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BuPaIdentifi
   ?$inlinecount=allpages
   &$select=BusinessPartner,BPIdentificationType,BPIdentificationNumber,ValidityEndDate
   &$filter=BusinessPartner eq '{{$dotenv BusinessPartner}}' and BPIdentificationType eq '{{$dotenv BPIdentificationType}}'
+  &$top=10
+#  &$format=xlsx
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+# @name getBusinessPartnerRole
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartnerRole
+  ?$inlinecount=allpages
+  &$filter=BusinessPartnerRole eq '{{$dotenv BusinessPartnerRole}}'
   &$top=10
 #  &$format=xlsx
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
