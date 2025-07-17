@@ -11,5 +11,54 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PURCHASECONTRACT_PROCESS_SRV;v=0002/A_PurchaseContract
   ?$top=10
   &$inlinecount=allpages
+  #&$filter=PurchaseContract eq '{{$dotenv PurchaseContract}}'
+  &$filter=ValidityEndDate gt datetime'2025-01-01T00:00' and PurchasingDocumentDeletionCode eq ''
+  &$expand=to_PurchaseContractItem,to_PurchaseContractItem/to_PurContrItemCndnValdty,to_PurchaseContractItem/to_PurContrItemCndnValdty/to_PurContrItmCndnAmount,to_PurchaseContractItem/to_PurContrItemCndnValdty/to_PurContrItmCndnAmount/to_PurContrItmCndnScales,to_PurContrHdrCndnValdty,to_Purctrnotes,to_PurCtrPartners
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PURCHASECONTRACT_PROCESS_SRV;v=0002/A_PurContrItmCndnValdty
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PURCHASECONTRACT_PROCESS_SRV;v=0002/A_PurContrItmCndnScales
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PURCHASECONTRACT_PROCESS_SRV;v=0002/A_PurContrItmCndnValdty
+  ?$top=5000
+  &$format=xlsx
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PURCHASECONTRACT_PROCESS_SRV;v=0002/A_PurCtrAddress
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PURCHASECONTRACT_PROCESS_SRV;v=0002/A_PurCtrAddress
+  ?$top=5000
+  &$format=xlsx
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PURCHASECONTRACT_PROCESS_SRV;v=0002/A_PurContrHdrCndnAmount
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PURCHASECONTRACT_PROCESS_SRV;v=0002/A_PurContrHdrCndnScale
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PURCHASECONTRACT_PROCESS_SRV;v=0002/A_PurContrHdrCndnValdty
+  ?$top=10
+  &$inlinecount=allpages
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
