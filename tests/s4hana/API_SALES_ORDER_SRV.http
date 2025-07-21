@@ -44,6 +44,15 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrderIte
   &$inlinecount=allpages
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrderPrecdgProcFlow
+  ?$top=10
+  &$inlinecount=allpages
+  &$filter=PrecedingDocument eq '3340'
+  # Query operation on element 'OVERALLSDPROCESSSTATUS' of entity 'A_SALESORDERPRECDGPROCFLOW' not implemented
+  # &$filter=OverallSDProcessStatus eq 'C'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
 ### Get CSRF Token
 # @name getCSRF
 HEAD {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder
