@@ -108,6 +108,29 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/AttachmentHarmonizedOperationSet
+  ?$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### Method 'ATTACHMENTFORSAP_GET_ENTITYSET' not implemented in data provider class
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/AttachmentForSAPObjectNodeTypeSet
+  ?$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### Method 'SAPOBJECTDOCUMEN_GET_ENTITYSET' not implemented in data provider class
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/SAPObjectDocumentTypeSet
+  ?$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/A_DocumentInfoRecordAttch
+  ?$top=10
+  &$inlinecount=allpages
+  &$expand=DocumentInfoRecordToAttachmentNavigation
+  &$filter=DocumentInfoRecordDocNumber eq '{{$dotenv DocumentInfoRecordDocNumber}}' and DocumentStatusName eq 'Released'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/$metadata
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
