@@ -40,6 +40,15 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/p
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/purchaseorder/0001/PurOrderItemPricingElement
+  ?$top=1
+#  &$skip=287316
+  &$filter=PurchaseOrder eq '4501054377' and ConditionType eq 'ZEWZ'
+  &$count=true
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept-Language: de
+Accept: application/json
+###
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/purchaseorder/0001/PurchaseOrderItemNote
   ?$top=1
   &$count=true
