@@ -35,3 +35,11 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/A_ClfnClassFor
   &$inlinecount=allpages
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/A_ClfnProduct
+  ?$top=10
+  &$inlinecount=allpages
+  &$filter=Product eq '{{$dotenv Product}}'
+  &$expand=to_Description,to_Plant,to_ProductCharc, ,to_ProductSalesTax,to_SalesDelivery
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
