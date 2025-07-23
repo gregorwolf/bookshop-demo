@@ -39,6 +39,15 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder
+  ?$top=10
+  &$skip=0
+  &$filter={{$dotenv A_SalesOrderFilter}}
+  &$expand=to_Item,to_Item/to_ScheduleLine,to_Item/to_Partner,to_Partner
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrderItem
   ?$top=10
   &$inlinecount=allpages
