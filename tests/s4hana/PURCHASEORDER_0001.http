@@ -25,12 +25,16 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/p
   ?$top=1
   &$count=true
   &$orderby=PurchaseOrder desc
-  &$filter=(PurchasingProcessingStatus eq '03' or PurchasingProcessingStatus eq '04')
-  # and Supplier eq ''
+  #&$filter=(PurchasingProcessingStatus eq '03' or PurchasingProcessingStatus eq '04')
   #&$filter=PurchaseOrderSubtype eq ''
-  #&$filter=PurchaseOrder eq '4501014184'
-  # &$expand=_PurchaseOrderItem($expand=_DeliveryAddress(),_PurchaseOrder(),_PurchaseOrderInvoicingPlan(),_PurchaseOrderItemNote(),_PurchaseOrderScheduleLineTP(),_PurOrdAccountAssignment(),_PurOrdPricingElement()),_PurchaseOrderNote($expand=*),_PurchaseOrderPartner($expand=*),_SupplierAddress($expand=*)
-  &$expand=_PurchaseOrderPartner,_SupplierAddress,_PurchaseOrderItem($expand=_DeliveryAddress),_PurchaseOrderNote
+  &$filter=Supplier eq '' and CreationDate ge 2024-01-01 
+  # &$filter=PurchaseOrder eq '{{$dotenv PurchaseOrder}}'
+  &$expand=_PurchaseOrderItem($expand=_DeliveryAddress(),_PurchaseOrder(),_PurchaseOrderInvoicingPlan(),_PurchaseOrderItemNote(),_PurchaseOrderScheduleLineTP(),_PurOrdAccountAssignment(),_PurOrdPricingElement()),_PurchaseOrderNote($expand=*),_PurchaseOrderPartner($expand=*),_SupplierAddress($expand=*)
+  #&$expand=_PurchaseOrderPartner,_SupplierAddress,_PurchaseOrderItem($expand=_DeliveryAddress),_PurchaseOrderNote
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/purchaseorder/0001/{{$dotenv PurchaseOrderQuery}}
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
@@ -68,6 +72,12 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/purchaseorder/0001/POSubcontractingComponent
+  ?$top=1
+  &$count=true
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### The entity A_PURCHASEORDERPARTNER_2 can only be accessed by navigation or expand
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_purchaseorder_2/srvd_a2x/sap/purchaseorder/0001/PurchaseOrderPartner
   ?$top=1
   &$count=true
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
