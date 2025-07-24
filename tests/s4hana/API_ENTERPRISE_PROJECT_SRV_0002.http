@@ -1,0 +1,34 @@
+# https://api.sap.com/api/API_ENTERPRISE_PROJECT_SRV_0002/overview
+# SAP_COM_0308
+# 
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_ENTERPRISE_PROJECT_SRV;v=0002/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_ENTERPRISE_PROJECT_SRV;v=0002/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+Entities:
+      "A_EnterpriseProjBlkFunc",
+      "A_EnterpriseProjectElement",
+      "A_EnterpriseProjectJVA",
+      "A_EnterpriseProjectRole",
+      "A_EnterpriseProjectTeamMember",
+      "A_EnterpriseProject",
+      "A_EntProjectElementJVA",
+      "A_EntProjectPublicSector",
+      "A_EntProjElmntBlockFunc",
+      "A_EntProjElmntCnfgrdWrkItmTxt",
+      "A_EntProjElmntDlvbrl",
+      "A_EntProjElmntDlvbrlDistr",
+      "A_EntProjectElmntPublicSector",
+      "A_EntProjElmntWorkItem",
+      "A_EntTeamMemberEntitlement"
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_ENTERPRISE_PROJECT_SRV;v=0002/A_EnterpriseProject
+  ?$inlinecount=allpages
+  &$top=10
+  &$expand=to_EnterpriseProjectElement,to_EnterpriseProjectElement/to_EntProjectElementJVA
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
