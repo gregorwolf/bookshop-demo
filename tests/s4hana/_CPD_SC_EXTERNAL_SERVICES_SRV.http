@@ -1,0 +1,53 @@
+# https://api.sap.com/api/_CPD_SC_EXTERNAL_SERVICES_SRV/overview
+# SAP_COM_0054
+# 
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/CPD/SC_EXTERNAL_SERVICES_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/CPD/SC_EXTERNAL_SERVICES_SRV/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/CPD/SC_EXTERNAL_SERVICES_SRV/ProjectSet
+  ?$inlinecount=allpages
+  &$top=10
+  &$filter=ChangedOn ge datetimeoffset'2020-01-01T00:00:00Z'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/CPD/SC_EXTERNAL_SERVICES_SRV/WorkpackageSet
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/CPD/SC_EXTERNAL_SERVICES_SRV/PlanDataSet
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json 
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/CPD/SC_EXTERNAL_SERVICES_SRV/WorkItemSet
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/CPD/SC_EXTERNAL_SERVICES_SRV/ProjectRoleSet
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/CPD/SC_EXTERNAL_SERVICES_SRV/StaffingDataSet
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/CPD/SC_EXTERNAL_SERVICES_SRV/WorkPackageFunctionSet
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
