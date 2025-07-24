@@ -22,6 +22,10 @@ Accept: application/json
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/$metadata
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/{{$dotenv SalesOrderQuery}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder
   ?$top=1
