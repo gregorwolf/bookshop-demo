@@ -11,7 +11,8 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_CLASS_SRV/A_ClfnClassForKeyDate
     ?$inlinecount=allpages
     &$top=10
-    &$filter=Class eq '{{$dotenv Class}}'
+    &$filter=ClassInternalID eq '17'
+    #&$filter=Class eq '{{$dotenv Class}}'
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
@@ -25,7 +26,8 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_CLASS_SRV/A_ClfnClassCharcForKeyDate
     ?$inlinecount=allpages
     &$top=10
-    &$filter=ClassInternalID eq '{{$dotenv ClassInternalID}}'
+    #&$filter=ClassInternalID eq '{{$dotenv ClassInternalID}}'
+    &$filter=CharcInternalID eq '1796'
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
