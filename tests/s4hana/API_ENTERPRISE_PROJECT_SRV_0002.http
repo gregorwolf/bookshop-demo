@@ -9,26 +9,16 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_ENTERPRISE_PROJECT_SRV;v=0002/
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
-Entities:
-      "A_EnterpriseProjBlkFunc",
-      "A_EnterpriseProjectElement",
-      "A_EnterpriseProjectJVA",
-      "A_EnterpriseProjectRole",
-      "A_EnterpriseProjectTeamMember",
-      "A_EnterpriseProject",
-      "A_EntProjectElementJVA",
-      "A_EntProjectPublicSector",
-      "A_EntProjElmntBlockFunc",
-      "A_EntProjElmntCnfgrdWrkItmTxt",
-      "A_EntProjElmntDlvbrl",
-      "A_EntProjElmntDlvbrlDistr",
-      "A_EntProjectElmntPublicSector",
-      "A_EntProjElmntWorkItem",
-      "A_EntTeamMemberEntitlement"
-###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_ENTERPRISE_PROJECT_SRV;v=0002/A_EnterpriseProject
   ?$inlinecount=allpages
+  &$top=1
+  &$expand=to_EnterpriseProjectElement,to_EnterpriseProjectJVA,to_EntProjBlkFunc,to_EntProjectPublicSector,to_EntProjRole,to_EntProjTeamMember,to_EnterpriseProjectElement/to_EntProjectElementJVA,to_EnterpriseProjectElement/to_EntProjectElmntPublicSector,to_EnterpriseProjectElement/to_EntProjElmntBlkFunc,to_EnterpriseProjectElement/to_ParentProjElement,to_EnterpriseProjectElement/to_EntProjElmntDlvbrl,to_EnterpriseProjectElement/to_EntProjElmntWorkItem,to_EnterpriseProjectElement/to_SubProjElement
+  &$filter=ProjectUUID eq guid'{{$dotenv ProjectUUID}}'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### A_EntProjElmntWorkItem
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_ENTERPRISE_PROJECT_SRV;v=0002/A_EntProjElmntWorkItem
+  ?$inlinecount=allpages
   &$top=10
-  &$expand=to_EnterpriseProjectElement,to_EnterpriseProjectElement/to_EntProjectElementJVA
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
