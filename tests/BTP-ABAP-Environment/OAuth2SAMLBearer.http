@@ -1,0 +1,16 @@
+### Get Token from S/4HANA Cloud
+# @name requestAccessTokenS4
+POST {{$dotenv btp_abap_host}}/sap/bc/sec/oauth2/token
+Authorization: Basic {{$dotenv btp_abap_client_id}}:{{$dotenv btp_abap_client_secret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=urn:ietf:params:oauth:grant-type:saml2-bearer
+&scope=SAP_BW_INA_BATCHPROCESSING_HTTP SAP_BW_INA_GETCATALOG_HTTP SAP_BW_INA_GETRESPONSE_HTTP SAP_BW_INA_GETSERVERINFO_HTTP SAP_BW_INA_LOGOFF_HTTP SAP_BW_INA_VALUEHELP_HTTP
+&assertion={{$dotenv sac_saml_bearer_assertion}}
+&client_secret={{$dotenv btp_abap_client_secret}}
+&client_id={{$dotenv btp_abap_client_id}}
+### Write response into local variables
+@access_token={{requestAccessTokenS4.response.body.$.access_token}}
+###
+GET {{$dotenv btp_abap_host}}/sap/bw/ina/GetServerInfo
+Authorization: Bearer {{access_token}}

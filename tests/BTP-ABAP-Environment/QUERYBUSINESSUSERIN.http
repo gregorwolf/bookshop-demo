@@ -1,6 +1,6 @@
 ### BTP ABAP Environment
 ### https://help.sap.com/docs/btp/sap-business-technology-platform/inbound-service-business-user-read
-POST https://29ef5731-7c76-4597-b55c-6d1bda45329f.abap.eu20.hana.ondemand.com/sap/bc/srt/scs_ext/sap/querybusinessuserin
+POST {{$dotenv btp_abap_host}}/sap/bc/srt/scs_ext/sap/querybusinessuserin
 Authorization: Basic {{$dotenv btp_abap_basic_auth}}:{{$dotenv btp_abap_basic_password}}
 Content-Type: text/xml
 Accept: text/xml
