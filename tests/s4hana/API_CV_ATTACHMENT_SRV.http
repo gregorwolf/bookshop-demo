@@ -85,12 +85,12 @@ Accept: application/json
 Accept-Language: en
 
 ### Read Token to Variable
-@DMSDocumentInfoRecordDocType={{getAllOriginals.response.body.d.results[0].DocumentInfoRecordDocType}}
-@DMSDocumentInfoRecordDocNumber={{getAllOriginals.response.body.d.results[0].DocumentInfoRecordDocNumber}}
-@DMSLogicalDocument={{getAllOriginals.response.body.d.results[0].LogicalDocument}}
-@DMSArchiveDocumentID={{getAllOriginals.response.body.d.results[0].ArchiveDocumentID}}
-@DMSLinkedSAPObjectKey={{getAllOriginals.response.body.d.results[0].LinkedSAPObjectKey}}
-@DMSBusinessObjectTypeName={{getAllOriginals.response.body.d.results[0].BusinessObjectTypeName}}
+#@DMSDocumentInfoRecordDocType={{getAllOriginals.response.body.d.results[0].DocumentInfoRecordDocType}}
+#@DMSDocumentInfoRecordDocNumber={{getAllOriginals.response.body.d.results[0].DocumentInfoRecordDocNumber}}
+#@DMSLogicalDocument={{getAllOriginals.response.body.d.results[0].LogicalDocument}}
+#@DMSArchiveDocumentID={{getAllOriginals.response.body.d.results[0].ArchiveDocumentID}}
+#@DMSLinkedSAPObjectKey={{getAllOriginals.response.body.d.results[0].LinkedSAPObjectKey}}
+#@DMSBusinessObjectTypeName={{getAllOriginals.response.body.d.results[0].BusinessObjectTypeName}}
 
 ### Read created document Metadata - is not implemented
 GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/AttachmentContentSet(DocumentInfoRecordDocType='{{DMSDocumentInfoRecordDocType}}',DocumentInfoRecordDocNumber='{{DMSDocumentInfoRecordDocNumber}}',DocumentInfoRecordDocVersion='',DocumentInfoRecordDocPart='',LogicalDocument='{{DMSLogicalDocument}}',ArchiveDocumentID='{{DMSArchiveDocumentID}}',LinkedSAPObjectKey='{{DMSLinkedSAPObjectKey}}',BusinessObjectTypeName='{{DMSBusinessObjectTypeName}}')
@@ -124,13 +124,22 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/SAPObjectDocu
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
+# @name getA_DocumentInfoRecordAttch
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/A_DocumentInfoRecordAttch
   ?$top=10
   &$inlinecount=allpages
   &$expand=DocumentInfoRecordToAttachmentNavigation
-  &$filter=DocumentInfoRecordDocNumber eq '{{$dotenv DocumentInfoRecordDocNumber}}' and DocumentStatusName eq 'Released'
+  &$filter=DocumentInfoRecordDocNumber eq '{{$dotenv DocumentInfoRecordDocNumber}}'
+  # and DocumentStatusName eq 'Released'
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+###
+@DMSDocumentInfoRecordDocType={{getA_DocumentInfoRecordAttch.response.body.d.results[0].DocumentInfoRecordToAttachmentNavigation.results[0].DocumentInfoRecordDocType}}
+@DMSDocumentInfoRecordDocNumber={{getA_DocumentInfoRecordAttch.response.body.d.results[0].DocumentInfoRecordToAttachmentNavigation.results[0].DocumentInfoRecordDocNumber}}
+@DMSLogicalDocument={{getA_DocumentInfoRecordAttch.response.body.d.results[0].DocumentInfoRecordToAttachmentNavigation.results[0].LogicalDocument}}
+@DMSArchiveDocumentID={{getA_DocumentInfoRecordAttch.response.body.d.results[0].DocumentInfoRecordToAttachmentNavigation.results[0].ArchiveDocumentID}}
+@DMSLinkedSAPObjectKey={{getA_DocumentInfoRecordAttch.response.body.d.results[0].DocumentInfoRecordToAttachmentNavigation.results[0].LinkedSAPObjectKey}}
+@DMSBusinessObjectTypeName={{getA_DocumentInfoRecordAttch.response.body.d.results[0].DocumentInfoRecordToAttachmentNavigation.results[0].BusinessObjectTypeName}}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/$metadata
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
@@ -138,13 +147,13 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAttachmentCount
   ?BusinessObjectTypeName='{{$dotenv BusinessObjectTypeName}}'
   &LinkedSAPObjectKey='{{$dotenv LinkedSAPObjectKey}}'
-  &SemanticObject=''
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ### GetAllOriginals
 # @name getAllOriginals
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAllOriginals
-  ?BusinessObjectTypeName='{{$dotenv BusinessObjectTypeName}}'
+  ?SAPObjectType='{{$dotenv SAPObjectType}}'
+#  ?BusinessObjectTypeName='{{$dotenv BusinessObjectTypeName}}'
   &LinkedSAPObjectKey='{{$dotenv LinkedSAPObjectKey}}'
   &SemanticObject=''
 Accept: application/json
