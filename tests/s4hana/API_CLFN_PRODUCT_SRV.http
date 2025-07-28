@@ -24,15 +24,19 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/$metadata
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/A_ProductClass
-  ?$top=10
+  ?$top=25
+  &$skip=50
+  #&$orderby=Product
+  #&$select=Product
   &$inlinecount=allpages
-  &$expand=to_Characteristics,to_Characteristics/to_Valuation,to_ClassDetails
+  #&$expand=to_Characteristics,to_Characteristics/to_Valuation,to_ClassDetails
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/A_ClfnClassForKeyDate
   ?$top=10
   &$inlinecount=allpages
+  &$filter=Class eq '{{$dotenv Class}}'
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
@@ -40,6 +44,43 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/A_ClfnProduct
   ?$top=10
   &$inlinecount=allpages
   &$filter=Product eq '{{$dotenv Product}}'
-  &$expand=to_Description,to_Plant,to_ProductCharc, ,to_ProductSalesTax,to_SalesDelivery
+  &$expand=to_ProductCharc,to_ProductCharc/to_Valuation,to_ProductClass,to_ProductClass/to_Characteristics,to_ProductClass/to_Characteristics/to_Valuation
+  # to_Plant,to_SalesDelivery,
+  &$orderby=Product
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/A_ProductClassCharc
+  ?$top=10
+  &$inlinecount=allpages
+  &$expand=to_Valuation
+  &$filter=Product eq '{{$dotenv Product}}' and CharcInternalID eq '1796'
+  #(ClassInternalID eq '17' or ClassInternalID eq '20')
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/A_ProductCharcValue
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/A_ProductCharcValue
+  ?$orderby=Product
+  #&$top=100
+  #&$filter={{$dotenv A_ProductCharcValueFilter}}
+  &$filter=Product eq '{{$dotenv Product}}' and CharcInternalID eq '1796'
+  #&$format=xlsx
+  &$format=json
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/A_ProductCharcValue
+    ?$top=100
+    &$orderby=Product
+#    &$filter=(CharcInternalID eq '2173' or CharcInternalID eq '2195' or CharcInternalID eq '2196' or CharcInternalID eq '2197' or CharcInternalID eq '2198' or CharcInternalID eq '2199' or CharcInternalID eq '2200' or CharcInternalID eq '2201' or CharcInternalID eq '2202' or CharcInternalID eq '2203' or CharcInternalID eq '2204' or CharcInternalID eq '2205' or CharcInternalID eq '2206' or CharcInternalID eq '2207' or CharcInternalID eq '2208' or CharcInternalID eq '2209' or CharcInternalID eq '2210' or CharcInternalID eq '2211' or CharcInternalID eq '2687')
+    &$inlinecount=allpages
+    &$format=json
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+
+  
