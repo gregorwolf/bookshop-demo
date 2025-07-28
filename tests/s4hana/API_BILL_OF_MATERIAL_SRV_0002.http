@@ -8,12 +8,19 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/$metadata
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/MaterialBOM/$count
+  ?$filter=BillOfMaterialVariantUsage eq 'A'
+  # and ({{$dotenv PlantFilter}})
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/MaterialBOM
   ?$inlinecount=allpages
   &$top=10
+  &$expand=to_BillOfMaterialItem,to_BillOfMaterialLongText,to_BillOfMaterialUsage,to_BillOfMaterialUsage/to_BillOfMaterialUsageText
+  &$filter=BillOfMaterialVariantUsage eq 'A' and ({{$dotenv PlantFilter}} or Plant eq '')
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
-
 ### Read MaterialBOMSubItem entities
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/MaterialBOMSubItem
     ?$top=10
@@ -58,9 +65,13 @@ Accept: application/json
 ### A_BillOfMaterialUsage
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/A_BillOfMaterialUsage
     ?$inlinecount=allpages
-    &$top=5
+    &$top=15
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+### A_BillOfMaterialUsage
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/A_BillOfMaterialUsage
+    ?$format=xlsx
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ### MBOMItmObjDpnAssignment
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/MBOMItmObjDpnAssignment
     ?$inlinecount=allpages
