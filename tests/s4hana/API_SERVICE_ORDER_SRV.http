@@ -9,7 +9,7 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_ORDER_SRV/A_ServiceOrder
   ?$inlinecount=allpages
   &$top=10
-  &$expand=to_ReferenceObject,to_Appointment
+  &$expand=to_Item,to_Item/to_Confirmation,to_Item/to_PricingElement,to_Item/to_ReferenceObject,to_Item/to_SrvcOrdItemUserStatus,to_Item/to_Appointment,to_Item/to_Duration,to_Item/to_ProductReferenceObject,to_Item/to_Partner,to_Item/to_Partner/to_Address,to_Item/to_Text,to_ReferenceObject,to_Appointment
   &$filter=ServiceOrder eq '{{$dotenv ServiceOrder}}'
   #&$filter=ServiceOrderIsReleased eq 'X' and ServiceOrderIsCompleted eq '' and ServiceOrderIsRejected eq '' and SalesOrganization eq '{{$dotenv SalesOrganization}}'
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
