@@ -1,9 +1,9 @@
 namespace my.bookshop;
 
 using {
-  managed,
-  cuid,
-  User,
+                         managed,
+                         cuid,
+                         User,
   sap.common.CodeList as CodeList,
 } from '@sap/cds/common';
 
@@ -20,23 +20,34 @@ entity CompanyCode : CodeList {
       // Accepts ABCDxse
       // @assert.format: '[A-Z,0-9]{4}'
       @assert.format: '^([A-Z,0-9]{4})$'
-  key ID : String(4) @(title: '{i18n>CompanyCode}', );
+  key ID : String(4) @(title: '{i18n>CompanyCode}',
+      );
 }
 
 entity Roles : cuid, managed {
   @mandatory
   @assert.format: 'r_[a-z]'
-  rolename        : localized String(255) not null @(title: '{i18n>RoleName}', );
-  description     : localized String not null      @(title: '{i18n>Description}', );
-  CompanyCode     : Association to CompanyCode     @(title: '{i18n>CompanyCode}', );
-  count           : Integer                        @(title: '{i18n>count}', );
+  rolename        : localized String(255) not null @(title: '{i18n>RoleName}',
+  );
+  description     : localized String not null      @(title: '{i18n>Description}',
+  );
+  CompanyCode     : Association to CompanyCode     @(title: '{i18n>CompanyCode}',
+                    );
+  count           : Integer                        @(title: '{i18n>count}',
+  );
   priority        : Priority;
-  read            : Boolean                        @(title: '{i18n>Read}', );
-  authcreate      : Boolean                        @(title: '{i18n>Create}', );
-  authupdate      : Boolean                        @(title: '{i18n>Update}', );
-  approve         : Boolean                        @(title: '{i18n>Approve}', );
-  validFrom       : Timestamp                      @(title: '{i18n>validFrom}', );
-  validTo         : Timestamp                      @(title: '{i18n>validTo}', );
+  read            : Boolean                        @(title: '{i18n>Read}',
+  );
+  authcreate      : Boolean                        @(title: '{i18n>Create}',
+  );
+  authupdate      : Boolean                        @(title: '{i18n>Update}',
+  );
+  approve         : Boolean                        @(title: '{i18n>Approve}',
+  );
+  validFrom       : Timestamp                      @(title: '{i18n>validFrom}',
+  );
+  validTo         : Timestamp                      @(title: '{i18n>validTo}',
+  );
   BusinessObjects : Composition of many Role_BusinessObject
                       on BusinessObjects.parent = $self;
   Users           : Composition of many Role_User
@@ -69,11 +80,14 @@ entity Role_User : cuid {
 @assert.unique: {username: [username], }
 entity Users : cuid, managed {
   @Core.Immutable
-  username    : String    @(title: '{i18n>Username}', );
+  username    : String    @(title: '{i18n>Username}',
+  );
   employee    : Employee;
   responsible : Employee;
-  validFrom   : Timestamp @(title: '{i18n>validFrom}', );
-  validTo     : Timestamp @(title: '{i18n>validTo}', );
+  validFrom   : Timestamp @(title: '{i18n>validFrom}',
+  );
+  validTo     : Timestamp @(title: '{i18n>validTo}',
+  );
   address     : Composition of Address
                   on address.parent = $self;
   roles       : Association to many Role_User
@@ -82,8 +96,10 @@ entity Users : cuid, managed {
 
 entity Address : cuid, managed {
   parent : Association to Users;
-  street : String(60) @(title: '{i18n>Street}', );
-  city   : String(60) @(title: '{i18n>City}', );
+  street : String(60) @(title: '{i18n>Street}',
+  );
+  city   : String(60) @(title: '{i18n>City}',
+  );
 };
 
 type XSUAAUsers {
