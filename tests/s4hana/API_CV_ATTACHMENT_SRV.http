@@ -152,8 +152,8 @@ Accept: application/json
 ### GetAllOriginals
 # @name getAllOriginals
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAllOriginals
-  ?SAPObjectType='{{$dotenv SAPObjectType}}'
-#  ?BusinessObjectTypeName='{{$dotenv BusinessObjectTypeName}}'
+#  ?SAPObjectType='{{$dotenv SAPObjectType}}'
+  ?BusinessObjectTypeName='{{$dotenv BusinessObjectTypeName}}'
   &LinkedSAPObjectKey='{{$dotenv LinkedSAPObjectKey}}'
   &SemanticObject=''
 Accept: application/json

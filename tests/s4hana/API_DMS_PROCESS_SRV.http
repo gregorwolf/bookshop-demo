@@ -25,19 +25,3 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_DMS_PROCESS_SRV/A_DocInfoRecdOb
   &$expand=to_DocInfoRecord
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
-
-### Read Token to Variable
-@DMSDocumentInfoRecordDocType={{getA_DocInfoRecdObjLinkProduct.response.body.d.results[0].to_DocInfoRecord.DocumentInfoRecordDocType}}
-@DMSDocumentInfoRecordDocNumber={{getA_DocInfoRecdObjLinkProduct.response.body.d.results[0].to_DocInfoRecord.DocumentInfoRecordDocNumber}}
-@DMSLogicalDocument={{getA_DocInfoRecdObjLinkProduct.response.body.d.results[0].to_DocInfoRecord.LogicalDocument}}
-@DMSArchiveDocumentID={{getA_DocInfoRecdObjLinkProduct.response.body.d.results[0].ArchiveDocumentID}}
-@DMSLinkedSAPObjectKey={{getA_DocInfoRecdObjLinkProduct.response.body.d.results[0].LinkedSAPObjectKey}}
-@DMSBusinessObjectTypeName={{getA_DocInfoRecdObjLinkProduct.response.body.d.results[0].BusinessObjectTypeName}}
-
-
-
-          "DocumentInfoRecordDocType": "KDL",
-          "DocumentInfoRecordDocVersion": "01",
-          "DocumentInfoRecordDocNumber": "D10061701",
-          "DocumentInfoRecordDocPart": "000",
-          "DocumentInfoRecord": "KDLD10061701  
