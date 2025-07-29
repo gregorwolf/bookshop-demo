@@ -54,7 +54,7 @@ entity Roles : cuid, managed {
                       on Users.parent = $self;
 };
 
-annotate Roles with @odata.draft.enabled;
+annotate Roles with @fiori.draft.enabled;
 
 entity BusinessObjects {
   key ID       : BusinessObject;

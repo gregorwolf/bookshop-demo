@@ -43,17 +43,17 @@ annotate AdminService.Roles with @(UI: {
       Inline: false
     },
     {
-      $Type : 'UI.DataFieldForAction',
-      Label : '{i18n>rolesCountUp}',
-      Action: 'AdminService.EntityContainer/rolesCountUp',
-      Inline: false,
+      $Type             : 'UI.DataFieldForAction',
+      Label             : '{i18n>rolesCountUp}',
+      Action            : 'AdminService.EntityContainer/rolesCountUp',
+      Inline            : false,
       InvocationGrouping: #ChangeSet
     },
     {
-      $Type : 'UI.DataFieldForAction',
-      Label : '{i18n>rolesCountDown}',
-      Action: 'AdminService.EntityContainer/rolesCountDown',
-      Inline: false,
+      $Type             : 'UI.DataFieldForAction',
+      Label             : '{i18n>rolesCountDown}',
+      Action            : 'AdminService.EntityContainer/rolesCountDown',
+      Inline            : false,
       InvocationGrouping: #ChangeSet
     },
     {
@@ -79,7 +79,8 @@ annotate AdminService.Roles with @(UI: {
     TypeName      : 'Role',
     TypeNamePlural: 'Roles',
     Title         : {
-      Label: 'Role name ', //A label is possible but it is not considered on the ObjectPage yet
+      Label: 'Role name ',
+      //A label is possible but it is not considered on the ObjectPage yet
       Value: rolename
     },
     Description   : {Value: description}
@@ -178,7 +179,7 @@ annotate AdminService.Roles with @(UI: {
 
 );
 
-annotate AdminService.Roles_texts with @(UI: {
+annotate AdminService.Roles.texts with @(UI: {
   Identification : [{Value: rolename}],
   SelectionFields: [
     locale,
@@ -201,7 +202,7 @@ annotate AdminService.Roles_texts with @(UI: {
 });
 
 // Add Value Help for Locales
-annotate AdminService.Roles_texts {
+annotate AdminService.Roles.texts {
   locale @ValueList: {
     entity: 'Languages',
     type  : #fixed
