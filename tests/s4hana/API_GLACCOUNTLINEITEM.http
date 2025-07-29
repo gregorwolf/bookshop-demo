@@ -9,13 +9,21 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_GLACCOUNTLINEITEM/GLAccountLineItem/$count
-  ?$filter=(CompanyCode eq '1020' or CompanyCode eq '2210') and (FiscalYear eq '2023' or FiscalYear eq '2024' or FiscalYear eq '2025') and Customer ne ''
+  ?$filter=(CompanyCode eq '1110') and (GLAccount eq '12111000' or GLAccount eq '12110000' or GLAccount eq '12119200') and Ledger eq '0L' and PostingDate le datetime'2025-06-30T00:00:00' and PostingDate ge datetime'2023-01-01T00:00:00'
+#   and (FiscalYear eq '2023' or FiscalYear eq '2024' or FiscalYear eq '2025') and Customer ne ''
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_GLACCOUNTLINEITEM/GLAccountLineItem
   ?$inlinecount=allpages
-  &$top=10
-  &$filter=(CompanyCode eq '1020' or CompanyCode eq '2210') and (FiscalYear eq '2023' or FiscalYear eq '2024' or FiscalYear eq '2025')
+  &$top=1000
+  &$filter=(CompanyCode eq '1110') and (GLAccount eq '12111000' or GLAccount eq '12110000' or GLAccount eq '12119200') and Ledger eq '0L' and PostingDate le datetime'2025-06-30T00:00:00' and PostingDate ge datetime'2023-01-01T00:00:00'
+  #$filter=(CompanyCode eq '1020' or CompanyCode eq '2210') and (FiscalYear eq '2023' or FiscalYear eq '2024' or FiscalYear eq '2025')
   # and Customer ne '' and AccountingDocument eq '1800012227'
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_GLACCOUNTLINEITEM/GLAccountLineItem
+  ?$filter=(CompanyCode eq '1110') and (GLAccount eq '12111000' or GLAccount eq '12110000' or GLAccount eq '12119200') and Ledger eq '0L' and PostingDate le datetime'2025-06-30T00:00:00' and PostingDate ge datetime'2023-01-01T00:00:00'
+  &$top=1000
+  &$format=xlsx
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
