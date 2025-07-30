@@ -12,8 +12,8 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_DMS_PROCESS_SRV/A_DocumentInfoRecord
   ?$inlinecount=allpages
   &$top=10
-  &$filter=DocumentInfoRecordDocNumber eq '{{$dotenv DocumentInfoRecordDocNumber}}'
-  #DocumentStatusName eq 'Released'
+  #&$filter=DocumentInfoRecordDocNumber eq '{{$dotenv DocumentInfoRecordDocNumber}}'
+  &$filter=DocumentStatusName eq 'Released'
   &$expand=to_ProductObj
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
