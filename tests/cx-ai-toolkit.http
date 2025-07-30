@@ -1,0 +1,35 @@
+# SAP CX AI Toolkit
+# https://help.sap.com/docs/cx-ai-toolkit/apis/authenticating-with-oauth-tokens?locale=en-US
+# https://api.sap.com/package/SAPCXAIToolkit/rest
+#
+### Get Tokens
+# https://blogs.sap.com/2020/03/02/using-postman-for-api-testing-with-xsuaa/
+# @name requestUserAccessToken
+POST {{$dotenv ias_base_url}}/oauth2/token
+# Authorization: Basic {{$dotenv ias_client_id}}:{{$dotenv ias_client_secret}}
+Accept: application/json;charset=utf8
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password
+&username={{$dotenv ias_username}}
+&password={{$dotenv ias_password}}
+&client_id={{$dotenv ias_client_id}}
+&client_secret={{$dotenv ias_client_secret}}
+### Fill Variables from Response
+@user_access_token={{requestUserAccessToken.response.body.$.access_token}}
+
+### Get Token from AI Toolkit Server
+# @name requestAccessTokenAiToolkit
+POST {{$dotenv ai_toolkit_base_url}}/oauth2/token
+#Authorization: Basic {{$dotenv ai_toolkit_client_id}}:{{$dotenv ai_toolkit_client_secret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
+&client_id={{$dotenv ai_toolkit_client_id}}
+&client_secret={{$dotenv ai_toolkit_client_secret}}
+&scope=openid email profile
+&assertion={{user_access_token}}
+&resource=urn:sap:identity:application:provider:name:Toolkit
+&token_format=jwt
+### Fill Variables from Response
+@ai_toolkit_access_token={{requestAccessTokenAiToolkit.response.body.$.access_token}}
