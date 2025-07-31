@@ -1,4 +1,4 @@
-### IPS SCIM Proxy to SAP Build Work Zone, standard edition
+### IPS SCIM Proxy
 # https://help.sap.com/docs/cloud-identity-services/cloud-identity-services/proxy-sap-build-work-zone-standard-edition?locale=en-US
 ###
 GET {{$dotenv ias_scim_endpoint}}/ipsproxy/service/api/v1/scim/{{$dotenv ias_scim_proxy_id}}/Users
