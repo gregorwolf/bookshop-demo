@@ -104,12 +104,13 @@ service AdminService @(
 
 */
   @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Roles'])
-  action   rolesCountUp(roles : array of Roles)                                                        returns array of Roles;
+  action   rolesCountUp(roles: array of Roles)                                                     returns array of Roles;
 
   @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Roles'])
-  action   rolesCountDown(roles : array of Roles)                                                      returns array of Roles;
+  action   rolesCountDown(roles: array of Roles)                                                   returns array of Roles;
 
-  @odata.draft.enabled
+      @odata.draft.enabled
+      @cds.redirection.target
   // @Common.DraftRoot.NewAction : 'AdminService.createDraftRole'
   entity Roles @(restrict: [{
     grant: ['*'],
@@ -117,12 +118,14 @@ service AdminService @(
   }, ])                         as projection on db.Roles
     actions {
       @cds.odata.bindingparameter.collection
-      action createDraftRole(rolename : String not null, description : String not null) returns Roles;
+      action createDraftRole(rolename: String not null, description: String not null) returns Roles;
       @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Roles'])
-      action countUp()                                                                  returns Roles;
+      action countUp()                                                                returns Roles;
       @(Common.SideEffects.TargetEntities: ['/AdminService.EntityContainer/Roles'])
-      action countDown()                                                                returns Roles;
+      action countDown()                                                              returns Roles;
     };
+
+  // entity RoleUsages             as projection on db.RoleUsages;
 
   //------- auto-exposed --------
   entity Role_BusinessObject    as projection on db.Role_BusinessObject;
@@ -168,20 +171,20 @@ service AdminService @(
   entity MeteringAnalytics      as projection on db.MeteringAnalytics;
   // XSUAA API
 
-  function readUsers()                                                                                 returns array of db.XSUAAUsers;
-  function readUsersSDK()                                                                              returns array of db.XSUAAUsers;
-  action   updateUsers()                                                                               returns Boolean;
+  function readUsers()                                                                             returns array of db.XSUAAUsers;
+  function readUsersSDK()                                                                          returns array of db.XSUAAUsers;
+  action   updateUsers()                                                                           returns Boolean;
   // job-scheduler
-  function readJobs()                                                                                  returns array of db.Jobs;
-  function readJobDetails(jobId : Integer)                                                             returns db.Jobs;
-  function readJobSchedules(jobId : Integer)                                                           returns array of db.Schedules;
-  action   updateJobSchedule(jobId : Integer, scheduleId : String, schedule : db.Schedules)            returns array of db.Schedules;
-  function readJobActionLogs(jobId : Integer)                                                          returns String; // array of db.ActionLogs;
-  function readJobRunLogs(jobId : Integer, scheduleId : String, page_size : Integer, offset : Integer) returns array of db.RunLogs;
-  action   createJob(url : String, cron : String)                                                      returns Integer;
-  action   updateJob(jobId : Integer, active : Boolean)                                                returns String;
-  action   deleteJob(jobId : Integer)                                                                  returns String;
-  action   insertBookAndAuthor()                                                                       returns String;
+  function readJobs()                                                                              returns array of db.Jobs;
+  function readJobDetails(jobId: Integer)                                                          returns db.Jobs;
+  function readJobSchedules(jobId: Integer)                                                        returns array of db.Schedules;
+  action   updateJobSchedule(jobId: Integer, scheduleId: String, schedule: db.Schedules)           returns array of db.Schedules;
+  function readJobActionLogs(jobId: Integer)                                                       returns String; // array of db.ActionLogs;
+  function readJobRunLogs(jobId: Integer, scheduleId: String, page_size: Integer, offset: Integer) returns array of db.RunLogs;
+  action   createJob(url: String, cron: String)                                                    returns Integer;
+  action   updateJob(jobId: Integer, active: Boolean)                                              returns String;
+  action   deleteJob(jobId: Integer)                                                               returns String;
+  action   insertBookAndAuthor()                                                                   returns String;
   // Cloud Foundry
-  function readOrganizations()                                                                         returns array of db.Organization;
+  function readOrganizations()                                                                     returns array of db.Organization;
 }

@@ -50,9 +50,17 @@ entity Roles : cuid, managed {
   );
   BusinessObjects : Composition of many Role_BusinessObject
                       on BusinessObjects.parent = $self;
+  roleUsages      : Association to many RoleUsages
+                      on roleUsages.ID = ID;
   Users           : Composition of many Role_User
                       on Users.parent = $self;
 };
+
+@cds.odata.valuelist
+@cds.autoexpose
+@UI.Identification: [{Value: description}]
+@readonly
+entity RoleUsages as projection on Roles;
 
 annotate Roles with @fiori.draft.enabled;
 
