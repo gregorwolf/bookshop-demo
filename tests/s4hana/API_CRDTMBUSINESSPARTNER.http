@@ -1,0 +1,52 @@
+# https://api.sap.com/api/API_CRDTMBUSINESSPARTNER/overview
+# SAP_COM_0740
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CRDTMBUSINESSPARTNER/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CRDTMBUSINESSPARTNER/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CRDTMBUSINESSPARTNER/CreditMgmtBusinessPartner
+  ?$inlinecount=allpages
+  &$top=10
+  &$expand=to_CrdtMBPCollateralTP,to_CrdtMBPCreditInsuranceTP,to_CrdtMBPNegativeEventTP,to_CreditMgmtAccountTP,to_CreditMgmtAccountTP/to_CrdtMAcctCollateralTP,to_CreditMgmtAccountTP/to_CrdtMAcctCrdtInsuranceTP
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### CrdtMAcctCollateral
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CRDTMBUSINESSPARTNER/CrdtMAcctCollateral
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### CrdtMAcctCrdtInsurance
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CRDTMBUSINESSPARTNER/CrdtMAcctCrdtInsurance
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### CrdtMgmtBPCollateral
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CRDTMBUSINESSPARTNER/CrdtMgmtBPCollateral
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### CrdtMgmtBPCreditInsurance
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CRDTMBUSINESSPARTNER/CrdtMgmtBPCreditInsurance
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### CrdtMgmtBPNegativeEvent
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CRDTMBUSINESSPARTNER/CrdtMgmtBPNegativeEvent
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### CreditManagementAccount
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CRDTMBUSINESSPARTNER/CreditManagementAccount
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
