@@ -23,6 +23,15 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/$metadata
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
+### Count requests
+###
+### A_ClfnProduct
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/A_ClfnProduct/$count
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### A_ProductCharcValue
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/A_ProductCharcValue/$count
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/A_ProductClass
   ?$top=25
   &$skip=50
