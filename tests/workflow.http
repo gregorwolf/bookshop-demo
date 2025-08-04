@@ -1,3 +1,4 @@
+### https://api.sap.com/api/SAP_CP_Workflow_CF/overview
 ### Request Access Token
 # @name requestAccessToken
 POST {{$dotenv workflow_url}}/oauth/token
@@ -12,6 +13,14 @@ client_id={{$dotenv workflow_clientid}}
 @access_token = {{requestAccessToken.response.body.$.access_token}}
 
 ###
+GET {{$dotenv workflow_rest}}/v1/task-definitions
+Authorization: Bearer {{access_token}}
+###
 GET {{$dotenv workflow_rest}}/v1/task-instances
 Authorization: Bearer {{access_token}}
-### Returns []
+###
+GET {{$dotenv workflow_rest}}/v1/workflow-definitions
+Authorization: Bearer {{access_token}}
+###
+GET {{$dotenv workflow_rest}}/v1/workflow-instances
+Authorization: Bearer {{access_token}}
