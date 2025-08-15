@@ -2,7 +2,6 @@ const cds = require("@sap/cds");
 const LOG = cds.log("admin-service");
 const JobSchedulerClient = require("@sap/jobs-client");
 const xsenv = require("@sap/xsenv");
-const SapCfMailer = require("sap-cf-mailer").default;
 const metering = require("./metering");
 const { getDestination } = require("@sap-cloud-sdk/connectivity");
 const { executeHttpRequest } = require("@sap-cloud-sdk/http-client");
