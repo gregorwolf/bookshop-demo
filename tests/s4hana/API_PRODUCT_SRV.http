@@ -62,6 +62,23 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_ProductPlant
   &$inlinecount=allpages
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+### A_ProductSalesText
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_ProductSalesText
+  ?$top=10
+  &$filter=Language eq 'DE' and ProductSalesOrg eq '1020'
+	# Product eq '{{$dotenv Product}}' and 
+  # Doesn't work
+  # substringof('Text', LongText) eq true
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+Accept: application/json
+### A_ProductSalesText
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_ProductSalesText
+  ?$top=10
+  &$filter=Product eq '{{$dotenv Product}}' and ProductSalesOrg eq '1020'
+	&$format=xlsx
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_ProductPlantText
   ?$top=10

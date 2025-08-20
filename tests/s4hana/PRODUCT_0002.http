@@ -54,11 +54,21 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0
   &$filter=Plant eq '{{$dotenv Plant}}' and Product eq '{{$dotenv Product}}'
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
-###
-GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0002/Product('{{$dotenv product}}')
+### ProductSalesDeliveryText
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0002/ProductSalesDeliveryText
+  ?$top=10
+  &$filter=Language eq 'DE' and (ProductSalesOrg eq '1020' or ProductSalesOrg eq '2210')
+  # _Product/LaboratoryOrDesignOffice eq '102' and 
+  #Product eq '{{$dotenv Product}}' 
+  &$count=true
+  #&$expand=*
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
-
+### ProductSalesDeliveryText
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0002/ProductSalesDeliveryText
+  ?$filter=Language eq 'DE' and (ProductSalesOrg eq '1020' or ProductSalesOrg eq '2210')
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/pdf
 ### Get CSRF Token
 # @name getCSRF
 HEAD {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0002/
