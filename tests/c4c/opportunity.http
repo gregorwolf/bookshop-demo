@@ -3,6 +3,7 @@ GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/OpportunityCollection/$count
   ?$filter=CreationDate gt datetime'2024-01-01T00:00'
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 ###
+# @name getOpportunity
 GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/OpportunityCollection
   ?$top=1
   &$inlinecount=allpages
@@ -13,13 +14,37 @@ GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/OpportunityCollection
   # CreationDate gt datetime'2023-01-01T00:00' and 
   &$filter=ID eq '{{$dotenv opportunity}}'
   # and CreationDate lt datetime'2024-01-01T00:00' 
-  &$expand=OpportunityExternalParty,OpportunitySalesTeamParty
+  &$expand=OpportunityExternalParty,OpportunitySalesTeamParty,OpportunityCompetitorParty
   #,OpportunityAttachmentFolder
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 Accept: application/json
 ### 252288
 @ObjectID=0238EB247ACE1EEDA2D4158D38D85CA1
-###
+@uri={{getOpportunity.response.body.$.d.results[0].__metadata.uri}}
+### Add Competitor
+POST {{uri}}/OpportunityCompetitorParty
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "PartyID": "3000225659",
+  "RoleCode": "30",
+  "MainIndicator": true
+}
+### Add Competitor
+POST {{uri}}/OpportunityCompetitorParty
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "PartyID": "3000225651",
+  "RoleCode": "30",
+  "MainIndicator": false
+}
+
+### Create Attachment
 POST {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/OpportunityCollection('{{ObjectID}}')/OpportunityAttachmentFolder
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 Accept: application/json
