@@ -1,0 +1,8 @@
+### https://api.sap.com/api/competitor/overview
+### https://help.sap.com/doc/d0f9ba822c08405da7d88174b304df84/CLOUD/en-US/index.html#/topic/Competitor
+###
+GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/CompetitorCollection
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+Accept: application/json
