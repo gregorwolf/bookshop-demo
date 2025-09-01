@@ -51,6 +51,15 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPart
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
+# @name readBusinessPartnerViaAPIManagement
+GET {{$dotenv s4hana_apimgmt_host}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartner
+	?$top=10
+  &$inlinecount=allpages
+#  &APIKey={{$dotenv s4hana_apikey}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_apimgmt_password}}
+APIKey: {{$dotenv s4hana_apikey}}
+Accept: application/json
+###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_CustomerSalesArea
   ?$inlinecount=allpages
   &$top=10
