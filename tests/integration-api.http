@@ -1,3 +1,4 @@
+### https://api.sap.com/package/CloudIntegrationAPI/odata
 ### Get Access Token (Cloud Foundry using Client Credentials)
 # @name requestAccessToken
 POST {{$dotenv integration_api_tokenendpoint}}
@@ -180,5 +181,15 @@ Authorization: Bearer {{access_token}}
 Accept: application/json
 ###
 GET {{$dotenv integration_api_url}}/api/v1/Variables
+Authorization: Bearer {{access_token}}
+Accept: application/json
+### IntegrationRuntimeArtifacts
+GET {{$dotenv integration_api_url}}/api/v1/IntegrationRuntimeArtifacts
+Authorization: Bearer {{access_token}}
+Accept: application/json
+### ServiceEndpoints
+GET {{$dotenv integration_api_url}}/api/v1/ServiceEndpoints
+  ?$expand=EntryPoints,ApiDefinitions
+  &$inlinecount=allpages
 Authorization: Bearer {{access_token}}
 Accept: application/json
