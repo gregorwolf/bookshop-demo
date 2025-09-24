@@ -1,0 +1,18 @@
+# https://api.sap.com/api/CONDITIONCONTRACT_0001/overview
+# SAP_COM_0729
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_condition_contract/srvd_a2x/sap/conditioncontract/0001/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_condition_contract/srvd_a2x/sap/conditioncontract/0001/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_condition_contract/srvd_a2x/sap/conditioncontract/0001/ConditionContract
+  ?$count=true
+  &$top=10
+  &$expand=_CndnContrActiveStatus,_CndnContrBusVolSelCriteria,_CndnContrSettlmtCal,_CndnContrCndnRecord($expand=_CndnContrCndnRecdValidity,_CndnContrScCndnRecord,_Text)
+  #&$filter=CompanyCode eq ''
+  #&$filter=SalesOrganization eq ''
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
