@@ -11,10 +11,66 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SLSPRICINGCONDITIONRECORD_SRV/$metadata
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
+# @name getSlsPrcgCndnRecdValidity
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SLSPRICINGCONDITIONRECORD_SRV/A_SlsPrcgCndnRecdValidity
   ?$top=10
   &$inlinecount=allpages
-  &$filter=Material eq '{{$dotenv Material}}' and ConditionType eq '{{$dotenv ConditionType}}' and CustomerPriceGroup eq '{{$dotenv CustomerPriceGroup}}' and SalesOrganization eq '{{$dotenv SalesOrganization}}'
+  &$filter=ConditionType eq '{{$dotenv ConditionType}}'
+#  &$filter=Material eq '{{$dotenv Material}}' and CustomerPriceGroup eq '{{$dotenv CustomerPriceGroup}}' and SalesOrganization eq '{{$dotenv SalesOrganization}}'
   &$expand=to_SlsPrcgCndnRecdSuplmnt,to_SlsPrcgConditionRecord,to_SlsPrcgConditionRecord/to_SlsPrcgCndnRecordScale
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+###
+@conditionRecorduri={{getSlsPrcgCndnRecdValidity.response.body.d.results[0].to_SlsPrcgConditionRecord.__metadata.uri}}
+### Get CSRF-Token
+# @name getCsrfToken
+HEAD {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SLSPRICINGCONDITIONRECORD_SRV
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+X-CSRF-Token: Fetch
+
+### Read Token to Variable
+@csrf={{getCsrfToken.response.headers.x-csrf-token}}
+
+### Read Condition Record to prepare for Update
+# @name read
+GET {{conditionRecorduri}}
+  ?$expand=to_SlsPrcgCndnRecdValidity
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### save etag
+@eTag={{read.response.headers.etag}}
+### PATCH validity
+PATCH {{conditionRecorduri}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Content-Type: application/json
+Accept: application/json
+X-CSRF-Token: {{csrf}}
+If-Match: {{eTag}}
+
+{
+  "ConditionRateValue" : "51.00",
+  "ConditionRateValueUnit": "EUR"
+}
+
+### Create ConditionRecord 2060-01-01 – 2060-12-31 8453
+POST {{$dotenv s4hanahost}}/sap/opu/odata/SAP/API_SLSPRICINGCONDITIONRECORD_SRV/A_SlsPrcgConditionRecord
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Content-Type: application/json
+Accept: application/json
+X-CSRF-Token: {{csrf}}
+
+{
+    "ConditionTable" : "304",
+    "ConditionType" : "PPR0",
+    "ConditionRateValue" : "51",
+    "ConditionRateValueUnit" : "EUR",
+    "to_SlsPrcgCndnRecdValidity" : [
+        {
+          "ConditionValidityStartDate" : "2060-01-01T00:00:00",
+          "ConditionValidityEndDate" : "2060-12-31T00:00:00",
+          "SalesOrganization": "1010",
+          "DistributionChannel": "10",
+          "Material" : "TG0011"
+        }
+    ]
+}
