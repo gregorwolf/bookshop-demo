@@ -1,0 +1,13 @@
+# https://api.sap.com/api/ECFoundationOrganization/overview
+### Get Metadata
+GET {{$dotenv sf_base_url}}/odata/v2/$metadata
+apikey: {{$dotenv apikey}}
+### Territory
+GET {{$dotenv sf_base_url}}/odata/v2/Territory
+apikey: {{$dotenv apikey}}
+Accept: application/json
+### FOCostCenter
+GET {{$dotenv sf_base_url}}/odata/v2/FOCostCenter
+  ?$top=5
+apikey: {{$dotenv apikey}}
+Accept: application/json
