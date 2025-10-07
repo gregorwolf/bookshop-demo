@@ -1,0 +1,16 @@
+# https://api.sap.com/api/API_LEDGER_SRV/overview
+# SAP_COM_0087
+# 
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_LEDGER_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_LEDGER_SRV/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_LEDGER_SRV/A_Ledger
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
