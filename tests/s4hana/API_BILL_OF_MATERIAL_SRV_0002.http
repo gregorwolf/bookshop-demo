@@ -18,7 +18,8 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILL_OF_MATERIAL_SRV;v=0002/Mat
   ?$inlinecount=allpages
   &$top=10
   &$expand=to_BillOfMaterialItem,to_BillOfMaterialLongText,to_BillOfMaterialUsage,to_BillOfMaterialUsage/to_BillOfMaterialUsageText
-  &$filter=BillOfMaterialVariantUsage eq 'A' and ({{$dotenv PlantFilter}} or Plant eq '')
+  #&$filter=BillOfMaterialVariantUsage eq 'A' and ({{$dotenv PlantFilter}} or Plant eq '')
+  &$filter=BillOfMaterial eq '00049025' and BillOfMaterialCategory eq 'M'
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ### Read MaterialBOMSubItem entities
