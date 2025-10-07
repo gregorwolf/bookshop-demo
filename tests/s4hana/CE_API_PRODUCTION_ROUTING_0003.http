@@ -18,5 +18,28 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ROUTING;v=0003/ProductionRouting
   ?$top=10
   &$inlinecount=allpages
+  &$filter=ProductionRoutingGroup eq '50004464'
+  &$expand=to_Header/to_MatlAssgmt,to_MatlAssgmt,to_MatlAssgmt/to_ProdnRtgTP
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ROUTING;v=0003/ProductionRoutingCompAlloc
+  ?$top=150
+  &$inlinecount=allpages
+  #&$filter=BillOfMaterialComponent eq '638872'
+  # Multiple Materials
+  &$filter=ProductionRoutingGroup eq '50004464'
+  # Single Material
+  #&$filter=ProductionRoutingGroup eq '50004457'
+  &$expand=to_Header,to_ProdnRtgTP,to_Header/to_MatlAssgmt
+  &$orderby=ProductionRoutingGroup,ProductionRouting,ProductionRoutingSequence,BillOfMaterial
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ROUTING;v=0003/ProductionRoutingOperation
+  ?$top=10
+  &$inlinecount=allpages
+  &$filter=ProductionRoutingGroup eq '50004464'
+  &$expand=to_OpCompAlloc,to_OpCompAlloc/to_Header,to_OpCompAlloc/to_Header/to_MatlAssgmt
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
