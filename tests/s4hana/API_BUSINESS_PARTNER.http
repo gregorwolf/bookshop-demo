@@ -105,6 +105,14 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BuPaIdentifi
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
+# @name getBusinessPartner
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_Supplier
+  ?$inlinecount=allpages
+  &$expand=to_SupplierCompany,to_SupplierCompany/to_Supplier,to_SupplierCompany/to_Supplier/to_SupplierCompany
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
 # @name getBusinessPartnerRole
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartnerRole
   ?$inlinecount=allpages
