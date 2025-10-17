@@ -85,14 +85,16 @@ GET {{$dotenv ias_scim_endpoint}}/scim/Users
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ### Filter by Group Display Name with contains
 GET {{$dotenv ias_scim_endpoint}}/scim/Users
-  ?filter=groups.display co "SAP_BTP"
+  ?startId=initial
+  &count=100
+  &filter=groups.display%20sw%20%22SAP_CBC_%22
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ###
 GET {{$dotenv ias_scim_endpoint}}/scim/Groups
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ###
 GET {{$dotenv ias_scim_endpoint}}/scim/Groups
-  ?filter=displayName co "SAP_BTP_"
+  ?filter=displayName sw "SAP_CBC_"
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ###
 GET {{$dotenv ias_scim_endpoint}}/scim/Groups
