@@ -8,6 +8,11 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_GLACCOUNTLINEITEM/
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_GLACCOUNTLINEITEM/GLAccountLineItem
+  ?$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_GLACCOUNTLINEITEM/GLAccountLineItem/$count
   ?$filter=(CompanyCode eq '1110') and (GLAccount eq '12111000' or GLAccount eq '12110000' or GLAccount eq '12119200') and Ledger eq '0L' and PostingDate le datetime'2025-06-30T00:00:00' and PostingDate ge datetime'2023-01-01T00:00:00'
 #   and (FiscalYear eq '2023' or FiscalYear eq '2024' or FiscalYear eq '2025') and Customer ne ''
