@@ -1,0 +1,15 @@
+# https://api.sap.com/api/API_SALES_QUOTATION_SRV/overview
+# SAP_COM_0118
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_QUOTATION_SRV/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_QUOTATION_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_QUOTATION_SRV/A_SalesQuotation
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
