@@ -11,5 +11,47 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_QUOTATION_SRV/A_SalesQuotation
   ?$top=10
   &$inlinecount=allpages
+  &$filter=(SalesOrganization eq '1020' or SalesOrganization eq '2210' or SalesOrganization eq '2211' or SalesOrganization eq '2212' or SalesOrganization eq '2213' or SalesOrganization eq '2214' or SalesOrganization eq '2215' or SalesOrganization eq '2216' or SalesOrganization eq '2217')
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_QUOTATION_SRV/A_SalesQuotation
+  #?$select=*,to_Item/*,to_Item/to_Partner/*,to_Item/to_PricingElement/*,to_Item/to_RelatedObject/*,to_Item/to_Text/*,to_Item/to_PrecedingProcFlowDocItem/*,to_Item/to_SubsequentProcFlowDocItem/*,to_Partner/*,to_PricingElement/*,to_RelatedObject/*,to_Text/*,to_PrecedingProcFlowDoc/*,to_SubsequentProcFlowDoc/*
+  #&$expand=to_Item,to_Item/to_Partner,to_Item/to_PricingElement,to_Item/to_RelatedObject,to_Item/to_Text,to_Item/to_PrecedingProcFlowDocItem,to_Item/to_SubsequentProcFlowDocItem,to_Partner,to_PricingElement,to_RelatedObject,to_Text,to_PrecedingProcFlowDoc,to_SubsequentProcFlowDoc
+  #&$top=10
+  #&$orderby=SalesQuotation
+  ?$select=*,to_Item/*,to_Item/to_Partner/*,to_Item/to_PricingElement/*,to_Item/to_RelatedObject/*,to_Item/to_Text/*,to_Partner/*,to_PricingElement/*,to_RelatedObject/*,to_Text/*
+  # to_Item/to_PrecedingProcFlowDocItem/*,to_Item/to_SubsequentProcFlowDocItem/*,,to_PrecedingProcFlowDoc/*,to_SubsequentProcFlowDoc/*
+  &$expand=to_Item,to_Item/to_Partner,to_Item/to_PricingElement,to_Item/to_RelatedObject,to_Item/to_Text,to_Partner,to_PricingElement,to_RelatedObject,to_Text
+  # to_Item/to_PrecedingProcFlowDocItem,to_Item/to_SubsequentProcFlowDocItem, ,to_PrecedingProcFlowDoc,to_SubsequentProcFlowDoc
+  &$inlinecount=allpages
+  &$top=2
+  &$skip=2
+  &$orderby=SalesQuotation
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+### A_SlsQtanItmPrecdgProcFlow
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_QUOTATION_SRV/A_SlsQtanItmPrecdgProcFlow
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### A_SlsQtanItmSubsqntProcFlow
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_QUOTATION_SRV/A_SlsQtanItmSubsqntProcFlow
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### A_SlsQtanPrecdgProcFlow
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_QUOTATION_SRV/A_SlsQtanPrecdgProcFlow
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### A_SlsQtanSubsqntProcFlow
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_QUOTATION_SRV/A_SlsQtanSubsqntProcFlow
+  ?$top=10
+  &$inlinecount=allpages
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
