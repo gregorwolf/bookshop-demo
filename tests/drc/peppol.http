@@ -1,0 +1,29 @@
+# Communication Scenario SAP_COM_0529
+### Request Access Token
+# @name requestAccessToken
+POST {{$dotenv peppol_token_endpoint}}/oauth/token
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{$dotenv peppol_clientid}}
+&client_secret={{$dotenv peppol_clientsecret}}
+&grant_type=client_credentials
+&response_type=token
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+### Test root URL
+# Response:
+# 404 Not Found: Requested route ('peppol-cf-cust.it-cpi018-rt.cfapps.eu10-003.hana.ondemand.com') does not exist.
+# is correct. Hope that SAP Note 3611636 will be updated soon to reflect this.
+POST {{$dotenv peppol_api_endpoint}}
+Authorization: Bearer {{access_token}}
+### Test PeppolSendDocumentTest endpoint
+# Got this URL from:
+# https://help.sap.com/docs/cloud-edition/sap-document-and-reporting-compliance-cloud-edition/creating-communication-arrangements-sap-s-4hana-cloud-network-exchange?locale=en-US
+# will return:
+# 500 Internal Server Error
+# as we do not send a valid payload, but at least the endpoint is reachable.
+# If the authorization header isn't sent it returns:
+# 401 Unauthorized
+POST {{$dotenv peppol_api_endpoint}}/cxf/PeppolSendDocumentTest
+Authorization: Bearer {{access_token}}
