@@ -1,9 +1,30 @@
 # https://api.sap.com/api/ECPersonalInformation/overview
 ### PerPersonal
+# @name readPerPersonal
 GET {{$dotenv sf_base_url}}/odata/v2/PerPersonal
   ?$top=5
   &$inlinecount=allpages
   &$filter=nationality eq 'DEU'
   &$expand=localNavDEU
 apikey: {{$dotenv apikey}}
+Accept: application/json
+###
+@personIdExternal={{readPerPersonal.response.body.$.d.results[0].personIdExternal}}
+
+###
+GET {{$dotenv sf_base_url}}/odata/v2/PerPersonal
+  ?$top=5
+  &$inlinecount=allpages
+  &$filter=nationality eq 'DEU'
+  &$expand=localNavDEU
+Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
+Accept: application/json
+
+###
+GET {{$dotenv sf_base_url}}/odata/v2/PerPerson
+  ?$format=json
+  &$filter=(personIdExternal in '103008')
+  &$expand=employmentNav/userNav,employmentNav/jobInfoNav,personalInfoNav,personEmpTerminationInfoNav,phoneNav,emailNav,employmentNav/userNav/manager/empInfo,employmentNav/jobInfoNav/departmentNav,employmentNav/jobInfoNav/locationNav,employmentNav/jobInfoNav/locationNav/addressNavDEFLT,employmentNav/jobInfoNav/locationNav/addressNavDEFLT/stateNav
+apikey: {{$dotenv apikey}}
+#Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
 Accept: application/json
