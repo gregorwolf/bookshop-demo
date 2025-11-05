@@ -9,7 +9,8 @@ Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ### Read Users with Filter
 GET {{$dotenv ias_scim_endpoint}}/scim/Users
 #  ?filter=urn:sap:cloud:scim:schemas:extension:custom:2.0:Supplier:supplierId eq "13453"
-  ?filter=userType eq "partner"
+#  ?filter=userType eq "partner"
+  ?filter=userName eq "partner"
 #  ?filter=addresses.country eq "AT"
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ### Read User
