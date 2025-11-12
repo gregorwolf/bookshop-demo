@@ -11,4 +11,6 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_whse_availablestock/srvd_a2x/sap/warehouseavailablestock/0001/WarehouseAvailableStock
   ?$top=10
   &$count=true
+  &$filter=EWMWarehouse eq '1050' and Product eq '3600001255'
+  # and AvailableEWMStockQty gt 1000 and EWMStockQuantityBaseUnit eq 'PC'
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
