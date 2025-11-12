@@ -1,0 +1,50 @@
+# https://api.sap.com/api/WAREHOUSEOUTBDELIVERYORDER_0001/overview
+# SAP_COM_0356
+# https://help.sap.com/docs/SAP_S4HANA_CLOUD/c46da892efa14cea8347e9b872199d6f/17d9e5896cab40409f24097a271e3acd.html?locale=en-US
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_odo_2/srvd_a2x/sap/warehouseoutbdeliveryorder/0001/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_odo_2/srvd_a2x/sap/warehouseoutbdeliveryorder/0001/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### WhseOutboundDeliveryOrderHead
+# @name readWarehouseOutbDeliveryOrders
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_odo_2/srvd_a2x/sap/warehouseoutbdeliveryorder/0001/WhseOutboundDeliveryOrderHead
+  ?$top=10
+  &$count=true
+  &$orderby=PlannedDeliveryUTCDateTime desc
+  &$filter=EWMWarehouse eq '1050' and ShipToParty eq '1240746'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### 
+@EWMOutboundDeliveryOrder={{readWarehouseOutbDeliveryOrders.response.body.value[0].EWMOutboundDeliveryOrder}}
+###
+# @name readWarehouseOutbDeliveryOrder
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_odo_2/srvd_a2x/sap/warehouseoutbdeliveryorder/0001/WhseOutboundDeliveryOrderHead('{{EWMOutboundDeliveryOrder}}')
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+@etag={{readWarehouseOutbDeliveryOrder.response.headers.etag}}
+### 
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_odo_2/srvd_a2x/sap/warehouseoutbdeliveryorder/0001/WhseOutboundDeliveryOrderHead
+  ?$top=10
+  &$count=true
+  &$orderby=PlannedDeliveryUTCDateTime desc
+  &$filter=EWMWarehouse eq '1050' and ShipToParty eq '1240746'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### Get CSRF Token
+# @name getCSRF
+HEAD {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_odo_2/srvd_a2x/sap/warehouseoutbdeliveryorder/0001/
+X-CSRF-Token: Fetch
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Read Token to Variable
+@CSRF={{getCSRF.response.headers.x-csrf-token}}
+###
+POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_odo_2/srvd_a2x/sap/warehouseoutbdeliveryorder/0001/WhseOutboundDeliveryOrderHead('{{EWMOutboundDeliveryOrder}}')/SAP__self.PostGoodsIssue
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+If-Match: {{etag}}
+Content-Type: application/json
