@@ -29,6 +29,7 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_order_task_2/srvd_a2x/sap/warehouseorder/0001/WarehouseTask
   ?$top=10
   &$count=true
+  &$expand=*
 #  $select={{$dotenv WarehouseOrder_select}}
   &$filter={{$dotenv WarehouseTask_filter}}
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
@@ -51,6 +52,17 @@ X-CSRF-Token: Fetch
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ### Read Token to Variable
 @CSRF={{getCSRF.response.headers.x-csrf-token}}
+###
+# @name createWarehouseTaskDeliveryHeader
+POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_order_task_2/srvd_a2x/sap/warehouseorder/0001/WarehouseTask
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+{
+  "EWMDelivery": "{{$dotenv DeliveryDocument}}"
+}
 ###
 # @name ConfirmWarehouseTaskProduct
 POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_order_task_2/srvd_a2x/sap/warehouseorder/0001/WarehouseTask(EWMWarehouse='{{EWMWarehouse}}',WarehouseTask='{{WarehouseTask}}',WarehouseTaskItem='{{WarehouseTaskItem}}')/SAP__self.ConfirmWarehouseTaskProduct
