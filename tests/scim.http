@@ -1,3 +1,4 @@
+### https://api.sap.com/api/IdDS_SCIM/overview
 ### 
 GET {{$dotenv ias_scim_endpoint}}/scim/Schemas
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
@@ -10,8 +11,10 @@ Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 GET {{$dotenv ias_scim_endpoint}}/scim/Users
 #  ?filter=urn:sap:cloud:scim:schemas:extension:custom:2.0:Supplier:supplierId eq "13453"
 #  ?filter=userType eq "partner"
-  ?filter=userName eq "partner"
+#  ?filter=userName eq "partner"
 #  ?filter=addresses.country eq "AT"
+#  ?filter=urn:ietf:params:scim:schemas:extension:sap:2.0:User:userId eq "P000047"
+  ?filter=urn:ietf:params:scim:schemas:extension:sap:2.0:User:validTo lt "2025-12-31T23:59:59Z"
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ### Read User
 GET {{$dotenv ias_scim_endpoint}}/scim/Users/{{$dotenv ias_scim_user_guid}}
@@ -104,6 +107,9 @@ Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 ###
 GET {{$dotenv ias_scim_endpoint}}/Applications/v1/
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+###
+### Deprecated:
+### https://api.sap.com/api/IAS_SCIM/overview
 ### 
 GET {{$dotenv ias_scim_endpoint}}/service/scim/Users
 Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
