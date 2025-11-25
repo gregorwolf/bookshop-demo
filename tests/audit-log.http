@@ -21,6 +21,6 @@ GET {{$dotenv audit_log_url}}/auditlog/v2/auditlogrecords
 Authorization: Bearer {{access_token}}
 ###
 GET {{$dotenv audit_log_url}}/auditlog/v2/auditlogrecords
-  ?time_from=2024-09-01T00:00:00.000
-  &time_to=2024-09-30T23:59:59.999
+  ?time_from=2025-11-24T00:00:00.000
+  &time_to=2025-11-30T23:59:59.999
 Authorization: Bearer {{access_token}}
