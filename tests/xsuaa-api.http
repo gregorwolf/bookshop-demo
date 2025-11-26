@@ -13,6 +13,16 @@ grant_type=client_credentials
 ### 
 # @name readUsers
 GET {{$dotenv xsuaa_apiaccess_apiurl}}/Users
+  ?count=500
+#  &filter=last_logon_success_time le 1759276800000
+#  &filter=origin eq "sap.custom"
+#  &sortBy=last_logon_success_time
+Authorization: Bearer {{access_token}}
+### Read ID of first User from previous response
+@firstUserId={{readUsers.response.body.$.resources[0].id}}
+### Delete first User from previous response
+# @name deleteUser
+DELETE {{$dotenv xsuaa_apiaccess_apiurl}}/Users/{{firstUserId}}
 Authorization: Bearer {{access_token}}
 ###
 GET {{$dotenv xsuaa_apiaccess_apiurl}}/Users
