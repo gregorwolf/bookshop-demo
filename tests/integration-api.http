@@ -75,6 +75,11 @@ Accept: application/json
 ###
 GET {{designGuidelineExecutionResultReport}}
 Authorization: Bearer {{access_token}}
+### https://api.sap.com/api/IntegrationContent/path/get_IntegrationDesigntimeArtifacts_Id___Id___Version___Version____Configurations
+### Configurations of Integration Flow
+GET {{$dotenv integration_api_url}}/api/v1/IntegrationDesigntimeArtifacts(Id='{{Id}}',Version='{{Version}}')/Configurations
+Authorization: Bearer {{access_token}}
+Accept: application/json
 ### Execute Design Guideline
 POST {{$dotenv integration_api_url}}/api/v1/ExecuteIntegrationDesigntimeArtifactsGuidelines
   ?Id='{{Id}}'
