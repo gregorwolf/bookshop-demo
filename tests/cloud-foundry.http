@@ -6,8 +6,8 @@ Authorization: Basic cf:
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=password
-&username={{$dotenv username}}
-&password={{$dotenv password}}
+&username={{$dotenv cf_username}}
+&password={{$dotenv cf_password}}
 # &login_hint={"origin":"sap.ids"}
 # According to SAP Note https://launchpad.support.sap.com/#/notes/3140806
 # currently only supported in Feature Set A
@@ -17,50 +17,51 @@ grant_type=password
 # Using Origin Key origin=sap.default results in:
 # The origin provided in the login_hint does not match an active Identity Provider, that supports password grant.
 # If you want to use your own IAS tenant, you have to uncomment the following line and maintain the variable origin in your .env file
-#&login_hint={"origin":"{{$dotenv origin}}"}
+&login_hint={"origin":"{{$dotenv origin}}"}
 
 ### Save Access Token in local variable
-@accToken = {{access_token_request.response.body.access_token}}
+@access_token={{access_token_request.response.body.access_token}}
+@id_token={{access_token_request.response.body.id_token}}
 
 ### List all Organizations
 GET {{$dotenv cf_url}}/v3/organizations
-Authorization: Bearer {{accToken}}
+Authorization: Bearer {{access_token}}
 ### Filter Organization by name
 # @name getOrgByName
 GET {{$dotenv cf_url}}/v3/organizations
   ?names={{$dotenv cf_org_name}}
-Authorization: Bearer {{accToken}}
+Authorization: Bearer {{access_token}}
 ###
 @orgId = {{getOrgByName.response.body.resources.0.guid}}
 ### Details of specific Organization
 GET {{$dotenv cf_url}}/v3/organizations/{{orgId}}
-Authorization: Bearer {{accToken}}
+Authorization: Bearer {{access_token}}
 ###
 GET {{$dotenv cf_url}}/v3/spaces
-Authorization: Bearer {{accToken}}
+Authorization: Bearer {{access_token}}
 ### Filter Space by name
 # @name getSpaceByName
 GET {{$dotenv cf_url}}/v3/spaces
   ?names=dev
   &organization_guids={{orgId}}
-Authorization: Bearer {{accToken}}
+Authorization: Bearer {{access_token}}
 ###
 @spaceId = {{getSpaceByName.response.body.resources.0.guid}}
 ###
 GET {{$dotenv cf_url}}/v3/spaces/{{spaceId}}
-Authorization: Bearer {{accToken}}
+Authorization: Bearer {{access_token}}
 ### Read Service Instances in Space
 # @name getServiceInstanceByName
 GET {{$dotenv cf_url}}/v3/service_instances
   ?names={{$dotenv cf_service_name}}
   &space_guids={{spaceId}}
-Authorization: Bearer {{accToken}}
+Authorization: Bearer {{access_token}}
 ###
 @serviceInstanceId = {{getServiceInstanceByName.response.body.resources.0.guid}}
 ### Create Service Key
 # @name createServiceKey
 POST {{$dotenv cf_url}}/v3/service_credential_bindings
-Authorization: Bearer {{accToken}}
+Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
 {
@@ -79,26 +80,26 @@ Content-Type: application/json
 ###
 # @name getServiceKey
 GET {{serviceKeyLocation}}
-Authorization: Bearer {{accToken}}
+Authorization: Bearer {{access_token}}
 ###
 @serviceCredentialBinding = {{getServiceKey.response.body.links.service_credential_binding.href}}
 ###
 # @name getServiceKeyCredentials
 GET {{serviceCredentialBinding}}
-Authorization: Bearer {{accToken}}
+Authorization: Bearer {{access_token}}
 ###
 # @name getAppByName
 GET {{$dotenv cf_url}}/v3/apps
   ?organization_guids={{orgId}}
   &space_guids={{spaceId}}
   &names={{$dotenv cf_app_name}}
-Authorization: Bearer {{accToken}}
+Authorization: Bearer {{access_token}}
 ###
 @appId = {{getAppByName.response.body.resources.0.guid}}
 ### Create Task for App
 # @name createTask
 POST {{$dotenv cf_url}}/v3/apps/{{appId}}/tasks
-Authorization: Bearer {{accToken}}
+Authorization: Bearer {{access_token}}
 Content-Type: application/json
   
 {
@@ -112,21 +113,21 @@ GET {{$dotenv cf_url}}/v3/service_credential_bindings
   ?names={{$dotenv cf_service_key_name}}
   &service_instance_guids={{serviceInstanceId}}
   &type=key
-Authorization: Bearer {{accToken}}
+Authorization: Bearer {{access_token}}
 ###
 @serviceKeyId = {{getServiceKeyByName.response.body.resources.0.guid}}
 ### Delete Service Key
 DELETE {{$dotenv cf_url}}/v3/service_credential_bindings/{{serviceKeyId}}
-Authorization: Bearer {{accToken}}
+Authorization: Bearer {{access_token}}
 ###
 GET {{$dotenv cf_url}}/v3/domains
-Authorization: Bearer {{accToken}}
+Authorization: Bearer {{access_token}}
 
 ###
 # Documentation at:
 # https://help.sap.com/docs/TRANSPORT_MANAGEMENT_SERVICE/7f7160ec0d8546c6b3eab72fb5ad6fd8/c9905c142cf14aea86fe2451434faed9.html?locale=en-US
 GET {{$dotenv cf_deploy}}{{$dotenv cf_deploy_path}}
-Authorization: Bearer {{accToken}}
+Authorization: Bearer {{access_token}}
 
 ###
 GET {{$dotenv cf_deploy}}/public/ping
