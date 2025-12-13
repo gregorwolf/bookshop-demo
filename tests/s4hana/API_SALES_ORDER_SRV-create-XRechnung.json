@@ -1,0 +1,18 @@
+{
+  "SalesOrderType": "OR",
+  "SalesOrderTypeInternalCode": "TA",
+  "SalesOrganization": "1010",
+  "DistributionChannel": "10",
+  "OrganizationDivision": "00",
+  "SoldToParty": "1149707",
+  "PurchaseOrderByCustomer": "XRechnung 2025-12-06 v2",
+  "CompleteDeliveryIsDefined": true,
+  "to_Item": [
+    {
+      "SalesOrderItem": "10",
+      "Material": "3600001255",
+      "RequestedQuantity": "1",
+      "RequestedQuantityUnit": "PC"
+    }
+  ]
+}
