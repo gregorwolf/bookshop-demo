@@ -10,10 +10,12 @@ GET http://localhost:4004/admin/Authors
 Authorization: Basic booksadmin:
 ### Read Books via OData V4 as booksadmin
 GET http://localhost:4004/odata/v4/admin/Books
+  ?$top=10
 Authorization: Basic booksadmin:
 
 ### Read Books via OData V2 as booksadmin
-GET http://localhost:4004/v2/admin/Books?$top=10
+GET http://localhost:4004/odata/v2/admin/Books
+  ?$top=10
 Authorization: Basic booksadmin:
 
 ### Read Books via OData V4 as booksadmin and expand to author
@@ -21,9 +23,9 @@ GET http://localhost:4004/odata/v4/admin/Books?$expand=author
 Authorization: Basic booksadmin:
 
 ### Read Books via OData V2 as booksadmin and expand to author
-GET http://localhost:4004/v2/admin/Books?$expand=author
+GET http://localhost:4004/odata/v2/admin/Books?$expand=author
 Authorization: Basic booksadmin:
 
 ### Read Authors via OData V2 as booksadmin
-GET http://localhost:4004/v2/admin/Authors
+GET http://localhost:4004/odata/v2/admin/Authors
 Authorization: Basic booksadmin:
