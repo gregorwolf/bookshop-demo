@@ -1,15 +1,15 @@
 ### Read BooksAnalytics
-GET http://localhost:4004/analytics/
+GET http://localhost:4004/odata/v4/analytics/
 Authorization: Basic admin:
 ### Read BooksAnalytics
-GET http://localhost:4004/analytics/$metadata
+GET http://localhost:4004/odata/v4/analytics/$metadata
 Authorization: Basic admin:
 ### Read BooksAnalytics
-http://localhost:4004/analytics/BooksAnalytics
+http://localhost:4004/odata/v4/analytics/BooksAnalytics
   ?$count=true
-  &$expand=author,currency
+  #&$expand=author,currency
+  &$compute=stock mul price as StockValue
 Authorization: Basic admin:
-
 ### Read BooksAnalytics
 http://localhost:4004/v2/analytics/BooksAnalytics
 Authorization: Basic admin:

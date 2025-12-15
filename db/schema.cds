@@ -167,6 +167,9 @@ view BooksAnalytics as
     stock,
     @Aggregation.default: #SUM
     @Analytics.Measure  : true
+    price,
+    @Aggregation.default: #SUM
+    @Analytics.Measure  : true
     @title              : '{i18n>numberOfBooks}'
     1         as count : Integer,
   };
@@ -405,7 +408,7 @@ entity OrderItems : cuid {
   itemNo    : Integer not null @(title: 'itemNo',
   );
   book      : Association to Books;
-  product   : SEPMRA_I_Product_E : Product;
+  product   : SEPMRA_I_Product_E:Product;
   amount    : Integer;
   netAmount : Decimal(9, 2);
 }
