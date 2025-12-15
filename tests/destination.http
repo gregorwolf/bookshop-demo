@@ -1,6 +1,8 @@
 ### Get Access Token for Destination Service
 # Documentation:
 # https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/7e306250e08340f89d6c103e28840f30.html
+# API Documentation:
+# https://api.sap.com/api/SAP_CP_CF_Connectivity_Destination/overview
 # @name requestDestinationAccessToken
 POST {{$dotenv dest_tokenendpoint}}/oauth/token
 Authorization: Basic {{$dotenv dest_clientid}}:{{$dotenv dest_clientsecret}}
