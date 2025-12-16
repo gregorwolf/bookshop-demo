@@ -7,8 +7,9 @@ Authorization: Basic admin:
 ### Read BooksAnalytics
 http://localhost:4004/odata/v4/analytics/BooksAnalytics
   ?$count=true
-  #&$expand=author,currency
-  &$compute=stock mul price as StockValue
+  //&$expand=author,currency
+  &$compute=price mul stock as StockValue
+  # price mul author/ID as StockValueInHundreds
 Authorization: Basic admin:
 ### Read BooksAnalytics
 http://localhost:4004/v2/analytics/BooksAnalytics
