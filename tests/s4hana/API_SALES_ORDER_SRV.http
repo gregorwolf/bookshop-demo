@@ -31,14 +31,17 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder
   ?$top=1
 #  &$skip=9
 #  &$filter=SoldToParty eq '10100003'
-  &$filter=OverallSDProcessStatus ne 'C' and CreationDate ge datetime'2025-01-01T00:00'
+  &$filter=SalesOrder eq '{{$dotenv SalesOrder}}'
+  # &$filter=OverallSDProcessStatus ne 'C' and CreationDate ge datetime'2025-01-01T00:00'
   # and OverallSDDocumentRejectionSts eq ''
   &$orderby=SalesOrder desc
   # Results in:
   # Resource not found for the segment 'to_Items'
   # &$select=*,to_Items/*,to_Items/to_ScheduleLine/*,to_Items/to_Partner/*,to_Partner/*
-  &$expand=to_Item,to_Item/to_ScheduleLine,to_Item/to_Partner,to_Partner
+  &$expand=to_Item
+  #,to_Item/to_ScheduleLine,to_Item/to_Partner,to_Partner
   #,to_Item/to_SubsequentProcFlowDocItem,to_BillingPlan,to_SubsequentProcFlowDoc,to_PrecedingProcFlowDoc,to_RelatedObject,to_PaymentPlanItemDetails
+  &$select=SalesOrderType,SalesOrderTypeInternalCode,SalesOrganization,DistributionChannel,OrganizationDivision,SoldToParty,PurchaseOrderByCustomer,CompleteDeliveryIsDefined,to_Item/SalesOrderItem,to_Item/Material,to_Item/RequestedQuantity,to_Item/RequestedQuantityUnit
   &$inlinecount=allpages
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
@@ -82,11 +85,13 @@ X-CSRF-Token: {{CSRF}}
 Content-Type: application/json
 
 #< ./default-env-API_SALES_ORDER_SRV-create.json
+< ./default-env-API_SALES_ORDER_SRV-create-68125885-clean.json
 #< ./API_SALES_ORDER_SRV-create.json
 #< ./API_SALES_ORDER_SRV-create-2.json
 #< ./API_SALES_ORDER_SRV-create-3.json
 #< ./API_SALES_ORDER_SRV-create-XRechnung.json
-< ./API_SALES_ORDER_SRV-create-Peppol-DE.json
+#< ./API_SALES_ORDER_SRV-create-ZUGFeRD.json
+#< ./API_SALES_ORDER_SRV-create-Peppol-DE.json
 #< ./API_SALES_ORDER_SRV-create-with-payment-plan.json
 # Returns:
 # CX_GOAL_EXC - Entity EPAY is not available

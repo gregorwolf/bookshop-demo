@@ -1,4 +1,5 @@
 ### Cloud: https://api.sap.com/api/WAREHOUSERESOURCE_0001/overview
+### Communication Scenario: SAP_COM_0353
 ### OnPrem: 
 ### S/4HANA Cloud
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_order_task_2/srvd_a2x/sap/warehouseorder/0001/
