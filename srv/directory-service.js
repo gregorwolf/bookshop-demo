@@ -5,7 +5,7 @@ module.exports = function () {
     console.log(req.user);
     if (cds.env.requires.db.kind === "hana") {
       const version = 1;
-      await cds.tx(req).run(`SET 'VERSION' = '${version}'`);
+      await cds.tx(req).run(`SET 'VERSION' = '?'`, [version]);
     }
     if (req.target.name === "DirectoryViewService.Session") {
       return;
