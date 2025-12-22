@@ -4,7 +4,8 @@ module.exports = function () {
     req.user.attr.version = 1;
     console.log(req.user);
     if (cds.env.requires.db.kind === "hana") {
-      await cds.tx(req).run("SET 'VERSION' = '1'");
+      const version = 1;
+      await cds.tx(req).run(`SET 'VERSION' = '${version}'`);
     }
     if (req.target.name === "DirectoryViewService.Session") {
       return;
@@ -13,7 +14,7 @@ module.exports = function () {
       user: req.user.id,
     });
     const session = await cds.tx(req).run(query);
-    if (session === null || !session.directory || !session.version) {
+    if (session === null || !session?.directory || !session?.version) {
       return req.error("mandatory session variable not set");
     }
   });
