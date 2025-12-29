@@ -78,3 +78,11 @@ Content-Type: application/json
     }
   ]
 }
+### from file
+POST {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SIMULATION_SRV/A_SalesOrderSimulation
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+< ./default-env-API_SALES_ORDER_SIMULATION_SRV-70642138.json
