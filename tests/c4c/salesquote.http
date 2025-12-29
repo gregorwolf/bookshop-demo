@@ -3,7 +3,8 @@ GET {{$dotenv host}}/sap/c4c/odata/v1/c4codataapi/SalesQuoteCollection
   ?$top=10
   &$inlinecount=allpages
   &$expand=SalesQuoteItem,SalesQuoteReference,SalesQuoteParty
-  &$filter=ID eq '4000003307'
+  &$select=ID,BuyerPartyID,SalesOrganisationID,CurrencyCode,SalesQuoteItem/ItemID,SalesQuoteItem/ProductInternalID,SalesQuoteItem/Quantity,SalesQuoteItem/QuantityMeasureUnitCode
+  &$filter=ID eq '{{$dotenv SalesQuoteID}}'
   #&$filter=ProcessingTypeCode ne 'ZAG' and SalesOfficeID eq '{{$dotenv SalesOfficeID}}'
   #&$orderby=CreationDateTime desc
 Authorization: Basic {{$dotenv username}}:{{$dotenv password}}
