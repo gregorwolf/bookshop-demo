@@ -38,10 +38,10 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder
   # Results in:
   # Resource not found for the segment 'to_Items'
   # &$select=*,to_Items/*,to_Items/to_ScheduleLine/*,to_Items/to_Partner/*,to_Partner/*
-  &$expand=to_Item
+  &$expand=to_PrecedingProcFlowDoc,to_Item,to_Item/to_PricingElement,to_Item/to_PrecedingProcFlowDocItem
   #,to_Item/to_ScheduleLine,to_Item/to_Partner,to_Partner
   #,to_Item/to_SubsequentProcFlowDocItem,to_BillingPlan,to_SubsequentProcFlowDoc,to_PrecedingProcFlowDoc,to_RelatedObject,to_PaymentPlanItemDetails
-  &$select=SalesOrderType,SalesOrderTypeInternalCode,SalesOrganization,DistributionChannel,OrganizationDivision,SoldToParty,PurchaseOrderByCustomer,CompleteDeliveryIsDefined,to_Item/SalesOrderItem,to_Item/Material,to_Item/RequestedQuantity,to_Item/RequestedQuantityUnit
+  #&$select=SalesOrderType,SalesOrderTypeInternalCode,SalesOrganization,DistributionChannel,OrganizationDivision,SoldToParty,PurchaseOrderByCustomer,CompleteDeliveryIsDefined,to_Item/SalesOrderItem,to_Item/Material,to_Item/RequestedQuantity,to_Item/RequestedQuantityUnit
   &$inlinecount=allpages
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
