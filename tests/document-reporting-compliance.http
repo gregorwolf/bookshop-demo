@@ -1,0 +1,21 @@
+#
+# SAP Document and Reporting Compliance, Cloud Edition
+#
+# https://help.sap.com/docs/cloud-edition/sap-document-and-reporting-compliance-cloud-edition/creating-logical-ports-in-soa-management-sap-s-4hana-network-exchange?locale=en-US
+# 
+### Get Access Token (Cloud Foundry using Client Credentials)
+# @name requestAccessToken
+POST {{$dotenv drc_tokenurl}}/oauth/token
+Authorization: Basic {{$dotenv drc_clientid}}:{{$dotenv drc_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+### Fill Variables from Response
+@access_token = {{requestAccessToken.response.body.$.access_token}}
+
+### CO_EDO_UBL_SEND_CRED_NOTE_V1_0
+POST {{$dotenv drc_url}}/cxf/PeppolSendDocumentTest
+Authorization: Bearer {{access_token}}
+Content-Type: application/xml
+Accept: application/xml
