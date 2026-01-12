@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@cap-js-community/odata-v2-adapter": "^1",
-    "@cap-js/notifications": "^0.2.3",
+    "@cap-js/notifications": "^0.3.0",
     "@sap-cloud-sdk/http-client": "^4",
     "@sap-cloud-sdk/mail-client": "^3",
     "@sap-cloud-sdk/util": "^4",
@@ -51,7 +51,7 @@
     "@sap/ux-specification": "^1.120.0",
     "artillery": "^2.0.21",
     "cds-swagger-ui-express": "^0",
-    "chai": "^5",
+    "chai": "^6",
     "chai-as-promised": "^8",
     "chai-subset": "^1.6.0",
     "copyfiles": "2.4.1",
