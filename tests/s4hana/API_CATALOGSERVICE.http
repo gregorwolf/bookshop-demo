@@ -17,8 +17,9 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/IWFND/CATALOGSERVICE;v=0002/ServiceColl
   ?$top=100
   &$inlinecount=allpages
 #  &$select=TechnicalServiceName
-  &$filter=TechnicalServiceName eq 'API_BUSINESS_PARTNER'
-  #'{{$dotenv TechnicalServiceName}}'
+  &$filter=startswith(TechnicalServiceName, '{{$dotenv TechnicalServiceName}}')
+#  &$filter=TechnicalServiceName eq '{{$dotenv TechnicalServiceName}}'
+#  &$expand=TagCollection
 #  &$filter=startswith(TechnicalServiceName, '{{$dotenv TechnicalServiceName}}')
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
