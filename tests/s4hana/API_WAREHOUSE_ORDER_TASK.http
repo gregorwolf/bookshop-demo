@@ -1,0 +1,18 @@
+
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_WAREHOUSE_ORDER_TASK/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_WAREHOUSE_ORDER_TASK/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_WAREHOUSE_ORDER_TASK/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_WAREHOUSE_ORDER_TASK/WarehouseOrder
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
