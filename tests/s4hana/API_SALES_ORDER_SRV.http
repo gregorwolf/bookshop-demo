@@ -60,6 +60,14 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrderIte
   &$inlinecount=allpages
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+
+### A_SalesOrderHeaderPartner
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrderHeaderPartner
+  ?$top=10
+  &$inlinecount=allpages
+  &$filter=ReferenceBusinessPartner eq '8028756'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrderPrecdgProcFlow
   ?$top=10
