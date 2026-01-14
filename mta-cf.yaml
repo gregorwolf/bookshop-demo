@@ -60,7 +60,24 @@ modules:
       #      - name: bookshop-demo-cloud-logging
       - name: bookshop-demo-autoscaler
         parameters:
-          path: ./autoscaler.json
+          config:
+            instance_min_count: 1
+            instance_max_count: 2
+            scaling_rules:
+              - metric_type: cpu
+                threshold: 70
+                stat_window_secs: 60
+                operator: ">"
+                adjustment: "+1"
+                breach_duration_secs: 60
+                cool_down_secs: 60
+              - metric_type: cpu
+                threshold: 70
+                stat_window_secs: 60
+                operator: "<="
+                adjustment: "-1"
+                breach_duration_secs: 60
+                cool_down_secs: 60
   - name: bookshop-demo-api-sb
     # ------------------------------------------------------------
     type: nodejs
@@ -217,7 +234,7 @@ modules:
     build-parameters:
       ignore: ["node_modules/"]
     requires:
-      #      - name: bookshop-demo-ui5-flexibility-keyuser
+      - name: bookshop-demo-ui5-flexibility-keyuser
       - name: bookshop-demo-destination-service
       - name: bookshop-demo-connectivity-service
       - name: bookshop-demo-uaa
@@ -328,8 +345,8 @@ resources:
     parameters:
       service: autoscaler
       service-plan: standard
-#  - name: bookshop-demo-ui5-flexibility-keyuser
-#    type: org.cloudfoundry.managed-service
-#    parameters:
-#      service: ui5-flexibility-keyuser
-#      service-plan: free
+  - name: bookshop-demo-ui5-flexibility-keyuser
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: ui5-flexibility-keyuser
+      service-plan: free
