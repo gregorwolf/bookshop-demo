@@ -39,8 +39,8 @@
       "csrfProtection": true
     },
     {
-      "source": "/odata/v2/(.*)$",
-      "target": "/odata/v2/$1",
+      "source": "/odata/(.*)$",
+      "target": "/odata/$1",
       "authenticationType": "xsuaa",
       "destination": "srv_api",
       "csrfProtection": true
