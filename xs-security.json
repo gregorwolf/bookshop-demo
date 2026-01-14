@@ -27,7 +27,9 @@
     {
       "name": "$XSAPPNAME.jobscheduler",
       "description": "Scope for Job Scheduler",
-      "grant-as-authority-to-apps": ["jobscheduler"]
+      "grant-as-authority-to-apps": [
+        "jobscheduler"
+      ]
     },
     {
       "name": "$XSAPPNAME.job",
@@ -49,36 +51,72 @@
     {
       "name": "admin",
       "description": "generated",
-      "scope-references": ["$XSAPPNAME.admin"],
+      "scope-references": [
+        "$XSAPPNAME.admin"
+      ],
       "attribute-references": []
     },
     {
       "name": "booksadmin",
       "description": "generated",
-      "scope-references": ["$XSAPPNAME.booksadmin"],
+      "scope-references": [
+        "$XSAPPNAME.booksadmin"
+      ],
       "attribute-references": []
     },
     {
       "name": "roleadmin",
       "description": "generated",
-      "scope-references": ["$XSAPPNAME.roleadmin"],
+      "scope-references": [
+        "$XSAPPNAME.roleadmin"
+      ],
       "attribute-references": []
     },
     {
       "name": "Token_Exchange",
       "description": "UAA",
-      "scope-references": ["uaa.user"]
+      "scope-references": [
+        "uaa.user"
+      ]
     },
     {
       "name": "userattributes",
       "description": "generated",
       "default-role-name": "Attributes of a User",
       "scope-references": [],
-      "attribute-references": ["level"]
+      "attribute-references": [
+        "level"
+      ]
+    }
+  ],
+  "role-collections": [
+    {
+      "name": "BookshopAdmin",
+      "description": "Bookshop Admin",
+      "role-template-references": [
+        "$XSAPPNAME.admin"
+      ]
+    },
+    {
+      "name": "BookshopBooksAdmin",
+      "description": "Bookshop Books Admin",
+      "role-template-references": [
+        "$XSAPPNAME.booksadmin"
+      ]
+    },
+    {
+      "name": "BookshopRoleAdmin",
+      "description": "Bookshop Role Admin",
+      "role-template-references": [
+        "$XSAPPNAME.roleadmin"
+      ]
     }
   ],
   "oauth2-configuration": {
-    "credential-types": ["binding-secret", "x509"],
+    "credential-types": [
+      "binding-secret",
+      "x509"
+    ],
     "redirect-uris": [
       "https://global.consent.azure-apim.net/redirect",
       "https://*.hana.ondemand.com/**",
