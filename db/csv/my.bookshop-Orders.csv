@@ -1,5 +1,5 @@
 ID;taxPercentage;headerText;vipOrder;salesOrganization;distributionChannel;totalTax;totalWithTax;modifiedAt;createdAt;createdBy;modifiedBy;OrderNo;total;currency_code;orderstatus_code;deliverystatus_code;ShippingAddress_ID
-7e2f2640-6866-4dcf-8f4d-3027aa831cad;19;;true ;1000;00;3.4;50.8;;2019-01-31;bob@vipOrder.com;;1;30;EUR;N;N;58040e66-1dcd-4ffb-ab10-fdce32028b79
+7e2f2640-6866-4dcf-8f4d-3027aa831cad;19;;true;1000;00;3.4;50.8;;2019-01-31;bob@vipOrder.com;;1;30;EUR;N;N;58040e66-1dcd-4ffb-ab10-fdce32028b79
 64e718c9-ff99-47f1-8ca3-950c850777d4;19;;false;1000;00;3.4;50.8;;2019-02-01;bob;;2;15.5;EUR;N;N;
 1e2f2640-6866-4dcf-8f4d-3027aa831cad;19;;false;1000;00;3.4;50.8;;2020-01-31;bob@vipOrder.com;;10;30;JPY;N;N;
 2e2f2640-6866-4dcf-8f4d-3027aa831cad;19;;false;1000;00;3.4;50.8;;2020-01-31;bob@vipOrder.com;;11;30;KRW;N;N;
