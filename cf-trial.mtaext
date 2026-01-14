@@ -1,8 +1,11 @@
-_schema-version: '3.1'
+_schema-version: "3.1"
 ID: bookshop-demo.extension
 extends: bookshop-demo
 
-#resources:
+resources:
+  - name: bookshop-demo-job-scheduler
+    parameters:
+      service-plan: free
 #  - name: bookshop-demo-ui5-flexibility-keyuser
 #    parameters:
 #      service-plan: trial

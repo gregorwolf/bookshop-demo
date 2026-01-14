@@ -309,6 +309,10 @@ resources:
       service-plan: lite
       config:
         enable-xsuaa-support: true
+    processed-after:
+      - bookshop-demo-uaa
+    requires:
+      - name: bookshop-demo-uaa
   - name: bookshop-demo-logging
     type: org.cloudfoundry.managed-service
     parameters:
