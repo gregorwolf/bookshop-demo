@@ -42,7 +42,10 @@
       "tablet": true,
       "phone": true
     },
-    "supportedThemes": ["sap_hcb", "sap_belize"]
+    "supportedThemes": [
+      "sap_hcb",
+      "sap_belize"
+    ]
   },
   "sap.ui5": {
     "resources": {
@@ -90,7 +93,15 @@
         }
       }
     },
-    "extends": {},
+    "extends": {
+      "extensions": {
+        "sap.ui.controllerExtensions": {
+          "sap.suite.ui.generic.template.ListReport.view.ListReport": {
+            "controllerName": "v2.ordersUI5latest.ext.controller.ListReportExtension"
+          }
+        }
+      }
+    },
     "contentDensities": {
       "compact": true,
       "cozy": true
