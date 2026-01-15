@@ -36,6 +36,11 @@ Authorization: Bearer {{access_token}}
 < ./ads.pdf
 ###
 @document={{createDocument.response.body.*}}
+### Requesting a CSRF Token returns: 
+### 403 Forbidden - RBAC: access denied
+GET {{$dotenv print_endpoint}}/dm/api/v1/rest/print-documents/{{document}}
+Authorization: Bearer {{access_token}}
+CSRF-Token: Fetch
 ###
 PUT {{$dotenv print_endpoint}}/qm/api/v1/rest/print-tasks/{{document}}
 Authorization: Bearer {{access_token}}
