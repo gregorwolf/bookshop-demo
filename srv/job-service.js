@@ -6,7 +6,7 @@ const RUNNING = "R";
 class JobService extends cds.ApplicationService {
   async init() {
     const db = await cds.connect.to("db");
-    const { Jobs } = db.entities("my.job");
+    const { Jobs } = cds.entities("my.job");
 
     this.before("READ", Jobs, (req) => {
       LOG.info(`before READ Jobs`);
@@ -27,12 +27,12 @@ class JobService extends cds.ApplicationService {
       const { selection } = req.data;
       try {
         const insertRes = await tx.run(
-          INSERT.into(Jobs).entries({ selection, status_code: QUEUED })
+          INSERT.into(Jobs).entries({ selection, status_code: QUEUED }),
         );
         // Fix Object result
         // https://answers.sap.com/questions/13734900/sap-cap-cql-insert-result-object-is-different-depe.html
         const selectRes = await tx.run(
-          SELECT.from(Jobs).where([...insertRes][0])
+          SELECT.from(Jobs).where([...insertRes][0]),
         );
         await tx.commit();
         const job = selectRes[0];
@@ -56,7 +56,7 @@ class JobService extends cds.ApplicationService {
       const updateRes = await db.run(
         UPDATE(Jobs)
           .set({ status_code: req.data.status, end: Date.now() })
-          .where({ ID })
+          .where({ ID }),
       );
     });
 
@@ -71,7 +71,7 @@ async function start(tx) {
   const { Jobs } = tx.entities("my.job");
   await tx.begin();
   const jobs = await tx.run(
-    SELECT.from(Jobs).where({ status_code: QUEUED }).orderBy("createdAt asc")
+    SELECT.from(Jobs).where({ status_code: QUEUED }).orderBy("createdAt asc"),
   );
   await tx.commit();
   for (job of jobs) {
@@ -81,7 +81,7 @@ async function start(tx) {
       SELECT.from(Jobs).where({
         selection: job.selection,
         status_code: RUNNING,
-      })
+      }),
     );
     await tx.commit();
     LOG.debug("runningjob:", runningjobs);
@@ -91,7 +91,7 @@ async function start(tx) {
         const updateRes = await tx.run(
           UPDATE(Jobs)
             .set({ status_code: RUNNING, start: Date.now() })
-            .where({ ID: job.ID })
+            .where({ ID: job.ID }),
         );
         await tx.commit();
         const jobExecutionService = await cds.connect.to("JobExecutionService");
@@ -103,7 +103,7 @@ async function start(tx) {
       }
     } else {
       LOG.info(
-        `Another Job wth the same selection of ${job.selection} is already running`
+        `Another Job wth the same selection of ${job.selection} is already running`,
       );
     }
   }

@@ -30,19 +30,19 @@ function sapJobLogger(req, res, next) {
     LOG.info("===> SAP Job Headers");
     LOG.info(
       "===> SAP Job Headers - x-sap-job-id:         " +
-        req.headers["x-sap-job-id"]
+        req.headers["x-sap-job-id"],
     );
     LOG.info(
       "===> SAP Job Headers - x-sap-jobschedule-id: " +
-        req.headers["x-sap-jobschedule-id"]
+        req.headers["x-sap-jobschedule-id"],
     );
     LOG.info(
       "===> SAP Job Headers - x-sap-job-run-id:     " +
-        req.headers["x-sap-job-run-id"]
+        req.headers["x-sap-job-run-id"],
     );
     LOG.info(
       "===> SAP Job Headers - x-sap-scheduler-host: " +
-        req.headers["x-sap-scheduler-host"]
+        req.headers["x-sap-scheduler-host"],
     );
   }
 
@@ -83,7 +83,7 @@ const readJwt = function (req) {
       const jwtBase64Encoded = theJwtToken.split(".")[1];
       if (jwtBase64Encoded) {
         const jwtDecoded = Buffer.from(jwtBase64Encoded, "base64").toString(
-          "ascii"
+          "ascii",
         );
         return JSON.parse(jwtDecoded);
       }
@@ -131,7 +131,7 @@ cds.on("bootstrap", async (app) => {
   app.use(
     express.urlencoded({
       extended: true,
-    })
+    }),
   );
 
   // Dummy OAuth token endpoint that can be configured in a BTP destination
@@ -157,7 +157,7 @@ cds.on("bootstrap", async (app) => {
     LOG.info("===> MY_SCOPE: " + MY_SCOPE);
     if (req.authInfo?.checkScope(MY_SCOPE)) {
       res.send(
-        "The endpoint was properly called, role available, delivering data"
+        "The endpoint was properly called, role available, delivering data",
       );
     } else {
       const jwtToken = readJwt(req);
@@ -187,7 +187,7 @@ if (process.env.NODE_ENV !== "production") {
 
 cds.on("served", async (services) => {
   const db = await cds.connect.to("db");
-  const { ServiceDefinition } = db.entities("dynamic");
+  const { ServiceDefinition } = cds.entities("dynamic");
   const serviceDefinitions = await SELECT.from(ServiceDefinition);
   LOG.debug("serviceDefinitions: ", serviceDefinitions);
   for (const serviceDefinition of serviceDefinitions) {
