@@ -57,7 +57,6 @@ entity Roles : cuid, managed {
 };
 
 @cds.odata.valuelist
-@cds.autoexpose
 @UI.Identification: [{Value: description}]
 @readonly
 entity RoleUsages as projection on Roles;
