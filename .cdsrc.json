@@ -1,6 +1,6 @@
 {
   "requires": {
-    "[development]": {
+    "[xdevelopment]": {
       "db": {
         "credentials": {
           "database": "db/bookshop.db"
@@ -46,34 +46,55 @@
       "users": {
         "requester": {
           "password": "",
-          "roles": ["admin"]
+          "roles": [
+            "admin"
+          ]
         },
         "booksadmin": {
           "password": "",
-          "roles": ["booksadmin"]
+          "roles": [
+            "booksadmin"
+          ]
         },
         "job": {
           "password": "Secret1",
-          "roles": ["job"]
+          "roles": [
+            "job"
+          ]
         },
         "job-execution": {
           "password": "Secret2",
-          "roles": ["job-execution"]
+          "roles": [
+            "job-execution"
+          ]
         },
         "admin": {
           "password": "",
-          "roles": ["admin", "roleadmin", "booksadmin", "MODEL_ALL"]
+          "roles": [
+            "admin",
+            "roleadmin",
+            "booksadmin",
+            "MODEL_ALL"
+          ]
         },
         "roleadmin": {
-          "roles": ["admin", "roleadmin"]
+          "roles": [
+            "admin",
+            "roleadmin"
+          ]
         },
         "littleadmin": {
           "password": "",
-          "roles": ["admin"]
+          "roles": [
+            "admin"
+          ]
         },
         "bob": {
           "password": "",
-          "roles": ["authenticated-user", "openid"],
+          "roles": [
+            "authenticated-user",
+            "openid"
+          ],
           "attr": {
             "level": 5,
             "directory": "A",
@@ -82,7 +103,10 @@
         },
         "error": {
           "password": "",
-          "roles": ["authenticated-user", "openid"]
+          "roles": [
+            "authenticated-user",
+            "openid"
+          ]
         },
         "*": true
       }
