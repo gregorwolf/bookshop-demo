@@ -62,7 +62,8 @@
     "npm-run-all": "^4.1.5",
     "response-time": "^2.3.2",
     "sqlite3": "^5",
-    "supertest": "^7"
+    "supertest": "^7",
+    "cds-plugin-ui5": "^0.13.0"
   },
   "scripts": {
     "setup": "run-s deploy:sqlite:bookshop build start",
@@ -140,7 +141,8 @@
     "cf:uaa:update": "cf update-service bookshop-demo-uaa -c xs-security.json",
     "undeploy:xsa": "xs undeploy bookshop-demo --delete-services --delete-service-brokers",
     "undeploy:cf": "cf undeploy bookshop-demo --delete-service-keys --delete-services --delete-service-brokers",
-    "watch-uom-mapping": "cds watch --open uom-mapping/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-uom-mapping": "cds watch --open uom-mapping/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-business-object": "cds watch --open businessobject/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
   "cds": {
     "fiori": {
@@ -334,6 +336,10 @@
     }
   },
   "sapux": [
-    "app/webapp/uom-mapping"
+    "app/webapp/uom-mapping",
+    "app/business-object"
+  ],
+  "workspaces": [
+    "app/*"
   ]
 }
