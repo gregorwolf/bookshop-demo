@@ -127,7 +127,7 @@ service AdminService @(
 
   @odata.draft.enabled: null
   @readonly
-  entity RoleUsages             as projection on db.Roles;
+  entity RoleUsages             as projection on db.RoleUsages;
 
   //------- auto-exposed --------
   entity Role_BusinessObject    as projection on db.Role_BusinessObject;
