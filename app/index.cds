@@ -444,3 +444,5 @@ annotate my.Authors with {
     )  @UI.HiddenFilter;
     name @title: '{i18n>AuthorName}';
 }
+
+using from './business-object/annotations';

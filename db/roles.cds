@@ -4,6 +4,7 @@ using {
                          managed,
                          cuid,
                          User,
+                         temporal,
   sap.common.CodeList as CodeList,
 } from '@sap/cds/common';
 
@@ -68,6 +69,12 @@ entity BusinessObjects {
       parent   : Association to BusinessObjects;
       children : Composition of many BusinessObjects
                    on children.parent = $self;
+};
+
+entity BusinessObjectsCUID : cuid, temporal, CodeList {
+  parent   : Association to BusinessObjectsCUID;
+  children : Composition of many BusinessObjectsCUID
+               on children.parent = $self;
 };
 
 entity Role_BusinessObject : cuid, managed {

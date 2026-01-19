@@ -132,10 +132,9 @@ service AdminService @(
   entity Role_User              as projection on db.Role_User;
 
   //> these shall be removed but this would break the Fiori UI
-  entity BusinessObjects @(restrict: [{
-    grant: ['READ'],
-    to   : 'admin'
-  }, ])                         as projection on db.BusinessObjects;
+  @odata.draft.enabled
+  @hierarchy
+  entity BusinessObjects        as projection on db.BusinessObjects;
 
   @Common.SideEffects #responsibleChange: {
     SourceProperties: [responsible_ID],

@@ -1,0 +1,155 @@
+{
+  "_version": "1.76.0",
+  "sap.app": {
+    "id": "businessobject",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.20.0",
+      "toolsId": "49feff95-d524-4123-9e8b-c71fbe0741d2"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/business-object/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "BusinessObject-manage": {
+          "semanticObject": "BusinessObject",
+          "action": "manage",
+          "title": "{{BusinessObject-manage.flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.139.4",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "businessobject.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "BusinessObjectsCUIDList",
+          "target": "BusinessObjectsCUIDList"
+        },
+        {
+          "pattern": "BusinessObjectsCUID({key}):?query:",
+          "name": "BusinessObjectsCUIDObjectPage",
+          "target": "BusinessObjectsCUIDObjectPage"
+        }
+      ],
+      "targets": {
+        "BusinessObjectsCUIDList": {
+          "type": "Component",
+          "id": "BusinessObjectsCUIDList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/BusinessObjectsCUID",
+              "variantManagement": "Page",
+              "navigation": {
+                "BusinessObjectsCUID": {
+                  "detail": {
+                    "route": "BusinessObjectsCUIDObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "hierarchyQualifier": "BusinessObjectsCUIDHierarchy",
+                    "type": "TreeTable"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "BusinessObjectsCUIDObjectPage": {
+          "type": "Component",
+          "id": "BusinessObjectsCUIDObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": true,
+              "contextPath": "/BusinessObjectsCUID"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}
