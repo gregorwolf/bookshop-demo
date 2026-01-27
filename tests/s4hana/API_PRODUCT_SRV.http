@@ -172,6 +172,24 @@ Content-Type: application/json
   }
 }
 ###
+# @name createProductFromFile
+POST {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+< ./default-env-API_PRODUCT_SRV.json
+###
+# @name createProductFromFile
+PATCH {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product('{{$dotenv Product}}')
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+< ./default-env-API_PRODUCT_SRV-patch.json
+###
 # @name createProductViaAPIManagement
 POST {{$dotenv s4hana_apimgmt_host}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_apimgmt_password}}

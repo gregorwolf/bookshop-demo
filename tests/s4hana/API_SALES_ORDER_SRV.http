@@ -93,11 +93,11 @@ X-CSRF-Token: {{CSRF}}
 Content-Type: application/json
 
 #< ./default-env-API_SALES_ORDER_SRV-create.json
-< ./default-env-API_SALES_ORDER_SRV-create-68125885-clean.json
+#< ./default-env-API_SALES_ORDER_SRV-create-68125885-clean.json
 #< ./API_SALES_ORDER_SRV-create.json
 #< ./API_SALES_ORDER_SRV-create-2.json
 #< ./API_SALES_ORDER_SRV-create-3.json
-#< ./API_SALES_ORDER_SRV-create-XRechnung.json
+< ./API_SALES_ORDER_SRV-create-XRechnung.json
 #< ./API_SALES_ORDER_SRV-create-ZUGFeRD.json
 #< ./API_SALES_ORDER_SRV-create-Peppol-DE.json
 #< ./API_SALES_ORDER_SRV-create-with-payment-plan.json

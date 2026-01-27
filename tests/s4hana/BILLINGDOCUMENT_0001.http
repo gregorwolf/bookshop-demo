@@ -11,8 +11,9 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 # @name billingDocuments
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_billingdocument/srvd_a2x/sap/billingdocument/0001/BillingDocument
   ?$top=10
-  &$expand=_Item
-  &$filter=LastChangeDateTime gt 2024-10-08T00:00:00Z
+  &$expand=_Item($expand=_ItemPartner),*
+  &$filter=LastChangeDateTime gt 2026-01-08T00:00:00Z
+  #&$filter=PaymentMethod eq 'X'
   &$orderby=BillingDocument desc
   &$count=true
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
@@ -20,8 +21,10 @@ Accept: application/json
 ### Read first Billing Document to Variable
 @billingDocument={{billingDocuments.response.body.value.0.BillingDocument}}
 ###
-# @name billingDocuments
+# @name billingDocumentRequest
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_billingdocument/srvd_a2x/sap/billingdocument/0001/BillingDocument/{{billingDocument}}
+  ?$expand=_Item($expand=_ItemPartner),*
+  &sap-language=DE
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ### Get CSRF Token
