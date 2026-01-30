@@ -1,0 +1,59 @@
+# https://divalto.atlassian.net/wiki/spaces/PAI/pages/10550740818/Services+Web+API+Architecture+REST
+###
+GET https://api.divaltocloud.com/
+
+###
+# https://api.divaltocloud.com/ [NUMEROSITE] / [ENVIRONNEMENT] /api/v1/Authent/Auth
+# @name access_token_request
+POST https://api.divaltocloud.com/{{$dotenv NUMEROSITE}}/{{$dotenv ENVIRONNEMENT}}/api/v1/Authent/Auth
+Content-Type: application/json
+
+{
+    "user": "userapi@divalto.com",
+    "password": "xxxxxxxxxxxxxxx",
+    "infos": ""
+}
+### Save Access Token in local variable
+@access_token={{access_token_request.response.body.access_token}}
+###
+# /api/v1/WebService/Execute
+POST https://api.divaltocloud.com/{{$dotenv NUMEROSITE}}/{{$dotenv ENVIRONNEMENT}}/api/v1/WebService/Execute
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "action": "PING",
+    "param": ""
+}
+### /api/v1/RecordSql/Execute
+POST https://api.divaltocloud.com/{{$dotenv NUMEROSITE}}/{{$dotenv ENVIRONNEMENT}}/api/v1/RecordSql/Execute
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "dhoq": "gtrstab.dhoq",                // Nom du fichier DHOQ
+    "recordsql": "CODEPOSTAL",             // Nom du RecordSQL
+    "parameters": "",
+    "fields": "CPOSTAL;VIL",               // Récupération des champs CPOSTAL et VIL
+    "where": "",
+    "where_parameters": "",
+    "offset": "0",                         // Décalage de 0 résultat
+    "count": "5",                          // Récupération de 5 résultats maximum
+    "orderby": "Par_Code",                 // Tri par Code Postal
+    "having": "",
+    "having_parameters": "",
+    "infos": "<perf>1",                    // Activation des statistiques
+    "filter": {
+        "operator_where":"OR",             // Deux clauses WHERE avec un OU logique
+        "where": [                         // Par défaut, un ET logique est appliqué
+            { 
+                "name": "Like_Cpostal",    // Première clause WHERE
+                "parameters": "6796%"      // Code Postal contient la valeur "6796"
+            },                                          
+            {                                           
+                "name": "Like_Vil",        // Seconde clause WHERE
+                "parameters": "%PARIS%"    // Ville contient la valeur "PARIS"
+            }
+        ]
+    }
+}
