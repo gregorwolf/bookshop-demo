@@ -4,19 +4,20 @@ POST https://windfgwpublic.b2clogin.com/windfgwpublic.onmicrosoft.com/b2c_1a_sig
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=client_credentials
-&scope=https%3A%2F%2Fwindfgwpublic.onmicrosoft.com%2F5f46c2c0-9b00-4346-837b-eb06ac61148d%2F.default
+# This scope works for production:
+&scope=https%3A%2F%2Fwindfgwpublic.onmicrosoft.com%2F1a33ef9b-b63c-45b1-90c1-669bf5516bf2%2F.default
 &client_id={{$dotenv ZEREZ_client_id}}
 &client_secret={{$dotenv ZEREZ_client_secret}}
 
 ### Fill Variables from Response
 @access_token = {{requestAccessToken.response.body.$.access_token}}
+### Development
 ### Returns:
-# 500 Internal Server Error
-# System.ArgumentNullException: Value cannot be null. (Parameter 'source')
+# 403 Forbidden
 GET https://app-zerez-weeu-gatewaysvc-dev-01.azurewebsites.net/api/v1/certificates/ZE-D77X-36KX
 Authorization: Bearer {{access_token}}
 accept: text/plain
-### Returns Unauthorized
+### Productions
 GET https://app-zerez-weeu-gatewaysvc-prod-01.azurewebsites.net/api/v1/certificates/ZE-D77X-36KX
 Authorization: Bearer {{access_token}}
 accept: text/plain
