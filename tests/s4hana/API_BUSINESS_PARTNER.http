@@ -60,12 +60,29 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_apimgmt_passwo
 APIKey: {{$dotenv s4hana_apikey}}
 Accept: application/json
 ###
+# @name getCustomerSalesArea
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_CustomerSalesArea
   ?$inlinecount=allpages
   &$top=10
-  &$filter=SalesOrganization eq '1010' and DistributionChannel eq '10'
+  &$skip=100
+  &$filter=SalesOrganization eq '2210'
+  # and DistributionChannel eq '10'
+  #&$orderby=Customer desc
+  &$select=Customer
+  #&$expand=to_PartnerFunction,to_SalesAreaTax,to_SalesAreaText,to_SlsAreaAddrDepdntInfo
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+###
+### Set DeletionIndicator for A_CustomerSalesArea
+PATCH {{getCustomerSalesArea.response.body.d.results[0].__metadata.uri}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+Content-Type: application/json
+X-CSRF-Token: {{CSRF}}
+
+{
+  "DeletionIndicator": true
+}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_CustomerText
   ?$inlinecount=allpages
