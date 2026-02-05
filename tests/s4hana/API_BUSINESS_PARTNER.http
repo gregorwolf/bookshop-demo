@@ -32,6 +32,11 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/$metadata
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/DuplicateCheck
+  ?Input='{"BusinessPartnerCategory":"2","OrganizationBPName1":"{{$dotenv DuplicateCheck_OrganizationBPName1}}","_BusinessPartnerAddress":[{"StreetName":"{{$dotenv DuplicateCheck_StreetName}}","CityName":"{{$dotenv DuplicateCheck_CityName}}","Country":"DE"}]}'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartner/$count
   ?$filter=Customer ne ''
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
