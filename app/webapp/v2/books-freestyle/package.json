@@ -19,7 +19,7 @@
     "start-mock": "fiori run --open test/flpSandboxMockServer.html"
   },
   "devDependencies": {
-    "@ui5/cli": "3.3.0",
+    "@ui5/cli": "^4",
     "@ui5/fs": "3.0.4",
     "@ui5/logger": "3.0.0",
     "@sap/ux-ui5-tooling": "1.10.1"
