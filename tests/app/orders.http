@@ -131,7 +131,7 @@ Authorization: Basic admin:
 Content-Type: application/json
 
 {}
-### Delete Items an action
+### Delete Items using an action
 POST http://localhost:4004/odata/v4/order/Orders(ID={{orderID}},IsActiveEntity=true)/deleteOrderItems
 Authorization: Basic admin:
 Content-Type: application/json
@@ -149,6 +149,28 @@ Authorization: Basic admin:
 GET http://localhost:4004/v2/admin/Orders(ID=guid'7e2f2640-6866-4dcf-8f4d-3027aa831cad',IsActiveEntity=true)/Items
 Authorization: Basic admin:
 
+### 
+POST http://localhost:4004/odata/v4/order/Orders(ID=64e718c9-ff99-47f1-8ca3-950c850777d4,IsActiveEntity=true)/OrderService.setOrderParameters
+Authorization: Basic admin:
+Accept: application/json
+Content-Type: application/json
+x-sap-job-id: 5
+
+{
+  "vipOrder": true,
+  "employeeOrder": false
+}
+###
+POST http://localhost:4004/odata/v4/order/Orders(ID=64e718c9-ff99-47f1-8ca3-950c850777d4,IsActiveEntity=true)/OrderService.setOrderParameters
+Authorization: Basic booksadmin:
+Accept: application/json
+Content-Type: application/json
+x-sap-job-id: 5
+
+{
+  "vipOrder": true,
+  "employeeOrder": false
+}
 ### Order Consistency Check via OData V4
 POST http://localhost:4004/odata/v4/order/Orders(ID=64e718c9-ff99-47f1-8ca3-950c850777d4,IsActiveEntity=true)/OrderService.checkConsistencyInline
 Authorization: Basic admin:
