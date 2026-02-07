@@ -24,16 +24,23 @@
   <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
     <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1" />
   </edmx:Reference>
-  <edmx:Reference
-    Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
-    <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1" />
-  </edmx:Reference>
   <edmx:DataServices>
     <Schema Namespace="OrderService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <Annotation Term="Core.Links">
+        <Collection>
+          <Record>
+            <PropertyValue Property="rel" String="author" />
+            <PropertyValue Property="href" String="https://cap.cloud.sap" />
+          </Record>
+        </Collection>
+      </Annotation>
       <EntityContainer Name="EntityContainer">
         <EntitySet Name="Orders" EntityType="OrderService.Orders">
           <NavigationPropertyBinding Path="Items" Target="OrderItems" />
+          <NavigationPropertyBinding Path="compositionTags" Target="CompositionTags" />
+          <NavigationPropertyBinding Path="tags" Target="OrderTags" />
           <NavigationPropertyBinding Path="ShippingAddress" Target="OrderShippingAddress" />
+          <NavigationPropertyBinding Path="Comments" Target="Comments" />
           <NavigationPropertyBinding Path="orderstatus" Target="Orderstatuses" />
           <NavigationPropertyBinding Path="deliverystatus" Target="Deliverystatuses" />
           <NavigationPropertyBinding Path="currency" Target="Currencies" />
@@ -44,9 +51,6 @@
           <NavigationPropertyBinding Path="book" Target="Books" />
           <NavigationPropertyBinding Path="SiblingEntity" Target="OrderItems" />
         </EntitySet>
-        <EntitySet Name="OrderShippingAddress" EntityType="OrderService.OrderShippingAddress">
-          <NavigationPropertyBinding Path="SiblingEntity" Target="OrderShippingAddress" />
-        </EntitySet>
         <EntitySet Name="Books" EntityType="OrderService.Books">
           <NavigationPropertyBinding Path="genre" Target="Genres" />
           <NavigationPropertyBinding Path="relatedBook" Target="Books" />
@@ -56,11 +60,47 @@
           <NavigationPropertyBinding Path="texts" Target="Books_texts" />
           <NavigationPropertyBinding Path="localized" Target="Books_texts" />
         </EntitySet>
-        <EntitySet Name="A_SalesOrganizationText" EntityType="OrderService.A_SalesOrganizationText" />
-        <Singleton Name="Userdetails" Type="OrderService.Userdetails">
-          <NavigationPropertyBinding Path="authorizations" Target="Authorizations" />
-        </Singleton>
-        <Singleton Name="Authorizations" Type="OrderService.Authorizations" />
+        <EntitySet Name="Genres" EntityType="OrderService.Genres">
+          <NavigationPropertyBinding Path="parent" Target="Genres" />
+          <NavigationPropertyBinding Path="texts" Target="Genres_texts" />
+          <NavigationPropertyBinding Path="localized" Target="Genres_texts" />
+        </EntitySet>
+        <EntitySet Name="Currencies" EntityType="OrderService.Currencies">
+          <NavigationPropertyBinding Path="texts" Target="Currencies_texts" />
+          <NavigationPropertyBinding Path="localized" Target="Currencies_texts" />
+        </EntitySet>
+        <EntitySet Name="Authors" EntityType="OrderService.Authors">
+          <NavigationPropertyBinding Path="country" Target="Countries" />
+        </EntitySet>
+        <EntitySet Name="Countries" EntityType="OrderService.Countries">
+          <NavigationPropertyBinding Path="texts" Target="Countries_texts" />
+          <NavigationPropertyBinding Path="localized" Target="Countries_texts" />
+        </EntitySet>
+        <EntitySet Name="BookPlants" EntityType="OrderService.BookPlants">
+          <NavigationPropertyBinding Path="book" Target="Books" />
+          <NavigationPropertyBinding Path="plant" Target="Plant" />
+        </EntitySet>
+        <EntitySet Name="Plant" EntityType="OrderService.Plant">
+          <NavigationPropertyBinding Path="texts" Target="Plant_texts" />
+          <NavigationPropertyBinding Path="localized" Target="Plant_texts" />
+          <NavigationPropertyBinding Path="SiblingEntity" Target="Plant" />
+        </EntitySet>
+        <EntitySet Name="CompositionTags" EntityType="OrderService.CompositionTags">
+          <NavigationPropertyBinding Path="parent" Target="Orders" />
+          <NavigationPropertyBinding Path="SiblingEntity" Target="CompositionTags" />
+        </EntitySet>
+        <EntitySet Name="OrderTags" EntityType="OrderService.OrderTags">
+          <NavigationPropertyBinding Path="parent" Target="Orders" />
+          <NavigationPropertyBinding Path="tag" Target="Tags" />
+          <NavigationPropertyBinding Path="SiblingEntity" Target="OrderTags" />
+        </EntitySet>
+        <EntitySet Name="Tags" EntityType="OrderService.Tags" />
+        <EntitySet Name="OrderShippingAddress" EntityType="OrderService.OrderShippingAddress">
+          <NavigationPropertyBinding Path="SiblingEntity" Target="OrderShippingAddress" />
+        </EntitySet>
+        <EntitySet Name="Comments" EntityType="OrderService.Comments">
+          <NavigationPropertyBinding Path="parent" Target="Orders" />
+        </EntitySet>
         <EntitySet Name="Orderstatuses" EntityType="OrderService.Orderstatuses">
           <NavigationPropertyBinding Path="texts" Target="Orderstatuses_texts" />
           <NavigationPropertyBinding Path="localized" Target="Orderstatuses_texts" />
@@ -69,41 +109,20 @@
           <NavigationPropertyBinding Path="texts" Target="Deliverystatuses_texts" />
           <NavigationPropertyBinding Path="localized" Target="Deliverystatuses_texts" />
         </EntitySet>
-        <EntitySet Name="Currencies" EntityType="OrderService.Currencies">
-          <NavigationPropertyBinding Path="texts" Target="Currencies_texts" />
-          <NavigationPropertyBinding Path="localized" Target="Currencies_texts" />
-        </EntitySet>
-        <EntitySet Name="Genres" EntityType="OrderService.Genres">
-          <NavigationPropertyBinding Path="parent" Target="Genres" />
-          <NavigationPropertyBinding Path="children" Target="Genres" />
-          <NavigationPropertyBinding Path="texts" Target="Genres_texts" />
-          <NavigationPropertyBinding Path="localized" Target="Genres_texts" />
-        </EntitySet>
-        <EntitySet Name="Authors" EntityType="OrderService.Authors">
-          <NavigationPropertyBinding Path="country" Target="Countries" />
-        </EntitySet>
-        <EntitySet Name="BookPlants" EntityType="OrderService.BookPlants">
-          <NavigationPropertyBinding Path="book" Target="Books" />
-          <NavigationPropertyBinding Path="plant" Target="Plant" />
-        </EntitySet>
-        <EntitySet Name="Countries" EntityType="OrderService.Countries">
-          <NavigationPropertyBinding Path="texts" Target="Countries_texts" />
-          <NavigationPropertyBinding Path="localized" Target="Countries_texts" />
-        </EntitySet>
-        <EntitySet Name="Plant" EntityType="OrderService.Plant">
-          <NavigationPropertyBinding Path="texts" Target="Plant_texts" />
-          <NavigationPropertyBinding Path="localized" Target="Plant_texts" />
-        </EntitySet>
+        <EntitySet Name="A_SalesOrganizationText" EntityType="OrderService.A_SalesOrganizationText" />
+        <EntitySet Name="A_DistributionChannelText"
+          EntityType="OrderService.A_DistributionChannelText" />
+        <Singleton Name="Userdetails" Type="OrderService.Userdetails">
+          <NavigationPropertyBinding Path="authorizations" Target="Authorizations" />
+        </Singleton>
+        <Singleton Name="Authorizations" Type="OrderService.Authorizations" />
+        <EntitySet Name="Genres_texts" EntityType="OrderService.Genres_texts" />
+        <EntitySet Name="Currencies_texts" EntityType="OrderService.Currencies_texts" />
+        <EntitySet Name="Countries_texts" EntityType="OrderService.Countries_texts" />
+        <EntitySet Name="Plant_texts" EntityType="OrderService.Plant_texts" />
         <EntitySet Name="Books_texts" EntityType="OrderService.Books_texts" />
         <EntitySet Name="Orderstatuses_texts" EntityType="OrderService.Orderstatuses_texts" />
         <EntitySet Name="Deliverystatuses_texts" EntityType="OrderService.Deliverystatuses_texts" />
-        <EntitySet Name="Currencies_texts" EntityType="OrderService.Currencies_texts" />
-        <EntitySet Name="Genres_texts" EntityType="OrderService.Genres_texts" />
-        <EntitySet Name="Countries_texts" EntityType="OrderService.Countries_texts" />
-        <EntitySet Name="Plant_texts" EntityType="OrderService.Plant_texts" />
-        <EntitySet Name="OrderReport" EntityType="OrderService.OrderReportParameters">
-          <NavigationPropertyBinding Path="Set/Parameters" Target="OrderReport" />
-        </EntitySet>
         <FunctionImport Name="readCdsEnv" Function="OrderService.readCdsEnv" />
         <ActionImport Name="sendmail" Action="OrderService.sendmail" />
       </EntityContainer>
@@ -122,8 +141,16 @@
         <Property Name="modifiedBy" Type="Edm.String" MaxLength="255" />
         <Property Name="OrderNo" Type="Edm.String" />
         <Property Name="salesOrganization" Type="Edm.String" MaxLength="4" />
+        <Property Name="distributionChannel" Type="Edm.String" MaxLength="2" />
         <Property Name="CustomerOrderNo" Type="Edm.String" MaxLength="80" />
         <NavigationProperty Name="Items" Type="Collection(OrderService.OrderItems)" Partner="parent">
+          <OnDelete Action="Cascade" />
+        </NavigationProperty>
+        <NavigationProperty Name="compositionTags" Type="Collection(OrderService.CompositionTags)"
+          Partner="parent">
+          <OnDelete Action="Cascade" />
+        </NavigationProperty>
+        <NavigationProperty Name="tags" Type="Collection(OrderService.OrderTags)" Partner="parent">
           <OnDelete Action="Cascade" />
         </NavigationProperty>
         <NavigationProperty Name="ShippingAddress" Type="OrderService.OrderShippingAddress">
@@ -132,6 +159,8 @@
         </NavigationProperty>
         <Property Name="ShippingAddress_ID" Type="Edm.Guid" />
         <Property Name="headerText" Type="Edm.String" />
+        <NavigationProperty Name="Comments" Type="Collection(OrderService.Comments)"
+          Partner="parent" />
         <Property Name="total" Type="Edm.Decimal" Scale="variable" />
         <Property Name="taxPercentage" Type="Edm.Decimal" Precision="5" Scale="2" />
         <Property Name="totalTax" Type="Edm.Decimal" Precision="15" Scale="2" />
@@ -156,6 +185,8 @@
         <NavigationProperty Name="DraftAdministrativeData"
           Type="OrderService.DraftAdministrativeData" ContainsTarget="true" />
         <NavigationProperty Name="SiblingEntity" Type="OrderService.Orders" />
+        <Property Name="DraftMessages"
+          Type="Collection(OrderService.DRAFT_DraftAdministrativeData_DraftMessage)" Nullable="true" />
       </EntityType>
       <EntityType Name="OrderItems">
         <Key>
@@ -182,26 +213,8 @@
         <NavigationProperty Name="DraftAdministrativeData"
           Type="OrderService.DraftAdministrativeData" ContainsTarget="true" />
         <NavigationProperty Name="SiblingEntity" Type="OrderService.OrderItems" />
-      </EntityType>
-      <EntityType Name="OrderShippingAddress">
-        <Key>
-          <PropertyRef Name="ID" />
-          <PropertyRef Name="IsActiveEntity" />
-        </Key>
-        <Property Name="ID" Type="Edm.Guid" Nullable="false" />
-        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
-        <Property Name="createdBy" Type="Edm.String" MaxLength="255" />
-        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
-        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255" />
-        <Property Name="street" Type="Edm.String" MaxLength="60" />
-        <Property Name="city" Type="Edm.String" MaxLength="60" />
-        <Property Name="address" Type="Edm.String" />
-        <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true" />
-        <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false" />
-        <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false" />
-        <NavigationProperty Name="DraftAdministrativeData"
-          Type="OrderService.DraftAdministrativeData" ContainsTarget="true" />
-        <NavigationProperty Name="SiblingEntity" Type="OrderService.OrderShippingAddress" />
+        <Property Name="DraftMessages"
+          Type="Collection(OrderService.DRAFT_DraftAdministrativeData_DraftMessage)" Nullable="true" />
       </EntityType>
       <EntityType Name="Books">
         <Key>
@@ -250,45 +263,210 @@
           <ReferentialConstraint Property="ID" ReferencedProperty="ID" />
         </NavigationProperty>
       </EntityType>
-      <EntityType Name="A_SalesOrganizationText">
+      <EntityType Name="Genres">
         <Key>
-          <PropertyRef Name="SalesOrganization" />
+          <PropertyRef Name="ID" />
         </Key>
-        <Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" Nullable="false" />
-        <Property Name="SalesOrganizationName" Type="Edm.String" />
-      </EntityType>
-      <EntityType Name="Userdetails">
-        <Key>
-          <PropertyRef Name="username" />
-        </Key>
-        <Property Name="username" Type="Edm.String" Nullable="false" />
-        <NavigationProperty Name="authorizations" Type="OrderService.Authorizations">
-          <ReferentialConstraint Property="authorizations_username" ReferencedProperty="username" />
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
+        <NavigationProperty Name="parent" Type="OrderService.Genres">
+          <ReferentialConstraint Property="parent_ID" ReferencedProperty="ID" />
         </NavigationProperty>
-        <Property Name="authorizations_username" Type="Edm.String" />
+        <Property Name="parent_ID" Type="Edm.Int32" />
+        <Property Name="genreSemanticObject" Type="Edm.String" />
+        <NavigationProperty Name="texts" Type="Collection(OrderService.Genres_texts)">
+          <OnDelete Action="Cascade" />
+        </NavigationProperty>
+        <NavigationProperty Name="localized" Type="OrderService.Genres_texts">
+          <ReferentialConstraint Property="ID" ReferencedProperty="ID" />
+        </NavigationProperty>
       </EntityType>
-      <EntityType Name="Authorizations">
+      <EntityType Name="Currencies">
         <Key>
-          <PropertyRef Name="username" />
+          <PropertyRef Name="code" />
         </Key>
-        <Property Name="username" Type="Edm.String" Nullable="false" />
-        <Property Name="is_admin" Type="Edm.Boolean" />
-        <Property Name="is_roleadmin" Type="Edm.Boolean" />
-        <Property Name="is_booksadmin" Type="Edm.Boolean" />
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false" />
+        <Property Name="symbol" Type="Edm.String" MaxLength="5" />
+        <Property Name="minorUnit" Type="Edm.Int16" />
+        <Property Name="decimalPlaces" Type="Edm.Int32" />
+        <NavigationProperty Name="texts" Type="Collection(OrderService.Currencies_texts)">
+          <OnDelete Action="Cascade" />
+        </NavigationProperty>
+        <NavigationProperty Name="localized" Type="OrderService.Currencies_texts">
+          <ReferentialConstraint Property="code" ReferencedProperty="code" />
+        </NavigationProperty>
       </EntityType>
-      <EntityType Name="OrderReportType">
+      <EntityType Name="Authors">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255" />
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255" />
+        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="name" Type="Edm.String" MaxLength="111" />
+        <Property Name="dateOfBirth" Type="Edm.Date" />
+        <Property Name="dateOfDeath" Type="Edm.Date" />
+        <Property Name="placeOfBirth" Type="Edm.String" />
+        <Property Name="placeOfDeath" Type="Edm.String" />
+        <Property Name="alive" Type="Edm.Boolean" />
+        <NavigationProperty Name="country" Type="OrderService.Countries">
+          <ReferentialConstraint Property="country_code" ReferencedProperty="code" />
+        </NavigationProperty>
+        <Property Name="country_code" Type="Edm.String" MaxLength="3" />
+      </EntityType>
+      <EntityType Name="Countries">
+        <Key>
+          <PropertyRef Name="code" />
+        </Key>
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false" />
+        <NavigationProperty Name="texts" Type="Collection(OrderService.Countries_texts)">
+          <OnDelete Action="Cascade" />
+        </NavigationProperty>
+        <NavigationProperty Name="localized" Type="OrderService.Countries_texts">
+          <ReferentialConstraint Property="code" ReferencedProperty="code" />
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="BookPlants">
+        <Key>
+          <PropertyRef Name="book_ID" />
+          <PropertyRef Name="plant_ID" />
+        </Key>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255" />
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255" />
+        <NavigationProperty Name="book" Type="OrderService.Books" Partner="plants">
+          <ReferentialConstraint Property="book_ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="book_ID" Type="Edm.Int32" Nullable="false" />
+        <NavigationProperty Name="plant" Type="OrderService.Plant">
+          <ReferentialConstraint Property="plant_ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="plant_ID" Type="Edm.String" MaxLength="4" Nullable="false" />
+        <Property Name="purchasingGroup" Type="Edm.String" MaxLength="3" />
+        <Property Name="stock" Type="Edm.Int32" />
+      </EntityType>
+      <EntityType Name="Plant">
+        <Key>
+          <PropertyRef Name="ID" />
+          <PropertyRef Name="IsActiveEntity" />
+        </Key>
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255" />
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255" />
+        <Property Name="ID" Type="Edm.String" MaxLength="4" Nullable="false" />
+        <NavigationProperty Name="texts" Type="Collection(OrderService.Plant_texts)">
+          <OnDelete Action="Cascade" />
+        </NavigationProperty>
+        <NavigationProperty Name="localized" Type="OrderService.Plant_texts">
+          <ReferentialConstraint Property="ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true" />
+        <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false" />
+        <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false" />
+        <NavigationProperty Name="DraftAdministrativeData"
+          Type="OrderService.DraftAdministrativeData" ContainsTarget="true" />
+        <NavigationProperty Name="SiblingEntity" Type="OrderService.Plant" />
+        <Property Name="DraftMessages"
+          Type="Collection(OrderService.DRAFT_DraftAdministrativeData_DraftMessage)" Nullable="true" />
+      </EntityType>
+      <EntityType Name="CompositionTags">
+        <Key>
+          <PropertyRef Name="ID" />
+          <PropertyRef Name="IsActiveEntity" />
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false" />
+        <NavigationProperty Name="parent" Type="OrderService.Orders" Partner="compositionTags">
+          <ReferentialConstraint Property="parent_ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="parent_ID" Type="Edm.Guid" />
+        <Property Name="tag" Type="Edm.String" />
+        <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true" />
+        <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false" />
+        <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false" />
+        <NavigationProperty Name="DraftAdministrativeData"
+          Type="OrderService.DraftAdministrativeData" ContainsTarget="true" />
+        <NavigationProperty Name="SiblingEntity" Type="OrderService.CompositionTags" />
+        <Property Name="DraftMessages"
+          Type="Collection(OrderService.DRAFT_DraftAdministrativeData_DraftMessage)" Nullable="true" />
+      </EntityType>
+      <EntityType Name="OrderTags">
+        <Key>
+          <PropertyRef Name="ID" />
+          <PropertyRef Name="IsActiveEntity" />
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false" />
+        <NavigationProperty Name="parent" Type="OrderService.Orders" Partner="tags">
+          <ReferentialConstraint Property="parent_ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="parent_ID" Type="Edm.Guid" />
+        <NavigationProperty Name="tag" Type="OrderService.Tags">
+          <ReferentialConstraint Property="tag_ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="tag_ID" Type="Edm.Guid" />
+        <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true" />
+        <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false" />
+        <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false" />
+        <NavigationProperty Name="DraftAdministrativeData"
+          Type="OrderService.DraftAdministrativeData" ContainsTarget="true" />
+        <NavigationProperty Name="SiblingEntity" Type="OrderService.OrderTags" />
+        <Property Name="DraftMessages"
+          Type="Collection(OrderService.DRAFT_DraftAdministrativeData_DraftMessage)" Nullable="true" />
+      </EntityType>
+      <EntityType Name="Tags">
         <Key>
           <PropertyRef Name="ID" />
         </Key>
         <Property Name="ID" Type="Edm.Guid" Nullable="false" />
-        <Property Name="OrderNo" Type="Edm.String" />
-        <Property Name="CustomerOrderNo" Type="Edm.String" MaxLength="80" />
-        <Property Name="total" Type="Edm.Decimal" Scale="variable" />
-        <Property Name="taxPercentage" Type="Edm.Decimal" Precision="5" Scale="2" />
-        <Property Name="tax" Type="Edm.Decimal" Precision="15" Scale="2" />
-        <Property Name="totalWithTax" Type="Edm.Decimal" Precision="15" Scale="2" />
-        <NavigationProperty Name="Parameters" Type="OrderService.OrderReportParameters"
-          Partner="Set" />
+        <Property Name="tag" Type="Edm.String" />
+      </EntityType>
+      <EntityType Name="OrderShippingAddress">
+        <Key>
+          <PropertyRef Name="ID" />
+          <PropertyRef Name="IsActiveEntity" />
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false" />
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255" />
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255" />
+        <Property Name="street" Type="Edm.String" MaxLength="60" />
+        <Property Name="city" Type="Edm.String" MaxLength="60" />
+        <Property Name="address" Type="Edm.String" />
+        <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true" />
+        <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false" />
+        <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false" />
+        <NavigationProperty Name="DraftAdministrativeData"
+          Type="OrderService.DraftAdministrativeData" ContainsTarget="true" />
+        <NavigationProperty Name="SiblingEntity" Type="OrderService.OrderShippingAddress" />
+        <Property Name="DraftMessages"
+          Type="Collection(OrderService.DRAFT_DraftAdministrativeData_DraftMessage)" Nullable="true" />
+      </EntityType>
+      <EntityType Name="Comments">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false" />
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255" />
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255" />
+        <NavigationProperty Name="parent" Type="OrderService.Orders" Nullable="false"
+          Partner="Comments">
+          <ReferentialConstraint Property="parent_ID" ReferencedProperty="ID" />
+        </NavigationProperty>
+        <Property Name="parent_ID" Type="Edm.Guid" Nullable="false" />
+        <Property Name="text" Type="Edm.String" />
       </EntityType>
       <EntityType Name="Orderstatuses">
         <Key>
@@ -318,116 +496,39 @@
           <ReferentialConstraint Property="code" ReferencedProperty="code" />
         </NavigationProperty>
       </EntityType>
-      <EntityType Name="Currencies">
+      <EntityType Name="A_SalesOrganizationText">
         <Key>
-          <PropertyRef Name="code" />
+          <PropertyRef Name="SalesOrganization" />
         </Key>
-        <Property Name="name" Type="Edm.String" MaxLength="255" />
-        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
-        <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false" />
-        <Property Name="symbol" Type="Edm.String" MaxLength="5" />
-        <Property Name="minorUnit" Type="Edm.Int16" />
-        <Property Name="decimalPlaces" Type="Edm.Int32" />
-        <NavigationProperty Name="texts" Type="Collection(OrderService.Currencies_texts)">
-          <OnDelete Action="Cascade" />
-        </NavigationProperty>
-        <NavigationProperty Name="localized" Type="OrderService.Currencies_texts">
-          <ReferentialConstraint Property="code" ReferencedProperty="code" />
-        </NavigationProperty>
+        <Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" Nullable="false" />
+        <Property Name="SalesOrganizationName" Type="Edm.String" />
       </EntityType>
-      <EntityType Name="Genres">
+      <EntityType Name="A_DistributionChannelText">
         <Key>
-          <PropertyRef Name="ID" />
+          <PropertyRef Name="DistributionChannel" />
         </Key>
-        <Property Name="name" Type="Edm.String" MaxLength="255" />
-        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
-        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
-        <NavigationProperty Name="parent" Type="OrderService.Genres" Partner="children">
-          <ReferentialConstraint Property="parent_ID" ReferencedProperty="ID" />
-        </NavigationProperty>
-        <Property Name="parent_ID" Type="Edm.Int32" />
-        <NavigationProperty Name="children" Type="Collection(OrderService.Genres)" Partner="parent">
-          <OnDelete Action="Cascade" />
-        </NavigationProperty>
-        <Property Name="nodeType" Type="Edm.String" MaxLength="1" DefaultValue="F" />
-        <Property Name="nodeType_FC" Type="Edm.Int32" />
-        <Property Name="genreSemanticObject" Type="Edm.String" />
-        <NavigationProperty Name="texts" Type="Collection(OrderService.Genres_texts)">
-          <OnDelete Action="Cascade" />
-        </NavigationProperty>
-        <NavigationProperty Name="localized" Type="OrderService.Genres_texts">
-          <ReferentialConstraint Property="ID" ReferencedProperty="ID" />
-        </NavigationProperty>
+        <Property Name="DistributionChannel" Type="Edm.String" MaxLength="2" Nullable="false" />
+        <Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" />
+        <Property Name="DistributionChannelName" Type="Edm.String" />
       </EntityType>
-      <EntityType Name="Authors">
+      <EntityType Name="Userdetails">
         <Key>
-          <PropertyRef Name="ID" />
+          <PropertyRef Name="username" />
         </Key>
-        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
-        <Property Name="createdBy" Type="Edm.String" MaxLength="255" />
-        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
-        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255" />
-        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
-        <Property Name="name" Type="Edm.String" MaxLength="111" />
-        <Property Name="dateOfBirth" Type="Edm.Date" />
-        <Property Name="dateOfDeath" Type="Edm.Date" />
-        <Property Name="placeOfBirth" Type="Edm.String" />
-        <Property Name="placeOfDeath" Type="Edm.String" />
-        <Property Name="alive" Type="Edm.Boolean" />
-        <NavigationProperty Name="country" Type="OrderService.Countries">
-          <ReferentialConstraint Property="country_code" ReferencedProperty="code" />
+        <Property Name="username" Type="Edm.String" Nullable="false" />
+        <NavigationProperty Name="authorizations" Type="OrderService.Authorizations">
+          <ReferentialConstraint Property="authorizations_username" ReferencedProperty="username" />
         </NavigationProperty>
-        <Property Name="country_code" Type="Edm.String" MaxLength="3" />
+        <Property Name="authorizations_username" Type="Edm.String" />
       </EntityType>
-      <EntityType Name="BookPlants">
+      <EntityType Name="Authorizations">
         <Key>
-          <PropertyRef Name="book_ID" />
-          <PropertyRef Name="plant_ID" />
+          <PropertyRef Name="username" />
         </Key>
-        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
-        <Property Name="createdBy" Type="Edm.String" MaxLength="255" />
-        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
-        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255" />
-        <NavigationProperty Name="book" Type="OrderService.Books" Partner="plants">
-          <ReferentialConstraint Property="book_ID" ReferencedProperty="ID" />
-        </NavigationProperty>
-        <Property Name="book_ID" Type="Edm.Int32" Nullable="false" />
-        <NavigationProperty Name="plant" Type="OrderService.Plant">
-          <ReferentialConstraint Property="plant_ID" ReferencedProperty="ID" />
-        </NavigationProperty>
-        <Property Name="plant_ID" Type="Edm.String" MaxLength="4" Nullable="false" />
-        <Property Name="purchasingGroup" Type="Edm.String" MaxLength="3" />
-        <Property Name="stock" Type="Edm.Int32" />
-      </EntityType>
-      <EntityType Name="Countries">
-        <Key>
-          <PropertyRef Name="code" />
-        </Key>
-        <Property Name="name" Type="Edm.String" MaxLength="255" />
-        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
-        <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false" />
-        <NavigationProperty Name="texts" Type="Collection(OrderService.Countries_texts)">
-          <OnDelete Action="Cascade" />
-        </NavigationProperty>
-        <NavigationProperty Name="localized" Type="OrderService.Countries_texts">
-          <ReferentialConstraint Property="code" ReferencedProperty="code" />
-        </NavigationProperty>
-      </EntityType>
-      <EntityType Name="Plant">
-        <Key>
-          <PropertyRef Name="ID" />
-        </Key>
-        <Property Name="name" Type="Edm.String" MaxLength="255" />
-        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
-        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7" />
-        <Property Name="createdBy" Type="Edm.String" MaxLength="255" />
-        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7" />
-        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255" />
-        <Property Name="ID" Type="Edm.String" MaxLength="4" Nullable="false" />
-        <NavigationProperty Name="texts" Type="Collection(OrderService.Plant_texts)">
-          <OnDelete Action="Cascade" />
-        </NavigationProperty>
-        <NavigationProperty Name="localized" Type="OrderService.Plant_texts" />
+        <Property Name="username" Type="Edm.String" Nullable="false" />
+        <Property Name="is_admin" Type="Edm.Boolean" />
+        <Property Name="is_roleadmin" Type="Edm.Boolean" />
+        <Property Name="is_booksadmin" Type="Edm.Boolean" />
       </EntityType>
       <EntityType Name="DraftAdministrativeData">
         <Key>
@@ -441,6 +542,46 @@
         <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256" />
         <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256" />
         <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean" />
+      </EntityType>
+      <EntityType Name="Genres_texts">
+        <Key>
+          <PropertyRef Name="locale" />
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false" />
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Currencies_texts">
+        <Key>
+          <PropertyRef Name="locale" />
+          <PropertyRef Name="code" />
+        </Key>
+        <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false" />
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Countries_texts">
+        <Key>
+          <PropertyRef Name="locale" />
+          <PropertyRef Name="code" />
+        </Key>
+        <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false" />
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false" />
+      </EntityType>
+      <EntityType Name="Plant_texts">
+        <Key>
+          <PropertyRef Name="locale" />
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false" />
+        <Property Name="name" Type="Edm.String" MaxLength="255" />
+        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
+        <Property Name="ID" Type="Edm.String" MaxLength="4" Nullable="false" />
       </EntityType>
       <EntityType Name="Books_texts">
         <Key>
@@ -472,55 +613,19 @@
         <Property Name="descr" Type="Edm.String" MaxLength="1000" />
         <Property Name="code" Type="Edm.String" MaxLength="1" Nullable="false" />
       </EntityType>
-      <EntityType Name="Currencies_texts">
-        <Key>
-          <PropertyRef Name="locale" />
-          <PropertyRef Name="code" />
-        </Key>
-        <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false" />
-        <Property Name="name" Type="Edm.String" MaxLength="255" />
-        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
-        <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false" />
-      </EntityType>
-      <EntityType Name="Genres_texts">
-        <Key>
-          <PropertyRef Name="locale" />
-          <PropertyRef Name="ID" />
-        </Key>
-        <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false" />
-        <Property Name="name" Type="Edm.String" MaxLength="255" />
-        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
-        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
-      </EntityType>
-      <EntityType Name="Countries_texts">
-        <Key>
-          <PropertyRef Name="locale" />
-          <PropertyRef Name="code" />
-        </Key>
-        <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false" />
-        <Property Name="name" Type="Edm.String" MaxLength="255" />
-        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
-        <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false" />
-      </EntityType>
-      <EntityType Name="Plant_texts">
-        <Key>
-          <PropertyRef Name="ID_texts" />
-        </Key>
-        <Property Name="ID_texts" Type="Edm.Guid" Nullable="false" />
-        <Property Name="locale" Type="Edm.String" MaxLength="14" />
-        <Property Name="name" Type="Edm.String" MaxLength="255" />
-        <Property Name="descr" Type="Edm.String" MaxLength="1000" />
-        <Property Name="ID" Type="Edm.String" MaxLength="4" />
-      </EntityType>
-      <EntityType Name="OrderReportParameters">
-        <Key>
-          <PropertyRef Name="currency" />
-        </Key>
-        <Property Name="currency" Type="Edm.String" MaxLength="3" Nullable="false" />
-        <NavigationProperty Name="Set" Type="Collection(OrderService.OrderReportType)"
-          Partner="Parameters" ContainsTarget="true" />
-      </EntityType>
+      <ComplexType Name="DRAFT_DraftAdministrativeData_DraftMessage">
+        <Property Name="code" Type="Edm.String" />
+        <Property Name="message" Type="Edm.String" />
+        <Property Name="target" Type="Edm.String" />
+        <Property Name="additionalTargets" Type="Collection(Edm.String)" Nullable="true" />
+        <Property Name="transition" Type="Edm.Boolean" />
+        <Property Name="numericSeverity" Type="Edm.Byte" />
+        <Property Name="longtextUrl" Type="Edm.String" />
+      </ComplexType>
       <Action Name="deleteOrder" IsBound="true">
+        <Parameter Name="in" Type="OrderService.Orders" />
+      </Action>
+      <Action Name="deleteOrderItems" IsBound="true">
         <Parameter Name="in" Type="OrderService.Orders" />
       </Action>
       <Action Name="checkConsistency" IsBound="true">
@@ -539,6 +644,10 @@
         <Parameter Name="OrderNo" Type="Edm.String" Nullable="false" />
         <Parameter Name="CustomerOrderNo" Type="Edm.String" MaxLength="80" />
       </Action>
+      <Action Name="addComment" IsBound="true">
+        <Parameter Name="in" Type="OrderService.Orders" />
+        <Parameter Name="comment" Type="Edm.String" />
+      </Action>
       <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
         <Parameter Name="in" Type="OrderService.Orders" />
         <Parameter Name="SideEffectsQualifier" Type="Edm.String" />
@@ -550,6 +659,21 @@
         <ReturnType Type="OrderService.OrderItems" />
       </Action>
       <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="OrderService.Plant" />
+        <Parameter Name="SideEffectsQualifier" Type="Edm.String" />
+        <ReturnType Type="OrderService.Plant" />
+      </Action>
+      <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="OrderService.CompositionTags" />
+        <Parameter Name="SideEffectsQualifier" Type="Edm.String" />
+        <ReturnType Type="OrderService.CompositionTags" />
+      </Action>
+      <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="OrderService.OrderTags" />
+        <Parameter Name="SideEffectsQualifier" Type="Edm.String" />
+        <ReturnType Type="OrderService.OrderTags" />
+      </Action>
+      <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
         <Parameter Name="in" Type="OrderService.OrderShippingAddress" />
         <Parameter Name="SideEffectsQualifier" Type="Edm.String" />
         <ReturnType Type="OrderService.OrderShippingAddress" />
@@ -558,10 +682,19 @@
         <Parameter Name="in" Type="OrderService.Orders" />
         <ReturnType Type="OrderService.Orders" />
       </Action>
+      <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="OrderService.Plant" />
+        <ReturnType Type="OrderService.Plant" />
+      </Action>
       <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
         <Parameter Name="in" Type="OrderService.Orders" />
         <Parameter Name="PreserveChanges" Type="Edm.Boolean" />
         <ReturnType Type="OrderService.Orders" />
+      </Action>
+      <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="OrderService.Plant" />
+        <Parameter Name="PreserveChanges" Type="Edm.Boolean" />
+        <ReturnType Type="OrderService.Plant" />
       </Action>
       <Function Name="readCdsEnv" IsBound="false" IsComposable="false">
         <ReturnType Type="Edm.String" />
@@ -574,7 +707,11 @@
         <Parameter Name="destination" Type="Edm.String" />
         <ReturnType Type="Edm.String" />
       </Action>
+      <Annotations Target="OrderService.EntityContainer">
+        <Annotation Term="Common.AddressViaNavigationPath" Bool="true" />
+      </Annotations>
       <Annotations Target="OrderService.Orders">
+        <Annotation Term="UI.CreateHidden" Path="/Authorizations/is_admin" />
         <Annotation Term="UI.SelectionFields">
           <Collection>
             <PropertyPath>OrderNo</PropertyPath>
@@ -801,6 +938,13 @@
               <PropertyValue Property="Label" String="Order Value" />
             </Record>
             <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="compositionTags/tag" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="tags/tag/ID" />
+              <PropertyValue Property="Label" String="Tags" />
+            </Record>
+            <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="createdAt" />
               <PropertyValue Property="Label" String="Creation Date" />
             </Record>
@@ -956,6 +1100,11 @@
               <PropertyValue Property="Label" String="Shipping Address" />
               <PropertyValue Property="Target" AnnotationPath="ShippingAddress/@UI.Identification" />
             </Record>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="ID" String="CommentsFacet" />
+              <PropertyValue Property="Label" String="Comments" />
+              <PropertyValue Property="Target" AnnotationPath="Comments/@UI.LineItem" />
+            </Record>
           </Collection>
         </Annotation>
         <Annotation Term="UI.FieldGroup" Qualifier="OrderValue">
@@ -994,6 +1143,13 @@
           <Record Type="UI.FieldGroupType">
             <PropertyValue Property="Data">
               <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="compositionTags/tag" />
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="tags/tag/ID" />
+                  <PropertyValue Property="Label" String="Tags" />
+                </Record>
                 <Record Type="UI.DataField">
                   <PropertyValue Property="Value" Path="salesOrganization" />
                 </Record>
@@ -1077,8 +1233,24 @@
             </PropertyValue>
           </Record>
         </Annotation>
+        <Annotation Term="Common.SideEffects" Qualifier="alwaysFetchMessages">
+          <Record Type="Common.SideEffectsType">
+            <PropertyValue Property="SourceEntities">
+              <Collection>
+                <NavigationPropertyPath></NavigationPropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="TargetProperties">
+              <Collection>
+                <String>DraftMessages</String>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.Messages" Path="DraftMessages" />
       </Annotations>
       <Annotations Target="OrderService.EntityContainer/Orders">
+        <Annotation Term="UI.CreateHidden" Path="/Authorizations/is_admin" />
         <Annotation Term="UI.SelectionPresentationVariant" Qualifier="New">
           <Record Type="UI.SelectionPresentationVariantType">
             <PropertyValue Property="Text" String="New" />
@@ -1287,6 +1459,20 @@
             <PropertyValue Property="PreparationAction" String="OrderService.draftPrepare" />
           </Record>
         </Annotation>
+        <Annotation Term="Common.SideEffects" Qualifier="alwaysFetchMessages">
+          <Record Type="Common.SideEffectsType">
+            <PropertyValue Property="SourceEntities">
+              <Collection>
+                <NavigationPropertyPath></NavigationPropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="TargetProperties">
+              <Collection>
+                <String>DraftMessages</String>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
       </Annotations>
       <Annotations Target="OrderService.Orders/ComputedTax">
         <Annotation Term="Measures.ISOCurrency" Path="currency/code" />
@@ -1305,12 +1491,14 @@
       </Annotations>
       <Annotations Target="OrderService.Orders/createdAt">
         <Annotation Term="UI.HiddenFilter" Bool="false" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Immutable" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Common.Label" String="Created On" />
       </Annotations>
       <Annotations Target="OrderService.Orders/createdBy">
         <Annotation Term="UI.HiddenFilter" Bool="false" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Immutable" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Core.Description" String="User's unique ID" />
@@ -1318,11 +1506,13 @@
       </Annotations>
       <Annotations Target="OrderService.Orders/modifiedAt">
         <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Common.Label" String="Changed On" />
       </Annotations>
       <Annotations Target="OrderService.Orders/modifiedBy">
         <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Core.Description" String="User's unique ID" />
         <Annotation Term="Common.Label" String="Changed By" />
@@ -1360,14 +1550,54 @@
         <Annotation Term="Core.LongDescription"
           String="An organizational area for sales that combines the sales-relevant master data for customers, products, and price lists." />
       </Annotations>
+      <Annotations Target="OrderService.Orders/distributionChannel">
+        <Annotation Term="Common.ValueListWithFixedValues" Bool="false" />
+        <Annotation Term="Common.ValueListMapping">
+          <Record Type="Common.ValueListMappingType">
+            <PropertyValue Property="CollectionPath" String="A_DistributionChannelText" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="distributionChannel" />
+                  <PropertyValue Property="ValueListProperty" String="DistributionChannel" />
+                </Record>
+                <Record Type="Common.ValueListParameterIn">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="salesOrganization" />
+                  <PropertyValue Property="ValueListProperty" String="SalesOrganization" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="DistributionChannelName" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.QuickInfo"
+          String="A channel through which saleable materials or services reach customers." />
+        <Annotation Term="Common.Label" String="Distribution Channel" />
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory" />
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Core.Description" String="Distribution Channel" />
+        <Annotation Term="Core.LongDescription"
+          String="A channel through which saleable materials or services reach customers." />
+      </Annotations>
       <Annotations Target="OrderService.Orders/CustomerOrderNo">
         <Annotation Term="Common.Label" String="Customer Order Number" />
       </Annotations>
       <Annotations Target="OrderService.Orders/Items">
         <Annotation Term="Common.Label" String="Items" />
       </Annotations>
+      <Annotations Target="OrderService.Orders/compositionTags">
+        <Annotation Term="Common.Label" String="Composition Tags" />
+      </Annotations>
+      <Annotations Target="OrderService.Orders/tags">
+        <Annotation Term="Common.Label" String="Tags" />
+      </Annotations>
       <Annotations Target="OrderService.Orders/headerText">
         <Annotation Term="Common.Label" String="Order Header Text" />
+      </Annotations>
+      <Annotations Target="OrderService.Orders/Comments">
+        <Annotation Term="Common.Label" String="Comments" />
       </Annotations>
       <Annotations Target="OrderService.Orders/total">
         <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly" />
@@ -1502,6 +1732,9 @@
       <Annotations Target="OrderService.Orders/DraftAdministrativeData">
         <Annotation Term="UI.Hidden" Bool="true" />
       </Annotations>
+      <Annotations Target="OrderService.Orders/DraftMessages">
+        <Annotation Term="Core.Computed" Bool="true" />
+      </Annotations>
       <Annotations Target="OrderService.checkConsistencyInline(OrderService.Orders)">
         <Annotation Term="Core.OperationAvailable">
           <In>
@@ -1521,9 +1754,8 @@
         </Annotation>
       </Annotations>
       <Annotations Target="OrderService.setOrderParameters(OrderService.Orders)">
-        <Annotation Term="Core.OperationAvailable">
-          <Path>/AdminService.EntityContainer/Authorizations.is_admin</Path>
-        </Annotation>
+        <Annotation Term="Core.OperationAvailable"
+          Path="/AdminService.EntityContainer/Authorizations.is_admin" />
       </Annotations>
       <Annotations Target="OrderService.setOrderParameters(OrderService.Orders)/vipOrder">
         <Annotation Term="UI.ParameterDefaultValue" Bool="false" />
@@ -1641,6 +1873,21 @@
             </Record>
           </Collection>
         </Annotation>
+        <Annotation Term="Common.SideEffects" Qualifier="alwaysFetchMessages">
+          <Record Type="Common.SideEffectsType">
+            <PropertyValue Property="SourceEntities">
+              <Collection>
+                <NavigationPropertyPath></NavigationPropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="TargetProperties">
+              <Collection>
+                <String>DraftMessages</String>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.Messages" Path="DraftMessages" />
       </Annotations>
       <Annotations Target="OrderService.EntityContainer/OrderItems">
         <Annotation Term="UI.PresentationVariant">
@@ -1664,6 +1911,20 @@
         <Annotation Term="Common.DraftNode">
           <Record Type="Common.DraftNodeType">
             <PropertyValue Property="PreparationAction" String="OrderService.draftPrepare" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.SideEffects" Qualifier="alwaysFetchMessages">
+          <Record Type="Common.SideEffectsType">
+            <PropertyValue Property="SourceEntities">
+              <Collection>
+                <NavigationPropertyPath></NavigationPropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="TargetProperties">
+              <Collection>
+                <String>DraftMessages</String>
+              </Collection>
+            </PropertyValue>
           </Record>
         </Annotation>
       </Annotations>
@@ -1718,114 +1979,8 @@
       <Annotations Target="OrderService.OrderItems/DraftAdministrativeData">
         <Annotation Term="UI.Hidden" Bool="true" />
       </Annotations>
-      <Annotations Target="OrderService.OrderShippingAddress">
-        <Annotation Term="UI.HeaderInfo">
-          <Record Type="UI.HeaderInfoType">
-            <PropertyValue Property="TypeName" String="Shipping Address" />
-            <PropertyValue Property="TypeNamePlural" String=" " />
-            <PropertyValue Property="Title">
-              <Record Type="UI.DataField">
-                <PropertyValue Property="Value" Path="city" />
-              </Record>
-            </PropertyValue>
-            <PropertyValue Property="Description">
-              <Record Type="UI.DataField">
-                <PropertyValue Property="Value" Path="city" />
-              </Record>
-            </PropertyValue>
-          </Record>
-        </Annotation>
-        <Annotation Term="UI.SelectionFields">
-          <Collection>
-            <PropertyPath>city</PropertyPath>
-          </Collection>
-        </Annotation>
-        <Annotation Term="UI.LineItem">
-          <Collection>
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="street" />
-            </Record>
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="city" />
-            </Record>
-          </Collection>
-        </Annotation>
-        <Annotation Term="UI.Identification">
-          <Collection>
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="street" />
-            </Record>
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="city" />
-            </Record>
-          </Collection>
-        </Annotation>
-        <Annotation Term="UI.Facets">
-          <Collection>
-            <Record Type="UI.ReferenceFacet">
-              <PropertyValue Property="Label" String="Shipping Address" />
-              <PropertyValue Property="Target" AnnotationPath="@UI.Identification" />
-            </Record>
-          </Collection>
-        </Annotation>
-      </Annotations>
-      <Annotations Target="OrderService.EntityContainer/OrderShippingAddress">
-        <Annotation Term="Common.DraftNode">
-          <Record Type="Common.DraftNodeType">
-            <PropertyValue Property="PreparationAction" String="OrderService.draftPrepare" />
-          </Record>
-        </Annotation>
-      </Annotations>
-      <Annotations Target="OrderService.OrderShippingAddress/ID">
-        <Annotation Term="Core.ComputedDefaultValue" Bool="true" />
-      </Annotations>
-      <Annotations Target="OrderService.OrderShippingAddress/createdAt">
-        <Annotation Term="UI.HiddenFilter" Bool="true" />
-        <Annotation Term="Core.Immutable" Bool="true" />
+      <Annotations Target="OrderService.OrderItems/DraftMessages">
         <Annotation Term="Core.Computed" Bool="true" />
-        <Annotation Term="Common.Label" String="Created On" />
-      </Annotations>
-      <Annotations Target="OrderService.OrderShippingAddress/createdBy">
-        <Annotation Term="UI.HiddenFilter" Bool="true" />
-        <Annotation Term="Core.Immutable" Bool="true" />
-        <Annotation Term="Core.Computed" Bool="true" />
-        <Annotation Term="Core.Description" String="User's unique ID" />
-        <Annotation Term="Common.Label" String="Created By" />
-      </Annotations>
-      <Annotations Target="OrderService.OrderShippingAddress/modifiedAt">
-        <Annotation Term="UI.HiddenFilter" Bool="true" />
-        <Annotation Term="Core.Computed" Bool="true" />
-        <Annotation Term="Common.Label" String="Changed On" />
-      </Annotations>
-      <Annotations Target="OrderService.OrderShippingAddress/modifiedBy">
-        <Annotation Term="UI.HiddenFilter" Bool="true" />
-        <Annotation Term="Core.Computed" Bool="true" />
-        <Annotation Term="Core.Description" String="User's unique ID" />
-        <Annotation Term="Common.Label" String="Changed By" />
-      </Annotations>
-      <Annotations Target="OrderService.OrderShippingAddress/street">
-        <Annotation Term="UI.Placeholder" String="Street / House No." />
-        <Annotation Term="Common.Label" String="Street" />
-        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory" />
-      </Annotations>
-      <Annotations Target="OrderService.OrderShippingAddress/city">
-        <Annotation Term="Common.Label" String="City" />
-        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory" />
-      </Annotations>
-      <Annotations Target="OrderService.OrderShippingAddress/address">
-        <Annotation Term="Core.Computed" Bool="true" />
-      </Annotations>
-      <Annotations Target="OrderService.OrderShippingAddress/IsActiveEntity">
-        <Annotation Term="UI.Hidden" Bool="true" />
-      </Annotations>
-      <Annotations Target="OrderService.OrderShippingAddress/HasActiveEntity">
-        <Annotation Term="UI.Hidden" Bool="true" />
-      </Annotations>
-      <Annotations Target="OrderService.OrderShippingAddress/HasDraftEntity">
-        <Annotation Term="UI.Hidden" Bool="true" />
-      </Annotations>
-      <Annotations Target="OrderService.OrderShippingAddress/DraftAdministrativeData">
-        <Annotation Term="UI.Hidden" Bool="true" />
       </Annotations>
       <Annotations Target="OrderService.Books">
         <Annotation Term="UI.PresentationVariant">
@@ -2006,12 +2161,14 @@
       </Annotations>
       <Annotations Target="OrderService.Books/createdAt">
         <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Immutable" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Common.Label" String="Created On" />
       </Annotations>
       <Annotations Target="OrderService.Books/createdBy">
         <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Immutable" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Core.Description" String="User's unique ID" />
@@ -2019,11 +2176,13 @@
       </Annotations>
       <Annotations Target="OrderService.Books/modifiedAt">
         <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Common.Label" String="Changed On" />
       </Annotations>
       <Annotations Target="OrderService.Books/modifiedBy">
         <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Core.Description" String="User's unique ID" />
         <Annotation Term="Common.Label" String="Changed By" />
@@ -2151,146 +2310,6 @@
         </Annotation>
         <Annotation Term="Common.Label" String="Author ID" />
       </Annotations>
-      <Annotations Target="OrderService.A_SalesOrganizationText/SalesOrganization">
-        <Annotation Term="Core.Description" String="Sales Organization" />
-        <Annotation Term="Core.LongDescription"
-          String="An organizational area for sales that combines the sales-relevant master data for customers, products, and price lists." />
-        <Annotation Term="Common.QuickInfo"
-          String="An organizational area for sales that combines the sales-relevant master data for customers, products, and price lists." />
-        <Annotation Term="Common.Label" String="Sales Organization" />
-      </Annotations>
-      <Annotations Target="OrderService.A_SalesOrganizationText/SalesOrganizationName">
-        <Annotation Term="Core.Description" String="Sales Organization" />
-        <Annotation Term="Core.LongDescription"
-          String="An organizational area for sales that combines the sales-relevant master data for customers, products, and price lists." />
-        <Annotation Term="Common.QuickInfo"
-          String="An organizational area for sales that combines the sales-relevant master data for customers, products, and price lists." />
-        <Annotation Term="Common.Label" String="Sales Organization" />
-      </Annotations>
-      <Annotations Target="OrderService.EntityContainer/Userdetails">
-        <Annotation Term="Capabilities.DeleteRestrictions">
-          <Record Type="Capabilities.DeleteRestrictionsType">
-            <PropertyValue Property="Deletable" Bool="false" />
-          </Record>
-        </Annotation>
-        <Annotation Term="Capabilities.UpdateRestrictions">
-          <Record Type="Capabilities.UpdateRestrictionsType">
-            <PropertyValue Property="Updatable" Bool="false" />
-          </Record>
-        </Annotation>
-      </Annotations>
-      <Annotations Target="OrderService.EntityContainer/Authorizations">
-        <Annotation Term="Capabilities.DeleteRestrictions">
-          <Record Type="Capabilities.DeleteRestrictionsType">
-            <PropertyValue Property="Deletable" Bool="false" />
-          </Record>
-        </Annotation>
-        <Annotation Term="Capabilities.UpdateRestrictions">
-          <Record Type="Capabilities.UpdateRestrictionsType">
-            <PropertyValue Property="Updatable" Bool="false" />
-          </Record>
-        </Annotation>
-      </Annotations>
-      <Annotations Target="OrderService.sendmail()/subject">
-        <Annotation Term="UI.ParameterDefaultValue" String="Test" />
-      </Annotations>
-      <Annotations Target="OrderService.OrderReportType">
-        <Annotation Term="UI.SelectionFields">
-          <Collection>
-            <PropertyPath>OrderNo</PropertyPath>
-          </Collection>
-        </Annotation>
-        <Annotation Term="UI.LineItem">
-          <Collection>
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="OrderNo" />
-            </Record>
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="taxPercentage" />
-            </Record>
-          </Collection>
-        </Annotation>
-      </Annotations>
-      <Annotations Target="OrderService.OrderReportType/ID">
-        <Annotation Term="Core.ComputedDefaultValue" Bool="true" />
-      </Annotations>
-      <Annotations Target="OrderService.OrderReportType/OrderNo">
-        <Annotation Term="Core.Immutable" Bool="true" />
-        <Annotation Term="Common.Label" String="Order Number" />
-      </Annotations>
-      <Annotations Target="OrderService.OrderReportType/CustomerOrderNo">
-        <Annotation Term="Common.Label" String="Customer Order Number" />
-      </Annotations>
-      <Annotations Target="OrderService.OrderReportType/total">
-        <Annotation Term="Measures.ISOCurrency" Path="currency/code" />
-        <Annotation Term="Core.Computed" Bool="true" />
-      </Annotations>
-      <Annotations Target="OrderService.OrderReportType/taxPercentage">
-        <Annotation Term="Common.Label" String="taxPercentage" />
-      </Annotations>
-      <Annotations Target="OrderService.OrderReportType/tax">
-        <Annotation Term="Core.Computed" Bool="true" />
-      </Annotations>
-      <Annotations Target="OrderService.OrderReportType/totalWithTax">
-        <Annotation Term="Core.Computed" Bool="true" />
-      </Annotations>
-      <Annotations Target="OrderService.Orderstatuses">
-        <Annotation Term="UI.Identification">
-          <Collection>
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="name" />
-            </Record>
-          </Collection>
-        </Annotation>
-      </Annotations>
-      <Annotations Target="OrderService.Orderstatuses/name">
-        <Annotation Term="Common.Label" String="Name" />
-      </Annotations>
-      <Annotations Target="OrderService.Orderstatuses/descr">
-        <Annotation Term="Common.Label" String="Description" />
-      </Annotations>
-      <Annotations Target="OrderService.Deliverystatuses">
-        <Annotation Term="UI.Identification">
-          <Collection>
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="name" />
-            </Record>
-          </Collection>
-        </Annotation>
-      </Annotations>
-      <Annotations Target="OrderService.Deliverystatuses/name">
-        <Annotation Term="Common.Label" String="Name" />
-      </Annotations>
-      <Annotations Target="OrderService.Deliverystatuses/descr">
-        <Annotation Term="Common.Label" String="Description" />
-      </Annotations>
-      <Annotations Target="OrderService.Currencies">
-        <Annotation Term="UI.Identification">
-          <Collection>
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="name" />
-            </Record>
-          </Collection>
-        </Annotation>
-      </Annotations>
-      <Annotations Target="OrderService.Currencies/name">
-        <Annotation Term="Common.Label" String="Name" />
-      </Annotations>
-      <Annotations Target="OrderService.Currencies/descr">
-        <Annotation Term="Common.Label" String="Description" />
-      </Annotations>
-      <Annotations Target="OrderService.Currencies/code">
-        <Annotation Term="CodeList.StandardCode" PropertyPath="code" />
-        <Annotation Term="Common.UnitSpecificScale" Path="decimalPlaces" />
-        <Annotation Term="Common.Text" Path="name" />
-        <Annotation Term="Common.Label" String="Currency Code" />
-      </Annotations>
-      <Annotations Target="OrderService.Currencies/symbol">
-        <Annotation Term="Common.Label" String="Currency Symbol" />
-      </Annotations>
-      <Annotations Target="OrderService.Currencies/minorUnit">
-        <Annotation Term="Common.Label" String="Currency Minor Unit Fractions" />
-      </Annotations>
       <Annotations Target="OrderService.Genres">
         <Annotation Term="Common.SemanticKey">
           <Collection>
@@ -2342,28 +2361,36 @@
           </Record>
         </Annotation>
       </Annotations>
-      <Annotations Target="OrderService.Genres/nodeType">
-        <Annotation Term="Common.Label" String="nodeType" />
-        <Annotation Term="Validation.AllowedValues">
+      <Annotations Target="OrderService.Genres/genreSemanticObject">
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="SemanticObject" />
+      </Annotations>
+      <Annotations Target="OrderService.Currencies">
+        <Annotation Term="UI.Identification">
           <Collection>
-            <Record Type="Validation.AllowedValue">
-              <Annotation Term="Core.SymbolicName" String="requested" />
-              <PropertyValue Property="Value" String="F" />
-            </Record>
-            <Record Type="Validation.AllowedValue">
-              <Annotation Term="Core.SymbolicName" String="pending" />
-              <PropertyValue Property="Value" String="L" />
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name" />
             </Record>
           </Collection>
         </Annotation>
       </Annotations>
-      <Annotations Target="OrderService.Genres/nodeType_FC">
-        <Annotation Term="Core.Computed" Bool="true" />
-        <Annotation Term="Common.Label" String="nodeType_FC" />
+      <Annotations Target="OrderService.Currencies/name">
+        <Annotation Term="Common.Label" String="Name" />
       </Annotations>
-      <Annotations Target="OrderService.Genres/genreSemanticObject">
-        <Annotation Term="Core.Computed" Bool="true" />
-        <Annotation Term="Common.Label" String="SemanticObject" />
+      <Annotations Target="OrderService.Currencies/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="OrderService.Currencies/code">
+        <Annotation Term="CodeList.StandardCode" PropertyPath="code" />
+        <Annotation Term="Common.UnitSpecificScale" Path="decimalPlaces" />
+        <Annotation Term="Common.Text" Path="name" />
+        <Annotation Term="Common.Label" String="Currency Code" />
+      </Annotations>
+      <Annotations Target="OrderService.Currencies/symbol">
+        <Annotation Term="Common.Label" String="Currency Symbol" />
+      </Annotations>
+      <Annotations Target="OrderService.Currencies/minorUnit">
+        <Annotation Term="Common.Label" String="Currency Minor Unit Fractions" />
       </Annotations>
       <Annotations Target="OrderService.Authors">
         <Annotation Term="UI.Identification">
@@ -2382,8 +2409,33 @@
         </Annotation>
         <Annotation Term="UI.LineItem">
           <Collection>
-            <Record Type="UI.DataField">
+            <Record Type="UI.DataFieldWithIntentBasedNavigation">
+              <PropertyValue Property="Label" String="To Books With Intent Based" />
               <PropertyValue Property="Value" Path="ID" />
+              <PropertyValue Property="SemanticObject" String="Books" />
+              <PropertyValue Property="Action" String="displayUI5latest" />
+              <PropertyValue Property="Mapping">
+                <Collection>
+                  <Record Type="Common.SemanticObjectMappingType">
+                    <PropertyValue Property="LocalProperty" PropertyPath="ID" />
+                    <PropertyValue Property="SemanticObjectProperty" String="author_ID" />
+                  </Record>
+                </Collection>
+              </PropertyValue>
+            </Record>
+            <Record Type="UI.DataFieldForIntentBasedNavigation">
+              <PropertyValue Property="SemanticObject" String="Books" />
+              <PropertyValue Property="Action" String="displayUI5latest" />
+              <PropertyValue Property="Label" String="To Books For Intent Based" />
+              <PropertyValue Property="Inline" Bool="true" />
+              <PropertyValue Property="Mapping">
+                <Collection>
+                  <Record Type="Common.SemanticObjectMappingType">
+                    <PropertyValue Property="LocalProperty" PropertyPath="ID" />
+                    <PropertyValue Property="SemanticObjectProperty" String="author_ID" />
+                  </Record>
+                </Collection>
+              </PropertyValue>
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="name" />
@@ -2402,12 +2454,6 @@
             </Record>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="country/name" />
-            </Record>
-            <Record Type="UI.DataFieldWithIntentBasedNavigation">
-              <PropertyValue Property="Label" String="To Books Intent Based" />
-              <PropertyValue Property="Value" Path="ID" />
-              <PropertyValue Property="SemanticObject" String="Books" />
-              <PropertyValue Property="Action" String="displayUI5latest" />
             </Record>
           </Collection>
         </Annotation>
@@ -2491,12 +2537,14 @@
       </Annotations>
       <Annotations Target="OrderService.Authors/createdAt">
         <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Immutable" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Common.Label" String="Created On" />
       </Annotations>
       <Annotations Target="OrderService.Authors/createdBy">
         <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Immutable" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Core.Description" String="User's unique ID" />
@@ -2504,11 +2552,13 @@
       </Annotations>
       <Annotations Target="OrderService.Authors/modifiedAt">
         <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Common.Label" String="Changed On" />
       </Annotations>
       <Annotations Target="OrderService.Authors/modifiedBy">
         <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Core.Description" String="User's unique ID" />
         <Annotation Term="Common.Label" String="Changed By" />
@@ -2521,7 +2571,7 @@
         <Annotation Term="UI.HiddenFilter" Bool="true" />
       </Annotations>
       <Annotations Target="OrderService.Authors/name">
-        <Annotation Term="Common.Label" String="Author''s Name" />
+        <Annotation Term="Common.Label" String="Author's Name" />
       </Annotations>
       <Annotations Target="OrderService.Authors/country">
         <Annotation Term="Common.Label" String="Country/Region" />
@@ -2548,14 +2598,35 @@
         </Annotation>
         <Annotation Term="Core.Description" String="Country/region code as specified by ISO 3166-1" />
       </Annotations>
+      <Annotations Target="OrderService.Countries">
+        <Annotation Term="UI.Identification">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="OrderService.Countries/name">
+        <Annotation Term="Common.Label" String="Name" />
+      </Annotations>
+      <Annotations Target="OrderService.Countries/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="OrderService.Countries/code">
+        <Annotation Term="Common.Text" Path="name" />
+        <Annotation Term="Common.Label" String="Country/Region Code" />
+      </Annotations>
       <Annotations Target="OrderService.BookPlants/createdAt">
         <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Immutable" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Common.Label" String="Created On" />
       </Annotations>
       <Annotations Target="OrderService.BookPlants/createdBy">
         <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Immutable" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Core.Description" String="User's unique ID" />
@@ -2563,11 +2634,13 @@
       </Annotations>
       <Annotations Target="OrderService.BookPlants/modifiedAt">
         <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Common.Label" String="Changed On" />
       </Annotations>
       <Annotations Target="OrderService.BookPlants/modifiedBy">
         <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Core.Description" String="User's unique ID" />
         <Annotation Term="Common.Label" String="Changed By" />
@@ -2591,37 +2664,56 @@
           </Record>
         </Annotation>
       </Annotations>
-      <Annotations Target="OrderService.Countries">
-        <Annotation Term="UI.Identification">
-          <Collection>
-            <Record Type="UI.DataField">
-              <PropertyValue Property="Value" Path="name" />
-            </Record>
-          </Collection>
-        </Annotation>
-      </Annotations>
-      <Annotations Target="OrderService.Countries/name">
-        <Annotation Term="Common.Label" String="Name" />
-      </Annotations>
-      <Annotations Target="OrderService.Countries/descr">
-        <Annotation Term="Common.Label" String="Description" />
-      </Annotations>
-      <Annotations Target="OrderService.Countries/code">
-        <Annotation Term="Common.Text" Path="name" />
-        <Annotation Term="Common.Label" String="Country/Region Code" />
-      </Annotations>
       <Annotations Target="OrderService.Plant">
         <Annotation Term="Common.SemanticKey">
           <Collection>
             <PropertyPath>ID</PropertyPath>
           </Collection>
         </Annotation>
+        <Annotation Term="Common.SideEffects" Qualifier="alwaysFetchMessages">
+          <Record Type="Common.SideEffectsType">
+            <PropertyValue Property="SourceEntities">
+              <Collection>
+                <NavigationPropertyPath></NavigationPropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="TargetProperties">
+              <Collection>
+                <String>DraftMessages</String>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.Messages" Path="DraftMessages" />
         <Annotation Term="UI.Identification">
           <Collection>
             <Record Type="UI.DataField">
               <PropertyValue Property="Value" Path="name" />
             </Record>
           </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="OrderService.EntityContainer/Plant">
+        <Annotation Term="Common.DraftRoot">
+          <Record Type="Common.DraftRootType">
+            <PropertyValue Property="ActivationAction" String="OrderService.draftActivate" />
+            <PropertyValue Property="EditAction" String="OrderService.draftEdit" />
+            <PropertyValue Property="PreparationAction" String="OrderService.draftPrepare" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.SideEffects" Qualifier="alwaysFetchMessages">
+          <Record Type="Common.SideEffectsType">
+            <PropertyValue Property="SourceEntities">
+              <Collection>
+                <NavigationPropertyPath></NavigationPropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="TargetProperties">
+              <Collection>
+                <String>DraftMessages</String>
+              </Collection>
+            </PropertyValue>
+          </Record>
         </Annotation>
       </Annotations>
       <Annotations Target="OrderService.Plant/name">
@@ -2632,12 +2724,14 @@
       </Annotations>
       <Annotations Target="OrderService.Plant/createdAt">
         <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Immutable" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Common.Label" String="Created On" />
       </Annotations>
       <Annotations Target="OrderService.Plant/createdBy">
         <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Immutable" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Core.Description" String="User's unique ID" />
@@ -2645,14 +2739,492 @@
       </Annotations>
       <Annotations Target="OrderService.Plant/modifiedAt">
         <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Common.Label" String="Changed On" />
       </Annotations>
       <Annotations Target="OrderService.Plant/modifiedBy">
         <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
         <Annotation Term="Core.Computed" Bool="true" />
         <Annotation Term="Core.Description" String="User's unique ID" />
         <Annotation Term="Common.Label" String="Changed By" />
+      </Annotations>
+      <Annotations Target="OrderService.Plant/IsActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.Plant/HasActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.Plant/HasDraftEntity">
+        <Annotation Term="UI.Hidden" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.Plant/DraftAdministrativeData">
+        <Annotation Term="UI.Hidden" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.Plant/DraftMessages">
+        <Annotation Term="Core.Computed" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.CompositionTags">
+        <Annotation Term="Common.SideEffects" Qualifier="alwaysFetchMessages">
+          <Record Type="Common.SideEffectsType">
+            <PropertyValue Property="SourceEntities">
+              <Collection>
+                <NavigationPropertyPath></NavigationPropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="TargetProperties">
+              <Collection>
+                <String>DraftMessages</String>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.Messages" Path="DraftMessages" />
+      </Annotations>
+      <Annotations Target="OrderService.EntityContainer/CompositionTags">
+        <Annotation Term="Common.DraftNode">
+          <Record Type="Common.DraftNodeType">
+            <PropertyValue Property="PreparationAction" String="OrderService.draftPrepare" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.SideEffects" Qualifier="alwaysFetchMessages">
+          <Record Type="Common.SideEffectsType">
+            <PropertyValue Property="SourceEntities">
+              <Collection>
+                <NavigationPropertyPath></NavigationPropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="TargetProperties">
+              <Collection>
+                <String>DraftMessages</String>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="OrderService.CompositionTags/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.CompositionTags/tag">
+        <Annotation Term="Common.Label" String="Composition Tag" />
+      </Annotations>
+      <Annotations Target="OrderService.CompositionTags/IsActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.CompositionTags/HasActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.CompositionTags/HasDraftEntity">
+        <Annotation Term="UI.Hidden" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.CompositionTags/DraftAdministrativeData">
+        <Annotation Term="UI.Hidden" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.CompositionTags/DraftMessages">
+        <Annotation Term="Core.Computed" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderTags">
+        <Annotation Term="Common.SideEffects" Qualifier="alwaysFetchMessages">
+          <Record Type="Common.SideEffectsType">
+            <PropertyValue Property="SourceEntities">
+              <Collection>
+                <NavigationPropertyPath></NavigationPropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="TargetProperties">
+              <Collection>
+                <String>DraftMessages</String>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.Messages" Path="DraftMessages" />
+      </Annotations>
+      <Annotations Target="OrderService.EntityContainer/OrderTags">
+        <Annotation Term="Common.DraftNode">
+          <Record Type="Common.DraftNodeType">
+            <PropertyValue Property="PreparationAction" String="OrderService.draftPrepare" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.SideEffects" Qualifier="alwaysFetchMessages">
+          <Record Type="Common.SideEffectsType">
+            <PropertyValue Property="SourceEntities">
+              <Collection>
+                <NavigationPropertyPath></NavigationPropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="TargetProperties">
+              <Collection>
+                <String>DraftMessages</String>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="OrderService.OrderTags/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderTags/IsActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderTags/HasActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderTags/HasDraftEntity">
+        <Annotation Term="UI.Hidden" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderTags/DraftAdministrativeData">
+        <Annotation Term="UI.Hidden" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderTags/DraftMessages">
+        <Annotation Term="Core.Computed" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.Tags/ID">
+        <Annotation Term="Common.ValueListWithFixedValues" Bool="false" />
+        <Annotation Term="Common.ValueListMapping">
+          <Record Type="Common.ValueListMappingType">
+            <PropertyValue Property="CollectionPath" String="Tags" />
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="ID" />
+                  <PropertyValue Property="ValueListProperty" String="ID" />
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="tag" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.Text" Path="tag">
+          <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly" />
+        </Annotation>
+        <Annotation Term="Common.Label" String="Tag" />
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderShippingAddress">
+        <Annotation Term="UI.HeaderInfo">
+          <Record Type="UI.HeaderInfoType">
+            <PropertyValue Property="TypeName" String="Shipping Address" />
+            <PropertyValue Property="TypeNamePlural" String=" " />
+            <PropertyValue Property="Title">
+              <Record Type="UI.DataField">
+                <PropertyValue Property="Value" Path="city" />
+              </Record>
+            </PropertyValue>
+            <PropertyValue Property="Description">
+              <Record Type="UI.DataField">
+                <PropertyValue Property="Value" Path="city" />
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.SelectionFields">
+          <Collection>
+            <PropertyPath>city</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="street" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="city" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.Identification">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="street" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="city" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.Facets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="Label" String="Shipping Address" />
+              <PropertyValue Property="Target" AnnotationPath="@UI.Identification" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="Common.SideEffects" Qualifier="alwaysFetchMessages">
+          <Record Type="Common.SideEffectsType">
+            <PropertyValue Property="SourceEntities">
+              <Collection>
+                <NavigationPropertyPath></NavigationPropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="TargetProperties">
+              <Collection>
+                <String>DraftMessages</String>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.Messages" Path="DraftMessages" />
+      </Annotations>
+      <Annotations Target="OrderService.EntityContainer/OrderShippingAddress">
+        <Annotation Term="Common.DraftNode">
+          <Record Type="Common.DraftNodeType">
+            <PropertyValue Property="PreparationAction" String="OrderService.draftPrepare" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Common.SideEffects" Qualifier="alwaysFetchMessages">
+          <Record Type="Common.SideEffectsType">
+            <PropertyValue Property="SourceEntities">
+              <Collection>
+                <NavigationPropertyPath></NavigationPropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="TargetProperties">
+              <Collection>
+                <String>DraftMessages</String>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="OrderService.OrderShippingAddress/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderShippingAddress/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="Created On" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderShippingAddress/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Core.Description" String="User's unique ID" />
+        <Annotation Term="Common.Label" String="Created By" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderShippingAddress/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="Changed On" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderShippingAddress/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Core.Description" String="User's unique ID" />
+        <Annotation Term="Common.Label" String="Changed By" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderShippingAddress/street">
+        <Annotation Term="UI.Placeholder" String="Street / House No." />
+        <Annotation Term="Common.Label" String="Street" />
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderShippingAddress/city">
+        <Annotation Term="Common.Label" String="City" />
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderShippingAddress/address">
+        <Annotation Term="Core.Computed" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderShippingAddress/IsActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderShippingAddress/HasActiveEntity">
+        <Annotation Term="UI.Hidden" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderShippingAddress/HasDraftEntity">
+        <Annotation Term="UI.Hidden" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderShippingAddress/DraftAdministrativeData">
+        <Annotation Term="UI.Hidden" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.OrderShippingAddress/DraftMessages">
+        <Annotation Term="Core.Computed" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.Comments">
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="createdAt" />
+              <PropertyValue Property="Label" String="Created On" />
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="createdBy" />
+              <PropertyValue Property="Label" String="Created By" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.PresentationVariant">
+          <Record Type="UI.PresentationVariantType">
+            <PropertyValue Property="SortOrder">
+              <Collection>
+                <Record Type="Common.SortOrderType">
+                  <PropertyValue Property="Property" PropertyPath="createdAt" />
+                  <PropertyValue Property="Descending" Bool="true" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="OrderService.EntityContainer/Comments">
+        <Annotation Term="UI.PresentationVariant">
+          <Record Type="UI.PresentationVariantType">
+            <PropertyValue Property="SortOrder">
+              <Collection>
+                <Record Type="Common.SortOrderType">
+                  <PropertyValue Property="Property" PropertyPath="createdAt" />
+                  <PropertyValue Property="Descending" Bool="true" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="OrderService.Comments/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true" />
+      </Annotations>
+      <Annotations Target="OrderService.Comments/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="Created On" />
+      </Annotations>
+      <Annotations Target="OrderService.Comments/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
+        <Annotation Term="Core.Immutable" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Core.Description" String="User's unique ID" />
+        <Annotation Term="Common.Label" String="Created By" />
+      </Annotations>
+      <Annotations Target="OrderService.Comments/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Common.Label" String="Changed On" />
+      </Annotations>
+      <Annotations Target="OrderService.Comments/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true" />
+        <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true" />
+        <Annotation Term="Core.Computed" Bool="true" />
+        <Annotation Term="Core.Description" String="User's unique ID" />
+        <Annotation Term="Common.Label" String="Changed By" />
+      </Annotations>
+      <Annotations Target="OrderService.Orderstatuses">
+        <Annotation Term="UI.Identification">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="OrderService.Orderstatuses/name">
+        <Annotation Term="Common.Label" String="Orderstatus" />
+        <Annotation Term="Core.Description" String="Orderstatus" />
+      </Annotations>
+      <Annotations Target="OrderService.Orderstatuses/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="OrderService.Deliverystatuses">
+        <Annotation Term="UI.Identification">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="name" />
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="OrderService.Deliverystatuses/name">
+        <Annotation Term="Common.Label" String="Deliverystatus" />
+        <Annotation Term="Core.Description" String="Deliverystatus" />
+      </Annotations>
+      <Annotations Target="OrderService.Deliverystatuses/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="OrderService.A_SalesOrganizationText/SalesOrganization">
+        <Annotation Term="Core.Description" String="Sales Organization" />
+        <Annotation Term="Core.LongDescription"
+          String="An organizational area for sales that combines the sales-relevant master data for customers, products, and price lists." />
+        <Annotation Term="Common.QuickInfo"
+          String="An organizational area for sales that combines the sales-relevant master data for customers, products, and price lists." />
+        <Annotation Term="Common.Label" String="Sales Organization" />
+      </Annotations>
+      <Annotations Target="OrderService.A_SalesOrganizationText/SalesOrganizationName">
+        <Annotation Term="Core.Description" String="Sales Organization" />
+        <Annotation Term="Core.LongDescription"
+          String="An organizational area for sales that combines the sales-relevant master data for customers, products, and price lists." />
+        <Annotation Term="Common.QuickInfo"
+          String="An organizational area for sales that combines the sales-relevant master data for customers, products, and price lists." />
+        <Annotation Term="Common.Label" String="Sales Organization" />
+      </Annotations>
+      <Annotations Target="OrderService.EntityContainer/A_DistributionChannelText">
+        <Annotation Term="Capabilities.SearchRestrictions">
+          <Record Type="Capabilities.SearchRestrictionsType">
+            <PropertyValue Property="Searchable" Bool="false" />
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="OrderService.A_DistributionChannelText/DistributionChannel">
+        <Annotation Term="Core.Description" String="Distribution Channel" />
+        <Annotation Term="Core.LongDescription"
+          String="A channel through which saleable materials or services reach customers." />
+        <Annotation Term="Common.QuickInfo"
+          String="A channel through which saleable materials or services reach customers." />
+        <Annotation Term="Common.Label" String="Distribution Channel" />
+      </Annotations>
+      <Annotations Target="OrderService.A_DistributionChannelText/SalesOrganization">
+        <Annotation Term="Core.Description" String="Sales Organization" />
+        <Annotation Term="Core.LongDescription"
+          String="An organizational area for sales that combines the sales-relevant master data for customers, products, and price lists." />
+        <Annotation Term="Common.QuickInfo"
+          String="An organizational area for sales that combines the sales-relevant master data for customers, products, and price lists." />
+        <Annotation Term="Common.Label" String="Sales Organization" />
+      </Annotations>
+      <Annotations Target="OrderService.A_DistributionChannelText/DistributionChannelName">
+        <Annotation Term="Core.Description" String="Distribution Channel" />
+        <Annotation Term="Core.LongDescription"
+          String="A channel through which saleable materials or services reach customers." />
+        <Annotation Term="Common.QuickInfo"
+          String="A channel through which saleable materials or services reach customers." />
+        <Annotation Term="Common.Label" String="Distribution Channel" />
+      </Annotations>
+      <Annotations Target="OrderService.EntityContainer/Userdetails">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false" />
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="OrderService.EntityContainer/Authorizations">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false" />
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="OrderService.sendmail()/subject">
+        <Annotation Term="UI.ParameterDefaultValue" String="Test" />
       </Annotations>
       <Annotations Target="OrderService.DraftAdministrativeData">
         <Annotation Term="Common.Label" String="Draft Administrative Data" />
@@ -2685,6 +3257,56 @@
         <Annotation Term="UI.Hidden" Bool="true" />
         <Annotation Term="Common.Label" String="Draft In Process By Me" />
       </Annotations>
+      <Annotations Target="OrderService.Genres_texts/locale">
+        <Annotation Term="Common.Label" String="Language Code" />
+      </Annotations>
+      <Annotations Target="OrderService.Genres_texts/name">
+        <Annotation Term="Common.Label" String="Name" />
+      </Annotations>
+      <Annotations Target="OrderService.Genres_texts/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="OrderService.Genres_texts/ID">
+        <Annotation Term="Common.SemanticObject" Path="genreSemanticObject" />
+        <Annotation Term="Common.Label" String="genreID" />
+      </Annotations>
+      <Annotations Target="OrderService.Currencies_texts/locale">
+        <Annotation Term="Common.Label" String="Language Code" />
+      </Annotations>
+      <Annotations Target="OrderService.Currencies_texts/name">
+        <Annotation Term="Common.Label" String="Name" />
+      </Annotations>
+      <Annotations Target="OrderService.Currencies_texts/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="OrderService.Currencies_texts/code">
+        <Annotation Term="CodeList.StandardCode" PropertyPath="code" />
+        <Annotation Term="Common.UnitSpecificScale" Path="decimalPlaces" />
+        <Annotation Term="Common.Text" Path="name" />
+        <Annotation Term="Common.Label" String="Currency Code" />
+      </Annotations>
+      <Annotations Target="OrderService.Countries_texts/locale">
+        <Annotation Term="Common.Label" String="Language Code" />
+      </Annotations>
+      <Annotations Target="OrderService.Countries_texts/name">
+        <Annotation Term="Common.Label" String="Name" />
+      </Annotations>
+      <Annotations Target="OrderService.Countries_texts/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
+      <Annotations Target="OrderService.Countries_texts/code">
+        <Annotation Term="Common.Text" Path="name" />
+        <Annotation Term="Common.Label" String="Country/Region Code" />
+      </Annotations>
+      <Annotations Target="OrderService.Plant_texts/locale">
+        <Annotation Term="Common.Label" String="Language Code" />
+      </Annotations>
+      <Annotations Target="OrderService.Plant_texts/name">
+        <Annotation Term="Common.Label" String="Name" />
+      </Annotations>
+      <Annotations Target="OrderService.Plant_texts/descr">
+        <Annotation Term="Common.Label" String="Description" />
+      </Annotations>
       <Annotations Target="OrderService.Books_texts/locale">
         <Annotation Term="Common.Label" String="Language Code" />
       </Annotations>
@@ -2704,7 +3326,8 @@
         <Annotation Term="Common.Label" String="Language Code" />
       </Annotations>
       <Annotations Target="OrderService.Orderstatuses_texts/name">
-        <Annotation Term="Common.Label" String="Name" />
+        <Annotation Term="Common.Label" String="Orderstatus" />
+        <Annotation Term="Core.Description" String="Orderstatus" />
       </Annotations>
       <Annotations Target="OrderService.Orderstatuses_texts/descr">
         <Annotation Term="Common.Label" String="Description" />
@@ -2713,95 +3336,11 @@
         <Annotation Term="Common.Label" String="Language Code" />
       </Annotations>
       <Annotations Target="OrderService.Deliverystatuses_texts/name">
-        <Annotation Term="Common.Label" String="Name" />
+        <Annotation Term="Common.Label" String="Deliverystatus" />
+        <Annotation Term="Core.Description" String="Deliverystatus" />
       </Annotations>
       <Annotations Target="OrderService.Deliverystatuses_texts/descr">
         <Annotation Term="Common.Label" String="Description" />
-      </Annotations>
-      <Annotations Target="OrderService.Currencies_texts/locale">
-        <Annotation Term="Common.Label" String="Language Code" />
-      </Annotations>
-      <Annotations Target="OrderService.Currencies_texts/name">
-        <Annotation Term="Common.Label" String="Name" />
-      </Annotations>
-      <Annotations Target="OrderService.Currencies_texts/descr">
-        <Annotation Term="Common.Label" String="Description" />
-      </Annotations>
-      <Annotations Target="OrderService.Currencies_texts/code">
-        <Annotation Term="CodeList.StandardCode" PropertyPath="code" />
-        <Annotation Term="Common.UnitSpecificScale" Path="decimalPlaces" />
-        <Annotation Term="Common.Text" Path="name" />
-        <Annotation Term="Common.Label" String="Currency Code" />
-      </Annotations>
-      <Annotations Target="OrderService.Genres_texts/locale">
-        <Annotation Term="Common.Label" String="Language Code" />
-      </Annotations>
-      <Annotations Target="OrderService.Genres_texts/name">
-        <Annotation Term="Common.Label" String="Name" />
-      </Annotations>
-      <Annotations Target="OrderService.Genres_texts/descr">
-        <Annotation Term="Common.Label" String="Description" />
-      </Annotations>
-      <Annotations Target="OrderService.Genres_texts/ID">
-        <Annotation Term="Common.SemanticObject" Path="genreSemanticObject" />
-        <Annotation Term="Common.Label" String="genreID" />
-      </Annotations>
-      <Annotations Target="OrderService.Countries_texts/locale">
-        <Annotation Term="Common.Label" String="Language Code" />
-      </Annotations>
-      <Annotations Target="OrderService.Countries_texts/name">
-        <Annotation Term="Common.Label" String="Name" />
-      </Annotations>
-      <Annotations Target="OrderService.Countries_texts/descr">
-        <Annotation Term="Common.Label" String="Description" />
-      </Annotations>
-      <Annotations Target="OrderService.Countries_texts/code">
-        <Annotation Term="Common.Text" Path="name" />
-        <Annotation Term="Common.Label" String="Country/Region Code" />
-      </Annotations>
-      <Annotations Target="OrderService.Plant_texts/ID_texts">
-        <Annotation Term="Core.ComputedDefaultValue" Bool="true" />
-      </Annotations>
-      <Annotations Target="OrderService.Plant_texts/locale">
-        <Annotation Term="Common.Label" String="Language Code" />
-      </Annotations>
-      <Annotations Target="OrderService.Plant_texts/name">
-        <Annotation Term="Common.Label" String="Name" />
-      </Annotations>
-      <Annotations Target="OrderService.Plant_texts/descr">
-        <Annotation Term="Common.Label" String="Description" />
-      </Annotations>
-      <Annotations Target="OrderService.EntityContainer/OrderReport">
-        <Annotation Term="Capabilities.FilterRestrictions">
-          <Record Type="Capabilities.FilterRestrictionsType">
-            <PropertyValue Property="FilterExpressionRestrictions">
-              <Collection>
-                <Record Type="Capabilities.FilterExpressionRestrictionType">
-                  <PropertyValue Property="Property" PropertyPath="Set/currency" />
-                  <PropertyValue Property="AllowedExpressions" String="SingleValue" />
-                </Record>
-              </Collection>
-            </PropertyValue>
-          </Record>
-        </Annotation>
-        <Annotation Term="Capabilities.DeleteRestrictions">
-          <Record Type="Capabilities.DeleteRestrictionsType">
-            <PropertyValue Property="Deletable" Bool="false" />
-          </Record>
-        </Annotation>
-        <Annotation Term="Capabilities.InsertRestrictions">
-          <Record Type="Capabilities.InsertRestrictionsType">
-            <PropertyValue Property="Insertable" Bool="false" />
-          </Record>
-        </Annotation>
-        <Annotation Term="Capabilities.UpdateRestrictions">
-          <Record Type="Capabilities.UpdateRestrictionsType">
-            <PropertyValue Property="Updatable" Bool="false" />
-          </Record>
-        </Annotation>
-      </Annotations>
-      <Annotations Target="OrderService.OrderReportParameters/currency">
-        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory" />
       </Annotations>
     </Schema>
   </edmx:DataServices>
