@@ -35,7 +35,8 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod
   ?$top=10
   &$inlinecount=allpages
-  &$filter=Plant eq '{{$dotenv Plant}}' and Material eq '{{$dotenv Product}}'
+  &$filter=MatlWrhsStkQtyInMatlBaseUnit gt 0
+  #&$filter=Plant eq '{{$dotenv Plant}}' and Material eq '{{$dotenv Product}}'
   # InventoryStockType eq '01' and 
   # and StorageLocation eq '{{$dotenv Warehouse}}' 
   # and MaterialBaseUnit eq 'KG'
