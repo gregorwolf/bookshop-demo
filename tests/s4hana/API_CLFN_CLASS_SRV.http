@@ -11,8 +11,11 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_CLASS_SRV/A_ClfnClassForKeyDate
     ?$inlinecount=allpages
     &$top=10
-    &$filter=ClassInternalID eq '17'
+    &$expand=to_ClassCharacteristic,to_ClassDescription
+    &$filter=ClassType eq '001' and ValidityStartDate le datetime'2026-02-12T00:00:00.000' and ValidityEndDate ge datetime'2026-02-12T00:00:00.000'
+    #&$filter=ClassInternalID eq '17'
     #&$filter=Class eq '{{$dotenv Class}}'
+    &$select=ClassType,Class,to_ClassCharacteristic/Characteristic,to_ClassDescription/Language,to_ClassDescription/ClassDescription
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###

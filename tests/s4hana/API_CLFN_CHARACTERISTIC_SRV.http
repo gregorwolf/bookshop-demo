@@ -17,12 +17,22 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_CHARACTERISTIC_SRV/A_ClfnCharacteristicForKeyDate
     ?$inlinecount=allpages
     &$top=10
-    &$filter=CharcInternalID eq '{{$dotenv CharcInternalID}}'
-    &$expand=to_CharacteristicDesc,to_CharacteristicReference,to_CharacteristicRestriction,to_CharacteristicValue
+    #&$filter=CharcInternalID eq '{{$dotenv CharcInternalID}}'
+    &$filter=Characteristic eq '{{$dotenv Characteristic}}' and ValidityStartDate le datetime'2026-02-12T00:00:00.000' and ValidityEndDate ge datetime'2026-02-12T00:00:00.000'
+    &$expand=to_CharacteristicDesc,to_CharacteristicValue,to_CharacteristicValue/to_CharcValueDesc
+    #,to_CharacteristicValue/to_CharcValueDesc,to_CharacteristicDesc,to_CharacteristicReference,to_CharacteristicRestriction
+    #&$select=Characteristic,to_CharacteristicDesc/Language,to_CharacteristicDesc/CharcDescription,to_CharacteristicValue/*
+    #,to_CharacteristicValue/to_CharcValueDesc/Language,to_CharacteristicValue/to_CharcValueDesc/CharcValueDescription
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_CHARACTERISTIC_SRV/A_ClfnCharcRefForKeyDate
+    ?$inlinecount=allpages
+    &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CLFN_CHARACTERISTIC_SRV/A_ClfnCharcValueForKeyDate
     ?$inlinecount=allpages
     &$top=10
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
