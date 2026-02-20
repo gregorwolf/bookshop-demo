@@ -48,7 +48,7 @@
     "@sap/cds-dk": "^9",
     "@sap/datasphere-cli": "^2026",
     "@sap/graph-toolkit": "^3",
-    "@sap/ux-specification": "^1.120.0",
+    "@sap/ux-specification": "^1.142.1",
     "artillery": "^2.0.21",
     "cds-swagger-ui-express": "^0",
     "chai": "^6",
