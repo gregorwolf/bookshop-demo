@@ -33,7 +33,7 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/$metadata
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/DuplicateCheck
-  ?Input='{"BusinessPartnerCategory":"2","OrganizationBPName1":"{{$dotenv DuplicateCheck_OrganizationBPName1}}","_BusinessPartnerAddress":[{"StreetName":"{{$dotenv DuplicateCheck_StreetName}}","CityName":"{{$dotenv DuplicateCheck_CityName}}","Country":"DE"}]}'
+  ?Input='{"BusinessPartnerCategory":"2","OrganizationBPName1":"{{$dotenv DuplicateCheck_OrganizationBPName1}}","_BusinessPartnerAddress":[{"StreetName":"{{$dotenv DuplicateCheck_StreetName}}","PostalCode":"{{$dotenv DuplicateCheck_PostalCode}}","CityName":"{{$dotenv DuplicateCheck_CityName}}","Country":"DE"}]}'
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
@@ -47,7 +47,7 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPart
   &$skip=0
   &$inlinecount=allpages
   &$expand=to_BusinessPartnerAddress,to_BusinessPartnerAddress/to_AddressUsage,to_Customer,to_Customer/to_CustomerSalesArea
-  &$filter=Customer ne ''
+  &$filter=Customer ne '' and OrganizationBPName1 eq '{{$dotenv DuplicateCheck_OrganizationBPName1}}'
   # and LastChangeDate gt '2024-01-01T00:00'
   #&$select=Customer,BusinessPartnerFullName
   &$orderby=Customer
