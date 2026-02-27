@@ -109,6 +109,9 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/AttachmentHarmonizedOperationSet
   ?$top=10
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
@@ -124,7 +127,7 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/SAPObjectDocu
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
-# @name getA_DocumentInfoRecordAttch
+# @name getA_DocumentInfoRecordAttachment
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/A_DocumentInfoRecordAttch
   ?$top=10
   &$inlinecount=allpages
@@ -134,12 +137,12 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/A_DocumentInf
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
-@DMSDocumentInfoRecordDocType={{getA_DocumentInfoRecordAttch.response.body.d.results[0].DocumentInfoRecordToAttachmentNavigation.results[0].DocumentInfoRecordDocType}}
-@DMSDocumentInfoRecordDocNumber={{getA_DocumentInfoRecordAttch.response.body.d.results[0].DocumentInfoRecordToAttachmentNavigation.results[0].DocumentInfoRecordDocNumber}}
-@DMSLogicalDocument={{getA_DocumentInfoRecordAttch.response.body.d.results[0].DocumentInfoRecordToAttachmentNavigation.results[0].LogicalDocument}}
-@DMSArchiveDocumentID={{getA_DocumentInfoRecordAttch.response.body.d.results[0].DocumentInfoRecordToAttachmentNavigation.results[0].ArchiveDocumentID}}
-@DMSLinkedSAPObjectKey={{getA_DocumentInfoRecordAttch.response.body.d.results[0].DocumentInfoRecordToAttachmentNavigation.results[0].LinkedSAPObjectKey}}
-@DMSBusinessObjectTypeName={{getA_DocumentInfoRecordAttch.response.body.d.results[0].DocumentInfoRecordToAttachmentNavigation.results[0].BusinessObjectTypeName}}
+#@DMSDocumentInfoRecordDocType={{getA_DocumentInfoRecordAttachment.response.body.d.results[0].DocumentInfoRecordToAttachmentNavigation.results[0].DocumentInfoRecordDocType}}
+#@DMSDocumentInfoRecordDocNumber={{getA_DocumentInfoRecordAttachment.response.body.d.results[0].DocumentInfoRecordToAttachmentNavigation.results[0].DocumentInfoRecordDocNumber}}
+#@DMSLogicalDocument={{getA_DocumentInfoRecordAttachment.response.body.d.results[0].DocumentInfoRecordToAttachmentNavigation.results[0].LogicalDocument}}
+#@DMSArchiveDocumentID={{getA_DocumentInfoRecordAttachment.response.body.d.results[0].DocumentInfoRecordToAttachmentNavigation.results[0].ArchiveDocumentID}}
+#@DMSLinkedSAPObjectKey={{getA_DocumentInfoRecordAttachment.response.body.d.results[0].DocumentInfoRecordToAttachmentNavigation.results[0].LinkedSAPObjectKey}}
+#@DMSBusinessObjectTypeName={{getA_DocumentInfoRecordAttachment.response.body.d.results[0].DocumentInfoRecordToAttachmentNavigation.results[0].BusinessObjectTypeName}}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/$metadata
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
@@ -157,12 +160,59 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/GetAllOrigina
   &LinkedSAPObjectKey='{{$dotenv LinkedSAPObjectKey}}'
   &SemanticObject=''
 Accept: application/json
+#Accept: application/atom+xml
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept-Language: en
-### Read created document Metadata - is not implemented
+###
+@DMSDocumentInfoRecordDocType={{getAllOriginals.response.body.d.results[0].DocumentInfoRecordDocType}}
+@DMSDocumentInfoRecordDocNumber={{getAllOriginals.response.body.d.results[0].DocumentInfoRecordDocNumber}}
+@DMSLogicalDocument={{getAllOriginals.response.body.d.results[0].LogicalDocument}}
+@DMSArchiveDocumentID={{getAllOriginals.response.body.d.results[0].ArchiveDocumentID}}
+@DMSLinkedSAPObjectKey={{getAllOriginals.response.body.d.results[0].LinkedSAPObjectKey}}
+@DMSBusinessObjectTypeName={{getAllOriginals.response.body.d.results[0].BusinessObjectTypeName}}
+@DMSuri={{getAllOriginals.response.body.d.results[0].__metadata.uri}}
+### Read existing document Metadata - is not implemented
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/AttachmentContentSet(DocumentInfoRecordDocType='{{DMSDocumentInfoRecordDocType}}',DocumentInfoRecordDocNumber='{{DMSDocumentInfoRecordDocNumber}}',DocumentInfoRecordDocVersion='',DocumentInfoRecordDocPart='',LogicalDocument='{{DMSLogicalDocument}}',ArchiveDocumentID='{{DMSArchiveDocumentID}}',LinkedSAPObjectKey='{{DMSLinkedSAPObjectKey}}',BusinessObjectTypeName='{{DMSBusinessObjectTypeName}}')
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
-### Read created document Content
+### Read existing document Content
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/AttachmentContentSet(DocumentInfoRecordDocType='{{DMSDocumentInfoRecordDocType}}',DocumentInfoRecordDocNumber='{{DMSDocumentInfoRecordDocNumber}}',DocumentInfoRecordDocVersion='',DocumentInfoRecordDocPart='',LogicalDocument='{{DMSLogicalDocument}}',ArchiveDocumentID='{{DMSArchiveDocumentID}}',LinkedSAPObjectKey='{{DMSLinkedSAPObjectKey}}',BusinessObjectTypeName='{{DMSBusinessObjectTypeName}}')/$value
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Delete existing document
+DELETE {{DMSuri}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+X-CSRF-Token: {{csrf}}
+Accept: application/json
+
+### Get CSRF Token
+# @name getCSRF
+HEAD {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+X-CSRF-Token: Fetch
+### Read Token to Variable
+@csrf={{getCSRF.response.headers.x-csrf-token}}
+
+### Create Attachment in GOS
+# @name createAttachment
+POST {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_CV_ATTACHMENT_SRV/AttachmentContentSet
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+X-CSRF-Token: {{csrf}}
+Accept-Language: en
+Accept: application/json
+Content-Type: image/png
+Slug: Test.png
+BusinessObjectTypeName: {{$dotenv BusinessObjectTypeName}}
+LinkedSAPObjectKey: {{$dotenv LinkedSAPObjectKey}}
+
+< ../app/Test.png
+###
+@newAttachmentUri={{createAttachment.response.headers.location}}
+@newAttachmentMediaSrc={{createAttachment.response.body.d.__metadata.media_src}}
+### Read created document content
+GET {{newAttachmentMediaSrc}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Delete created document
+DELETE {{newAttachmentUri}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+X-CSRF-Token: {{csrf}}
+Accept: application/json
