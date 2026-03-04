@@ -21,8 +21,11 @@ Accept: application/json
 Authorization: Bearer {{access_token}}
 
 ###
-#@cmisRepositoryId={{repositories.response.body.$.repoAndConnectionInfos[1].repository.id}}
-@cmisRepositoryId={{$dotenv dms_cmisRepositoryId}}
+@cmisRepositoryId={{repositories.response.body.$.repoAndConnectionInfos.repository.id}}
+@externalId={{repositories.response.body.$.repoAndConnectionInfos.repository.externalId}}
+#@cmisRepositoryId={{$dotenv dms_cmisRepositoryId}}
+#@externalId={{$dotenv dms_externalId}}
+
 ###
 POST {{$dotenv dms_api}}/rest/v2/repositories
 Accept: application/json
@@ -39,7 +42,7 @@ Authorization: Bearer {{access_token}}
     "skipVirusScanForLargeFile": "false",
     "hashAlgorithms": "SHA-256",
     "isContentBridgeEnabled": "false",
-    "externalId": "{{$dotenv dms_externalId}}"
+    "externalId": "{{externalId}}"
   }
 }
 
@@ -48,7 +51,7 @@ GET {{$dotenv dms_api}}/rest/v2/usage/storage
 Accept: application/json
 Authorization: Bearer {{access_token}}
 ###
-# @name repositories
+# @name repository
 GET {{$dotenv dms_api}}/rest/v2/repositories/{{cmisRepositoryId}}
 Accept: application/json
 Authorization: Bearer {{access_token}}
@@ -72,19 +75,19 @@ Accept: application/json
 Authorization: Bearer {{access_token}}
 ###
 # @name browser
-GET {{$dotenv dms_api}}/browser/{{$dotenv dms_externalId}}/root
+GET {{$dotenv dms_api}}/browser/{{externalId}}/root
 Accept: application/json
 Authorization: Bearer {{access_token}}
 ###
 #@folder={{$dotenv dms_folder}}
 @folder={{browser.response.body.$.objects[1].object.properties.cmis:name.value}}
 ### does the folder already exist?
-GET {{$dotenv dms_api}}/browser/{{$dotenv dms_externalId}}/root/{{folder}}
+GET {{$dotenv dms_api}}/browser/{{externalId}}/root/{{folder}}
 Accept: application/json
 Authorization: Bearer {{access_token}}
 
 ### create folder
-POST {{$dotenv dms_api}}/browser/{{$dotenv dms_externalId}}/root/
+POST {{$dotenv dms_api}}/browser/{{externalId}}/root/
 Content-Type: application/x-www-form-urlencoded
 Authorization: Bearer {{access_token}}
 
@@ -95,7 +98,7 @@ cmisAction=createFolder
 &propertyValue[1]={{folder}}
 
 ### Upload Document to folder
-POST {{$dotenv dms_api}}/browser/{{$dotenv dms_externalId}}/root/{{folder}}
+POST {{$dotenv dms_api}}/browser/{{externalId}}/root/{{folder}}
 Content-Type: multipart/form-data;boundary="WebKitFormBoundary7MA4YWxkTrZu0gW"
 Authorization: Bearer {{access_token}}
 
@@ -128,16 +131,16 @@ Content-Type: image/png
 --WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 ### read document
-GET {{$dotenv dms_api}}/browser/{{$dotenv dms_externalId}}/root/{{folder}}/Testö.png?cmisselector=content
+GET {{$dotenv dms_api}}/browser/{{externalId}}/root/{{folder}}/Testö.png?cmisselector=content
 Authorization: Bearer {{access_token}}
 
 ### read folder
-GET {{$dotenv dms_api}}/browser/{{$dotenv dms_externalId}}/root/{{folder}}
+GET {{$dotenv dms_api}}/browser/{{externalId}}/root/{{folder}}
 Accept: application/json
 Authorization: Bearer {{access_token}}
 
 ### delete document
-POST {{$dotenv dms_api}}/browser/{{$dotenv dms_externalId}}/root/{{folder}}/Testö.png
+POST {{$dotenv dms_api}}/browser/{{externalId}}/root/{{folder}}/Testö.png
 Authorization: Bearer {{access_token}}
 Content-Type: application/x-www-form-urlencoded
 
