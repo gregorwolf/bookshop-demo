@@ -33,6 +33,12 @@ Authorization: Bearer {{destination_access_token}}
 # @name instanceDestinations
 GET {{$dotenv dest_uri}}/destination-configuration/v1/instanceDestinations
 Authorization: Bearer {{destination_access_token}}
+### Create Destination
+POST {{$dotenv dest_uri}}/destination-configuration/v1/subaccountDestinations
+Authorization: Bearer {{destination_access_token}}
+Content-Type: application/json
+
+< ./default-env-dest.json
 ### Read Destination via CAP 
 GET http://localhost:4004/odata/v4/admin/Destination
 Authorization: Basic admin:
