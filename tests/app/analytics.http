@@ -8,8 +8,10 @@ Authorization: Basic admin:
 http://localhost:4004/odata/v4/analytics/BooksAnalytics
   ?$count=true
   //&$expand=author,currency
-  &$compute=price mul stock as StockValue
-  # price mul author/ID as StockValueInHundreds
+  &$compute=price mul stock as StockValue, price mul 1.19 as PriceWithTax
+  // Error:
+  // Parsing URL failed at position 72: Expected "add", "div", "divby", "mul", "sub", or a whitespace but "/" found.
+  #&$compute=price mul author/ID as StockValueInHundreds
 Authorization: Basic admin:
 ### Read BooksAnalytics
 http://localhost:4004/v2/analytics/BooksAnalytics
