@@ -2,10 +2,10 @@ const cds = require("@sap/cds");
 const LOG = cds.log("init");
 
 module.exports = async (db) => {
-  const { ServiceDefinition } = db.entities("dynamic");
+  const { ServiceDefinition } = cds.entities("dynamic");
 
   let csnHelloWorldService = await cds.compile(
-    "file:./dynamic/hello-world-service.cds"
+    "file:./dynamic/hello-world-service.cds",
   );
   let csnMinimalService = await cds.compile("file:./srv/minimal-service.cds");
   const ServiceDefinitionData = [
