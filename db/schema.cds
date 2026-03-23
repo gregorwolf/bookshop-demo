@@ -48,39 +48,39 @@ entity Approval : managed, cuid {
 };
 
 entity Books : managed {
-  key     ID                        : Integer;
-          title                     : localized String(111);
-          descr                     : localized String(1111);
-          genre                     : Association to Genres;
-          stock                     : Integer;
-          stockTarget               : Integer;
+  key ID                             : Integer;
+      title                          : localized String(111);
+      descr                          : localized String(1111);
+      genre                          : Association to Genres;
+      stock                          : Integer;
+      stockTarget                    : Integer;
 
-          @title: 'Related Book'
-          relatedBook               : Association to one Books;
+      @title: 'Related Book'
+      relatedBook                    : Association to one Books;
 
-          @sap.unit                     : 'currency_code'
-          @Semantics.amount.currencyCode: 'currency_code'
-          @Measures.ISOCurrency         : currency_code
-          price                     : DecimalFloat;
+      @sap.unit                     : 'currency_code'
+      @Semantics.amount.currencyCode: 'currency_code'
+      @Measures.ISOCurrency         : currency_code
+      price                          : DecimalFloat;
 
-          @Common.IsCurrency
-          @sap.semantics                : 'currency-code'
-          @Semantics.currencyCode
-          currency                  : Currency;
-  virtual virtualFromDB             : String default 'Value from DB';
-  virtual semanticURLtoPublisher    : String;
-          weight                    : DecimalFloat  @title: 'Weight (DecimalFloat)';
-          height                    : Double        @title: 'Height (Double)';
-          width                     : Decimal(9, 2) @title: 'Width (Decimal(9,2))';
-          visible                   : Boolean       @title: 'Visible (Boolean)';
-          releaseDate               : DateTime      @title: 'Release Date (DateTime)';
-          readingTime               : Time          @title: 'Reading Time (Time)';
-          author                    : Association to one Authors;
-          publisher                 : Association to one Publishers;
-          plants                    : Association to many BookPlants
-                                        on plants.book = $self;
-          to_BooksAuthorsAssignment : Association to BooksAuthorsAssignment
-                                        on to_BooksAuthorsAssignment.ASSOC_Book = $self;
+      @Common.IsCurrency
+      @sap.semantics                : 'currency-code'
+      @Semantics.currencyCode
+      currency                       : Currency;
+      virtual virtualFromDB          : String default 'Value from DB';
+      virtual semanticURLtoPublisher : String;
+      weight                         : DecimalFloat  @title: 'Weight (DecimalFloat)';
+      height                         : Double        @title: 'Height (Double)';
+      width                          : Decimal(9, 2) @title: 'Width (Decimal(9,2))';
+      visible                        : Boolean       @title: 'Visible (Boolean)';
+      releaseDate                    : DateTime      @title: 'Release Date (DateTime)';
+      readingTime                    : Time          @title: 'Reading Time (Time)';
+      author                         : Association to one Authors;
+      publisher                      : Association to one Publishers;
+      plants                         : Association to many BookPlants
+                                         on plants.book = $self;
+      to_BooksAuthorsAssignment      : Association to BooksAuthorsAssignment
+                                         on to_BooksAuthorsAssignment.ASSOC_Book = $self;
 };
 
 @cds.autoexpose
@@ -128,15 +128,15 @@ entity Authors : managed {
   SemanticObject: 'genres',
 }
 entity Genres : sap.common.CodeList {
-          @title                : '{i18n>genreID}'
-          @Common.SemanticObject: genreSemanticObject
-  key     ID                  : Integer               @sap.hierarchy.node.for;
+      @title                : '{i18n>genreID}'
+      @Common.SemanticObject: genreSemanticObject
+  key ID                          : Integer               @sap.hierarchy.node.for;
 
-          @title                : '{i18n>parent}'
-          parent              : Association to Genres @sap.hierarchy.parent.node.for;
+      @title                : '{i18n>parent}'
+      parent                      : Association to Genres @sap.hierarchy.parent.node.for;
 
-          @title: '{i18n>SemanticObject}'
-  virtual genreSemanticObject : String;
+      @title: '{i18n>SemanticObject}'
+      virtual genreSemanticObject : String;
 }
 
 entity Publishers : managed {
@@ -222,26 +222,29 @@ entity Documents : cuid, managed {
   filename  : String not null @title: '{i18n>filename}';
 }
 
-entity Orderstatuses : sap.common.CodeList {
-  key code : String(1);
+//type OrderStatusCode         : ;
+
+entity OrderStatus : sap.common.CodeList {
+  key code : String(1) enum {
+        New = 'N';
+        InProcess = 'I';
+        Completed = 'C';
+      };
 }
 
-type Orderstatus             : Association to Orderstatuses;
-annotate Orderstatus with @title: '{i18n>Orderstatus}';
-
-annotate Orderstatuses {
+annotate OrderStatus {
   @title: '{i18n>Orderstatus}'  @description: '{i18n>Orderstatus}'
   name;
 }
 
-entity Deliverystatuses : sap.common.CodeList {
+entity DeliveryStatus : sap.common.CodeList {
   key code : String(1);
 }
 
-type Deliverystatus          : Association to Deliverystatuses;
+type Deliverystatus          : Association to DeliveryStatus;
 annotate Deliverystatus with @title: '{i18n>Deliverystatus}';
 
-annotate Deliverystatuses {
+annotate DeliveryStatus {
   @title: '{i18n>Deliverystatus}'  @description: '{i18n>Deliverystatus}'
   name;
 }
@@ -344,7 +347,7 @@ entity Orders : cuid, managed {
     true
   ]}}
   @readonly
-  orderstatus         : Orderstatus;
+  orderstatus         : Association to OrderStatus default 'N';
 
   @readonly
   @Common.ValueListWithFixedValues: true

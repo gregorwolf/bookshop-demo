@@ -60,10 +60,18 @@ service OrderService @(
       action NewAction(OrderNo: db.Orders:OrderNo not null, CustomerOrderNo: db.Orders:CustomerOrderNo);
       action addComment(comment: String);
 
+      action processOrder();
+      action completeOrder();
+
     };
 
   annotate Orders with {
     ID @Core.Computed;
+  }
+
+  annotate Orders with @flow.status: orderstatus actions {
+     processOrder       @from       : [ #New]        @to: #InProcess;
+     completeOrder      @from       : [ #InProcess]  @to: #Completed;
   }
 
   //------- auto-exposed --------
