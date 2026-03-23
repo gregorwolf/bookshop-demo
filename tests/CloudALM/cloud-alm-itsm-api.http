@@ -5,7 +5,7 @@
 ###
 ### Service instance must be created with the scope "$XSMASTERAPPNAME.calm-api.bsm.read" following:
 ### https://help.sap.com/docs/cloud-alm/setup-administration/enabling-sap-cloud-alm-api?locale=en-US
-
+@installationNumber=0090775943
 ### Request Access Token
 # @name requestAccessToken
 POST {{$dotenv cloud_alm_token_endpoint}}/oauth/token
@@ -24,7 +24,7 @@ GET {{$dotenv cloud_alm_api}}/api/calm-itsmapi/v1/supportcases/masterdata/compon
     ?offset=0
     &limit=50
 Authorization: Bearer {{access_token}}
-###
+### Lists Installations
 GET {{$dotenv cloud_alm_api}}/api/calm-itsmapi/v1/supportcases/masterdata/landscapeObjects
     ?offset=0
     &limit=50
@@ -44,14 +44,23 @@ Authorization: Bearer {{access_token}}
 ###
 ### Response is empty but HTTP Status is 200
 ### Even with correct installationNumber
+# @name getCasesIds
 GET {{$dotenv cloud_alm_api}}/api/calm-itsmapi/v1/supportcases/cases/ids
     ?offset=0
     &limit=100
-    &installationNumber={{$dotenv installationNumber}}
+    &installationNumber={{installationNumber}}
+#    &installationNumber={{$dotenv installationNumber}}
     &reporter={{$dotenv reporter}}
 Authorization: Bearer {{access_token}}
-### esponse is empty but HTTP Status is 200
+###
+@caseId={{getCasesIds.response.body.$.results[0].correlationId}}
+### response is empty but HTTP Status is 200
 GET {{$dotenv cloud_alm_api}}/api/calm-itsmapi/v1/supportcases/cases
-    ?id=002075129400000473662025
+    ?id={{caseId}}
+    &reporter={{$dotenv reporter}}
+Authorization: Bearer {{access_token}}
+### Get list of activities
+GET {{$dotenv cloud_alm_api}}/api/calm-itsmapi/v1/supportcases/cases/activities
+    ?id={{caseId}}
     &reporter={{$dotenv reporter}}
 Authorization: Bearer {{access_token}}
