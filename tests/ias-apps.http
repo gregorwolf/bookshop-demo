@@ -3,9 +3,31 @@
 ### https://api.sap.com/api/SCI_Application_Directory/overview
 ###
 ### Get all applications
+# @name getApplications
 GET {{$dotenv ias_apps_endpoint}}/Applications/v1/
 #  ?limit=2
+  ?filter=name eq oac.accounts.sap.com
 Authorization: Basic {{$dotenv ias_apps_username}}:{{$dotenv ias_apps_password}}
+###
+@applicationId={{getApplications.response.body.$.applications[0].id}}
+### Get one application by ID
+GET {{$dotenv ias_apps_endpoint}}/Applications/v1/{{applicationId}}
+Authorization: Basic {{$dotenv ias_apps_username}}:{{$dotenv ias_apps_password}}
+### 
+# If applied to System Application:
+# System application cannot be updated.
+PATCH {{$dotenv ias_apps_endpoint}}/Applications/v1/{{applicationId}}
+Authorization: Basic {{$dotenv ias_apps_username}}:{{$dotenv ias_apps_password}}
+Content-Type: application/json
+
+{
+   "operations": [
+      {
+         "op": "remove",
+         "path": "/urn:sap:identity:application:schemas:extension:sci:1.0:Authentication/conditionalAuthentication/0"
+      }
+   ]
+}
 ### Get one application by applicationIdentifier
 GET {{$dotenv ias_apps_endpoint}}/Applications/v1/{{$dotenv ias_applicationIdentifier}}
 #  ?limit=2
