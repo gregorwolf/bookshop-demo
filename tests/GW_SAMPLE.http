@@ -1,0 +1,39 @@
+@host=https://techxchangeapim.azure-api.net
+### S/4HANA Cloud
+GET {{host}}/student004/BusinessPartnerSet
+  ?$top=2
+Accept: application/json
+### Get CSRF Token
+# @name getCSRF
+GET {{host}}/student004/BusinessPartnerSet
+X-CSRF-Token: Fetch
+### Read Token to Variable
+@CSRF={{getCSRF.response.headers.x-csrf-token}}
+###
+# @name simulateSalesOrder
+POST {{host}}/student004/BusinessPartnerSet
+Accept: application/json
+#X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+{
+  "CompanyName": "SAP SE",
+  "WebAddress": "http://www.sap.com",
+  "EmailAddress": "hans.dampf@sap.com",
+  "PhoneNumber": "0622734567",
+  "FaxNumber": "0622734004",
+  "LegalForm": "SE",
+  "CurrencyCode": "EUR",
+  "BusinessPartnerRole": "01",
+  "Address": {
+    "City": "Updated MS Walldorf",
+    "PostalCode": "69190",
+    "Street": "Dietmar-Hopp-Allee",
+    "Building": "16",
+    "Country": "DE",
+    "AddressType": "02"
+  }
+}
+###
+GET {{host}}/student004/BusinessPartnerSet('0100000117')
+Accept: application/json
