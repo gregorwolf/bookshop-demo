@@ -1,0 +1,33 @@
+### ABAP Flight Reference Scenario for RAP on ABAP Platform Cloud
+### https://github.com/SAP-samples/abap-platform-refscen-flight/tree/ABAP-platform-cloud
+GET {{$dotenv btp_abap_host}}/sap/opu/odata4/dmo/ui_agency_hd_o4/srvd/dmo/ui_agency_hd/0001/
+Authorization: Basic {{$dotenv btp_abap_basic_auth}}:{{$dotenv btp_abap_basic_password}}
+###
+GET {{$dotenv btp_abap_host}}/sap/opu/odata4/dmo/ui_agency_hd_o4/srvd/dmo/ui_agency_hd/0001/$metadata
+Authorization: Basic {{$dotenv btp_abap_basic_auth}}:{{$dotenv btp_abap_basic_password}}
+###
+GET {{$dotenv btp_abap_host}}/sap/opu/odata4/dmo/ui_agency_hd_o4/srvd/dmo/ui_agency_hd/0001/Employee
+  ?$top=10
+  &$filter=Employee eq '207' and IsActiveEntity eq true
+Authorization: Basic {{$dotenv btp_abap_basic_auth}}:{{$dotenv btp_abap_basic_password}}
+###
+GET {{$dotenv btp_abap_host}}/sap/opu/odata4/dmo/ui_agency_hd_o4/srvd/dmo/ui_agency_hd/0001/Agency(Agency='4001',IsActiveEntity=true)/_Employee
+  ?$select=Agency,Employee,FirstName,HasActiveEntity,IsActiveEntity,LastName,Manager,Salary,SalaryCurrency,SiblingOrderNumber,__HierarchyPropertiesForxDMOxI_EmployeeHN_HD/DrillState,__HierarchyPropertiesForxDMOxI_EmployeeHN_HD/NodeId
+  &$apply=descendants($root/Agency(Agency='4001',IsActiveEntity=true)/_Employee,xDMOxI_EmployeeHN_HD,__HierarchyPropertiesForxDMOxI_EmployeeHN_HD/NodeId,filter(Agency eq '4001' and Employee eq '207' and IsActiveEntity eq true),1)
+  &$count=true
+  &$skip=0
+  &$top=210
+Authorization: Basic {{$dotenv btp_abap_basic_auth}}:{{$dotenv btp_abap_basic_password}}
+###
+GET {{$dotenv btp_abap_host}}/sap/opu/odata4/dmo/ui_agency_hd_o4/srvd/dmo/ui_agency_hd/0001/Employee
+  ?$select=Agency,Employee,FirstName,HasActiveEntity,IsActiveEntity,LastName,Manager,Salary,SalaryCurrency,SiblingOrderNumber,__HierarchyPropertiesForxDMOxI_EmployeeHN_HD/DrillState,__HierarchyPropertiesForxDMOxI_EmployeeHN_HD/NodeId
+  &$apply=descendants($root/Employee,xDMOxI_EmployeeHN_HD,__HierarchyPropertiesForxDMOxI_EmployeeHN_HD/NodeId,filter(Agency eq '4001' and Employee eq '207' and IsActiveEntity eq true),1)
+  &$count=true
+  &$skip=0
+  &$top=210
+Authorization: Basic {{$dotenv btp_abap_basic_auth}}:{{$dotenv btp_abap_basic_password}}
+###
+
+$apply=orderby(AGE)/com.sap.vocabularies.Hierarchy.v1.TopLevels(HierarchyNodes=$root/EMPLOYEES,HierarchyQualifier='OrgChart',NodeProperty='ID',Levels=2)
+&$select=AGE,DescendantCount,DistanceFromRoot,DrillState,ID,MANAGER_ID,Name
+&$count=true&$skip=0&$top=115

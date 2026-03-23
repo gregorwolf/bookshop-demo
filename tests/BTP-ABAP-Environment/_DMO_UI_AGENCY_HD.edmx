@@ -1,0 +1,1482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+  xmlns="http://docs.oasis-open.org/odata/ns/edm">
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="SAP__aggregation" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="SAP__capabilities" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="SAP__HTML5" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="Org.OData.Measures.V1" Alias="SAP__measures" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SESSION',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.Session.v1" Alias="SAP__session" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SUPPORT',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.Support.v1" Alias="SAP__support" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="SAP__UI" />
+  </edmx:Reference>
+  <edmx:Reference
+    Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value">
+    <edmx:Include Namespace="Org.OData.Validation.V1" Alias="SAP__validation" />
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001" Alias="SAP__self">
+      <Annotation Term="SAP__core.SchemaVersion" String="1.0.0" />
+      <EntityType Name="EmployeeType">
+        <Key>
+          <PropertyRef Name="Agency" />
+          <PropertyRef Name="Employee" />
+          <PropertyRef Name="IsActiveEntity" />
+        </Key>
+        <Property Name="Agency" Type="Edm.String" Nullable="false" MaxLength="6" />
+        <Property Name="Employee" Type="Edm.String" Nullable="false" MaxLength="8" />
+        <Property Name="AgencyName" Type="Edm.String" Nullable="false" MaxLength="80" />
+        <Property Name="FirstName" Type="Edm.String" Nullable="false" MaxLength="40" />
+        <Property Name="LastName" Type="Edm.String" Nullable="false" MaxLength="40" />
+        <Property Name="Salary" Type="Edm.Decimal" Nullable="false" Precision="21" Scale="variable" />
+        <Property Name="SalaryCurrency" Type="Edm.String" Nullable="false" MaxLength="5" />
+        <Property Name="Manager" Type="Edm.String" Nullable="false" MaxLength="8" />
+        <Property Name="ManagerFirstName" Type="Edm.String" Nullable="false" MaxLength="40" />
+        <Property Name="ManagerLastName" Type="Edm.String" Nullable="false" MaxLength="40" />
+        <Property Name="SiblingOrderNumber" Type="Edm.String" Nullable="false" MaxLength="3" />
+        <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="DraftEntityCreationDateTime" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="DraftEntityLastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="__HierarchyPropertiesForxDMOxI_EmployeeHN_HD"
+          Type="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.HierarchyPropertiesForxDMOxI_EmployeeHN_HD" />
+        <Property Name="SAP__Messages"
+          Type="Collection(com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.SAP__Message)"
+          Nullable="false" />
+        <NavigationProperty Name="DraftAdministrativeData"
+          Type="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.I_DraftAdministrativeDataType" />
+        <NavigationProperty Name="SiblingEntity"
+          Type="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.EmployeeType" />
+        <NavigationProperty Name="_Agency"
+          Type="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.AgencyType" Nullable="false"
+          Partner="_Employee">
+          <ReferentialConstraint Property="Agency" ReferencedProperty="Agency" />
+        </NavigationProperty>
+        <NavigationProperty Name="_Employee"
+          Type="Collection(com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.EmployeeType)" />
+        <NavigationProperty Name="_Manager"
+          Type="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.EmployeeType" />
+      </EntityType>
+      <EntityType Name="AgencyType">
+        <Key>
+          <PropertyRef Name="Agency" />
+          <PropertyRef Name="IsActiveEntity" />
+        </Key>
+        <Property Name="Agency" Type="Edm.String" Nullable="false" MaxLength="6" />
+        <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="80" />
+        <Property Name="Street" Type="Edm.String" Nullable="false" MaxLength="60" />
+        <Property Name="PostalCode" Type="Edm.String" Nullable="false" MaxLength="10" />
+        <Property Name="City" Type="Edm.String" Nullable="false" MaxLength="40" />
+        <Property Name="CountryCode" Type="Edm.String" Nullable="false" MaxLength="3" />
+        <Property Name="PhoneNumber" Type="Edm.String" Nullable="false" MaxLength="30" />
+        <Property Name="EMailAddress" Type="Edm.String" Nullable="false" MaxLength="256" />
+        <Property Name="WebAddress" Type="Edm.String" Nullable="false" MaxLength="256" />
+        <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="DraftEntityCreationDateTime" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="DraftEntityLastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="SAP__Messages"
+          Type="Collection(com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.SAP__Message)"
+          Nullable="false" />
+        <NavigationProperty Name="DraftAdministrativeData"
+          Type="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.I_DraftAdministrativeDataType" />
+        <NavigationProperty Name="SiblingEntity"
+          Type="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.AgencyType" />
+        <NavigationProperty Name="_Employee"
+          Type="Collection(com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.EmployeeType)"
+          Partner="_Agency">
+          <OnDelete Action="Cascade" />
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="CurrencyType">
+        <Key>
+          <PropertyRef Name="Currency" />
+        </Key>
+        <Property Name="Currency" Type="Edm.String" Nullable="false" MaxLength="5" />
+        <Property Name="Currency_Text" Type="Edm.String" Nullable="false" MaxLength="40" />
+      </EntityType>
+      <EntityType Name="I_DraftAdministrativeDataType">
+        <Key>
+          <PropertyRef Name="DraftUUID" />
+          <PropertyRef Name="DraftEntityType" />
+        </Key>
+        <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false" />
+        <Property Name="DraftEntityType" Type="Edm.String" Nullable="false" MaxLength="30" />
+        <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="CreatedByUser" Type="Edm.String" Nullable="false" MaxLength="12" />
+        <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="LastChangedByUser" Type="Edm.String" Nullable="false" MaxLength="12" />
+        <Property Name="DraftAccessType" Type="Edm.String" Nullable="false" MaxLength="1" />
+        <Property Name="ProcessingStartDateTime" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="InProcessByUser" Type="Edm.String" Nullable="false" MaxLength="12" />
+        <Property Name="DraftIsKeptByUser" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="EnqueueStartDateTime" Type="Edm.DateTimeOffset" Precision="7" />
+        <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="DraftIsLastChangedByMe" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="CreatedByUserDescription" Type="Edm.String" Nullable="false" MaxLength="80" />
+        <Property Name="LastChangedByUserDescription" Type="Edm.String" Nullable="false"
+          MaxLength="80" />
+        <Property Name="InProcessByUserDescription" Type="Edm.String" Nullable="false"
+          MaxLength="80" />
+      </EntityType>
+      <ComplexType Name="HierarchyPropertiesForxDMOxI_EmployeeHN_HD">
+        <Property Name="NodeId" Type="Edm.String" Nullable="false" />
+        <Property Name="DescendantCount" Type="Edm.Int64" Nullable="false" />
+        <Property Name="LimitedDescendantCount" Type="Edm.Int64" Nullable="false" />
+        <Property Name="DrillState" Type="Edm.String" Nullable="false" />
+        <Property Name="DistanceFromRoot" Type="Edm.Int64" Nullable="false" />
+        <Property Name="LimitedRank" Type="Edm.Int64" Nullable="false" />
+      </ComplexType>
+      <ComplexType Name="EmployeeNextSiblingParameter">
+        <Property Name="Agency" Type="Edm.String" Nullable="false" MaxLength="6" />
+        <Property Name="Employee" Type="Edm.String" Nullable="false" MaxLength="8" />
+      </ComplexType>
+      <ComplexType Name="SAP__Message">
+        <Property Name="code" Type="Edm.String" Nullable="false" />
+        <Property Name="message" Type="Edm.String" Nullable="false" />
+        <Property Name="target" Type="Edm.String" />
+        <Property Name="additionalTargets" Type="Collection(Edm.String)" Nullable="false" />
+        <Property Name="transition" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="numericSeverity" Type="Edm.Byte" Nullable="false" />
+        <Property Name="longtextUrl" Type="Edm.String" />
+      </ComplexType>
+      <Action Name="Prepare" IsBound="true">
+        <Parameter Name="_it" Type="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.AgencyType"
+          Nullable="false" />
+      </Action>
+      <Action Name="Discard" IsBound="true">
+        <Parameter Name="_it" Type="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.AgencyType"
+          Nullable="false" />
+      </Action>
+      <Action Name="Resume" IsBound="true">
+        <Parameter Name="_it" Type="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.AgencyType"
+          Nullable="false" />
+      </Action>
+      <Action Name="Edit" EntitySetPath="_it" IsBound="true">
+        <Parameter Name="_it" Type="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.AgencyType"
+          Nullable="false" />
+        <Parameter Name="PreserveChanges" Type="Edm.Boolean" Nullable="false" />
+        <ReturnType Type="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.AgencyType" Nullable="false" />
+      </Action>
+      <Action Name="changeNextSibling" IsBound="true">
+        <Parameter Name="_it" Type="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.EmployeeType"
+          Nullable="false" />
+        <Parameter Name="NextSibling"
+          Type="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.EmployeeNextSiblingParameter"
+          Nullable="true" />
+      </Action>
+      <Action Name="Activate" EntitySetPath="_it" IsBound="true">
+        <Parameter Name="_it" Type="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.AgencyType"
+          Nullable="false" />
+        <ReturnType Type="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.AgencyType" Nullable="false" />
+      </Action>
+      <Action Name="copy" EntitySetPath="_it" IsBound="true">
+        <Parameter Name="_it" Type="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.EmployeeType"
+          Nullable="false" />
+        <ReturnType Type="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.EmployeeType" Nullable="false" />
+      </Action>
+      <EntityContainer Name="Container">
+        <EntitySet Name="Agency" EntityType="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.AgencyType">
+          <NavigationPropertyBinding Path="DraftAdministrativeData"
+            Target="I_DraftAdministrativeData" />
+          <NavigationPropertyBinding Path="SiblingEntity" Target="Agency" />
+          <NavigationPropertyBinding Path="_Employee" Target="Employee" />
+        </EntitySet>
+        <EntitySet Name="Currency"
+          EntityType="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.CurrencyType" />
+        <EntitySet Name="Employee"
+          EntityType="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.EmployeeType">
+          <NavigationPropertyBinding Path="DraftAdministrativeData"
+            Target="I_DraftAdministrativeData" />
+          <NavigationPropertyBinding Path="SiblingEntity" Target="Employee" />
+          <NavigationPropertyBinding Path="_Agency" Target="Agency" />
+          <NavigationPropertyBinding Path="_Employee" Target="Employee" />
+          <NavigationPropertyBinding Path="_Manager" Target="Employee" />
+        </EntitySet>
+        <EntitySet Name="I_DraftAdministrativeData"
+          EntityType="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.I_DraftAdministrativeDataType" />
+      </EntityContainer>
+      <Annotations Target="SAP__self.EmployeeNextSiblingParameter/Agency">
+        <Annotation Term="SAP__common.IsDigitSequence" />
+        <Annotation Term="SAP__common.Label" String="Agency ID" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: Agency ID" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeNextSiblingParameter/Employee">
+        <Annotation Term="SAP__common.IsDigitSequence" />
+        <Annotation Term="SAP__common.Label" String="Employee" />
+        <Annotation Term="SAP__common.QuickInfo" String="Employee ID" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/Agency">
+        <Annotation Term="SAP__common.Text" Path="AgencyName" />
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__common.IsDigitSequence" />
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Agency ID" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: Agency ID" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/Employee">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__common.IsDigitSequence" />
+        <Annotation Term="SAP__common.Label" String="Employee" />
+        <Annotation Term="SAP__common.QuickInfo" String="Employee ID" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/AgencyName">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__common.Label" String="Agency Name" />
+        <Annotation Term="SAP__common.Heading" String="Agency" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: Agency Name" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/Salary">
+        <Annotation Term="SAP__measures.ISOCurrency" Path="SalaryCurrency" />
+        <Annotation Term="SAP__common.Label" String="Salary" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/SalaryCurrency">
+        <Annotation Term="SAP__common.IsCurrency" />
+        <Annotation Term="SAP__common.ValueListForValidation" String="" />
+        <Annotation Term="SAP__common.ValueListReferences">
+          <Collection>
+            <String>
+              ../../../../srvd_f4/sap/i_currencystdvh/0001;ps='srvd-*dmo*ui_agency_hd-0001';va='com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.et-*dmo*c_employeetp_hd.salarycurrency'/$metadata</String>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__common.Label" String="Currency Code" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: Currency Code" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/Manager">
+        <Annotation Term="SAP__common.Label" String="Manager" />
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__common.IsDigitSequence" />
+        <Annotation Term="SAP__common.ValueListReferences">
+          <Collection>
+            <String>
+              ../../../../srvd_f4/dmo/i_employee_managervh_hd/0001;ps='srvd-*dmo*ui_agency_hd-0001';va='com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.et-*dmo*c_employeetp_hd.manager'/$metadata</String>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__common.Heading" String="Employee" />
+        <Annotation Term="SAP__common.QuickInfo" String="Employee ID" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/ManagerFirstName">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__common.Label" String="First Name" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: First Name" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/ManagerLastName">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__common.Label" String="Last Name" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: Last Name" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/SiblingOrderNumber">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__common.IsDigitSequence" />
+        <Annotation Term="SAP__common.Label" String="Sibling Order Number" />
+        <Annotation Term="SAP__common.QuickInfo" String="Hierarchy: Sibling Order Number" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/HasDraftEntity">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__UI.HiddenFilter" />
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Has Draft" />
+        <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Has draft document" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/DraftEntityCreationDateTime">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__UI.HiddenFilter" />
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Draft Created On" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/DraftEntityLastChangeDateTime">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__UI.HiddenFilter" />
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Draft Last Changed On" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/HasActiveEntity">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__UI.HiddenFilter" />
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Has active" />
+        <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Has active document" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/IsActiveEntity">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__UI.HiddenFilter" />
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Is active" />
+        <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Is active document" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/__HierarchyPropertiesForxDMOxI_EmployeeHN_HD">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__UI.HiddenFilter" />
+        <Annotation Term="SAP__UI.Hidden" />
+      </Annotations>
+      <Annotations Target="SAP__self.Container/Employee">
+        <Annotation Term="SAP__capabilities.NavigationRestrictions">
+          <Record>
+            <PropertyValue Property="RestrictedProperties">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="NavigationProperty"
+                    NavigationPropertyPath="SiblingEntity" />
+                  <PropertyValue Property="DeepUpdateSupport">
+                    <Record>
+                      <PropertyValue Property="Supported" Bool="false" />
+                    </Record>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Agency" />
+                  <PropertyValue Property="InsertRestrictions">
+                    <Record>
+                      <PropertyValue Property="Insertable" Bool="false" />
+                    </Record>
+                  </PropertyValue>
+                  <PropertyValue Property="DeepUpdateSupport">
+                    <Record>
+                      <PropertyValue Property="Supported" Bool="false" />
+                    </Record>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Employee" />
+                  <PropertyValue Property="InsertRestrictions">
+                    <Record>
+                      <PropertyValue Property="Insertable" Bool="false" />
+                    </Record>
+                  </PropertyValue>
+                  <PropertyValue Property="DeepUpdateSupport">
+                    <Record>
+                      <PropertyValue Property="Supported" Bool="false" />
+                    </Record>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Manager" />
+                  <PropertyValue Property="InsertRestrictions">
+                    <Record>
+                      <PropertyValue Property="Insertable" Bool="false" />
+                    </Record>
+                  </PropertyValue>
+                  <PropertyValue Property="DeepUpdateSupport">
+                    <Record>
+                      <PropertyValue Property="Supported" Bool="false" />
+                    </Record>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__common.DraftNode">
+          <Record />
+        </Annotation>
+        <Annotation Term="SAP__common.DraftActivationVia">
+          <Collection>
+            <String>SAP__self.Container/Agency</String>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.SearchRestrictions">
+          <Record>
+            <PropertyValue Property="Searchable" Bool="true" />
+            <PropertyValue Property="UnsupportedExpressions"
+              EnumMember="SAP__capabilities.SearchExpressions/AND SAP__capabilities.SearchExpressions/NOT SAP__capabilities.SearchExpressions/group " />
+            <PropertyValue Property="SearchSyntax" String="https://url.sap/odata-search" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.FilterRestrictions">
+          <Record>
+            <PropertyValue Property="Filterable" Bool="true" />
+            <PropertyValue Property="FilterExpressionRestrictions">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="Property" PropertyPath="DraftEntityCreationDateTime" />
+                  <PropertyValue Property="AllowedExpressions" String="SingleRange" />
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property" PropertyPath="DraftEntityLastChangeDateTime" />
+                  <PropertyValue Property="AllowedExpressions" String="SingleRange" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="NonFilterableProperties">
+              <Collection>
+                <PropertyPath>__HierarchyPropertiesForxDMOxI_EmployeeHN_HD</PropertyPath>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.SortRestrictions">
+          <Record>
+            <PropertyValue Property="NonSortableProperties">
+              <Collection>
+                <PropertyPath>__HierarchyPropertiesForxDMOxI_EmployeeHN_HD</PropertyPath>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.UpdateRestrictions">
+          <Record>
+            <PropertyValue Property="DeltaUpdateSupported" Bool="true" />
+            <PropertyValue Property="NonUpdatableNavigationProperties">
+              <Collection>
+                <PropertyPath>DraftAdministrativeData</PropertyPath>
+                <PropertyPath>SiblingEntity</PropertyPath>
+                <PropertyPath>_Agency</PropertyPath>
+                <PropertyPath>_Employee</PropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="QueryOptions">
+              <Record>
+                <PropertyValue Property="SelectSupported" Bool="true" />
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.DeepUpdateSupport">
+          <Record>
+            <PropertyValue Property="ContentIDSupported" Bool="true" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.InsertRestrictions">
+          <Record>
+            <PropertyValue Property="Insertable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__core.OptimisticConcurrency">
+          <Collection>
+            <PropertyPath>LocalLastChangedAt</PropertyPath>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType">
+        <Annotation Term="SAP__common.Label" String="Hierarchy: Draft: Employee" />
+        <Annotation Term="SAP__hierarchy.RecursiveHierarchyActions" Qualifier="xDMOxI_EmployeeHN_HD">
+          <Record>
+            <PropertyValue Property="ChangeNextSiblingAction"
+              String="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.changeNextSibling" />
+            <PropertyValue Property="CopyAction"
+              String="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.copy" />
+            <PropertyValue Property="ChangeSiblingForRootsSupported" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__aggregation.ApplySupported">
+          <Record>
+            <PropertyValue Property="Transformations">
+              <Collection>
+                <String>filter</String>
+                <String>orderby</String>
+                <String>search</String>
+                <String>ancestors</String>
+                <String>descendants</String>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__UI.ConnectedFields" Qualifier="FullName">
+          <Record>
+            <PropertyValue Property="Data">
+              <Record>
+                <PropertyValue Property="First">
+                  <Record Type="SAP__UI.DataField">
+                    <PropertyValue Property="Value" Path="FirstName" />
+                  </Record>
+                </PropertyValue>
+                <PropertyValue Property="Last">
+                  <Record Type="SAP__UI.DataField">
+                    <PropertyValue Property="Value" Path="LastName" />
+                  </Record>
+                </PropertyValue>
+              </Record>
+            </PropertyValue>
+            <PropertyValue Property="Label" String="Full Name" />
+            <PropertyValue Property="Template" String="{First} {Last}" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__UI.ConnectedFields" Qualifier="ManagerFullName">
+          <Record>
+            <PropertyValue Property="Data">
+              <Record>
+                <PropertyValue Property="ID">
+                  <Record Type="SAP__UI.DataField">
+                    <PropertyValue Property="Value" Path="Manager" />
+                  </Record>
+                </PropertyValue>
+                <PropertyValue Property="First">
+                  <Record Type="SAP__UI.DataField">
+                    <PropertyValue Property="Value" Path="ManagerFirstName" />
+                  </Record>
+                </PropertyValue>
+                <PropertyValue Property="Last">
+                  <Record Type="SAP__UI.DataField">
+                    <PropertyValue Property="Value" Path="ManagerLastName" />
+                  </Record>
+                </PropertyValue>
+              </Record>
+            </PropertyValue>
+            <PropertyValue Property="Label" String="Manager" />
+            <PropertyValue Property="Template" String="{ID} {First} {Last}" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__UI.Facets">
+          <Collection>
+            <Record Type="SAP__UI.CollectionFacet">
+              <PropertyValue Property="Label" String="Employee" />
+              <PropertyValue Property="ID" String="Employee" />
+              <PropertyValue Property="Facets">
+                <Collection>
+                  <Record Type="SAP__UI.ReferenceFacet">
+                    <PropertyValue Property="Label" String="General" />
+                    <PropertyValue Property="ID" String="General" />
+                    <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#General_FG" />
+                  </Record>
+                  <Record Type="SAP__UI.ReferenceFacet">
+                    <PropertyValue Property="Label" String="Name" />
+                    <PropertyValue Property="ID" String="Name" />
+                    <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#Name_FG" />
+                  </Record>
+                  <Record Type="SAP__UI.ReferenceFacet">
+                    <PropertyValue Property="Label" String="Salary Data" />
+                    <PropertyValue Property="ID" String="Salary" />
+                    <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#Salary_FG" />
+                  </Record>
+                </Collection>
+              </PropertyValue>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__UI.FieldGroup" Qualifier="General_FG">
+          <Record>
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="SAP__UI.DataField">
+                  <PropertyValue Property="Value" Path="Employee" />
+                </Record>
+                <Record Type="SAP__UI.DataFieldForAnnotation">
+                  <PropertyValue Property="Target"
+                    AnnotationPath="@SAP__UI.ConnectedFields#ManagerFullName" />
+                </Record>
+                <Record Type="SAP__UI.DataField">
+                  <PropertyValue Property="Value" Path="SiblingOrderNumber" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__UI.FieldGroup" Qualifier="Name_FG">
+          <Record>
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="SAP__UI.DataField">
+                  <PropertyValue Property="Value" Path="FirstName" />
+                </Record>
+                <Record Type="SAP__UI.DataField">
+                  <PropertyValue Property="Value" Path="LastName" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__UI.FieldGroup" Qualifier="Salary_FG">
+          <Record>
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="SAP__UI.DataField">
+                  <PropertyValue Property="Value" Path="Salary" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__UI.HeaderInfo">
+          <Record>
+            <PropertyValue Property="TypeName" String="Employee" />
+            <PropertyValue Property="TypeNamePlural" String="Employees" />
+            <PropertyValue Property="Title">
+              <Record Type="SAP__UI.DataFieldForAnnotation">
+                <PropertyValue Property="Target" AnnotationPath="@SAP__UI.ConnectedFields#FullName" />
+              </Record>
+            </PropertyValue>
+            <PropertyValue Property="Description">
+              <Record Type="SAP__UI.DataField">
+                <PropertyValue Property="Value" Path="Employee" />
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__UI.Identification">
+          <Collection>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="FirstName" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__UI.LineItem">
+          <Collection>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="Employee" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="FirstName" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="LastName" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="Salary" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="Manager" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="SiblingOrderNumber" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__UI.PresentationVariant">
+          <Record>
+            <PropertyValue Property="SortOrder">
+              <Collection>
+                <Record Type="SAP__common.SortOrderType">
+                  <PropertyValue Property="Property" PropertyPath="Employee" />
+                  <PropertyValue Property="Descending" Bool="false" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Visualizations">
+              <Collection>
+                <AnnotationPath>@SAP__UI.LineItem</AnnotationPath>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__UI.SelectionFields">
+          <Collection>
+            <PropertyPath>FirstName</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Annotation Term="Communication.Contact">
+          <Record>
+            <PropertyValue Property="org" Path="AgencyName" />
+            <PropertyValue Property="n">
+              <Record>
+                <PropertyValue Property="given" Path="FirstName" />
+                <PropertyValue Property="given" Path="ManagerFirstName" />
+                <PropertyValue Property="surname" Path="LastName" />
+                <PropertyValue Property="surname" Path="ManagerLastName" />
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__common.Messages" Path="SAP__Messages" />
+        <Annotation Term="SAP__aggregation.RecursiveHierarchy" Qualifier="xDMOxI_EmployeeHN_HD">
+          <Record>
+            <PropertyValue Property="NodeProperty"
+              PropertyPath="__HierarchyPropertiesForxDMOxI_EmployeeHN_HD/NodeId" />
+            <PropertyValue Property="ParentNavigationProperty" NavigationPropertyPath="_Manager" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__hierarchy.RecursiveHierarchy" Qualifier="xDMOxI_EmployeeHN_HD">
+          <Record>
+            <PropertyValue Property="ChildCount">
+              <Null />
+            </PropertyValue>
+            <PropertyValue Property="DescendantCount"
+              Path="__HierarchyPropertiesForxDMOxI_EmployeeHN_HD/DescendantCount" />
+            <PropertyValue Property="ExternalKey">
+              <Null />
+            </PropertyValue>
+            <PropertyValue Property="LimitedDescendantCount"
+              Path="__HierarchyPropertiesForxDMOxI_EmployeeHN_HD/LimitedDescendantCount" />
+            <PropertyValue Property="DistanceFromRoot"
+              Path="__HierarchyPropertiesForxDMOxI_EmployeeHN_HD/DistanceFromRoot" />
+            <PropertyValue Property="DrillState"
+              Path="__HierarchyPropertiesForxDMOxI_EmployeeHN_HD/DrillState" />
+            <PropertyValue Property="MatchedDescendantCount">
+              <Null />
+            </PropertyValue>
+            <PropertyValue Property="Matched">
+              <Null />
+            </PropertyValue>
+            <PropertyValue Property="NodeType">
+              <Null />
+            </PropertyValue>
+            <PropertyValue Property="SiblingRank">
+              <Null />
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="SAP__self.Container">
+        <Annotation Term="SAP__CodeList.CurrencyCodes">
+          <Record>
+            <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata" />
+            <PropertyValue Property="CollectionPath" String="Currencies" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true" />
+        <Annotation Term="SAP__UI.LeadingEntitySet" String="Agency" />
+        <Annotation Term="SAP__capabilities.FilterFunctions">
+          <Collection>
+            <String>eq</String>
+            <String>ne</String>
+            <String>gt</String>
+            <String>ge</String>
+            <String>lt</String>
+            <String>le</String>
+            <String>and</String>
+            <String>or</String>
+            <String>contains</String>
+            <String>startswith</String>
+            <String>endswith</String>
+            <String>any</String>
+            <String>all</String>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__support.TechnicalInfoLinks">
+          <Record>
+            <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata" />
+            <PropertyValue Property="FunctionImport" String="GetTechnicalInfoLinks" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.SupportedFormats">
+          <Collection>
+            <String>application/json</String>
+            <String>application/pdf</String>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__PDF.Features">
+          <Record>
+            <PropertyValue Property="DocumentDescriptionReference"
+              String="../../../../default/iwbep/common/0001/$metadata" />
+            <PropertyValue Property="DocumentDescriptionCollection" String="MyDocumentDescriptions" />
+            <PropertyValue Property="ArchiveFormat" Bool="true" />
+            <PropertyValue Property="Border" Bool="true" />
+            <PropertyValue Property="CoverPage" Bool="true" />
+            <PropertyValue Property="FitToPage" Bool="true" />
+            <PropertyValue Property="FontName" Bool="true" />
+            <PropertyValue Property="FontSize" Bool="true" />
+            <PropertyValue Property="HeaderFooter" Bool="true" />
+            <PropertyValue Property="IANATimezoneFormat" Bool="true" />
+            <PropertyValue Property="Margin" Bool="true" />
+            <PropertyValue Property="Padding" Bool="true" />
+            <PropertyValue Property="ResultSizeDefault" Int="20000" />
+            <PropertyValue Property="ResultSizeMaximum" Int="20000" />
+            <PropertyValue Property="Signature" Bool="true" />
+            <PropertyValue Property="TextDirectionLayout" Bool="true" />
+            <PropertyValue Property="Treeview" Bool="true" />
+            <PropertyValue Property="UploadToFileShare" Bool="true" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.KeyAsSegmentSupported" />
+        <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported" />
+      </Annotations>
+      <Annotations Target="SAP__self.AgencyType/Agency">
+        <Annotation Term="SAP__common.Text" Path="Name">
+          <Annotation Term="SAP__UI.TextArrangement"
+            EnumMember="SAP__UI.TextArrangementType/TextSeparate" />
+        </Annotation>
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__common.IsDigitSequence" />
+        <Annotation Term="SAP__common.Label" String="Agency ID" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: Agency ID" />
+      </Annotations>
+      <Annotations Target="SAP__self.AgencyType/Name">
+        <Annotation Term="SAP__common.FieldControl"
+          EnumMember="SAP__common.FieldControlType/Mandatory" />
+        <Annotation Term="SAP__common.Label" String="Agency Name" />
+        <Annotation Term="SAP__common.Heading" String="Agency" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: Agency Name" />
+      </Annotations>
+      <Annotations Target="SAP__self.AgencyType/PostalCode">
+        <Annotation Term="SAP__common.IsUpperCase" />
+        <Annotation Term="SAP__common.Label" String="Postal Code" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: Postal Code" />
+      </Annotations>
+      <Annotations Target="SAP__self.AgencyType/CountryCode">
+        <Annotation Term="SAP__common.FieldControl"
+          EnumMember="SAP__common.FieldControlType/Mandatory" />
+        <Annotation Term="SAP__common.IsUpperCase" />
+        <Annotation Term="SAP__common.ValueListReferences">
+          <Collection>
+            <String>
+              ../../../../srvd_f4/sap/i_countryvh/0001;ps='srvd-*dmo*ui_agency_hd-0001';va='com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.et-*dmo*c_agencytp_hd.countrycode'/$metadata</String>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__common.Label" String="Country/Region Key" />
+        <Annotation Term="SAP__common.Heading" String="C/R" />
+        <Annotation Term="SAP__common.DocumentationRef"
+          String="urn:sap-com:documentation:key?=type=DE&amp;id=LAND1" />
+      </Annotations>
+      <Annotations Target="SAP__self.AgencyType/PhoneNumber">
+        <Annotation Term="SAP__common.IsUpperCase" />
+        <Annotation Term="Communication.IsPhoneNumber" />
+        <Annotation Term="SAP__common.Label" String="Phone No." />
+        <Annotation Term="SAP__common.Heading" String="Phone Number" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: Phone Number" />
+      </Annotations>
+      <Annotations Target="SAP__self.AgencyType/EMailAddress">
+        <Annotation Term="SAP__common.FieldControl"
+          EnumMember="SAP__common.FieldControlType/Mandatory" />
+        <Annotation Term="Communication.IsEmailAddress" />
+        <Annotation Term="SAP__common.Label" String="E-Mail Address" />
+        <Annotation Term="SAP__common.Heading" String="E-Mail" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: Email Address" />
+      </Annotations>
+      <Annotations Target="SAP__self.AgencyType/LocalLastChangedAt">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Changed On" />
+        <Annotation Term="SAP__common.QuickInfo" String="Local Instance Last Change Date Time" />
+        <Annotation Term="SAP__common.DocumentationRef"
+          String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LOCINST_LASTCHANGE_TSTMPL" />
+      </Annotations>
+      <Annotations Target="SAP__self.AgencyType/HasDraftEntity">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__UI.HiddenFilter" />
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Has Draft" />
+        <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Has draft document" />
+      </Annotations>
+      <Annotations Target="SAP__self.AgencyType/DraftEntityCreationDateTime">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__UI.HiddenFilter" />
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Draft Created On" />
+      </Annotations>
+      <Annotations Target="SAP__self.AgencyType/DraftEntityLastChangeDateTime">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__UI.HiddenFilter" />
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Draft Last Changed On" />
+      </Annotations>
+      <Annotations Target="SAP__self.AgencyType/HasActiveEntity">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__UI.HiddenFilter" />
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Has active" />
+        <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Has active document" />
+      </Annotations>
+      <Annotations Target="SAP__self.AgencyType/IsActiveEntity">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__UI.HiddenFilter" />
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Is active" />
+        <Annotation Term="SAP__common.QuickInfo" String="Draft - Indicator - Is active document" />
+      </Annotations>
+      <Annotations Target="SAP__self.Container/Agency">
+        <Annotation Term="SAP__capabilities.NavigationRestrictions">
+          <Record>
+            <PropertyValue Property="RestrictedProperties">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="NavigationProperty"
+                    NavigationPropertyPath="SiblingEntity" />
+                  <PropertyValue Property="InsertRestrictions">
+                    <Record>
+                      <PropertyValue Property="Insertable" Bool="false" />
+                    </Record>
+                  </PropertyValue>
+                  <PropertyValue Property="DeepUpdateSupport">
+                    <Record>
+                      <PropertyValue Property="Supported" Bool="false" />
+                    </Record>
+                  </PropertyValue>
+                </Record>
+                <Record>
+                  <PropertyValue Property="NavigationProperty" NavigationPropertyPath="_Employee" />
+                  <PropertyValue Property="InsertRestrictions">
+                    <Record>
+                      <PropertyValue Property="Insertable" Bool="true" />
+                    </Record>
+                  </PropertyValue>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__common.DraftRoot">
+          <Record>
+            <PropertyValue Property="PreparationAction"
+              String="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.Prepare" />
+            <PropertyValue Property="DiscardAction"
+              String="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.Discard" />
+            <PropertyValue Property="ResumeAction"
+              String="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.Resume" />
+            <PropertyValue Property="EditAction"
+              String="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.Edit" />
+            <PropertyValue Property="ActivationAction"
+              String="com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.Activate" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.SearchRestrictions">
+          <Record>
+            <PropertyValue Property="Searchable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.FilterRestrictions">
+          <Record>
+            <PropertyValue Property="Filterable" Bool="true" />
+            <PropertyValue Property="FilterExpressionRestrictions">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="Property" PropertyPath="EMailAddress" />
+                  <PropertyValue Property="AllowedExpressions" String="SearchExpression" />
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property" PropertyPath="WebAddress" />
+                  <PropertyValue Property="AllowedExpressions" String="SearchExpression" />
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property" PropertyPath="DraftEntityCreationDateTime" />
+                  <PropertyValue Property="AllowedExpressions" String="SingleRange" />
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property" PropertyPath="DraftEntityLastChangeDateTime" />
+                  <PropertyValue Property="AllowedExpressions" String="SingleRange" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.SortRestrictions">
+          <Record>
+            <PropertyValue Property="NonSortableProperties">
+              <Collection>
+                <PropertyPath>EMailAddress</PropertyPath>
+                <PropertyPath>WebAddress</PropertyPath>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.UpdateRestrictions">
+          <Record>
+            <PropertyValue Property="DeltaUpdateSupported" Bool="true" />
+            <PropertyValue Property="NonUpdatableNavigationProperties">
+              <Collection>
+                <PropertyPath>DraftAdministrativeData</PropertyPath>
+                <PropertyPath>SiblingEntity</PropertyPath>
+                <PropertyPath>_Employee</PropertyPath>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="QueryOptions">
+              <Record>
+                <PropertyValue Property="SelectSupported" Bool="true" />
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.DeepUpdateSupport">
+          <Record>
+            <PropertyValue Property="ContentIDSupported" Bool="true" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__core.OptimisticConcurrency">
+          <Collection>
+            <PropertyPath>LocalLastChangedAt</PropertyPath>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="SAP__self.AgencyType/_Employee">
+        <Annotation Term="SAP__common.Composition" />
+      </Annotations>
+      <Annotations Target="SAP__self.Edit(SAP__self.AgencyType)/PreserveChanges">
+        <Annotation Term="SAP__common.IsUpperCase" />
+        <Annotation Term="SAP__common.Label" String="TRUE" />
+        <Annotation Term="SAP__common.QuickInfo"
+          String="Data element for domain BOOLE: TRUE (='X') and FALSE (=' ')" />
+      </Annotations>
+      <Annotations Target="SAP__self.AgencyType">
+        <Annotation Term="SAP__common.Label" String="Hierarchy: Draft: Agency" />
+        <Annotation Term="SAP__UI.Facets">
+          <Collection>
+            <Record Type="SAP__UI.CollectionFacet">
+              <PropertyValue Property="Label" String="Agency" />
+              <PropertyValue Property="ID" String="Agency" />
+              <PropertyValue Property="Facets">
+                <Collection>
+                  <Record Type="SAP__UI.ReferenceFacet">
+                    <PropertyValue Property="Label" String="General" />
+                    <PropertyValue Property="ID" String="General" />
+                    <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#General_FG" />
+                  </Record>
+                  <Record Type="SAP__UI.ReferenceFacet">
+                    <PropertyValue Property="Label" String="Address" />
+                    <PropertyValue Property="ID" String="Address" />
+                    <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#Address_FG" />
+                  </Record>
+                  <Record Type="SAP__UI.ReferenceFacet">
+                    <PropertyValue Property="Label" String="Contact Data" />
+                    <PropertyValue Property="ID" String="Contact" />
+                    <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#Contact_FG" />
+                  </Record>
+                </Collection>
+              </PropertyValue>
+            </Record>
+            <Record Type="SAP__UI.ReferenceFacet">
+              <PropertyValue Property="Label" String="Employee" />
+              <PropertyValue Property="ID" String="Employee" />
+              <PropertyValue Property="Target" AnnotationPath="_Employee/@SAP__UI.LineItem" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__UI.FieldGroup" Qualifier="Address_FG">
+          <Record>
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="SAP__UI.DataField">
+                  <PropertyValue Property="Value" Path="Street" />
+                </Record>
+                <Record Type="SAP__UI.DataField">
+                  <PropertyValue Property="Value" Path="PostalCode" />
+                </Record>
+                <Record Type="SAP__UI.DataField">
+                  <PropertyValue Property="Value" Path="City" />
+                </Record>
+                <Record Type="SAP__UI.DataField">
+                  <PropertyValue Property="Value" Path="CountryCode" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__UI.FieldGroup" Qualifier="Contact_FG">
+          <Record>
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="SAP__UI.DataField">
+                  <PropertyValue Property="Value" Path="PhoneNumber" />
+                </Record>
+                <Record Type="SAP__UI.DataField">
+                  <PropertyValue Property="Value" Path="EMailAddress" />
+                </Record>
+                <Record Type="SAP__UI.DataField">
+                  <PropertyValue Property="Value" Path="WebAddress" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__UI.FieldGroup" Qualifier="General_FG">
+          <Record>
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="SAP__UI.DataField">
+                  <PropertyValue Property="Value" Path="Name" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__UI.HeaderInfo">
+          <Record>
+            <PropertyValue Property="TypeName" String="Agency" />
+            <PropertyValue Property="TypeNamePlural" String="Agencies" />
+            <PropertyValue Property="Title">
+              <Record Type="SAP__UI.DataField">
+                <PropertyValue Property="Value" Path="Name" />
+              </Record>
+            </PropertyValue>
+            <PropertyValue Property="Description">
+              <Record Type="SAP__UI.DataField">
+                <PropertyValue Property="Value" Path="Agency" />
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__UI.Identification">
+          <Collection>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="Street" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="PostalCode" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="City" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="CountryCode" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="PhoneNumber" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="EMailAddress" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="WebAddress" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__UI.LineItem">
+          <Collection>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="Agency" />
+              <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High" />
+            </Record>
+            <Record Type="SAP__UI.DataField">
+              <PropertyValue Property="Value" Path="Name" />
+              <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/High" />
+            </Record>
+            <Record Type="SAP__UI.DataFieldForAnnotation">
+              <PropertyValue Property="Label" String="Address" />
+              <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#Address_FG" />
+              <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Medium" />
+            </Record>
+            <Record Type="SAP__UI.DataFieldForAnnotation">
+              <PropertyValue Property="Label" String="Contact Data" />
+              <PropertyValue Property="Target" AnnotationPath="@SAP__UI.FieldGroup#Contact_FG" />
+              <Annotation Term="SAP__UI.Importance" EnumMember="SAP__UI.ImportanceType/Low" />
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__UI.PresentationVariant">
+          <Record>
+            <PropertyValue Property="SortOrder">
+              <Collection>
+                <Record Type="SAP__common.SortOrderType">
+                  <PropertyValue Property="Property" PropertyPath="Agency" />
+                  <PropertyValue Property="Descending" Bool="false" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="Visualizations">
+              <Collection>
+                <AnnotationPath>@SAP__UI.LineItem</AnnotationPath>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__UI.SelectionFields">
+          <Collection>
+            <PropertyPath>Agency</PropertyPath>
+            <PropertyPath>Name</PropertyPath>
+            <PropertyPath>City</PropertyPath>
+            <PropertyPath>CountryCode</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Annotation Term="Communication.Contact">
+          <Record>
+            <PropertyValue Property="org" Path="Name" />
+            <PropertyValue Property="adr">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="type"
+                    EnumMember="Communication.ContactInformationType/preferred" />
+                  <PropertyValue Property="locality" Path="City" />
+                  <PropertyValue Property="street" Path="Street" />
+                  <PropertyValue Property="country" Path="CountryCode" />
+                  <PropertyValue Property="code" Path="PostalCode" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="tel">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="type" EnumMember="Communication.PhoneType/work" />
+                  <PropertyValue Property="uri" Path="PhoneNumber" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+            <PropertyValue Property="email">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="address" Path="EMailAddress" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Communication.Address" Qualifier="pref">
+          <Record>
+            <PropertyValue Property="type"
+              EnumMember="Communication.ContactInformationType/preferred" />
+            <PropertyValue Property="locality" Path="City" />
+            <PropertyValue Property="street" Path="Street" />
+            <PropertyValue Property="country" Path="CountryCode" />
+            <PropertyValue Property="code" Path="PostalCode" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__common.Messages" Path="SAP__Messages" />
+      </Annotations>
+      <Annotations Target="SAP__self.CurrencyType/Currency">
+        <Annotation Term="SAP__common.IsCurrency" />
+        <Annotation Term="SAP__common.Text" Path="Currency_Text" />
+        <Annotation Term="SAP__common.IsUpperCase" />
+        <Annotation Term="SAP__common.Label" String="Currency" />
+        <Annotation Term="SAP__common.Heading" String="Crcy" />
+        <Annotation Term="SAP__common.QuickInfo" String="Currency Key" />
+        <Annotation Term="SAP__common.DocumentationRef"
+          String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERS_CURC" />
+      </Annotations>
+      <Annotations Target="SAP__self.CurrencyType/Currency_Text">
+        <Annotation Term="SAP__core.Computed" />
+        <Annotation Term="SAP__common.Label" String="Description" />
+        <Annotation Term="SAP__common.DocumentationRef"
+          String="urn:sap-com:documentation:key?=type=DE&amp;id=LTEXT_CDS" />
+      </Annotations>
+      <Annotations Target="SAP__self.CurrencyType">
+        <Annotation Term="SAP__common.Label" String="Currency" />
+      </Annotations>
+      <Annotations Target="SAP__self.Container/Currency">
+        <Annotation Term="SAP__capabilities.SearchRestrictions">
+          <Record>
+            <PropertyValue Property="Searchable" Bool="true" />
+            <PropertyValue Property="UnsupportedExpressions"
+              EnumMember="SAP__capabilities.SearchExpressions/AND SAP__capabilities.SearchExpressions/NOT SAP__capabilities.SearchExpressions/group " />
+            <PropertyValue Property="SearchSyntax" String="https://url.sap/odata-search" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.InsertRestrictions">
+          <Record>
+            <PropertyValue Property="Insertable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.DeleteRestrictions">
+          <Record>
+            <PropertyValue Property="Deletable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.UpdateRestrictions">
+          <Record>
+            <PropertyValue Property="Updatable" Bool="false" />
+            <PropertyValue Property="QueryOptions">
+              <Record>
+                <PropertyValue Property="SelectSupported" Bool="true" />
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="SAP__self.I_DraftAdministrativeDataType/DraftEntityType">
+        <Annotation Term="SAP__common.IsUpperCase" />
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Draft Entity ID" />
+      </Annotations>
+      <Annotations Target="SAP__self.I_DraftAdministrativeDataType/CreatedByUser">
+        <Annotation Term="SAP__common.Text" Path="CreatedByUserDescription" />
+        <Annotation Term="SAP__common.IsUpperCase" />
+        <Annotation Term="SAP__common.ValueListReferences">
+          <Collection>
+            <String>
+              ../../../../srvd_f4/sap/i_draftadministrativeuservh/0001;ps='srvd-*dmo*ui_agency_hd-0001';va='com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.et-i_draftadministrativedata.createdbyuser'/$metadata</String>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__common.Label" String="Draft Created By" />
+      </Annotations>
+      <Annotations Target="SAP__self.I_DraftAdministrativeDataType/LastChangedByUser">
+        <Annotation Term="SAP__common.Text" Path="LastChangedByUserDescription" />
+        <Annotation Term="SAP__common.IsUpperCase" />
+        <Annotation Term="SAP__common.ValueListReferences">
+          <Collection>
+            <String>
+              ../../../../srvd_f4/sap/i_draftadministrativeuservh/0001;ps='srvd-*dmo*ui_agency_hd-0001';va='com.sap.gateway.srvd.dmo.ui_agency_hd.v0001.et-i_draftadministrativedata.lastchangedbyuser'/$metadata</String>
+          </Collection>
+        </Annotation>
+        <Annotation Term="SAP__common.Label" String="Draft Last Changed By" />
+      </Annotations>
+      <Annotations Target="SAP__self.I_DraftAdministrativeDataType/DraftAccessType">
+        <Annotation Term="SAP__common.IsUpperCase" />
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Draft Access Type" />
+      </Annotations>
+      <Annotations Target="SAP__self.I_DraftAdministrativeDataType/InProcessByUser">
+        <Annotation Term="SAP__common.Text" Path="InProcessByUserDescription" />
+        <Annotation Term="SAP__common.IsUpperCase" />
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Draft In Process By" />
+      </Annotations>
+      <Annotations Target="SAP__self.I_DraftAdministrativeDataType">
+        <Annotation Term="SAP__common.Label" String="Draft Administration Data" />
+      </Annotations>
+      <Annotations Target="SAP__self.Container/I_DraftAdministrativeData">
+        <Annotation Term="SAP__capabilities.SearchRestrictions">
+          <Record>
+            <PropertyValue Property="Searchable" Bool="true" />
+            <PropertyValue Property="UnsupportedExpressions"
+              EnumMember="SAP__capabilities.SearchExpressions/AND SAP__capabilities.SearchExpressions/NOT SAP__capabilities.SearchExpressions/group " />
+            <PropertyValue Property="SearchSyntax" String="https://url.sap/odata-search" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.FilterRestrictions">
+          <Record>
+            <PropertyValue Property="Filterable" Bool="true" />
+            <PropertyValue Property="FilterExpressionRestrictions">
+              <Collection>
+                <Record>
+                  <PropertyValue Property="Property" PropertyPath="CreationDateTime" />
+                  <PropertyValue Property="AllowedExpressions" String="SingleRange" />
+                </Record>
+                <Record>
+                  <PropertyValue Property="Property" PropertyPath="LastChangeDateTime" />
+                  <PropertyValue Property="AllowedExpressions" String="SingleRange" />
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.ReadRestrictions">
+          <Record>
+            <PropertyValue Property="Readable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.InsertRestrictions">
+          <Record>
+            <PropertyValue Property="Insertable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.DeleteRestrictions">
+          <Record>
+            <PropertyValue Property="Deletable" Bool="false" />
+          </Record>
+        </Annotation>
+        <Annotation Term="SAP__capabilities.UpdateRestrictions">
+          <Record>
+            <PropertyValue Property="Updatable" Bool="false" />
+            <PropertyValue Property="QueryOptions">
+              <Record>
+                <PropertyValue Property="SelectSupported" Bool="true" />
+              </Record>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/LocalLastChangedAt">
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Changed On" />
+        <Annotation Term="SAP__common.QuickInfo" String="Local Instance Last Change Date Time" />
+        <Annotation Term="SAP__common.DocumentationRef"
+          String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LOCINST_LASTCHANGE_TSTMPL" />
+      </Annotations>
+      <Annotations Target="SAP__self.I_DraftAdministrativeDataType/DraftUUID">
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Draft (Technical ID)" />
+      </Annotations>
+      <Annotations Target="SAP__self.I_DraftAdministrativeDataType/ProcessingStartDateTime">
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Draft In Process Since" />
+      </Annotations>
+      <Annotations Target="SAP__self.I_DraftAdministrativeDataType/DraftIsKeptByUser">
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Draft Is Kept By User" />
+      </Annotations>
+      <Annotations Target="SAP__self.I_DraftAdministrativeDataType/EnqueueStartDateTime">
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Draft Locked Since" />
+      </Annotations>
+      <Annotations Target="SAP__self.I_DraftAdministrativeDataType/DraftIsCreatedByMe">
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Draft Created By Me" />
+      </Annotations>
+      <Annotations Target="SAP__self.I_DraftAdministrativeDataType/DraftIsLastChangedByMe">
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Draft Last Changed By Me" />
+      </Annotations>
+      <Annotations Target="SAP__self.I_DraftAdministrativeDataType/DraftIsProcessedByMe">
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Draft In Process By Me" />
+      </Annotations>
+      <Annotations Target="SAP__self.I_DraftAdministrativeDataType/CreatedByUserDescription">
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Draft Created By (Description)" />
+      </Annotations>
+      <Annotations Target="SAP__self.I_DraftAdministrativeDataType/LastChangedByUserDescription">
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Draft Last Changed By (Description)" />
+      </Annotations>
+      <Annotations Target="SAP__self.I_DraftAdministrativeDataType/InProcessByUserDescription">
+        <Annotation Term="SAP__UI.Hidden" />
+        <Annotation Term="SAP__common.Label" String="Draft In Process By (Description)" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/FirstName">
+        <Annotation Term="SAP__common.Label" String="First Name" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: First Name" />
+      </Annotations>
+      <Annotations Target="SAP__self.EmployeeType/LastName">
+        <Annotation Term="SAP__common.Label" String="Last Name" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: Last Name" />
+      </Annotations>
+      <Annotations Target="SAP__self.Container/Agency/_Employee">
+        <Annotation Term="SAP__hierarchy.RecursiveHierarchySupported"
+          Qualifier="xDMOxI_EmployeeHN_HD" />
+      </Annotations>
+      <Annotations Target="SAP__self.AgencyType/Street">
+        <Annotation Term="SAP__common.Label" String="Street" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: Street" />
+      </Annotations>
+      <Annotations Target="SAP__self.AgencyType/City">
+        <Annotation Term="SAP__common.Label" String="City" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: City" />
+      </Annotations>
+      <Annotations Target="SAP__self.AgencyType/WebAddress">
+        <Annotation Term="SAP__common.Label" String="Web Address" />
+        <Annotation Term="SAP__common.QuickInfo" String="Flight Reference Scenario: Web Address" />
+      </Annotations>
+      <Annotations Target="SAP__self.I_DraftAdministrativeDataType/CreationDateTime">
+        <Annotation Term="SAP__common.Label" String="Draft Created On" />
+      </Annotations>
+      <Annotations Target="SAP__self.I_DraftAdministrativeDataType/LastChangeDateTime">
+        <Annotation Term="SAP__common.Label" String="Draft Last Changed On" />
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
