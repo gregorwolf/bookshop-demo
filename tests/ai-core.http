@@ -1,0 +1,49 @@
+### All AI Core API's: https://api.sap.com/package/SAPAICore/rest
+### AI Core: https://api.sap.com/api/AI_CORE_API/overview
+###
+# @name requestAIcoreAccessToken
+POST {{$dotenv ai_core_tokenendpoint}}/oauth/token
+Authorization: Basic {{$dotenv ai_core_clientid}}:{{$dotenv ai_core_clientsecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&response_type=token
+
+### Fill Variables from Response
+@ai_core_access_token = {{requestAIcoreAccessToken.response.body.$.access_token}}
+
+### Root - 404 Not Found
+GET {{$dotenv ai_core_url}}/v2/
+Authorization: Bearer {{ai_core_access_token}}
+### /admin/tenantInfo
+GET {{$dotenv ai_core_url}}/v2/admin/tenantInfo
+Authorization: Bearer {{ai_core_access_token}}
+### /admin/resourceGroups
+GET {{$dotenv ai_core_url}}/v2/admin/resourceGroups
+Authorization: Bearer {{ai_core_access_token}}
+### Create resourceGroups
+POST {{$dotenv ai_core_url}}/v2/admin/resourceGroups
+Authorization: Bearer {{ai_core_access_token}}
+Content-Type: application/json
+
+{ "resourceGroupId": "{{$dotenv ai_core_resourceGroupId}}"}
+### Create resourceGroups with Document Grounding
+POST {{$dotenv ai_core_url}}/v2/admin/resourceGroups
+Authorization: Bearer {{ai_core_access_token}}
+Content-Type: application/json
+
+{
+  "resourceGroupId": "{{$dotenv ai_core_resourceGroupId}}-grounding", 
+  "labels": [
+    {
+      "key": "ext.ai.sap.com/document-grounding",
+      "value": "true"
+    }
+  ]
+}
+### /admin/resourceGroups/{resourceGroupId}
+GET {{$dotenv ai_core_url}}/v2/admin/resourceGroups/{{$dotenv ai_core_resourceGroupId}}
+Authorization: Bearer {{ai_core_access_token}}
+### /admin/resourceGroups/{resourceGroupId}-grounding
+GET {{$dotenv ai_core_url}}/v2/admin/resourceGroups/{{$dotenv ai_core_resourceGroupId}}-grounding
+Authorization: Bearer {{ai_core_access_token}}
