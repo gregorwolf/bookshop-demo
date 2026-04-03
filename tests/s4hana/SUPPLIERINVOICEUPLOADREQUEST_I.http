@@ -1,0 +1,11 @@
+# https://api.sap.com/api/API_SUPPLIERINVOICE_PROCESS_SRV/overview
+# Communication Scenario SAP_COM_0057
+### S/4HANA Cloud
+POST {{$dotenv s4hanahost}}/sap/bc/srt/scs_ext/sap/supplierinvoiceuploadrequest_i
+    ?MessageId=fdda84d6-8186-4522-8b1c-50c4d48b4c17
+    &QualityOfService=ExactlyOnce
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Content-Type: text/xml; charset=utf-8
+#Soapaction: ""
+
+< ./SUPPLIERINVOICEUPLOADREQUEST_I.xml
