@@ -1,0 +1,17 @@
+# https://api.sap.com/api/API_SERVICE_CONFIRMATION_SRV/overview
+# Communication Scenario
+# Service Confirmation OData Integration (SAP_COM_0352)
+# Service - Repair Confirmation Integration (SAP_COM_0933)
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_CONFIRMATION_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_CONFIRMATION_SRV/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_CONFIRMATION_SRV/A_ServiceConfirmation
+  ?$inlinecount=allpages
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
