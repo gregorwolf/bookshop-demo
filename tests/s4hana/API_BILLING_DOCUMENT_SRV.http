@@ -18,3 +18,9 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingD
   &$expand=to_Item,to_Item/to_ItemText,to_Item/to_Partner,to_Partner,to_PricingElement,to_Text
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocumentItem
+  ?$filter=BillingDocument eq '{{$dotenv BillingDocument}}' and ReferenceSDDocumentCategory eq '{{$dotenv ReferenceSDDocumentCategory}}'
+  &$select=ReferenceSDDocument,ReferenceSDDocumentItem,ReferenceSDDocumentCategory
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json

@@ -15,3 +15,29 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_CONFIRMATION_SRV/A_Serv
   &$top=10
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_CONFIRMATION_SRV/A_ServiceConfirmation
+  ?$inlinecount=allpages
+  &$top=10
+  &$filter=ServiceConfirmation eq '{{$dotenv ServiceConfirmation}}'
+  &$expand=to_Appointment,to_Duration,to_Item,to_Item/to_ReferenceObject,to_ReferenceObject
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_CONFIRMATION_SRV/A_ServiceConfirmationItem
+  ?$inlinecount=allpages
+  &$top=10
+  &$filter=ServiceConfirmation eq '{{$dotenv ServiceConfirmation}}' and ServiceConfirmationItem eq '{{$dotenv ServiceConfirmationItem}}'
+  &$expand=to_ReferenceObject
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_CONFIRMATION_SRV/A_ServiceConfItmRefObject
+  ?$inlinecount=allpages
+  &$top=10
+  &$filter=ServiceConfirmation eq '{{$dotenv ServiceConfirmation}}' and ServiceConfirmationItem eq '{{$dotenv ServiceConfirmationItem}}'
+  &$select=ServiceReferenceEquipment
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
