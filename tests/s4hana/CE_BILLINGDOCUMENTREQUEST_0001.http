@@ -1,0 +1,33 @@
+# https://api.sap.com/api/sap-s4-CE_BILLINGDOCUMENTREQUEST_0001-v1/overview
+# Communication Scenario
+# External Billing Document Request Integration (SAP_COM_0176)
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_billingdocumentrequest/srvd_a2x/sap/billingdocumentrequest/0001/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_billingdocumentrequest/srvd_a2x/sap/billingdocumentrequest/0001/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_billingdocumentrequest/srvd_a2x/sap/billingdocumentrequest/0001/BillingDocumentRequest
+  ?$count=true
+  &$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_billingdocumentrequest/srvd_a2x/sap/billingdocumentrequest/0001/BillingDocumentRequest
+  ?$count=true
+  &$top=10
+  &$filter=BillingDocumentRequest eq '{{$dotenv BillingDocumentRequest}}'
+  &$expand=*
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_billingdocumentrequest/srvd_a2x/sap/billingdocumentrequest/0001/BillingDocumentRequestItem
+  ?$count=true
+  &$top=10
+  &$filter=BillingDocumentRequest eq '{{$dotenv BillingDocumentRequest}}' and BillingDocumentRequestItem eq '{{$dotenv BillingDocumentRequestItem}}'
+  &$select=ReferenceDocument,ReferenceDocumentItem,ReferenceDocSDDocCategory
+  #&$expand=*
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
