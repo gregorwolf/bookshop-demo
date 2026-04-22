@@ -13,7 +13,7 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_EQUIPMENT/Equipment
   &$top=10
   &$orderby=CreationDate desc
   &$filter=Equipment eq '{{$dotenv Equipment}}'
-  &$select=BusinessPartnerName1,BusinessPartnerName2,StreetName,PostalCode,CityName,Country
+  &$select=Equipment,BusinessPartnerName1,BusinessPartnerName2,StreetName,PostalCode,CityName,Country
 #  &$filter=MaintenancePlant ne ''
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json

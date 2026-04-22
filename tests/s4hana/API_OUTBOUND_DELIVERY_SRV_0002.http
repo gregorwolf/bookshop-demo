@@ -18,6 +18,7 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OUTBOUND_DELIVERY_SRV;v=0002/A_OutbDeliveryHeader('{{$dotenv DeliveryDocument}}')
+  ?$expand=to_DeliveryDocumentItem,to_DeliveryDocumentItem/to_DocumentFlow,to_HandlingUnitHeaderDelivery,to_DeliveryDocumentPartner,to_DeliveryDocumentPartner/to_Address,to_DeliveryDocumentPartner/to_Address2
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ### Get CSRF Token

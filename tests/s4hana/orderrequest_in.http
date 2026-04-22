@@ -1,5 +1,13 @@
-### S/4HANA Cloud
-GET {{$dotenv s4hanahost}}/sap/bc/srt/scs_ext/sap/orderrequest_in
+### S/4HANA Public Cloud
+### SAP_COM_0223 - Sales with Buyers Integration
+###
+### Request WSDL
+# returns:
+# WSP Exception caught: Initial value "config key" in method INITIALIZE of
+GET {{$dotenv s4hanahost}}/sap/bc/srt/scs_ext/sap/orderrequest_in?wsdl
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+POST {{$dotenv s4hanahost}}/sap/bc/srt/scs_ext/sap/orderrequest_in
     ?MessageId=570aed44-c52e-1edf-a791-1525dcc9e1c0
     &QueueId=DB7B16460CC1E9F8
     &QualityOfService=ExactlyOnce

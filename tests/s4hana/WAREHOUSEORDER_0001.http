@@ -13,8 +13,8 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_order_task_2/srvd_a2x/sap/warehouseorder/0001/WarehouseOrder
   ?$top=10
   &$count=true
-#  $select={{$dotenv WarehouseOrder_select}}
-#  &$filter={{$dotenv WarehouseOrder_filter}}
+  #&$select={{$dotenv WarehouseOrder_select}}
+  #&$filter={{$dotenv WarehouseOrder_filter}}
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
@@ -24,14 +24,19 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_order_task_2/srvd_a2x/sap/warehouseorder/0001/WarehouseOrder(EWMWarehouse='{{warehouse}}',WarehouseOrder='{{warehouseOrder}}')
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
-
 ###
 # @name readWarehouseTasks
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_order_task_2/srvd_a2x/sap/warehouseorder/0001/WarehouseTask
-  ?$top=10
+  ?{{$dotenv WarehouseTask_query}}
   &$count=true
-  &$expand=*
-#  $select={{$dotenv WarehouseOrder_select}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+# @name readWarehouseTasks
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_order_task_2/srvd_a2x/sap/warehouseorder/0001/WarehouseTask
+  ?$top=9999
+  &$count=true
+#  &$expand=*
+  &$select={{$dotenv WarehouseTask_select}}
   &$filter={{$dotenv WarehouseTask_filter}}
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
