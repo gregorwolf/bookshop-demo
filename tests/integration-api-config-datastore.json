@@ -1,0 +1,12 @@
+{
+  "grant-types": [
+    "client_credentials"
+  ],
+  "redirect-uris": [],
+  "roles": [
+    "DataStorePayloadsRead",
+    "DataStoresAndQueuesRead",
+    "DataStoresAndQueuesDelete"
+  ],
+  "token-validity": 43200
+}

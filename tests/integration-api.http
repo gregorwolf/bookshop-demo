@@ -181,6 +181,14 @@ GET {{$dotenv integration_api_url}}/api/v1/DataStoreEntries
   ?overdueonly=false
 Authorization: Bearer {{access_token}}
 Accept: application/json
+### Read specific Data Store Entry
+GET {{$dotenv integration_api_url}}/api/v1/DataStoreEntries(Id='{{$dotenv DataStoresId}}',DataStoreName='{{$dotenv DataStoreName}}',IntegrationFlow='',Type='')
+Authorization: Bearer {{access_token}}
+Accept: application/json
+### Delete specific Data Store Entry
+DELETE {{$dotenv integration_api_url}}/api/v1/DataStoreEntries(Id='{{$dotenv DataStoresId}}',DataStoreName='{{$dotenv DataStoreName}}',IntegrationFlow='',Type='')
+Authorization: Bearer {{access_token}}
+Accept: application/json
 ###
 GET {{$dotenv integration_api_url}}/api/v1/JmsBrokers('Broker1')
   ?$expand=QueueNamesHigh,InactiveQueues,QueueStates
