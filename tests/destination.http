@@ -39,6 +39,13 @@ Authorization: Bearer {{destination_access_token}}
 Content-Type: application/json
 
 < ./default-env-dest.json
+### /v1/subaccountCertificates
+GET {{$dotenv dest_uri}}/destination-configuration/v1/subaccountCertificates
+Authorization: Bearer {{destination_access_token}}
+### /v1/subaccountCertificates
+GET {{$dotenv dest_uri}}/destination-configuration/v1/subaccountCertificates/a4h.pem
+Authorization: Bearer {{destination_access_token}}
+
 ### Read Destination via CAP 
 GET http://localhost:4004/odata/v4/admin/Destination
 Authorization: Basic admin:
