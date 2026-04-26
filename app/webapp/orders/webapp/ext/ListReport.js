@@ -9,11 +9,7 @@ sap.ui.define([
             const context = {
                 editFlow: this.editFlow,
                 getContexts: () => {
-                    return this.editFlow.getView().getBindingContext();
-                },
-                onSuccess: () => {
-                    // Refresh the comments table after successful comment addition
-                    this.editFlow.getView().byId("orders::OrdersObjectPage--fe::table::Comments::LineItem-innerTable").getBinding("items").refresh();
+                    return this.getSelectedContexts();
                 },
                 // These will be set by the utility
                 commentModel: this.commentModel,

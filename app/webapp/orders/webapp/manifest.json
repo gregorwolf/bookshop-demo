@@ -148,6 +148,19 @@
                                         "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Empty"
                                     }
                                 }
+                            },
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "actions": {
+                                        "addComment": {
+                                            "visible": true,
+                                            "enabled": true,
+                                            "requiresSelection": true,  
+                                            "text": "Add Comment",
+                                            "press": "orders.ext.ListReport.addComment"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
