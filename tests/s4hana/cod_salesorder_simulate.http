@@ -1,0 +1,12 @@
+### S/4HANA Public Cloud
+### Logistics - SAP Cloud for Customer Integration	SAP_COM_0025
+### Request Pricing for Sales Document or Opportunity from S/4
+###
+POST {{$dotenv s4hanahost}}/sap/bc/srt/scs_ext/sap/cod_salesorder_simulate
+    ?MessageId={{$guid}}
+Accept: text/xml
+Content-Type: text/xml; charset=utf-8
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+
+#< ./default-env-cod_salesorder_simulate.xml
+< ./default-env-cod_salesorder_simulate-1010.xml

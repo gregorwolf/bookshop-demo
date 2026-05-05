@@ -1,0 +1,2649 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions targetNamespace="urn:sap-com:document:sap:rfc:functions"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+  xmlns:tns="urn:sap-com:document:sap:rfc:functions"
+  xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+  xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+  <wsdl:documentation>
+    <sidl:sidl xmlns:sidl="http://www.sap.com/2007/03/sidl" />
+  </wsdl:documentation>
+  <wsp:UsingPolicy wsdl:required="true" />
+  <wsp:Policy wsu:Id="BN__binding">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrnbnd:OptimizedMimeSerialization
+          xmlns:saptrnbnd="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization"
+          wsp:Optional="true" />
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+          wsp:Optional="true" />
+        <wsp:All xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+          <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"
+            xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy"
+            xmlns:wsa="http://www.w3.org/2005/08/addressing"
+            xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512"
+            xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility"
+            xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication />
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15 />
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict />
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+      <wsp:All>
+        <saptrnbnd:OptimizedMimeSerialization
+          xmlns:saptrnbnd="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization"
+          wsp:Optional="true" />
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+          wsp:Optional="true" />
+        <wsp:All xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+          <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"
+            xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy"
+            xmlns:wsa="http://www.w3.org/2005/08/addressing"
+            xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512"
+            xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility"
+            xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:RequireClientCertificate />
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15 />
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict />
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+      <wsp:All>
+        <saptrnbnd:OptimizedXMLTransfer uri="http://xml.sap.com/2006/11/esi/esp/binxml"
+          xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/"
+          wsp:Optional="true" />
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+          wsp:Optional="true" />
+        <wsp:All xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+          <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"
+            xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy"
+            xmlns:wsa="http://www.w3.org/2005/08/addressing"
+            xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512"
+            xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility"
+            xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication />
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15 />
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict />
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+      <wsp:All>
+        <saptrnbnd:OptimizedXMLTransfer uri="http://xml.sap.com/2006/11/esi/esp/binxml"
+          xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/"
+          wsp:Optional="true" />
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+          wsp:Optional="true" />
+        <wsp:All xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+          <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"
+            xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy"
+            xmlns:wsa="http://www.w3.org/2005/08/addressing"
+            xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512"
+            xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility"
+            xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:RequireClientCertificate />
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15 />
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict />
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="BN__binding_soap12">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrnbnd:OptimizedMimeSerialization
+          xmlns:saptrnbnd="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization"
+          wsp:Optional="true" />
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+          wsp:Optional="true" />
+        <wsp:All xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+          <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"
+            xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy"
+            xmlns:wsa="http://www.w3.org/2005/08/addressing"
+            xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512"
+            xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility"
+            xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication />
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15 />
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict />
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+      <wsp:All>
+        <saptrnbnd:OptimizedMimeSerialization
+          xmlns:saptrnbnd="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization"
+          wsp:Optional="true" />
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+          wsp:Optional="true" />
+        <wsp:All xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+          <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"
+            xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy"
+            xmlns:wsa="http://www.w3.org/2005/08/addressing"
+            xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512"
+            xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility"
+            xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:RequireClientCertificate />
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15 />
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict />
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+      <wsp:All>
+        <saptrnbnd:OptimizedXMLTransfer uri="http://xml.sap.com/2006/11/esi/esp/binxml"
+          xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/"
+          wsp:Optional="true" />
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+          wsp:Optional="true" />
+        <wsp:All xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+          <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"
+            xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy"
+            xmlns:wsa="http://www.w3.org/2005/08/addressing"
+            xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512"
+            xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility"
+            xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:HttpBasicAuthentication />
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15 />
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict />
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+      <wsp:All>
+        <saptrnbnd:OptimizedXMLTransfer uri="http://xml.sap.com/2006/11/esi/esp/binxml"
+          xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/"
+          wsp:Optional="true" />
+        <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+          wsp:Optional="true" />
+        <wsp:All xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+          <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"
+            xmlns:sapsp="http://www.sap.com/webas/630/soap/features/security/policy"
+            xmlns:wsa="http://www.w3.org/2005/08/addressing"
+            xmlns:wst="http://docs.oasis-open.org/ws-sx/ws-trust/200512"
+            xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility"
+            xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+            <wsp:Policy>
+              <sp:TransportToken>
+                <wsp:Policy>
+                  <sp:HttpsToken>
+                    <wsp:Policy>
+                      <sp:RequireClientCertificate />
+                    </wsp:Policy>
+                  </sp:HttpsToken>
+                </wsp:Policy>
+              </sp:TransportToken>
+              <sp:AlgorithmSuite>
+                <wsp:Policy>
+                  <sp:Basic128Rsa15 />
+                </wsp:Policy>
+              </sp:AlgorithmSuite>
+              <sp:Layout>
+                <wsp:Policy>
+                  <sp:Strict />
+                </wsp:Policy>
+              </sp:Layout>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:All>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="IF__COD_SALESORDER_SIMULATE">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sapsession:Session xmlns:sapsession="http://www.sap.com/webas/630/soap/features/session/">
+          <sapsession:enableSession>false</sapsession:enableSession>
+        </sapsession:Session>
+        <sapcentraladmin:CentralAdministration
+          xmlns:sapcentraladmin="http://www.sap.com/webas/700/soap/features/CentralAdministration/"
+          wsp:Optional="true">
+          <sapcentraladmin:BusinessApplicationID>7183A054C6051FE0A7A7567CBF20F285</sapcentraladmin:BusinessApplicationID>
+        </sapcentraladmin:CentralAdministration>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__COD_SALESORDER_SIMULATE">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">
+          no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">
+          false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">
+          true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema attributeFormDefault="qualified"
+      targetNamespace="urn:sap-com:document:sap:rfc:functions">
+      <xsd:simpleType name="byte16">
+        <xsd:restriction base="xsd:base64Binary">
+          <xsd:maxLength value="16" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char1">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char10">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="10" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char12">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="12" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char13">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="13" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char132">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="132" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char15">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="15" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char16">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="16" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char17">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="17" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char18">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="18" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char2">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char20">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="20" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char22">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="22" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char220">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="220" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char24">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="24" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char240">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="240" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char25">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="25" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char250">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="250" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char26">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="26" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char28">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="28" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char3">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="3" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char30">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="30" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char31">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="31" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char32">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="32" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char35">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="35" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char4">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="4" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char40">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char5">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="5" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char50">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="50" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char6">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="6" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char70">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="70" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char8">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="8" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char9">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="9" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="cuky5">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="5" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="date10">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="10" />
+          <xsd:pattern value="\d\d\d\d-\d\d-\d\d" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="decimal1.0">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="1" />
+          <xsd:fractionDigits value="0" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="decimal23.4">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="23" />
+          <xsd:fractionDigits value="4" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="decimal28.9">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="28" />
+          <xsd:fractionDigits value="9" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="decimal3.0">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="3" />
+          <xsd:fractionDigits value="0" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="decimal3.1">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="3" />
+          <xsd:fractionDigits value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="decimal5.0">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="5" />
+          <xsd:fractionDigits value="0" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="decimal5.2">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="5" />
+          <xsd:fractionDigits value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="decimal9.5">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="9" />
+          <xsd:fractionDigits value="5" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="lang">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="numeric10">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="10" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="numeric12">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="12" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="numeric18">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="18" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="numeric2">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="2" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="numeric3">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="3" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="numeric4">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="4" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="numeric5">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="5" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="numeric6">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="6" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="numeric8">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="8" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="quantum13.3">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="13" />
+          <xsd:fractionDigits value="3" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="quantum15.3">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:totalDigits value="15" />
+          <xsd:fractionDigits value="3" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="time">
+        <xsd:restriction base="xsd:time">
+          <xsd:pattern value="[0-9]{2}:[0-9]{2}:[0-9]{2}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="unit3">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="3" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="BAPI_SENDER">
+        <xsd:sequence>
+          <xsd:element name="LOG_SYSTEM" type="tns:char10" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPISDITM">
+        <xsd:sequence>
+          <xsd:element name="ITM_NUMBER" type="tns:numeric6" />
+          <xsd:element name="HG_LV_ITEM" type="tns:numeric6" />
+          <xsd:element name="PO_ITM_NO" type="tns:char6" />
+          <xsd:element name="MATERIAL" type="tns:char18" />
+          <xsd:element name="ALT_TO_ITM" type="tns:numeric6" />
+          <xsd:element name="CUST_MAT22" type="tns:char22" />
+          <xsd:element name="BATCH" type="tns:char10" />
+          <xsd:element name="DLV_GROUP" type="tns:numeric3" />
+          <xsd:element name="PART_DLV" type="tns:char1" />
+          <xsd:element name="REASON_REJ" type="tns:char2" />
+          <xsd:element name="BILL_BLOCK" type="tns:char2" />
+          <xsd:element name="BILL_DATE" type="tns:date10" />
+          <xsd:element name="PLANT" type="tns:char4" />
+          <xsd:element name="STORE_LOC" type="tns:char4" />
+          <xsd:element name="TARGET_QTY" type="tns:quantum13.3" />
+          <xsd:element name="TARGET_QU" type="tns:unit3" />
+          <xsd:element name="T_UNIT_ISO" type="tns:char3" />
+          <xsd:element name="ITEM_CATEG" type="tns:char4" />
+          <xsd:element name="SHORT_TEXT" type="tns:char40" />
+          <xsd:element name="PRC_GROUP1" type="tns:char3" />
+          <xsd:element name="PRC_GROUP2" type="tns:char3" />
+          <xsd:element name="PRC_GROUP3" type="tns:char3" />
+          <xsd:element name="PRC_GROUP4" type="tns:char3" />
+          <xsd:element name="PRC_GROUP5" type="tns:char3" />
+          <xsd:element name="PROD_HIERA" type="tns:char18" />
+          <xsd:element name="MATL_GROUP" type="tns:char9" />
+          <xsd:element name="PURCH_NO_C" type="tns:char35" />
+          <xsd:element name="PURCH_DATE" type="tns:date10" />
+          <xsd:element name="PO_METHOD" type="tns:char4" />
+          <xsd:element name="REF_1" type="tns:char12" />
+          <xsd:element name="PURCH_NO_S" type="tns:char35" />
+          <xsd:element name="PO_DAT_S" type="tns:date10" />
+          <xsd:element name="PO_METH_S" type="tns:char4" />
+          <xsd:element name="REF_1_S" type="tns:char12" />
+          <xsd:element name="POITM_NO_S" type="tns:char6" />
+          <xsd:element name="PRICE_GRP" type="tns:char2" />
+          <xsd:element name="CUST_GROUP" type="tns:char2" />
+          <xsd:element name="SALES_DIST" type="tns:char6" />
+          <xsd:element name="PRICE_LIST" type="tns:char2" />
+          <xsd:element name="INCOTERMS1" type="tns:char3" />
+          <xsd:element name="INCOTERMS2" type="tns:char28" />
+          <xsd:element name="ORDCOMP_IN" type="tns:char1" />
+          <xsd:element name="BILL_SCHED" type="tns:char2" />
+          <xsd:element name="INVO_SCHED" type="tns:char2" />
+          <xsd:element name="MN_INVOICE" type="tns:char1" />
+          <xsd:element name="EX_RATE_FI" type="tns:decimal9.5" />
+          <xsd:element name="ADD_VAL_DY" type="tns:numeric2" />
+          <xsd:element name="FIX_VAL_DY" type="tns:date10" />
+          <xsd:element name="PMNTTRMS" type="tns:char4" />
+          <xsd:element name="PYMT_METH" type="tns:char1" />
+          <xsd:element name="ACCNT_ASGN" type="tns:char2" />
+          <xsd:element name="EXCHG_RATE" type="tns:decimal9.5" />
+          <xsd:element name="PRICE_DATE" type="tns:date10" />
+          <xsd:element name="SERV_DATE" type="tns:date10" />
+          <xsd:element name="DUNN_KEY" type="tns:char1" />
+          <xsd:element name="DUNN_BLOCK" type="tns:char1" />
+          <xsd:element name="PROMOTION" type="tns:char10" />
+          <xsd:element name="PMTGAR_PRO" type="tns:char6" />
+          <xsd:element name="DOC_NUM_FI" type="tns:char10" />
+          <xsd:element name="DEPARTM_NO" type="tns:char4" />
+          <xsd:element name="REC_POINT" type="tns:char25" />
+          <xsd:element name="CSTCNDGRP1" type="tns:char2" />
+          <xsd:element name="CSTCNDGRP2" type="tns:char2" />
+          <xsd:element name="CSTCNDGRP3" type="tns:char2" />
+          <xsd:element name="CSTCNDGRP4" type="tns:char2" />
+          <xsd:element name="CSTCNDGRP5" type="tns:char2" />
+          <xsd:element name="DLV_TIME" type="tns:char3" />
+          <xsd:element name="SALES_UNIT" type="tns:unit3" />
+          <xsd:element name="S_UNIT_ISO" type="tns:char3" />
+          <xsd:element name="TRG_QTY_NO" type="tns:decimal5.0" />
+          <xsd:element name="TRGQTY_DEN" type="tns:decimal5.0" />
+          <xsd:element name="RNDDLV_QTY" type="tns:quantum13.3" />
+          <xsd:element name="MAXDEVAMNT" type="tns:quantum13.3" />
+          <xsd:element name="MAXDEVPER" type="tns:decimal3.0" />
+          <xsd:element name="MAXDEV_DAY" type="tns:decimal3.0" />
+          <xsd:element name="USAGE_IND" type="tns:char3" />
+          <xsd:element name="FIXED_QUAN" type="tns:char1" />
+          <xsd:element name="UNLMT_DLV" type="tns:char1" />
+          <xsd:element name="OVERDLVTOL" type="tns:decimal3.1" />
+          <xsd:element name="UNDDLV_TOL" type="tns:decimal3.1" />
+          <xsd:element name="DIVISION" type="tns:char2" />
+          <xsd:element name="SALQTYNUM" type="tns:decimal5.0" />
+          <xsd:element name="SALQTYDEN" type="tns:decimal5.0" />
+          <xsd:element name="GROSS_WGHT" type="tns:quantum15.3" />
+          <xsd:element name="NET_WEIGHT" type="tns:quantum15.3" />
+          <xsd:element name="UNTOF_WGHT" type="tns:unit3" />
+          <xsd:element name="UNOF_WTISO" type="tns:char3" />
+          <xsd:element name="VOLUME" type="tns:quantum15.3" />
+          <xsd:element name="VOLUNIT" type="tns:unit3" />
+          <xsd:element name="VOLUNITISO" type="tns:char3" />
+          <xsd:element name="DLV_PRIO" type="tns:numeric2" />
+          <xsd:element name="SHIP_POINT" type="tns:char4" />
+          <xsd:element name="ROUTE" type="tns:char6" />
+          <xsd:element name="CREATED_BY" type="tns:char12" />
+          <xsd:element name="TAX_CLASS1" type="tns:char1" />
+          <xsd:element name="TAX_CLASS2" type="tns:char1" />
+          <xsd:element name="TAX_CLASS3" type="tns:char1" />
+          <xsd:element name="TAX_CLASS4" type="tns:char1" />
+          <xsd:element name="TAX_CLASS5" type="tns:char1" />
+          <xsd:element name="TAX_CLASS6" type="tns:char1" />
+          <xsd:element name="TAX_CLASS7" type="tns:char1" />
+          <xsd:element name="TAX_CLASS8" type="tns:char1" />
+          <xsd:element name="TAX_CLASS9" type="tns:char1" />
+          <xsd:element name="MAT_PR_GRP" type="tns:char2" />
+          <xsd:element name="VAL_TYPE" type="tns:char10" />
+          <xsd:element name="FIXDAT_QTY" type="tns:char1" />
+          <xsd:element name="BOMEXPL_NO" type="tns:char8" />
+          <xsd:element name="RESANALKEY" type="tns:char6" />
+          <xsd:element name="REQMTS_TYP" type="tns:char4" />
+          <xsd:element name="NO_GR_POST" type="tns:char1" />
+          <xsd:element name="BUS_TRANST" type="tns:char2" />
+          <xsd:element name="OVERHD_KEY" type="tns:char6" />
+          <xsd:element name="CSTG_SHEET" type="tns:char6" />
+          <xsd:element name="MATFRGTGRP" type="tns:char8" />
+          <xsd:element name="PLDLVSHDIN" type="tns:char4" />
+          <xsd:element name="SEQ_NO" type="tns:char35" />
+          <xsd:element name="BIL_FORM" type="tns:char2" />
+          <xsd:element name="DLI_PROFIL" type="tns:char8" />
+          <xsd:element name="REV_TYPE" type="tns:char1" />
+          <xsd:element name="BEGDEM_PER" type="tns:char1" />
+          <xsd:element name="PR_REF_MAT" type="tns:char18" />
+          <xsd:element name="REFOBJTYPE" type="tns:char10" />
+          <xsd:element name="REFOBJKEY" type="tns:char70" />
+          <xsd:element name="REFLOGSYS" type="tns:char10" />
+          <xsd:element name="ORDER_PROB" type="tns:numeric3" />
+          <xsd:element name="MAX_PL_DLV" type="tns:decimal1.0" />
+          <xsd:element name="CFOP_CODE" type="tns:char5" />
+          <xsd:element name="TAXLAWICMS" type="tns:char3" />
+          <xsd:element name="TAXLAWIPI" type="tns:char3" />
+          <xsd:element name="SD_TAXCODE" type="tns:char2" />
+          <xsd:element name="ASSORT_MOD" type="tns:char18" />
+          <xsd:element name="COMP_QUANT" type="tns:quantum13.3" />
+          <xsd:element name="TARGET_VAL" type="tns:decimal28.9" />
+          <xsd:element name="CURRENCY" type="tns:cuky5" />
+          <xsd:element name="CURR_ISO" type="tns:char3" />
+          <xsd:element name="PROFIT_CTR" type="tns:char10" />
+          <xsd:element name="ORDERID" type="tns:char12" />
+          <xsd:element name="WBS_ELEM" type="tns:char24" />
+          <xsd:element name="DEPREC_PER" type="tns:decimal5.2" />
+          <xsd:element name="REF_DOC" type="tns:char10" />
+          <xsd:element name="REF_DOC_IT" type="tns:numeric6" />
+          <xsd:element name="REF_DOC_CA" type="tns:char1" />
+          <xsd:element name="CUST_MAT35" type="tns:char35" />
+          <xsd:element name="EXCH_RATE_FI_V" type="tns:decimal9.5" />
+          <xsd:element name="EXCHG_RATE_V" type="tns:decimal9.5" />
+          <xsd:element name="ITEMGUID_ATP" type="tns:char22" />
+          <xsd:element name="VAL_CONTR" type="tns:char10" />
+          <xsd:element name="VAL_CON_I" type="tns:numeric6" />
+          <xsd:element name="CONFIG_ID" type="tns:char6" />
+          <xsd:element name="INST_ID" type="tns:char8" />
+          <xsd:element name="MAT_EXT" type="tns:char40" />
+          <xsd:element name="MAT_GUID" type="tns:char32" />
+          <xsd:element name="MAT_VERS" type="tns:char10" />
+          <xsd:element name="P_MAT_EXT" type="tns:char40" />
+          <xsd:element name="P_MAT_GUID" type="tns:char32" />
+          <xsd:element name="P_MAT_VERS" type="tns:char10" />
+          <xsd:element name="FUNC_AREA" type="tns:char4" />
+          <xsd:element name="ALTERN_BOM" type="tns:char2" />
+          <xsd:element name="FKK_CONACCT" type="tns:char12" />
+          <xsd:element name="EAN_UPC" type="tns:char18" />
+          <xsd:element name="PRODCAT" type="tns:char10" />
+          <xsd:element name="SHIP_TYPE" type="tns:char2" />
+          <xsd:element name="S_PROC_IND" type="tns:char4" />
+          <xsd:element name="FUNC_AREA_LONG" type="tns:char16" />
+          <xsd:element name="BILL_REL" type="tns:char1" />
+          <xsd:element name="VW_UEPOS" type="tns:char1" />
+          <xsd:element name="CAMPAIGN" type="tns:byte16" />
+          <xsd:element name="DLVSCHDUSE" type="tns:char3" />
+          <xsd:element name="CFOP_LONG" type="tns:char10" />
+          <xsd:element name="SELECTION" type="tns:char32" />
+          <xsd:element name="MAT_ENTRD" type="tns:char18" />
+          <xsd:element name="LOG_SYSTEM_OWN" type="tns:char10" />
+          <xsd:element name="ITM_TYPE_USAGE" type="tns:char4" />
+          <xsd:element name="TAXLAWISS" type="tns:char3" />
+          <xsd:element name="MAT_ENTRD_EXTERNAL" type="tns:char40" />
+          <xsd:element name="MAT_ENTRD_GUID" type="tns:char32" />
+          <xsd:element name="MAT_ENTRD_VERSION" type="tns:char10" />
+          <xsd:element name="LOC_TAXCAT" type="tns:char2" />
+          <xsd:element name="LOC_ZEROVAT" type="tns:char1" />
+          <xsd:element name="LOC_ACTCODE" type="tns:char2" />
+          <xsd:element name="LOC_DISTTYPE" type="tns:char2" />
+          <xsd:element name="LOC_TXRELCLAS" type="tns:char10" />
+          <xsd:element name="CALC_MOTIVE" type="tns:char2" />
+          <xsd:element name="COMPREAS" type="tns:char4" />
+          <xsd:element name="FUND" type="tns:char10" />
+          <xsd:element name="FUNDS_CTR" type="tns:char16" />
+          <xsd:element name="CMMT_ITEM" type="tns:char24" />
+          <xsd:element name="GRANT_NBR" type="tns:char20" />
+          <xsd:element name="BUDGET_PERIOD" type="tns:char10" />
+          <xsd:element name="TAXLAWCOFINS" type="tns:char3" />
+          <xsd:element name="TAXLAWPIS" type="tns:char3" />
+          <xsd:element name="TREASURY_ACC_SYMBOL" type="tns:char30" />
+          <xsd:element name="BUSINESS_EVENT_TCODE" type="tns:char10" />
+          <xsd:element name="MODIFICATION_ALLOWED" type="tns:char1" />
+          <xsd:element name="CANCELLATION_ALLOWED" type="tns:char1" />
+          <xsd:element name="PAYMENT_METHODS" type="tns:char10" />
+          <xsd:element name="BUSINESS_PARTNER_NO" type="tns:char6" />
+          <xsd:element name="REPORTING_FREQ" type="tns:char3" />
+          <xsd:element name="SEPA_MANDATE_ID" type="tns:char35" />
+          <xsd:element name="REQ_SEGMENT" type="tns:char16" />
+          <xsd:element name="TP_SUBLEVL" type="tns:char2" />
+          <xsd:element name="TP_AGENCID" type="tns:char3" />
+          <xsd:element name="TP_ALTRAID" type="tns:char3" />
+          <xsd:element name="TP_BEGPER" type="tns:numeric4" />
+          <xsd:element name="TP_ENDPER" type="tns:numeric4" />
+          <xsd:element name="TP_AVTYPE" type="tns:char1" />
+          <xsd:element name="TP_MAIN_ACCT" type="tns:char4" />
+          <xsd:element name="TP_SUB_ACCT" type="tns:char3" />
+          <xsd:element name="TP_BETC" type="tns:char10" />
+          <xsd:element name="REVACC_REFID" type="tns:char30" />
+          <xsd:element name="REVACC_REFTYPE" type="tns:char3" />
+          <xsd:element name="REF_DOC_CA_LONG" type="tns:char4" />
+          <xsd:element name="INCOTERMSV" type="tns:char4" />
+          <xsd:element name="INCOTERMS2L" type="tns:char70" />
+          <xsd:element name="INCOTERMS3L" type="tns:char70" />
+          <xsd:element name="MATERIAL_LONG" type="tns:char40" />
+          <xsd:element name="PR_REF_MAT_LONG" type="tns:char40" />
+          <xsd:element name="MAT_ENTRD_LONG" type="tns:char40" />
+          <xsd:element name="PO_QUAN" type="tns:quantum13.3" />
+          <xsd:element name="PO_UNIT" type="tns:unit3" />
+          <xsd:element name="REQ_SEG_LONG" type="tns:char40" />
+          <xsd:element name="TXS_BUSINESS_TRANSACTION" type="tns:char4" />
+          <xsd:element name="TXS_MATERIAL_USAGE" type="tns:char1" />
+          <xsd:element name="TXS_USAGE_PURPOSE" type="tns:char25" />
+          <xsd:element name="SERVICE_DOC_TYPE" type="tns:char4" />
+          <xsd:element name="SERVICE_DOC_ID" type="tns:char10" />
+          <xsd:element name="SERVICE_DOC_ITEM_ID" type="tns:numeric6" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPISCHDLX">
+        <xsd:sequence>
+          <xsd:element name="ITM_NUMBER" type="tns:numeric6" />
+          <xsd:element name="SCHED_LINE" type="tns:numeric4" />
+          <xsd:element name="UPDATEFLAG" type="tns:char1" />
+          <xsd:element name="REQ_DATE" type="tns:char1" />
+          <xsd:element name="DATE_TYPE" type="tns:char1" />
+          <xsd:element name="REQ_TIME" type="tns:char1" />
+          <xsd:element name="REQ_QTY" type="tns:char1" />
+          <xsd:element name="REQ_DLV_BL" type="tns:char1" />
+          <xsd:element name="SCHED_TYPE" type="tns:char1" />
+          <xsd:element name="TP_DATE" type="tns:char1" />
+          <xsd:element name="MS_DATE" type="tns:char1" />
+          <xsd:element name="LOAD_DATE" type="tns:char1" />
+          <xsd:element name="GI_DATE" type="tns:char1" />
+          <xsd:element name="TP_TIME" type="tns:char1" />
+          <xsd:element name="MS_TIME" type="tns:char1" />
+          <xsd:element name="LOAD_TIME" type="tns:char1" />
+          <xsd:element name="GI_TIME" type="tns:char1" />
+          <xsd:element name="REFOBJTYPE" type="tns:char10" />
+          <xsd:element name="REFOBJKEY" type="tns:char70" />
+          <xsd:element name="DLV_DATE" type="tns:char1" />
+          <xsd:element name="DLV_TIME" type="tns:char1" />
+          <xsd:element name="REL_TYPE" type="tns:char1" />
+          <xsd:element name="PLAN_SCHED_TYPE" type="tns:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPICONDX">
+        <xsd:sequence>
+          <xsd:element name="ITM_NUMBER" type="tns:numeric6" />
+          <xsd:element name="COND_ST_NO" type="tns:numeric3" />
+          <xsd:element name="COND_COUNT" type="tns:numeric2" />
+          <xsd:element name="COND_TYPE" type="tns:char4" />
+          <xsd:element name="UPDATEFLAG" type="tns:char1" />
+          <xsd:element name="COND_VALUE" type="tns:char1" />
+          <xsd:element name="CURRENCY" type="tns:char1" />
+          <xsd:element name="COND_UNIT" type="tns:char1" />
+          <xsd:element name="COND_P_UNT" type="tns:char1" />
+          <xsd:element name="VARCOND" type="tns:char26" />
+          <xsd:element name="COND_COUNT_LONG" type="tns:numeric3" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPICUVK">
+        <xsd:sequence>
+          <xsd:element name="CONFIG_ID" type="tns:char6" />
+          <xsd:element name="INST_ID" type="tns:char8" />
+          <xsd:element name="VKEY" type="tns:char26" />
+          <xsd:element name="FACTOR" type="tns:char15" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_S_BAPICOND">
+        <xsd:sequence>
+          <xsd:element name="ITM_NUMBER" type="tns:numeric6" />
+          <xsd:element name="COND_ST_NO" type="tns:numeric3" />
+          <xsd:element name="COND_COUNT" type="tns:numeric2" />
+          <xsd:element name="COND_TYPE" type="tns:char4" />
+          <xsd:element name="COND_VALUE" type="tns:decimal28.9" />
+          <xsd:element name="CURRENCY" type="tns:cuky5" />
+          <xsd:element name="COND_UNIT" type="tns:unit3" />
+          <xsd:element name="COND_P_UNT" type="tns:decimal5.0" />
+          <xsd:element name="CURR_ISO" type="tns:char3" />
+          <xsd:element name="CD_UNT_ISO" type="tns:char3" />
+          <xsd:element name="REFOBJTYPE" type="tns:char10" />
+          <xsd:element name="REFOBJKEY" type="tns:char70" />
+          <xsd:element name="REFLOGSYS" type="tns:char10" />
+          <xsd:element name="APPLICATIO" type="tns:char2" />
+          <xsd:element name="CONPRICDAT" type="tns:date10" />
+          <xsd:element name="CALCTYPCON" type="tns:char1" />
+          <xsd:element name="CONBASEVAL" type="tns:decimal28.9" />
+          <xsd:element name="CONEXCHRAT" type="tns:decimal9.5" />
+          <xsd:element name="NUMCONVERT" type="tns:decimal5.0" />
+          <xsd:element name="DENOMINATO" type="tns:decimal5.0" />
+          <xsd:element name="CONDTYPE" type="tns:char1" />
+          <xsd:element name="STAT_CON" type="tns:char1" />
+          <xsd:element name="SCALETYPE" type="tns:char1" />
+          <xsd:element name="ACCRUALS" type="tns:char1" />
+          <xsd:element name="CONINVOLST" type="tns:char1" />
+          <xsd:element name="CONDORIGIN" type="tns:char1" />
+          <xsd:element name="GROUPCOND" type="tns:char1" />
+          <xsd:element name="COND_UPDAT" type="tns:char1" />
+          <xsd:element name="ACCESS_SEQ" type="tns:numeric2" />
+          <xsd:element name="CONDCOUNT" type="tns:numeric2" />
+          <xsd:element name="ROUNDOFFDI" type="tns:decimal28.9" />
+          <xsd:element name="CONDVALUE" type="tns:decimal28.9" />
+          <xsd:element name="CURRENCY_2" type="tns:cuky5" />
+          <xsd:element name="CURR_ISO_2" type="tns:char3" />
+          <xsd:element name="CONDCNTRL" type="tns:char1" />
+          <xsd:element name="CONDISACTI" type="tns:char1" />
+          <xsd:element name="CONDCLASS" type="tns:char1" />
+          <xsd:element name="FACTBASVAL" type="xsd:float" />
+          <xsd:element name="SCALEBASIN" type="tns:char1" />
+          <xsd:element name="SCALBASVAL" type="tns:decimal28.9" />
+          <xsd:element name="UNITMEASUR" type="tns:unit3" />
+          <xsd:element name="ISO_UNIT" type="tns:char3" />
+          <xsd:element name="CURRENCKEY" type="tns:cuky5" />
+          <xsd:element name="CURRENISO" type="tns:char3" />
+          <xsd:element name="CONDINCOMP" type="tns:char1" />
+          <xsd:element name="CONDCONFIG" type="tns:char1" />
+          <xsd:element name="CONDCHAMAN" type="tns:char1" />
+          <xsd:element name="COND_NO" type="tns:char10" />
+          <xsd:element name="TAX_CODE" type="tns:char2" />
+          <xsd:element name="VARCOND" type="tns:char26" />
+          <xsd:element name="ACCOUNTKEY" type="tns:char3" />
+          <xsd:element name="ACCOUNT_KE" type="tns:char3" />
+          <xsd:element name="WT_WITHCD" type="tns:char2" />
+          <xsd:element name="STRUCTCOND" type="tns:char1" />
+          <xsd:element name="FACTCONBAS" type="xsd:float" />
+          <xsd:element name="CONDCOINHD" type="tns:numeric2" />
+          <xsd:element name="ACCESS_SEQ_LONG" type="tns:numeric3" />
+          <xsd:element name="COND_COUNT_LONG" type="tns:numeric3" />
+          <xsd:element name="CONDCOINHD_LONG" type="tns:numeric3" />
+          <xsd:element name="KBETR_EDITABLE" type="tns:char1" />
+          <xsd:element name="KPEIN_EDITABLE" type="tns:char1" />
+          <xsd:element name="DELETABLE" type="tns:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPICUVAL">
+        <xsd:sequence>
+          <xsd:element name="CONFIG_ID" type="tns:char6" />
+          <xsd:element name="INST_ID" type="tns:char8" />
+          <xsd:element name="CHARC" type="tns:char40" />
+          <xsd:element name="CHARC_TXT" type="tns:char70" />
+          <xsd:element name="VALUE" type="tns:char40" />
+          <xsd:element name="VALUE_TXT" type="tns:char70" />
+          <xsd:element name="AUTHOR" type="tns:char1" />
+          <xsd:element name="VALUE_TO" type="tns:char40" />
+          <xsd:element name="VALCODE" type="tns:char1" />
+          <xsd:element name="VALUE_LONG" type="tns:char70" />
+          <xsd:element name="VALUE_TO_LONG" type="tns:char70" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPISDITMX">
+        <xsd:sequence>
+          <xsd:element name="ITM_NUMBER" type="tns:numeric6" />
+          <xsd:element name="UPDATEFLAG" type="tns:char1" />
+          <xsd:element name="HG_LV_ITEM" type="tns:char1" />
+          <xsd:element name="PO_ITM_NO" type="tns:char1" />
+          <xsd:element name="MATERIAL" type="tns:char1" />
+          <xsd:element name="ALT_TO_ITM" type="tns:char1" />
+          <xsd:element name="CUST_MAT22" type="tns:char1" />
+          <xsd:element name="BATCH" type="tns:char1" />
+          <xsd:element name="DLV_GROUP" type="tns:char1" />
+          <xsd:element name="PART_DLV" type="tns:char1" />
+          <xsd:element name="REASON_REJ" type="tns:char1" />
+          <xsd:element name="BILL_BLOCK" type="tns:char1" />
+          <xsd:element name="BILL_DATE" type="tns:char1" />
+          <xsd:element name="PLANT" type="tns:char1" />
+          <xsd:element name="STORE_LOC" type="tns:char1" />
+          <xsd:element name="TARGET_QTY" type="tns:char1" />
+          <xsd:element name="TARGET_QU" type="tns:char1" />
+          <xsd:element name="T_UNIT_ISO" type="tns:char1" />
+          <xsd:element name="ITEM_CATEG" type="tns:char1" />
+          <xsd:element name="SHORT_TEXT" type="tns:char1" />
+          <xsd:element name="PRC_GROUP1" type="tns:char1" />
+          <xsd:element name="PRC_GROUP2" type="tns:char1" />
+          <xsd:element name="PRC_GROUP3" type="tns:char1" />
+          <xsd:element name="PRC_GROUP4" type="tns:char1" />
+          <xsd:element name="PRC_GROUP5" type="tns:char1" />
+          <xsd:element name="PROD_HIERA" type="tns:char1" />
+          <xsd:element name="MATL_GROUP" type="tns:char1" />
+          <xsd:element name="PURCH_NO_C" type="tns:char1" />
+          <xsd:element name="PURCH_DATE" type="tns:char1" />
+          <xsd:element name="PO_METHOD" type="tns:char1" />
+          <xsd:element name="REF_1" type="tns:char1" />
+          <xsd:element name="PURCH_NO_S" type="tns:char1" />
+          <xsd:element name="PO_DAT_S" type="tns:char1" />
+          <xsd:element name="PO_METH_S" type="tns:char1" />
+          <xsd:element name="REF_1_S" type="tns:char1" />
+          <xsd:element name="POITM_NO_S" type="tns:char1" />
+          <xsd:element name="PRICE_GRP" type="tns:char1" />
+          <xsd:element name="CUST_GROUP" type="tns:char1" />
+          <xsd:element name="SALES_DIST" type="tns:char1" />
+          <xsd:element name="PRICE_LIST" type="tns:char1" />
+          <xsd:element name="INCOTERMS1" type="tns:char1" />
+          <xsd:element name="INCOTERMS2" type="tns:char1" />
+          <xsd:element name="ORDCOMP_IN" type="tns:char1" />
+          <xsd:element name="BILL_SCHED" type="tns:char1" />
+          <xsd:element name="INVO_SCHED" type="tns:char1" />
+          <xsd:element name="MN_INVOICE" type="tns:char1" />
+          <xsd:element name="EX_RATE_FI" type="tns:char1" />
+          <xsd:element name="ADD_VAL_DY" type="tns:char1" />
+          <xsd:element name="FIX_VAL_DY" type="tns:char1" />
+          <xsd:element name="PMNTTRMS" type="tns:char1" />
+          <xsd:element name="PYMT_METH" type="tns:char1" />
+          <xsd:element name="ACCNT_ASGN" type="tns:char1" />
+          <xsd:element name="EXCHG_RATE" type="tns:char1" />
+          <xsd:element name="PRICE_DATE" type="tns:char1" />
+          <xsd:element name="SERV_DATE" type="tns:char1" />
+          <xsd:element name="DUNN_KEY" type="tns:char1" />
+          <xsd:element name="DUNN_BLOCK" type="tns:char1" />
+          <xsd:element name="PROMOTION" type="tns:char1" />
+          <xsd:element name="PMTGAR_PRO" type="tns:char1" />
+          <xsd:element name="DOC_NUM_FI" type="tns:char1" />
+          <xsd:element name="DEPARTM_NO" type="tns:char1" />
+          <xsd:element name="REC_POINT" type="tns:char1" />
+          <xsd:element name="CSTCNDGRP1" type="tns:char1" />
+          <xsd:element name="CSTCNDGRP2" type="tns:char1" />
+          <xsd:element name="CSTCNDGRP3" type="tns:char1" />
+          <xsd:element name="CSTCNDGRP4" type="tns:char1" />
+          <xsd:element name="CSTCNDGRP5" type="tns:char1" />
+          <xsd:element name="DLV_TIME" type="tns:char1" />
+          <xsd:element name="SALES_UNIT" type="tns:char1" />
+          <xsd:element name="TRG_QTY_NO" type="tns:char1" />
+          <xsd:element name="TRGQTY_DEN" type="tns:char1" />
+          <xsd:element name="RNDDLV_QTY" type="tns:char1" />
+          <xsd:element name="MAXDEVAMNT" type="tns:char1" />
+          <xsd:element name="MAXDEVPER" type="tns:char1" />
+          <xsd:element name="MAXDEV_DAY" type="tns:char1" />
+          <xsd:element name="USAGE_IND" type="tns:char1" />
+          <xsd:element name="FIXED_QUAN" type="tns:char1" />
+          <xsd:element name="UNLMT_DLV" type="tns:char1" />
+          <xsd:element name="OVERDLVTOL" type="tns:char1" />
+          <xsd:element name="UNDDLV_TOL" type="tns:char1" />
+          <xsd:element name="DIVISION" type="tns:char1" />
+          <xsd:element name="SALQTYNUM" type="tns:char1" />
+          <xsd:element name="SALQTYDEN" type="tns:char1" />
+          <xsd:element name="GROSS_WGHT" type="tns:char1" />
+          <xsd:element name="NET_WEIGHT" type="tns:char1" />
+          <xsd:element name="UNTOF_WGHT" type="tns:char1" />
+          <xsd:element name="VOLUME" type="tns:char1" />
+          <xsd:element name="VOLUNIT" type="tns:char1" />
+          <xsd:element name="DLV_PRIO" type="tns:char1" />
+          <xsd:element name="SHIP_POINT" type="tns:char1" />
+          <xsd:element name="ROUTE" type="tns:char1" />
+          <xsd:element name="TAX_CLASS1" type="tns:char1" />
+          <xsd:element name="TAX_CLASS2" type="tns:char1" />
+          <xsd:element name="TAX_CLASS3" type="tns:char1" />
+          <xsd:element name="TAX_CLASS4" type="tns:char1" />
+          <xsd:element name="TAX_CLASS5" type="tns:char1" />
+          <xsd:element name="TAX_CLASS6" type="tns:char1" />
+          <xsd:element name="TAX_CLASS7" type="tns:char1" />
+          <xsd:element name="TAX_CLASS8" type="tns:char1" />
+          <xsd:element name="TAX_CLASS9" type="tns:char1" />
+          <xsd:element name="MAT_PR_GRP" type="tns:char1" />
+          <xsd:element name="VAL_TYPE" type="tns:char1" />
+          <xsd:element name="FIXDAT_QTY" type="tns:char1" />
+          <xsd:element name="BOMEXPL_NO" type="tns:char1" />
+          <xsd:element name="RESANALKEY" type="tns:char1" />
+          <xsd:element name="REQMTS_TYP" type="tns:char1" />
+          <xsd:element name="NO_GR_POST" type="tns:char1" />
+          <xsd:element name="BUS_TRANST" type="tns:char1" />
+          <xsd:element name="OVERHD_KEY" type="tns:char1" />
+          <xsd:element name="CSTG_SHEET" type="tns:char1" />
+          <xsd:element name="MATFRGTGRP" type="tns:char1" />
+          <xsd:element name="PLDLVSHDIN" type="tns:char1" />
+          <xsd:element name="SEQ_NO" type="tns:char1" />
+          <xsd:element name="BIL_FORM" type="tns:char1" />
+          <xsd:element name="DLI_PROFIL" type="tns:char1" />
+          <xsd:element name="REV_TYPE" type="tns:char1" />
+          <xsd:element name="BEGDEM_PER" type="tns:char1" />
+          <xsd:element name="PR_REF_MAT" type="tns:char1" />
+          <xsd:element name="REFOBJTYPE" type="tns:char1" />
+          <xsd:element name="REFOBJKEY" type="tns:char1" />
+          <xsd:element name="REFLOGSYS" type="tns:char1" />
+          <xsd:element name="ORDER_PROB" type="tns:char1" />
+          <xsd:element name="MAX_PL_DLV" type="tns:char1" />
+          <xsd:element name="CFOP_CODE" type="tns:char1" />
+          <xsd:element name="TAXLAWICMS" type="tns:char1" />
+          <xsd:element name="TAXLAWIPI" type="tns:char1" />
+          <xsd:element name="SD_TAXCODE" type="tns:char1" />
+          <xsd:element name="ASSORT_MOD" type="tns:char1" />
+          <xsd:element name="COMP_QUANT" type="tns:char1" />
+          <xsd:element name="TARGET_VAL" type="tns:char1" />
+          <xsd:element name="PROFIT_CTR" type="tns:char1" />
+          <xsd:element name="ORDERID" type="tns:char1" />
+          <xsd:element name="WBS_ELEM" type="tns:char1" />
+          <xsd:element name="DEPREC_PER" type="tns:char1" />
+          <xsd:element name="REF_DOC" type="tns:char1" />
+          <xsd:element name="REF_DOC_IT" type="tns:char1" />
+          <xsd:element name="REF_DOC_CA" type="tns:char1" />
+          <xsd:element name="CUST_MAT35" type="tns:char1" />
+          <xsd:element name="EXCH_RATE_FI_V" type="tns:char1" />
+          <xsd:element name="EXCHG_RATE_V" type="tns:char1" />
+          <xsd:element name="ITEMGUID_ATP" type="tns:char1" />
+          <xsd:element name="VAL_CONTR" type="tns:char1" />
+          <xsd:element name="VAL_CON_I" type="tns:char1" />
+          <xsd:element name="CONFIG_ID" type="tns:char1" />
+          <xsd:element name="INST_ID" type="tns:char1" />
+          <xsd:element name="MAT_EXT" type="tns:char1" />
+          <xsd:element name="MAT_GUID" type="tns:char1" />
+          <xsd:element name="MAT_VERS" type="tns:char1" />
+          <xsd:element name="P_MAT_EXT" type="tns:char1" />
+          <xsd:element name="P_MAT_GUID" type="tns:char1" />
+          <xsd:element name="P_MAT_VERS" type="tns:char1" />
+          <xsd:element name="FUNC_AREA" type="tns:char1" />
+          <xsd:element name="ALTERN_BOM" type="tns:char1" />
+          <xsd:element name="FKK_CONACCT" type="tns:char1" />
+          <xsd:element name="EAN_UPC" type="tns:char1" />
+          <xsd:element name="PRODCAT" type="tns:char1" />
+          <xsd:element name="SHIP_TYPE" type="tns:char1" />
+          <xsd:element name="S_PROC_IND" type="tns:char1" />
+          <xsd:element name="BILL_REL" type="tns:char1" />
+          <xsd:element name="VW_UEPOS" type="tns:char1" />
+          <xsd:element name="CAMPAIGN" type="tns:char1" />
+          <xsd:element name="DLVSCHDUSE" type="tns:char1" />
+          <xsd:element name="SELECTION" type="tns:char1" />
+          <xsd:element name="MAT_ENTRD" type="tns:char1" />
+          <xsd:element name="LOG_SYSTEM_OWN" type="tns:char1" />
+          <xsd:element name="ITM_TYPE_USAGE" type="tns:char1" />
+          <xsd:element name="MAT_ENTRD_EXTERNAL" type="tns:char1" />
+          <xsd:element name="MAT_ENTRD_GUID" type="tns:char1" />
+          <xsd:element name="MAT_ENTRD_VERSION" type="tns:char1" />
+          <xsd:element name="LOC_TAXCAT" type="tns:char1" />
+          <xsd:element name="LOC_ZEROVAT" type="tns:char1" />
+          <xsd:element name="LOC_ACTCODE" type="tns:char1" />
+          <xsd:element name="LOC_DISTTYPE" type="tns:char1" />
+          <xsd:element name="LOC_TXRELCLAS" type="tns:char1" />
+          <xsd:element name="CALC_MOTIVE" type="tns:char1" />
+          <xsd:element name="FUND" type="tns:char1" />
+          <xsd:element name="FUNDS_CTR" type="tns:char1" />
+          <xsd:element name="CMMT_ITEM" type="tns:char1" />
+          <xsd:element name="GRANT_NBR" type="tns:char1" />
+          <xsd:element name="BUDGET_PERIOD" type="tns:char1" />
+          <xsd:element name="TAXLAWISS" type="tns:char1" />
+          <xsd:element name="TAXLAWCOFINS" type="tns:char1" />
+          <xsd:element name="TAXLAWPIS" type="tns:char1" />
+          <xsd:element name="TREASURY_ACC_SYMBOL" type="tns:char1" />
+          <xsd:element name="BUSINESS_EVENT_TCODE" type="tns:char1" />
+          <xsd:element name="MODIFICATION_ALLOWED" type="tns:char1" />
+          <xsd:element name="CANCELLATION_ALLOWED" type="tns:char1" />
+          <xsd:element name="PAYMENT_METHODS" type="tns:char1" />
+          <xsd:element name="BUSINESS_PARTNER_NO" type="tns:char1" />
+          <xsd:element name="REPORTING_FREQ" type="tns:char1" />
+          <xsd:element name="CFOP_LONG" type="tns:char1" />
+          <xsd:element name="SEPA_MANDATE_ID" type="tns:char1" />
+          <xsd:element name="REQ_SEGMENT" type="tns:char1" />
+          <xsd:element name="TP_SUBLEVL" type="tns:char1" />
+          <xsd:element name="TP_AGENCID" type="tns:char1" />
+          <xsd:element name="TP_ALTRAID" type="tns:char1" />
+          <xsd:element name="TP_BEGPER" type="tns:char1" />
+          <xsd:element name="TP_ENDPER" type="tns:char1" />
+          <xsd:element name="TP_AVTYPE" type="tns:char1" />
+          <xsd:element name="TP_MAIN_ACCT" type="tns:char1" />
+          <xsd:element name="TP_SUB_ACCT" type="tns:char1" />
+          <xsd:element name="TP_BETC" type="tns:char1" />
+          <xsd:element name="REVACC_REFID" type="tns:char1" />
+          <xsd:element name="REVACC_REFTYPE" type="tns:char1" />
+          <xsd:element name="REF_DOC_CA_LONG" type="tns:char1" />
+          <xsd:element name="INCOTERMSV" type="tns:char1" />
+          <xsd:element name="INCOTERMS2L" type="tns:char1" />
+          <xsd:element name="INCOTERMS3L" type="tns:char1" />
+          <xsd:element name="MATERIAL_LONG" type="tns:char1" />
+          <xsd:element name="PR_REF_MAT_LONG" type="tns:char1" />
+          <xsd:element name="MAT_ENTRD_LONG" type="tns:char1" />
+          <xsd:element name="PO_QUAN" type="tns:char1" />
+          <xsd:element name="PO_UNIT" type="tns:char1" />
+          <xsd:element name="REQ_SEG_LONG" type="tns:char1" />
+          <xsd:element name="TXS_BUSINESS_TRANSACTION" type="tns:char1" />
+          <xsd:element name="TXS_MATERIAL_USAGE" type="tns:char1" />
+          <xsd:element name="TXS_USAGE_PURPOSE" type="tns:char1" />
+          <xsd:element name="SERVICE_DOC_TYPE" type="tns:char1" />
+          <xsd:element name="SERVICE_DOC_ID" type="tns:char1" />
+          <xsd:element name="SERVICE_DOC_ITEM_ID" type="tns:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_S_SIMULATION_PROPERTIES">
+        <xsd:sequence>
+          <xsd:element name="SEL_BY_ATP_ONLY" type="tns:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPICUCFG">
+        <xsd:sequence>
+          <xsd:element name="POSEX" type="tns:char6" />
+          <xsd:element name="CONFIG_ID" type="tns:char6" />
+          <xsd:element name="ROOT_ID" type="tns:char8" />
+          <xsd:element name="SCE" type="tns:char1" />
+          <xsd:element name="KBNAME" type="tns:char30" />
+          <xsd:element name="KBVERSION" type="tns:char30" />
+          <xsd:element name="COMPLETE" type="tns:char1" />
+          <xsd:element name="CONSISTENT" type="tns:char1" />
+          <xsd:element name="CFGINFO" type="tns:char250" />
+          <xsd:element name="KBPROFILE" type="tns:char30" />
+          <xsd:element name="KBLANGUAGE" type="tns:lang" />
+          <xsd:element name="CBASE_ID" type="tns:char32" />
+          <xsd:element name="CBASE_ID_TYPE" type="tns:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPISCHDL">
+        <xsd:sequence>
+          <xsd:element name="ITM_NUMBER" type="tns:numeric6" />
+          <xsd:element name="SCHED_LINE" type="tns:numeric4" />
+          <xsd:element name="REQ_DATE" type="tns:date10" />
+          <xsd:element name="DATE_TYPE" type="tns:char1" />
+          <xsd:element name="REQ_TIME" type="tns:time" />
+          <xsd:element name="REQ_QTY" type="tns:quantum13.3" />
+          <xsd:element name="REQ_DLV_BL" type="tns:char2" />
+          <xsd:element name="SCHED_TYPE" type="tns:char2" />
+          <xsd:element name="TP_DATE" type="tns:date10" />
+          <xsd:element name="MS_DATE" type="tns:date10" />
+          <xsd:element name="LOAD_DATE" type="tns:date10" />
+          <xsd:element name="GI_DATE" type="tns:date10" />
+          <xsd:element name="TP_TIME" type="tns:time" />
+          <xsd:element name="MS_TIME" type="tns:time" />
+          <xsd:element name="LOAD_TIME" type="tns:time" />
+          <xsd:element name="GI_TIME" type="tns:time" />
+          <xsd:element name="REFOBJTYPE" type="tns:char10" />
+          <xsd:element name="REFOBJKEY" type="tns:char70" />
+          <xsd:element name="REFLOGSYS" type="tns:char10" />
+          <xsd:element name="DLV_DATE" type="tns:date10" />
+          <xsd:element name="DLV_TIME" type="tns:time" />
+          <xsd:element name="REL_TYPE" type="tns:char1" />
+          <xsd:element name="PLAN_SCHED_TYPE" type="tns:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPICUPRT">
+        <xsd:sequence>
+          <xsd:element name="CONFIG_ID" type="tns:char6" />
+          <xsd:element name="PARENT_ID" type="tns:char8" />
+          <xsd:element name="INST_ID" type="tns:char8" />
+          <xsd:element name="PART_OF_NO" type="tns:char4" />
+          <xsd:element name="OBJ_TYPE" type="tns:char10" />
+          <xsd:element name="CLASS_TYPE" type="tns:char3" />
+          <xsd:element name="OBJ_KEY" type="tns:char50" />
+          <xsd:element name="AUTHOR" type="tns:char1" />
+          <xsd:element name="SALES_RELEVANT" type="tns:char1" />
+          <xsd:element name="PART_OF_GUID" type="tns:char32" />
+          <xsd:element name="BOM_IDENT" type="tns:char8" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPICUBLB">
+        <xsd:sequence>
+          <xsd:element name="CONFIG_ID" type="tns:char6" />
+          <xsd:element name="CONTEXT" type="tns:char250" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPISDHD1">
+        <xsd:sequence>
+          <xsd:element name="REFOBJTYPE" type="tns:char10" />
+          <xsd:element name="REFOBJKEY" type="tns:char70" />
+          <xsd:element name="REFDOCTYPE" type="tns:char10" />
+          <xsd:element name="DOC_TYPE" type="tns:char4" />
+          <xsd:element name="COLLECT_NO" type="tns:char10" />
+          <xsd:element name="SALES_ORG" type="tns:char4" />
+          <xsd:element name="DISTR_CHAN" type="tns:char2" />
+          <xsd:element name="DIVISION" type="tns:char2" />
+          <xsd:element name="SALES_GRP" type="tns:char3" />
+          <xsd:element name="SALES_OFF" type="tns:char4" />
+          <xsd:element name="REQ_DATE_H" type="tns:date10" />
+          <xsd:element name="DATE_TYPE" type="tns:char1" />
+          <xsd:element name="PURCH_DATE" type="tns:date10" />
+          <xsd:element name="PO_METHOD" type="tns:char4" />
+          <xsd:element name="PO_SUPPLEM" type="tns:char4" />
+          <xsd:element name="REF_1" type="tns:char12" />
+          <xsd:element name="NAME" type="tns:char35" />
+          <xsd:element name="TELEPHONE" type="tns:char16" />
+          <xsd:element name="PRICE_GRP" type="tns:char2" />
+          <xsd:element name="CUST_GROUP" type="tns:char2" />
+          <xsd:element name="SALES_DIST" type="tns:char6" />
+          <xsd:element name="PRICE_LIST" type="tns:char2" />
+          <xsd:element name="INCOTERMS1" type="tns:char3" />
+          <xsd:element name="INCOTERMS2" type="tns:char28" />
+          <xsd:element name="PMNTTRMS" type="tns:char4" />
+          <xsd:element name="DLV_BLOCK" type="tns:char2" />
+          <xsd:element name="BILL_BLOCK" type="tns:char2" />
+          <xsd:element name="ORD_REASON" type="tns:char3" />
+          <xsd:element name="COMPL_DLV" type="tns:char1" />
+          <xsd:element name="PRICE_DATE" type="tns:date10" />
+          <xsd:element name="QT_VALID_F" type="tns:date10" />
+          <xsd:element name="QT_VALID_T" type="tns:date10" />
+          <xsd:element name="CT_VALID_F" type="tns:date10" />
+          <xsd:element name="CT_VALID_T" type="tns:date10" />
+          <xsd:element name="CUST_GRP1" type="tns:char3" />
+          <xsd:element name="CUST_GRP2" type="tns:char3" />
+          <xsd:element name="CUST_GRP3" type="tns:char3" />
+          <xsd:element name="CUST_GRP4" type="tns:char3" />
+          <xsd:element name="CUST_GRP5" type="tns:char3" />
+          <xsd:element name="PURCH_NO_C" type="tns:char35" />
+          <xsd:element name="PURCH_NO_S" type="tns:char35" />
+          <xsd:element name="PO_DAT_S" type="tns:date10" />
+          <xsd:element name="PO_METH_S" type="tns:char4" />
+          <xsd:element name="REF_1_S" type="tns:char12" />
+          <xsd:element name="SD_DOC_CAT" type="tns:char1" />
+          <xsd:element name="DOC_DATE" type="tns:date10" />
+          <xsd:element name="WAR_DATE" type="tns:date10" />
+          <xsd:element name="SHIP_COND" type="tns:char2" />
+          <xsd:element name="PP_SEARCH" type="tns:char40" />
+          <xsd:element name="DUN_COUNT" type="tns:decimal3.0" />
+          <xsd:element name="DUN_DATE" type="tns:date10" />
+          <xsd:element name="DLVSCHDUSE" type="tns:char3" />
+          <xsd:element name="PLDLVSTYP" type="tns:char1" />
+          <xsd:element name="REF_DOC" type="tns:char10" />
+          <xsd:element name="COMP_CDE_B" type="tns:char4" />
+          <xsd:element name="ALTTAX_CLS" type="tns:char1" />
+          <xsd:element name="TAX_CLASS2" type="tns:char1" />
+          <xsd:element name="TAX_CLASS3" type="tns:char1" />
+          <xsd:element name="TAX_CLASS4" type="tns:char1" />
+          <xsd:element name="TAX_CLASS5" type="tns:char1" />
+          <xsd:element name="TAX_CLASS6" type="tns:char1" />
+          <xsd:element name="TAX_CLASS7" type="tns:char1" />
+          <xsd:element name="TAX_CLASS8" type="tns:char1" />
+          <xsd:element name="TAX_CLASS9" type="tns:char1" />
+          <xsd:element name="REF_DOC_L" type="tns:char16" />
+          <xsd:element name="ASS_NUMBER" type="tns:char18" />
+          <xsd:element name="REFDOC_CAT" type="tns:char1" />
+          <xsd:element name="ORDCOMB_IN" type="tns:char1" />
+          <xsd:element name="BILL_SCHED" type="tns:char2" />
+          <xsd:element name="INVO_SCHED" type="tns:char2" />
+          <xsd:element name="MN_INVOICE" type="tns:char1" />
+          <xsd:element name="EXRATE_FI" type="tns:decimal9.5" />
+          <xsd:element name="ADD_VAL_DY" type="tns:numeric2" />
+          <xsd:element name="FIX_VAL_DY" type="tns:date10" />
+          <xsd:element name="PYMT_METH" type="tns:char1" />
+          <xsd:element name="ACCNT_ASGN" type="tns:char2" />
+          <xsd:element name="EXCHG_RATE" type="tns:decimal9.5" />
+          <xsd:element name="BILL_DATE" type="tns:date10" />
+          <xsd:element name="SERV_DATE" type="tns:date10" />
+          <xsd:element name="DUNN_KEY" type="tns:char1" />
+          <xsd:element name="DUNN_BLOCK" type="tns:char1" />
+          <xsd:element name="PMTGAR_PRO" type="tns:char6" />
+          <xsd:element name="DEPARTM_NO" type="tns:char4" />
+          <xsd:element name="REC_POINT" type="tns:char25" />
+          <xsd:element name="DOC_NUM_FI" type="tns:char10" />
+          <xsd:element name="CSTCNDGRP1" type="tns:char2" />
+          <xsd:element name="CSTCNDGRP2" type="tns:char2" />
+          <xsd:element name="CSTCNDGRP3" type="tns:char2" />
+          <xsd:element name="CSTCNDGRP4" type="tns:char2" />
+          <xsd:element name="CSTCNDGRP5" type="tns:char2" />
+          <xsd:element name="DLV_TIME" type="tns:char3" />
+          <xsd:element name="CURRENCY" type="tns:cuky5" />
+          <xsd:element name="CURR_ISO" type="tns:char3" />
+          <xsd:element name="CREATED_BY" type="tns:char12" />
+          <xsd:element name="TAXDEP_CTY" type="tns:char3" />
+          <xsd:element name="TAXDST_CTY" type="tns:char3" />
+          <xsd:element name="EUTRI_DEAL" type="tns:char1" />
+          <xsd:element name="MAST_CONTR" type="tns:char10" />
+          <xsd:element name="REF_PROC" type="tns:char4" />
+          <xsd:element name="CHKPRTAUTH" type="tns:char1" />
+          <xsd:element name="CMLQTY_DAT" type="tns:date10" />
+          <xsd:element name="VERSION" type="tns:char12" />
+          <xsd:element name="NOTIF_NO" type="tns:char12" />
+          <xsd:element name="WBS_ELEM" type="tns:char24" />
+          <xsd:element name="EXCH_RATE_FI_V" type="tns:decimal9.5" />
+          <xsd:element name="EXCHG_RATE_V" type="tns:decimal9.5" />
+          <xsd:element name="FKK_CONACCT" type="tns:char12" />
+          <xsd:element name="CAMPAIGN" type="tns:byte16" />
+          <xsd:element name="DOC_CLASS" type="tns:char9" />
+          <xsd:element name="H_CURR" type="tns:cuky5" />
+          <xsd:element name="H_CURR_ISO" type="tns:char3" />
+          <xsd:element name="SHIP_TYPE" type="tns:char2" />
+          <xsd:element name="S_PROC_IND" type="tns:char4" />
+          <xsd:element name="REF_DOC_L_LONG" type="tns:char35" />
+          <xsd:element name="LINE_TIME" type="tns:time" />
+          <xsd:element name="CALC_MOTIVE" type="tns:char2" />
+          <xsd:element name="PSM_PSTNG_DATE" type="tns:date10" />
+          <xsd:element name="TREASURY_ACC_SYMBOL" type="tns:char30" />
+          <xsd:element name="BUSINESS_EVENT_TCODE" type="tns:char10" />
+          <xsd:element name="MODIFICATION_ALLOWED" type="tns:char1" />
+          <xsd:element name="CANCELLATION_ALLOWED" type="tns:char1" />
+          <xsd:element name="PAYMENT_METHODS" type="tns:char10" />
+          <xsd:element name="BUSINESS_PARTNER_NO" type="tns:char6" />
+          <xsd:element name="REPORTING_FREQ" type="tns:char3" />
+          <xsd:element name="SEPA_MANDATE_ID" type="tns:char35" />
+          <xsd:element name="SD_DOC_CAT_LONG" type="tns:char4" />
+          <xsd:element name="REFDOC_CAT_LONG" type="tns:char4" />
+          <xsd:element name="INCOTERMSV" type="tns:char4" />
+          <xsd:element name="INCOTERMS2L" type="tns:char70" />
+          <xsd:element name="INCOTERMS3L" type="tns:char70" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPISDHD1X">
+        <xsd:sequence>
+          <xsd:element name="UPDATEFLAG" type="tns:char1" />
+          <xsd:element name="DOC_TYPE" type="tns:char1" />
+          <xsd:element name="COLLECT_NO" type="tns:char1" />
+          <xsd:element name="SALES_ORG" type="tns:char1" />
+          <xsd:element name="DISTR_CHAN" type="tns:char1" />
+          <xsd:element name="DIVISION" type="tns:char1" />
+          <xsd:element name="SALES_GRP" type="tns:char1" />
+          <xsd:element name="SALES_OFF" type="tns:char1" />
+          <xsd:element name="REQ_DATE_H" type="tns:char1" />
+          <xsd:element name="DATE_TYPE" type="tns:char1" />
+          <xsd:element name="PURCH_DATE" type="tns:char1" />
+          <xsd:element name="PO_METHOD" type="tns:char1" />
+          <xsd:element name="PO_SUPPLEM" type="tns:char1" />
+          <xsd:element name="REF_1" type="tns:char1" />
+          <xsd:element name="NAME" type="tns:char1" />
+          <xsd:element name="TELEPHONE" type="tns:char1" />
+          <xsd:element name="PRICE_GRP" type="tns:char1" />
+          <xsd:element name="CUST_GROUP" type="tns:char1" />
+          <xsd:element name="SALES_DIST" type="tns:char1" />
+          <xsd:element name="PRICE_LIST" type="tns:char1" />
+          <xsd:element name="INCOTERMS1" type="tns:char1" />
+          <xsd:element name="INCOTERMS2" type="tns:char1" />
+          <xsd:element name="PMNTTRMS" type="tns:char1" />
+          <xsd:element name="DLV_BLOCK" type="tns:char1" />
+          <xsd:element name="BILL_BLOCK" type="tns:char1" />
+          <xsd:element name="ORD_REASON" type="tns:char1" />
+          <xsd:element name="COMPL_DLV" type="tns:char1" />
+          <xsd:element name="PRICE_DATE" type="tns:char1" />
+          <xsd:element name="QT_VALID_F" type="tns:char1" />
+          <xsd:element name="QT_VALID_T" type="tns:char1" />
+          <xsd:element name="CT_VALID_F" type="tns:char1" />
+          <xsd:element name="CT_VALID_T" type="tns:char1" />
+          <xsd:element name="CUST_GRP1" type="tns:char1" />
+          <xsd:element name="CUST_GRP2" type="tns:char1" />
+          <xsd:element name="CUST_GRP3" type="tns:char1" />
+          <xsd:element name="CUST_GRP4" type="tns:char1" />
+          <xsd:element name="CUST_GRP5" type="tns:char1" />
+          <xsd:element name="PURCH_NO_C" type="tns:char1" />
+          <xsd:element name="PURCH_NO_S" type="tns:char1" />
+          <xsd:element name="PO_DAT_S" type="tns:char1" />
+          <xsd:element name="PO_METH_S" type="tns:char1" />
+          <xsd:element name="REF_1_S" type="tns:char1" />
+          <xsd:element name="SD_DOC_CAT" type="tns:char1" />
+          <xsd:element name="DOC_DATE" type="tns:char1" />
+          <xsd:element name="WAR_DATE" type="tns:char1" />
+          <xsd:element name="SHIP_COND" type="tns:char1" />
+          <xsd:element name="PP_SEARCH" type="tns:char1" />
+          <xsd:element name="DUN_COUNT" type="tns:char1" />
+          <xsd:element name="DUN_DATE" type="tns:char1" />
+          <xsd:element name="DLVSCHDUSE" type="tns:char1" />
+          <xsd:element name="PLDLVSTYP" type="tns:char1" />
+          <xsd:element name="REF_DOC" type="tns:char1" />
+          <xsd:element name="COMP_CDE_B" type="tns:char1" />
+          <xsd:element name="ALTTAX_CLS" type="tns:char1" />
+          <xsd:element name="TAX_CLASS2" type="tns:char1" />
+          <xsd:element name="TAX_CLASS3" type="tns:char1" />
+          <xsd:element name="TAX_CLASS4" type="tns:char1" />
+          <xsd:element name="TAX_CLASS5" type="tns:char1" />
+          <xsd:element name="TAX_CLASS6" type="tns:char1" />
+          <xsd:element name="TAX_CLASS7" type="tns:char1" />
+          <xsd:element name="TAX_CLASS8" type="tns:char1" />
+          <xsd:element name="TAX_CLASS9" type="tns:char1" />
+          <xsd:element name="REF_DOC_L" type="tns:char1" />
+          <xsd:element name="ASS_NUMBER" type="tns:char1" />
+          <xsd:element name="REFDOC_CAT" type="tns:char1" />
+          <xsd:element name="ORDCOMB_IN" type="tns:char1" />
+          <xsd:element name="BILL_SCHED" type="tns:char1" />
+          <xsd:element name="INVO_SCHED" type="tns:char1" />
+          <xsd:element name="MN_INVOICE" type="tns:char1" />
+          <xsd:element name="EXRATE_FI" type="tns:char1" />
+          <xsd:element name="ADD_VAL_DY" type="tns:char1" />
+          <xsd:element name="FIX_VAL_DY" type="tns:char1" />
+          <xsd:element name="PYMT_METH" type="tns:char1" />
+          <xsd:element name="ACCNT_ASGN" type="tns:char1" />
+          <xsd:element name="EXCHG_RATE" type="tns:char1" />
+          <xsd:element name="BILL_DATE" type="tns:char1" />
+          <xsd:element name="SERV_DATE" type="tns:char1" />
+          <xsd:element name="DUNN_KEY" type="tns:char1" />
+          <xsd:element name="DUNN_BLOCK" type="tns:char1" />
+          <xsd:element name="PROMOTION" type="tns:char1" />
+          <xsd:element name="PMTGAR_PRO" type="tns:char1" />
+          <xsd:element name="DEPARTM_NO" type="tns:char1" />
+          <xsd:element name="REC_POINT" type="tns:char1" />
+          <xsd:element name="POITM_NO_S" type="tns:char1" />
+          <xsd:element name="DOC_NUM_FI" type="tns:char1" />
+          <xsd:element name="CSTCNDGRP1" type="tns:char1" />
+          <xsd:element name="CSTCNDGRP2" type="tns:char1" />
+          <xsd:element name="CSTCNDGRP3" type="tns:char1" />
+          <xsd:element name="CSTCNDGRP4" type="tns:char1" />
+          <xsd:element name="CSTCNDGRP5" type="tns:char1" />
+          <xsd:element name="DLV_TIME" type="tns:char1" />
+          <xsd:element name="CURRENCY" type="tns:char1" />
+          <xsd:element name="TAXDEP_CTY" type="tns:char1" />
+          <xsd:element name="TAXDST_CTY" type="tns:char1" />
+          <xsd:element name="EUTRI_DEAL" type="tns:char1" />
+          <xsd:element name="MAST_CONTR" type="tns:char1" />
+          <xsd:element name="REF_PROC" type="tns:char1" />
+          <xsd:element name="CHKPRTAUTH" type="tns:char1" />
+          <xsd:element name="CMLQTY_DAT" type="tns:char1" />
+          <xsd:element name="VERSION" type="tns:char1" />
+          <xsd:element name="NOTIF_NO" type="tns:char1" />
+          <xsd:element name="WBS_ELEM" type="tns:char1" />
+          <xsd:element name="EXCH_RATE_FI_V" type="tns:char1" />
+          <xsd:element name="EXCHG_RATE_V" type="tns:char1" />
+          <xsd:element name="FKK_CONACCT" type="tns:char1" />
+          <xsd:element name="CAMPAIGN" type="tns:char1" />
+          <xsd:element name="DOC_CLASS" type="tns:char1" />
+          <xsd:element name="H_CURR" type="tns:char1" />
+          <xsd:element name="SHIP_TYPE" type="tns:char1" />
+          <xsd:element name="S_PROC_IND" type="tns:char1" />
+          <xsd:element name="LINE_TIME" type="tns:char1" />
+          <xsd:element name="CALC_MOTIVE" type="tns:char1" />
+          <xsd:element name="PSM_PSTNG_DATE" type="tns:char1" />
+          <xsd:element name="TREASURY_ACC_SYMBOL" type="tns:char1" />
+          <xsd:element name="BUSINESS_EVENT_TCODE" type="tns:char1" />
+          <xsd:element name="MODIFICATION_ALLOWED" type="tns:char1" />
+          <xsd:element name="CANCELLATION_ALLOWED" type="tns:char1" />
+          <xsd:element name="PAYMENT_METHODS" type="tns:char1" />
+          <xsd:element name="BUSINESS_PARTNER_NO" type="tns:char1" />
+          <xsd:element name="REPORTING_FREQ" type="tns:char1" />
+          <xsd:element name="SEPA_MANDATE_ID" type="tns:char1" />
+          <xsd:element name="SD_DOC_CAT_LONG" type="tns:char1" />
+          <xsd:element name="REFDOC_CAT_LONG" type="tns:char1" />
+          <xsd:element name="INCOTERMSV" type="tns:char1" />
+          <xsd:element name="INCOTERMS2L" type="tns:char1" />
+          <xsd:element name="INCOTERMS3L" type="tns:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPICUINS">
+        <xsd:sequence>
+          <xsd:element name="CONFIG_ID" type="tns:char6" />
+          <xsd:element name="INST_ID" type="tns:char8" />
+          <xsd:element name="OBJ_TYPE" type="tns:char10" />
+          <xsd:element name="CLASS_TYPE" type="tns:char3" />
+          <xsd:element name="OBJ_KEY" type="tns:char50" />
+          <xsd:element name="OBJ_TXT" type="tns:char70" />
+          <xsd:element name="QUANTITY" type="tns:char15" />
+          <xsd:element name="AUTHOR" type="tns:char1" />
+          <xsd:element name="QUANTITY_UNIT" type="tns:unit3" />
+          <xsd:element name="COMPLETE" type="tns:char1" />
+          <xsd:element name="CONSISTENT" type="tns:char1" />
+          <xsd:element name="OBJECT_GUID" type="tns:char32" />
+          <xsd:element name="PERSIST_ID" type="tns:char32" />
+          <xsd:element name="PERSIST_ID_TYPE" type="tns:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPIPAREX">
+        <xsd:sequence>
+          <xsd:element name="STRUCTURE" type="tns:char30" />
+          <xsd:element name="VALUEPART1" type="tns:char240" />
+          <xsd:element name="VALUEPART2" type="tns:char240" />
+          <xsd:element name="VALUEPART3" type="tns:char240" />
+          <xsd:element name="VALUEPART4" type="tns:char240" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPIPARNR">
+        <xsd:sequence>
+          <xsd:element name="PARTN_ROLE" type="tns:char2" />
+          <xsd:element name="PARTN_NUMB" type="tns:char10" />
+          <xsd:element name="ITM_NUMBER" type="tns:numeric6" />
+          <xsd:element name="TITLE" type="tns:char15" />
+          <xsd:element name="NAME" type="tns:char35" />
+          <xsd:element name="NAME_2" type="tns:char35" />
+          <xsd:element name="NAME_3" type="tns:char35" />
+          <xsd:element name="NAME_4" type="tns:char35" />
+          <xsd:element name="STREET" type="tns:char35" />
+          <xsd:element name="COUNTRY" type="tns:char3" />
+          <xsd:element name="COUNTR_ISO" type="tns:char2" />
+          <xsd:element name="POSTL_CODE" type="tns:char10" />
+          <xsd:element name="POBX_PCD" type="tns:char10" />
+          <xsd:element name="POBX_CTY" type="tns:char35" />
+          <xsd:element name="CITY" type="tns:char35" />
+          <xsd:element name="DISTRICT" type="tns:char35" />
+          <xsd:element name="REGION" type="tns:char3" />
+          <xsd:element name="PO_BOX" type="tns:char10" />
+          <xsd:element name="TELEPHONE" type="tns:char16" />
+          <xsd:element name="TELEPHONE2" type="tns:char16" />
+          <xsd:element name="TELEBOX" type="tns:char15" />
+          <xsd:element name="FAX_NUMBER" type="tns:char31" />
+          <xsd:element name="TELETEX_NO" type="tns:char30" />
+          <xsd:element name="TELEX_NO" type="tns:char30" />
+          <xsd:element name="LANGU" type="tns:lang" />
+          <xsd:element name="LANGU_ISO" type="tns:char2" />
+          <xsd:element name="UNLOAD_PT" type="tns:char25" />
+          <xsd:element name="TRANSPZONE" type="tns:char10" />
+          <xsd:element name="TAXJURCODE" type="tns:char15" />
+          <xsd:element name="ADDRESS" type="tns:char10" />
+          <xsd:element name="PRIV_ADDR" type="tns:char10" />
+          <xsd:element name="ADDR_TYPE" type="tns:char1" />
+          <xsd:element name="ADDR_ORIG" type="tns:char1" />
+          <xsd:element name="ADDR_LINK" type="tns:char10" />
+          <xsd:element name="REFOBJTYPE" type="tns:char10" />
+          <xsd:element name="REFOBJKEY" type="tns:char70" />
+          <xsd:element name="REFLOGSYS" type="tns:char10" />
+          <xsd:element name="VAT_REG_NO" type="tns:char20" />
+          <xsd:element name="ADDRESSGUID" type="tns:char32" />
+          <xsd:element name="EXTERNALADDRESSNUMBER" type="tns:char20" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPISDLS">
+        <xsd:sequence>
+          <xsd:element name="PRICING" type="tns:char1" />
+          <xsd:element name="ATP_WRKMOD" type="tns:char1" />
+          <xsd:element name="SCHEDULING" type="tns:char1" />
+          <xsd:element name="NOSTRUCTURE" type="tns:char1" />
+          <xsd:element name="COND_HANDL" type="tns:char1" />
+          <xsd:element name="ADDR_CHECK" type="tns:char1" />
+          <xsd:element name="FSH_COPY_REF" type="tns:char1" />
+          <xsd:element name="NO_CREDIT_CHECK" type="tns:char1" />
+          <xsd:element name="NO_ATP" type="tns:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPICUREF">
+        <xsd:sequence>
+          <xsd:element name="POSEX" type="tns:char6" />
+          <xsd:element name="CONFIG_ID" type="tns:char6" />
+          <xsd:element name="INST_ID" type="tns:char8" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_S_SYS_ADM_DATA">
+        <xsd:sequence>
+          <xsd:element name="LANGU" type="tns:char2" />
+          <xsd:element name="UNAME" type="tns:char12" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_S_SLS_ORDER_DATA">
+        <xsd:sequence>
+          <xsd:element name="OPERATION" type="tns:char3" />
+          <xsd:element name="DOC_NUMBER" type="tns:char10" />
+          <xsd:element name="REC_DATE" type="tns:date10" />
+          <xsd:element name="REC_TIME" type="tns:time" />
+          <xsd:element name="CREATED_BY" type="tns:char12" />
+          <xsd:element name="QT_VALID_F" type="tns:date10" />
+          <xsd:element name="QT_VALID_T" type="tns:date10" />
+          <xsd:element name="DOC_DATE" type="tns:date10" />
+          <xsd:element name="SD_DOC_CAT" type="tns:char1" />
+          <xsd:element name="TRAN_GROUP" type="tns:char1" />
+          <xsd:element name="DOC_TYPE" type="tns:char4" />
+          <xsd:element name="ORD_REASON" type="tns:char3" />
+          <xsd:element name="WAR_DATE" type="tns:date10" />
+          <xsd:element name="SD_COL_NUM" type="tns:char10" />
+          <xsd:element name="DLV_BLOCK" type="tns:char2" />
+          <xsd:element name="BILL_BLOCK" type="tns:char2" />
+          <xsd:element name="NET_VAL_HD" type="tns:decimal28.9" />
+          <xsd:element name="CURRENCY" type="tns:cuky5" />
+          <xsd:element name="CURREN_ISO" type="tns:char3" />
+          <xsd:element name="SALES_ORG" type="tns:char4" />
+          <xsd:element name="DISTR_CHAN" type="tns:char2" />
+          <xsd:element name="DIVISION" type="tns:char2" />
+          <xsd:element name="SALES_GRP" type="tns:char3" />
+          <xsd:element name="SALES_OFF" type="tns:char4" />
+          <xsd:element name="BUS_AREA" type="tns:char4" />
+          <xsd:element name="CT_AREA" type="tns:char4" />
+          <xsd:element name="CT_VALID_F" type="tns:date10" />
+          <xsd:element name="CT_VALID_T" type="tns:date10" />
+          <xsd:element name="CONDITIONS" type="tns:char10" />
+          <xsd:element name="REQ_DATE_H" type="tns:date10" />
+          <xsd:element name="DATE_TYPE" type="tns:char1" />
+          <xsd:element name="COMPL_DLV" type="tns:char1" />
+          <xsd:element name="DOC_CLASS" type="tns:char9" />
+          <xsd:element name="DOC_INDIC" type="tns:char1" />
+          <xsd:element name="SD_PRIC_PR" type="tns:char6" />
+          <xsd:element name="SHIP_COND" type="tns:char2" />
+          <xsd:element name="ORDBILLTYP" type="tns:char4" />
+          <xsd:element name="ORD_PROBAB" type="tns:numeric3" />
+          <xsd:element name="SEAR_PRPR" type="tns:char40" />
+          <xsd:element name="PURCH_NO" type="tns:char20" />
+          <xsd:element name="PO_METHOD" type="tns:char4" />
+          <xsd:element name="PURCH_DATE" type="tns:date10" />
+          <xsd:element name="PO_SUPPLEM" type="tns:char4" />
+          <xsd:element name="REF_1" type="tns:char12" />
+          <xsd:element name="ORDERER_NA" type="tns:char35" />
+          <xsd:element name="TELEPHONE" type="tns:char16" />
+          <xsd:element name="DUN_COUNT" type="tns:decimal3.0" />
+          <xsd:element name="DUN_DATE" type="tns:date10" />
+          <xsd:element name="SOLD_TO" type="tns:char10" />
+          <xsd:element name="COSTCENTER" type="tns:char10" />
+          <xsd:element name="UPDATE_GRP" type="tns:char6" />
+          <xsd:element name="STAT_CURR" type="tns:cuky5" />
+          <xsd:element name="ISOSTATCUR" type="tns:char3" />
+          <xsd:element name="CH_ON" type="tns:date10" />
+          <xsd:element name="CUST_GRP1" type="tns:char3" />
+          <xsd:element name="CUST_GRP2" type="tns:char3" />
+          <xsd:element name="CUST_GRP3" type="tns:char3" />
+          <xsd:element name="CUST_GRP4" type="tns:char3" />
+          <xsd:element name="CUST_GRP5" type="tns:char3" />
+          <xsd:element name="AGREE_COND" type="tns:char10" />
+          <xsd:element name="CO_AREA" type="tns:char4" />
+          <xsd:element name="WBS_ELEM" type="tns:numeric8" />
+          <xsd:element name="EXCHG_RATE" type="tns:char4" />
+          <xsd:element name="C_CTR_AREA" type="tns:char4" />
+          <xsd:element name="CRED_ACCNT" type="tns:char10" />
+          <xsd:element name="CRED_GROUP" type="tns:char4" />
+          <xsd:element name="REPR_GROUP" type="tns:char3" />
+          <xsd:element name="RISK_CATEG" type="tns:char3" />
+          <xsd:element name="CURR_CRED" type="tns:cuky5" />
+          <xsd:element name="ISOCURRCRE" type="tns:char3" />
+          <xsd:element name="REL_DAT_DD" type="tns:date10" />
+          <xsd:element name="NEXT_CHDAT" type="tns:date10" />
+          <xsd:element name="NEXT_DATE" type="tns:date10" />
+          <xsd:element name="REL_CREDIT" type="tns:decimal28.9" />
+          <xsd:element name="HI_TYPE_PR" type="tns:char1" />
+          <xsd:element name="DLVSCHEDUS" type="tns:char3" />
+          <xsd:element name="PLAN_DLV" type="tns:char1" />
+          <xsd:element name="REF_DOC" type="tns:char10" />
+          <xsd:element name="OB_JNR_HD" type="tns:char22" />
+          <xsd:element name="COMP_CODE" type="tns:char4" />
+          <xsd:element name="ALT_TAX_CL" type="tns:char1" />
+          <xsd:element name="TAX_CLASS2" type="tns:char1" />
+          <xsd:element name="TAX_CLASS3" type="tns:char1" />
+          <xsd:element name="TAX_CLASS4" type="tns:char1" />
+          <xsd:element name="TAX_CLASS5" type="tns:char1" />
+          <xsd:element name="TAX_CLASS6" type="tns:char1" />
+          <xsd:element name="TAX_CLASS7" type="tns:char1" />
+          <xsd:element name="TAX_CLASS8" type="tns:char1" />
+          <xsd:element name="TAX_CLASS9" type="tns:char1" />
+          <xsd:element name="REF_DOC_L" type="tns:char16" />
+          <xsd:element name="ASS_NUMBER" type="tns:char18" />
+          <xsd:element name="DOC_CAT_SD" type="tns:char1" />
+          <xsd:element name="KALSM_CH" type="tns:char6" />
+          <xsd:element name="ACC_PERIOD" type="tns:numeric2" />
+          <xsd:element name="ORDERID" type="tns:char12" />
+          <xsd:element name="NOTIF_NO" type="tns:char12" />
+          <xsd:element name="MASTER_CON" type="tns:char10" />
+          <xsd:element name="REF_PROC" type="tns:char4" />
+          <xsd:element name="CHECK_PART" type="tns:char1" />
+          <xsd:element name="PICK_UP_DA" type="tns:date10" />
+          <xsd:element name="PICK_UP_T1" type="tns:time" />
+          <xsd:element name="PICK_UP_T2" type="tns:time" />
+          <xsd:element name="NUM_PAY_CA" type="tns:char10" />
+          <xsd:element name="LINE_TIME" type="tns:time" />
+          <xsd:element name="TAX_DEST_CT" type="tns:char3" />
+          <xsd:element name="ISOTAXDEST" type="tns:char2" />
+          <xsd:element name="TAX_DEPART" type="tns:char3" />
+          <xsd:element name="ISOTAXDEPA" type="tns:char2" />
+          <xsd:element name="EU_TRIANG" type="tns:char1" />
+          <xsd:element name="MAST_CONTR" type="tns:char1" />
+          <xsd:element name="CML_QTY_DA" type="tns:date10" />
+          <xsd:element name="MS_DATE" type="tns:date10" />
+          <xsd:element name="VERSION" type="tns:char12" />
+          <xsd:element name="REF_DOC_L_LONG" type="tns:char35" />
+          <xsd:element name="CRM_GUID" type="tns:char70" />
+          <xsd:element name="SD_DOC_CAT_LONG" type="tns:char4" />
+          <xsd:element name="DOC_CAT_SD_LONG" type="tns:char4" />
+          <xsd:element name="STATUS" type="tns:BAPISDHDST" />
+          <xsd:element name="GROSS_VAL_HD" type="tns:decimal28.9" />
+          <xsd:element name="TAX_AMOUNT_HD" type="tns:decimal28.9" />
+          <xsd:element name="PRC_CONDITIONS" type="tns:COD_T_BAPICOND" />
+          <xsd:element name="PRINT_PRC_CONDITIONS" type="tns:COD_T_BAPICOND_PRINT_VIEW" />
+          <xsd:element name="PARTNERS" type="tns:COD_T_BAPIPARNR" />
+          <xsd:element name="ITEMS" type="tns:COD_T_SLS_ITEM_DATA" />
+          <xsd:element name="CREATE_COND_TYPE_HD" type="tns:COD_T_KSCHA" />
+          <xsd:element name="CREATE_COND_TYPE_IT" type="tns:COD_T_KSCHA" />
+          <xsd:element name="CREDIT_LIMIT" type="tns:decimal23.4" />
+          <xsd:element name="CREDIT_EXPOSURE_AMOUNT" type="tns:decimal23.4" />
+          <xsd:element name="CREDIT_EXCEEDED_AMOUNT" type="tns:decimal23.4" />
+          <xsd:element name="CREATE_COND_HD" type="tns:COD_T_COND_TYPE" />
+          <xsd:element name="CREATE_COND_IT" type="tns:COD_T_COND_TYPE" />
+          <xsd:element name="GROSS_WEIG_HD" type="tns:quantum15.3" />
+          <xsd:element name="NET_WEIGHT_HD" type="tns:quantum15.3" />
+          <xsd:element name="UNIT_OF_WT_HD" type="tns:unit3" />
+          <xsd:element name="UNIT_WTISO_HD" type="tns:char3" />
+          <xsd:element name="VOLUME_HD" type="tns:quantum15.3" />
+          <xsd:element name="VOLUMEUNIT_HD" type="tns:unit3" />
+          <xsd:element name="VOLUNITISO_HD" type="tns:char3" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_S_COND_TYPE">
+        <xsd:sequence>
+          <xsd:element name="COND_TYPE" type="tns:char4" />
+          <xsd:element name="STEP_NUMBER" type="tns:numeric3" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_S_SLS_ITEM_DATA">
+        <xsd:sequence>
+          <xsd:element name="OPERATION" type="tns:char3" />
+          <xsd:element name="DOC_NUMBER" type="tns:char10" />
+          <xsd:element name="ITM_NUMBER" type="tns:numeric6" />
+          <xsd:element name="MATERIAL" type="tns:char18" />
+          <xsd:element name="MAT_ENTRD" type="tns:char18" />
+          <xsd:element name="PR_REF_MAT" type="tns:char18" />
+          <xsd:element name="BATCH" type="tns:char10" />
+          <xsd:element name="MATL_GROUP" type="tns:char9" />
+          <xsd:element name="SHORT_TEXT" type="tns:char40" />
+          <xsd:element name="ITEM_CATEG" type="tns:char4" />
+          <xsd:element name="ITEM_TYPE" type="tns:char1" />
+          <xsd:element name="REL_FOR_DE" type="tns:char1" />
+          <xsd:element name="REL_FOR_BI" type="tns:char1" />
+          <xsd:element name="HG_LV_ITEM" type="tns:numeric6" />
+          <xsd:element name="ALTERN_ITM" type="tns:numeric6" />
+          <xsd:element name="REA_FOR_RE" type="tns:char2" />
+          <xsd:element name="PROD_HIER" type="tns:char18" />
+          <xsd:element name="OUT_AGR_TA" type="tns:decimal28.9" />
+          <xsd:element name="TARGET_QTY" type="tns:quantum13.3" />
+          <xsd:element name="TARGET_QU" type="tns:unit3" />
+          <xsd:element name="T_UNIT_ISO" type="tns:char3" />
+          <xsd:element name="TARG_QTY_N" type="tns:decimal5.0" />
+          <xsd:element name="TARG_QTY_D" type="tns:decimal5.0" />
+          <xsd:element name="BASE_UOM" type="tns:unit3" />
+          <xsd:element name="T_BAS_UNIT" type="tns:char3" />
+          <xsd:element name="SCALE_QUAN" type="tns:quantum13.3" />
+          <xsd:element name="ROUND_DLV" type="tns:quantum13.3" />
+          <xsd:element name="RECON_DATE" type="tns:date10" />
+          <xsd:element name="MAX_DEVIAT" type="tns:quantum13.3" />
+          <xsd:element name="PO_ITM_NO" type="tns:char6" />
+          <xsd:element name="CUST_MAT22" type="tns:char22" />
+          <xsd:element name="MAX_DEV_PE" type="tns:decimal3.0" />
+          <xsd:element name="MAX_DEV_DA" type="tns:decimal3.0" />
+          <xsd:element name="REPAIR_PRO" type="tns:char3" />
+          <xsd:element name="DLVSCHEDUS" type="tns:char3" />
+          <xsd:element name="DLV_GROUP" type="tns:numeric3" />
+          <xsd:element name="FIXED_QUAN" type="tns:char1" />
+          <xsd:element name="DELI_UNLIM" type="tns:char1" />
+          <xsd:element name="OVER_DLV_T" type="tns:decimal3.1" />
+          <xsd:element name="UNDER_DLV" type="tns:decimal3.1" />
+          <xsd:element name="BILL_BLOCK" type="tns:char2" />
+          <xsd:element name="REPLACE_PT" type="tns:char1" />
+          <xsd:element name="METH_BILL" type="tns:char1" />
+          <xsd:element name="DIVISION" type="tns:char2" />
+          <xsd:element name="BUS_AREA" type="tns:char4" />
+          <xsd:element name="NET_VALUE" type="tns:decimal28.9" />
+          <xsd:element name="CURRENCY" type="tns:cuky5" />
+          <xsd:element name="CURREN_ISO" type="tns:char3" />
+          <xsd:element name="MAX_PL_DLV" type="tns:decimal1.0" />
+          <xsd:element name="PART_DLV" type="tns:char1" />
+          <xsd:element name="BTCH_SPLIT" type="tns:char1" />
+          <xsd:element name="REQ_QTY" type="tns:quantum15.3" />
+          <xsd:element name="CUM_REQ_DE" type="tns:quantum15.3" />
+          <xsd:element name="CUM_CF_QTY" type="tns:quantum15.3" />
+          <xsd:element name="CUM_CON_QU" type="tns:quantum15.3" />
+          <xsd:element name="SALES_UNIT" type="tns:unit3" />
+          <xsd:element name="ISOCODUNIT" type="tns:char3" />
+          <xsd:element name="SALES_QTY1" type="tns:decimal5.0" />
+          <xsd:element name="SALES_QTY2" type="tns:decimal5.0" />
+          <xsd:element name="GROSS_WEIG" type="tns:quantum15.3" />
+          <xsd:element name="NET_WEIGHT" type="tns:quantum15.3" />
+          <xsd:element name="UNIT_OF_WT" type="tns:unit3" />
+          <xsd:element name="UNIT_WTISO" type="tns:char3" />
+          <xsd:element name="VOLUME" type="tns:quantum15.3" />
+          <xsd:element name="VOLUMEUNIT" type="tns:unit3" />
+          <xsd:element name="VOLUNITISO" type="tns:char3" />
+          <xsd:element name="CAU_VBELN" type="tns:char10" />
+          <xsd:element name="CAU_POSNR" type="tns:numeric6" />
+          <xsd:element name="REF_DOC" type="tns:char10" />
+          <xsd:element name="POSNR_VOR" type="tns:numeric6" />
+          <xsd:element name="OBJ_COPY" type="tns:char1" />
+          <xsd:element name="UPDAT_FLAG" type="tns:char1" />
+          <xsd:element name="END_RULE" type="tns:char1" />
+          <xsd:element name="DLV_PRIO" type="tns:numeric2" />
+          <xsd:element name="PLANT" type="tns:char4" />
+          <xsd:element name="STGE_LOC" type="tns:char4" />
+          <xsd:element name="SHIP_POINT" type="tns:char4" />
+          <xsd:element name="ROUTE" type="tns:char6" />
+          <xsd:element name="KEY_ST" type="tns:char1" />
+          <xsd:element name="DATE_ST" type="tns:date10" />
+          <xsd:element name="NBR_ST" type="tns:char8" />
+          <xsd:element name="STPOS_VBAP" type="tns:decimal5.0" />
+          <xsd:element name="ORDER_PROB" type="tns:numeric3" />
+          <xsd:element name="CREAT_DATE" type="tns:date10" />
+          <xsd:element name="CREATED_BY" type="tns:char12" />
+          <xsd:element name="REC_TIME" type="tns:time" />
+          <xsd:element name="TAX_CLASS1" type="tns:char1" />
+          <xsd:element name="TAX_CLASS2" type="tns:char1" />
+          <xsd:element name="TAX_CLASS3" type="tns:char1" />
+          <xsd:element name="TAX_CLASS4" type="tns:char1" />
+          <xsd:element name="TAX_CLASS5" type="tns:char1" />
+          <xsd:element name="TAX_CLASS6" type="tns:char1" />
+          <xsd:element name="TAX_CLASS7" type="tns:char1" />
+          <xsd:element name="TAX_CLASS8" type="tns:char1" />
+          <xsd:element name="TAX_CLASS9" type="tns:char1" />
+          <xsd:element name="FIX_SP_DAY" type="tns:decimal5.2" />
+          <xsd:element name="VAR_SP_DAY" type="tns:decimal5.2" />
+          <xsd:element name="PREC_DOC" type="tns:char1" />
+          <xsd:element name="NET_PRICE" type="tns:decimal28.9" />
+          <xsd:element name="COND_P_UNT" type="tns:decimal5.0" />
+          <xsd:element name="COND_UNIT" type="tns:unit3" />
+          <xsd:element name="CONISOUNIT" type="tns:char3" />
+          <xsd:element name="RETOURE" type="tns:char1" />
+          <xsd:element name="CASH_DISC" type="tns:char1" />
+          <xsd:element name="AVAILCHECK" type="tns:char2" />
+          <xsd:element name="SUM_REQUIR" type="tns:char1" />
+          <xsd:element name="MAT_PR_GRP" type="tns:char2" />
+          <xsd:element name="ACCT_ASSGT" type="tns:char2" />
+          <xsd:element name="REBATE_GRP" type="tns:char2" />
+          <xsd:element name="COMM_GROUP" type="tns:char2" />
+          <xsd:element name="EUR_ART_NR" type="tns:char13" />
+          <xsd:element name="PRICE_OK" type="tns:char1" />
+          <xsd:element name="VAL_TYPE" type="tns:char10" />
+          <xsd:element name="SEP_VALUAT" type="tns:char1" />
+          <xsd:element name="BATCH_MGMT" type="tns:char1" />
+          <xsd:element name="IND_BTCH" type="tns:char1" />
+          <xsd:element name="MIN_DELY" type="tns:quantum13.3" />
+          <xsd:element name="UPDATE_GRP" type="tns:char6" />
+          <xsd:element name="COST_DOC_C" type="tns:decimal28.9" />
+          <xsd:element name="SUBTOT_PP1" type="tns:decimal28.9" />
+          <xsd:element name="SUBTOT_PP2" type="tns:decimal28.9" />
+          <xsd:element name="SUBTOT_PP3" type="tns:decimal28.9" />
+          <xsd:element name="SUBTOT_PP4" type="tns:decimal28.9" />
+          <xsd:element name="SUBTOT_PP5" type="tns:decimal28.9" />
+          <xsd:element name="SUBTOT_PP6" type="tns:decimal28.9" />
+          <xsd:element name="EXCH_RATE" type="tns:decimal9.5" />
+          <xsd:element name="CH_ON" type="tns:date10" />
+          <xsd:element name="EAN_UPC" type="tns:char18" />
+          <xsd:element name="FIX_DATE" type="tns:char1" />
+          <xsd:element name="PROFIT_CTR" type="tns:char10" />
+          <xsd:element name="PRC_GROUP1" type="tns:char3" />
+          <xsd:element name="PRC_GROUP2" type="tns:char3" />
+          <xsd:element name="PRC_GROUP3" type="tns:char3" />
+          <xsd:element name="PRC_GROUP4" type="tns:char3" />
+          <xsd:element name="PRC_GROUP5" type="tns:char3" />
+          <xsd:element name="COMPON_QTY" type="tns:quantum13.3" />
+          <xsd:element name="SUBSTREASO" type="tns:char4" />
+          <xsd:element name="SPEC_STOCK" type="tns:char1" />
+          <xsd:element name="ALLOC_INDI" type="tns:char1" />
+          <xsd:element name="PROFIT_SEG" type="tns:numeric10" />
+          <xsd:element name="WBS_ELEM" type="tns:numeric8" />
+          <xsd:element name="ORDERID" type="tns:char12" />
+          <xsd:element name="PLNG_MATL" type="tns:char18" />
+          <xsd:element name="PLNG_PLANT" type="tns:char4" />
+          <xsd:element name="BASE_UNIT" type="tns:unit3" />
+          <xsd:element name="ISOBASUNIT" type="tns:char3" />
+          <xsd:element name="CONV_FACT" type="xsd:float" />
+          <xsd:element name="ACCTASSCAT" type="tns:char1" />
+          <xsd:element name="CONSUMPT" type="tns:char1" />
+          <xsd:element name="BOMEXPLNO" type="tns:char8" />
+          <xsd:element name="OBJ_NR_IT" type="tns:char22" />
+          <xsd:element name="RES_ANAL" type="tns:char6" />
+          <xsd:element name="REQMTSTYP" type="tns:char4" />
+          <xsd:element name="CREDPRICIT" type="tns:decimal28.9" />
+          <xsd:element name="PARTRELID" type="tns:char1" />
+          <xsd:element name="ACTCREDID" type="tns:char1" />
+          <xsd:element name="CR_EXCHRAT" type="tns:decimal9.5" />
+          <xsd:element name="CONFIG" type="tns:numeric18" />
+          <xsd:element name="CHCLASS_IN" type="tns:numeric18" />
+          <xsd:element name="STAT_PRICE" type="tns:char1" />
+          <xsd:element name="COND_UPDAT" type="tns:char1" />
+          <xsd:element name="SERNO_PROF" type="tns:char4" />
+          <xsd:element name="NO_OF_SERI" type="xsd:int" />
+          <xsd:element name="NOGRPOSTED" type="tns:char1" />
+          <xsd:element name="MAT_GRP_SM" type="tns:char4" />
+          <xsd:element name="MAN_PR_CH" type="tns:char1" />
+          <xsd:element name="DOC_CAT_SD" type="tns:char1" />
+          <xsd:element name="MATDETERID" type="tns:char1" />
+          <xsd:element name="ITUSAGEID" type="tns:char1" />
+          <xsd:element name="COSTESTNR" type="tns:numeric12" />
+          <xsd:element name="CSTG_VRNT" type="tns:char4" />
+          <xsd:element name="BOMITEMNR" type="tns:char4" />
+          <xsd:element name="STAT_VAL" type="tns:char1" />
+          <xsd:element name="STAT_DATE" type="tns:date10" />
+          <xsd:element name="BUS_TRANST" type="tns:char2" />
+          <xsd:element name="PREF_INDIC" type="tns:char1" />
+          <xsd:element name="NRCONDREC" type="tns:char10" />
+          <xsd:element name="INTCLASSNR" type="tns:numeric10" />
+          <xsd:element name="BATCH_EXIT" type="tns:numeric3" />
+          <xsd:element name="BOM_CATEGO" type="tns:char1" />
+          <xsd:element name="BOM_IT_NR" type="tns:numeric8" />
+          <xsd:element name="COUNTER" type="tns:numeric8" />
+          <xsd:element name="INCONSCONF" type="tns:char1" />
+          <xsd:element name="OVERH_KEY" type="tns:char6" />
+          <xsd:element name="CSTG_SHEET" type="tns:char6" />
+          <xsd:element name="CSTG_VRNT1" type="tns:char4" />
+          <xsd:element name="PROD_ALLOC" type="tns:char18" />
+          <xsd:element name="PRICE_REF" type="tns:char18" />
+          <xsd:element name="MATPRICGRP" type="tns:char2" />
+          <xsd:element name="MATFRGTGRP" type="tns:char8" />
+          <xsd:element name="PLANDLVSCH" type="tns:char4" />
+          <xsd:element name="SEQUENCENO" type="tns:char35" />
+          <xsd:element name="CREDPRIC" type="xsd:float" />
+          <xsd:element name="PAY_GUARAN" type="tns:char2" />
+          <xsd:element name="GURANTEED" type="xsd:float" />
+          <xsd:element name="CFOP_CODE" type="tns:char5" />
+          <xsd:element name="TAXLAWICMS" type="tns:char3" />
+          <xsd:element name="TAXLAWIPI" type="tns:char3" />
+          <xsd:element name="SD_TAXCODE" type="tns:char2" />
+          <xsd:element name="VALCONTRNR" type="tns:char10" />
+          <xsd:element name="VALCONTRIT" type="tns:numeric6" />
+          <xsd:element name="ASSORT_MOD" type="tns:char18" />
+          <xsd:element name="VALSPECSTO" type="tns:char1" />
+          <xsd:element name="MATGRHIE1" type="tns:char18" />
+          <xsd:element name="MATGRHIE2" type="tns:char18" />
+          <xsd:element name="PROMOTION" type="tns:char10" />
+          <xsd:element name="SALES_DEAL" type="tns:char10" />
+          <xsd:element name="FLGLEADUNI" type="tns:char1" />
+          <xsd:element name="FREE_GOODS" type="tns:char1" />
+          <xsd:element name="VALID_OBJ" type="tns:char12" />
+          <xsd:element name="TAX_AMOUNT" type="tns:decimal28.9" />
+          <xsd:element name="MRP_AREA" type="tns:char10" />
+          <xsd:element name="CUST_MAT35" type="tns:char35" />
+          <xsd:element name="CR_EXCHRAT_V" type="tns:decimal9.5" />
+          <xsd:element name="EXCHRATEST_V" type="tns:decimal9.5" />
+          <xsd:element name="ITM_TYPE_USAGE" type="tns:char4" />
+          <xsd:element name="CFOP_LONG" type="tns:char10" />
+          <xsd:element name="GROSS_VAL" type="tns:decimal28.9" />
+          <xsd:element name="LOG_SYSTEM_OWN" type="tns:char10" />
+          <xsd:element name="TAXLAWISS" type="tns:char3" />
+          <xsd:element name="TAXLAWCOFINS" type="tns:char3" />
+          <xsd:element name="TAXLAWPIS" type="tns:char3" />
+          <xsd:element name="DOC_CAT_SD_LONG" type="tns:char4" />
+          <xsd:element name="MATERIAL_LONG" type="tns:char40" />
+          <xsd:element name="MAT_ENTRD_LONG" type="tns:char40" />
+          <xsd:element name="PR_REF_MAT_LONG" type="tns:char40" />
+          <xsd:element name="PLNG_MATL_LONG" type="tns:char40" />
+          <xsd:element name="PRICE_REF_LONG" type="tns:char40" />
+          <xsd:element name="PO_QUAN" type="tns:quantum13.3" />
+          <xsd:element name="PO_UNIT" type="tns:unit3" />
+          <xsd:element name="PRC_CONDITIONS" type="tns:COD_T_BAPICOND" />
+          <xsd:element name="PRINT_PRC_CONDITIONS" type="tns:COD_T_BAPICOND_PRINT_VIEW" />
+          <xsd:element name="SCHEDULE_LINES" type="tns:BAPISDHEDUTAB" />
+          <xsd:element name="PARTNERS" type="tns:COD_T_BAPIPARNR" />
+          <xsd:element name="TEXTS" type="tns:COD_T_SDTEXT" />
+          <xsd:element name="STATUS" type="tns:BAPISDITST" />
+          <xsd:element name="BUSINESS_DATA" type="tns:BAPISDBUSI" />
+          <xsd:element name="RELEASED_QTY" type="tns:quantum15.3" />
+          <xsd:element name="RELEASED_QU" type="tns:char3" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPISDITST">
+        <xsd:sequence>
+          <xsd:element name="OPERATION" type="tns:char3" />
+          <xsd:element name="SD_DOC" type="tns:char10" />
+          <xsd:element name="ITM_NUMBER" type="tns:numeric6" />
+          <xsd:element name="REFERNSTAT" type="tns:char1" />
+          <xsd:element name="REFTOTSTAT" type="tns:char1" />
+          <xsd:element name="CONFSTATIT" type="tns:char1" />
+          <xsd:element name="DELIV_STAT" type="tns:char1" />
+          <xsd:element name="DLV_STAT_I" type="tns:char1" />
+          <xsd:element name="GOODSMVSTA" type="tns:char1" />
+          <xsd:element name="BILLSTATHD" type="tns:char1" />
+          <xsd:element name="BILLSTATIT" type="tns:char1" />
+          <xsd:element name="REJSTATIT" type="tns:char1" />
+          <xsd:element name="OVRPROCSTA" type="tns:char1" />
+          <xsd:element name="PICKINGSTA" type="tns:char1" />
+          <xsd:element name="WHMANAGSTA" type="tns:char1" />
+          <xsd:element name="GENINCOMST" type="tns:char1" />
+          <xsd:element name="INCOMSTDEL" type="tns:char1" />
+          <xsd:element name="INCOMSTBIL" type="tns:char1" />
+          <xsd:element name="INCOMSTPRI" type="tns:char1" />
+          <xsd:element name="BILLSTAINT" type="tns:char1" />
+          <xsd:element name="CUSTRESIT1" type="tns:char1" />
+          <xsd:element name="CUSTRESIT2" type="tns:char1" />
+          <xsd:element name="CUSTRESIT3" type="tns:char1" />
+          <xsd:element name="CUSTRESIT4" type="tns:char1" />
+          <xsd:element name="CUSTRESIT5" type="tns:char1" />
+          <xsd:element name="PACKSTSTIT" type="tns:char1" />
+          <xsd:element name="STAPICKCON" type="tns:char1" />
+          <xsd:element name="CONFIRMSTA" type="tns:char1" />
+          <xsd:element name="STATCRECH6" type="tns:char1" />
+          <xsd:element name="STATCRECH7" type="tns:char1" />
+          <xsd:element name="INCOMSTAIT" type="tns:char1" />
+          <xsd:element name="INCOMSTAPA" type="tns:char1" />
+          <xsd:element name="INCOSTAGOO" type="tns:char1" />
+          <xsd:element name="DELAYSTAT" type="tns:char1" />
+          <xsd:element name="REVDETSTAT" type="tns:char1" />
+          <xsd:element name="DECTWHOUSE" type="tns:char1" />
+          <xsd:element name="ITBILBLOST" type="tns:char1" />
+          <xsd:element name="ITDELBLOST" type="tns:char1" />
+          <xsd:element name="LEBITEMSTA" type="tns:char1" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_S_SDTEXT">
+        <xsd:sequence>
+          <xsd:element name="DOC_NUMBER" type="tns:char10" />
+          <xsd:element name="ITM_NUMBER" type="tns:numeric6" />
+          <xsd:element name="APPLOBJECT" type="tns:char10" />
+          <xsd:element name="TEXT_NAME" type="tns:char70" />
+          <xsd:element name="TEXT_ID" type="tns:char4" />
+          <xsd:element name="LANGU" type="tns:lang" />
+          <xsd:element name="LANGU_ISO" type="tns:char2" />
+          <xsd:element name="TEXT_LINES" type="tns:COD_T_TLINE" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_S_TLINE">
+        <xsd:sequence>
+          <xsd:element name="LINE_CNT" type="tns:numeric8" />
+          <xsd:element name="FORMAT_COL" type="tns:char2" />
+          <xsd:element name="TEXT_LINE" type="tns:char132" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPISDBUSI">
+        <xsd:sequence>
+          <xsd:element name="OPERATION" type="tns:char3" />
+          <xsd:element name="SD_DOC" type="tns:char10" />
+          <xsd:element name="ITM_NUMBER" type="tns:numeric6" />
+          <xsd:element name="PRICE_GRP" type="tns:char2" />
+          <xsd:element name="CUST_GROUP" type="tns:char2" />
+          <xsd:element name="SALES_DIST" type="tns:char6" />
+          <xsd:element name="PRICE_LIST" type="tns:char2" />
+          <xsd:element name="INCOTERMS1" type="tns:char3" />
+          <xsd:element name="INCOTERMS2" type="tns:char28" />
+          <xsd:element name="ORDCOMBIND" type="tns:char1" />
+          <xsd:element name="BILL_SCHED" type="tns:char2" />
+          <xsd:element name="INVO_SCHED" type="tns:char2" />
+          <xsd:element name="MN_INVOICE" type="tns:char1" />
+          <xsd:element name="EXCHRATEFI" type="tns:decimal9.5" />
+          <xsd:element name="ADD_VAL_DY" type="tns:numeric2" />
+          <xsd:element name="FIX_VAL_DY" type="tns:date10" />
+          <xsd:element name="PMNTTRMS" type="tns:char4" />
+          <xsd:element name="PAYMETHODE" type="tns:char1" />
+          <xsd:element name="ACCNT_ASGN" type="tns:char2" />
+          <xsd:element name="EXCHG_RATE" type="tns:decimal9.5" />
+          <xsd:element name="PRICE_DATE" type="tns:date10" />
+          <xsd:element name="BILL_DATE" type="tns:date10" />
+          <xsd:element name="SERV_DATE" type="tns:date10" />
+          <xsd:element name="FISC_YEAR" type="tns:numeric4" />
+          <xsd:element name="POSTPERIOD" type="tns:numeric3" />
+          <xsd:element name="EXCHRATEST" type="tns:decimal9.5" />
+          <xsd:element name="DUNN_KEY" type="tns:char1" />
+          <xsd:element name="DUNN_BLOCK" type="tns:char1" />
+          <xsd:element name="BILL_PLAN" type="tns:char10" />
+          <xsd:element name="PROMOTION" type="tns:char10" />
+          <xsd:element name="PAY_GUARAN" type="tns:char6" />
+          <xsd:element name="FINDOCPROC" type="tns:char10" />
+          <xsd:element name="J_1AFITP_D" type="tns:char2" />
+          <xsd:element name="REAS_0_VAT" type="tns:char1" />
+          <xsd:element name="REGION" type="tns:char3" />
+          <xsd:element name="ACTIVICODE" type="tns:char2" />
+          <xsd:element name="DISTRIBTYP" type="tns:char2" />
+          <xsd:element name="TAX_CLASS" type="tns:char10" />
+          <xsd:element name="DEPART_NO" type="tns:char4" />
+          <xsd:element name="REC_POINT" type="tns:char25" />
+          <xsd:element name="PURCH_NO_C" type="tns:char35" />
+          <xsd:element name="PURCH_DATE" type="tns:date10" />
+          <xsd:element name="PO_METHOD" type="tns:char4" />
+          <xsd:element name="REF_1" type="tns:char12" />
+          <xsd:element name="PURCH_NO_S" type="tns:char35" />
+          <xsd:element name="PO_DAT_S" type="tns:date10" />
+          <xsd:element name="PO_METH_S" type="tns:char4" />
+          <xsd:element name="REF_1_S" type="tns:char12" />
+          <xsd:element name="POITMNOS" type="tns:char6" />
+          <xsd:element name="TRANS_DATE" type="tns:date10" />
+          <xsd:element name="TRANSDATE" type="tns:date10" />
+          <xsd:element name="CUSTCONGR1" type="tns:char2" />
+          <xsd:element name="CUSTCONGR2" type="tns:char2" />
+          <xsd:element name="CUSTCONGR3" type="tns:char2" />
+          <xsd:element name="CUSTCONGR4" type="tns:char2" />
+          <xsd:element name="CUSTCONGR5" type="tns:char2" />
+          <xsd:element name="VALCONTCUR" type="tns:cuky5" />
+          <xsd:element name="ISOVALCONT" type="tns:char3" />
+          <xsd:element name="EXCHRATECO" type="tns:decimal9.5" />
+          <xsd:element name="CURRENCKEY" type="tns:cuky5" />
+          <xsd:element name="ISOCURRKEY" type="tns:char3" />
+          <xsd:element name="EXCHRATELC" type="tns:decimal9.5" />
+          <xsd:element name="CEPRPERCEN" type="tns:decimal5.2" />
+          <xsd:element name="INFLAT_IDX" type="tns:char5" />
+          <xsd:element name="BASDATEIDX" type="tns:date10" />
+          <xsd:element name="CUST_PO_NO" type="tns:char35" />
+          <xsd:element name="DLV_TIME" type="tns:char3" />
+          <xsd:element name="DLI_PROFIL" type="tns:char8" />
+          <xsd:element name="CALC_MOTIVE" type="tns:char2" />
+          <xsd:element name="BILL_FORM" type="tns:char2" />
+          <xsd:element name="REVENUETYP" type="tns:char1" />
+          <xsd:element name="BEGDEMAPER" type="tns:char1" />
+          <xsd:element name="EXCHRATELC_V" type="tns:decimal9.5" />
+          <xsd:element name="EXCH_RATE_FI_V" type="tns:decimal9.5" />
+          <xsd:element name="EXCHG_RATE_V" type="tns:decimal9.5" />
+          <xsd:element name="EXCHRATEST_V" type="tns:decimal9.5" />
+          <xsd:element name="EXCHRATECO_V" type="tns:decimal9.5" />
+          <xsd:element name="DELIV_TYPE" type="tns:char2" />
+          <xsd:element name="TRANS_CAT" type="tns:char4" />
+          <xsd:element name="TRANS_MAT" type="tns:char18" />
+          <xsd:element name="SPEC_PROC" type="tns:char4" />
+          <xsd:element name="PRODCAT" type="tns:char10" />
+          <xsd:element name="FUNC_AREA" type="tns:char4" />
+          <xsd:element name="POD_PROC" type="tns:char1" />
+          <xsd:element name="CAMPAIGN" type="tns:byte16" />
+          <xsd:element name="FKK_CONACCT" type="tns:char12" />
+          <xsd:element name="FUNC_AREA_LONG" type="tns:char16" />
+          <xsd:element name="FKK_CONACCT_GUID" type="tns:byte16" />
+          <xsd:element name="TRANS_MAT_EXTERNAL" type="tns:char40" />
+          <xsd:element name="TRANS_MAT_GUID" type="tns:char32" />
+          <xsd:element name="TRANS_MAT_VERSION" type="tns:char10" />
+          <xsd:element name="SEPA_MANDATE_ID" type="tns:char35" />
+          <xsd:element name="INCOTERMSV" type="tns:char4" />
+          <xsd:element name="INCOTERMS2L" type="tns:char70" />
+          <xsd:element name="INCOTERMS3L" type="tns:char70" />
+          <xsd:element name="TRANS_MAT_LONG" type="tns:char40" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_S_BAPICOND_PRINT_VIEW">
+        <xsd:sequence>
+          <xsd:element name="ITM_NUMBER" type="tns:numeric6" />
+          <xsd:element name="COND_ST_NO" type="tns:numeric3" />
+          <xsd:element name="COND_COUNT" type="tns:numeric2" />
+          <xsd:element name="APPLICATIO" type="tns:char2" />
+          <xsd:element name="COND_TYPE" type="tns:char4" />
+          <xsd:element name="CALCTYPCON" type="tns:char1" />
+          <xsd:element name="CONBASEVAL" type="tns:decimal28.9" />
+          <xsd:element name="COND_VALUE" type="tns:decimal28.9" />
+          <xsd:element name="COND_UNIT" type="tns:unit3" />
+          <xsd:element name="CD_UNT_ISO" type="tns:char3" />
+          <xsd:element name="COND_P_UNT" type="tns:decimal5.0" />
+          <xsd:element name="CURRENCY" type="tns:cuky5" />
+          <xsd:element name="CURR_ISO" type="tns:char3" />
+          <xsd:element name="CONEXCHRAT" type="tns:decimal9.5" />
+          <xsd:element name="CONDTYPE" type="tns:char1" />
+          <xsd:element name="STAT_CON" type="tns:char1" />
+          <xsd:element name="CONDORIGIN" type="tns:char1" />
+          <xsd:element name="CONDVALUE" type="tns:decimal28.9" />
+          <xsd:element name="CURRENCY_2" type="tns:cuky5" />
+          <xsd:element name="CURR_ISO_2" type="tns:char3" />
+          <xsd:element name="CONDCNTRL" type="tns:char1" />
+          <xsd:element name="CONDISACTI" type="tns:char1" />
+          <xsd:element name="CONDCLASS" type="tns:char1" />
+          <xsd:element name="PRINTFLAG" type="tns:char1" />
+          <xsd:element name="TEXT" type="tns:char40" />
+          <xsd:element name="TAX_CODE" type="tns:char2" />
+          <xsd:element name="FACTBASVAL" type="xsd:float" />
+          <xsd:element name="COND_COUNT_LONG" type="tns:numeric3" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPISDHEDU">
+        <xsd:sequence>
+          <xsd:element name="OPERATION" type="tns:char3" />
+          <xsd:element name="DOC_NUMBER" type="tns:char10" />
+          <xsd:element name="ITM_NUMBER" type="tns:numeric6" />
+          <xsd:element name="SCHED_LINE" type="tns:numeric4" />
+          <xsd:element name="SCHED_TYPE" type="tns:char2" />
+          <xsd:element name="RELFORDEL" type="tns:char1" />
+          <xsd:element name="REQ_DATE" type="tns:date10" />
+          <xsd:element name="REQ_TIME" type="tns:time" />
+          <xsd:element name="REQ_QTY" type="tns:quantum13.3" />
+          <xsd:element name="CONFIR_QTY" type="tns:quantum13.3" />
+          <xsd:element name="SALES_UNIT" type="tns:unit3" />
+          <xsd:element name="ISOCODUNIT" type="tns:char3" />
+          <xsd:element name="REQ_QTY1" type="tns:quantum13.3" />
+          <xsd:element name="BASE_UOM" type="tns:unit3" />
+          <xsd:element name="ISOBASUNIT" type="tns:char3" />
+          <xsd:element name="REQ_DATE1" type="tns:date10" />
+          <xsd:element name="REQ_TYPE" type="tns:char2" />
+          <xsd:element name="PLTYPE" type="tns:char1" />
+          <xsd:element name="BUSIDOCNR" type="tns:char10" />
+          <xsd:element name="BUSIITNR" type="tns:numeric6" />
+          <xsd:element name="SCHED_LIN1" type="tns:numeric4" />
+          <xsd:element name="EARL_DATE" type="tns:date10" />
+          <xsd:element name="MAINT_REQ" type="tns:numeric10" />
+          <xsd:element name="PREQ_NO" type="tns:char10" />
+          <xsd:element name="PO_TYPE" type="tns:char4" />
+          <xsd:element name="DOC_CAT" type="tns:char1" />
+          <xsd:element name="CONF_STAT" type="tns:char1" />
+          <xsd:element name="IR_IND" type="tns:char1" />
+          <xsd:element name="RETURNDATE" type="tns:date10" />
+          <xsd:element name="DATE_TYPE" type="tns:char1" />
+          <xsd:element name="TP_DATE" type="tns:date10" />
+          <xsd:element name="MS_DATE" type="tns:date10" />
+          <xsd:element name="LOAD_DATE" type="tns:date10" />
+          <xsd:element name="GI_DATE" type="tns:date10" />
+          <xsd:element name="CORR_QTY" type="tns:quantum13.3" />
+          <xsd:element name="REQ_DLV_BL" type="tns:char2" />
+          <xsd:element name="GRP_DEFIN" type="tns:numeric3" />
+          <xsd:element name="RELEASTYP" type="tns:char1" />
+          <xsd:element name="FORCAST_NR" type="tns:numeric10" />
+          <xsd:element name="COMMIT_QTY" type="tns:quantum13.3" />
+          <xsd:element name="SIZE2" type="tns:quantum13.3" />
+          <xsd:element name="SIZE3" type="tns:quantum13.3" />
+          <xsd:element name="UNIT_MEAS" type="tns:unit3" />
+          <xsd:element name="ISO_ROMEI" type="tns:char3" />
+          <xsd:element name="FORMULAKEY" type="tns:char2" />
+          <xsd:element name="SALESQTYNR" type="tns:decimal5.0" />
+          <xsd:element name="SALESQTYDE" type="tns:decimal5.0" />
+          <xsd:element name="AVAIL_CON" type="tns:char1" />
+          <xsd:element name="MOVE_TYPE" type="tns:char3" />
+          <xsd:element name="PREQ_ITEM" type="tns:numeric5" />
+          <xsd:element name="LINTYP_EDI" type="tns:char1" />
+          <xsd:element name="ORDERID" type="tns:char12" />
+          <xsd:element name="PLANORDNR" type="tns:char10" />
+          <xsd:element name="BOMEXPL_NO" type="tns:char8" />
+          <xsd:element name="CUSTCHSTAT" type="tns:char17" />
+          <xsd:element name="GURANTEED" type="xsd:float" />
+          <xsd:element name="MS_TIME" type="tns:time" />
+          <xsd:element name="TP_TIME" type="tns:time" />
+          <xsd:element name="LOAD_TIME" type="tns:time" />
+          <xsd:element name="GI_TIME" type="tns:time" />
+          <xsd:element name="ROUTESCHED" type="tns:char10" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPISDHDST">
+        <xsd:sequence>
+          <xsd:element name="OPERATION" type="tns:char3" />
+          <xsd:element name="SD_DOC" type="tns:char10" />
+          <xsd:element name="REFDOCHDST" type="tns:char1" />
+          <xsd:element name="TOTREFSTAT" type="tns:char1" />
+          <xsd:element name="CONFIRSTAT" type="tns:char1" />
+          <xsd:element name="DELIV_STAT" type="tns:char1" />
+          <xsd:element name="DLV_STAT_H" type="tns:char1" />
+          <xsd:element name="TOTGOODSMV" type="tns:char1" />
+          <xsd:element name="BILLSTATUS" type="tns:char1" />
+          <xsd:element name="BILLINGSTA" type="tns:char1" />
+          <xsd:element name="ACCOUNTSTA" type="tns:char1" />
+          <xsd:element name="OVERALLREJ" type="tns:char1" />
+          <xsd:element name="PRC_STAT_H" type="tns:char1" />
+          <xsd:element name="OVERALLPIC" type="tns:char1" />
+          <xsd:element name="OVERALL_WM" type="tns:char1" />
+          <xsd:element name="TOTINCOMPL" type="tns:char1" />
+          <xsd:element name="TOTINCOMIT" type="tns:char1" />
+          <xsd:element name="TOTINCOMBI" type="tns:char1" />
+          <xsd:element name="GENINCOMHD" type="tns:char1" />
+          <xsd:element name="HDIMCOMDEL" type="tns:char1" />
+          <xsd:element name="HDINCOMBIL" type="tns:char1" />
+          <xsd:element name="DOCIMCOMPR" type="tns:char1" />
+          <xsd:element name="SD_DOC_CAT" type="tns:char1" />
+          <xsd:element name="SDDOCOBJ" type="tns:char1" />
+          <xsd:element name="CH_ON" type="tns:date10" />
+          <xsd:element name="BILTOTSTAT" type="tns:char1" />
+          <xsd:element name="INVOICSTAT" type="tns:char1" />
+          <xsd:element name="CUSTRESHD1" type="tns:char1" />
+          <xsd:element name="CUSTRESHD2" type="tns:char1" />
+          <xsd:element name="CUSTRESHD3" type="tns:char1" />
+          <xsd:element name="CUSTRESHD4" type="tns:char1" />
+          <xsd:element name="CUSTRESHD5" type="tns:char1" />
+          <xsd:element name="CUSTRESIT1" type="tns:char1" />
+          <xsd:element name="CUSTRESIT2" type="tns:char1" />
+          <xsd:element name="CUSTRESIT3" type="tns:char1" />
+          <xsd:element name="CUSTRESIT4" type="tns:char1" />
+          <xsd:element name="CUSTRESIT5" type="tns:char1" />
+          <xsd:element name="TOTSTATIT" type="tns:char1" />
+          <xsd:element name="STATSTACLC" type="tns:char1" />
+          <xsd:element name="STATDYNCLC" type="tns:char1" />
+          <xsd:element name="STATCREDCH" type="tns:char1" />
+          <xsd:element name="STATCRECH1" type="tns:char1" />
+          <xsd:element name="STATCRECH2" type="tns:char1" />
+          <xsd:element name="STATCRECH3" type="tns:char1" />
+          <xsd:element name="STATCRECH4" type="tns:char1" />
+          <xsd:element name="STATCRECH5" type="tns:char1" />
+          <xsd:element name="STATCRECH6" type="tns:char1" />
+          <xsd:element name="STATCRECH7" type="tns:char1" />
+          <xsd:element name="STATCRECH8" type="tns:char1" />
+          <xsd:element name="STATCRECH9" type="tns:char1" />
+          <xsd:element name="STATCRECHA" type="tns:char1" />
+          <xsd:element name="STATCRECHB" type="tns:char1" />
+          <xsd:element name="STATCRECHC" type="tns:char1" />
+          <xsd:element name="TOTSTATCCH" type="tns:char1" />
+          <xsd:element name="TRNSPLANST" type="tns:char1" />
+          <xsd:element name="QUITTSTAT" type="tns:char1" />
+          <xsd:element name="CONFIRMSTA" type="tns:char1" />
+          <xsd:element name="SAPRELEASE" type="tns:char4" />
+          <xsd:element name="TOTINCOMI" type="tns:char1" />
+          <xsd:element name="TOTINCOMI1" type="tns:char1" />
+          <xsd:element name="TOTINCOMI2" type="tns:char1" />
+          <xsd:element name="HDINCOMPL" type="tns:char1" />
+          <xsd:element name="HDINCOMPL1" type="tns:char1" />
+          <xsd:element name="HDINCOMPL2" type="tns:char1" />
+          <xsd:element name="HDINCOMPL3" type="tns:char1" />
+          <xsd:element name="CREDCHECK" type="tns:char1" />
+          <xsd:element name="DELAYSTAT" type="tns:char1" />
+          <xsd:element name="SHIPPUNIT" type="tns:char1" />
+          <xsd:element name="DISTRISTAT" type="tns:char1" />
+          <xsd:element name="REVDETSTAT" type="tns:char1" />
+          <xsd:element name="INDIDOCACH" type="tns:char1" />
+          <xsd:element name="TOBILBLOST" type="tns:char1" />
+          <xsd:element name="TODELBLOST" type="tns:char1" />
+          <xsd:element name="TOBLOCKSTA" type="tns:char1" />
+          <xsd:element name="LEBHEADSTA" type="tns:char1" />
+          <xsd:element name="FMSTATUS" type="tns:char1" />
+          <xsd:element name="SD_DOC_CAT_LONG" type="tns:char4" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPIRET2">
+        <xsd:sequence>
+          <xsd:element name="TYPE" type="tns:char1" />
+          <xsd:element name="ID" type="tns:char20" />
+          <xsd:element name="NUMBER" type="tns:numeric3" />
+          <xsd:element name="MESSAGE" type="tns:char220" />
+          <xsd:element name="LOG_NO" type="tns:char20" />
+          <xsd:element name="LOG_MSG_NO" type="tns:numeric6" />
+          <xsd:element name="MESSAGE_V1" type="tns:char50" />
+          <xsd:element name="MESSAGE_V2" type="tns:char50" />
+          <xsd:element name="MESSAGE_V3" type="tns:char50" />
+          <xsd:element name="MESSAGE_V4" type="tns:char50" />
+          <xsd:element name="PARAMETER" type="tns:char32" />
+          <xsd:element name="ROW" type="xsd:int" />
+          <xsd:element name="FIELD" type="tns:char30" />
+          <xsd:element name="SYSTEM" type="tns:char10" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_BAPISDITM">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:BAPISDITM" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_BAPISCHDLX">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:BAPISCHDLX" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_BAPICONDX">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:BAPICONDX" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_BAPICUVK">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:BAPICUVK" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_BAPICOND">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:COD_S_BAPICOND" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_BAPICUVAL">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:BAPICUVAL" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_BAPISDITMX">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:BAPISDITMX" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_BAPICUCFG">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:BAPICUCFG" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_BAPISCHDL">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:BAPISCHDL" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_BAPICUPRT">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:BAPICUPRT" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_BAPICUBLB">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:BAPICUBLB" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_BAPICUINS">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:BAPICUINS" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPIPAREXTAB">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:BAPIPAREX" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_BAPIPARNR">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:BAPIPARNR" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_BAPICUREF">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:BAPICUREF" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_COND_TYPE">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:COD_S_COND_TYPE" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_SLS_ITEM_DATA">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:COD_S_SLS_ITEM_DATA" minOccurs="0"
+            maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_SDTEXT">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:COD_S_SDTEXT" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_TLINE">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:COD_S_TLINE" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_BAPICOND_PRINT_VIEW">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:COD_S_BAPICOND_PRINT_VIEW" minOccurs="0"
+            maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPISDHEDUTAB">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:BAPISDHEDU" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="COD_T_KSCHA">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:char4" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BAPIRETTAB">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:BAPIRET2" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="COD_SALESORDER_SIMULATE">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="IS_LOGIC_SWITCH" type="tns:BAPISDLS" minOccurs="0" />
+            <xsd:element name="IS_ORDER_HEADER" type="tns:BAPISDHD1" />
+            <xsd:element name="IS_ORDER_HEADER_X" type="tns:BAPISDHD1X" minOccurs="0" />
+            <xsd:element name="IS_ORDER_SYS_DATA" type="tns:COD_S_SYS_ADM_DATA" minOccurs="0" />
+            <xsd:element name="IS_SENDER" type="tns:BAPI_SENDER" minOccurs="0" />
+            <xsd:element name="IS_SIMULATION_PROPERTIES" type="tns:COD_S_SIMULATION_PROPERTIES"
+              minOccurs="0" />
+            <xsd:element name="IT_ORDER_CONDITIONS" type="tns:COD_T_BAPICOND" minOccurs="0" />
+            <xsd:element name="IT_ORDER_CONDITIONS_X" type="tns:COD_T_BAPICONDX" minOccurs="0" />
+            <xsd:element name="IT_ORDER_EXTENSIONS" type="tns:BAPIPAREXTAB" minOccurs="0" />
+            <xsd:element name="IT_ORDER_ITEMS" type="tns:COD_T_BAPISDITM" minOccurs="0" />
+            <xsd:element name="IT_ORDER_ITEMS_X" type="tns:COD_T_BAPISDITMX" minOccurs="0" />
+            <xsd:element name="IT_ORDER_PARTNERS" type="tns:COD_T_BAPIPARNR" minOccurs="0" />
+            <xsd:element name="IT_ORDER_SCHEDULE_LINES" type="tns:COD_T_BAPISCHDL" minOccurs="0" />
+            <xsd:element name="IT_ORDER_SCHEDULE_LINES_X" type="tns:COD_T_BAPISCHDLX" minOccurs="0" />
+            <xsd:element name="IT_SALES_CFGS_BLOB" type="tns:COD_T_BAPICUBLB" minOccurs="0" />
+            <xsd:element name="IT_SALES_CFGS_INST" type="tns:COD_T_BAPICUINS" minOccurs="0" />
+            <xsd:element name="IT_SALES_CFGS_PART_OF" type="tns:COD_T_BAPICUPRT" minOccurs="0" />
+            <xsd:element name="IT_SALES_CFGS_REF" type="tns:COD_T_BAPICUCFG" minOccurs="0" />
+            <xsd:element name="IT_SALES_CFGS_REFINST" type="tns:COD_T_BAPICUREF" minOccurs="0" />
+            <xsd:element name="IT_SALES_CFGS_VALUE" type="tns:COD_T_BAPICUVAL" minOccurs="0" />
+            <xsd:element name="IT_SALES_CFGS_VK" type="tns:COD_T_BAPICUVK" minOccurs="0" />
+            <xsd:element name="IV_SALESDOCUMENT" type="tns:char10" minOccurs="0" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="COD_SALESORDER_SIMULATEResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ES_SALES_ORDER_DATA" type="tns:COD_S_SLS_ORDER_DATA" />
+            <xsd:element name="ES_SIMULATION_PROPERTIES" type="tns:COD_S_SIMULATION_PROPERTIES" />
+            <xsd:element name="ET_RETURN" type="tns:BAPIRETTAB" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="COD_SALESORDER_SIMULATE">
+    <wsdl:part name="parameters" element="tns:COD_SALESORDER_SIMULATE" />
+  </wsdl:message>
+  <wsdl:message name="COD_SALESORDER_SIMULATEResponse">
+    <wsdl:part name="parameter" element="tns:COD_SALESORDER_SIMULATEResponse" />
+  </wsdl:message>
+  <wsdl:portType name="COD_SALESORDER_SIMULATE">
+    <wsdl:documentation>
+      <sapdoc:sapdoc xmlns:sapdoc="urn:sap:esi:documentation">
+        <sapdoc:docitem applicationComponent="LO-INT-COD" />
+      </sapdoc:sapdoc>
+    </wsdl:documentation>
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#IF__COD_SALESORDER_SIMULATE" />
+    </wsp:Policy>
+    <wsdl:operation name="COD_SALESORDER_SIMULATE">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__COD_SALESORDER_SIMULATE" />
+      </wsp:Policy>
+      <wsdl:input message="tns:COD_SALESORDER_SIMULATE" />
+      <wsdl:output message="tns:COD_SALESORDER_SIMULATEResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="binding" type="tns:COD_SALESORDER_SIMULATE">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#BN__binding" />
+    </wsp:Policy>
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <wsdl:operation name="COD_SALESORDER_SIMULATE">
+      <soap:operation
+        soapAction="urn:sap-com:document:sap:rfc:functions:COD_SALESORDER_SIMULATE:COD_SALESORDER_SIMULATERequest"
+        style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="binding_soap12" type="tns:COD_SALESORDER_SIMULATE">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#BN__binding_soap12" />
+    </wsp:Policy>
+    <wsoap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <wsdl:operation name="COD_SALESORDER_SIMULATE">
+      <wsoap12:operation
+        soapAction="urn:sap-com:document:sap:rfc:functions:COD_SALESORDER_SIMULATE:COD_SALESORDER_SIMULATERequest"
+        style="document" />
+      <wsdl:input>
+        <wsoap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="service">
+    <wsdl:port name="binding" binding="tns:binding">
+      <soap:address
+        location="https://my430449-api.s4hana.cloud.sap/sap/bc/srt/scs_ext/sap/cod_salesorder_simulate" />
+    </wsdl:port>
+    <wsdl:port name="binding_soap12" binding="tns:binding_soap12">
+      <wsoap12:address
+        location="https://my430449-api.s4hana.cloud.sap/sap/bc/srt/scs_ext/sap/cod_salesorder_simulate" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
