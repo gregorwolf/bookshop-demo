@@ -1,30 +1,30 @@
 ### V4
-GET http://localhost:4004/maintainer-group/
+GET http://localhost:4004/odata/v4/maintainer-group/
 Authorization: Basic admin:
 ### 
-GET http://localhost:4004/maintainer-group/Languages
+GET http://localhost:4004/odata/v4/maintainer-group/Languages
   ?$expand=texts
 Authorization: Basic admin:
 ###
-GET http://localhost:4004/maintainer-group/MaintainerGroup
+GET http://localhost:4004/odata/v4/maintainer-group/MaintainerGroup
 Accept-Language: en
 Authorization: Basic admin:
 ###
-GET http://localhost:4004/maintainer-group/MaintainerGroup
+GET http://localhost:4004/odata/v4/maintainer-group/MaintainerGroup
 Accept-Language: de
 Authorization: Basic admin:
 ###
-GET http://localhost:4004/maintainer-group/MaintainerGroup
+GET http://localhost:4004/odata/v4/maintainer-group/MaintainerGroup
   ?$expand=texts
 Accept-Language: de
 Authorization: Basic admin:
 ###
-GET http://localhost:4004/maintainer-group/MaintainerGroup
+GET http://localhost:4004/odata/v4/maintainer-group/MaintainerGroup
   ?$expand=maintainers($expand=employee)
 Authorization: Basic admin:
 ###
 # @name readMaintainerGroup
-GET http://localhost:4004/maintainer-group/MaintainerGroup
+GET http://localhost:4004/odata/v4/maintainer-group/MaintainerGroup
   ?$expand=maintainers
   &$filter=description eq 'Europe'
 Accept-Language: de
@@ -32,7 +32,7 @@ Authorization: Basic admin:
 ###
 @maintainerGroupID = {{readMaintainerGroup.response.body.value[0].ID}}
 ###
-POST http://localhost:4004/maintainer-group/Maintainer
+POST http://localhost:4004/odata/v4/maintainer-group/Maintainer
 Content-Type: application/json
 Authorization: Basic admin:
 
@@ -40,5 +40,22 @@ Authorization: Basic admin:
   "employee_ID": "8497c73f-9606-405c-b00f-8fe84da8c7fa",
   "group_ID": "{{maintainerGroupID}}"
 }
+###
+# @name createMaintainerGroup
+POST http://localhost:4004/odata/v4/maintainer-group/MaintainerGroup
+Content-Type: application/json
+Authorization: Basic admin:
 
-### TODO: Activate Draft
+{
+  "description": "Australia"
+}
+###
+@maintainerGroupIDaustralia = {{createMaintainerGroup.response.body.ID}}
+### Try to change while user edits the draft
+PATCH http://localhost:4004/odata/v4/maintainer-group/MaintainerGroup({{maintainerGroupIDaustralia}})
+Content-Type: application/json
+Authorization: Basic admin:
+
+{
+  "description": "Australia - edited"
+}

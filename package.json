@@ -147,7 +147,7 @@
     "fiori": {
       "draft_lock_timeout": 1,
       "lean_draft": true,
-      "bypass_draft": true
+      "direct_crud": true
     },
     "features": {
       "xassert_integrity": "db",
