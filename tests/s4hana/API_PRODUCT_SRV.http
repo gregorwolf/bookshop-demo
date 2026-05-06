@@ -73,17 +73,6 @@ Accept: application/json
 ### A_ProductSalesText
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_ProductSalesText
   ?$top=10
-  &$filter=Language eq 'DE' and ProductSalesOrg eq '1020'
-	# Product eq '{{$dotenv Product}}' and 
-  # Doesn't work
-  # substringof('Text', LongText) eq true
-  &$inlinecount=allpages
-Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
-Accept: application/json
-Accept: application/json
-### A_ProductSalesText
-GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_ProductSalesText
-  ?$top=10
   &$filter=Product eq '{{$dotenv Product}}' and ProductSalesOrg eq '1020'
 	&$format=xlsx
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
@@ -131,6 +120,20 @@ Accept: application/json
 ###
 @productDescription={{readProductDescriptions.response.body.d.results[0].ProductDescription}}
 @productDescriptionURI={{readProductDescriptions.response.body.d.results[0].__metadata.uri}}
+### Read A_ProductSalesText
+# @name readProductSalesText
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/A_ProductSalesText
+  ?$top=10
+  &$filter=Language eq 'DE' and ProductSalesOrg eq '1010' and Product eq '{{$dotenv Product}}'
+  # Doesn't work
+  # substringof('Text', LongText) eq true
+  &$inlinecount=allpages
+	&$orderby=Product desc
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+@productLongText={{readProductSalesText.response.body.d.results[0].LongText}}
+@productLongTextURL={{readProductSalesText.response.body.d.results[0].__metadata.uri}}
 ### Get CSRF Token
 # @name getCSRF
 HEAD {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCT_SRV/
@@ -138,6 +141,16 @@ X-CSRF-Token: Fetch
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ### Read Token to Variable
 @CSRF={{getCSRF.response.headers.x-csrf-token}}
+### Update Product Sales Text
+PATCH {{productLongTextURL}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+{
+	"LongText": "{{productLongText}}"
+}
 ###
 # @name updateProductDescription
 PATCH {{productDescriptionURI}}
