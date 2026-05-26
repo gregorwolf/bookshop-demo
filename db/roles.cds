@@ -25,6 +25,7 @@ entity CompanyCode : CodeList {
       );
 }
 
+@Common.SemanticKey: [rolename, ]
 entity Roles : cuid, managed {
   @mandatory
   @assert.format: 'r_[a-z]'
