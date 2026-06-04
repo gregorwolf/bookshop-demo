@@ -1,0 +1,18 @@
+### Cloud: https://api.sap.com/api/API_OPLACCTGDOCITEMCUBE_SRV/overview
+# SAP_COM_0303, SAP_COM_1294
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OPLACCTGDOCITEMCUBE_SRV/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OPLACCTGDOCITEMCUBE_SRV/A_OperationalAcctgDocItemCube/$count
+  ?$filter=CompanyCode eq '{{$dotenv CompanyCode}}' and FiscalYear eq '{{$dotenv FiscalYear}}'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OPLACCTGDOCITEMCUBE_SRV/A_OperationalAcctgDocItemCube
+  ?$top=3000
+  &$skip=3000
+  &$filter=CompanyCode eq '{{$dotenv CompanyCode}}' and FiscalYear eq '{{$dotenv FiscalYear}}'
+  &$orderby=AccountingDocument
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
