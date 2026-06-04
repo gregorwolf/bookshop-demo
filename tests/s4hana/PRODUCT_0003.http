@@ -1,0 +1,112 @@
+# Cloud: https://api.sap.com/api/sap-s4-CE_PRODUCT_0003-v3/overview
+# SAP_COM_0009
+
+###
+# Sandbox
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/
+APIKey: {{$dotenv apikey}}
+Accept: application/json
+###
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/Product
+  ?$count=true
+  &$top=10
+  #&$filter=ProductType eq 'KMAT'
+  &$expand=_ProductDescription(),_ProductSales(),_ProductSalesDelivery($expand=_ProdSalesDeliverySalesTax())
+  #&$expand=*
+  #_ProductChangeMaster(),_ProductEWMWarehouse(),_ProductPlant(),_ProductProcurement(),_ProductQualityManagement()
+  #,_ProductStorage(),_ProductUnitOfMeasure(),_ProductValuation()
+# 
+APIKey: {{$dotenv apikey}}
+Accept: application/json
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/Product
+  ?$top=10
+  &$filter=Product eq '{{$dotenv Product}}'
+#  &$filter=LastChangeDateTime gt 2024-10-08T00:00:00Z
+  &$count=true
+  #&$expand=*
+  &$expand=_ProductBasicText,_ProductChangeMaster,_ProductDescription,_ProductEWMWarehouse($expand=_ProductEWMStorageType),_ProductInspectionText,_ProductInternalComment,_ProductPlant($expand=_ProdPlantInternationalTrade,_ProdPlntMRPText,_ProductPlantCosting,_ProductPlantForecast,_ProductPlantInspTypeSetting,_ProductPlantMRP,_ProductPlantPlanning,_ProductPlantProcurement,_ProductPlantPurchaseTax,_ProductPlantQualityManagement,_ProductPlantSales,_ProductPlantStorage,_ProductPlantStorageLocation,_ProductPlantSupplyPlanning,_ProductPlantWorkScheduling,_VariantConfiguration($expand=_Instance($expand=_Characteristic($expand=_AssignedValue)))),_ProductProcurement,_ProductPurchaseOrderText,_ProductQualityManagement,_ProductSales,_ProductSalesDelivery($expand=_ProdSalesDeliverySalesTax,_ProductSalesDeliveryText),_ProductStorage,_ProductUnitOfMeasure($expand=_ProductUnitOfMeasureEAN),_ProductValuation($expand=_ProductValuationAccounting,_ProductValuationCosting,_ProductValuationLedgerAccount,_ProductValuationLedgerPrices),_VariantConfiguration($expand=_Instance($expand=_Characteristic($expand=_AssignedValue)))
+  #_ProductSalesDelivery,_ProductPlant($expand=*)
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/ProductPlant
+  ?$top=10
+  &$count=true
+#  &$filter=YY1_Beipackmaterial_PLT ne true
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/ProductPlantMRP
+  ?$top=10
+  &$count=true
+  &$expand=*
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/ProductDescription
+  ?$top=10
+  &$count=true
+  &$expand=*
+  &$filter=Product eq '{{$dotenv Product}}'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/ProductPlantStorageLocation
+  ?$top=10
+  &$count=true
+  &$filter=Plant eq '{{$dotenv Plant}}' and Product eq '{{$dotenv Product}}'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### ProductSalesDeliveryText
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/ProductSalesDeliveryText
+  ?$top=10
+  &$filter=Product eq '{{$dotenv Product}}' 
+  #Language eq 'DE' and (ProductSalesOrg eq '1020' or ProductSalesOrg eq '2210')
+  # _Product/LaboratoryOrDesignOffice eq '102' and 
+  &$count=true
+  #&$expand=*
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### ProductSalesDeliveryText
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/ProductSalesDeliveryText
+  ?$filter=Language eq 'DE' and (ProductSalesOrg eq '1020' or ProductSalesOrg eq '2210')
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/pdf
+### Get CSRF Token
+# @name getCSRF
+HEAD {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/
+X-CSRF-Token: Fetch
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Read Token to Variable
+@CSRF={{getCSRF.response.headers.x-csrf-token}}
+###
+# @name createProduct
+POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/Product
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+{
+  "Product": "BIKE-GRP01-003",
+  "IndustrySector": "M",
+  "ProductType": "FERT",
+  "GrossWeight": 20.000,
+  "WeightUnit": "KG",
+  "WeightISOUnit": "KGM",
+  "ProductGroup": "L004",
+  "BaseUnit": "ST",
+  "BaseISOUnit": "PCE",
+  "ItemCategoryGroup": "NORM",
+  "NetWeight": 19.500,
+  "_ProductDescription": [    {        "Product": "TE210921_1",        "Language": "EN",        "ProductDescription": "BIKE-GRP01-003"    }
+  ]
+}
