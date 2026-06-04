@@ -14,8 +14,16 @@ Accept: application/json
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_nodes_srv/srvd_a2x/sap/prodhiernodes/0001/ProdUniversalHierarchy
   ?$top=10
-  &$filter=ProdUnivHierarchy eq '{{$dotenv ProdUnivHierarchy}}'
+  &$filter=ProdUnivHierarchy eq '{{$dotenv ProdUnivHierarchy}}' and ProdHierarchyValidityEndDate ge 2026-06-01 
   &$expand=_ProdUnivHierNodeByHierID,_Text
   &$count=true
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### ProdUnivHierNodeByHierID
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_nodes_srv/srvd_a2x/sap/prodhiernodes/0001/ProdUnivHierNodeByHierID
+  ?$top=10
+  &$count=true
+#  &$filter=ParentNode ne ''
+  &$filter=ProdUnivHierarchyNode eq '{{$dotenv ProdUnivHierarchyNode}}' and ProdHierarchyValidityEndDate ge 2026-06-01 
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
