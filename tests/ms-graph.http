@@ -5,6 +5,7 @@ Content-Type: application/x-www-form-urlencoded
 
 client_id={{$dotenv msgraph_mail_clientid}}
 &scope=https%3A%2F%2Fgraph.microsoft.com%2F.default
+#&scope=https%3A%2F%2Foutlook.office.com%2F.default
 &client_secret={{$dotenv msgraph_mail_clientsecret}}
 &grant_type=client_credentials
 ### Fill Variables from Response
