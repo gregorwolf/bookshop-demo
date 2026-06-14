@@ -78,15 +78,17 @@ Content-Type: application/json
 
 {
   "ID": "{{roleID}}",
-  "rolename": "",
-  "description": "Description"
+  "rolename": "r_test_draft",
+  "description": "Test Draft Role"
 }
 
 ###
 @location = {{createRole.response.headers.Location}}
-
 ###
 GET http://localhost:4004/odata/v4/admin/{{location}}
+Authorization: Basic admin:
+###
+GET http://localhost:4004/odata/v4/admin/Roles(ID={{roleID}},IsActiveEntity=true)
 Authorization: Basic admin:
 
 ###
