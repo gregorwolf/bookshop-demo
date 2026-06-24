@@ -37,6 +37,11 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/DuplicateCheck
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/DuplicateCheck
+  ?Input='{{$dotenv DuplicateCheck_Input}}'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartner/$count
   ?$filter=Customer ne ''
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
