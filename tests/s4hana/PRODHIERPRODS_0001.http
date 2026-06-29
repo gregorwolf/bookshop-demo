@@ -24,11 +24,67 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/s
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
+# @name readProdUnivHierProdByHierNode
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/ProdUnivHierProdByHierNode
   ?$top=10
   &$filter=ProdUnivHierarchy eq '{{$dotenv ProdUnivHierarchy}}' and ProdHierarchyValidityEndDate ge 2026-06-01 and Product eq '{{$dotenv ProdUnivHierarchyProduct}}'
-  &$select=ParentNode
+  #&$select=ParentNode
   #&$expand=*
-  #&$count=true
+  &$count=true
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+###
+@ParentNode={{readProdUnivHierProdByHierNode.response.body.value[0].ParentNode}}
+@etag={{readProdUnivHierProdByHierNode.response.body.value[0]["@odata.etag"]}}
+### Read ProdUnivHierNormalNode
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/ProdUnivHierNormalNode
+  ?$top=10
+  &$filter=ProdUnivHierarchy eq '{{$dotenv ProdUnivHierarchy}}' and HierarchyNode eq '{{ParentNode}}' and ProdHierarchyValidityEndDate ge 2026-06-01
+  &$count=true
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/ProdUnivHierNormalNode(ProdUnivHierarchy='{{$dotenv ProdUnivHierarchy}}',HierarchyNode='{{ParentNode}}',ProdHierarchyValidityEndDate=9999-12-31)
+  ?$expand=*
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### Get CSRF Token
+# @name getCSRF
+HEAD {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/
+X-CSRF-Token: Fetch
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Read Token to Variable
+@CSRF={{getCSRF.response.headers.x-csrf-token}}
+###
+POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/ProdUnivHierNormalNode(ProdUnivHierarchy='{{$dotenv ProdUnivHierarchy}}',HierarchyNode='{{ParentNode}}',ProdHierarchyValidityEndDate=9999-12-31)/_ProdUnivHierProdByHierNode
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+X-CSRF-Token: {{CSRF}}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "ProdUnivHierarchy" : "{{$dotenv ProdUnivHierarchy}}",
+  "HierarchyNode" : "{{$dotenv Product}}",
+  "ProdHierarchyValidityEndDate" : "9999-12-31",
+  "Product" : "{{$dotenv Product}}"
+}
+### Delete Product from Hierarchy Node
+### Result: 400 Bad Request
+DELETE {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/ProdUnivHierProdByHierNode(ProdUnivHierarchy='{{$dotenv ProdUnivHierarchy}}',HierarchyNode='{{ParentNode}}',ProdHierarchyValidityEndDate=999-12-31,Product='{{$dotenv Product}}')
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+X-CSRF-Token: {{CSRF}}
+### Read ProdUnivHierProdByHierNode
+### Result: 400 Bad Request
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/ProdUnivHierProdByHierNode(ProdUnivHierarchy='{{$dotenv ProdUnivHierarchy}}',HierarchyNode='{{ParentNode}}',ProdHierarchyValidityEndDate=999-12-31,Product='{{$dotenv Product}}')
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### Read ProdUnivHierProdByHierNode
+### Result: 404 Not Found
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/ProdUnivHierProdByHierNode/{{$dotenv ProdUnivHierarchy}}/{{ParentNode}}/9999-12-31/{{$dotenv Product}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### Delete Product from Hierarchy Node
+DELETE {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/ProdUnivHierProdByHierNode/{{$dotenv ProdUnivHierarchy}}/{{ParentNode}}/9999-12-31/{{$dotenv Product}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+X-CSRF-Token: {{CSRF}}
+If-Match: {{etag}}

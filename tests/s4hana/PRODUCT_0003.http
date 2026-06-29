@@ -32,7 +32,7 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0
 #  &$filter=LastChangeDateTime gt 2024-10-08T00:00:00Z
   &$count=true
   #&$expand=*
-  &$expand=_ProductBasicText,_ProductChangeMaster,_ProductDescription,_ProductEWMWarehouse($expand=_ProductEWMStorageType),_ProductInspectionText,_ProductInternalComment,_ProductPlant($expand=_ProdPlantInternationalTrade,_ProdPlntMRPText,_ProductPlantCosting,_ProductPlantForecast,_ProductPlantInspTypeSetting,_ProductPlantMRP,_ProductPlantPlanning,_ProductPlantProcurement,_ProductPlantPurchaseTax,_ProductPlantQualityManagement,_ProductPlantSales,_ProductPlantStorage,_ProductPlantStorageLocation,_ProductPlantSupplyPlanning,_ProductPlantWorkScheduling,_VariantConfiguration($expand=_Instance($expand=_Characteristic($expand=_AssignedValue)))),_ProductProcurement,_ProductPurchaseOrderText,_ProductQualityManagement,_ProductSales,_ProductSalesDelivery($expand=_ProdSalesDeliverySalesTax,_ProductSalesDeliveryText),_ProductStorage,_ProductUnitOfMeasure($expand=_ProductUnitOfMeasureEAN),_ProductValuation($expand=_ProductValuationAccounting,_ProductValuationCosting,_ProductValuationLedgerAccount,_ProductValuationLedgerPrices),_VariantConfiguration($expand=_Instance($expand=_Characteristic($expand=_AssignedValue)))
+  #&$expand=_ProductBasicText,_ProductChangeMaster,_ProductDescription,_ProductEWMWarehouse($expand=_ProductEWMStorageType),_ProductInspectionText,_ProductInternalComment,_ProductPlant($expand=_ProdPlantInternationalTrade,_ProdPlntMRPText,_ProductPlantCosting,_ProductPlantForecast,_ProductPlantInspTypeSetting,_ProductPlantMRP,_ProductPlantPlanning,_ProductPlantProcurement,_ProductPlantPurchaseTax,_ProductPlantQualityManagement,_ProductPlantSales,_ProductPlantStorage,_ProductPlantStorageLocation,_ProductPlantSupplyPlanning,_ProductPlantWorkScheduling,_VariantConfiguration($expand=_Instance($expand=_Characteristic($expand=_AssignedValue)))),_ProductProcurement,_ProductPurchaseOrderText,_ProductQualityManagement,_ProductSales,_ProductSalesDelivery($expand=_ProdSalesDeliverySalesTax,_ProductSalesDeliveryText),_ProductStorage,_ProductUnitOfMeasure($expand=_ProductUnitOfMeasureEAN),_ProductValuation($expand=_ProductValuationAccounting,_ProductValuationCosting,_ProductValuationLedgerAccount,_ProductValuationLedgerPrices),_VariantConfiguration($expand=_Instance($expand=_Characteristic($expand=_AssignedValue)))
   #_ProductSalesDelivery,_ProductPlant($expand=*)
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
@@ -109,4 +109,22 @@ Content-Type: application/json
   "NetWeight": 19.500,
   "_ProductDescription": [    {        "Product": "TE210921_1",        "Language": "EN",        "ProductDescription": "BIKE-GRP01-003"    }
   ]
+}
+###
+# @name readProduct
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/Product('{{$dotenv Product}}')
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### Read etag
+@etag={{readProduct.response.headers.etag}}
+###
+PATCH {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/Product('{{$dotenv Product}}')
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+Content-Type: application/json
+If-Match: {{etag}}
+X-CSRF-Token: {{CSRF}}
+
+{
+  "{{$dotenv custom_field_name}}": ""
 }
