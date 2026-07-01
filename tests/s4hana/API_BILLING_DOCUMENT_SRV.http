@@ -8,19 +8,26 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/$metadata
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
-GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/GetPDF
-  ?BillingDocument='{{$dotenv BillingDocument}}'
+# @name getBillingDocuments
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument
+  ?$inlinecount=allpages
+  &$top=10
+  #&$filter=BillingDocument eq '{{$dotenv BillingDocument}}'
+  &$filter=CompanyCode eq '{{$dotenv CompanyCode}}' and FiscalYear eq '{{$dotenv FiscalYear}}'
+  #&$expand=to_Item,to_Item/to_ItemText,to_Item/to_Partner,to_Partner,to_PricingElement,to_Text
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
-GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument
-  ?$filter=BillingDocument eq '{{$dotenv BillingDocument}}'
-  &$expand=to_Item,to_Item/to_ItemText,to_Item/to_Partner,to_Partner,to_PricingElement,to_Text
+@billingDocument={{getBillingDocuments.response.body.d.results[0].BillingDocument}}
+#@billingDocument={{$dotenv BillingDocument}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/GetPDF
+  ?BillingDocument='{{billingDocument}}'
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocumentItem
-  ?$filter=BillingDocument eq '{{$dotenv BillingDocument}}' and ReferenceSDDocumentCategory eq '{{$dotenv ReferenceSDDocumentCategory}}'
+  ?$filter=BillingDocument eq '{{billingDocument}}' and ReferenceSDDocumentCategory eq '{{$dotenv ReferenceSDDocumentCategory}}'
   &$select=ReferenceSDDocument,ReferenceSDDocumentItem,ReferenceSDDocumentCategory
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
