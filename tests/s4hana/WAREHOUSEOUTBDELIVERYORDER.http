@@ -18,7 +18,8 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_odo_2/srvd_a2x/sap/w
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ### 
-@EWMOutboundDeliveryOrder={{readWarehouseOutbDeliveryOrders.response.body.value[0].EWMOutboundDeliveryOrder}}
+#@EWMOutboundDeliveryOrder={{readWarehouseOutbDeliveryOrders.response.body.value[0].EWMOutboundDeliveryOrder}}
+@EWMOutboundDeliveryOrder={{$dotenv DeliveryDocument}}
 ###
 # @name readWarehouseOutbDeliveryOrder
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_warehouse_odo_2/srvd_a2x/sap/warehouseoutbdeliveryorder/0001/WhseOutboundDeliveryOrderHead('{{EWMOutboundDeliveryOrder}}')
