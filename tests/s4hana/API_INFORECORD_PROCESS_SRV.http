@@ -13,9 +13,10 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_INFORECORD_PROCESS_SRV/A_Purcha
 #  ?$top=1
 #  &$skip=43785
   &$inlinecount=allpages
-#  &$filter=PurchasingInfoRecord eq '{{$dotenv PurchasingInfoRecord}}'
-  &$filter=IsDeleted eq false
-#  &$expand=to_PurgInfoRecdOrgPlantData,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPurOrgText,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPrcgCndnValidity,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPrcgCndnValidity/to_PurInfoRecdPrcgCndn,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPrcgCndnValidity/to_PurInfoRecdPrcgCndn/to_PurgInfoPricingCndnRecdScale,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPrcgCndnValidity/to_PurInfoRecdPrcgCndn/to_PurInfoRecdSuplmntPrcgCndn
+  &$filter=PurchasingInfoRecord eq '{{$dotenv PurchasingInfoRecord}}'
+#  &$filter=IsDeleted eq false and 
+  # and Supplier eq '{{$dotenv Supplier}}' and Product eq '{{$dotenv Product}}' and PurchasingOrganization eq '{{$dotenv PurchasingOrganization}}' and Plant eq '{{$dotenv Plant}}'
+  &$expand=to_PurgInfoRecdOrgPlantData,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPurOrgText,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPrcgCndnValidity,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPrcgCndnValidity/to_PurInfoRecdPrcgCndn,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPrcgCndnValidity/to_PurInfoRecdPrcgCndn/to_PurgInfoPricingCndnRecdScale,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPrcgCndnValidity/to_PurInfoRecdPrcgCndn/to_PurInfoRecdSuplmntPrcgCndn
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
