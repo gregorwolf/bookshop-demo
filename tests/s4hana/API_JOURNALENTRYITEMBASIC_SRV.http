@@ -37,8 +37,13 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_JOURNALENTRYITEMBASIC_SRV/A_Jou
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_JOURNALENTRYITEMBASIC_SRV/A_JournalEntryItemBasic
-  ?$top=10000
-  &$skip=10000
-  &$filter=CompanyCode eq '{{$dotenv CompanyCode}}' and LedgerFiscalYear eq '{{$dotenv FiscalYear}}'
+  ?$top=10
+  &$skip=1000
+  &$filter=LedgerFiscalYear eq '{{$dotenv FiscalYear}}' and CompanyCode eq '{{$dotenv CompanyCode}}'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_JOURNALENTRYITEMBASIC_SRV/A_JournalEntryItemBasic
+  ?{{$dotenv A_JournalEntryItemBasicQuery}}
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
