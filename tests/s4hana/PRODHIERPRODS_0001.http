@@ -35,6 +35,7 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
 @ParentNode={{readProdUnivHierProdByHierNode.response.body.value[0].ParentNode}}
+@HierarchyNode={{readProdUnivHierProdByHierNode.response.body.value[0].HierarchyNode}}
 @etag={{readProdUnivHierProdByHierNode.response.body.value[0]["@odata.etag"]}}
 ### Read ProdUnivHierNormalNode
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/ProdUnivHierNormalNode
@@ -68,23 +69,31 @@ Content-Type: application/json
   "ProdHierarchyValidityEndDate" : "9999-12-31",
   "Product" : "{{$dotenv Product}}"
 }
+### Move Product to Another Hierarchy Node
+POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/ProdUnivHierProdByHierNode(ProdUnivHierarchy='{{$dotenv ProdUnivHierarchy}}',HierarchyNode='{{HierarchyNode}}',ProdHierarchyValidityEndDate=9999-12-31,Product='{{$dotenv Product}}')/SAP__self.MoveProductToAnotherNode
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+X-CSRF-Token: {{CSRF}}
+Accept: application/json
+Content-Type: application/json
+If-Match: *
+
+{
+  "ProductHierarchyTargetNode" : "{{$dotenv ProductHierarchyTargetNode}}"
+}
 ### Delete Product from Hierarchy Node
-### Result: 400 Bad Request
-DELETE {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/ProdUnivHierProdByHierNode(ProdUnivHierarchy='{{$dotenv ProdUnivHierarchy}}',HierarchyNode='{{ParentNode}}',ProdHierarchyValidityEndDate=999-12-31,Product='{{$dotenv Product}}')
+DELETE {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/ProdUnivHierProdByHierNode(ProdUnivHierarchy='{{$dotenv ProdUnivHierarchy}}',HierarchyNode='{{HierarchyNode}}',ProdHierarchyValidityEndDate=9999-12-31,Product='{{$dotenv Product}}')
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 X-CSRF-Token: {{CSRF}}
 ### Read ProdUnivHierProdByHierNode
-### Result: 400 Bad Request
-GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/ProdUnivHierProdByHierNode(ProdUnivHierarchy='{{$dotenv ProdUnivHierarchy}}',HierarchyNode='{{ParentNode}}',ProdHierarchyValidityEndDate=999-12-31,Product='{{$dotenv Product}}')
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/ProdUnivHierProdByHierNode(ProdUnivHierarchy='{{$dotenv ProdUnivHierarchy}}',HierarchyNode='{{HierarchyNode}}',ProdHierarchyValidityEndDate=9999-12-31,Product='{{$dotenv Product}}')
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ### Read ProdUnivHierProdByHierNode
-### Result: 404 Not Found
-GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/ProdUnivHierProdByHierNode/{{$dotenv ProdUnivHierarchy}}/{{ParentNode}}/9999-12-31/{{$dotenv Product}}
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/ProdUnivHierProdByHierNode/{{$dotenv ProdUnivHierarchy}}/{{HierarchyNode}}/9999-12-31/{{$dotenv Product}}
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ### Delete Product from Hierarchy Node
-DELETE {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/ProdUnivHierProdByHierNode/{{$dotenv ProdUnivHierarchy}}/{{ParentNode}}/9999-12-31/{{$dotenv Product}}
+DELETE {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_prod_hier_prods_srv/srvd_a2x/sap/prodhierprods/0001/ProdUnivHierProdByHierNode/{{$dotenv ProdUnivHierarchy}}/{{HierarchyNode}}/9999-12-31/{{$dotenv Product}}
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 X-CSRF-Token: {{CSRF}}
 If-Match: {{etag}}
