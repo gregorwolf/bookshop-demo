@@ -4,6 +4,9 @@
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OPLACCTGDOCITEMCUBE_SRV/
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+### Metadata
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OPLACCTGDOCITEMCUBE_SRV/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_OPLACCTGDOCITEMCUBE_SRV/A_OperationalAcctgDocItemCube/$count
   ?$filter=CompanyCode eq '{{$dotenv CompanyCode}}' and FiscalYear eq '{{$dotenv FiscalYear}}'
