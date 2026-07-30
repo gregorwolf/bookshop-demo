@@ -14,6 +14,7 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingD
   &$top=10
   #&$filter=BillingDocument eq '{{$dotenv BillingDocument}}'
   &$filter=CompanyCode eq '{{$dotenv CompanyCode}}' and FiscalYear eq '{{$dotenv FiscalYear}}'
+  # and BillingDocumentDate ge datetime'2025-10-01T00:00:00.000'
   #&$expand=to_Item,to_Item/to_ItemText,to_Item/to_Partner,to_Partner,to_PricingElement,to_Text
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
