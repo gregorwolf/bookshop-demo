@@ -97,11 +97,12 @@ Content-Type: application/json
 #< ./API_SALES_ORDER_SRV-create.json
 #< ./API_SALES_ORDER_SRV-create-2.json
 #< ./API_SALES_ORDER_SRV-create-3.json
-< ./API_SALES_ORDER_SRV-create-XRechnung.json
+#< ./API_SALES_ORDER_SRV-create-XRechnung.json
 #< ./API_SALES_ORDER_SRV-create-CustomerMaterial.json
 #< ./API_SALES_ORDER_SRV-create-ZUGFeRD.json
 #< ./API_SALES_ORDER_SRV-create-Peppol-DE.json
 #< ./API_SALES_ORDER_SRV-create-with-payment-plan.json
+< ./default-env-API_SALES_ORDER_SRV-create-80183218.json
 # Returns:
 # CX_GOAL_EXC - Entity EPAY is not available
 # in S/4HANA Public Cloud Learning Hub System
