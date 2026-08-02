@@ -9,7 +9,7 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SUPPLIERINVOICE_PROCESS_SRV/A_SupplierInvoice/$count
-  ?$filter=CompanyCode eq '{{$dotenv CompanyCode}}'
+  ?$filter=CompanyCode eq '{{$dotenv CompanyCode}}' or CompanyCode eq '{{$dotenv CompanyCode2}}'
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SUPPLIERINVOICE_PROCESS_SRV/A_SupplierInvoice
