@@ -1,4 +1,4 @@
-# https://api.sap.com/api/API_SUPPLIERINVOICE_PROCESS_SRV/overview
+# https://api.sap.com/api/SUPPLIERINVOICEUPLOADREQUEST_I/overview
 # Communication Scenario SAP_COM_0057
 ### S/4HANA Cloud
 POST {{$dotenv s4hanahost}}/sap/bc/srt/scs_ext/sap/supplierinvoiceuploadrequest_i
