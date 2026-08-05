@@ -46,6 +46,7 @@ Content-Type: application/json
 {
   "_Reference": [
     {
+      "BillingDocumentType": "{{$dotenv BillingDocumentType}}",
       "SDDocument": "{{$dotenv DeliveryDocument}}"
     }
   ]
