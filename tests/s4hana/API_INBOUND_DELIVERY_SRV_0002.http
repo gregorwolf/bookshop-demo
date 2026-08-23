@@ -1,0 +1,22 @@
+### Cloud: https://api.sap.com/api/API_INBOUND_DELIVERY_SRV_0002/overview
+### SAP_COM_0106
+### OnPrem: 
+### S/4HANA Cloud
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_INBOUND_DELIVERY_SRV;v=0002/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_INBOUND_DELIVERY_SRV;v=0002/$metadata
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_INBOUND_DELIVERY_SRV;v=0002/A_InbDeliveryHeader
+  ?$top=10
+  &$expand=to_DeliveryDocumentItem,to_DeliveryDocumentItem/to_DocumentFlow
+  &$orderby=DeliveryDocument desc
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_INBOUND_DELIVERY_SRV;v=0002/A_InbDeliveryHeader('{{$dotenv InboundDeliveryDocument}}')
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
