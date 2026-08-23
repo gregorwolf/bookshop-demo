@@ -26,6 +26,13 @@ Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
 Content-Type: application/scim+json
 
 < ./default-env-create-minimal.json
+### Create User
+# @name createUser20260820
+POST {{$dotenv ias_scim_endpoint}}/scim/Users
+Authorization: Basic {{$dotenv ias_scim_username}}:{{$dotenv ias_scim_password}}
+Content-Type: application/scim+json
+
+< ./default-env-create-20260820.json
 ###
 @userId={{createUser.response.body.id}}
 ### Update User
