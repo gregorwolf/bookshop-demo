@@ -1,0 +1,10 @@
+# Test for S/4HANA Public Cloud or ABAP Environment as a Content Provider for 
+# SAP Build Work Zone, standard edition
+# https://developers.sap.com/tutorials/abap-environment-lp-service-content-provider..html
+# Communication Arrangement: SAP_COM_0647
+###
+GET {{$dotenv s4hanahost}}/sap/bc/http/sap/APS_FLP_CONTENT_EXPOSURE
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+###
+GET {{$dotenv s4hanahost}}/sap/bc/http/sap/APS_FLP_CONTENT_EXPOSURE/entities
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
