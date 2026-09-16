@@ -141,6 +141,22 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_Supplier
   &$top=10
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+### A_BusinessPartnerAddress
+# @name getBusinessPartnerAddress
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartnerAddress
+  ?$inlinecount=allpages
+  &$top=10
+  &$filter=BusinessPartner eq '{{$dotenv BusinessPartner}}'
+#  &$format=xlsx
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+@referenceBusinessPartner={{getBusinessPartnerAddress.response.body.d.results[0].BusinessPartner}}
+@addressID={{getBusinessPartnerAddress.response.body.d.results[0].AddressID}}
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartnerAddress(BusinessPartner='{{referenceBusinessPartner}}',AddressID='{{addressID}}')
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
 ### A_BusinessPartnerBank
 # @name getBusinessPartnerBank
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartnerBank
