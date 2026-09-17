@@ -90,9 +90,12 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ### ProductPlantInternationalTrade
 GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/ProductPlantInternationalTrade
-  ?$top=10
-  &$filter=Product eq '{{$dotenv Product}}' 
+  ?$top=50
+  #&$filter=Product eq '{{$dotenv Product}}' 
+  &$filter=CountryOfOrigin ne '' 
   &$count=true
+  &$orderby=Product,Plant
+  &$select=CountryOfOrigin
   #&$expand=*
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
