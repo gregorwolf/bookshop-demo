@@ -12,9 +12,10 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_WORK_CENTERS/A_WorkCenters
   ?$top=10
   &$inlinecount=allpages
-  #&$filter=Plant eq '1020'
-  &$filter=WorkCenterInternalID eq '10000186'
-  &$expand=to_WorkCenterAllCapacity,to_WorkCenterAllCapacity/to_Capacity,to_WorkCenterAllCapacity/to_Capacity/to_CapacityInterval,to_WorkCenterAllCapacity/to_Capacity/to_CapacityInterval/to_CapacityShift
+  &$filter=Plant eq '1010' and startswith(WorkCenter,'T-A00')
+  #&$filter=WorkCenterInternalID eq '10000186'
+  #&$expand=to_WorkCenterAllCapacity,to_WorkCenterAllCapacity/to_Capacity,to_WorkCenterAllCapacity/to_Capacity/to_CapacityInterval,to_WorkCenterAllCapacity/to_Capacity/to_CapacityInterval/to_CapacityShift
+  &$select=WorkCenter
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
