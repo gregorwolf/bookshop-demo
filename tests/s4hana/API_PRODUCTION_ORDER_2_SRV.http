@@ -8,15 +8,37 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ORDER_2_SRV/$metadata
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
+# @name getProductionOrder
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ORDER_2_SRV/A_ProductionOrder_2
-  ?$top=1000
-  &$filter=ManufacturingOrder eq '{{$dotenv ManufacturingOrder}}'
+  ?$top=10
+#  &$filter=ManufacturingOrder eq '{{$dotenv ManufacturingOrder}}'
   &$inlinecount=allpages
   # &$select=ManufacturingOrder,to_ProdnOrdHeaderSerialNumber/ManufacturingOrder,to_ProdnOrdHeaderSerialNumber/ManufacturingOrderItem
-  &$expand=to_ProdnOrdHeaderSerialNumber
+  &$expand=to_ProdnOrdHeaderSerialNumber,to_ProductionOrderOperation
   #,to_ProductionOrderComponent,to_ProductionOrderComponentExt,to_ProductionOrderComponentExt4,to_ProductionOrderItem,to_ProductionOrderItem/to_ProdnOrderItemSerialNumber,to_ProductionOrderOperation,to_ProductionOrderStatus,to_ProductionRsceTools
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+###
+@etag={{getProductionOrder.response.body.d.results[0].to_ProductionOrderOperation.results[0].__metadata.etag}}
+@operationUri={{getProductionOrder.response.body.d.results[0].to_ProductionOrderOperation.results[0].__metadata.uri}}
+### Get CSRF Token
+# @name getCSRF
+HEAD {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ORDER_2_SRV/
+X-CSRF-Token: Fetch
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Read Token to Variable
+@CSRF={{getCSRF.response.headers.x-csrf-token}}
+### Update Operation
+PATCH {{operationUri}}
+X-CSRF-Token: {{CSRF}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+If-Match: {{etag}}
+Content-Type: application/json
+
+{
+  "WorkCenter": "T-A000"
+}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_PRODUCTION_ORDER_2_SRV/A_ProdnOrderItemSerialNumber
   ?$top=10
