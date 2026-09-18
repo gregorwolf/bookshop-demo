@@ -1,0 +1,86 @@
+# Cloud: https://api.sap.com/api/BC_EXT_APPJOB_MANAGEMENT/overview
+# SAP_COM_0326
+### S/4HANA Cloud / BTP ABAP Environment
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/BC_EXT_APPJOB_MANAGEMENT;v=0002/
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### JobHeaderSet
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/BC_EXT_APPJOB_MANAGEMENT;v=0002/JobHeaderSet
+  ?$top=10
+  &$inlinecount=allpages
+  &$expand=JobStepSet,JobStepSet/JobStepLogInfoSet,JobStepSet/JobStepLogInfoSet/JobLogMessageSet
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### JobScheduleCheckCollection - not implemented in data provider class
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/BC_EXT_APPJOB_MANAGEMENT;v=0002/JobScheduleCheckCollection
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### JoblistSet - not implemented in data provider class
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/BC_EXT_APPJOB_MANAGEMENT;v=0002/JoblistSet
+  ?$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### JobLogSet - Service not implemented
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/BC_EXT_APPJOB_MANAGEMENT;v=0002/JobLogSet
+  ?$top=10
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### JobTemplateSet
+# @name getJobTemplateSet
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/BC_EXT_APPJOB_MANAGEMENT;v=0002/JobTemplateSet
+  ?$top=10
+  &$inlinecount=allpages
+  &$expand=JobTemplateParamSectionSet,JobTemplateParamSectionSet/JobTemplateParamGroupSet,JobTemplateParamSectionSet/JobTemplateParamGroupSet/JobTemplateParameterSet,JobTemplateParamSectionSet/JobTemplateParamGroupSet/JobTemplateParameterSet/JobTemplateParameterValueDataSet
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### TemplateValuesGet
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/BC_EXT_APPJOB_MANAGEMENT;v=0002/TemplateValuesGet
+  ?JobTemplateName='{{getJobTemplateSet.response.body.d.results[0].JobTemplateName}}'
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+
+### JobTemplateParamGroupSet
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/BC_EXT_APPJOB_MANAGEMENT;v=0002/JobTemplateParamGroupSet
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### JobTemplateParameterValueDataSet
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/BC_EXT_APPJOB_MANAGEMENT;v=0002/JobTemplateParameterValueDataSet
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### JobStepSet
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/BC_EXT_APPJOB_MANAGEMENT;v=0002/JobStepSet
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+Accept: application/json
+### JobTemplateParamSectionSet
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/BC_EXT_APPJOB_MANAGEMENT;v=0002/JobTemplateParamSectionSet
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### JobTemplateSequenceSet
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/BC_EXT_APPJOB_MANAGEMENT;v=0002/JobTemplateSequenceSet
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### JobLogSet
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/BC_EXT_APPJOB_MANAGEMENT;v=0002/JobLogSet
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+### JobStepLogInfoSet - Job doesn't exist.
+GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/BC_EXT_APPJOB_MANAGEMENT;v=0002/JobStepLogInfoSet
+  ?$top=10
+  &$inlinecount=allpages
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
