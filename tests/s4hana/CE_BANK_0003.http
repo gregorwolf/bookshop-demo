@@ -12,7 +12,7 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_bank/srvd_a2x/sap/bank/0003/Ba
   ?$top=10
   &$skip=0
   &$count=true
-  &$filter=SWIFTCode ne '' and BankCountry eq 'IT'
+  &$filter=BankCountry eq 'IT' and SWIFTCode eq ''
   #&$filter=BankNumber eq '0100557570'
   #&$select=SWIFTCode
   &$expand=*
