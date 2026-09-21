@@ -1,0 +1,10 @@
+### S/4HANA Public Cloud
+### https://api.sap.com/api/WORKFORCEPERSONMASTERDATAREPLI/overview
+### SAP_COM_0301
+POST {{$dotenv s4hanahost}}/sap/bc/srt/scs_ext/sap/workforcepersonmasterdatarepli
+    ?MessageId={{$guid}}
+Accept: text/xml
+Content-Type: text/xml; charset=utf-8
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+
+< ./default-env-workforcepersonmasterdatarepli.xml
