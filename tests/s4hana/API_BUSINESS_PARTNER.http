@@ -75,12 +75,14 @@ Accept: application/json
 # @name getCustomerSalesArea
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_CustomerSalesArea
   ?$inlinecount=allpages
-  &$top=100
+  &$top=10
   &$skip=0
-  &$filter=(SalesOrganization eq '1010' or SalesOrganization eq '3910') and SalesOffice eq ''
+  &$filter=startswith(SupplyingPlant,'P')
+  #&$filter=SupplyingPlant eq '2210'
+  #&$filter=(SalesOrganization eq '1010' or SalesOrganization eq '3910') and SalesOffice eq ''
   # and DistributionChannel eq '10'
   &$orderby=Customer
-  &$select=Customer
+  #&$select=Customer
   #&$expand=to_PartnerFunction,to_SalesAreaTax,to_SalesAreaText,to_SlsAreaAddrDepdntInfo
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
@@ -161,10 +163,11 @@ Accept: application/json
 # @name getBusinessPartnerBank
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartnerBank
   ?$inlinecount=allpages
-  &$top=10
-  #&$filter=SWIFTCode eq ''
-  # and BankCountryKey ne 'IT'
-#  &$format=xlsx
+  &$top=100
+  #&$filter=BusinessPartner eq '{{$dotenv BusinessPartner}}'
+  &$filter=BankCountryKey ne 'IT' and SWIFTCode eq '' 
+  #&$filter=BankCountryKey ne 'IT' and BankCountryKey ne 'CH' and SWIFTCode eq '' and IBAN ne ''
+  #&$format=xlsx
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
