@@ -12,8 +12,8 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_bank/srvd_a2x/sap/bank/0003/Ba
   ?$top=10
   &$skip=0
   &$count=true
-  &$filter=BankCountry eq 'IT' and SWIFTCode eq ''
-  #&$filter=BankNumber eq '0100557570'
+  #&$filter=BankCountry eq 'IT' and SWIFTCode eq ''
+  &$filter=BankNumber eq '{{$dotenv BankNumber}}'
   #&$select=SWIFTCode
   &$expand=*
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
@@ -39,12 +39,12 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ### Read Token to Variable
 @CSRF={{getCSRF.response.headers.x-csrf-token}}
 ### Update SWIFTCode
-PATCH {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_bank/srvd_a2x/sap/bank/0003/Bank/IT/0100557570
+PATCH {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_bank/srvd_a2x/sap/bank/0003/Bank/IT/{{$dotenv BankNumber}}
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 X-CSRF-Token: {{CSRF}}
 Content-Type: application/json
 
 {
-  "SWIFTCode": "BNLIITRRXXX"
+  "SWIFTCode": "{{$dotenv SWIFTCode}}"
 }
 ###
