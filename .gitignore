@@ -9,8 +9,7 @@ target/
 .DS_Store
 _out
 
-default-env*.json
-default-env*.xml
+default-env*.*
 
 fioriHtmlRunner.html
 .*/fioriHtmlRunner.html
