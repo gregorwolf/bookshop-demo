@@ -13,7 +13,8 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_INFORECORD_PROCESS_SRV/A_Purcha
 #  ?$top=1
 #  &$skip=43785
   &$inlinecount=allpages
-  &$filter=PurchasingInfoRecord eq '{{$dotenv PurchasingInfoRecord}}'
+#  &$filter=PurchasingInfoRecord eq '{{$dotenv PurchasingInfoRecord}}'
+  &$filter=Material eq '{{$dotenv Material}}'
 #  &$filter=IsDeleted eq false and 
   # and Supplier eq '{{$dotenv Supplier}}' and Product eq '{{$dotenv Product}}' and PurchasingOrganization eq '{{$dotenv PurchasingOrganization}}' and Plant eq '{{$dotenv Plant}}'
   &$expand=to_PurgInfoRecdOrgPlantData,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPurOrgText,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPrcgCndnValidity,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPrcgCndnValidity/to_PurInfoRecdPrcgCndn,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPrcgCndnValidity/to_PurInfoRecdPrcgCndn/to_PurgInfoPricingCndnRecdScale,to_PurgInfoRecdOrgPlantData/to_PurInfoRecdPrcgCndnValidity/to_PurInfoRecdPrcgCndn/to_PurInfoRecdSuplmntPrcgCndn

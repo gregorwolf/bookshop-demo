@@ -15,9 +15,9 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SUPPLIERINVOICE_PROCESS_SRV/A_SupplierInvoice
   ?$inlinecount=allpages
   &$top=10
-  &$filter=CompanyCode eq '{{$dotenv CompanyCode}}'
+  #&$filter=CompanyCode eq '{{$dotenv CompanyCode}}'
   # and FiscalYear eq '{{$dotenv FiscalYear}}'
-  #&$filter=SupplierInvoice eq '5105742401'
+  &$filter=SupplierInvoice eq '5105774759'
   &$orderby=DocumentDate desc
   #&$select=SupplierInvoice
   &$expand=to_BR_SupplierInvoiceNFDocument,to_SelectedDeliveryNotes,to_SelectedPurchaseOrders,to_SelectedServiceEntrySheets,to_SuplrInvcItemAsset,to_SuplrInvcItemMaterial,to_SuplrInvcItemPurOrdRef,to_SuplrInvoiceAdditionalData,to_SupplierInvoiceItemGLAcct,to_SupplierInvoiceODN,to_SupplierInvoiceTax,to_SupplierInvoiceWhldgTax

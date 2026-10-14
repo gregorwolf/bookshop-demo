@@ -100,7 +100,8 @@ X-CSRF-Token: {{CSRF}}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_CustomerText
   ?$inlinecount=allpages
-  &top=10
+  &top=200
+  &$filter=LongTextID eq '{{$dotenv LongTextID}}'
 #  &$format=xlsx
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
