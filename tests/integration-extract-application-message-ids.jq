@@ -1,0 +1,3 @@
+.[]
+| .ApplicationMessageId?
+| select(. != null and . != "")
