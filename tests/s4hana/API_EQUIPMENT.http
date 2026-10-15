@@ -10,11 +10,12 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_EQUIPMENT/Equipment
   ?$inlinecount=allpages
-  &$top=10
-  &$orderby=CreationDate desc
-  &$filter=Equipment eq '{{$dotenv Equipment}}'
-  &$select=Equipment,BusinessPartnerName1,BusinessPartnerName2,StreetName,PostalCode,CityName,Country
-#  &$filter=MaintenancePlant ne ''
+  &$top=40
+  &$orderby=LastChangeDateTime desc
+  &$filter=LastChangeDateTime gt datetimeoffset'2026-10-14T16:00:00Z'
+  #&$filter=Equipment eq '{{$dotenv Equipment}}'
+  #&$filter=MaintenancePlant ne ''
+  #&$select=Equipment,BusinessPartnerName1,BusinessPartnerName2,StreetName,PostalCode,CityName,Country,LastChangeDateTime
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
