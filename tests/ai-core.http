@@ -19,21 +19,25 @@ Authorization: Bearer {{ai_core_access_token}}
 GET {{$dotenv ai_core_url}}/v2/admin/tenantInfo
 Authorization: Bearer {{ai_core_access_token}}
 ### /admin/resourceGroups
+# @name getAIcoreResourceGroups
 GET {{$dotenv ai_core_url}}/v2/admin/resourceGroups
 Authorization: Bearer {{ai_core_access_token}}
+###
+#@ai_core_resourceGroupId={{$dotenv ai_core_resourceGroupId}}
+@ai_core_resourceGroupId={{getAIcoreResourceGroups.response.body.resources[0].resourceGroupId}}
 ### Create resourceGroups
 POST {{$dotenv ai_core_url}}/v2/admin/resourceGroups
 Authorization: Bearer {{ai_core_access_token}}
 Content-Type: application/json
 
-{ "resourceGroupId": "{{$dotenv ai_core_resourceGroupId}}"}
+{ "resourceGroupId": "{{ai_core_resourceGroupId}}"}
 ### Create resourceGroups with Document Grounding
 POST {{$dotenv ai_core_url}}/v2/admin/resourceGroups
 Authorization: Bearer {{ai_core_access_token}}
 Content-Type: application/json
 
 {
-  "resourceGroupId": "{{$dotenv ai_core_resourceGroupId}}-grounding", 
+  "resourceGroupId": "{{ai_core_resourceGroupId}}-grounding", 
   "labels": [
     {
       "key": "ext.ai.sap.com/document-grounding",
@@ -42,8 +46,8 @@ Content-Type: application/json
   ]
 }
 ### /admin/resourceGroups/{resourceGroupId}
-GET {{$dotenv ai_core_url}}/v2/admin/resourceGroups/{{$dotenv ai_core_resourceGroupId}}
+GET {{$dotenv ai_core_url}}/v2/admin/resourceGroups/{{ai_core_resourceGroupId}}
 Authorization: Bearer {{ai_core_access_token}}
 ### /admin/resourceGroups/{resourceGroupId}-grounding
-GET {{$dotenv ai_core_url}}/v2/admin/resourceGroups/{{$dotenv ai_core_resourceGroupId}}-grounding
+GET {{$dotenv ai_core_url}}/v2/admin/resourceGroups/{{ai_core_resourceGroupId}}-grounding
 Authorization: Bearer {{ai_core_access_token}}
