@@ -1,0 +1,20 @@
+### Get CSRF Token
+# @name getCSRF
+HEAD https://go.support.sap.com/minisap/odata/bkey/minisap/
+X-CSRF-Token: Fetch
+### Read Token to Variable
+@csrf={{getCSRF.response.headers.x-csrf-token}}
+###
+POST https://go.support.sap.com/minisap/odata/bkey/minisap/LicenseKey
+Content-Type: application/json
+X-CSRF-Token: {{csrf}}
+Accept: application/json
+
+{
+  "Type":"{{$dotenv Type}}",
+  "Name":"{{$dotenv Name}}",
+  "Email":"{{$dotenv Email}}",
+  "Hwkey":"{{$dotenv Hwkey}}",
+  "HostID":"",
+  "HostName":""
+}
