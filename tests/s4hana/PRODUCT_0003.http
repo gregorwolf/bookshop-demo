@@ -31,9 +31,14 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0
   &$filter=Product eq '{{$dotenv Product}}'
 #  &$filter=LastChangeDateTime gt 2024-10-08T00:00:00Z
   &$count=true
-  &$expand=_ProductPlant($expand=*)
-  #&$expand=_ProductBasicText,_ProductChangeMaster,_ProductDescription,_ProductEWMWarehouse($expand=_ProductEWMStorageType),_ProductInspectionText,_ProductInternalComment,_ProductPlant($expand=_ProdPlantInternationalTrade,_ProdPlntMRPText,_ProductPlantCosting,_ProductPlantForecast,_ProductPlantInspTypeSetting,_ProductPlantMRP,_ProductPlantPlanning,_ProductPlantProcurement,_ProductPlantPurchaseTax,_ProductPlantQualityManagement,_ProductPlantSales,_ProductPlantStorage,_ProductPlantStorageLocation,_ProductPlantSupplyPlanning,_ProductPlantWorkScheduling,_VariantConfiguration($expand=_Instance($expand=_Characteristic($expand=_AssignedValue)))),_ProductProcurement,_ProductPurchaseOrderText,_ProductQualityManagement,_ProductSales,_ProductSalesDelivery($expand=_ProdSalesDeliverySalesTax,_ProductSalesDeliveryText),_ProductStorage,_ProductUnitOfMeasure($expand=_ProductUnitOfMeasureEAN),_ProductValuation($expand=_ProductValuationAccounting,_ProductValuationCosting,_ProductValuationLedgerAccount,_ProductValuationLedgerPrices),_VariantConfiguration($expand=_Instance($expand=_Characteristic($expand=_AssignedValue)))
+  #&$expand=_ProductPlant($expand=*)
+  &$expand=_ProductBasicText($filter=Language eq 'FR'),_ProductDescription($filter=Language eq 'FR'),_ProductChangeMaster,_ProductEWMWarehouse($expand=_ProductEWMStorageType),_ProductInspectionText,_ProductInternalComment,_ProductPlant($expand=_ProdPlantInternationalTrade,_ProdPlntMRPText,_ProductPlantCosting,_ProductPlantForecast,_ProductPlantInspTypeSetting,_ProductPlantMRP,_ProductPlantPlanning,_ProductPlantProcurement,_ProductPlantPurchaseTax,_ProductPlantQualityManagement,_ProductPlantSales,_ProductPlantStorage,_ProductPlantStorageLocation,_ProductPlantSupplyPlanning,_ProductPlantWorkScheduling,_VariantConfiguration($expand=_Instance($expand=_Characteristic($expand=_AssignedValue)))),_ProductProcurement,_ProductPurchaseOrderText,_ProductQualityManagement,_ProductSales,_ProductSalesDelivery($expand=_ProdSalesDeliverySalesTax,_ProductSalesDeliveryText),_ProductStorage,_ProductUnitOfMeasure($expand=_ProductUnitOfMeasureEAN),_ProductValuation($expand=_ProductValuationAccounting,_ProductValuationCosting,_ProductValuationLedgerAccount,_ProductValuationLedgerPrices),_VariantConfiguration($expand=_Instance($expand=_Characteristic($expand=_AssignedValue)))
   #_ProductSalesDelivery,_ProductPlant($expand=*)
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+###
+GET {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/Product/{{$dotenv Product}}
+  ?$expand=_ProductBasicText,_ProductChangeMaster,_ProductDescription,_ProductEWMWarehouse($expand=_ProductEWMStorageType),_ProductInspectionText,_ProductInternalComment,_ProductPlant($expand=_ProdPlantInternationalTrade,_ProdPlntMRPText,_ProductPlantCosting,_ProductPlantForecast,_ProductPlantInspTypeSetting,_ProductPlantMRP,_ProductPlantPlanning,_ProductPlantProcurement,_ProductPlantPurchaseTax,_ProductPlantQualityManagement,_ProductPlantSales,_ProductPlantStorage,_ProductPlantStorageLocation,_ProductPlantSupplyPlanning,_ProductPlantWorkScheduling,_VariantConfiguration($expand=_Instance($expand=_Characteristic($expand=_AssignedValue)))),_ProductProcurement,_ProductPurchaseOrderText,_ProductQualityManagement,_ProductSales,_ProductSalesDelivery($expand=_ProdSalesDeliverySalesTax,_ProductSalesDeliveryText),_ProductStorage,_ProductUnitOfMeasure($expand=_ProductUnitOfMeasureEAN),_ProductValuation($expand=_ProductValuationAccounting,_ProductValuationCosting,_ProductValuationLedgerAccount,_ProductValuationLedgerPrices),_VariantConfiguration($expand=_Instance($expand=_Characteristic($expand=_AssignedValue)))
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
@@ -111,6 +116,15 @@ X-CSRF-Token: Fetch
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 ### Read Token to Variable
 @CSRF={{getCSRF.response.headers.x-csrf-token}}
+###
+# @name createProductFromJson
+POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/Product
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+< ./default-env-product_0003.json
 ###
 # @name createProduct
 POST {{$dotenv s4hanahost}}/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0003/Product
