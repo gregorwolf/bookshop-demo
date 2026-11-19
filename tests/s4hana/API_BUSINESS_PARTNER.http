@@ -75,15 +75,17 @@ Accept: application/json
 # @name getCustomerSalesArea
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_CustomerSalesArea
   ?$inlinecount=allpages
-  &$top=10
+  &$top=1000
   &$skip=0
-  &$filter=startswith(SupplyingPlant,'P')
+  #&$filter=startswith(SupplyingPlant,'P')
   #&$filter=SupplyingPlant eq '2210'
   #&$filter=(SalesOrganization eq '1010' or SalesOrganization eq '3910') and SalesOffice eq ''
+  &$filter=SalesOffice eq '{{$dotenv SalesOffice}}'
   # and DistributionChannel eq '10'
   &$orderby=Customer
   #&$select=Customer
   #&$expand=to_PartnerFunction,to_SalesAreaTax,to_SalesAreaText,to_SlsAreaAddrDepdntInfo
+  #&$format=xlsx
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
