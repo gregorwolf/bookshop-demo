@@ -1,0 +1,3 @@
+###
+GET http://localhost:2236/mcp
+Authorization: Bearer {{$dotenv adt_mcp_token}}
