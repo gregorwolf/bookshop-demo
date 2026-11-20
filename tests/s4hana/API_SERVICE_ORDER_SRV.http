@@ -25,11 +25,15 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_ORDER_SRV/A_ServiceOrde
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 ###
+# @name getServiceOrderItems
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_ORDER_SRV/A_ServiceOrderItem
   ?$inlinecount=allpages
-  #&$select=ServiceOrder,ServiceOrderItem,ServiceOrderItemIsReleased,to_ReferenceObject/ServiceOrder,to_ReferenceObject/ServiceOrderItem,to_ReferenceObject/ServiceReferenceEquipment,to_ReferenceObject/ServiceRefFunctionalLocation,to_ReferenceObject/SrvcRefObjIsMainObject
-  &$expand=to_ServiceOrder,to_ServiceOrder/to_ServiceOrdUserStatus,to_ReferenceObject,to_SrvcOrdItemUserStatus
-  &$filter=StorageLocation eq '{{$dotenv StorageLocation}}'
+  #&$top=5
+  &$select=ServiceOrder,ServiceOrderItem,ExecutingServiceEmployee,StorageLocation
+  #,ServiceOrderItemIsReleased,to_ReferenceObject/ServiceOrder,to_ReferenceObject/ServiceOrderItem,to_ReferenceObject/ServiceReferenceEquipment,to_ReferenceObject/ServiceRefFunctionalLocation,to_ReferenceObject/SrvcRefObjIsMainObject
+  #&$expand=to_Partner
+  #to_ServiceOrder,to_ServiceOrder/to_ServiceOrdUserStatus,to_ReferenceObject,to_SrvcOrdItemUserStatus
+  &$filter=StorageLocation eq '{{$dotenv StorageLocationFilter}}' and ExecutingServiceEmployee eq '{{$dotenv ExecutingServiceEmployee}}'
   #ServiceOrder eq '{{$dotenv ServiceOrder}}' and ServiceOrderItem eq '{{$dotenv ServiceOrderItem}}'
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
@@ -62,7 +66,8 @@ Content-Type: application/json
 }
 ### Fix Storage Location for Service Order Item
 ### 3854496 - Service order item plant and storage location determination by exec. service employee not working (https://me.sap.com/notes/3854496)
-PATCH {{getServiceOrders.response.body.d.results[0].to_Item.results[0].__metadata.uri}}
+#PATCH {{getServiceOrders.response.body.d.results[0].to_Item.results[0].__metadata.uri}}
+PATCH {{getServiceOrderItems.response.body.d.results[0].__metadata.uri}}
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 X-CSRF-Token: {{CSRF}}
