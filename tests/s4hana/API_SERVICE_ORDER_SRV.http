@@ -33,10 +33,24 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_ORDER_SRV/A_ServiceOrde
   #,ServiceOrderItemIsReleased,to_ReferenceObject/ServiceOrder,to_ReferenceObject/ServiceOrderItem,to_ReferenceObject/ServiceReferenceEquipment,to_ReferenceObject/ServiceRefFunctionalLocation,to_ReferenceObject/SrvcRefObjIsMainObject
   #&$expand=to_Partner
   #to_ServiceOrder,to_ServiceOrder/to_ServiceOrdUserStatus,to_ReferenceObject,to_SrvcOrdItemUserStatus
+  #&$filter=ServiceOrder eq '{{$dotenv ServiceOrder}}' and ServiceOrderItem eq '{{$dotenv ServiceOrderItem}}'
   &$filter=StorageLocation eq '{{$dotenv StorageLocationFilter}}' and ExecutingServiceEmployee eq '{{$dotenv ExecutingServiceEmployee}}'
-  #ServiceOrder eq '{{$dotenv ServiceOrder}}' and ServiceOrderItem eq '{{$dotenv ServiceOrderItem}}'
+  # 
+  &$orderby=ServiceOrder desc
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+### Fix Storage Location for Service Order Item
+### 3854496 - Service order item plant and storage location determination by exec. service employee not working (https://me.sap.com/notes/3854496)
+#PATCH {{getServiceOrders.response.body.d.results[0].to_Item.results[0].__metadata.uri}}
+PATCH {{getServiceOrderItems.response.body.d.results[0].__metadata.uri}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+{
+  "StorageLocation": "{{$dotenv StorageLocation}}"
+}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_ORDER_SRV/A_ServiceOrder('{{$dotenv ServiceOrder}}')
   ?$expand=to_ReferenceObject
@@ -63,16 +77,4 @@ Content-Type: application/json
 ###
 {
   "FSMServiceCall": "364"
-}
-### Fix Storage Location for Service Order Item
-### 3854496 - Service order item plant and storage location determination by exec. service employee not working (https://me.sap.com/notes/3854496)
-#PATCH {{getServiceOrders.response.body.d.results[0].to_Item.results[0].__metadata.uri}}
-PATCH {{getServiceOrderItems.response.body.d.results[0].__metadata.uri}}
-Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
-Accept: application/json
-X-CSRF-Token: {{CSRF}}
-Content-Type: application/json
-
-{
-  "StorageLocation": "{{$dotenv StorageLocation}}"
 }
