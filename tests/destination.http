@@ -86,6 +86,17 @@ grant_type=password
 ### Fill Variables from Response
 @user_access_token = {{requestUserAccessToken.response.body.$.access_token}}
 
+
+### Get Access token from Destination Service using the OAuth2SAMLBearerAssertion Destination
+# According to https://api.sap.com/api/SAP_CP_CF_Connectivity_Destination/path/get_destinations__name_
+### Read details of one destination
+# @name requestProviderDestination
+GET {{$dotenv dest_uri}}/destination-configuration/v1/destinations/{{$dotenv dest_name}}
+X-user-token: {{user_access_token}}
+Authorization: Bearer {{destination_access_token}}
+###
+@user_destination_access_token={{requestProviderDestination.response.body.$.authTokens[0].value}}
+
 # Before you can use the next requests a SSH connection to an application running
 # in Cloud Foundry must be established. SSH is enabled by:
 #
