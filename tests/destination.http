@@ -96,7 +96,11 @@ X-user-token: {{user_access_token}}
 Authorization: Bearer {{destination_access_token}}
 ###
 @user_destination_access_token={{requestProviderDestination.response.body.$.authTokens[0].value}}
-
+@sacurl={{requestProviderDestination.response.body.$.destinationConfiguration.URL}}
+@sacpath={{requestProviderDestination.response.body.$.destinationConfiguration.sap-card-nominations-path}}
+###
+GET {{sacurl}}{{sacpath}}
+Authorization: Bearer {{user_destination_access_token}}
 # Before you can use the next requests a SSH connection to an application running
 # in Cloud Foundry must be established. SSH is enabled by:
 #
