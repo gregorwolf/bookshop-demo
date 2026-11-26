@@ -18,7 +18,7 @@ Accept: application/json
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_ORDER_SRV/A_ServiceOrder
   ?$inlinecount=allpages
   &$top=10
-  &$expand=to_Item,to_Item/to_Confirmation,to_Item/to_PricingElement,to_Item/to_ReferenceObject,to_Item/to_SrvcOrdItemUserStatus,to_Item/to_Appointment,to_Item/to_Duration,to_Item/to_ProductReferenceObject,to_Item/to_Partner,to_Item/to_Partner/to_Address,to_Item/to_Text,to_ReferenceObject,to_Appointment
+  &$expand=to_Confirmation,to_Item,to_Item/to_Confirmation,to_Item/to_PricingElement,to_Item/to_ReferenceObject,to_Item/to_SrvcOrdItemUserStatus,to_Item/to_Appointment,to_Item/to_Duration,to_Item/to_ProductReferenceObject,to_Item/to_Partner,to_Item/to_Partner/to_Address,to_Item/to_Text,to_ReferenceObject,to_Appointment
   &$orderby=ServiceOrder desc
   &$filter=ServiceOrder eq '{{$dotenv ServiceOrder}}'
   #&$filter=ServiceOrderIsReleased eq 'X' and ServiceOrderIsCompleted eq '' and ServiceOrderIsRejected eq '' and SalesOrganization eq '{{$dotenv SalesOrganization}}'
@@ -33,8 +33,8 @@ GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_ORDER_SRV/A_ServiceOrde
   #,ServiceOrderItemIsReleased,to_ReferenceObject/ServiceOrder,to_ReferenceObject/ServiceOrderItem,to_ReferenceObject/ServiceReferenceEquipment,to_ReferenceObject/ServiceRefFunctionalLocation,to_ReferenceObject/SrvcRefObjIsMainObject
   #&$expand=to_Partner
   #to_ServiceOrder,to_ServiceOrder/to_ServiceOrdUserStatus,to_ReferenceObject,to_SrvcOrdItemUserStatus
-  #&$filter=ServiceOrder eq '{{$dotenv ServiceOrder}}' and ServiceOrderItem eq '{{$dotenv ServiceOrderItem}}'
-  &$filter=StorageLocation eq '{{$dotenv StorageLocationFilter}}' and ExecutingServiceEmployee eq '{{$dotenv ExecutingServiceEmployee}}'
+  &$filter=ServiceOrder eq '{{$dotenv ServiceOrder}}' and ServiceOrderItem eq '{{$dotenv ServiceOrderItem}}'
+  #&$filter=StorageLocation eq '{{$dotenv StorageLocationFilter}}' and ExecutingServiceEmployee eq '{{$dotenv ExecutingServiceEmployee}}'
   # 
   &$orderby=ServiceOrder desc
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
