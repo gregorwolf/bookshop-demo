@@ -26,13 +26,33 @@ Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
 
 ###
+# @name getServiceConfirmationItems
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_CONFIRMATION_SRV/A_ServiceConfirmationItem
   ?$inlinecount=allpages
   &$top=10
-  &$filter=ServiceConfirmation eq '{{$dotenv ServiceConfirmation}}' and ServiceConfirmationItem eq '{{$dotenv ServiceConfirmationItem}}'
+  #&$filter=ServiceConfirmation eq '{{$dotenv ServiceConfirmation}}' and ServiceConfirmationItem eq '{{$dotenv ServiceConfirmationItem}}'
+  &$filter=StorageLocation eq '{{$dotenv StorageLocationFilter}}' and ExecutingServiceEmployee eq '{{$dotenv ExecutingServiceEmployee}}'
   &$expand=to_ReferenceObject
 Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
 Accept: application/json
+###
+# @name getCSRF
+HEAD {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_CONFIRMATION_SRV/
+X-CSRF-Token: Fetch
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+### Read Token to Variable
+@CSRF={{getCSRF.response.headers.x-csrf-token}}
+### Fix Storage Location for Service Order Item
+### 3854496 - Service order item plant and storage location determination by exec. service employee not working (https://me.sap.com/notes/3854496)
+PATCH {{getServiceConfirmationItems.response.body.d.results[0].__metadata.uri}}
+Authorization: Basic {{$dotenv s4hana_username}}:{{$dotenv s4hana_password}}
+Accept: application/json
+X-CSRF-Token: {{CSRF}}
+Content-Type: application/json
+
+{
+  "StorageLocation": "{{$dotenv StorageLocation}}"
+}
 ###
 GET {{$dotenv s4hanahost}}/sap/opu/odata/sap/API_SERVICE_CONFIRMATION_SRV/A_ServiceConfItmRefObject
   ?$inlinecount=allpages
